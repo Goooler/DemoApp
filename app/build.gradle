@@ -1,0 +1,54 @@
+apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao'
+apply plugin: 'io.objectbox'
+
+android {
+    compileSdkVersion compileSdk
+    defaultConfig {
+        applicationId "io.goooler.demoapp"
+        minSdkVersion minSdk
+        targetSdkVersion targetSdk
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    dexOptions {
+        javaMaxHeapSize "1g"
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "androidx.appcompat:appcompat:$appcompatVersion"
+    implementation "androidx.legacy:legacy-support-v4:$supportVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintlayoutVersion"
+    implementation "com.google.android.material:material:$materialVersion"
+    implementation "org.apache.commons.io:commonsIO:$commonsIOVersion"
+    implementation "com.squareup.okhttp3:okhttp:$okhttpVersion"
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.alibaba:fastjson:$fastjsonVersion"
+    implementation "com.google.code.gson:gson:$gsonVersion"
+    implementation "org.greenrobot:greendao:$greenDaoVersion"
+    implementation "org.greenrobot:eventbus:$eventbusVersion"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxandroidVersion"
+    implementation "com.squareup.picasso:picasso:$picassoVersion"
+    implementation "com.facebook.fresco:fresco:$frescoVersion"
+    implementation "com.github.PhilJay:MPAndroidChart:$mpchartVersion"
+    implementation "com.airbnb.android:lottie:$lottieVersion"
+    implementation "com.scwang.smartrefresh:SmartRefreshLayout:$smartRefreshLayoutVersion"
+    implementation "com.scwang.smartrefresh:SmartRefreshHeader:$smartRefreshLayoutVersion"
+    implementation "com.google.dagger:dagger:$daggerVersion"
+    implementation "com.google.dagger:dagger-android:$daggerVersion"
+    implementation "com.google.dagger:dagger-android-support:$daggerVersion"
+    annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
+    annotationProcessor "com.google.dagger:dagger-android-processor:$daggerVersion"
+}
