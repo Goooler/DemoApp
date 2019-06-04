@@ -1,0 +1,12 @@
+apply plugin: 'java-library'
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.apache.commons.io:commonsIO:$commonsIOVersion"
+    implementation "com.squareup.okhttp3:okhttp:$okhttpVersion"
+    implementation "com.alibaba:fastjson:$fastjsonVersion"
+    implementation "com.google.code.gson:gson:$gsonVersion"
+}
+
+sourceCompatibility = "8"
+targetCompatibility = "8"

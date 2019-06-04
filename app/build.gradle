@@ -8,8 +8,8 @@ android {
         applicationId "io.goooler.demoapp"
         minSdkVersion minSdk
         targetSdkVersion targetSdk
-        versionCode 1
-        versionName "1.0"
+        versionCode appVersionCode
+        versionName appVersionName
     }
     buildTypes {
         release {
@@ -32,6 +32,8 @@ dependencies {
     implementation "androidx.legacy:legacy-support-v4:$supportVersion"
     implementation "androidx.constraintlayout:constraintlayout:$constraintlayoutVersion"
     implementation "com.google.android.material:material:$materialVersion"
+    implementation "androidx.annotation:annotation:$annotationVersion"
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
     implementation "org.apache.commons.io:commonsIO:$commonsIOVersion"
     implementation "com.squareup.okhttp3:okhttp:$okhttpVersion"
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
