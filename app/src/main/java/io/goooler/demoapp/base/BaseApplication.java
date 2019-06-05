@@ -23,6 +23,9 @@ public class BaseApplication extends Application {
         initGlobalObject();
     }
 
+    /**
+     * 这里注意此方法仅在模拟器环境下会回调
+     */
     @Override
     public void onTerminate() {
         super.onTerminate();
@@ -40,8 +43,9 @@ public class BaseApplication extends Application {
 
     /**
      * 应用结束时销毁全局对象
+     * 真机环境需要在 MainActivity 结束时执行
      */
-    private void destroyGlobalObject() {
+    public static void destroyGlobalObject() {
         handler.removeCallbacksAndMessages(null);
     }
 
