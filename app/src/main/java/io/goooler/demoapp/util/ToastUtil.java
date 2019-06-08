@@ -6,7 +6,7 @@ import io.goooler.demoapp.base.BaseApplication;
 
 
 /**
- * Toast 显示工具
+ * Toast 简单封装
  */
 
 public class ToastUtil {
@@ -23,9 +23,9 @@ public class ToastUtil {
     /**
      * 默认长度 Toast.LENGTH_SHORT
      *
-     * @param stringId 资源文件文本
+     * @param stringId 文本资源 id
      */
     public static void showToast(int stringId) {
-        Toast.makeText(BaseApplication.getContext(), ResUtil.getString(stringId), Toast.LENGTH_SHORT).show();
+        showToast(ResUtil.getString(stringId));
     }
 }

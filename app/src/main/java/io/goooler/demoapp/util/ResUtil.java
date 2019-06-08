@@ -22,4 +22,8 @@ public class ResUtil {
     public static String[] getStringArray(int id) {
         return getResources().getStringArray(id);
     }
+
+    public static int getColor(int id) {
+        return getResources().getColor(id);
+    }
 }

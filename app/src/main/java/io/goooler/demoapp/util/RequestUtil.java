@@ -1,10 +1,9 @@
 package io.goooler.demoapp.util;
 
-import android.os.Looper;
-
 import java.io.IOException;
 
 import io.goooler.demoapp.R;
+import io.goooler.demoapp.base.BaseApplication;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MediaType;
@@ -15,12 +14,9 @@ import okhttp3.Response;
 
 /**
  * OkHttp 请求简单封装
- *
- * @constant 是对常量的注释
  */
 
 public class RequestUtil {
-
     private static final String DEFAULT_URL = "";
     private static final String CONTENT_TYPE_JSON = "application/json; charset=utf-8";
 
@@ -36,7 +32,7 @@ public class RequestUtil {
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                showToast();
+                showFailToast();
             }
 
             @Override
@@ -60,7 +56,7 @@ public class RequestUtil {
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                showToast();
+                showFailToast();
             }
 
             @Override
@@ -68,15 +64,6 @@ public class RequestUtil {
                 sendCallback(response, listener);
             }
         });
-    }
-
-    /**
-     * 请求失败直接弹出 toast 提示失败
-     */
-    private static void showToast() {
-        Looper.prepare();
-        ToastUtil.showToast(R.string.request_failed);
-        Looper.loop();
     }
 
     /**
@@ -89,17 +76,54 @@ public class RequestUtil {
                 jsonString = response.body().string();
             } catch (IOException e) {
             }
+            listener.response(response);
             listener.response(response, jsonString);
         }
     }
 
-    public interface RequestListener {
+    /**
+     * 请求失败一律弹出 “请求失败” 提示，需要先切换到主线程
+     */
+    private static void showFailToast() {
+        BaseApplication.getHandler().post(new Runnable() {
+            @Override
+            public void run() {
+                ToastUtil.showToast(R.string.request_failed);
+            }
+        });
+    }
+
+    /**
+     * 请求结果回调给调用方的接口，可以让调用方实现匿名内部类时自由选择要覆写的方法
+     * 覆写的方法决定回调的类型
+     */
+    public static abstract class RequestListener implements RequestCallback {
+        @Override
+        public void response(Response rawResponse) {
+
+        }
+
+        @Override
+        public void response(Response rawResponse, String jsonString) {
+
+        }
+    }
+
+    /**
+     * RequestListener 要实现的一个接口，定义几种返回类型
+     */
+    public interface RequestCallback {
         /**
-         * 自定义要回调给发起放大的数据类型
+         * @param rawResponse 原始的 okhttp3.Response 不做任何处理
+         */
+        void response(Response rawResponse);
+
+        /**
+         * 自定义要回调给发起方的数据类型
          *
-         * @param rawRseponse 原始的 response
+         * @param rawResponse 原始的 response
          * @param jsonString  body string
          */
-        void response(Response rawRseponse, String jsonString);
+        void response(Response rawResponse, String jsonString);
     }
 }
