@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'org.greenrobot.greendao'
 apply plugin: 'io.objectbox'
+//apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion compileSdk
@@ -27,30 +28,51 @@ android {
 }
 
 dependencies {
+    // official
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "androidx.appcompat:appcompat:$appcompatVersion"
     implementation "androidx.legacy:legacy-support-v4:$supportVersion"
     implementation "androidx.constraintlayout:constraintlayout:$constraintlayoutVersion"
-    implementation "com.google.android.material:material:$materialVersion"
     implementation "androidx.annotation:annotation:$annotationVersion"
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
-    implementation "org.apache.commons.io:commonsIO:$commonsIOVersion"
-    implementation "com.squareup.okhttp3:okhttp:$okhttpVersion"
-    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
-    implementation "com.alibaba:fastjson:$fastjsonVersion"
-    implementation "com.google.code.gson:gson:$gsonVersion"
-    implementation "org.greenrobot:greendao:$greenDaoVersion"
-    implementation "org.greenrobot:eventbus:$eventbusVersion"
-    implementation "io.reactivex.rxjava2:rxandroid:$rxandroidVersion"
-    implementation "com.squareup.picasso:picasso:$picassoVersion"
-    implementation "com.facebook.fresco:fresco:$frescoVersion"
+    implementation "androidx.cardview:cardview:$materialVersion"
+    implementation "androidx.palette:palette:$materialVersion"
+    implementation "androidx.percentlayout:percentlayout:$materialVersion"
+    implementation "com.google.android.material:material:$materialVersion"
+
+    // UI
+    implementation "com.scwang.smartrefresh:SmartRefreshLayout:$smartrefreshlayoutVersion"
+    implementation "com.scwang.smartrefresh:SmartRefreshHeader:$smartrefreshlayoutVersion"
     implementation "com.github.PhilJay:MPAndroidChart:$mpchartVersion"
     implementation "com.airbnb.android:lottie:$lottieVersion"
-    implementation "com.scwang.smartrefresh:SmartRefreshLayout:$smartRefreshLayoutVersion"
-    implementation "com.scwang.smartrefresh:SmartRefreshHeader:$smartRefreshLayoutVersion"
+    implementation "com.google.android.exoplayer:exoplayer:$exoplayerVersion"
+
+    // network
+    implementation "org.apache.commons.io:commonsIO:$commonsioVersion"
+    implementation "com.squareup.okhttp3:okhttp:$okhttpVersion"
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.picasso:picasso:$picassoVersion"
+    implementation "com.facebook.fresco:fresco:$frescoVersion"
+    implementation "com.github.bumptech.glide:glide:$glideVersion"
+    annotationProcessor "com.github.bumptech.glide:compiler:$glideVersion"
+
+    // async
+    implementation "org.greenrobot:eventbus:$eventbusVersion"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxandroidVersion"
+    implementation "com.jakewharton:butterknife:$bufferVersion"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$bufferVersion"
     implementation "com.google.dagger:dagger:$daggerVersion"
     implementation "com.google.dagger:dagger-android:$daggerVersion"
     implementation "com.google.dagger:dagger-android-support:$daggerVersion"
     annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
     annotationProcessor "com.google.dagger:dagger-android-processor:$daggerVersion"
+
+    // utils
+    implementation "com.alibaba:fastjson:$fastjsonVersion"
+    implementation "com.google.code.gson:gson:$gsonVersion"
+    implementation "org.jsoup:jsoup:$jsoupVersion"
+    implementation "org.greenrobot:greendao:$greendaoVersion"
+
+    // analyse
+    //implementation "com.google.firebase:firebase-core:$firebaseVersion"
 }

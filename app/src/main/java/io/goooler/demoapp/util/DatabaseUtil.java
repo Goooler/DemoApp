@@ -1,5 +1,8 @@
 package io.goooler.demoapp.util;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import org.greenrobot.greendao.async.AsyncOperationListener;
 import org.greenrobot.greendao.async.AsyncSession;
 
@@ -39,19 +42,30 @@ public class DatabaseUtil {
      * bean 直接插入，list 取其中第一个对象通过反射判断类型
      * 这里使用 insertOrReplace 方法替代单纯的插入，可实现有则更新无则插入
      *
-     * @param entity                 要插入的数据，可以是 list 或 bean
-     * @param asyncOperationListener 接口回调
+     * @param entity                 要插入的数据，可以是 list 或 bean，不能为空
+     * @param asyncOperationListener 接口回调，为空代表不需要回调
      */
-    private static void insertTrue(Object entity, AsyncOperationListener asyncOperationListener) {
+    private static void insertTrue(@NonNull Object entity, @Nullable AsyncOperationListener asyncOperationListener) {
+        //非空才插入，否则报错
+        if (EmptyUtil.isNotEmpty(entity)) {
+            if (entity instanceof List) {
+                getAsyncSession(asyncOperationListener).insertOrReplaceInTx(
+                        ((List) entity).get(FIRST_INDEX).getClass(),
+                        (List) entity);
+            } else {
+                getAsyncSession(asyncOperationListener).insertOrReplace(entity);
+            }
+        }
+    }
+
+    /**
+     * 获取数据库异步操作对象
+     *
+     * @param asyncOperationListener 异步任务完成后的监听回调
+     */
+    private static AsyncSession getAsyncSession(AsyncOperationListener asyncOperationListener) {
         AsyncSession asyncSession = BaseApplication.getDaoSession().startAsyncSession();
         asyncSession.setListener(asyncOperationListener);
-        if (entity instanceof List) {
-            if (!EmptyUtil.isEmpty((List) entity)) {
-                asyncSession.insertOrReplaceInTx(((List) entity).get(FIRST_INDEX).getClass(),
-                        (List) entity);
-            }
-        } else {
-            asyncSession.insertOrReplace(entity);
-        }
+        return asyncSession;
     }
 }
