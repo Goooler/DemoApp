@@ -1,8 +1,6 @@
 package io.goooler.demoapp.util;
 
-import android.os.Build;
-
-import androidx.annotation.RequiresApi;
+import android.annotation.SuppressLint;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -14,7 +12,6 @@ import java.time.format.DateTimeFormatter;
  * 更新：改用了线程安全的 java 8 自带的时间类
  */
 
-@RequiresApi(api = Build.VERSION_CODES.O)
 public class DateUtil {
     public static final String DEFAULT_DATE_FORMAT = "yyyy.MM.dd HH:mm";
     public static final String LONG_DATE_FORMAT = "yyyyMMddHHmmss";
@@ -40,6 +37,7 @@ public class DateUtil {
      * @param dateFormat 日期的字符串格式
      * @return 转换后的字符串日期
      */
+    @SuppressLint("NewApi")
     public static String timestampToDateString(Long timestamp, String dateFormat) {
         if (timestamp.toString().length() == TIMESTAMPE_LENGTH) {
             timestamp = timestamp * MILLISECONDS;
@@ -92,6 +90,7 @@ public class DateUtil {
      * @param dateFormat 日期的字符串格式
      * @return 转换后的时间戳
      */
+    @SuppressLint("NewApi")
     public static long dateStringToTimestamp(String dateString, String dateFormat) {
         return LocalDateTime.from(LocalDateTime.parse(dateString,
                 DateTimeFormatter.ofPattern(dateFormat))).

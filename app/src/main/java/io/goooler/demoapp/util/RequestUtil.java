@@ -1,9 +1,6 @@
 package io.goooler.demoapp.util;
 
-import android.os.Build;
-
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 
 import java.io.IOException;
 
@@ -20,7 +17,7 @@ import okhttp3.Response;
 /**
  * OkHttp 请求简单封装
  */
-@RequiresApi(api = Build.VERSION_CODES.M)
+
 public class RequestUtil {
     private static final String DEFAULT_URL = "";
     private static final String CONTENT_TYPE_JSON = "application/json; charset=utf-8";
