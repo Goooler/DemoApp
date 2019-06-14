@@ -1,5 +1,10 @@
 package io.goooler.demoapp.util;
 
+import android.os.Build;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+
 import java.io.IOException;
 
 import io.goooler.demoapp.R;
@@ -15,7 +20,7 @@ import okhttp3.Response;
 /**
  * OkHttp 请求简单封装
  */
-
+@RequiresApi(api = Build.VERSION_CODES.M)
 public class RequestUtil {
     private static final String DEFAULT_URL = "";
     private static final String CONTENT_TYPE_JSON = "application/json; charset=utf-8";
@@ -26,7 +31,7 @@ public class RequestUtil {
      * @param url      请求地址
      * @param listener 返回结果回调
      */
-    public static void getRequest(String url, RequestListener listener) {
+    public static void getRequest(String url, BaseRequestListener listener) {
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder().url(DEFAULT_URL + url).build();
         client.newCall(request).enqueue(new Callback() {
@@ -49,7 +54,7 @@ public class RequestUtil {
      * @param jsonString body 是 json 的方式
      * @param listener   返回结果回调
      */
-    public static void postRequest(String url, String jsonString, RequestListener listener) {
+    public static void postRequest(String url, String jsonString, BaseRequestListener listener) {
         OkHttpClient client = new OkHttpClient();
         RequestBody body = RequestBody.create(MediaType.parse(CONTENT_TYPE_JSON), jsonString);
         Request request = new Request.Builder().url(DEFAULT_URL + url).post(body).build();
@@ -69,7 +74,7 @@ public class RequestUtil {
     /**
      * 请求成功将返回的源 response 直接回调给发起方
      */
-    private static void sendCallback(Response response, RequestListener listener) {
+    private static void sendCallback(@NonNull Response response, BaseRequestListener listener) {
         if (response.isSuccessful()) {
             String jsonString = null;
             try {
@@ -97,7 +102,7 @@ public class RequestUtil {
      * 请求结果回调给调用方的接口，可以让调用方实现匿名内部类时自由选择要覆写的方法
      * 覆写的方法决定回调的类型
      */
-    public static abstract class RequestListener implements RequestCallback {
+    public static abstract class BaseRequestListener implements RequestCallback {
         @Override
         public void response(Response rawResponse) {
 
@@ -110,11 +115,13 @@ public class RequestUtil {
     }
 
     /**
-     * RequestListener 要实现的一个接口，定义几种返回类型
+     * BaseRequestListener 要实现的一个接口，定义几种返回类型
      */
     public interface RequestCallback {
         /**
-         * @param rawResponse 原始的 okhttp3.Response 不做任何处理
+         * 返回原始的 okhttp3.Response 不做任何处理
+         *
+         * @param rawResponse 源 Response
          */
         void response(Response rawResponse);
 

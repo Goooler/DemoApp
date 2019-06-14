@@ -40,8 +40,6 @@ public class SpUtil {
 
     /**
      * 判断应用是否第一次启动
-     *
-     * @return
      */
     public static boolean isFirstRun() {
         return getSp(Constants.SP_RUNINFO).getBoolean(Constants.SP_FIRST_RUN, true);

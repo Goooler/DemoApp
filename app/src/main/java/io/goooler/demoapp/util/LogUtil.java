@@ -23,7 +23,7 @@ public class LogUtil {
 
     private static void log(String tag, String debugInfo) {
         if (showLog) {
-            if (debugInfo == Constants.NULL_OBJECT) {
+            if (EmptyUtil.isEmpty(debugInfo)) {
                 Log.d(tag, Constants.NULL_STRING);
             } else {
                 Log.d(tag, debugInfo);

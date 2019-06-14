@@ -1,6 +1,9 @@
 package io.goooler.demoapp.util;
 
+import android.os.Build;
 import android.widget.Toast;
+
+import androidx.annotation.RequiresApi;
 
 import io.goooler.demoapp.base.BaseApplication;
 
@@ -8,7 +11,7 @@ import io.goooler.demoapp.base.BaseApplication;
 /**
  * Toast 简单封装
  */
-
+@RequiresApi(api = Build.VERSION_CODES.M)
 public class ToastUtil {
 
     /**

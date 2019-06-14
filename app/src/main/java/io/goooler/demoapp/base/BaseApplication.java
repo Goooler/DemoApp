@@ -43,7 +43,7 @@ public class BaseApplication extends Application {
 
     /**
      * 应用结束时销毁全局对象
-     * 真机环境需要在 MainActivity 结束时执行
+     * 真机环境需要在 mainActivity.onDestroy() 执行
      */
     public static void destroyGlobalObject() {
         handler.removeCallbacksAndMessages(null);
@@ -59,14 +59,23 @@ public class BaseApplication extends Application {
         daoSession = daoMaster.newSession();
     }
 
+    /**
+     * 获取全局 context
+     */
     public static Context getContext() {
         return context;
     }
 
+    /**
+     * 获取全局 handler
+     */
     public static Handler getHandler() {
         return handler;
     }
 
+    /**
+     * 获取全局 daoSession
+     */
     public static DaoSession getDaoSession() {
         return daoSession;
     }

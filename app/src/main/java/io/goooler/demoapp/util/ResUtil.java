@@ -1,6 +1,9 @@
 package io.goooler.demoapp.util;
 
 import android.content.res.Resources;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
 
 import io.goooler.demoapp.base.BaseApplication;
 
@@ -8,7 +11,7 @@ import io.goooler.demoapp.base.BaseApplication;
 /**
  * 获取资源的工具封装，可以在任何控件中直接获取
  */
-
+@RequiresApi(api = Build.VERSION_CODES.M)
 public class ResUtil {
 
     public static Resources getResources() {
@@ -24,6 +27,6 @@ public class ResUtil {
     }
 
     public static int getColor(int id) {
-        return getResources().getColor(id);
+        return getResources().getColor(id, null);
     }
 }

@@ -3,6 +3,7 @@ package io.goooler.demoapp.util;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import org.greenrobot.greendao.DaoException;
 import org.greenrobot.greendao.async.AsyncOperationListener;
 import org.greenrobot.greendao.async.AsyncSession;
 
@@ -45,15 +46,19 @@ public class DatabaseUtil {
      * @param entity                 要插入的数据，可以是 list 或 bean，不能为空
      * @param asyncOperationListener 接口回调，为空代表不需要回调
      */
+    @SuppressWarnings("unchecked")
     private static void insertTrue(@NonNull Object entity, @Nullable AsyncOperationListener asyncOperationListener) {
         //非空才插入，否则报错
         if (EmptyUtil.isNotEmpty(entity)) {
-            if (entity instanceof List) {
-                getAsyncSession(asyncOperationListener).insertOrReplaceInTx(
-                        ((List) entity).get(FIRST_INDEX).getClass(),
-                        (List) entity);
-            } else {
-                getAsyncSession(asyncOperationListener).insertOrReplace(entity);
+            try {
+                if (entity instanceof List) {
+                    getAsyncSession(asyncOperationListener).insertOrReplaceInTx(
+                            ((List) entity).get(FIRST_INDEX).getClass(),
+                            (List) entity);
+                } else {
+                    getAsyncSession(asyncOperationListener).insertOrReplace(entity);
+                }
+            } catch (DaoException e) {
             }
         }
     }

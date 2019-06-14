@@ -8,5 +8,6 @@ dependencies {
     implementation "com.google.code.gson:gson:$gsonVersion"
 }
 
-sourceCompatibility = "8"
-targetCompatibility = "8"
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}

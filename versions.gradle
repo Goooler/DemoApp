@@ -37,6 +37,7 @@ ext {
     firebaseVersion = '16.0.9'
     bufferVersion = '10.1.0'
     glideVersion = '4.9.0'
+    leakcanaryVersion = '1.6.3'
 
     // buildscript plugin
     gradleVersion = '3.4.1'
