@@ -6,25 +6,6 @@ package io.goooler.demoapp.model;
 
 public class EventType {
 
-    /**
-     * 状态码有两种，成功和失败
-     */
-    public static final int SUCCEED = 1;
-    public static final int FAILED = 0;
-
-    /**
-     * 具体的一些 messageCode 如下
-     */
-
-    // Service 回调给 MainOverallFragment 的数据，用于刷新数据总览
-    public static final int SERVICE_TO_OVERALL = 100;
-    // MainOverallFragment 下拉刷新触发请求，交给 Service 处理
-    public static final int OVERALL_TO_SERVICE = 101;
-    //从首页总览数据跳转到详情页面查看统计图
-    public static final int OVERALL_TO_DETAIL = 102;
-    //从首页总览数据跳转到 MainActivity
-    public static final int OVERALL_TO_MAIN = 103;
-
     public int statusCode;
     public int messageCode;
     public Object message;
@@ -43,10 +24,25 @@ public class EventType {
     }
 
     /**
+     * 状态码有两种，成功和失败
+     */
+    public interface Status {
+        int SUCCEED = 1;
+        int FAILED = 0;
+    }
+
+    /**
+     * 定义具体的事件
+     */
+    public interface Message {
+
+    }
+
+    /**
      * @return 比较对象和类的 statusCode 确认是否成功
      */
     public boolean isSuccessful() {
-        return statusCode == SUCCEED;
+        return statusCode == Status.SUCCEED;
     }
 
     /**

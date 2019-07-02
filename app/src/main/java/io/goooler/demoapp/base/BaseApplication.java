@@ -2,12 +2,13 @@ package io.goooler.demoapp.base;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Handler;
 
+import com.squareup.leakcanary.LeakCanary;
+
 import io.goooler.demoapp.model.Constants;
-import io.goooler.demoapp.model.DaoMaster;
-import io.goooler.demoapp.model.DaoSession;
 
 /**
  * 封装通用方法和一些初始化的动作
@@ -39,6 +40,19 @@ public class BaseApplication extends Application {
         context = getApplicationContext();
         handler = new Handler();
         initGreenDao();
+        LeakCanary.install(this);
+    }
+
+    /**
+     * 判断包是否为 debug
+     */
+    public static boolean isApkDebugable() {
+        try {
+            ApplicationInfo info = context.getApplicationInfo();
+            return (info.flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0;
+        } catch (Exception e) {
+        }
+        return false;
     }
 
     /**

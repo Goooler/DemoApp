@@ -1,5 +1,7 @@
 package io.goooler.demoapp.util;
 
+import android.text.TextUtils;
+
 import java.util.List;
 
 /**
@@ -7,20 +9,12 @@ import java.util.List;
  */
 public class EmptyUtil {
 
-    public static boolean isEmpty(String string) {
-        return string == null || string.length() == 0;
+    private static boolean isEmpty(String string) {
+        return TextUtils.isEmpty(string);
     }
 
-    public static boolean isEmpty(List list) {
+    private static boolean isEmpty(List list) {
         return list == null || list.size() == 0;
-    }
-
-    public static boolean isNotEmpty(String string) {
-        return isEmpty(string);
-    }
-
-    public static boolean isNotEmpty(List list) {
-        return !isEmpty(list);
     }
 
     /**

@@ -7,15 +7,14 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
+import io.goooler.demoapp.R;
+
 /**
  * 时间转换工具简单封装
  * 更新：改用了线程安全的 java 8 自带的时间类
  */
 
 public class DateUtil {
-    public static final String DEFAULT_DATE_FORMAT = "yyyy.MM.dd HH:mm";
-    public static final String LONG_DATE_FORMAT = "yyyyMMddHHmmss";
-    public static final String FLOAT_DATE_FORMAT = "HH.mm";
     public static final int MILLISECONDS = 1000;
     public static final int TIMESTAMPE_LENGTH = 10;
 
@@ -27,7 +26,7 @@ public class DateUtil {
      * @return 字符串格式如 yyyy.MM.dd HH:mm
      */
     public static String timestampToDateString(Long timestamp) {
-        return timestampToDateString(timestamp, DEFAULT_DATE_FORMAT);
+        return timestampToDateString(timestamp, ResUtil.getStringArray(R.array.date_format)[0]);
     }
 
     /**
@@ -52,7 +51,7 @@ public class DateUtil {
      * @return 长整数格式例如 yyyyMMddHHmmss
      */
     public static long timestampToDateLong(Long timestamp) {
-        return Long.valueOf(timestampToDateString(timestamp, LONG_DATE_FORMAT));
+        return Long.valueOf(timestampToDateString(timestamp, ResUtil.getStringArray(R.array.date_format)[1]));
     }
 
     /**
@@ -98,6 +97,6 @@ public class DateUtil {
     }
 
     public static float timestampToDateFloat(Long timestamp) {
-        return Float.valueOf(timestampToDateString(timestamp, FLOAT_DATE_FORMAT));
+        return Float.valueOf(timestampToDateString(timestamp, ResUtil.getStringArray(R.array.date_format)[2]));
     }
 }

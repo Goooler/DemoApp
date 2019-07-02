@@ -8,7 +8,7 @@ import io.goooler.demoapp.model.Constants;
 import static android.content.Context.MODE_PRIVATE;
 
 /**
- * SharedPreferences 几个工具的简单封装
+ * SharedPreferences 简单封装
  */
 
 public class SpUtil {

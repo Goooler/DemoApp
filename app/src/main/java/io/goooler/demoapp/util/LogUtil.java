@@ -2,6 +2,7 @@ package io.goooler.demoapp.util;
 
 import android.util.Log;
 
+import io.goooler.demoapp.base.BaseApplication;
 import io.goooler.demoapp.model.Constants;
 
 /**
@@ -10,7 +11,8 @@ import io.goooler.demoapp.model.Constants;
  */
 
 public class LogUtil {
-    private static boolean showLog = true;
+
+    private static boolean showLog = BaseApplication.isApkDebugable();
     private static final String DEFAULT_LOG_TAG = "defaultLogTag";
 
     public static void d(String debugInfo) {

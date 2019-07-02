@@ -2,6 +2,8 @@ package io.goooler.demoapp.util;
 
 import android.widget.Toast;
 
+import androidx.annotation.StringRes;
+
 import io.goooler.demoapp.base.BaseApplication;
 
 
@@ -25,7 +27,7 @@ public class ToastUtil {
      *
      * @param stringId 文本资源 id
      */
-    public static void showToast(int stringId) {
+    public static void showToast(@StringRes int stringId) {
         showToast(ResUtil.getString(stringId));
     }
 }
