@@ -20,6 +20,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    dataBinding {
+        enabled = true
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -36,6 +39,8 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:$constraintlayoutVersion"
     implementation "androidx.annotation:annotation:$annotationVersion"
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
+    implementation "android.arch.lifecycle:viewmodel:$lifecycleVersion"
+    implementation "android.arch.lifecycle:livedata:$lifecycleVersion"
     implementation "androidx.cardview:cardview:$materialVersion"
     implementation "androidx.palette:palette:$materialVersion"
     implementation "androidx.percentlayout:percentlayout:$materialVersion"
