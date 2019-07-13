@@ -1,7 +1,6 @@
 package io.goooler.demoapp.base;
 
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -27,15 +26,5 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onDestroy();
         // activity 出栈 List<Activity> 移除
         ActivityCollector.removeActivity(this);
-    }
-
-    /**
-     * findViewById 泛型自动造型封装
-     *
-     * @return (T) view
-     */
-    @SuppressWarnings("unchecked")
-    protected <T extends View> T find(int resId) {
-        return (T) super.findViewById(resId);
     }
 }

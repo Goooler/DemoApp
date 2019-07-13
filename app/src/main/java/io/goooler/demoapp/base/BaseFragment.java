@@ -15,16 +15,6 @@ import androidx.fragment.app.Fragment;
 public abstract class BaseFragment extends Fragment {
     private boolean viewCreated;
 
-    /**
-     * findViewById 泛型自动造型封装
-     *
-     * @return (T) view
-     */
-    @SuppressWarnings("unchecked")
-    protected <T extends View> T find(View view, int resId) {
-        return (T) view.findViewById(resId);
-    }
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = initView(inflater, container, savedInstanceState);

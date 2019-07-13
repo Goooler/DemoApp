@@ -11,7 +11,7 @@ buildscript {
     dependencies {
         classpath "com.android.tools.build:gradle:$gradleVersion"
         //noinspection DifferentKotlinGradleVersion
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         classpath "org.greenrobot:greendao-gradle-plugin:$greendaoVersion"
         classpath "io.objectbox:objectbox-gradle-plugin:$objectboxVersion"
         //classpath "com.google.gms:google-services:$gmsVersion"

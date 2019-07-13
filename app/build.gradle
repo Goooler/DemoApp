@@ -32,7 +32,7 @@ android {
 dependencies {
     // official
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
     implementation "androidx.core:core-ktx:$ktxVersion"
     implementation "androidx.appcompat:appcompat:$appcompatVersion"
     implementation "androidx.legacy:legacy-support-v4:$supportVersion"
