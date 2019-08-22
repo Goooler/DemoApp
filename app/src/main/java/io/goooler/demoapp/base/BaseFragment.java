@@ -49,7 +49,9 @@ public abstract class BaseFragment extends Fragment {
      *
      * @return 根布局
      */
-    protected abstract View initView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState);
+    protected abstract View initView(@NonNull LayoutInflater inflater,
+                                     @Nullable ViewGroup container,
+                                     @Nullable Bundle savedInstanceState);
 
     /**
      * 用在懒加载加载数据时

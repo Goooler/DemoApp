@@ -59,6 +59,7 @@ public class DatabaseUtil {
                     getAsyncSession(asyncOperationListener).insertOrReplace(entity);
                 }
             } catch (DaoException e) {
+                // do nothing
             }
         }
     }

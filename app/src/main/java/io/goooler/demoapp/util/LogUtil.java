@@ -12,7 +12,7 @@ import io.goooler.demoapp.model.Constants;
 
 public class LogUtil {
 
-    private static boolean showLog = BaseApplication.isApkDebugable();
+    private static boolean showLog = BaseApplication.isDebuggable();
     private static final String DEFAULT_LOG_TAG = "defaultLogTag";
 
     public static void d(String debugInfo) {

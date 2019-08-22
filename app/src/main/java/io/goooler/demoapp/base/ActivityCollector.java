@@ -38,7 +38,6 @@ public class ActivityCollector {
             }
         }
         activityList.clear();
-        //android.os.Process.killProcess(android.os.Process.myPid());
         LogUtil.d(Constants.BASE_ACTIVITY, Constants.FINISH_ALL_ACTIVITY);
     }
 }

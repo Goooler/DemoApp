@@ -77,6 +77,7 @@ public class RequestUtil {
             try {
                 jsonString = response.body().string();
             } catch (IOException e) {
+                // do nothing
             }
             listener.response(response);
             listener.response(response, jsonString);

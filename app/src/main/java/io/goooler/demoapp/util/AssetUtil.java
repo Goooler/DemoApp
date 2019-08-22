@@ -18,18 +18,19 @@ public class AssetUtil {
     }
 
     public static String readJsonFromAssets(String fileName) {
-        String jsonStrng = null;
+        String jsonString = null;
         try {
             StringBuilder builder = new StringBuilder();
             BufferedReader reader = new BufferedReader(new InputStreamReader(
                     getAssetsManager().open(fileName)));
-            while ((jsonStrng = reader.readLine()) != null) {
-                builder.append(jsonStrng);
+            while ((jsonString = reader.readLine()) != null) {
+                builder.append(jsonString);
             }
-            jsonStrng = builder.toString();
+            jsonString = builder.toString();
             reader.close();
         } catch (IOException e) {
+            // do nothing
         }
-        return jsonStrng;
+        return jsonString;
     }
 }

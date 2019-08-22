@@ -1,5 +1,6 @@
 package io.goooler.demoapp.base;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
@@ -14,6 +15,7 @@ import io.goooler.demoapp.model.Constants;
  * 封装通用方法和一些初始化的动作
  */
 public class BaseApplication extends Application {
+    @SuppressLint("StaticFieldLeak")
     private static Context context;
     private static Handler handler;
     private static DaoSession daoSession;
@@ -46,11 +48,12 @@ public class BaseApplication extends Application {
     /**
      * 判断包是否为 debug
      */
-    public static boolean isApkDebugable() {
+    public static boolean isDebuggable() {
         try {
             ApplicationInfo info = context.getApplicationInfo();
             return (info.flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0;
         } catch (Exception e) {
+            // do nothing
         }
         return false;
     }

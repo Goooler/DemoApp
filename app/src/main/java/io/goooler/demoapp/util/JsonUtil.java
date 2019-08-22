@@ -14,6 +14,7 @@ public class JsonUtil {
         try {
             t = JSONObject.parseObject(jsonString, clazz);
         } catch (JSONException e) {
+            // do nothing
         }
         return t;
     }
