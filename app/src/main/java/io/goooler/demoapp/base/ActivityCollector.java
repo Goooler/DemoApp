@@ -12,7 +12,7 @@ import io.goooler.demoapp.util.LogUtil;
  * 方便管理 activity
  */
 public class ActivityCollector {
-    public static List<Activity> activityList = new ArrayList<>();
+    public static final List<Activity> activityList = new ArrayList<>();
 
     /**
      * activity 入栈时记录指针

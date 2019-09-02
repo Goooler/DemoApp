@@ -2,7 +2,10 @@ package io.goooler.demoapp.util;
 
 import androidx.annotation.NonNull;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.IOException;
+import java.util.Objects;
 
 import io.goooler.demoapp.R;
 import io.goooler.demoapp.base.BaseApplication;
@@ -33,12 +36,12 @@ public class RequestUtil {
         Request request = new Request.Builder().url(DEFAULT_URL + url).build();
         client.newCall(request).enqueue(new Callback() {
             @Override
-            public void onFailure(Call call, IOException e) {
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
                 showFailToast();
             }
 
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                 sendCallback(response, listener);
             }
         });
@@ -53,16 +56,16 @@ public class RequestUtil {
      */
     public static void postRequest(String url, String jsonString, BaseRequestListener listener) {
         OkHttpClient client = new OkHttpClient();
-        RequestBody body = RequestBody.create(MediaType.parse(CONTENT_TYPE_JSON), jsonString);
+        RequestBody body = RequestBody.create(jsonString, MediaType.parse(CONTENT_TYPE_JSON));
         Request request = new Request.Builder().url(DEFAULT_URL + url).post(body).build();
         client.newCall(request).enqueue(new Callback() {
             @Override
-            public void onFailure(Call call, IOException e) {
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
                 showFailToast();
             }
 
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                 sendCallback(response, listener);
             }
         });
@@ -75,7 +78,7 @@ public class RequestUtil {
         if (response.isSuccessful()) {
             String jsonString = null;
             try {
-                jsonString = response.body().string();
+                jsonString = Objects.requireNonNull(response.body()).string();
             } catch (IOException e) {
                 // do nothing
             }

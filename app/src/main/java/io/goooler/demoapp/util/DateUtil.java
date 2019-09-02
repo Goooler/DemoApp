@@ -16,7 +16,7 @@ import io.goooler.demoapp.R;
 
 public class DateUtil {
     public static final int MILLISECONDS = 1000;
-    public static final int TIMESTAMPE_LENGTH = 10;
+    public static final int TIMESTAMP_LENGTH = 10;
 
     public static long getCurrentTimeMillis() {
         return System.currentTimeMillis() / MILLISECONDS;
@@ -38,7 +38,7 @@ public class DateUtil {
      */
     @SuppressLint("NewApi")
     public static String timestampToDateString(Long timestamp, String dateFormat) {
-        if (timestamp.toString().length() == TIMESTAMPE_LENGTH) {
+        if (timestamp.toString().length() == TIMESTAMP_LENGTH) {
             timestamp = timestamp * MILLISECONDS;
         }
         return DateTimeFormatter.ofPattern(dateFormat).format(LocalDateTime.ofInstant(

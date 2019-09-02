@@ -46,19 +46,6 @@ public class BaseApplication extends Application {
     }
 
     /**
-     * 判断包是否为 debug
-     */
-    public static boolean isDebuggable() {
-        try {
-            ApplicationInfo info = context.getApplicationInfo();
-            return (info.flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0;
-        } catch (Exception e) {
-            // do nothing
-        }
-        return false;
-    }
-
-    /**
      * 应用结束时销毁全局对象
      * 真机环境需要在 mainActivity.onDestroy() 执行
      */

@@ -23,11 +23,11 @@ public class SpUtil {
     }
 
     /**
-     * 获取 sp editer
+     * 获取 sp edit
      *
      * @param spName sp 文件名
      */
-    public static SharedPreferences.Editor getSpEditer(String spName) {
+    public static SharedPreferences.Editor getSpEdit(String spName) {
         return getSp(spName).edit();
     }
 
@@ -35,7 +35,7 @@ public class SpUtil {
      * 设置应用是否第一次启动的状态
      */
     public static void setFirstRunState(boolean firstRunState) {
-        getSpEditer(Constants.SP_RUNINFO).putBoolean(Constants.SP_FIRST_RUN, firstRunState).apply();
+        getSpEdit(Constants.SP_RUNINFO).putBoolean(Constants.SP_FIRST_RUN, firstRunState).apply();
     }
 
     /**

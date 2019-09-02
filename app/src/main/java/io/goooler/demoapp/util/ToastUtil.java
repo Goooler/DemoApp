@@ -1,5 +1,6 @@
 package io.goooler.demoapp.util;
 
+import android.os.Looper;
 import android.widget.Toast;
 
 import androidx.annotation.StringRes;
@@ -14,12 +15,18 @@ import io.goooler.demoapp.base.BaseApplication;
 public class ToastUtil {
 
     /**
-     * 默认长度 Toast.LENGTH_SHORT，
+     * 可在子线程使用的 toast
      *
      * @param text string 文本
      */
     public static void showToast(String text) {
-        Toast.makeText(BaseApplication.getContext(), text, Toast.LENGTH_SHORT).show();
+        if (Looper.myLooper() == Looper.getMainLooper()) {
+            Toast.makeText(BaseApplication.getContext(), text, Toast.LENGTH_SHORT).show();
+        } else {
+            Looper.prepare();
+            Toast.makeText(BaseApplication.getContext(), text, Toast.LENGTH_SHORT).show();
+            Looper.loop();
+        }
     }
 
     /**
