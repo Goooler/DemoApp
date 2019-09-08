@@ -7,7 +7,10 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
+
+import io.goooler.demoapp.util.ToastUtil;
 
 /**
  * 基类，封装通用方法
@@ -57,4 +60,12 @@ public abstract class BaseFragment extends Fragment {
      * 用在懒加载加载数据时
      */
     protected abstract void loadData();
+
+    protected void showToast(@StringRes int textId) {
+        ToastUtil.showToast(textId);
+    }
+
+    protected void showToast(String text) {
+        ToastUtil.showToast(text);
+    }
 }
