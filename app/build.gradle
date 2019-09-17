@@ -80,6 +80,7 @@ dependencies {
     implementation "com.google.code.gson:gson:$gsonVersion"
     implementation "org.jsoup:jsoup:$jsoupVersion"
     implementation "org.greenrobot:greendao:$greendaoVersion"
+    //implementation "'io.goooler:WechatHelper:1.0.0'"
 
     // analyze
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakcanaryVersion"
