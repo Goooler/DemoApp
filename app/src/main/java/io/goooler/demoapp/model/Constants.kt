@@ -5,21 +5,23 @@ package io.goooler.demoapp.model
  */
 interface Constants {
     companion object {
-        val DB_NAME = "Demo.db"
-        val NULL_STRING = ""
-        val NULL_OBJECT: String? = null
-        val SP_RUNINFO = "run_config"
-        val SP_FIRST_RUN = "firstRun"
-        val BASE_ACTIVITY = "BaseActivity"
-        val FINISH_ALL_ACTIVITY = "finished all activities"
-        val COORDINATES = "coordinates"
-        val PARAMS = "params"
-        val DATA = "data"
-        val KEY_AND_VALUE = "keyAndValue"
-        val LABLE = "lable"
-        val X = "x"
-        val Y = "y"
-        val MIPMAP = "mipmap"
-        val GOTO_FRAGMENT_ID = "goto_fragment_id"
+        const val DB_NAME = "Demo.db"
+        const val NULL_STRING = ""
+        const val BASE_ACTIVITY = "BaseActivity"
+        const val FINISH_ALL_ACTIVITY = "finished all activities"
+        const val COORDINATES = "coordinates"
+        const val PARAMS = "params"
+        const val DATA = "data"
+        const val KEY_AND_VALUE = "keyAndValue"
+        const val LABLE = "lable"
+        const val X = "x"
+        const val Y = "y"
+        const val MIPMAP = "mipmap"
+        const val GOTO_FRAGMENT_ID = "goto_fragment_id"
+    }
+
+    object SpKey {
+        const val SP_RUNINFO = "run_config"
+        const val SP_FIRST_RUN = "firstRun"
     }
 }

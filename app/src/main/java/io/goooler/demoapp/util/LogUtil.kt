@@ -1,9 +1,7 @@
 package io.goooler.demoapp.util
 
 import android.util.Log
-
 import io.goooler.demoapp.BuildConfig
-import io.goooler.demoapp.base.BaseApplication
 import io.goooler.demoapp.model.Constants
 
 /**

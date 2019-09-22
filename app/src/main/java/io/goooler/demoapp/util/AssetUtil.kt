@@ -11,7 +11,7 @@ import java.io.InputStreamReader
  */
 
 object AssetUtil {
-    val assetsManager: AssetManager
+    private val assetsManager: AssetManager
         get() = BaseApplication.context!!.assets
 
     fun readJsonFromAssets(fileName: String): String? {

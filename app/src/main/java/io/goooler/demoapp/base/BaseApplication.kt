@@ -3,13 +3,8 @@ package io.goooler.demoapp.base
 import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
-import android.content.pm.ApplicationInfo
-import android.database.sqlite.SQLiteDatabase
 import android.os.Handler
-
 import com.squareup.leakcanary.LeakCanary
-
-import io.goooler.demoapp.model.Constants
 
 /**
  * 封装通用方法和一些初始化的动作

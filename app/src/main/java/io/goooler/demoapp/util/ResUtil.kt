@@ -11,7 +11,7 @@ import io.goooler.demoapp.base.BaseApplication
  */
 object ResUtil {
 
-    val resources: Resources
+    private val resources: Resources
         get() = BaseApplication.context!!.resources
 
     fun getString(id: Int): String {

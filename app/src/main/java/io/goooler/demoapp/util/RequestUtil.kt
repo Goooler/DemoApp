@@ -64,7 +64,7 @@ object RequestUtil {
      */
     private fun sendCallback(response: Response, listener: BaseRequestListener) {
         if (response.isSuccessful) {
-            var jsonString: String = ""
+            var jsonString = ""
             try {
                 jsonString = Objects.requireNonNull<ResponseBody>(response.body).string()
             } catch (e: IOException) {

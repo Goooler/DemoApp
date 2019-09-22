@@ -23,11 +23,9 @@ class EventType
     /**
      * 状态码有两种，成功和失败
      */
-    interface Status {
-        companion object {
-            val SUCCEED = 1
-            val FAILED = 0
-        }
+    object Status {
+        val SUCCEED = 1
+        val FAILED = 0
     }
 
     /**
