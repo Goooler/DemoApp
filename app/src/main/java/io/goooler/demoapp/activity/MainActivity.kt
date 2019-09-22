@@ -13,13 +13,13 @@ import io.goooler.demoapp.databinding.ActivityMainBinding
 import io.goooler.demoapp.util.ToastUtil
 
 class MainActivity : BaseActivity(), ClickHandler {
-    private var binding: ActivityMainBinding? = null
+    private val binding by lazy {
+        DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-
-        binding!!.clickHandler = this
+        binding.clickHandler = this
     }
 
     override fun onDestroy() {
