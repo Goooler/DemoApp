@@ -1,10 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-//apply plugin: 'kotlin-kapt'
-apply plugin: 'org.greenrobot.greendao'
+apply plugin: 'kotlin-kapt'
 apply plugin: 'io.objectbox'
-//apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion compileSdk
@@ -62,25 +60,25 @@ dependencies {
     implementation "com.squareup.picasso:picasso:$picassoVersion"
     implementation "com.facebook.fresco:fresco:$frescoVersion"
     implementation "com.github.bumptech.glide:glide:$glideVersion"
-    annotationProcessor "com.github.bumptech.glide:compiler:$glideVersion"
+    kapt "com.github.bumptech.glide:compiler:$glideVersion"
 
     // async
     implementation "org.greenrobot:eventbus:$eventbusVersion"
     implementation "io.reactivex.rxjava2:rxandroid:$rxandroidVersion"
     implementation "com.jakewharton:butterknife:$bufferVersion"
-    annotationProcessor "com.jakewharton:butterknife-compiler:$bufferVersion"
+    kapt "com.jakewharton:butterknife-compiler:$bufferVersion"
     implementation "com.google.dagger:dagger:$daggerVersion"
     implementation "com.google.dagger:dagger-android:$daggerVersion"
     implementation "com.google.dagger:dagger-android-support:$daggerVersion"
-    annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
-    annotationProcessor "com.google.dagger:dagger-android-processor:$daggerVersion"
+    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
+    kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
 
     // utils
     implementation "com.alibaba:fastjson:$fastjsonVersion"
     implementation "com.google.code.gson:gson:$gsonVersion"
     implementation "org.jsoup:jsoup:$jsoupVersion"
     implementation "org.greenrobot:greendao:$greendaoVersion"
-    //implementation "'io.goooler:WechatHelper:1.0.0'"
+    implementation "io.goooler:wechathelper:$wechatHelperVersion"
 
     // analyze
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakcanaryVersion"

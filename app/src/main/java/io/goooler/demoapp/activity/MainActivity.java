@@ -9,7 +9,6 @@ import io.goooler.demoapp.R;
 import io.goooler.demoapp.async.ClickHandler;
 import io.goooler.demoapp.base.BaseActivity;
 import io.goooler.demoapp.base.BaseApplication;
-import io.goooler.demoapp.base.BaseBean;
 import io.goooler.demoapp.databinding.ActivityMainBinding;
 import io.goooler.demoapp.util.ToastUtil;
 
@@ -21,7 +20,6 @@ public class MainActivity extends BaseActivity implements ClickHandler {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
-        binding.setVm(new BaseBean(1, "button"));
         binding.setClickHandler(this);
     }
 

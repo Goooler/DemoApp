@@ -18,12 +18,12 @@ public class BaseApplication extends Application {
     @SuppressLint("StaticFieldLeak")
     private static Context context;
     private static Handler handler;
-    private static DaoSession daoSession;
 
     @Override
     public void onCreate() {
         super.onCreate();
         initGlobalObject();
+        LeakCanary.install(this);
     }
 
     /**
@@ -41,8 +41,6 @@ public class BaseApplication extends Application {
     private void initGlobalObject() {
         context = getApplicationContext();
         handler = new Handler();
-        initGreenDao();
-        LeakCanary.install(this);
     }
 
     /**
@@ -51,16 +49,6 @@ public class BaseApplication extends Application {
      */
     public static void destroyGlobalObject() {
         handler.removeCallbacksAndMessages(null);
-    }
-
-    /**
-     * 初始化 GreenDao 相关
-     */
-    private void initGreenDao() {
-        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, Constants.DB_NAME);
-        SQLiteDatabase db = helper.getWritableDatabase();
-        DaoMaster daoMaster = new DaoMaster(db);
-        daoSession = daoMaster.newSession();
     }
 
     /**
@@ -75,12 +63,5 @@ public class BaseApplication extends Application {
      */
     public static Handler getHandler() {
         return handler;
-    }
-
-    /**
-     * 获取全局 daoSession
-     */
-    public static DaoSession getDaoSession() {
-        return daoSession;
     }
 }

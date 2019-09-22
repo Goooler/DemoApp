@@ -39,6 +39,7 @@ ext {
     bufferVersion = '10.1.0'
     glideVersion = '4.9.0'
     leakcanaryVersion = '1.6.3'
+    wechatHelperVersion = '1.0.0'
 
     // buildScript plugin
     gradleVersion = '3.5.0'
