@@ -43,8 +43,10 @@ dependencies {
     implementation "android.arch.lifecycle:livedata:$lifecycleVersion"
     implementation "androidx.cardview:cardview:$materialVersion"
     implementation "androidx.palette:palette:$materialVersion"
+    implementation "com.google.android:flexbox:$materialVersion"
     implementation "androidx.percentlayout:percentlayout:$materialVersion"
     implementation "com.google.android.material:material:$materialVersion"
+    implementation "androidx.multidex:multidex:$multidexVersion"
 
     // UI
     implementation "com.scwang.smartrefresh:SmartRefreshLayout:$smartrefreshlayoutVersion"
@@ -56,10 +58,14 @@ dependencies {
     // network
     implementation "org.apache.commons.io:commonsIO:$commonsioVersion"
     implementation "com.squareup.okhttp3:okhttp:$okhttpVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
     implementation "com.squareup.picasso:picasso:$picassoVersion"
     implementation "com.facebook.fresco:fresco:$frescoVersion"
     implementation "com.github.bumptech.glide:glide:$glideVersion"
+    implementation "com.github.bumptech.glide:okhttp3-integration:$glideVersion"
     kapt "com.github.bumptech.glide:compiler:$glideVersion"
 
     // async
@@ -77,7 +83,7 @@ dependencies {
     implementation "com.google.code.gson:gson:$gsonVersion"
     implementation "org.jsoup:jsoup:$jsoupVersion"
     implementation "io.goooler:wechathelper:$wechatHelperVersion"
-
+    implementation "com.jakewharton.timber:timber:$timberVersion"
     // analyze
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakcanaryVersion"
 }

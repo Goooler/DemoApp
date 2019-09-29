@@ -9,21 +9,14 @@
             type="io.goooler.demoapp.async.ClickHandler" />
     </data>
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:focusable="true"
+        android:id="@+id/fragment_root"
         android:focusableInTouchMode="true"
         android:orientation="vertical"
         tools:context=".activity.MainActivity">
 
-        <Button
-            android:id="@+id/buttonPanel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:onClick="@{(v) -> clickHandler.onClick(v)}"
-            android:text="@string/app_name" />
-
-    </LinearLayout>
+    </FrameLayout>
 </layout>

@@ -4,6 +4,7 @@ import android.os.Bundle
 
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 
 import io.goooler.demoapp.model.Constants
 import io.goooler.demoapp.util.LogUtil
@@ -34,5 +35,48 @@ abstract class BaseActivity : AppCompatActivity() {
 
     protected fun showToast(text: String) {
         ToastUtil.showToast(text)
+    }
+
+    /**
+     * @param containerId 容器id
+     * @param fragment
+     * @param isAddToBackStack 将要替换的fragment是否要添加到返回栈
+     */
+    fun addFragment(containerId: Int, fragment: Fragment, isAddToBackStack: Boolean) {
+        supportFragmentManager.beginTransaction().run {
+            add(containerId, fragment)
+            if (isAddToBackStack) {
+                addToBackStack(null)
+            }
+            commit()
+        }
+    }
+
+    fun addFragment(containerId: Int, fragment: Fragment) {
+        addFragment(containerId, fragment, false)
+    }
+
+    /**
+     * @param containerId
+     * @param fragment
+     * @param isAddToBackStack 将要替换的fragment是否要添加到返回栈
+     */
+    fun replaceFragment(containerId: Int, fragment: Fragment, isAddToBackStack: Boolean) {
+        replaceFragment(containerId, fragment, isAddToBackStack, null)
+    }
+
+    /**
+     * @param containerID
+     * @param fragment
+     * @param isAddToBackStack 将要替换的fragment是否要添加到返回栈
+     * @param tag              fragment的tag
+     */
+    private fun replaceFragment(containerID: Int, fragment: Fragment, isAddToBackStack: Boolean, tag: String?) {
+        supportFragmentManager.beginTransaction().run {
+            if (isAddToBackStack) {
+                addToBackStack(tag)
+            }
+            replace(containerID, fragment, tag).commit()
+        }
     }
 }

@@ -27,7 +27,7 @@
         tools:ignore="AllowBackup,GoogleAppIndexingWarning,HardcodedDebugMode,UnusedAttribute">
         <activity
             android:name=".activity.MainActivity"
-            android:launchMode="singleTask">
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
