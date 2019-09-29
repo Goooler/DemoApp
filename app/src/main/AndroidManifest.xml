@@ -26,7 +26,7 @@
         android:theme="@style/Theme.Design.Light.NoActionBar"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning,HardcodedDebugMode,UnusedAttribute">
         <activity
-            android:name=".activity.MainActivity"
+            android:name=".main.ui.MainActivity"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

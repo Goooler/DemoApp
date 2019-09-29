@@ -16,7 +16,7 @@
         android:id="@+id/fragment_root"
         android:focusableInTouchMode="true"
         android:orientation="vertical"
-        tools:context=".activity.MainActivity">
+        tools:context=".main.ui.MainActivity">
 
     </FrameLayout>
 </layout>
