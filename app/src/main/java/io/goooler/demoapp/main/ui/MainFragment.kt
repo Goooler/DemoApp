@@ -15,12 +15,6 @@ class MainFragment : Fragment() {
         DataBindingUtil.inflate<FragmentMainBinding>(this.layoutInflater, R.layout.fragment_main, null, false)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-        }
-    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         binding.etUsername.run {
@@ -36,9 +30,6 @@ class MainFragment : Fragment() {
     }
 
     companion object {
-        fun newInstance() = MainFragment().apply {
-            arguments = Bundle().apply {
-            }
-        }
+        fun newInstance() = MainFragment()
     }
 }

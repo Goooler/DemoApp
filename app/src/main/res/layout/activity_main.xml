@@ -4,9 +4,6 @@
 
     <data>
 
-        <variable
-            name="clickHandler"
-            type="io.goooler.demoapp.async.ClickHandler" />
     </data>
 
     <FrameLayout
