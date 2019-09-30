@@ -31,8 +31,6 @@ abstract class BaseFragment : Fragment() {
         }
     }
 
-
-
     /**
      * 默认第一页 fragment 执行，不需要懒加载
      */

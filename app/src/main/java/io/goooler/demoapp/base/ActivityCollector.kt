@@ -1,11 +1,9 @@
 package io.goooler.demoapp.base
 
 import android.app.Activity
-
-import java.util.ArrayList
-
 import io.goooler.demoapp.model.Constants
 import io.goooler.demoapp.util.LogUtil
+import java.util.*
 
 /**
  * 方便管理 activity

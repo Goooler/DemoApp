@@ -1,11 +1,9 @@
 package io.goooler.demoapp.util
 
+import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
-
 import io.goooler.demoapp.base.BaseApplication
 import io.goooler.demoapp.model.Constants
-
-import android.content.Context.MODE_PRIVATE
 
 /**
  * SharedPreferences 简单封装

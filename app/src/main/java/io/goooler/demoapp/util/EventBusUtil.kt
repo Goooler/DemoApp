@@ -1,8 +1,7 @@
 package io.goooler.demoapp.util
 
-import org.greenrobot.eventbus.EventBus
-
 import io.goooler.demoapp.model.EventType
+import org.greenrobot.eventbus.EventBus
 
 /**
  * EventBus 的简单封装，加入统一的判空等操作
