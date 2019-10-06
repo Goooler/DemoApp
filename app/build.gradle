@@ -9,7 +9,7 @@ android {
     defaultConfig {
         applicationId "io.goooler.demoapp"
         minSdkVersion minSdk
-        targetSdkVersion targetSdk
+        targetSdkVersion compileSdk
         versionCode appVersionCode
         versionName appVersionName
         multiDexEnabled = true
