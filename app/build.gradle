@@ -18,6 +18,12 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            multiDexEnabled = true
+        }
+        debug {
+            jniDebuggable = true
+            renderscriptDebuggable = true
+            multiDexEnabled = true
         }
     }
     dataBinding {
