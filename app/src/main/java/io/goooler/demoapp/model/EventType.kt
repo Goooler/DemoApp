@@ -13,20 +13,19 @@ class EventType
  * @param message     消息主体
  */
 (var statusCode: Int, var messageCode: Int, var message: Any) {
+    /**
+     * 状态码有两种，成功和失败
+     */
+    object Status {
+        const val SUCCEED = 1
+        const val FAILED = 0
+    }
 
     /**
      * @return 比较对象和类的 statusCode 确认是否成功
      */
     val isSuccessful: Boolean
         get() = statusCode == Status.SUCCEED
-
-    /**
-     * 状态码有两种，成功和失败
-     */
-    object Status {
-        val SUCCEED = 1
-        val FAILED = 0
-    }
 
     /**
      * 定义具体的事件

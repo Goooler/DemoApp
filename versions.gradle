@@ -24,7 +24,7 @@ ext {
     okhttpVersion = '4.2.0'
     retrofitVersion = '2.6.1'
     fastjsonVersion = '1.1.71.android'
-    gsonVersion = '2.8.5'
+    gsonVersion = '2.8.6'
     jsoupVersion = '1.12.1'
     eventbusVersion = '3.1.1'
     rxandroidVersion = '2.1.1'

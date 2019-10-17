@@ -21,7 +21,7 @@ interface Constants {
     }
 
     object SpKey {
-        const val SP_RUNINFO = "run_config"
+        const val SP_RUN_INFO = "run_config"
         const val SP_FIRST_RUN = "firstRun"
     }
 }

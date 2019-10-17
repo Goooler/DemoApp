@@ -17,15 +17,6 @@ class MainFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        binding.etUsername.run {
-            requestFocus()
-            SoftInputUtil.showSoftInput(this)
-        }
-        binding.buttonPanel.run {
-            setOnClickListener {
-                SoftInputUtil.hideSoftInput(requireActivity())
-            }
-        }
         return binding.root
     }
 

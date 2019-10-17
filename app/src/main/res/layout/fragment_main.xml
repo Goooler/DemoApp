@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="UselessLeaf">
 
     <data>
 
@@ -9,34 +10,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
+        android:clickable="true"
         android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:orientation="vertical"
-        tools:context=".main.ui.MainActivity">
-
-        <EditText
-            android:id="@+id/et_username"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:hint="@string/username"
-            android:textSize="16sp" />
-
-        <EditText
-            android:id="@+id/et_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:hint="@string/password"
-            android:textSize="16sp" />
-
-        <Button
-            android:id="@+id/buttonPanel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:text="@string/app_name" />
+        android:orientation="vertical">
 
     </LinearLayout>
 </layout>

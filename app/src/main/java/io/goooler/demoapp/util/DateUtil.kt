@@ -13,8 +13,8 @@ import java.time.format.DateTimeFormatter
  */
 
 object DateUtil {
-    const val MILLISECONDS = 1000
-    const val TIMESTAMP_LENGTH = 10
+    private const val MILLISECONDS = 1000
+    private const val TIMESTAMP_LENGTH = 10
 
     private val currentTimeMillis: Long
         get() = System.currentTimeMillis() / MILLISECONDS

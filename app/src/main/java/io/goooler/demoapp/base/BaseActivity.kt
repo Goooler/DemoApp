@@ -42,6 +42,7 @@ abstract class BaseActivity : AppCompatActivity() {
      * @param fragment
      * @param isAddToBackStack 将要替换的fragment是否要添加到返回栈
      */
+    @Suppress("MemberVisibilityCanBePrivate")
     fun addFragment(containerId: Int, fragment: Fragment, isAddToBackStack: Boolean) {
         supportFragmentManager.beginTransaction().run {
             add(containerId, fragment)
@@ -57,21 +58,12 @@ abstract class BaseActivity : AppCompatActivity() {
     }
 
     /**
-     * @param containerId
-     * @param fragment
-     * @param isAddToBackStack 将要替换的fragment是否要添加到返回栈
-     */
-    fun replaceFragment(containerId: Int, fragment: Fragment, isAddToBackStack: Boolean) {
-        replaceFragment(containerId, fragment, isAddToBackStack, null)
-    }
-
-    /**
      * @param containerID
      * @param fragment
      * @param isAddToBackStack 将要替换的fragment是否要添加到返回栈
      * @param tag              fragment的tag
      */
-    private fun replaceFragment(containerID: Int, fragment: Fragment, isAddToBackStack: Boolean, tag: String?) {
+    fun replaceFragment(containerID: Int, fragment: Fragment, isAddToBackStack: Boolean, tag: String? = null) {
         supportFragmentManager.beginTransaction().run {
             if (isAddToBackStack) {
                 addToBackStack(tag)

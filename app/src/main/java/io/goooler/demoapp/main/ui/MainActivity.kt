@@ -14,31 +14,18 @@ class MainActivity : BaseActivity() {
         DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
     }
 
-    private val inviterFragment by lazy {
-        InviterFragment.newInstance()
-    }
-
-    private val loginFragment by lazy {
+    private val mainFragment by lazy {
         MainFragment.newInstance()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding
-        addFragment(R.id.fragment_root, inviterFragment)
-    }
-
-    override fun onPause() {
-        super.onPause()
-        SoftInputUtil.hideSoftInput(this)
+        addFragment(R.id.fragment_root, mainFragment)
     }
 
     override fun onDestroy() {
         BaseApplication.destroyGlobalObject()
         super.onDestroy()
-    }
-
-    fun gotoLogin() {
-        replaceFragment(R.id.fragment_root, loginFragment, true)
     }
 }

@@ -15,7 +15,7 @@ object SpUtil {
      * 判断应用是否第一次启动
      */
     val isFirstRun: Boolean
-        get() = getSp(Constants.SpKey.SP_RUNINFO).getBoolean(Constants.SpKey.SP_FIRST_RUN, true)
+        get() = getSp(Constants.SpKey.SP_RUN_INFO).getBoolean(Constants.SpKey.SP_FIRST_RUN, true)
 
     /**
      * 获取 sp
@@ -39,6 +39,6 @@ object SpUtil {
      * 设置应用是否第一次启动的状态
      */
     fun setFirstRunState(firstRunState: Boolean) {
-        getSpEdit(Constants.SpKey.SP_RUNINFO).putBoolean(Constants.SpKey.SP_FIRST_RUN, firstRunState).apply()
+        getSpEdit(Constants.SpKey.SP_RUN_INFO).putBoolean(Constants.SpKey.SP_FIRST_RUN, firstRunState).apply()
     }
 }
