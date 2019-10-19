@@ -6,7 +6,6 @@ import io.goooler.demoapp.R
 import io.goooler.demoapp.base.BaseActivity
 import io.goooler.demoapp.base.BaseApplication
 import io.goooler.demoapp.databinding.ActivityMainBinding
-import io.goooler.demoapp.util.SoftInputUtil
 
 class MainActivity : BaseActivity() {
 

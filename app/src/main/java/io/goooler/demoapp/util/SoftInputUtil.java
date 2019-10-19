@@ -13,7 +13,6 @@ import androidx.annotation.NonNull;
 import java.util.WeakHashMap;
 
 /**
- * Fix by feling on 2019/08/17.
  * 键盘（输入法软键盘）操作
  *
  * @author Ogiso
@@ -25,7 +24,7 @@ public class SoftInputUtil {
     }
 
     /**
-     * 显示键盘。 自动寻找焦点的View
+     * 显示键盘。 自动寻找焦点的 View
      *
      * @param activity .
      */
@@ -41,7 +40,7 @@ public class SoftInputUtil {
     /**
      * 显示键盘
      *
-     * @param view 获取焦点的view。一般是editText或其子类
+     * @param view 获取焦点的 view，一般是 editText 或其子类
      */
     public static void showSoftInput(@NonNull View view) {
         InputMethodManager imm = (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -59,13 +58,13 @@ public class SoftInputUtil {
      * @param activity activity
      */
     public static void hideSoftInput(@NonNull Activity activity) {
-        // 拿到InputMethodManager
+        // 拿到 InputMethodManager
         InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
-        // 如果window上view获取焦点 && view不为空
+        // 如果 window 上 view 获取焦点 && view不为空
         if (imm != null && imm.isActive() && activity.getCurrentFocus() != null) {
-            // 拿到view的token 不为空
+            // 拿到 view 的 token 不为空
             if (activity.getCurrentFocus().getWindowToken() != null) {
-                // 表示软键盘窗口总是隐藏，除非开始时以SHOW_FORCED显示。
+                // 表示软键盘窗口总是隐藏，除非开始时以 SHOW_FORCED 显示。
                 imm.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
             }
         } else {
@@ -127,7 +126,7 @@ public class SoftInputUtil {
     public static boolean isSoftInputShowing(@NonNull Activity activity) {
         // 获取当前屏幕内容的高度
         int screenHeight = activity.getWindow().getDecorView().getHeight();
-        // 获取View可见区域的bottom
+        // 获取 View 可见区域的 bottom
         Rect rect = new Rect();
         activity.getWindow().getDecorView().getWindowVisibleDisplayFrame(rect);
 
@@ -159,13 +158,13 @@ public class SoftInputUtil {
     private static WeakHashMap<Activity, ViewTreeObserver.OnGlobalLayoutListener> map = new WeakHashMap<>();
 
     /**
-     * 纪录根视图的显示高度
+     * 记录根视图的显示高度
      */
     private static int rootViewVisibleHeight;
 
 
     /**
-     * 设置SoftInputChangeListener。
+     * 设置 SoftInputChangeListener。
      *
      * @param activity                  .
      * @param onSoftInputChangeListener .
@@ -214,7 +213,7 @@ public class SoftInputUtil {
     }
 
     /**
-     * 移除SoftInputChangeListener
+     * 移除 SoftInputChangeListener
      *
      * @param activity .
      */

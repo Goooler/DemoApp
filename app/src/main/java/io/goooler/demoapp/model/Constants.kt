@@ -13,7 +13,7 @@ interface Constants {
         const val PARAMS = "params"
         const val DATA = "data"
         const val KEY_AND_VALUE = "keyAndValue"
-        const val LABLE = "lable"
+        const val LABEL = "label"
         const val X = "x"
         const val Y = "y"
         const val MIPMAP = "mipmap"

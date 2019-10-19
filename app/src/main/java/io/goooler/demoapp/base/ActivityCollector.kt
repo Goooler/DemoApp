@@ -28,6 +28,7 @@ object ActivityCollector {
     /**
      * 提供给外部一个方法直接干掉所有的 activity
      */
+    @Suppress("unused")
     fun finishAll() {
         for (activity in activityList) {
             if (!activity.isFinishing) {

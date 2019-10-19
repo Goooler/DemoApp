@@ -8,7 +8,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import io.goooler.demoapp.R
 import io.goooler.demoapp.databinding.FragmentMainBinding
-import io.goooler.demoapp.util.SoftInputUtil
 
 class MainFragment : Fragment() {
     private val binding by lazy {
