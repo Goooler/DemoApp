@@ -5,25 +5,28 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'io.objectbox'
 
 android {
-    compileSdkVersion compileSdk
     defaultConfig {
         applicationId "io.goooler.demoapp"
         minSdkVersion minSdk
+        compileSdkVersion compileSdk
         targetSdkVersion compileSdk
         versionCode appVersionCode
         versionName appVersionName
         multiDexEnabled = true
+        ndk {
+            abiFilters "arm64-v8a", "x86", "x86_64"
+        }
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            zipAlignEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            multiDexEnabled = true
         }
         debug {
             jniDebuggable = true
             renderscriptDebuggable = true
-            multiDexEnabled = true
         }
     }
     dataBinding {
