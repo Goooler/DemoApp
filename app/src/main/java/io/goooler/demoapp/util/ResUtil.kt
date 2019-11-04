@@ -12,7 +12,7 @@ import io.goooler.demoapp.base.BaseApplication
 object ResUtil {
 
     private val resources: Resources
-        get() = BaseApplication.context!!.resources
+        get() = BaseApplication.context.resources
 
     fun getString(id: Int): String {
         return resources.getString(id)

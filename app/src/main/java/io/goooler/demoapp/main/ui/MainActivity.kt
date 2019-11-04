@@ -6,6 +6,7 @@ import io.goooler.demoapp.R
 import io.goooler.demoapp.base.BaseActivity
 import io.goooler.demoapp.base.BaseApplication
 import io.goooler.demoapp.databinding.ActivityMainBinding
+import io.goooler.demoapp.util.LogUtil
 
 class MainActivity : BaseActivity() {
 
@@ -21,6 +22,7 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding
         addFragment(R.id.fragment_root, mainFragment)
+        LogUtil.d("66666")
     }
 
     override fun onDestroy() {

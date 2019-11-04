@@ -5,6 +5,8 @@ import android.app.Application
 import android.content.Context
 import android.os.Handler
 import com.squareup.leakcanary.LeakCanary
+import io.goooler.demoapp.BuildConfig
+import timber.log.Timber
 
 /**
  * 封装通用方法和一些初始化的动作
@@ -13,7 +15,7 @@ class BaseApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        initGlobalObject()
+        initData()
         LeakCanary.install(this)
     }
 
@@ -26,11 +28,14 @@ class BaseApplication : Application() {
     }
 
     /**
-     * 应用启动时初始化全局对象
+     * 应用启动时初始化
      */
-    private fun initGlobalObject() {
+    private fun initData() {
         context = applicationContext
         handler = Handler()
+        if (BuildConfig.DEBUG) {
+            Timber.plant(Timber.DebugTree())
+        }
     }
 
     companion object {
@@ -38,20 +43,18 @@ class BaseApplication : Application() {
          * 获取全局 context
          */
         @SuppressLint("StaticFieldLeak")
-        var context: Context? = null
-            private set
+        lateinit var context: Context
+
         /**
          * 获取全局 handler
          */
-        var handler: Handler? = null
-            private set
+        lateinit var handler: Handler
 
         /**
          * 应用结束时销毁全局对象
-         * 真机环境需要在 mainActivity.onDestroy() 执行
          */
         fun destroyGlobalObject() {
-            handler?.removeCallbacksAndMessages(null)
+            handler.removeCallbacksAndMessages(null)
         }
     }
 }

@@ -12,7 +12,7 @@ import java.io.InputStreamReader
 
 object AssetUtil {
     private val assetsManager: AssetManager
-        get() = BaseApplication.context!!.assets
+        get() = BaseApplication.context.assets
 
     fun readJsonFromAssets(fileName: String): String? {
         var jsonString: String? = null

@@ -23,7 +23,7 @@ object SpUtil {
      * @param spName sp 文件名
      */
     fun getSp(spName: String): SharedPreferences {
-        return BaseApplication.context!!.getSharedPreferences(spName, MODE_PRIVATE)
+        return BaseApplication.context.getSharedPreferences(spName, MODE_PRIVATE)
     }
 
     /**

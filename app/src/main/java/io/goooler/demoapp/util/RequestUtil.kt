@@ -80,7 +80,7 @@ object RequestUtil {
      * 请求失败一律弹出 “请求失败” 提示，需要先切换到主线程
      */
     private fun showFailToast() {
-        BaseApplication.handler!!.post { ToastUtil.showToast(R.string.request_failed) }
+        BaseApplication.handler.post { ToastUtil.showToast(R.string.request_failed) }
     }
 
     /**
