@@ -50,6 +50,11 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
     implementation "android.arch.lifecycle:viewmodel:$lifecycleVersion"
     implementation "android.arch.lifecycle:livedata:$lifecycleVersion"
+    implementation "android.arch.lifecycle:runtime:$lifecycleVersion"
+    implementation "android.arch.lifecycle:reactivestreams:$lifecycleVersion"
+    implementation "android.arch.lifecycle:common-java8:$lifecycleVersion"
+    //noinspection LifecycleAnnotationProcessorWithJava8
+    kapt "android.arch.lifecycle:compiler:$lifecycleVersion"
     implementation "androidx.cardview:cardview:$materialVersion"
     implementation "androidx.palette:palette:$materialVersion"
     implementation "com.google.android:flexbox:$materialVersion"

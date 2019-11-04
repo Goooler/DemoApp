@@ -6,6 +6,7 @@ import android.content.Context
 import android.os.Handler
 import com.squareup.leakcanary.LeakCanary
 import io.goooler.demoapp.BuildConfig
+import io.goooler.demoapp.util.CrashHandler
 import timber.log.Timber
 
 /**
@@ -16,7 +17,6 @@ class BaseApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         initData()
-        LeakCanary.install(this)
     }
 
     /**
@@ -36,6 +36,8 @@ class BaseApplication : Application() {
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
         }
+        LeakCanary.install(this)
+        CrashHandler.instance.init()
     }
 
     companion object {

@@ -5,6 +5,8 @@ import android.os.Bundle
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 
 import io.goooler.demoapp.model.Constants
 import io.goooler.demoapp.util.LogUtil
@@ -43,7 +45,7 @@ abstract class BaseActivity : AppCompatActivity() {
      * @param isAddToBackStack 将要替换的fragment是否要添加到返回栈
      */
     @Suppress("MemberVisibilityCanBePrivate")
-    fun addFragment(containerId: Int, fragment: Fragment, isAddToBackStack: Boolean) {
+    fun addFragment(containerId: Int, fragment: Fragment, isAddToBackStack: Boolean = false) {
         supportFragmentManager.beginTransaction().run {
             add(containerId, fragment)
             if (isAddToBackStack) {
@@ -53,22 +55,27 @@ abstract class BaseActivity : AppCompatActivity() {
         }
     }
 
-    fun addFragment(containerId: Int, fragment: Fragment) {
-        addFragment(containerId, fragment, false)
-    }
-
     /**
-     * @param containerID
+     * @param containerId
      * @param fragment
      * @param isAddToBackStack 将要替换的fragment是否要添加到返回栈
      * @param tag              fragment的tag
      */
-    fun replaceFragment(containerID: Int, fragment: Fragment, isAddToBackStack: Boolean, tag: String? = null) {
+    fun replaceFragment(containerId: Int, fragment: Fragment, isAddToBackStack: Boolean, tag: String? = null) {
         supportFragmentManager.beginTransaction().run {
             if (isAddToBackStack) {
                 addToBackStack(tag)
             }
-            replace(containerID, fragment, tag).commit()
+            replace(containerId, fragment, tag).commit()
+        }
+    }
+
+    protected fun <T : BaseViewModel> getViewModel(modelClass: Class<T>): T {
+        return ViewModelProviders.of(this).get(modelClass).apply {
+            lifecycle.addObserver(this)
+            toast.observe(this@BaseActivity, Observer<String> { msg ->
+                showToast(msg)
+            })
         }
     }
 }
