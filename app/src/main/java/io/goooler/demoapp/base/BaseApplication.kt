@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 import android.os.Handler
+import com.alibaba.android.arouter.launcher.ARouter
 import com.squareup.leakcanary.LeakCanary
 import io.goooler.demoapp.BuildConfig
 import io.goooler.demoapp.util.CrashHandler
@@ -33,11 +34,14 @@ class BaseApplication : Application() {
     private fun initData() {
         context = applicationContext
         handler = Handler()
+        ARouter.init(this)
+        CrashHandler.instance.init()
+        LeakCanary.install(this)
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
+            ARouter.openLog()
+            ARouter.openDebug()
         }
-        LeakCanary.install(this)
-        CrashHandler.instance.init()
     }
 
     companion object {
