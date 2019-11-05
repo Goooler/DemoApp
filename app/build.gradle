@@ -98,6 +98,8 @@ dependencies {
 
     // utils
     implementation "com.alibaba:fastjson:$fastjsonVersion"
+    implementation "com.alibaba:arouter-api:$arouterVersion"
+    kapt "com.alibaba:arouter-compiler:$arouterVersion"
     implementation "com.google.code.gson:gson:$gsonVersion"
     implementation "org.jsoup:jsoup:$jsoupVersion"
     implementation "io.goooler:wechathelper:$wechatHelperVersion"

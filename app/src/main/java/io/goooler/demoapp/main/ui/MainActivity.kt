@@ -2,11 +2,14 @@ package io.goooler.demoapp.main.ui
 
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
+import com.alibaba.android.arouter.facade.annotation.Route
 import io.goooler.demoapp.R
 import io.goooler.demoapp.base.BaseActivity
 import io.goooler.demoapp.base.BaseApplication
 import io.goooler.demoapp.databinding.ActivityMainBinding
+import io.goooler.demoapp.model.RouterPath
 
+@Route(path = RouterPath.MAIN)
 class MainActivity : BaseActivity() {
 
     private val binding by lazy {
