@@ -69,6 +69,22 @@ fun Number.formatMoney(isYuan: Boolean = false, trans2W: Boolean = false, scale:
     }
 }
 
+infix fun Number.plus(that: Number): Double {
+    return (BigDecimal(this.toString()) + BigDecimal(that.toString())).toDouble()
+}
+
+infix fun Number.minus(that: Number): Double {
+    return (BigDecimal(this.toString()) - BigDecimal(that.toString())).toDouble()
+}
+
+infix fun Number.times(that: Number): Double {
+    return (BigDecimal(this.toString()) * BigDecimal(that.toString())).toDouble()
+}
+
+infix fun Number.div(that: Number): Double {
+    return (BigDecimal(this.toString()) / BigDecimal(that.toString())).toDouble()
+}
+
 fun Long.trans2DateString(pattern: String): String {
     return DateUtil.timestampToDateString(this, pattern)
 }

@@ -13,13 +13,13 @@ object LogUtil {
     private const val DEFAULT_LOG_TAG = "defaultLogTag"
 
     @JvmStatic
-    fun d(debugInfo: String) {
-        log(DEFAULT_LOG_TAG, debugInfo)
+    fun d(debugInfo: Any) {
+        log(DEFAULT_LOG_TAG, debugInfo.toString())
     }
 
     @JvmStatic
-    fun d(tag: String, debugInfo: String) {
-        log(tag, debugInfo)
+    fun d(tag: Any, debugInfo: Any) {
+        log(tag.toString(), debugInfo.toString())
     }
 
     private fun log(tag: String, debugInfo: String) {
