@@ -1,4 +1,4 @@
-package io.goooler.demoapp.util;
+package io.goooler.demoapp.util.device;
 
 import android.app.Activity;
 import android.content.Context;

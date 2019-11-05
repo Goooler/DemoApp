@@ -1,4 +1,4 @@
-package io.goooler.demoapp.util;
+package io.goooler.demoapp.util.device;
 
 import android.app.Activity;
 import android.content.Context;
@@ -11,6 +11,8 @@ import android.view.inputmethod.InputMethodManager;
 import androidx.annotation.NonNull;
 
 import java.util.WeakHashMap;
+
+import io.goooler.demoapp.util.LogUtil;
 
 /**
  * 键盘（输入法软键盘）操作
