@@ -20,4 +20,5 @@
     <string name="data_no_refreshed" tools:ignore="UnusedResources">暂无更新</string>
     <string name="data_updated" tools:ignore="UnusedResources">更新成功</string>
     <string name="one_day_data" tools:ignore="UnusedResources">24小时内数据</string>
+    <string name="main_fragment" tools:ignore="UnusedResources">主页面</string>
 </resources>
