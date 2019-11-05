@@ -44,7 +44,7 @@ ext {
     ijkVersion = '0.8.8'
 
     // buildScript plugin
-    gradleVersion = '3.5.1'
+    gradleVersion = '3.5.2'
     kotlinVersion = '1.3.50'
     gmsVersion = '4.2.0'
     objectboxVersion = '2.3.4'

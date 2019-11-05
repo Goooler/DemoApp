@@ -9,7 +9,7 @@ import com.alibaba.fastjson.JSONObject
 
 object JsonUtil {
 
-    fun <T> parse(jsonString: String, clazz: Class<T>): T? {
+    fun <T> fromJson(jsonString: String, clazz: Class<T>): T? {
         var t: T? = null
         try {
             t = JSONObject.parseObject(jsonString, clazz)
