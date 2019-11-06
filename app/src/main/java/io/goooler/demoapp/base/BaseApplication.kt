@@ -8,7 +8,11 @@ import com.alibaba.android.arouter.launcher.ARouter
 import com.squareup.leakcanary.LeakCanary
 import io.goooler.demoapp.BuildConfig
 import io.goooler.demoapp.util.CrashHandler
+import io.goooler.demoapp.util.LogUtil
+import io.reactivex.Single
+import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
+import java.util.concurrent.TimeUnit
 
 /**
  * 封装通用方法和一些初始化的动作
@@ -31,17 +35,25 @@ class BaseApplication : Application() {
     /**
      * 应用启动时初始化
      */
+    @SuppressLint("CheckResult")
     private fun initData() {
         context = applicationContext
         handler = Handler()
         ARouter.init(this)
-        CrashHandler.instance.init()
-        LeakCanary.install(this)
-        if (BuildConfig.DEBUG) {
-            Timber.plant(Timber.DebugTree())
-            ARouter.openLog()
-            ARouter.openDebug()
-        }
+        Single.just(true)
+                .subscribeOn(Schedulers.io())
+                .delay(2, TimeUnit.SECONDS)
+                .subscribe({
+                    CrashHandler.instance.init()
+                    LeakCanary.install(this)
+                    if (BuildConfig.DEBUG) {
+                        Timber.plant(Timber.DebugTree())
+                        ARouter.openLog()
+                        ARouter.openDebug()
+                    }
+                }, {
+                    LogUtil.d(it)
+                })
     }
 
     companion object {
