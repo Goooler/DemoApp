@@ -6,7 +6,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import io.goooler.demoapp.util.ToastUtil
 
-class BaseDialogFragment : DialogFragment() {
+open class BaseDialogFragment : DialogFragment() {
 
     protected fun <T : BaseViewModel> getViewModel(modelClass: Class<T>): T {
         return ViewModelProviders.of(this).get(modelClass).apply {

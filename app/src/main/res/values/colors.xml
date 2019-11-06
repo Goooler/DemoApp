@@ -5,4 +5,5 @@
     <color name="colorAccent" tools:ignore="UnusedResources">#D81B60</color>
     <color name="black" tools:ignore="UnusedResources">#000000</color>
     <color name="white" tools:ignore="UnusedResources">#ffffff</color>
+    <color name="transparent" tools:ignore="UnusedResources">#00000000</color>
 </resources>
