@@ -5,10 +5,10 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'io.objectbox'
 
 android {
+    compileSdkVersion compileSdk
     defaultConfig {
         applicationId "io.goooler.demoapp"
         minSdkVersion minSdk
-        compileSdkVersion compileSdk
         targetSdkVersion compileSdk
         versionCode appVersionCode
         versionName appVersionName
@@ -35,6 +35,9 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
     }
 }
 
@@ -110,6 +113,7 @@ dependencies {
     implementation "org.jsoup:jsoup:$jsoupVersion"
     implementation "io.goooler:wechathelper:$wechatHelperVersion"
     implementation "com.jakewharton.timber:timber:$timberVersion"
+
     // analyze
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakcanaryVersion"
 }
