@@ -13,7 +13,7 @@ import io.goooler.demoapp.main.vm.MainViewModel
 class MainFragment : BaseFragment() {
 
     private val binding by lazy {
-        DataBindingUtil.inflate<FragmentMainBinding>(this.layoutInflater, R.layout.fragment_main, null, false)
+        DataBindingUtil.inflate<FragmentMainBinding>(layoutInflater, R.layout.fragment_main, null, false)
     }
 
     private val vm by lazy {
