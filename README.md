@@ -1,2 +1,5 @@
 # DemoApp
-用作测试的 Android 工程模版
+
+## 坑的集合
+- 不随意回收 bitmap
+- textView 双向绑定不监听 observable（避免递归调用）
