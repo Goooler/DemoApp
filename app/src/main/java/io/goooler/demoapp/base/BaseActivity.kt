@@ -6,6 +6,8 @@ import androidx.annotation.LayoutRes
 
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -39,6 +41,10 @@ abstract class BaseActivity : AppCompatActivity() {
 
     protected fun showToast(text: String) {
         ToastUtil.showToast(text)
+    }
+
+    protected fun <T : ViewDataBinding> inflate(@LayoutRes layoutId: Int): T {
+        return DataBindingUtil.setContentView(this, layoutId)
     }
 
     /**

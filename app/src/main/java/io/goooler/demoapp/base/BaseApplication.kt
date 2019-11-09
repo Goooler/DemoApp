@@ -3,7 +3,6 @@ package io.goooler.demoapp.base
 import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
-import android.os.Handler
 import com.alibaba.android.arouter.launcher.ARouter
 import com.squareup.leakcanary.LeakCanary
 import io.goooler.demoapp.BuildConfig
