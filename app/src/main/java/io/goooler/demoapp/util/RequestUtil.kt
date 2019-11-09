@@ -1,7 +1,6 @@
 package io.goooler.demoapp.util
 
 import io.goooler.demoapp.R
-import io.goooler.demoapp.base.BaseApplication
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
@@ -80,7 +79,7 @@ object RequestUtil {
      * 请求失败一律弹出 “请求失败” 提示，需要先切换到主线程
      */
     private fun showFailToast() {
-        BaseApplication.handler.post { ToastUtil.showToast(R.string.request_failed) }
+        ToastUtil.showToast(R.string.request_failed)
     }
 
     /**

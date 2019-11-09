@@ -25,20 +25,11 @@ class BaseApplication : Application() {
     }
 
     /**
-     * 这里注意此方法仅在模拟器环境下会回调
-     */
-    override fun onTerminate() {
-        super.onTerminate()
-        destroyGlobalObject()
-    }
-
-    /**
      * 应用启动时初始化
      */
     @SuppressLint("CheckResult")
     private fun initData() {
         context = applicationContext
-        handler = Handler()
         ARouter.init(this)
         Single.just(true)
                 .subscribeOn(Schedulers.io())
@@ -62,17 +53,5 @@ class BaseApplication : Application() {
          */
         @SuppressLint("StaticFieldLeak")
         lateinit var context: Context
-
-        /**
-         * 获取全局 handler
-         */
-        lateinit var handler: Handler
-
-        /**
-         * 应用结束时销毁全局对象
-         */
-        fun destroyGlobalObject() {
-            handler.removeCallbacksAndMessages(null)
-        }
     }
 }

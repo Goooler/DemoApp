@@ -17,9 +17,4 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         addFragment(android.R.id.content, mainFragment)
     }
-
-    override fun onDestroy() {
-        BaseApplication.destroyGlobalObject()
-        super.onDestroy()
-    }
 }
