@@ -1,6 +1,8 @@
 package io.goooler.demoapp.base
 
 import android.os.Bundle
+import androidx.annotation.IdRes
+import androidx.annotation.LayoutRes
 
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
@@ -13,7 +15,7 @@ import io.goooler.demoapp.util.LogUtil
 import io.goooler.demoapp.util.ToastUtil
 
 /**
- * 基类，封装通用方法
+ * Activity 基类，封装通用方法
  */
 abstract class BaseActivity : AppCompatActivity() {
 
@@ -45,7 +47,7 @@ abstract class BaseActivity : AppCompatActivity() {
      * @param isAddToBackStack 将要替换的fragment是否要添加到返回栈
      */
     @Suppress("MemberVisibilityCanBePrivate")
-    fun addFragment(containerId: Int, fragment: Fragment, isAddToBackStack: Boolean = false) {
+    fun addFragment(@IdRes containerId: Int, fragment: Fragment, isAddToBackStack: Boolean = false) {
         supportFragmentManager.beginTransaction().run {
             add(containerId, fragment)
             if (isAddToBackStack) {
@@ -61,7 +63,7 @@ abstract class BaseActivity : AppCompatActivity() {
      * @param isAddToBackStack 将要替换的fragment是否要添加到返回栈
      * @param tag              fragment的tag
      */
-    fun replaceFragment(containerId: Int, fragment: Fragment, isAddToBackStack: Boolean, tag: String? = null) {
+    fun replaceFragment(@IdRes containerId: Int, fragment: Fragment, isAddToBackStack: Boolean, tag: String? = null) {
         supportFragmentManager.beginTransaction().run {
             if (isAddToBackStack) {
                 addToBackStack(tag)

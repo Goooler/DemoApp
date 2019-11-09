@@ -12,7 +12,7 @@ import androidx.lifecycle.ViewModelProviders
 import io.goooler.demoapp.util.ToastUtil
 
 /**
- * 基类，封装通用方法
+ * Fragment 基类，封装通用方法
  */
 abstract class BaseFragment : Fragment() {
     private var viewCreated: Boolean = false
