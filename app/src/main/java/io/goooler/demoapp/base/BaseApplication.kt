@@ -30,6 +30,7 @@ class BaseApplication : Application() {
     private fun initData() {
         context = applicationContext
         ARouter.init(this)
+        // 部分三方初始化延时处理
         Single.just(true)
                 .subscribeOn(Schedulers.io())
                 .delay(2, TimeUnit.SECONDS)

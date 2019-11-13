@@ -1,15 +1,12 @@
 package io.goooler.demoapp.main.ui
 
-import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import io.goooler.demoapp.R
-import io.goooler.demoapp.base.BaseFragment
+import io.goooler.demoapp.base.BaseLazyFragment
 import io.goooler.demoapp.databinding.FragmentMainBinding
 import io.goooler.demoapp.main.vm.MainViewModel
 
-class MainFragment : BaseFragment() {
+class MainFragment : BaseLazyFragment() {
 
     private val binding by lazy {
         inflate<FragmentMainBinding>(R.layout.fragment_main)
@@ -23,7 +20,7 @@ class MainFragment : BaseFragment() {
         binding.vm = vm
     }
 
-    override fun initView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun initView(): View {
         return binding.root
     }
 
