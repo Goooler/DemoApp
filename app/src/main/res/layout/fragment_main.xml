@@ -8,6 +8,10 @@
         <variable
             name="vm"
             type="io.goooler.demoapp.main.vm.MainViewModel" />
+
+        <variable
+            name="clickListener"
+            type="android.view.View.OnClickListener" />
     </data>
 
     <LinearLayout
@@ -19,10 +23,12 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/tv_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@{vm.title}"
+            android:onClick="@{clickListener}"
             android:textColor="@color/black" />
 
     </LinearLayout>
