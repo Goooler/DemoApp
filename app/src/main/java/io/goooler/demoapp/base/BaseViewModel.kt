@@ -15,8 +15,8 @@ import io.reactivex.disposables.Disposable
 
 
 open class BaseViewModel(application: Application) : AndroidViewModel(application), DefaultLifecycleObserver {
+    private val compositeDisposable = CompositeDisposable()
     val toast = MutableLiveData<String>()
-    protected var compositeDisposable = CompositeDisposable()
 
     fun addDisposable(disposable: Disposable) {
         compositeDisposable.add(disposable)

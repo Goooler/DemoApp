@@ -19,6 +19,7 @@ ext {
     materialVersion = '1.0.0'
     annotationVersion = '1.1.0'
     lifecycleVersion = '2.1.0'
+    navigationVersion = '2.1.0'
     multidexVersion = '2.0.1'
     commonsioVersion = '2.5.0'
     okhttpVersion = '4.2.2'
@@ -27,7 +28,6 @@ ext {
     arouterVersion = '1.5.0'
     arouterCompilerVersion = '1.2.2'
     gsonVersion = '2.8.6'
-    jsoupVersion = '1.12.1'
     eventbusVersion = '3.1.1'
     rxandroidVersion = '2.1.1'
     rxjavaVersion = '2.2.12'
@@ -44,7 +44,6 @@ ext {
     wechatHelperVersion = '1.0.0'
     timberVersion = '4.7.1'
     ijkVersion = '0.8.8'
-    navigationVersion = '2.1.0'
 
     // buildScript plugin
     gradleVersion = '3.5.2'

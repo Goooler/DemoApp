@@ -34,7 +34,7 @@ class MainFragment : BaseFragment() {
     }
 
     private val clickListener = View.OnClickListener {
-        when(it) {
+        when (it) {
             binding.tvTitle -> {
                 showToast(R.string.main_fragment)
             }
