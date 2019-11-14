@@ -70,6 +70,10 @@ dependencies {
     implementation "com.google.android:flexbox:$materialVersion"
     implementation "androidx.percentlayout:percentlayout:$materialVersion"
     implementation "com.google.android.material:material:$materialVersion"
+    implementation "androidx.navigation:navigation-common-ktx:$navigationVersion"
+    implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
+    implementation "androidx.navigation:navigation-runtime-ktx:$navigationVersion"
+    implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
     implementation "androidx.multidex:multidex:$multidexVersion"
 
     // UI

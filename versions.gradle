@@ -44,6 +44,7 @@ ext {
     wechatHelperVersion = '1.0.0'
     timberVersion = '4.7.1'
     ijkVersion = '0.8.8'
+    navigationVersion = '2.1.0'
 
     // buildScript plugin
     gradleVersion = '3.5.2'
