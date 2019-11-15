@@ -22,6 +22,7 @@ class MainFragment : BaseFragment() {
     private val initOnce by lazy {
         binding.vm = vm
         binding.clickListener = clickListener
+        vm.initData()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

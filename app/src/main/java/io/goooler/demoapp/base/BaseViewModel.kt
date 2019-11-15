@@ -10,6 +10,9 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
+import io.goooler.demoapp.BuildConfig
+import io.goooler.demoapp.api.HttpResponse
+import io.goooler.demoapp.util.LogUtil
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
@@ -24,6 +27,26 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
 
     override fun onDestroy(owner: LifecycleOwner) {
         compositeDisposable.clear()
+    }
+
+    protected fun checkStatusAndEntry(response: HttpResponse<*>): Boolean {
+        return response.status && response.entry != null
+    }
+
+    protected fun checkStatusAndEntryWithToast(response: HttpResponse<*>): Boolean {
+        return checkStatusAndEntry(response).also {
+            if (!it) {
+                showToast(response.message)
+            }
+        }
+    }
+
+    protected fun silentThrowable(throwable: Throwable) {
+        if (BuildConfig.DEBUG) {
+            showToast(throwable.toString())
+        } else {
+            LogUtil.d(throwable)
+        }
     }
 
     protected fun showToast(@StringRes strResId: Int) {

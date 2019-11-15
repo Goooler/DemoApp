@@ -21,7 +21,7 @@ object RequestUtil {
      * @param url      请求地址
      * @param listener 返回结果回调
      */
-    fun getRequest(url: String, listener: BaseRequestListener) {
+    fun getRequest(url: String, listener: RequestListener) {
         val client = OkHttpClient()
         val request = Request.Builder().url(DEFAULT_URL + url).build()
         client.newCall(request).enqueue(object : Callback {
@@ -43,7 +43,7 @@ object RequestUtil {
      * @param jsonString body 是 json 的方式
      * @param listener   返回结果回调
      */
-    fun postRequest(url: String, jsonString: String, listener: BaseRequestListener) {
+    fun postRequest(url: String, jsonString: String, listener: RequestListener) {
         val body = jsonString.toRequestBody(CONTENT_TYPE_JSON.toMediaTypeOrNull())
         val request = Request.Builder().url(DEFAULT_URL + url).post(body).build()
         OkHttpClient().newCall(request).enqueue(object : Callback {
@@ -61,7 +61,7 @@ object RequestUtil {
     /**
      * 请求成功将返回的源 response 直接回调给发起方
      */
-    private fun sendCallback(response: Response, listener: BaseRequestListener) {
+    private fun sendCallback(response: Response, listener: RequestListener) {
         if (response.isSuccessful) {
             var jsonString = ""
             try {
@@ -86,7 +86,7 @@ object RequestUtil {
      * 请求结果回调给调用方的接口，可以让调用方实现匿名内部类时自由选择要覆写的方法
      * 覆写的方法决定回调的类型
      */
-    abstract class BaseRequestListener : RequestCallback {
+    abstract class RequestListener : RequestCallback {
         override fun response(rawResponse: Response) {
 
         }
@@ -97,7 +97,7 @@ object RequestUtil {
     }
 
     /**
-     * BaseRequestListener 要实现的一个接口，定义几种返回类型
+     * RequestListener 要实现的一个接口，定义几种返回类型
      */
     interface RequestCallback {
         /**
