@@ -1,0 +1,11 @@
+{
+	"message": "",
+	"responseCode": 200,
+	"status": true,
+	"entry": {
+		"name": "Demo",
+		"version": 1.0,
+		"author": "goooler",
+		"date": 1573786663692
+	}
+}
