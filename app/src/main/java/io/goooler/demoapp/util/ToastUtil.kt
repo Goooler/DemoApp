@@ -11,7 +11,6 @@ import io.goooler.demoapp.base.BaseApplication
 /**
  * Toast 简单封装
  */
-
 object ToastUtil {
 
     /**

@@ -42,7 +42,6 @@ ext {
     glideTransformVersion = '4.1.0'
     leakcanaryVersion = '1.6.3'
     wechatHelperVersion = '1.0.0'
-    timberVersion = '4.7.1'
     ijkVersion = '0.8.8'
 
     // buildScript plugin

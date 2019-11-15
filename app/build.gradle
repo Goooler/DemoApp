@@ -116,7 +116,6 @@ dependencies {
     kapt "com.alibaba:arouter-compiler:$arouterCompilerVersion"
     implementation "com.google.code.gson:gson:$gsonVersion"
     implementation "io.goooler:wechathelper:$wechatHelperVersion"
-    implementation "com.jakewharton.timber:timber:$timberVersion"
 
     // analyze
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakcanaryVersion"

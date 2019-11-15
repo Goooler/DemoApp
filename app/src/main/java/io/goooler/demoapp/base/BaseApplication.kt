@@ -10,7 +10,6 @@ import io.goooler.demoapp.util.CrashHandler
 import io.goooler.demoapp.util.LogUtil
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
-import timber.log.Timber
 import java.util.concurrent.TimeUnit
 
 /**
@@ -38,7 +37,6 @@ class BaseApplication : Application() {
                     CrashHandler.instance.init()
                     LeakCanary.install(this)
                     if (BuildConfig.DEBUG) {
-                        Timber.plant(Timber.DebugTree())
                         ARouter.openLog()
                         ARouter.openDebug()
                     }

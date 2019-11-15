@@ -1,7 +1,7 @@
 package io.goooler.demoapp.util
 
+import android.util.Log
 import io.goooler.demoapp.BuildConfig
-import timber.log.Timber
 
 /**
  * Log 工具的简单封装，可自由控制全局 log 输出
@@ -9,8 +9,7 @@ import timber.log.Timber
 
 object LogUtil {
 
-    private val showLog = BuildConfig.DEBUG
-    private const val DEFAULT_LOG_TAG = "defaultLogTag"
+    private const val DEFAULT_LOG_TAG = "goooler"
 
     @JvmStatic
     fun d(debugInfo: Any) {
@@ -22,10 +21,11 @@ object LogUtil {
         log(tag.toString(), debugInfo.toString())
     }
 
+    @JvmStatic
     private fun log(tag: String, debugInfo: String) {
-        if (showLog) {
+        if (BuildConfig.DEBUG) {
             if (debugInfo.isNotEmpty()) {
-                Timber.tag(tag).d(debugInfo)
+                Log.d(tag, debugInfo)
             }
         }
     }

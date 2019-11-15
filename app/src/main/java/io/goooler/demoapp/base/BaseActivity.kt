@@ -35,14 +35,6 @@ abstract class BaseActivity : AppCompatActivity() {
         ActivityCollector.removeActivity(this)
     }
 
-    protected fun showToast(@StringRes textId: Int) {
-        ToastUtil.showToast(textId)
-    }
-
-    protected fun showToast(text: String) {
-        ToastUtil.showToast(text)
-    }
-
     protected fun <T : ViewDataBinding> inflate(@LayoutRes layoutId: Int): T {
         return DataBindingUtil.setContentView(this, layoutId)
     }
@@ -79,11 +71,19 @@ abstract class BaseActivity : AppCompatActivity() {
     }
 
     protected fun <T : BaseViewModel> getViewModel(modelClass: Class<T>): T {
-        return ViewModelProviders.of(this).get(modelClass).apply {
+        return ViewModelProviders.of(this@BaseActivity).get(modelClass).apply {
             lifecycle.addObserver(this)
             toast.observe(this@BaseActivity, Observer<String> { msg ->
                 showToast(msg)
             })
         }
+    }
+
+    protected fun showToast(@StringRes textId: Int) {
+        ToastUtil.showToast(textId)
+    }
+
+    protected fun showToast(text: String) {
+        ToastUtil.showToast(text)
     }
 }
