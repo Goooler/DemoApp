@@ -20,17 +20,13 @@ class MainViewModel(application: Application) : BaseViewModel(application) {
 
     val title = ObservableField<String>()
 
-    init {
-        title.set(getString(R.string.main_fragment))
-    }
-
     fun initData() {
         repository.getDemoAppInfo()
                 .subscribeOn(Schedulers.io())
                 .filter{
                     it.status
                 }.subscribe({
-                    LogUtil.d(it.entry!!.toJson())
+                    title.set(it.entry!!.name)
                 }, {
                     silentThrowable(it)
                 }).let {

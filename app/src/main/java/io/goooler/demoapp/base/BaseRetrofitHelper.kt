@@ -14,7 +14,7 @@ import java.net.Proxy
 import java.util.concurrent.TimeUnit
 
 abstract class BaseRetrofitHelper protected constructor() {
-    private lateinit var retrofit: Retrofit
+    private var retrofit: Retrofit
 
     init {
         retrofit = Retrofit.Builder()

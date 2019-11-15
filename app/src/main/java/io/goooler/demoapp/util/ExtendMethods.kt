@@ -1,18 +1,12 @@
 package io.goooler.demoapp.util
 
 import android.webkit.URLUtil
+import androidx.lifecycle.MutableLiveData
 import io.goooler.demoapp.model.Constants.IMAGE_URL_PREFIX
 import io.goooler.demoapp.model.Constants.PHONE_FIRST_CHAR
 import io.goooler.demoapp.model.Constants.PHONE_LENGTH
 import java.math.BigDecimal
 import java.util.*
-
-
-/**
- * Created by JokerWan on 2019-05-14.
- * Function:
- */
-
 
 /**
  * 泛型传入要解析的data类的type
@@ -69,19 +63,19 @@ fun Number.formatMoney(isYuan: Boolean = false, trans2W: Boolean = false, scale:
     }
 }
 
-infix fun Number.plus(that: Number): Double {
+infix fun Double.plus(that: Double): Double {
     return (BigDecimal(this.toString()) + BigDecimal(that.toString())).toDouble()
 }
 
-infix fun Number.minus(that: Number): Double {
+infix fun Double.minus(that: Double): Double {
     return (BigDecimal(this.toString()) - BigDecimal(that.toString())).toDouble()
 }
 
-infix fun Number.times(that: Number): Double {
+infix fun Double.times(that: Double): Double {
     return (BigDecimal(this.toString()) * BigDecimal(that.toString())).toDouble()
 }
 
-infix fun Number.div(that: Number): Double {
+infix fun Double.div(that: Double): Double {
     return (BigDecimal(this.toString()) / BigDecimal(that.toString())).toDouble()
 }
 
@@ -138,3 +132,7 @@ fun String.isValidPhoneFormat(): Boolean {
 fun String.hidePhone(): String {
     return this.replace(Regex("(\\d{3})\\d{4}(\\d{4})"), "$1****$2")
 }
+
+fun  <T:Any> MutableLiveData<T>.set(value :T ?) = postValue(value)
+
+fun  <T:Any> MutableLiveData<T>.get() = value
