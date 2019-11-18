@@ -1,6 +1,6 @@
 <resources>
 
-    <!--优化开屏黑-->
+    <!--优化启动黑屏-->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowBackground">@color/white</item>
         <item name="colorPrimary">@color/colorPrimary</item>
@@ -23,9 +23,15 @@
     </style>
 
     <!--去掉点击后的水波纹效果-->
-    <style name="noClickEffect" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="NoClickEffect" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:selectableItemBackground">@null</item>
         <item name="android:selectableItemBackgroundBorderless">@null</item>
+    </style>
+
+    <!--编辑框下划线的颜色-->
+    <style name="EditTextUnderlineStyle">
+        <item name="android:colorControlNormal">@android:color/darker_gray</item>
+        <item name="android:colorControlActivated">@android:color/holo_red_light</item>
     </style>
 
 </resources>
