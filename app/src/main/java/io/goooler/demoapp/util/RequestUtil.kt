@@ -1,11 +1,9 @@
 package io.goooler.demoapp.util
 
-import io.goooler.demoapp.R
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.IOException
-import java.util.*
 
 /**
  * OkHttp 请求简单封装
@@ -21,12 +19,11 @@ object RequestUtil {
      * @param url      请求地址
      * @param listener 返回结果回调
      */
-    fun getRequest(url: String, listener: RequestListener) {
-        val client = OkHttpClient()
+    fun get(url: String, listener: RequestListener) {
         val request = Request.Builder().url(DEFAULT_URL + url).build()
-        client.newCall(request).enqueue(object : Callback {
+        OkHttpClient().newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
-                showFailToast()
+                ToastUtil.showToast(e.toString())
             }
 
             @Throws(IOException::class)
@@ -43,12 +40,12 @@ object RequestUtil {
      * @param jsonString body 是 json 的方式
      * @param listener   返回结果回调
      */
-    fun postRequest(url: String, jsonString: String, listener: RequestListener) {
+    fun post(url: String, jsonString: String, listener: RequestListener) {
         val body = jsonString.toRequestBody(CONTENT_TYPE_JSON.toMediaTypeOrNull())
         val request = Request.Builder().url(DEFAULT_URL + url).post(body).build()
         OkHttpClient().newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
-                showFailToast()
+                ToastUtil.showToast(e.toString())
             }
 
             @Throws(IOException::class)
@@ -65,7 +62,7 @@ object RequestUtil {
         if (response.isSuccessful) {
             var jsonString = ""
             try {
-                jsonString = Objects.requireNonNull<ResponseBody>(response.body).string()
+                jsonString = response.body.toString()
             } catch (e: IOException) {
                 // do nothing
             }
@@ -73,13 +70,6 @@ object RequestUtil {
             listener.response(response)
             listener.response(response, jsonString)
         }
-    }
-
-    /**
-     * 请求失败一律弹出 “请求失败” 提示，需要先切换到主线程
-     */
-    private fun showFailToast() {
-        ToastUtil.showToast(R.string.request_failed)
     }
 
     /**
