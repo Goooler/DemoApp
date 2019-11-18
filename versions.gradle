@@ -30,7 +30,7 @@ ext {
     gsonVersion = '2.8.6'
     eventbusVersion = '3.1.1'
     rxandroidVersion = '2.1.1'
-    rxjavaVersion = '2.2.12'
+    rxjavaVersion = '2.2.14'
     picassoVersion = '2.71828'
     frescoVersion = '2.0.0'
     mpchartVersion = 'v3.1.0'
