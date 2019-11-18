@@ -133,6 +133,6 @@ fun String.hidePhone(): String {
     return this.replace(Regex("(\\d{3})\\d{4}(\\d{4})"), "$1****$2")
 }
 
-fun  <T:Any> MutableLiveData<T>.set(value :T ?) = postValue(value)
+fun <T : Any> MutableLiveData<T>.set(value: T?) = postValue(value)
 
-fun  <T:Any> MutableLiveData<T>.get() = value
+fun <T : Any> MutableLiveData<T>.get() = value
