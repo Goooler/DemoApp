@@ -67,10 +67,10 @@ abstract class BaseRetrofitHelper protected constructor() {
     }
 
     protected val converterFactory: Converter.Factory
-        protected get() = GsonConverterFactory.create()
+        get() = GsonConverterFactory.create()
 
     protected val callAdapterFactory: CallAdapter.Factory
-        protected get() = RxJava2CallAdapterFactory.create()
+        get() = RxJava2CallAdapterFactory.create()
 
     fun <T> createApiService(service: Class<T>): T {
         return retrofit.create(service)

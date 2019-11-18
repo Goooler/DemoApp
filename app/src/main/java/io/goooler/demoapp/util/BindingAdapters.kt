@@ -26,13 +26,6 @@ import io.goooler.demoapp.util.image.ImageLoader
 import io.goooler.demoapp.util.image.glide.GlideApp
 import java.io.File
 
-
-/**
- * Created by JokerWan on 2019-05-15.
- * Fixed by feling on 2019-09-25.
- * Function: BindingAdapter
- */
-
 //------------------------View --------------------------//
 
 @BindingAdapter(value = ["binding_isGone"], requireAll = true)
@@ -421,7 +414,7 @@ fun TextView.bindingImpactTypeface(path: String) {
 
 @BindingAdapter("binding_paint_flag")
 fun TextView.bindingPaintFlag(flag: Int) {
-    this.paint.flags = flag // such as Paint.STRIKE_THRU_TEXT_FLAG
+    this.paint.flags = flag
     this.paint.isAntiAlias = true
 }
 

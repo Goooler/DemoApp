@@ -157,7 +157,7 @@ public class SoftInputUtil {
         void keyBoardHide(int height);
     }
 
-    private static WeakHashMap<Activity, ViewTreeObserver.OnGlobalLayoutListener> map = new WeakHashMap<>();
+    private static final WeakHashMap<Activity, ViewTreeObserver.OnGlobalLayoutListener> map = new WeakHashMap<>();
 
     /**
      * 记录根视图的显示高度

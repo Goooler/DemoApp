@@ -1,5 +1,6 @@
 package io.goooler.demoapp.util.device;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
@@ -13,6 +14,8 @@ import androidx.annotation.Nullable;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+
+import io.goooler.demoapp.util.LogUtil;
 
 /**
  * Fix by feling on 2019/08/17.
@@ -134,12 +137,14 @@ public class StatusBarUtil {
      * @param dark   是否把状态栏字体及图标颜色设置为深色
      * @return boolean 成功执行返回true
      */
+    @SuppressWarnings("unchecked")
+    @SuppressLint("PrivateApi")
     private static boolean isMIUISetStatusBarLightMode(@Nullable Window window, boolean dark) {
         boolean result = false;
         if (window != null) {
             Class clazz = window.getClass();
             try {
-                int darkModeFlag = 0;
+                int darkModeFlag;
                 Class layoutParams = Class.forName("android.view.MiuiWindowManager$LayoutParams");
                 Field field = layoutParams.getField("EXTRA_FLAG_STATUS_BAR_DARK_MODE");
                 darkModeFlag = field.getInt(layoutParams);
@@ -154,6 +159,7 @@ public class StatusBarUtil {
                 }
                 result = true;
             } catch (Exception e) {
+                LogUtil.d(e);
             }
         }
         return result;
@@ -205,6 +211,7 @@ public class StatusBarUtil {
                 window.setAttributes(lp);
                 result = true;
             } catch (Exception e) {
+                LogUtil.d(e);
             }
         }
         return result;

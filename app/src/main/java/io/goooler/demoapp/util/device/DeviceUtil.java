@@ -30,6 +30,8 @@ import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.util.Enumeration;
 
+import io.goooler.demoapp.util.LogUtil;
+
 /**
  * @author X
  * Created by liyanfang on 2018/7/3.
@@ -48,10 +50,7 @@ public class DeviceUtil {
      * @return Screen Width
      */
     public static int getScreenWidth(@NonNull Context context) {
-        Point point = new Point();
-        Display display = ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
-        display.getSize(point);
-        return point.x;
+        return getPoint(context).x;
     }
 
     /**
@@ -61,12 +60,17 @@ public class DeviceUtil {
      * @return Screen Height
      */
     public static int getScreenHeight(@NonNull Context context) {
-        Point point = new Point();
-        Display display = ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
-        display.getSize(point);
-        return point.y;
+        return getPoint(context).y;
     }
 
+    private static Point getPoint(@NonNull Context context) {
+        Point point = new Point();
+        WindowManager wm = ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE));
+        if (wm != null) {
+            wm.getDefaultDisplay().getSize(point);
+        }
+        return point;
+    }
 
     /**
      * 获取androidID
@@ -108,6 +112,7 @@ public class DeviceUtil {
      * @param context .
      * @return NavigationBar is exist.
      */
+    @SuppressWarnings("unchecked")
     @SuppressLint("PrivateApi")
     public static boolean checkDeviceHaveNavigationBar(@NonNull Context context) {
         boolean hasNavigationBar = false;
@@ -126,6 +131,7 @@ public class DeviceUtil {
                 hasNavigationBar = true;
             }
         } catch (Exception e) {
+            LogUtil.d(e);
         }
         return hasNavigationBar;
     }
@@ -139,7 +145,10 @@ public class DeviceUtil {
     public static int getVirtualBarHeight(@NonNull Context context) {
         int vh = 0;
         WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        Display display = windowManager.getDefaultDisplay();
+        Display display = null;
+        if (windowManager != null) {
+            display = windowManager.getDefaultDisplay();
+        }
         DisplayMetrics dm = new DisplayMetrics();
         try {
             @SuppressWarnings("rawtypes")
@@ -149,8 +158,8 @@ public class DeviceUtil {
             method.invoke(display, dm);
             vh = dm.heightPixels - windowManager.getDefaultDisplay().getHeight();
         } catch (Exception e) {
+            LogUtil.d(e);
         }
-
         return vh;
     }
 
@@ -255,6 +264,7 @@ public class DeviceUtil {
             result = br.readLine().split("\\s+")[1];
             br.close();
         } catch (IOException e) {
+            LogUtil.d(e);
         }
 
         if (result != null) {
@@ -282,12 +292,14 @@ public class DeviceUtil {
                 macSerial = str.trim();
             }
         } catch (IOException e) {
+            LogUtil.d(e);
         } finally {
             try {
                 if (lnr != null) {
                     lnr.close();
                 }
             } catch (IOException e) {
+                LogUtil.d(e);
             }
         }
         return macSerial;
@@ -309,12 +321,14 @@ public class DeviceUtil {
                 ethernetMac = ethernetMac.trim();
             }
         } catch (Exception e) {
+            LogUtil.d(e);
         } finally {
             try {
                 if (reader != null) {
                     reader.close();
                 }
             } catch (IOException e) {
+                LogUtil.d(e);
             }
         }
 
@@ -343,6 +357,7 @@ public class DeviceUtil {
             }
             strMacAddr = buffer.toString();
         } catch (Exception e) {
+            LogUtil.d(e);
         }
 
         return strMacAddr;
@@ -369,6 +384,7 @@ public class DeviceUtil {
                 }
             }
         } catch (SocketException e) {
+            LogUtil.d(e);
         }
         return ip;
     }

@@ -22,6 +22,7 @@ import okhttp3.OkHttpClient;
  */
 @GlideModule
 public class GlideConfigModule extends AppGlideModule {
+
     @Override
     public boolean isManifestParsingEnabled() {
         return false;
