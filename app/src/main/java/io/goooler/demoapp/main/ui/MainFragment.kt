@@ -11,15 +11,15 @@ import io.goooler.demoapp.main.vm.MainViewModel
 
 class MainFragment : BaseFragment() {
 
-    private val binding by lazy {
+    private val binding by lazy(LazyThreadSafetyMode.NONE) {
         inflate<FragmentMainBinding>(R.layout.fragment_main)
     }
 
-    private val vm by lazy {
+    private val vm by lazy(LazyThreadSafetyMode.NONE) {
         getViewModel(MainViewModel::class.java)
     }
 
-    private val initOnce by lazy {
+    private val initOnce by lazy(LazyThreadSafetyMode.NONE) {
         binding.vm = vm
         binding.clickListener = clickListener
         vm.initData()
