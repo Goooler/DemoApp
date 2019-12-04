@@ -3,6 +3,7 @@ package io.goooler.demoapp.model
 /**
  * 常量集合
  */
+@Suppress("unused")
 object Constants {
     const val DB_NAME = "Demo.db"
     const val IMAGE_URL_PREFIX = ""

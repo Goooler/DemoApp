@@ -92,6 +92,22 @@ public class ImageLoader {
     /**
      * load image
      *
+     * @param imageView           the image view
+     * @param url                 the url
+     * @param placeholderDrawable the placeholder drawable
+     * @param errorDrawable       the error Drawable
+     */
+    public static void load(ImageView imageView, String url, Drawable placeholderDrawable, Drawable errorDrawable) {
+        GlideApp.with(imageView)
+                .load(url)
+                .placeholder(placeholderDrawable)
+                .error(errorDrawable)
+                .into(imageView);
+    }
+
+    /**
+     * load image
+     *
      * @param imageView     the image view
      * @param bitmap        the url
      * @param placeholderId the placeholder id
@@ -116,6 +132,23 @@ public class ImageLoader {
                 .load(bitmap)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .placeholder(placeholderDrawable)
+                .into(imageView);
+    }
+
+    /**
+     * load image
+     *
+     * @param imageView           the image view
+     * @param bitmap              the url
+     * @param placeholderDrawable the placeholder drawable
+     * @param errorDrawable       the error Drawable
+     */
+    public static void load(ImageView imageView, Bitmap bitmap, Drawable placeholderDrawable, Drawable errorDrawable) {
+        GlideApp.with(imageView)
+                .load(bitmap)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .placeholder(placeholderDrawable)
+                .error(errorDrawable)
                 .into(imageView);
     }
 
@@ -147,6 +180,7 @@ public class ImageLoader {
                 .into(imageView);
     }
 
+
     /**
      * load image
      *
@@ -159,6 +193,23 @@ public class ImageLoader {
                 .load(translateOssUrl(imageView, url))
                 .placeholder(placeholderDrawable)
                 .error(GlideApp.with(imageView).load(url))
+                .into(imageView);
+    }
+
+
+    /**
+     * load image
+     *
+     * @param imageView           the image view
+     * @param url                 the url
+     * @param placeholderDrawable the placeholder drawable
+     * @param errorDrawable       the error Drawable
+     */
+    public static void loadOss(ImageView imageView, String url, Drawable placeholderDrawable, Drawable errorDrawable) {
+        GlideApp.with(imageView)
+                .load(translateOssUrl(imageView, url))
+                .placeholder(placeholderDrawable)
+                .error(GlideApp.with(imageView).load(url).error(errorDrawable))
                 .into(imageView);
     }
 
@@ -204,6 +255,25 @@ public class ImageLoader {
                 .centerCrop()
                 .into(imageView);
     }
+
+
+    /**
+     * Load image with centerCrop.
+     *
+     * @param imageView           the image view
+     * @param url                 the url
+     * @param placeholderDrawable the placeholder drawable
+     * @param errorDrawable       the error Drawable
+     */
+    public static void loadCenterCrop(ImageView imageView, String url, Drawable placeholderDrawable, Drawable errorDrawable) {
+        GlideApp.with(imageView)
+                .load(url)
+                .placeholder(placeholderDrawable)
+                .error(errorDrawable)
+                .centerCrop()
+                .into(imageView);
+    }
+
 
     /**
      * Load image with centerCrop.
@@ -251,6 +321,25 @@ public class ImageLoader {
                 .into(imageView);
     }
 
+
+    /**
+     * Load image with centerCrop.
+     *
+     * @param imageView           the image view
+     * @param url                 the url
+     * @param placeholderDrawable the placeholder drawable
+     * @param errorDrawable       the error Drawable
+     */
+    public static void loadCenterCropOss(ImageView imageView, String url, Drawable placeholderDrawable, Drawable errorDrawable) {
+        GlideApp.with(imageView)
+                .load(translateOssUrl(imageView, url))
+                .placeholder(placeholderDrawable)
+                .centerCrop()
+                .error(GlideApp.with(imageView).load(url).error(errorDrawable))
+                .into(imageView);
+    }
+
+
     /**
      * Load image with centerInside.
      *
@@ -279,6 +368,7 @@ public class ImageLoader {
                 .into(imageView);
     }
 
+
     /**
      * Load image with centerInside.
      *
@@ -293,6 +383,25 @@ public class ImageLoader {
                 .centerInside()
                 .into(imageView);
     }
+
+
+    /**
+     * Load image with centerInside.
+     *
+     * @param imageView           the image view
+     * @param url                 the url
+     * @param placeholderDrawable the placeholder drawable
+     * @param errorDrawable       the error Drawable
+     */
+    public static void loadCenterInside(ImageView imageView, String url, Drawable placeholderDrawable, Drawable errorDrawable) {
+        GlideApp.with(imageView)
+                .load(url)
+                .placeholder(placeholderDrawable)
+                .error(errorDrawable)
+                .centerInside()
+                .into(imageView);
+    }
+
 
     /**
      * Load image with centerInside.
@@ -340,6 +449,24 @@ public class ImageLoader {
                 .into(imageView);
     }
 
+
+    /**
+     * Load image with centerInside.
+     *
+     * @param imageView           the image view
+     * @param url                 the url
+     * @param placeholderDrawable the placeholder drawable
+     * @param errorDrawable       the error Drawable
+     */
+    public static void loadCenterInsideOss(ImageView imageView, String url, Drawable placeholderDrawable, Drawable errorDrawable) {
+        GlideApp.with(imageView)
+                .load(translateOssUrl(imageView, url))
+                .placeholder(placeholderDrawable)
+                .centerInside()
+                .error(GlideApp.with(imageView).load(url).error(errorDrawable))
+                .into(imageView);
+    }
+
     /**
      * Load image with fitCenter.
      *
@@ -368,6 +495,7 @@ public class ImageLoader {
                 .into(imageView);
     }
 
+
     /**
      * Load image with fitCenter.
      *
@@ -382,6 +510,24 @@ public class ImageLoader {
                 .fitCenter()
                 .into(imageView);
     }
+
+    /**
+     * Load image with fitCenter.
+     *
+     * @param imageView           the image view
+     * @param url                 the url
+     * @param placeholderDrawable the placeholder drawable
+     * @param errorDrawable       the error Drawable
+     */
+    public static void loadFitCenter(ImageView imageView, String url, Drawable placeholderDrawable, Drawable errorDrawable) {
+        GlideApp.with(imageView)
+                .load(url)
+                .placeholder(placeholderDrawable)
+                .error(errorDrawable)
+                .fitCenter()
+                .into(imageView);
+    }
+
 
     /**
      * Load image with fitCenter.
@@ -430,6 +576,24 @@ public class ImageLoader {
     }
 
     /**
+     * Load image with fitCenter.
+     *
+     * @param imageView           the image view
+     * @param url                 the url
+     * @param placeholderDrawable the placeholder drawable
+     * @param errorDrawable       the error Drawable
+     */
+    public static void loadFitCenterOss(ImageView imageView, String url, Drawable placeholderDrawable, Drawable errorDrawable) {
+        GlideApp.with(imageView)
+                .load(translateOssUrl(imageView, url))
+                .placeholder(placeholderDrawable)
+                .fitCenter()
+                .error(GlideApp.with(imageView).load(url).error(errorDrawable))
+                .into(imageView);
+    }
+
+
+    /**
      * Load image with circleCrop.
      *
      * @param imageView the image view
@@ -471,6 +635,25 @@ public class ImageLoader {
                 .circleCrop()
                 .into(imageView);
     }
+
+
+    /**
+     * Load image with circleCrop.
+     *
+     * @param imageView           the image view
+     * @param url                 the url
+     * @param placeholderDrawable the placeholder drawable
+     * @param errorDrawable       the error Drawable
+     */
+    public static void loadCircleCrop(ImageView imageView, String url, Drawable placeholderDrawable, Drawable errorDrawable) {
+        GlideApp.with(imageView)
+                .load(url)
+                .placeholder(placeholderDrawable)
+                .error(errorDrawable)
+                .circleCrop()
+                .into(imageView);
+    }
+
 
     /**
      * Load image with circleCrop.
@@ -518,6 +701,24 @@ public class ImageLoader {
                 .into(imageView);
     }
 
+
+    /**
+     * Load image with circleCrop.
+     *
+     * @param imageView           the image view
+     * @param url                 the url
+     * @param placeholderDrawable the placeholder drawable
+     * @param errorDrawable       the error Drawable
+     */
+    public static void loadCircleCropOss(ImageView imageView, String url, Drawable placeholderDrawable, Drawable errorDrawable) {
+        GlideApp.with(imageView)
+                .load(translateOssUrl(imageView, url))
+                .placeholder(placeholderDrawable)
+                .circleCrop()
+                .error(GlideApp.with(imageView).load(url).error(errorDrawable))
+                .into(imageView);
+    }
+
     /**
      * Load image with roundedCorner.
      *
@@ -560,6 +761,24 @@ public class ImageLoader {
         GlideApp.with(imageView)
                 .load(url)
                 .placeholder(placeholderDrawable)
+                .apply(RequestOptions.bitmapTransform(new RoundedCorners(roundingRadius)))
+                .into(imageView);
+    }
+
+    /**
+     * Load image with roundedCorner.
+     *
+     * @param imageView           the image view
+     * @param url                 the url
+     * @param roundingRadius      the rounding radius
+     * @param placeholderDrawable the placeholder drawable
+     * @param errorDrawable       the error Drawable
+     */
+    public static void loadRoundedCorner(ImageView imageView, String url, int roundingRadius, Drawable placeholderDrawable, Drawable errorDrawable) {
+        GlideApp.with(imageView)
+                .load(url)
+                .placeholder(placeholderDrawable)
+                .error(errorDrawable)
                 .apply(RequestOptions.bitmapTransform(new RoundedCorners(roundingRadius)))
                 .into(imageView);
     }
@@ -613,6 +832,25 @@ public class ImageLoader {
                 .into(imageView);
     }
 
+
+    /**
+     * Load image with roundedCorner.
+     *
+     * @param imageView           the image view
+     * @param url                 the url
+     * @param roundingRadius      the rounding radius
+     * @param placeholderDrawable the placeholder drawable
+     * @param errorDrawable       the error Drawable
+     */
+    public static void loadRoundedCornerOss(ImageView imageView, String url, int roundingRadius, Drawable placeholderDrawable, Drawable errorDrawable) {
+        GlideApp.with(imageView)
+                .load(translateOssUrl(imageView, url))
+                .placeholder(placeholderDrawable)
+                .apply(RequestOptions.bitmapTransform(new RoundedCorners(roundingRadius)))
+                .error(GlideApp.with(imageView).load(url).error(errorDrawable))
+                .into(imageView);
+    }
+
     /**
      * Load image with centerCrop and roundedCorner
      *
@@ -655,6 +893,25 @@ public class ImageLoader {
         GlideApp.with(imageView)
                 .load(url)
                 .placeholder(placeholderDrawable)
+                .transform(new CenterCrop(), new RoundedCorners(roundingRadius))
+                .into(imageView);
+    }
+
+
+    /**
+     * Load image with centerCrop and roundedCorner
+     *
+     * @param imageView           the image view
+     * @param url                 the url
+     * @param roundingRadius      the rounding radius
+     * @param placeholderDrawable the placeholder drawable
+     * @param errorDrawable       the error drawable
+     */
+    public static void loadCenterCropRoundedCorner(ImageView imageView, String url, int roundingRadius, Drawable placeholderDrawable, Drawable errorDrawable) {
+        GlideApp.with(imageView)
+                .load(url)
+                .placeholder(placeholderDrawable)
+                .error(errorDrawable)
                 .transform(new CenterCrop(), new RoundedCorners(roundingRadius))
                 .into(imageView);
     }
@@ -708,6 +965,25 @@ public class ImageLoader {
                 .into(imageView);
     }
 
+
+    /**
+     * Load image with centerCrop and roundedCorner
+     *
+     * @param imageView           the image view
+     * @param url                 the url
+     * @param roundingRadius      the rounding radius
+     * @param placeholderDrawable the placeholder drawable
+     * @param errorDrawable       the error drawable
+     */
+    public static void loadCenterCropRoundedCornerOss(ImageView imageView, String url, int roundingRadius, Drawable placeholderDrawable, Drawable errorDrawable) {
+        GlideApp.with(imageView)
+                .load(translateOssUrl(imageView, url))
+                .placeholder(placeholderDrawable)
+                .transform(new CenterCrop(), new RoundedCorners(roundingRadius))
+                .error(GlideApp.with(imageView).load(url).error(errorDrawable))
+                .into(imageView);
+    }
+
     /**
      * @param imageView the image view
      * @param url       the url
@@ -748,6 +1024,23 @@ public class ImageLoader {
                 .placeholder(placeholderDrawable)
                 .transform(new CenterCrop(), new BlurTransformation(radius, sampling))
                 .error(GlideApp.with(imageView).load(url))
+                .into(imageView);
+    }
+
+
+    /**
+     * @param imageView           the image view
+     * @param url                 the url
+     * @param radius              blur radius
+     * @param sampling            blur sampling
+     * @param placeholderDrawable the placeholder drawable
+     * @param errorDrawable       the error drawable
+     */
+    public static void loadCenterCropBlur(ImageView imageView, String url, int radius, int sampling, Drawable placeholderDrawable, Drawable errorDrawable) {
+        GlideApp.with(imageView).load(url)
+                .placeholder(placeholderDrawable)
+                .transform(new CenterCrop(), new BlurTransformation(radius, sampling))
+                .error(GlideApp.with(imageView).load(url).error(errorDrawable))
                 .into(imageView);
     }
 
@@ -794,6 +1087,24 @@ public class ImageLoader {
                 .placeholder(placeholderDrawable)
                 .transform(new CenterCrop(), new BlurTransformation(radius, sampling))
                 .error(GlideApp.with(imageView).load(url))
+                .into(imageView);
+    }
+
+
+    /**
+     * @param imageView           the image view
+     * @param url                 the url
+     * @param radius              blur radius
+     * @param sampling            blur sampling
+     * @param placeholderDrawable the placeholder drawable
+     * @param errorDrawable       the error drawable
+     */
+    public static void loadCenterCropBlurOss(ImageView imageView, String url, int radius, int sampling, Drawable placeholderDrawable, Drawable errorDrawable) {
+        GlideApp.with(imageView)
+                .load(translateOssUrl(imageView, url))
+                .placeholder(placeholderDrawable)
+                .transform(new CenterCrop(), new BlurTransformation(radius, sampling))
+                .error(GlideApp.with(imageView).load(url).error(errorDrawable))
                 .into(imageView);
     }
 
@@ -851,6 +1162,7 @@ public class ImageLoader {
                 .into(imageView);
     }
 
+
     /**
      * Load image without cache.
      *
@@ -866,6 +1178,26 @@ public class ImageLoader {
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .into(imageView);
     }
+
+
+    /**
+     * Load image without cache.
+     *
+     * @param imageView           the image view
+     * @param url                 the url
+     * @param placeholderDrawable the placeholder drawable
+     * @param errorDrawable       the error drawable
+     */
+    public static void loadWithoutCache(ImageView imageView, String url, Drawable placeholderDrawable, Drawable errorDrawable) {
+        GlideApp.with(imageView)
+                .load(url)
+                .placeholder(placeholderDrawable)
+                .error(errorDrawable)
+                .skipMemoryCache(false)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .into(imageView);
+    }
+
 
     /**
      * Load image without cache.
@@ -913,6 +1245,25 @@ public class ImageLoader {
                 .skipMemoryCache(false)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .error(GlideApp.with(imageView).load(url))
+                .into(imageView);
+    }
+
+
+    /**
+     * Load image without cache.
+     *
+     * @param imageView           the image view
+     * @param url                 the url
+     * @param placeholderDrawable the placeholder drawable
+     * @param errorDrawable       the error drawable
+     */
+    public static void loadWithoutCacheOss(ImageView imageView, String url, Drawable placeholderDrawable, Drawable errorDrawable) {
+        GlideApp.with(imageView)
+                .load(translateOssUrl(imageView, url))
+                .placeholder(placeholderDrawable)
+                .skipMemoryCache(false)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .error(GlideApp.with(imageView).load(url).error(errorDrawable))
                 .into(imageView);
     }
 

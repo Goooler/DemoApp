@@ -10,14 +10,12 @@ import com.alibaba.fastjson.JSONObject
 object JsonUtil {
 
     fun <T> fromJson(jsonString: String, clazz: Class<T>): T? {
-        var t: T? = null
-        try {
-            t = JSONObject.parseObject(jsonString, clazz)
+        return try {
+            JSONObject.parseObject(jsonString, clazz)
         } catch (e: JSONException) {
-            // do nothing
+            LogUtil.d(e.toString())
+            null
         }
-
-        return t
     }
 
     fun toJson(o: Any): String {

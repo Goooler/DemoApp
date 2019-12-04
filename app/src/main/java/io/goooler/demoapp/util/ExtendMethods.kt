@@ -1,17 +1,23 @@
 package io.goooler.demoapp.util
 
+import android.graphics.Color
+import android.graphics.drawable.GradientDrawable
+import android.view.View
 import android.webkit.URLUtil
+import androidx.annotation.ColorInt
 import androidx.lifecycle.MutableLiveData
+import io.goooler.demoapp.BuildConfig
+import io.goooler.demoapp.base.BaseApplication
 import io.goooler.demoapp.model.Constants.IMAGE_URL_PREFIX
 import io.goooler.demoapp.model.Constants.PHONE_FIRST_CHAR
 import io.goooler.demoapp.model.Constants.PHONE_LENGTH
+import io.goooler.demoapp.util.device.DimensionUtil
 import java.math.BigDecimal
 import java.util.*
 
-/**
- * 泛型传入要解析的data类的type
- * 只能适用于简单的对象不能解析集合类泛型（例如：List<MyObj>）
- */
+
+//---------------------Json-------------------------------//
+
 inline fun <reified T> String.fromJson(): T? {
     return JsonUtil.fromJson(this, T::class.java)
 }
@@ -19,6 +25,8 @@ inline fun <reified T> String.fromJson(): T? {
 fun Any.toJson(): String {
     return JsonUtil.toJson(this)
 }
+
+//---------------------Calculate-------------------------------//
 
 /**
  * @param isYuan 默认以分为单位，传入元为单位传 true
@@ -63,6 +71,42 @@ fun Number.formatMoney(isYuan: Boolean = false, trans2W: Boolean = false, scale:
     }
 }
 
+// 获取图片宽高比例，如：/assets/img/2019/07/18/n_1563460410803_3849___size550x769.jpg
+fun String.getSizeByLoadUrl(defaultWidth: Int, defaultHeight: Int): List<Int> {
+    val sizeList = ArrayList<Int>()
+    sizeList.add(defaultWidth)
+    sizeList.add(defaultHeight)
+    val flag = "size"
+    if (!this.contains(IMAGE_URL_PREFIX) || !this.contains(flag)) {
+        return sizeList
+    }
+    val pattern = "$flag(\\d+x\\d+)"
+    Regex(pattern)
+            .findAll(this)
+            .forEach {
+
+                // size550x769
+                val sizeXXXxXXX = it.value
+                // 550x769
+                val mXXXxXXX = sizeXXXxXXX.replace(flag, "")
+                val list = mXXXxXXX.split("x")
+
+                if (list.size < 2) {
+                    return sizeList
+                }
+                // 550
+                val width = list[0].toInt()
+                // 769
+                val height = list[1].toInt()
+                sizeList.clear()
+                sizeList.add(width)
+                sizeList.add(height)
+                return sizeList
+            }
+
+    return sizeList
+}
+
 infix fun Double.plus(that: Double): Double {
     return (BigDecimal(this.toString()) + BigDecimal(that.toString())).toDouble()
 }
@@ -79,23 +123,30 @@ infix fun Double.div(that: Double): Double {
     return (BigDecimal(this.toString()) / BigDecimal(that.toString())).toDouble()
 }
 
-fun Long.trans2DateString(pattern: String): String {
-    return DateUtil.timestampToDateString(this, pattern)
+fun Number.isZero(): Boolean {
+    return when (this) {
+        is Double -> BigDecimal(this.toString()) == BigDecimal("0.0")
+        is Long -> this == 0L
+        is Short, is Int -> this == 0
+        else -> false
+    }
 }
 
-fun String.toLoadUrl(): String {
-    return if (URLUtil.isNetworkUrl(this)) {
-        this
-    } else {
-        IMAGE_URL_PREFIX + this
-    }
+fun Number.isNotZero(): Boolean {
+    return !isZero()
+}
+
+//---------------------Date-------------------------------//
+
+fun Long.formatTime(pattern: String): String {
+    return DateUtil.timestampToDateString(this, pattern)
 }
 
 fun Long.easyTime(): String {
     val now = System.currentTimeMillis()
     val t = now - this
     if (t < 0) {// 未来
-        return this.trans2DateString("yyyy-MM-dd HH:mm")
+        return this.formatTime("yyyy-MM-dd HH:mm")
     }
     val oneMinute = 1000 * 60
     val oneHour = oneMinute * 60
@@ -115,15 +166,31 @@ fun Long.easyTime(): String {
 
 
     return when {
-        !isSameYear -> this.trans2DateString("yyyy-MM-dd HH:mm")
-        isYesterday -> this.trans2DateString("昨天 HH:mm")
+        !isSameYear -> this.formatTime("yyyy-MM-dd HH:mm")
+        isYesterday -> this.formatTime("昨天 HH:mm")
         t < oneMinute -> "刚刚"
         t < oneHour -> (t / oneMinute).toString() + "分钟前"
         t < oneDay -> (t / oneHour).toString() + "小时前"
-        isSameYear -> this.trans2DateString("MM-dd HH:mm")
-        else -> this.trans2DateString("yyyy-MM-dd HH:mm")
+        isSameYear -> this.formatTime("MM-dd HH:mm")
+        else -> this.formatTime("yyyy-MM-dd HH:mm")
     }
 }
+
+//---------------------Network-------------------------------//
+
+fun String.isNetworkUrl(): Boolean {
+    return URLUtil.isNetworkUrl(this)
+}
+
+fun String.toLoadUrl(): String {
+    return if (this.isNetworkUrl()) {
+        this
+    } else {
+        IMAGE_URL_PREFIX + this
+    }
+}
+
+//---------------------Phone-------------------------------//
 
 fun String.isValidPhoneFormat(): Boolean {
     return this.startsWith(PHONE_FIRST_CHAR) && this.length == PHONE_LENGTH
@@ -133,6 +200,188 @@ fun String.hidePhone(): String {
     return this.replace(Regex("(\\d{3})\\d{4}(\\d{4})"), "$1****$2")
 }
 
+fun Float.sp2px(): Int {
+    return DimensionUtil.sp2px(BaseApplication.context, this)
+}
+
+fun Float.dp2px(): Int {
+    return DimensionUtil.dp2px(BaseApplication.context, this)
+}
+
+fun Int.px2sp(): Float {
+    return DimensionUtil.px2sp(BaseApplication.context, this)
+}
+
+fun Int.px2dp(): Float {
+    return DimensionUtil.px2dp(BaseApplication.context, this)
+}
+
+//---------------------LiveData-------------------------------//
+
 fun <T : Any> MutableLiveData<T>.set(value: T?) = postValue(value)
 
 fun <T : Any> MutableLiveData<T>.get() = value
+
+//---------------------View-------------------------------//
+
+/**
+ * 设置 view 的背景，支持圆形和矩形，渐变色和描边圆角等
+ *
+ * @param shapeType 背景形状，圆、矩形等
+ * @param gradualColors 渐变色数组，和填充色互斥
+ * @param angle 渐变色角度
+ * @param solidColor 填充色，和渐变色数组互斥
+ * @param strokeColor 描边色
+ * @param stroke 描边粗细
+ * @param radius 圆角大小
+ */
+fun View.setBgShapeGradual(shapeType: Int = GradientDrawable.RECTANGLE,
+                           @ColorInt gradualColors: IntArray? = null,
+                           angle: Int = -1,
+                           @ColorInt solidColor: Int? = null,
+                           @ColorInt strokeColor: Int = Color.TRANSPARENT,
+                           stroke: Float = 0f,
+                           radius: Float = 0f) {
+    background = GradientDrawable().apply {
+        shape = shapeType
+        useLevel = false
+        gradientType = GradientDrawable.LINEAR_GRADIENT
+        when (angle) {
+            0 -> orientation = GradientDrawable.Orientation.LEFT_RIGHT
+            45 -> orientation = GradientDrawable.Orientation.BL_TR
+            90 -> orientation = GradientDrawable.Orientation.BOTTOM_TOP
+            135 -> orientation = GradientDrawable.Orientation.BR_TL
+            180 -> orientation = GradientDrawable.Orientation.RIGHT_LEFT
+            225 -> orientation = GradientDrawable.Orientation.TR_BL
+            270 -> orientation = GradientDrawable.Orientation.TOP_BOTTOM
+            315 -> orientation = GradientDrawable.Orientation.TL_BR
+        }
+        if (gradualColors != null && solidColor == null) {
+            colors = gradualColors
+        } else if (gradualColors == null && solidColor != null) {
+            setColor(solidColor)
+        }
+        setStroke(stroke.toInt(), strokeColor)
+        cornerRadius = radius
+    }
+}
+
+/**
+ * 设置 view 在矩形某几个角上需要圆角的背景
+ *
+ * @param solidColor 填充色
+ * @param topLeft 左上圆角大小
+ * @param topRight 右上圆角大小
+ * @param bottomLeft 左下圆角大小
+ * @param bottomRight 左下圆角大小
+ */
+fun View.setBgShapeCorners(@ColorInt solidColor: Int = Color.WHITE,
+                           topLeft: Float = 0f,
+                           topRight: Float = 0f,
+                           bottomLeft: Float = 0f,
+                           bottomRight: Float = 0f) {
+    background = GradientDrawable().apply {
+        shape = GradientDrawable.RECTANGLE
+        setColor(solidColor)
+        cornerRadii = floatArrayOf(
+                topLeft, topLeft,
+                topRight, topRight,
+                bottomRight, bottomRight,
+                bottomLeft, bottomLeft
+        )
+    }
+}
+
+//---------------------SafeTrans-------------------------------//
+
+fun String?.safeToBoolean(default: Boolean = false): Boolean {
+    if (this == null) return default
+    return try {
+        this.toBoolean()
+    } catch (e: Throwable) {
+        default
+    }
+}
+
+fun String?.safeToInt(default: Int = 0): Int {
+    if (this == null) return default
+    return try {
+        this.toInt()
+    } catch (e: Throwable) {
+        default
+    }
+}
+
+fun String?.safeToLong(default: Long = 0L): Long {
+    if (this == null) return default
+    return try {
+        this.toLong()
+    } catch (e: Throwable) {
+        default
+    }
+}
+
+fun String?.safeToFloat(default: Float = 0f): Float {
+    if (this == null) return default
+    return try {
+        this.toFloat()
+    } catch (e: Throwable) {
+        default
+    }
+}
+
+fun String?.safeToDouble(default: Double = 0.0): Double {
+    if (this == null) return default
+    return try {
+        this.toDouble()
+    } catch (e: Throwable) {
+        default
+    }
+}
+
+@ColorInt
+fun String?.safeToColor(@ColorInt default: Int = 0): Int {
+    return try {
+        Color.parseColor(this)
+    } catch (e: Throwable) {
+        default
+    }
+}
+
+//---------------------Func-------------------------------//
+
+fun Boolean.trueRun(whenTrue: () -> Unit = {}): Boolean {
+    if (this) {
+        whenTrue()
+    }
+    return this
+}
+
+fun Boolean.falseRun(whenFalse: () -> Unit = {}): Boolean {
+    if (!this) {
+        whenFalse()
+    }
+    return this
+}
+
+fun debugRun(debug: () -> Unit): Boolean {
+    if (BuildConfig.DEBUG) {
+        debug()
+    }
+    return BuildConfig.DEBUG
+}
+
+//---------------------Collections-------------------------------//
+
+fun <E> MutableCollection<E>.removeIfMatch(predicate: (e: E) -> Boolean): Boolean {
+    Objects.requireNonNull(predicate)
+    var removed = false
+    val each = this.iterator()
+    while (each.hasNext()) {
+        if (predicate(each.next())) {
+            each.remove()
+            removed = true
+        }
+    }
+    return removed
+}
