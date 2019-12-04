@@ -21,6 +21,12 @@ import io.goooler.demoapp.util.LogUtil;
  */
 public class SoftInputUtil {
 
+    private static final WeakHashMap<Activity, ViewTreeObserver.OnGlobalLayoutListener> map = new WeakHashMap<>();
+    /**
+     * 记录根视图的显示高度
+     */
+    private static int rootViewVisibleHeight;
+
     private SoftInputUtil() {
         throw new UnsupportedOperationException("you can't instantiate me.");
     }
@@ -118,7 +124,6 @@ public class SoftInputUtil {
         }
     }
 
-
     /**
      * Is keyboard showing boolean.
      *
@@ -135,7 +140,6 @@ public class SoftInputUtil {
         return screenHeight - rect.bottom - getSoftButtonsBarHeight(activity) != 0;
     }
 
-
     private static int getSoftButtonsBarHeight(@NonNull Activity activity) {
         DisplayMetrics metrics = new DisplayMetrics();
         // 这个方法获取可能不是真实屏幕的高度
@@ -150,20 +154,6 @@ public class SoftInputUtil {
             return 0;
         }
     }
-
-    public interface OnSoftInputChangeListener {
-        void keyBoardShow(int height);
-
-        void keyBoardHide(int height);
-    }
-
-    private static final WeakHashMap<Activity, ViewTreeObserver.OnGlobalLayoutListener> map = new WeakHashMap<>();
-
-    /**
-     * 记录根视图的显示高度
-     */
-    private static int rootViewVisibleHeight;
-
 
     /**
      * 设置 SoftInputChangeListener。
@@ -223,6 +213,12 @@ public class SoftInputUtil {
         View rootView = activity.getWindow().getDecorView();
         ViewTreeObserver.OnGlobalLayoutListener listener = map.remove(activity);
         rootView.getViewTreeObserver().removeOnGlobalLayoutListener(listener);
+    }
+
+    public interface OnSoftInputChangeListener {
+        void keyBoardShow(int height);
+
+        void keyBoardHide(int height);
     }
 
 }

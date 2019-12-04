@@ -19,9 +19,9 @@
         binding_bg_solidColor="@{@color/white}"
         binding_bg_topLeftRadius="@{9}"
         binding_bg_topRightRadius="@{9}"
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         tools:background="@color/white">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -55,13 +55,13 @@
 
         <TextView
             android:id="@+id/tv_content"
-            android:text="@{vm.content}"
-            android:textColor="@color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
-            android:layout_marginEnd="12dp"
             android:layout_marginTop="25dp"
+            android:layout_marginEnd="12dp"
+            android:text="@{vm.content}"
+            android:textColor="@color/black"
             tools:text="这是一段示例内容" />
     </LinearLayout>
 </layout>
