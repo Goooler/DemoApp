@@ -17,16 +17,16 @@ import jp.wasabeef.glide.transformations.BlurTransformation;
 
 /**
  * 现在服务端的下发的图片下载链接分两种；
- * 一种：http://cdn.webuy.ai/assets/file/11/24/n_1543045056389_4585.jpg
- * 另外一种后缀带[!max] 和 [!small]的：http://cdn.webuy.ai/assets/file/11/24/n_1543045056389_4585.jpg!max
- * http://cdn.webuy.ai/assets/file/11/24/n_1543045056389_4585.jpg!small
+ * 一种：http://cdn.xxx.com/assets/file/11/24/n_1543045056389_4585.jpg
+ * 另外一种后缀带[!max] 和 [!small]的：http://cdn.xxx.com/assets/file/11/24/n_1543045056389_4585.jpg!max
+ * http://cdn.xxx.com/assets/file/11/24/n_1543045056389_4585.jpg!small
  * <p>
  * 现在处理方式是阿里云支持等比例压缩，规则是图片后缀加：
  * ?x-oss-process=image/resize,w_指定宽度
  * ?x-oss-process=image/resize,h_指定高度
  * 处理过程中，带[!max]和[!small]后缀的图片链接需要去掉后缀，处理为像下面这样：
- * http://cdn.webuy.ai/assets/file/11/24/n_1543045056389_4585.jpg?x-oss-process=image/resize,w_140
- * http://cdn.webuy.ai/assets/file/11/24/n_1543045056389_4585.jpg?x-oss-process=image/resize,h_340
+ * http://cdn.xxx.com/assets/file/11/24/n_1543045056389_4585.jpg?x-oss-process=image/resize,w_140
+ * http://cdn.xxx.com/assets/file/11/24/n_1543045056389_4585.jpg?x-oss-process=image/resize,h_340
  * <p>
  * 在调用GlideApp的centerCrop()，centerInside()等方法时，如果同时也设置了ImageView的ScaleType属性，那么ImageView
  * 的ScaleType将会被忽略。
