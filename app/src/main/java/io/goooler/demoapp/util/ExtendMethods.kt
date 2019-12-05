@@ -15,6 +15,11 @@ import io.goooler.demoapp.util.device.DimensionUtil
 import java.math.BigDecimal
 import java.util.*
 
+//---------------------Json-------------------------------//
+
+fun Any?.log() {
+    LogUtil.d(this)
+}
 
 //---------------------Json-------------------------------//
 
