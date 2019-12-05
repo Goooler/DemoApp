@@ -73,23 +73,9 @@ object RequestUtil {
     }
 
     /**
-     * 请求结果回调给调用方的接口，可以让调用方实现匿名内部类时自由选择要覆写的方法
-     * 覆写的方法决定回调的类型
+     * 请求接口回调
      */
-    abstract class RequestListener : RequestCallback {
-        override fun response(rawResponse: Response) {
-
-        }
-
-        override fun response(rawResponse: Response, jsonString: String) {
-
-        }
-    }
-
-    /**
-     * RequestListener 要实现的一个接口，定义几种返回类型
-     */
-    interface RequestCallback {
+    interface RequestListener {
         /**
          * 返回原始的 okhttp3.Response 不做任何处理
          *
