@@ -7,10 +7,9 @@ import kotlin.system.exitProcess
 /**
  * 捕获系统崩溃
  */
-class CrashHandler private constructor() : Thread.UncaughtExceptionHandler {
+object CrashHandler : Thread.UncaughtExceptionHandler {
 
     private var mDefaultCrashHandler: Thread.UncaughtExceptionHandler? = null
-
 
     fun init() {
         mDefaultCrashHandler = Thread.getDefaultUncaughtExceptionHandler()
@@ -28,10 +27,5 @@ class CrashHandler private constructor() : Thread.UncaughtExceptionHandler {
             android.os.Process.killProcess(android.os.Process.myPid())
             exitProcess(1)
         }
-    }
-
-
-    companion object {
-        val instance = CrashHandler()
     }
 }

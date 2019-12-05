@@ -5,9 +5,9 @@ import android.app.Application
 import android.content.Context
 import com.alibaba.android.arouter.launcher.ARouter
 import com.squareup.leakcanary.LeakCanary
-import io.goooler.demoapp.BuildConfig
 import io.goooler.demoapp.util.CrashHandler
 import io.goooler.demoapp.util.LogUtil
+import io.goooler.demoapp.util.debugRun
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
@@ -28,15 +28,15 @@ class BaseApplication : Application() {
     @SuppressLint("CheckResult")
     private fun initData() {
         context = applicationContext
+        CrashHandler.init()
         ARouter.init(this)
         // 部分三方初始化延时处理
         Single.just(true)
                 .subscribeOn(Schedulers.io())
                 .delay(2, TimeUnit.SECONDS)
                 .subscribe({
-                    CrashHandler.instance.init()
                     LeakCanary.install(this)
-                    if (BuildConfig.DEBUG) {
+                    debugRun {
                         ARouter.openLog()
                         ARouter.openDebug()
                     }
