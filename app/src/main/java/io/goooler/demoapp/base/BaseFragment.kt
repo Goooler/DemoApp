@@ -14,10 +14,6 @@ import io.goooler.demoapp.util.ToastUtil
  */
 abstract class BaseFragment : Fragment() {
 
-    protected fun <T : ViewDataBinding> inflate(@LayoutRes layoutId: Int): T {
-        return DataBindingUtil.inflate(layoutInflater, layoutId, null, false)
-    }
-
     protected fun <T : BaseViewModel> getViewModel(modelClass: Class<T>): T {
         return ViewModelProviders.of(this@BaseFragment).get(modelClass).apply {
             lifecycle.addObserver(this)
@@ -33,7 +29,7 @@ abstract class BaseFragment : Fragment() {
     }
 
     private fun observeVm(vm: BaseViewModel) {
-        vm.toast.observe(this@BaseFragment, Observer<String> {
+        vm.toast.observe(this@BaseFragment, Observer {
             showToast(it)
         })
     }

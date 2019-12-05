@@ -20,11 +20,13 @@ class MainViewModel(application: Application) : BaseViewModel(application) {
                 .subscribeOn(Schedulers.io())
                 .filter {
                     it.status
-                }.subscribe({
+                }
+                .subscribe({
                     title.set(it.entry!!.name)
                 }, {
                     silentThrowable(it)
-                }).let {
+                })
+                .let {
                     addDisposable(it)
                 }
     }

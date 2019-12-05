@@ -35,10 +35,6 @@ abstract class BaseActivity : AppCompatActivity() {
         ActivityCollector.removeActivity(this)
     }
 
-    protected fun <T : ViewDataBinding> inflate(@LayoutRes layoutId: Int): T {
-        return DataBindingUtil.setContentView(this, layoutId)
-    }
-
     /**
      * @param containerId 容器id
      * @param fragment
@@ -73,8 +69,8 @@ abstract class BaseActivity : AppCompatActivity() {
     protected fun <T : BaseViewModel> getViewModel(modelClass: Class<T>): T {
         return ViewModelProviders.of(this@BaseActivity).get(modelClass).apply {
             lifecycle.addObserver(this)
-            toast.observe(this@BaseActivity, Observer<String> { msg ->
-                showToast(msg)
+            toast.observe(this@BaseActivity, Observer {
+                showToast(it)
             })
         }
     }

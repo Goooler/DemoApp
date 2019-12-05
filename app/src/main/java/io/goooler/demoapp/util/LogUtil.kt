@@ -12,13 +12,17 @@ object LogUtil {
     private const val DEFAULT_LOG_TAG = "goooler"
 
     @JvmStatic
-    fun d(debugInfo: Any) {
-        log(DEFAULT_LOG_TAG, debugInfo.toString())
+    fun d(debugInfo: Any?) {
+        debugInfo?.let {
+            log(DEFAULT_LOG_TAG, it.toString())
+        }
     }
 
     @JvmStatic
-    fun d(tag: Any, debugInfo: Any) {
-        log(tag.toString(), debugInfo.toString())
+    fun d(tag: Any, debugInfo: Any?) {
+        debugInfo?.let {
+            log(tag.toString(), it.toString())
+        }
     }
 
     @JvmStatic
