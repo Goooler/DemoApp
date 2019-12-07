@@ -9,15 +9,12 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
-import java.net.InetSocketAddress
-import java.net.Proxy
 import java.util.concurrent.TimeUnit
 
 abstract class BaseRetrofitHelper protected constructor() {
-    private var retrofit: Retrofit
 
-    init {
-        retrofit = Retrofit.Builder()
+    private val retrofit by lazy {
+        Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .client(buildOkHttpClient())
                 .addConverterFactory(converterFactory)
@@ -47,20 +44,12 @@ abstract class BaseRetrofitHelper protected constructor() {
     protected fun onAddInterceptor(builder: OkHttpClient.Builder?) {}
 
     protected fun buildOkHttpClient(): OkHttpClient {
-        var proxy: Proxy? = null
-        val host = System.getProperty("http.proxyHost")
-        val port = System.getProperty("http.proxyPort")
-        if (host != null && port != null) {
-            proxy = Proxy(Proxy.Type.HTTP, InetSocketAddress(host, Integer.valueOf(port)))
-        }
-        val httpCacheDirectory = File(context.cacheDir, "HttpCache")
-        val cache = Cache(httpCacheDirectory, CACHE_SIZE)
+        val cache = Cache(File(context.cacheDir, "HttpCache"), CACHE_SIZE)
         val builder = OkHttpClient.Builder()
                 .cache(cache)
                 .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
                 .writeTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS)
                 .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
-                .proxy(proxy)
                 .retryOnConnectionFailure(true)
         onAddInterceptor(builder)
         return builder.build()

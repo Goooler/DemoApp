@@ -6,7 +6,6 @@ import io.goooler.demoapp.api.RetrofitHelper
 import io.goooler.demoapp.base.BaseViewModel
 import io.goooler.demoapp.main.api.MainApi
 import io.goooler.demoapp.main.repository.MainRepository
-import io.goooler.demoapp.util.log
 import io.reactivex.schedulers.Schedulers
 
 class MainViewModel(application: Application) : BaseViewModel(application) {

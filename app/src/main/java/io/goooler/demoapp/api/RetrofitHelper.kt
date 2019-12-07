@@ -7,7 +7,7 @@ import io.goooler.demoapp.base.BaseRetrofitHelper
 object RetrofitHelper : BaseRetrofitHelper() {
 
     override val baseUrl: String
-        get() = "https://raw.githubusercontent.com"
+        get() = "https://github.com"
 
     override val context: Context
         get() = BaseApplication.context

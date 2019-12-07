@@ -2,16 +2,11 @@ package io.goooler.demoapp.base
 
 import android.os.Bundle
 import androidx.annotation.IdRes
-import androidx.annotation.LayoutRes
-
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-
 import io.goooler.demoapp.model.Constants
 import io.goooler.demoapp.util.LogUtil
 import io.goooler.demoapp.util.ToastUtil

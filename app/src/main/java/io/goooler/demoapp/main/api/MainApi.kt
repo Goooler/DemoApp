@@ -7,6 +7,6 @@ import retrofit2.http.GET
 
 interface MainApi {
 
-    @GET("/Goooler/DemoApp/kotlin/app/src/main/assets/demo.json")
+    @GET("/Goooler/DemoApp/raw/kotlin/app/src/main/assets/demo.json")
     fun getDemoAppInfo(): Observable<HttpResponse<DemoAppInfoBean>>
 }
