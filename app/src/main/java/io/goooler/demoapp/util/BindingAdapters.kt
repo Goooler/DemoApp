@@ -152,20 +152,20 @@ fun View.bindingMarginRight(marginRight: Float) {
 @BindingAdapter(value = ["binding_bg_startColor", "binding_bg_endColor",
     "binding_bg_angle", "binding_bg_radius"], requireAll = true)
 fun View.bindingBgShapeGradual(@ColorInt startColor: Int, @ColorInt endColor: Int, angle: Int, radius: Float) {
-    setBgShapeGradual(gradualColors = kotlin.intArrayOf(startColor, endColor), angle = angle, radius = radius)
+    setBgShapeGradual(gradualColors = intArrayOf(startColor, endColor), angle = angle, radius = radius)
 }
 
 @BindingAdapter(value = ["binding_bg_startColor", "binding_bg_endColor",
     "binding_bg_angle", "binding_bg_stroke", "binding_bg_strokeColor", "binding_bg_radius"], requireAll = true)
 fun View.bindingBgShapeGradual(@ColorInt startColor: Int, @ColorInt endColor: Int, angle: Int, stroke: Float, @ColorInt strokeColor: Int, radius: Float) {
-    setBgShapeGradual(gradualColors = kotlin.intArrayOf(startColor, endColor), angle = angle, radius = radius, strokeColor = strokeColor, stroke = stroke)
+    setBgShapeGradual(gradualColors = intArrayOf(startColor, endColor), angle = angle, radius = radius, strokeColor = strokeColor, stroke = stroke)
 }
 
 @BindingAdapter(value = ["binding_bg_startColor", "binding_bg_centerColor", "binding_bg_endColor",
     "binding_bg_angle", "binding_bg_radius"], requireAll = true)
 fun View.bindingBgShapeGradual(@ColorInt startColor: Int, @ColorInt centerColor: Int, @ColorInt endColor: Int,
                                angle: Int, radius: Float) {
-    setBgShapeGradual(gradualColors = kotlin.intArrayOf(startColor, centerColor, endColor), angle = angle, radius = radius)
+    setBgShapeGradual(gradualColors = intArrayOf(startColor, centerColor, endColor), angle = angle, radius = radius)
 }
 
 @BindingAdapter(value = ["binding_bg_solidColor", "binding_bg_topLeftRadius", "binding_bg_topRightRadius", "binding_bg_bottomLeftRadius", "binding_bg_bottomRightRadius"], requireAll = false)
@@ -175,12 +175,12 @@ fun View.bindingBgShapeCorners(@ColorInt solidColor: Int, topLeft: Float, topRig
 
 @BindingAdapter(value = ["binding_bg_startColor", "binding_bg_endColor", "binding_bg_angle"], requireAll = true)
 fun View.bindingBgShapeGradual(@ColorInt startColor: Int, @ColorInt endColor: Int, angle: Int) {
-    setBgShapeGradual(gradualColors = kotlin.intArrayOf(startColor, endColor), angle = angle)
+    setBgShapeGradual(gradualColors = intArrayOf(startColor, endColor), angle = angle)
 }
 
 @BindingAdapter(value = ["binding_bg_startColor", "binding_bg_centerColor", "binding_bg_endColor", "binding_bg_angle"], requireAll = true)
 fun View.bindingBgShapeGradual(@ColorInt startColor: Int, @ColorInt centerColor: Int, @ColorInt endColor: Int, angle: Int) {
-    setBgShapeGradual(gradualColors = kotlin.intArrayOf(startColor, centerColor, endColor), angle = angle)
+    setBgShapeGradual(gradualColors = intArrayOf(startColor, centerColor, endColor), angle = angle)
 }
 
 @BindingAdapter(value = ["binding_bg_stroke", "binding_bg_strokeColor", "binding_bg_solidColor", "binding_bg_radius"], requireAll = true)
@@ -340,7 +340,7 @@ fun TextView.bindingImpactTypeface(path: String) {
 
 @BindingAdapter("binding_paint_flag")
 fun TextView.bindingPaintFlag(flag: Int) {
-    paint.flags = flag // such as Paint.STRIKE_THRU_TEXT_FLAG
+    paint.flags = flag
     paint.isAntiAlias = true
 }
 

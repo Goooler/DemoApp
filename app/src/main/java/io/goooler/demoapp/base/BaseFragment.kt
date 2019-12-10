@@ -14,19 +14,20 @@ import io.goooler.demoapp.util.ToastUtil
 abstract class BaseFragment : Fragment() {
 
     /**
-     * @param containerId 容器id
-     * @param fragment
-     * @param isAddToBackStack 将要替换的fragment是否要添加到返回栈
+     * @param containerId       容器 id
+     * @param fragment          要添加的 fragment
+     * @param isAddToBackStack  将要添加的 fragment 是否要添加到返回栈
+     * @param tag               fragment 的 tag
      */
     protected fun addFragment(@IdRes containerId: Int, fragment: Fragment, isAddToBackStack: Boolean = false, tag: String? = null) {
         getFragmentTransaction(isAddToBackStack, tag).add(containerId, fragment, tag).commit()
     }
 
     /**
-     * @param containerId
-     * @param fragment
-     * @param isAddToBackStack 将要替换的fragment是否要添加到返回栈
-     * @param tag              fragment的tag
+     * @param containerId       容器 id
+     * @param fragment          要替换的 fragment
+     * @param isAddToBackStack  将要替换的 fragment 是否要添加到返回栈
+     * @param tag               fragment 的 tag
      */
     protected fun replaceFragment(@IdRes containerId: Int, fragment: Fragment, isAddToBackStack: Boolean = true, tag: String? = null) {
         getFragmentTransaction(isAddToBackStack, tag).replace(containerId, fragment, tag).commit()
