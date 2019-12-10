@@ -5,6 +5,7 @@ import androidx.annotation.IdRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import io.goooler.demoapp.model.Constants
@@ -35,15 +36,8 @@ abstract class BaseActivity : AppCompatActivity() {
      * @param fragment
      * @param isAddToBackStack 将要替换的fragment是否要添加到返回栈
      */
-    @Suppress("MemberVisibilityCanBePrivate")
-    protected fun addFragment(@IdRes containerId: Int, fragment: Fragment, isAddToBackStack: Boolean = false) {
-        supportFragmentManager.beginTransaction().run {
-            add(containerId, fragment)
-            if (isAddToBackStack) {
-                addToBackStack(null)
-            }
-            commit()
-        }
+    protected fun addFragment(@IdRes containerId: Int, fragment: Fragment, isAddToBackStack: Boolean = false, tag: String? = null) {
+        getFragmentTransaction(isAddToBackStack, tag).add(containerId, fragment, tag).commit()
     }
 
     /**
@@ -52,12 +46,15 @@ abstract class BaseActivity : AppCompatActivity() {
      * @param isAddToBackStack 将要替换的fragment是否要添加到返回栈
      * @param tag              fragment的tag
      */
-    protected fun replaceFragment(@IdRes containerId: Int, fragment: Fragment, isAddToBackStack: Boolean, tag: String? = null) {
-        supportFragmentManager.beginTransaction().run {
+    protected fun replaceFragment(@IdRes containerId: Int, fragment: Fragment, isAddToBackStack: Boolean = true, tag: String? = null) {
+        getFragmentTransaction(isAddToBackStack, tag).replace(containerId, fragment, tag).commit()
+    }
+
+    private fun getFragmentTransaction(isAddToBackStack: Boolean, tag: String?): FragmentTransaction {
+        return supportFragmentManager.beginTransaction().apply {
             if (isAddToBackStack) {
                 addToBackStack(tag)
             }
-            replace(containerId, fragment, tag).commit()
         }
     }
 
