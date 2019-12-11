@@ -2,9 +2,13 @@ package io.goooler.demoapp.util
 
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
+import android.os.Build
+import android.text.Html
+import android.text.Spanned
 import android.view.View
 import android.webkit.URLUtil
 import androidx.annotation.ColorInt
+import androidx.annotation.StringRes
 import androidx.lifecycle.MutableLiveData
 import io.goooler.demoapp.BuildConfig
 import io.goooler.demoapp.base.BaseApplication
@@ -15,13 +19,13 @@ import io.goooler.demoapp.util.device.DimensionUtil
 import java.math.BigDecimal
 import java.util.*
 
-//---------------------Json-------------------------------//
+//---------------------Log-------------------------------//
 
 fun Any?.log() {
     LogUtil.d(this)
 }
 
-//---------------------Json-------------------------------//
+//---------------------String-------------------------------//
 
 inline fun <reified T> String.fromJson(): T? {
     return JsonUtil.fromJson(this, T::class.java)
@@ -29,6 +33,19 @@ inline fun <reified T> String.fromJson(): T? {
 
 fun Any.toJson(): String {
     return JsonUtil.toJson(this)
+}
+
+fun String.fromHtml(): Spanned {
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+        Html.fromHtml(this, Html.FROM_HTML_MODE_LEGACY)
+    } else {
+        @Suppress("DEPRECATION")
+        Html.fromHtml(this)
+    }
+}
+
+fun String.formatRes(@StringRes resId: Int): String {
+    return String.format(ResUtil.getString(resId), this)
 }
 
 //---------------------Calculate-------------------------------//
@@ -389,4 +406,32 @@ fun <E> MutableCollection<E>.removeIfMatch(predicate: (e: E) -> Boolean): Boolea
         }
     }
     return removed
+}
+
+/**
+ * 判断集合内是否仅有一个元素
+ */
+fun <T> Collection<T>?.isSingle(): Boolean {
+    return this != null && this.size == 1
+}
+
+/**
+ * 判断集合内是否有多个元素
+ */
+fun <T> Collection<T>?.isMultiple(): Boolean {
+    return this != null && this.size > 1
+}
+
+/**
+ * 取集合内第二个元素
+ */
+fun <T> List<T>.second(): T {
+    return this[1]
+}
+
+/**
+ * 取集合内第三个元素
+ */
+fun <T> List<T>.third(): T {
+    return this[2]
 }
