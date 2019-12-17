@@ -9,7 +9,7 @@ import io.goooler.demoapp.main.repository.MainRepository
 import io.reactivex.schedulers.Schedulers
 
 class MainViewModel(application: Application) : BaseViewModel(application) {
-    private val repository by lazy {
+    private val repository by lazy(LazyThreadSafetyMode.NONE) {
         MainRepository(RetrofitHelper.createApiService(MainApi::class.java))
     }
 
