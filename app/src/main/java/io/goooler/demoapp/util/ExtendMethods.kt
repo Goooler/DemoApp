@@ -2,9 +2,13 @@ package io.goooler.demoapp.util
 
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
+import android.os.Build
+import android.text.Html
+import android.text.Spanned
 import android.view.View
 import android.webkit.URLUtil
 import androidx.annotation.ColorInt
+import androidx.annotation.StringRes
 import androidx.lifecycle.MutableLiveData
 import io.goooler.demoapp.BuildConfig
 import io.goooler.demoapp.base.BaseApplication
@@ -14,14 +18,15 @@ import io.goooler.demoapp.model.Constants.PHONE_LENGTH
 import io.goooler.demoapp.util.device.DimensionUtil
 import java.math.BigDecimal
 import java.util.*
+import kotlin.math.absoluteValue
 
-//---------------------Json-------------------------------//
+//---------------------Log-------------------------------//
 
 fun Any?.log() {
     LogUtil.d(this)
 }
 
-//---------------------Json-------------------------------//
+//---------------------String-------------------------------//
 
 inline fun <reified T> String.fromJson(): T? {
     return JsonUtil.fromJson(this, T::class.java)
@@ -31,12 +36,24 @@ fun Any.toJson(): String {
     return JsonUtil.toJson(this)
 }
 
+fun String.fromHtml(): Spanned {
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+        Html.fromHtml(this, Html.FROM_HTML_MODE_LEGACY)
+    } else {
+        @Suppress("DEPRECATION")
+        Html.fromHtml(this)
+    }
+}
+
+fun String.formatRes(@StringRes resId: Int): String {
+    return String.format(ResUtil.getString(resId), this)
+}
+
 //---------------------Calculate-------------------------------//
 
 /**
  * @param isYuan 默认以分为单位，传入元为单位传 true
  * @param trans2W 是否需要在超过一万时转换为 1.2w 的形式，不需要的话传 false
- * @param scale 保留小数的位数
  *
  * 分是 Long 类型、元是 Double 类型
  */
@@ -47,32 +64,29 @@ fun Number.formatMoney(isYuan: Boolean = false, trans2W: Boolean = false, scale:
         // 分转为元
         this.toDouble() / 100
     }
-    return when {
-        moneyF.toLong() / 10000 > 0 -> {
-            if (trans2W) {
-                return try {
-                    BigDecimal.valueOf(moneyF / 10000)
-                            .setScale(1, BigDecimal.ROUND_DOWN)
-                            .stripTrailingZeros().toPlainString() + "W"
-                } catch (e: Exception) {
-                    this.toString()
-                }
-            } else {
+    try {
+        when {
+            trans2W && moneyF / 10000 > 0 -> {
+                return BigDecimal.valueOf(moneyF / 10000)
+                        .setScale(1, BigDecimal.ROUND_DOWN)
+                        .stripTrailingZeros().toPlainString() + "W"
+            }
+
+            else ->
                 BigDecimal.valueOf(moneyF)
                         .setScale(scale, BigDecimal.ROUND_DOWN)
                         .stripTrailingZeros().toPlainString()
-            }
-        }
-        else -> {
-            BigDecimal.valueOf(moneyF).setScale(scale, BigDecimal.ROUND_DOWN)
-                    .stripTrailingZeros().toPlainString().let {
-                        return if (it.toDouble() == 0.0) {
-                            "0"
-                        } else {
-                            it
+                        .let {
+                            return if (it.toDouble().absoluteValue < 0.000001) {
+                                "0"
+                            } else {
+                                it
+                            }
                         }
-                    }
+
         }
+    } catch (e: Exception) {
+        return moneyF.toString()
     }
 }
 
@@ -389,4 +403,32 @@ fun <E> MutableCollection<E>.removeIfMatch(predicate: (e: E) -> Boolean): Boolea
         }
     }
     return removed
+}
+
+/**
+ * 判断集合内是否仅有一个元素
+ */
+fun <T> Collection<T>?.isSingle(): Boolean {
+    return this != null && this.size == 1
+}
+
+/**
+ * 判断集合内是否有多个元素
+ */
+fun <T> Collection<T>?.isMultiple(): Boolean {
+    return this != null && this.size > 1
+}
+
+/**
+ * 取集合内第二个元素
+ */
+fun <T> List<T>.second(): T {
+    return this[1]
+}
+
+/**
+ * 取集合内第三个元素
+ */
+fun <T> List<T>.third(): T {
+    return this[2]
 }
