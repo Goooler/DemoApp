@@ -9,7 +9,6 @@ import android.view.View
 import android.webkit.URLUtil
 import androidx.annotation.ColorInt
 import androidx.annotation.StringRes
-import androidx.lifecycle.MutableLiveData
 import io.goooler.demoapp.BuildConfig
 import io.goooler.demoapp.base.BaseApplication
 import io.goooler.demoapp.model.Constants.IMAGE_URL_PREFIX
@@ -235,13 +234,9 @@ fun Int.px2dp(): Float {
     return DimensionUtil.px2dp(BaseApplication.context, this)
 }
 
-//---------------------LiveData-------------------------------//
-
-fun <T : Any> MutableLiveData<T>.set(value: T?) = postValue(value)
-
-fun <T : Any> MutableLiveData<T>.get() = value
 
 //---------------------View-------------------------------//
+
 
 /**
  * 设置 view 的背景，支持圆形和矩形，渐变色和描边圆角等

@@ -19,7 +19,7 @@ object ToastUtil {
      * @param text string 文本
      */
     fun showToast(text: String) {
-        if (Looper.myLooper() == Looper.getMainLooper()) {
+        if (isMainThread()) {
             Toast.makeText(BaseApplication.context, text, Toast.LENGTH_SHORT).show()
         } else {
             Looper.prepare()
@@ -35,5 +35,9 @@ object ToastUtil {
      */
     fun showToast(@StringRes stringId: Int) {
         showToast(ResUtil.getString(stringId))
+    }
+
+    private fun isMainThread(): Boolean {
+        return Looper.getMainLooper().thread === Thread.currentThread()
     }
 }

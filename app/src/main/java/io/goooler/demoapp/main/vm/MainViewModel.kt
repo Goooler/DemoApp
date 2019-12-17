@@ -1,7 +1,7 @@
 package io.goooler.demoapp.main.vm
 
 import android.app.Application
-import androidx.databinding.ObservableField
+import androidx.lifecycle.MutableLiveData
 import io.goooler.demoapp.api.RetrofitHelper
 import io.goooler.demoapp.base.BaseViewModel
 import io.goooler.demoapp.main.api.MainApi
@@ -13,7 +13,7 @@ class MainViewModel(application: Application) : BaseViewModel(application) {
         MainRepository(RetrofitHelper.createApiService(MainApi::class.java))
     }
 
-    val title = ObservableField<String>()
+    val title = MutableLiveData<String>()
 
     fun initData() {
         repository.getDemoAppInfo()
@@ -25,7 +25,7 @@ class MainViewModel(application: Application) : BaseViewModel(application) {
                     return@map it.entry!!.name ?: ""
                 }
                 .subscribe({
-                    title.set(it)
+                    title.postValue(it)
                 }, {
                     silentThrowable(it)
                 })
