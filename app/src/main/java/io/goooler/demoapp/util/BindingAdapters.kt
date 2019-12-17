@@ -387,9 +387,9 @@ fun SmartRefreshLayout.bindingOnLoadMoreListener(listener: OnLoadMoreListener) {
     setOnLoadMoreListener(listener)
 }
 
-@BindingAdapter("binding_srl_isRefreshFinish")
-fun SmartRefreshLayout.bindingIsRefreshFinish(isFinish: Boolean) {
-    if (isFinish) {
+@BindingAdapter("binding_srl_refreshFinish")
+fun SmartRefreshLayout.bindingRefreshFinish(finish: Boolean) {
+    if (finish) {
         finishRefresh()
     }
 }

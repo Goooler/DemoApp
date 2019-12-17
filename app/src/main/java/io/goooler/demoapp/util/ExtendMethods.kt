@@ -9,7 +9,6 @@ import android.view.View
 import android.webkit.URLUtil
 import androidx.annotation.ColorInt
 import androidx.annotation.StringRes
-import androidx.lifecycle.MutableLiveData
 import io.goooler.demoapp.BuildConfig
 import io.goooler.demoapp.base.BaseApplication
 import io.goooler.demoapp.model.Constants.IMAGE_URL_PREFIX
@@ -18,6 +17,7 @@ import io.goooler.demoapp.model.Constants.PHONE_LENGTH
 import io.goooler.demoapp.util.device.DimensionUtil
 import java.math.BigDecimal
 import java.util.*
+import kotlin.math.absoluteValue
 
 //---------------------Log-------------------------------//
 
@@ -53,7 +53,6 @@ fun String.formatRes(@StringRes resId: Int): String {
 /**
  * @param isYuan 默认以分为单位，传入元为单位传 true
  * @param trans2W 是否需要在超过一万时转换为 1.2w 的形式，不需要的话传 false
- * @param scale 保留小数的位数
  *
  * 分是 Long 类型、元是 Double 类型
  */
@@ -64,32 +63,29 @@ fun Number.formatMoney(isYuan: Boolean = false, trans2W: Boolean = false, scale:
         // 分转为元
         this.toDouble() / 100
     }
-    return when {
-        moneyF.toLong() / 10000 > 0 -> {
-            if (trans2W) {
-                return try {
-                    BigDecimal.valueOf(moneyF / 10000)
-                            .setScale(1, BigDecimal.ROUND_DOWN)
-                            .stripTrailingZeros().toPlainString() + "W"
-                } catch (e: Exception) {
-                    this.toString()
-                }
-            } else {
+    try {
+        when {
+            trans2W && moneyF / 10000 > 0 -> {
+                return BigDecimal.valueOf(moneyF / 10000)
+                        .setScale(1, BigDecimal.ROUND_DOWN)
+                        .stripTrailingZeros().toPlainString() + "W"
+            }
+
+            else ->
                 BigDecimal.valueOf(moneyF)
                         .setScale(scale, BigDecimal.ROUND_DOWN)
                         .stripTrailingZeros().toPlainString()
-            }
-        }
-        else -> {
-            BigDecimal.valueOf(moneyF).setScale(scale, BigDecimal.ROUND_DOWN)
-                    .stripTrailingZeros().toPlainString().let {
-                        return if (it.toDouble() == 0.0) {
-                            "0"
-                        } else {
-                            it
+                        .let {
+                            return if (it.toDouble().absoluteValue < 0.000001) {
+                                "0"
+                            } else {
+                                it
+                            }
                         }
-                    }
+
         }
+    } catch (e: Exception) {
+        return moneyF.toString()
     }
 }
 
@@ -238,13 +234,9 @@ fun Int.px2dp(): Float {
     return DimensionUtil.px2dp(BaseApplication.context, this)
 }
 
-//---------------------LiveData-------------------------------//
-
-fun <T : Any> MutableLiveData<T>.set(value: T?) = postValue(value)
-
-fun <T : Any> MutableLiveData<T>.get() = value
 
 //---------------------View-------------------------------//
+
 
 /**
  * 设置 view 的背景，支持圆形和矩形，渐变色和描边圆角等
