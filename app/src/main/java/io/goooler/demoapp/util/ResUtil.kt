@@ -2,6 +2,8 @@ package io.goooler.demoapp.util
 
 import android.annotation.SuppressLint
 import android.content.res.Resources
+import android.graphics.drawable.Drawable
+import androidx.annotation.*
 
 import io.goooler.demoapp.base.BaseApplication
 
@@ -9,21 +11,26 @@ import io.goooler.demoapp.base.BaseApplication
 /**
  * 获取资源的工具封装，可以在任何控件中直接获取
  */
+@SuppressLint("NewApi")
 object ResUtil {
 
     private val resources: Resources
         get() = BaseApplication.context.resources
 
-    fun getString(id: Int): String {
+    fun getString(@StringRes id: Int): String {
         return resources.getString(id)
     }
 
-    fun getStringArray(id: Int): Array<String> {
+    fun getStringArray(@ArrayRes id: Int): Array<String> {
         return resources.getStringArray(id)
     }
 
-    @SuppressLint("NewApi")
-    fun getColor(id: Int): Int {
+    @ColorInt
+    fun getColor(@ColorRes id: Int): Int {
         return resources.getColor(id, null)
+    }
+
+    fun getDrawable(@DrawableRes id: Int): Drawable {
+        return resources.getDrawable(id, null)
     }
 }
