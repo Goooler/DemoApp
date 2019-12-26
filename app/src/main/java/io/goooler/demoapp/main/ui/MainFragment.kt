@@ -20,9 +20,9 @@ class MainFragment : BaseFragment() {
     }
 
     private val initOnce by lazy(LazyThreadSafetyMode.NONE) {
+        binding.lifecycleOwner = this@MainFragment
         binding.vm = vm
         binding.clickListener = clickListener
-        binding.lifecycleOwner = this@MainFragment
         vm.initData()
     }
 
