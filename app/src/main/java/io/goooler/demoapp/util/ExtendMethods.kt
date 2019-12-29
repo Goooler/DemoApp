@@ -26,7 +26,7 @@ fun Any?.log() {
     LogUtil.d(this)
 }
 
-//---------------------String-------------------------------//
+//---------------------CharSequence-------------------------------//
 
 inline fun <reified T> String.fromJson(): T? {
     return JsonUtil.fromJson(this, T::class.java)
@@ -51,6 +51,15 @@ fun String.formatRes(@StringRes resId: Int): String {
 
 fun CharSequence?.isNotNullOrEmpty(): Boolean {
     return !isNullOrEmpty()
+}
+
+/**
+ * subString 防越界处理
+ */
+fun String.safeSubstring(startIndex: Int, endIndex: Int): String {
+    val begin = if (startIndex < 0) 0 else startIndex
+    val end = if (endIndex > length) length else endIndex
+    return substring(begin, end)
 }
 
 //---------------------Calculate-------------------------------//
