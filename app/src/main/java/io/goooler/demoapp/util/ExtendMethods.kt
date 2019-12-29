@@ -1,5 +1,6 @@
 package io.goooler.demoapp.util
 
+import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.os.Build
@@ -46,6 +47,10 @@ fun String.fromHtml(): Spanned {
 
 fun String.formatRes(@StringRes resId: Int): String {
     return String.format(ResUtil.getString(resId), this)
+}
+
+fun CharSequence?.isNotNullOrEmpty(): Boolean {
+    return !isNullOrEmpty()
 }
 
 //---------------------Calculate-------------------------------//
@@ -226,12 +231,20 @@ fun Float.dp2px(): Int {
     return DimensionUtil.dp2px(BaseApplication.context, this)
 }
 
+fun Float.pt2px(context: Context): Int {
+    return DimensionUtil.pt2px(context, this)
+}
+
 fun Int.px2sp(): Float {
     return DimensionUtil.px2sp(BaseApplication.context, this)
 }
 
 fun Int.px2dp(): Float {
     return DimensionUtil.px2dp(BaseApplication.context, this)
+}
+
+fun Int.px2pt(context: Context): Float {
+    return DimensionUtil.px2pt(context, this)
 }
 
 
@@ -400,6 +413,10 @@ fun <E> MutableCollection<E>.removeIfMatch(predicate: (e: E) -> Boolean): Boolea
     return removed
 }
 
+fun <T> Collection<T>?.isNotNullOrEmpty(): Boolean {
+    return !isNullOrEmpty()
+}
+
 /**
  * 判断集合内是否仅有一个元素
  */
@@ -409,9 +426,11 @@ fun <T> Collection<T>?.isSingle(): Boolean {
 
 /**
  * 判断集合内是否有多个元素
+ * @param minSize 最小为 2
  */
-fun <T> Collection<T>?.isMultiple(): Boolean {
-    return this != null && this.size > 1
+fun <T> Collection<T>?.isMultiple(minSize: Int = 2): Boolean {
+    val min = if (minSize < 2) 2 else minSize
+    return this != null && this.size >= min
 }
 
 /**

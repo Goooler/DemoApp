@@ -1,6 +1,7 @@
 package io.goooler.demoapp.util.device;
 
 import android.content.Context;
+import android.util.DisplayMetrics;
 import android.util.TypedValue;
 
 import androidx.annotation.NonNull;
@@ -63,5 +64,29 @@ public class DimensionUtil {
      */
     public static float px2sp(@NonNull Context context, int pxValue) {
         return (pxValue / context.getResources().getDisplayMetrics().scaledDensity);
+    }
+
+    /**
+     * pt 转 px
+     *
+     * @param context 目前pt适配需要传入activity的context
+     * @param ptValue .
+     * @return .
+     */
+    public static int pt2px(@NonNull Context context, final float ptValue) {
+        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+        return (int) (ptValue * metrics.xdpi / 72f + 0.5f);
+    }
+
+    /**
+     * px 转 pt
+     *
+     * @param context 目前pt适配需要传入activity的context
+     * @param pxValue .
+     * @return .
+     */
+    public static float px2pt(@NonNull Context context, final int pxValue) {
+        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+        return (pxValue * 72f / metrics.xdpi + 0.5f);
     }
 }

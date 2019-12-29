@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import io.goooler.demoapp.R
 import io.goooler.demoapp.base.BaseDialogFragment
 import io.goooler.demoapp.databinding.FragmentBottomTipDialogBinding
@@ -28,7 +28,7 @@ class BottomTipDialogFragment : BaseDialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStyle(STYLE_NORMAL, R.style.Dialog_FullScreen)
+        setStyle(STYLE_NORMAL, R.style.DialogFullScreen)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -53,26 +53,21 @@ class BottomTipDialogFragment : BaseDialogFragment() {
             height = ViewGroup.LayoutParams.WRAP_CONTENT
             gravity = Gravity.BOTTOM
         }
-        dialog?.window?.attributes = param
+        dialog?.window?.run {
+            setWindowAnimations(R.style.DialogBottomAnim)
+            attributes = param
+        }
     }
 
     companion object {
         private const val TITLE = "title"
         private const val CONTENT = "content"
 
-        fun newInstance(title: String, content: String) = BottomTipDialogFragment().apply {
+        fun show(manager: FragmentManager, title: String, content: String) = BottomTipDialogFragment().apply {
             arguments = Bundle().apply {
                 putString(TITLE, title)
                 putString(CONTENT, content)
             }
-        }
-
-        fun show(fragment: Fragment, title: String, content: String) {
-            newInstance(title, content).run {
-                fragment.fragmentManager?.let {
-                    show(it, fragment.tag)
-                }
-            }
-        }
+        }.show(manager, null)
     }
 }
