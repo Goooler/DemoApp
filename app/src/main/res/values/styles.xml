@@ -9,10 +9,10 @@
     </style>
 
     <!--全屏对话框-->
-    <style name="Dialog.FullScreen" parent="Theme.AppCompat.Dialog">
+    <style name="DialogFullScreen" parent="Theme.AppCompat.Dialog">
         <item name="android:windowNoTitle">true</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowIsFloating">false</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
     </style>
 
     <!--对话框背景透明-->
@@ -20,6 +20,12 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <!--底部弹起效果-->
+    <style name="DialogBottomAnim" parent="@android:style/Animation">
+        <item name="android:windowEnterAnimation">@anim/popup_enter</item>
+        <item name="android:windowExitAnimation">@anim/popup_exit</item>
     </style>
 
     <!--去掉点击后的水波纹效果-->
