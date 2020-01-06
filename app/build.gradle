@@ -106,7 +106,6 @@ dependencies {
     implementation "com.alibaba:arouter-api:$arouterVersion"
     kapt "com.alibaba:arouter-compiler:$arouterCompilerVersion"
     implementation "com.google.code.gson:gson:$gsonVersion"
-    implementation "io.goooler:wechathelper:$wechatHelperVersion"
 
     // analyze
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakcanaryVersion"

@@ -22,7 +22,7 @@ class MainViewModel(application: Application) : BaseViewModel(application) {
                     it.status
                 }
                 .map {
-                    return@map it.entry!!.name ?: ""
+                    return@map it.entry!!.name.orEmpty()
                 }
                 .subscribe({
                     title.postValue(it)

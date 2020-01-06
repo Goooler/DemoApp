@@ -22,25 +22,23 @@ class MainFragment : BaseFragment() {
     private val initOnce by lazy(LazyThreadSafetyMode.NONE) {
         binding.lifecycleOwner = this@MainFragment
         binding.vm = vm
-        binding.clickListener = clickListener
+        binding.listener = eventListener
         vm.initData()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        initOnce
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        initOnce
+    private val eventListener = object : EventListener {
+        override fun onTitleClick() {
+            showToast(R.string.main_fragment)
+        }
     }
 
-    private val clickListener = View.OnClickListener {
-        when (it) {
-            binding.tvTitle -> {
-                showToast(R.string.main_fragment)
-            }
-        }
+    interface EventListener {
+        fun onTitleClick()
     }
 
     companion object {

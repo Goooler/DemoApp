@@ -6,7 +6,7 @@ package io.goooler.demoapp.base
  */
 abstract class BaseLazyFragment : BaseFragment() {
 
-    private val initOnce by lazy {
+    private val initOnce by lazy(LazyThreadSafetyMode.NONE) {
         loadData()
     }
 

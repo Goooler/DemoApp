@@ -5,7 +5,6 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentManager
 import io.goooler.demoapp.R
 import io.goooler.demoapp.base.BaseDialogFragment
@@ -17,23 +16,18 @@ class BottomTipDialogFragment : BaseDialogFragment() {
     private val vm by lazy { getViewModel(BottomTipDialogViewModel::class.java) }
 
     private val binding by lazy {
-        DataBindingUtil.inflate<FragmentBottomTipDialogBinding>(layoutInflater, R.layout.fragment_bottom_tip_dialog, null, false)
-    }
-
-    private val clickListener = View.OnClickListener {
-        when (it.id) {
-            R.id.iv_close -> dismiss()
-        }
+        FragmentBottomTipDialogBinding.inflate(layoutInflater)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStyle(STYLE_NORMAL, R.style.DialogFullScreen)
+        setStyle(STYLE_NORMAL, R.style.DialogBottomAnim)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        binding.lifecycleOwner = this@BottomTipDialogFragment
         binding.vm = vm
-        binding.clickListener = clickListener
+        binding.listener = eventListener
         arguments?.let {
             vm.title.set(it.getString(TITLE))
             vm.content.set(it.getString(CONTENT))
@@ -57,6 +51,16 @@ class BottomTipDialogFragment : BaseDialogFragment() {
             setWindowAnimations(R.style.DialogBottomAnim)
             attributes = param
         }
+    }
+
+    private val eventListener = object : EventListener {
+        override fun onCloseClick() {
+            dismiss()
+        }
+    }
+
+    interface EventListener {
+        fun onCloseClick()
     }
 
     companion object {

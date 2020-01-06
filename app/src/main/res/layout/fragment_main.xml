@@ -11,8 +11,8 @@
             type="io.goooler.demoapp.main.vm.MainViewModel" />
 
         <variable
-            name="clickListener"
-            type="android.view.View.OnClickListener" />
+            name="listener"
+            type="io.goooler.demoapp.main.ui.MainFragment.EventListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -29,7 +29,7 @@
             android:layout_height="100dp"
             android:background="@color/black"
             android:gravity="center"
-            android:onClick="@{clickListener}"
+            android:onClick="@{()->listener.onTitleClick()}"
             android:text="@{vm.title}"
             android:textColor="@color/black"
             app:layout_constraintTop_toTopOf="parent" />

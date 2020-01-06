@@ -22,8 +22,8 @@ ext {
     navigationVersion = '2.1.0'
     multidexVersion = '2.0.1'
     commonsioVersion = '2.5.0'
-    okhttpVersion = '4.2.2'
-    retrofitVersion = '2.6.1'
+    okhttpVersion = '4.3.0'
+    retrofitVersion = '2.7.1'
     fastjsonVersion = '1.1.71.android'
     arouterVersion = '1.5.0'
     arouterCompilerVersion = '1.2.2'
@@ -41,7 +41,6 @@ ext {
     glideVersion = '4.10.0'
     glideTransformVersion = '4.1.0'
     leakcanaryVersion = '1.6.3'
-    wechatHelperVersion = '1.0.0'
     ijkVersion = '0.8.8'
 
     // buildScript plugin

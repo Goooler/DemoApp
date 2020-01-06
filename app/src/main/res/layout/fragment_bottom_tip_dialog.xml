@@ -11,8 +11,8 @@
             type="io.goooler.demoapp.widget.vm.BottomTipDialogViewModel" />
 
         <variable
-            name="clickListener"
-            type="android.view.View.OnClickListener" />
+            name="listener"
+            type="io.goooler.demoapp.widget.ui.BottomTipDialogFragment.EventListener" />
     </data>
 
     <LinearLayout
@@ -47,7 +47,7 @@
                 android:layout_width="17dp"
                 android:layout_height="17dp"
                 android:layout_marginEnd="12dp"
-                android:onClick="@{clickListener}"
+                android:onClick="@{()->listener.onCloseClick()}"
                 android:src="@drawable/common_ic_close_dialog"
                 app:layout_constraintBottom_toBottomOf="@id/tv_title"
                 app:layout_constraintEnd_toEndOf="parent"
