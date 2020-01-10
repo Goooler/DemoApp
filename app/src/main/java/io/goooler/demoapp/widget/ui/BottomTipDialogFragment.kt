@@ -67,11 +67,11 @@ class BottomTipDialogFragment : BaseDialogFragment() {
         private const val TITLE = "title"
         private const val CONTENT = "content"
 
-        fun show(manager: FragmentManager, title: String, content: String) = BottomTipDialogFragment().apply {
+        fun show(manager: FragmentManager, title: String, content: String, tag: String? = null) = BottomTipDialogFragment().apply {
             arguments = Bundle().apply {
                 putString(TITLE, title)
                 putString(CONTENT, content)
             }
-        }.show(manager, null)
+        }.show(manager, tag)
     }
 }
