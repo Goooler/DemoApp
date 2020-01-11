@@ -2,17 +2,22 @@ package io.goooler.demoapp.util
 
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.DefaultLifecycleObserver
+import androidx.lifecycle.LifecycleOwner
 import io.goooler.demoapp.base.BaseDialogFragment
 
-object DialogManager {
+class DialogManager(private val maxSize: Int = 3) : DefaultLifecycleObserver {
 
     private val dialogQueue = ArrayList<DialogElement?>()
-    private const val MAX_SIZE = 3
-
 
     fun showDialog(element: DialogElement?) {
         addElement(element)
-        if (dialogQueue.size == MAX_SIZE) justShow(getElement())
+        if (dialogQueue.size == maxSize) justShow(getElement())
+    }
+
+    override fun onDestroy(owner: LifecycleOwner) {
+        super.onDestroy(owner)
+        clearAll()
     }
 
     private fun justShow(element: DialogElement?) {
@@ -31,6 +36,10 @@ object DialogManager {
         dialogQueue.run {
             if (isNotEmpty()) removeAt(0)
         }
+    }
+
+    private fun clearAll() {
+        dialogQueue.clear()
     }
 
     private fun getElement(): DialogElement? {

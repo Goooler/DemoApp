@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import io.goooler.demoapp.model.Constants
+import io.goooler.demoapp.util.DialogManager
 import io.goooler.demoapp.util.LogUtil
 import io.goooler.demoapp.util.ToastUtil
 
@@ -16,6 +17,12 @@ import io.goooler.demoapp.util.ToastUtil
  * Activity 基类，封装通用方法
  */
 abstract class BaseActivity : AppCompatActivity() {
+
+    val dialogManager by lazy {
+        val manager = DialogManager()
+        lifecycle.addObserver(manager)
+        manager
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
