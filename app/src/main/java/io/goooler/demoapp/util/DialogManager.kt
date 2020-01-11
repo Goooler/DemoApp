@@ -3,40 +3,55 @@ package io.goooler.demoapp.util
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import io.goooler.demoapp.base.BaseDialogFragment
-import java.util.concurrent.ArrayBlockingQueue
 
 object DialogManager {
 
-    private val dialogQueue = ArrayBlockingQueue<DialogElement>(10)
+    private val dialogQueue = ArrayList<DialogElement?>()
+    private const val MAX_SIZE = 3
 
-    fun showDialog(dialog: BaseDialogFragment, fragmentManager: FragmentManager, tag: String?) {
-        if (dialogQueue.isEmpty()) {
-            justShow(dialog, fragmentManager, tag)
+
+    fun showDialog(element: DialogElement?) {
+        addElement(element)
+        if (dialogQueue.size == MAX_SIZE) justShow(getElement())
+    }
+
+    private fun justShow(element: DialogElement?) {
+        element?.run {
+            (dialog as? BaseDialogFragment)?.dismissListener = listener
+            dialog?.show(fragmentManager, tag)
         }
-        dialogQueue.add(DialogElement(dialog, fragmentManager, tag))
+    }
+
+    private fun addElement(element: DialogElement?) {
+        dialogQueue.add(element)
+        dialogQueue.sortByDescending { it?.priority ?: -1 }
+    }
+
+    private fun removeElement() {
+        dialogQueue.run {
+            if (isNotEmpty()) removeAt(0)
+        }
     }
 
     private fun getElement(): DialogElement? {
         return if (dialogQueue.isNotEmpty()) dialogQueue.first() else null
     }
 
-    private val dialogListener = object : BaseDialogFragment.OnDismissListener {
+    private val listener = object : BaseDialogFragment.OnDismissListener {
         override fun onDismiss() {
-            dialogQueue.remove()
+            removeElement()
             getElement()?.run {
-                justShow(dialog, fragmentManager, tag)
+                dialog?.let {
+                    justShow(this)
+                }
             }
         }
     }
 
-    private fun justShow(dialog: DialogFragment, fragmentManager: FragmentManager, tag: String?) {
-        (dialog as? BaseDialogFragment)?.dismissListener = dialogListener
-        dialog.show(fragmentManager, tag)
-    }
-
-    private class DialogElement(
-            var dialog: DialogFragment,
+    class DialogElement(
+            var dialog: DialogFragment?,
             var fragmentManager: FragmentManager,
-            var tag: String?
+            var tag: String? = null,
+            var priority: Int = 1
     )
 }
