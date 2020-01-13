@@ -5,7 +5,6 @@ import androidx.annotation.IdRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import io.goooler.demoapp.model.Constants
@@ -18,7 +17,7 @@ import io.goooler.demoapp.util.ToastUtil
  */
 abstract class BaseActivity : AppCompatActivity() {
 
-    val dialogManager by lazy {
+    val dialogManager by lazy(LazyThreadSafetyMode.NONE) {
         val manager = DialogManager()
         lifecycle.addObserver(manager)
         manager
@@ -41,30 +40,37 @@ abstract class BaseActivity : AppCompatActivity() {
     /**
      * @param containerId       容器 id
      * @param fragment          要添加的 fragment
-     * @param isAddToBackStack  将要添加的 fragment 是否要添加到返回栈
+     * @param isAddToBackStack  将要添加的 fragment 是否要添加到返回栈，默认不添加
      * @param tag               fragment 的 tag
      */
-    protected fun addFragment(@IdRes containerId: Int, fragment: Fragment, isAddToBackStack: Boolean = false, tag: String? = null) {
+    protected fun addFragment(@IdRes containerId: Int,
+                              fragment: Fragment,
+                              isAddToBackStack: Boolean = false,
+                              tag: String? = null) {
+        if (fragment.isAdded) return
         getFragmentTransaction(isAddToBackStack, tag).add(containerId, fragment, tag).commit()
     }
 
     /**
      * @param containerId       容器 id
      * @param fragment          要替换的 fragment
-     * @param isAddToBackStack  将要替换的 fragment 是否要添加到返回栈
+     * @param isAddToBackStack  将要替换的 fragment 是否要添加到返回栈，默认添加
      * @param tag               fragment 的 tag
      */
-    protected fun replaceFragment(@IdRes containerId: Int, fragment: Fragment, isAddToBackStack: Boolean = true, tag: String? = null) {
+    protected fun replaceFragment(@IdRes containerId: Int,
+                                  fragment: Fragment,
+                                  isAddToBackStack: Boolean = true,
+                                  tag: String? = null) {
+        if (fragment.isAdded) return
         getFragmentTransaction(isAddToBackStack, tag).replace(containerId, fragment, tag).commit()
     }
 
-    private fun getFragmentTransaction(isAddToBackStack: Boolean, tag: String?): FragmentTransaction {
-        return supportFragmentManager.beginTransaction().apply {
-            if (isAddToBackStack) {
-                addToBackStack(tag)
+    private fun getFragmentTransaction(isAddToBackStack: Boolean, tag: String?) =
+            supportFragmentManager.beginTransaction().apply {
+                if (isAddToBackStack) {
+                    addToBackStack(tag)
+                }
             }
-        }
-    }
 
     protected fun <T : BaseViewModel> getViewModel(modelClass: Class<T>): T {
         return ViewModelProviders.of(this@BaseActivity).get(modelClass).apply {

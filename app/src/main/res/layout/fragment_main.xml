@@ -26,19 +26,13 @@
         <TextView
             android:id="@+id/tv_title"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="40dp"
             android:background="@color/black"
             android:gravity="center"
             android:onClick="@{()->listener.onTitleClick()}"
             android:text="@{vm.title}"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:background="@android:color/holo_red_dark"
-            app:layout_constraintBottom_toBottomOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -13,11 +13,9 @@ import io.goooler.demoapp.widget.vm.BottomTipDialogViewModel
 
 class BottomTipDialogFragment : BaseDialogFragment() {
 
-    private val vm by lazy { getViewModel(BottomTipDialogViewModel::class.java) }
+    private val vm by lazy(LazyThreadSafetyMode.NONE) { getViewModel(BottomTipDialogViewModel::class.java) }
 
-    private val binding by lazy {
-        FragmentBottomTipDialogBinding.inflate(layoutInflater)
-    }
+    private val binding by lazy(LazyThreadSafetyMode.NONE) { FragmentBottomTipDialogBinding.inflate(layoutInflater) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,7 +65,7 @@ class BottomTipDialogFragment : BaseDialogFragment() {
         private const val TITLE = "title"
         private const val CONTENT = "content"
 
-        fun newInstance(title: String, content: String, tag: String? = null) = BottomTipDialogFragment().apply {
+        fun newInstance(title: String, content: String) = BottomTipDialogFragment().apply {
             arguments = Bundle().apply {
                 putString(TITLE, title)
                 putString(CONTENT, content)
