@@ -8,15 +8,15 @@ import io.goooler.demoapp.util.ToastUtil
 
 open class BaseDialogFragment : DialogFragment() {
 
-    protected fun <T : BaseViewModel> getViewModel(modelClass: Class<T>): T {
-        return ViewModelProviders.of(this).get(modelClass).apply {
-            lifecycle.addObserver(this)
-            observeVm(this)
-        }
+    var dismissListener: OnDismissListener? = null
+
+    override fun dismiss() {
+        super.dismiss()
+        dismissListener?.onDismiss()
     }
 
-    protected fun <T : BaseViewModel> getViewModelOfActivity(modelClass: Class<T>): T {
-        return ViewModelProviders.of(requireActivity()).get(modelClass).apply {
+    protected fun <T : BaseViewModel> getViewModel(modelClass: Class<T>): T {
+        return ViewModelProviders.of(this).get(modelClass).apply {
             lifecycle.addObserver(this)
             observeVm(this)
         }
@@ -34,5 +34,9 @@ open class BaseDialogFragment : DialogFragment() {
 
     protected fun showToast(text: String) {
         ToastUtil.showToast(text)
+    }
+
+    interface OnDismissListener {
+        fun onDismiss()
     }
 }

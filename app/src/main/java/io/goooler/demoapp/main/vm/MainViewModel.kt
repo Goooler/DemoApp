@@ -2,6 +2,7 @@ package io.goooler.demoapp.main.vm
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
+import io.goooler.demoapp.R
 import io.goooler.demoapp.api.RetrofitHelper
 import io.goooler.demoapp.base.BaseViewModel
 import io.goooler.demoapp.main.api.MainApi
@@ -22,11 +23,12 @@ class MainViewModel(application: Application) : BaseViewModel(application) {
                     it.status
                 }
                 .map {
-                    return@map it.entry!!.name ?: ""
+                    return@map it.entry!!.name.orEmpty()
                 }
                 .subscribe({
                     title.postValue(it)
                 }, {
+                    title.postValue(getString(R.string.main_fragment))
                     silentThrowable(it)
                 })
                 .let {

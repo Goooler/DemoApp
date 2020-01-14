@@ -8,7 +8,7 @@ import io.goooler.demoapp.model.RouterPath
 @Route(path = RouterPath.MAIN)
 class MainActivity : BaseActivity() {
 
-    private val mainFragment by lazy {
+    private val mainFragment by lazy(LazyThreadSafetyMode.NONE) {
         MainFragment.newInstance()
     }
 
