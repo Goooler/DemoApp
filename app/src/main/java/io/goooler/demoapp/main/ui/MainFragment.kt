@@ -5,13 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import io.goooler.demoapp.base.BaseFragment
-import io.goooler.demoapp.databinding.FragmentMainBinding
+import io.goooler.demoapp.databinding.MainFragmentBinding
 import io.goooler.demoapp.main.vm.MainViewModel
 import io.goooler.demoapp.widget.ui.BottomTipDialogFragment
 
 class MainFragment : BaseFragment() {
 
-    private val binding by lazy(LazyThreadSafetyMode.NONE) { FragmentMainBinding.inflate(layoutInflater) }
+    private val binding by lazy(LazyThreadSafetyMode.NONE) { MainFragmentBinding.inflate(layoutInflater) }
 
     private val vm by lazy(LazyThreadSafetyMode.NONE) { getViewModel(MainViewModel::class.java) }
 

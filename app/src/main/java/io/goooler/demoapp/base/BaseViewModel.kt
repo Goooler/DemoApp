@@ -9,7 +9,6 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.MutableLiveData
 import io.goooler.demoapp.BuildConfig
 import io.goooler.demoapp.api.HttpResponse
 import io.goooler.demoapp.util.LogUtil
@@ -18,8 +17,9 @@ import io.reactivex.disposables.Disposable
 
 
 open class BaseViewModel(application: Application) : AndroidViewModel(application), DefaultLifecycleObserver {
+
     private val compositeDisposable = CompositeDisposable()
-    val toast = MutableLiveData<String>()
+    val toast = MutableStringLiveData()
 
     fun addDisposable(disposable: Disposable) {
         compositeDisposable.add(disposable)

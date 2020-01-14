@@ -6,17 +6,13 @@ package io.goooler.demoapp.base
  */
 abstract class BaseLazyFragment : BaseFragment() {
 
-    private val initOnce by lazy(LazyThreadSafetyMode.NONE) {
-        loadData()
-    }
-
     /**
-     * 用在懒加载加载数据时
+     * 用于懒加载
      */
     protected abstract fun loadData()
 
     override fun onResume() {
         super.onResume()
-        initOnce
+        loadData()
     }
 }
