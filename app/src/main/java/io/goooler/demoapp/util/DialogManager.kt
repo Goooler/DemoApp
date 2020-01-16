@@ -5,10 +5,11 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import io.goooler.demoapp.base.BaseDialogFragment
+import java.util.concurrent.ArrayBlockingQueue
 
 class DialogManager(private val maxSize: Int = 3) : DefaultLifecycleObserver {
 
-    private val dialogQueue = ArrayList<DialogElement?>()
+    private val dialogQueue = ArrayBlockingQueue<DialogElement?>(maxSize)
 
     fun showDialog(element: DialogElement?) {
         addElement(element)
@@ -29,12 +30,12 @@ class DialogManager(private val maxSize: Int = 3) : DefaultLifecycleObserver {
 
     private fun addElement(element: DialogElement?) {
         dialogQueue.add(element)
-        dialogQueue.sortByDescending { it?.priority ?: -1 }
+        dialogQueue.sortedByDescending { it?.priority ?: -1 }
     }
 
     private fun removeElement() {
         dialogQueue.run {
-            if (isNotEmpty()) removeAt(0)
+            if (isNotEmpty()) remove()
         }
     }
 

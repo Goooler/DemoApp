@@ -72,10 +72,10 @@ fun String.safeSubstring(startIndex: Int, endIndex: Int): String {
  */
 fun Number.formatMoney(isYuan: Boolean = false, trans2W: Boolean = false, scale: Int = 2): String {
     val moneyF = if (isYuan) {
-        this.toDouble()
+        toDouble()
     } else {
         // 分转为元
-        this.toDouble() / 100
+        toDouble() / 100
     }
     try {
         when {
@@ -103,13 +103,15 @@ fun Number.formatMoney(isYuan: Boolean = false, trans2W: Boolean = false, scale:
     }
 }
 
-// 获取图片宽高比例，如：/assets/img/2019/07/18/n_1563460410803_3849___size550x769.jpg
+/**
+ * 获取图片宽高比例，如：/assets/img/2019/07/18/n_1563460410803_3849___size550x769.jpg
+ */
 fun String.getSizeByLoadUrl(defaultWidth: Int, defaultHeight: Int): List<Int> {
     val sizeList = ArrayList<Int>()
     sizeList.add(defaultWidth)
     sizeList.add(defaultHeight)
     val flag = "size"
-    if (!this.contains(IMAGE_URL_PREFIX) || !this.contains(flag)) {
+    if (!contains(IMAGE_URL_PREFIX) || !contains(flag)) {
         return sizeList
     }
     val pattern = "$flag(\\d+x\\d+)"
@@ -178,7 +180,7 @@ fun Long.easyTime(): String {
     val now = System.currentTimeMillis()
     val t = now - this
     if (t < 0) {// 未来
-        return this.formatTime("yyyy-MM-dd HH:mm")
+        return formatTime("yyyy-MM-dd HH:mm")
     }
     val oneMinute = 1000 * 60
     val oneHour = oneMinute * 60
@@ -196,15 +198,14 @@ fun Long.easyTime(): String {
 
     val isSameYear = year1 == year2
 
-
     return when {
-        !isSameYear -> this.formatTime("yyyy-MM-dd HH:mm")
-        isYesterday -> this.formatTime("昨天 HH:mm")
+        !isSameYear -> formatTime("yyyy-MM-dd HH:mm")
+        isYesterday -> formatTime("昨天 HH:mm")
         t < oneMinute -> "刚刚"
         t < oneHour -> (t / oneMinute).toString() + "分钟前"
         t < oneDay -> (t / oneHour).toString() + "小时前"
-        isSameYear -> this.formatTime("MM-dd HH:mm")
-        else -> this.formatTime("yyyy-MM-dd HH:mm")
+        isSameYear -> formatTime("MM-dd HH:mm")
+        else -> formatTime("yyyy-MM-dd HH:mm")
     }
 }
 
@@ -215,7 +216,7 @@ fun String.isNetworkUrl(): Boolean {
 }
 
 fun String.toLoadUrl(): String {
-    return if (this.isNetworkUrl()) {
+    return if (isNetworkUrl()) {
         this
     } else {
         IMAGE_URL_PREFIX + this
@@ -225,11 +226,11 @@ fun String.toLoadUrl(): String {
 //---------------------Phone-------------------------------//
 
 fun String.isValidPhoneFormat(): Boolean {
-    return this.startsWith(PHONE_FIRST_CHAR) && this.length == PHONE_LENGTH
+    return startsWith(PHONE_FIRST_CHAR) && length == PHONE_LENGTH
 }
 
 fun String.hidePhone(): String {
-    return this.replace(Regex("(\\d{3})\\d{4}(\\d{4})"), "$1****$2")
+    return replace(Regex("(\\d{3})\\d{4}(\\d{4})"), "$1****$2")
 }
 
 fun Float.sp2px(): Int {
@@ -333,7 +334,7 @@ fun View.setBgShapeCorners(@ColorInt solidColor: Int = Color.WHITE,
 fun String?.safeToBoolean(default: Boolean = false): Boolean {
     if (this == null) return default
     return try {
-        this.toBoolean()
+        toBoolean()
     } catch (e: Throwable) {
         default
     }
@@ -342,7 +343,7 @@ fun String?.safeToBoolean(default: Boolean = false): Boolean {
 fun String?.safeToInt(default: Int = 0): Int {
     if (this == null) return default
     return try {
-        this.toInt()
+        toInt()
     } catch (e: Throwable) {
         default
     }
@@ -351,7 +352,7 @@ fun String?.safeToInt(default: Int = 0): Int {
 fun String?.safeToLong(default: Long = 0L): Long {
     if (this == null) return default
     return try {
-        this.toLong()
+        toLong()
     } catch (e: Throwable) {
         default
     }
@@ -360,7 +361,7 @@ fun String?.safeToLong(default: Long = 0L): Long {
 fun String?.safeToFloat(default: Float = 0f): Float {
     if (this == null) return default
     return try {
-        this.toFloat()
+        toFloat()
     } catch (e: Throwable) {
         default
     }
@@ -369,7 +370,7 @@ fun String?.safeToFloat(default: Float = 0f): Float {
 fun String?.safeToDouble(default: Double = 0.0): Double {
     if (this == null) return default
     return try {
-        this.toDouble()
+        toDouble()
     } catch (e: Throwable) {
         default
     }
@@ -412,7 +413,7 @@ fun debugRun(debug: () -> Unit): Boolean {
 fun <E> MutableCollection<E>.removeIfMatch(predicate: (e: E) -> Boolean): Boolean {
     Objects.requireNonNull(predicate)
     var removed = false
-    val each = this.iterator()
+    val each = iterator()
     while (each.hasNext()) {
         if (predicate(each.next())) {
             each.remove()
@@ -420,6 +421,10 @@ fun <E> MutableCollection<E>.removeIfMatch(predicate: (e: E) -> Boolean): Boolea
         }
     }
     return removed
+}
+
+fun <E> MutableList<E>.remove() {
+    removeAt(0)
 }
 
 fun <T> Collection<T>?.isNotNullOrEmpty(): Boolean {
@@ -430,7 +435,7 @@ fun <T> Collection<T>?.isNotNullOrEmpty(): Boolean {
  * 判断集合内是否仅有一个元素
  */
 fun <T> Collection<T>?.isSingle(): Boolean {
-    return this != null && this.size == 1
+    return this != null && size == 1
 }
 
 /**
@@ -439,13 +444,14 @@ fun <T> Collection<T>?.isSingle(): Boolean {
  */
 fun <T> Collection<T>?.isMultiple(minSize: Int = 2): Boolean {
     val min = if (minSize < 2) 2 else minSize
-    return this != null && this.size >= min
+    return this != null && size >= min
 }
 
 /**
  * 取集合内第二个元素
  */
 fun <T> List<T>.second(): T {
+    if (isEmpty()) throw NoSuchElementException("List is empty.")
     return this[1]
 }
 
@@ -453,5 +459,6 @@ fun <T> List<T>.second(): T {
  * 取集合内第三个元素
  */
 fun <T> List<T>.third(): T {
+    if (isEmpty()) throw NoSuchElementException("List is empty.")
     return this[2]
 }
