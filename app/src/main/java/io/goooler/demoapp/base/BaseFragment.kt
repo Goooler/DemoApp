@@ -14,6 +14,13 @@ import io.goooler.demoapp.util.ToastUtil
 abstract class BaseFragment : Fragment() {
 
     /**
+     * 调用 activity 的返回
+     */
+    protected fun onBackPressed() {
+        activity?.onBackPressed()
+    }
+
+    /**
      * @param containerId       容器 id
      * @param fragment          要添加的 fragment
      * @param isAddToBackStack  将要添加的 fragment 是否要添加到返回栈
