@@ -1,5 +1,6 @@
 package io.goooler.demoapp.base
 
+import android.content.res.Resources
 import android.os.Bundle
 import androidx.annotation.IdRes
 import androidx.annotation.StringRes
@@ -11,6 +12,7 @@ import io.goooler.demoapp.model.Constants
 import io.goooler.demoapp.util.DialogManager
 import io.goooler.demoapp.util.LogUtil
 import io.goooler.demoapp.util.ToastUtil
+import io.goooler.demoapp.util.device.AdaptScreenUtil
 
 /**
  * Activity 基类，封装通用方法
@@ -35,6 +37,10 @@ abstract class BaseActivity : AppCompatActivity() {
         super.onDestroy()
         // activity 出栈 List<Activity> 移除
         ActivityCollector.removeActivity(this)
+    }
+
+    override fun getResources(): Resources {
+        return AdaptScreenUtil.adaptWidth(super.getResources(), 360)
     }
 
     /**

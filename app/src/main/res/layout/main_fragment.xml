@@ -32,6 +32,7 @@
             android:onClick="@{()->listener.onTitleClick()}"
             android:text="@{vm.title}"
             android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

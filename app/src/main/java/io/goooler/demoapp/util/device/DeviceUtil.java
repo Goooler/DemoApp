@@ -63,6 +63,7 @@ public class DeviceUtil {
         return getPoint(context).y;
     }
 
+    @NonNull
     private static Point getPoint(@NonNull Context context) {
         Point point = new Point();
         WindowManager wm = ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE));
@@ -78,6 +79,7 @@ public class DeviceUtil {
      * @param context 上下文
      * @return android ID
      */
+    @NonNull
     public static String getAndroidId(@NonNull Context context) {
         try {
             ContentResolver cr = context.getContentResolver();
@@ -102,6 +104,7 @@ public class DeviceUtil {
      *
      * @return .
      */
+    @NonNull
     public static String getDeviceModel() {
         return Build.MODEL.trim();
     }
@@ -169,6 +172,7 @@ public class DeviceUtil {
      *
      * @return version
      */
+    @NonNull
     public static String getRelease() {
         return Build.VERSION.RELEASE;
     }
@@ -178,6 +182,7 @@ public class DeviceUtil {
      *
      * @return device model
      */
+    @NonNull
     public static String getModel() {
         return Build.MODEL.trim();
     }
@@ -187,6 +192,7 @@ public class DeviceUtil {
      *
      * @return BRAND
      */
+    @NonNull
     public static String getBrand() {
         return Build.BRAND;
     }
@@ -196,6 +202,7 @@ public class DeviceUtil {
      *
      * @return MANUFACTURER
      */
+    @NonNull
     public static String getManufacturer() {
         return Build.MANUFACTURER;
     }
@@ -205,6 +212,7 @@ public class DeviceUtil {
      *
      * @return SUPPORTED_ABIS
      */
+    @NonNull
     public static String getCpu() {
         return Build.SUPPORTED_ABIS[0];
     }
@@ -233,6 +241,7 @@ public class DeviceUtil {
      *
      * @return mac
      */
+    @NonNull
     public static String getMac(@NonNull Context context) {
         String mac = getWifiMac();
         if (TextUtils.isEmpty(mac) || !mac.contains(":")) {
@@ -252,6 +261,7 @@ public class DeviceUtil {
      *
      * @return ram
      */
+    @NonNull
     public static String getRam() {
         String path = "/proc/meminfo";
         String result = null;
@@ -279,6 +289,7 @@ public class DeviceUtil {
      *
      * @return mac
      */
+    @NonNull
     public static String getWifiMac() {
         String macSerial = null;
         LineNumberReader lnr = null;
@@ -311,6 +322,7 @@ public class DeviceUtil {
      *
      * @return mac
      */
+    @NonNull
     public static String getEthernetMac() {
         BufferedReader reader = null;
         String ethernetMac = null;
@@ -340,6 +352,7 @@ public class DeviceUtil {
      *
      * @return MacAddress
      */
+    @NonNull
     public static String getMacAddress() /* throws UnknownHostException */ {
         String strMacAddr = null;
         try {
@@ -363,6 +376,7 @@ public class DeviceUtil {
         return strMacAddr;
     }
 
+    @NonNull
     public static InetAddress getLocalNetAddress() {
         InetAddress ip = null;
         try {
@@ -394,7 +408,7 @@ public class DeviceUtil {
      *
      * @return 以M, G为单位的容量
      */
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
+    @NonNull
     public static String getExternalMemorySize(@NonNull Context context) {
         File file = Environment.getExternalStorageDirectory();
         StatFs statFs = new StatFs(file.getPath());
@@ -409,6 +423,7 @@ public class DeviceUtil {
      * @param context .
      * @return hardwareInfo + androidId
      */
+    @NonNull
     public static String getDeviceFingerprint(@NonNull Context context) {
         String hardwareInfo = Build.ID + Build.DISPLAY + Build.PRODUCT
                 + Build.DEVICE + Build.BOARD + Build.MANUFACTURER

@@ -21,7 +21,7 @@ import io.goooler.demoapp.util.LogUtil;
  */
 public class SoftInputUtil {
 
-    private static final WeakHashMap<Activity, ViewTreeObserver.OnGlobalLayoutListener> map = new WeakHashMap<>();
+    private static final WeakHashMap<Activity, ViewTreeObserver.OnGlobalLayoutListener> MAP = new WeakHashMap<>();
     /**
      * 记录根视图的显示高度
      */
@@ -164,7 +164,7 @@ public class SoftInputUtil {
     public static void setListener(@NonNull Activity activity, @NonNull OnSoftInputChangeListener onSoftInputChangeListener) {
         final View rootView = activity.getWindow().getDecorView();
 
-        if (map.get(activity) != null) {
+        if (MAP.get(activity) != null) {
             removeListener(activity);
         }
 
@@ -201,7 +201,7 @@ public class SoftInputUtil {
         // 监听视图树中全局布局发生改变或者视图树中的某个视图的可视状态发生改变
         rootView.getViewTreeObserver().addOnGlobalLayoutListener(onGlobalLayoutListener);
 
-        map.put(activity, onGlobalLayoutListener);
+        MAP.put(activity, onGlobalLayoutListener);
     }
 
     /**
@@ -211,7 +211,7 @@ public class SoftInputUtil {
      */
     public static void removeListener(@NonNull Activity activity) {
         View rootView = activity.getWindow().getDecorView();
-        ViewTreeObserver.OnGlobalLayoutListener listener = map.remove(activity);
+        ViewTreeObserver.OnGlobalLayoutListener listener = MAP.remove(activity);
         rootView.getViewTreeObserver().removeOnGlobalLayoutListener(listener);
     }
 
@@ -220,5 +220,4 @@ public class SoftInputUtil {
 
         void keyBoardHide(int height);
     }
-
 }
