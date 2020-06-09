@@ -5,7 +5,7 @@ import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import io.goooler.demoapp.util.ToastUtil
 
 /**
@@ -49,14 +49,14 @@ abstract class BaseFragment : Fragment() {
     }
 
     protected fun <T : BaseViewModel> getViewModel(modelClass: Class<T>): T {
-        return ViewModelProviders.of(this@BaseFragment).get(modelClass).apply {
+        return ViewModelProvider(this@BaseFragment).get(modelClass).apply {
             lifecycle.addObserver(this)
             observeVm(this)
         }
     }
 
     protected fun <T : BaseViewModel> getViewModelOfActivity(modelClass: Class<T>): T {
-        return ViewModelProviders.of(requireActivity()).get(modelClass).apply {
+        return ViewModelProvider(requireActivity()).get(modelClass).apply {
             lifecycle.addObserver(this)
             observeVm(this)
         }

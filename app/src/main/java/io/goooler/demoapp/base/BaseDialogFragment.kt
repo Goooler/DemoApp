@@ -3,7 +3,7 @@ package io.goooler.demoapp.base
 import androidx.annotation.StringRes
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import io.goooler.demoapp.util.ToastUtil
 
 open class BaseDialogFragment : DialogFragment() {
@@ -16,7 +16,7 @@ open class BaseDialogFragment : DialogFragment() {
     }
 
     protected fun <T : BaseViewModel> getViewModel(modelClass: Class<T>): T {
-        return ViewModelProviders.of(this).get(modelClass).apply {
+        return ViewModelProvider(this).get(modelClass).apply {
             lifecycle.addObserver(this)
             observeVm(this)
         }

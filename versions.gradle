@@ -5,6 +5,7 @@
 ext {
     // sdk
     compileSdk = 29
+    buildTool = '29.0.3'
     minSdk = 23
 
     // app
@@ -12,25 +13,29 @@ ext {
     appVersionName = "1.0"
 
     // app dependencies
-    ktxVersion = '1.1.0'
+    ktxVersion = '1.3.0'
     appcompatVersion = '1.1.0'
     supportVersion = '1.0.0'
     constraintlayoutVersion = '1.1.3'
-    materialVersion = '1.0.0'
+    materialVersion = '1.1.0'
+    flexboxVersion = '2.0.1'
+    cardViewlVersion = '1.0.0'
     annotationVersion = '1.1.0'
     lifecycleVersion = '2.2.0'
-    navigationVersion = '2.2.0'
+    navigationVersion = '2.2.2'
     multidexVersion = '2.0.1'
     commonsioVersion = '2.5.0'
-    okhttpVersion = '4.3.1'
-    retrofitVersion = '2.7.1'
+    okhttpVersion = '4.7.2'
+    retrofitVersion = '2.9.0'
     fastjsonVersion = '1.1.71.android'
     arouterVersion = '1.5.0'
     arouterCompilerVersion = '1.2.2'
     gsonVersion = '2.8.6'
-    eventbusVersion = '3.1.1'
-    rxandroidVersion = '2.1.1'
-    rxjavaVersion = '2.2.14'
+    moshiVersion = '1.9.2'
+    eventbusVersion = '3.2.0'
+    liveDataBusVersion = '1.6.1'
+    rxandroidVersion = '3.0.0'
+    rxjavaVersion = '3.0.4'
     picassoVersion = '2.71828'
     frescoVersion = '2.0.0'
     mpchartVersion = 'v3.1.0'
@@ -40,12 +45,13 @@ ext {
     exoplayerVersion = '2.10.5'
     glideVersion = '4.11.0'
     glideTransformVersion = '4.1.0'
-    leakcanaryVersion = '1.6.3'
+    leakcanaryVersion = '2.2'
     ijkVersion = '0.8.8'
 
     // buildScript plugin
-    gradleVersion = '3.5.3'
-    kotlinVersion = '1.3.61'
+    gradleVersion = '4.0.0'
+    kotlinVersion = '1.3.72'
+    desugarVersion = '1.0.5'
     gmsVersion = '4.2.0'
-    objectboxVersion = '2.4.1'
+    objectboxVersion = '2.5.1'
 }

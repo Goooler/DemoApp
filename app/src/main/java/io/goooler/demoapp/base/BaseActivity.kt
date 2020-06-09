@@ -7,7 +7,7 @@ import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import io.goooler.demoapp.model.Constants
 import io.goooler.demoapp.util.DialogManager
 import io.goooler.demoapp.util.LogUtil
@@ -79,7 +79,7 @@ abstract class BaseActivity : AppCompatActivity() {
             }
 
     protected fun <T : BaseViewModel> getViewModel(modelClass: Class<T>): T {
-        return ViewModelProviders.of(this@BaseActivity).get(modelClass).apply {
+        return ViewModelProvider(this@BaseActivity).get(modelClass).apply {
             lifecycle.addObserver(this)
             toast.observe(this@BaseActivity, Observer {
                 showToast(it)

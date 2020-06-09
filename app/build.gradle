@@ -2,10 +2,10 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'io.objectbox'
 
 android {
     compileSdkVersion compileSdk
+    buildToolsVersion buildTool
     defaultConfig {
         applicationId "io.goooler.demoapp"
         minSdkVersion minSdk
@@ -14,7 +14,7 @@ android {
         versionName appVersionName
         multiDexEnabled = true
         ndk {
-            abiFilters "armeabi-v7a, arm64-v8a", "x86", "x86_64"
+            abiFilters "armeabi-v7a", "x86"
         }
     }
     buildTypes {
@@ -31,10 +31,16 @@ android {
             ext.alwaysUpdateBuildId = false
         }
     }
-    dataBinding {
-        enabled = true
+    dependenciesInfo {
+        includeInApk = false
+        includeInBundle = false
+    }
+    buildFeatures{
+        dataBinding = true
+        viewBinding = true
     }
     compileOptions {
+        coreLibraryDesugaringEnabled true
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
@@ -46,20 +52,22 @@ android {
 kapt {
     arguments {
         arg("AROUTER_MODULE_NAME", project.getName())
+        arg("objectbox.debug", true)
     }
 }
 
 dependencies {
     // official
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
     implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
     implementation "androidx.core:core-ktx:$ktxVersion"
+    coreLibraryDesugaring "com.android.tools:desugar_jdk_libs:$desugarVersion"
     implementation "androidx.appcompat:appcompat:$appcompatVersion"
     implementation "androidx.annotation:annotation:$annotationVersion"
-    implementation "androidx.cardview:cardview:$materialVersion"
+    implementation "androidx.cardview:cardview:$cardViewlVersion"
     implementation "androidx.legacy:legacy-support-v4:$supportVersion"
-    implementation "androidx.palette:palette:$materialVersion"
-    implementation "androidx.percentlayout:percentlayout:$materialVersion"
+    implementation "androidx.palette:palette:$cardViewlVersion"
+    implementation "androidx.percentlayout:percentlayout:$cardViewlVersion"
     implementation "androidx.constraintlayout:constraintlayout:$constraintlayoutVersion"
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycleVersion"
@@ -76,7 +84,7 @@ dependencies {
     implementation "androidx.multidex:multidex:$multidexVersion"
     implementation "com.google.android.material:material:$materialVersion"
     implementation "androidx.recyclerview:recyclerview:$appcompatVersion"
-    implementation "com.google.android:flexbox:$appcompatVersion"
+    implementation "com.google.android:flexbox:$flexboxVersion"
 
     // UI
     implementation "com.scwang.smartrefresh:SmartRefreshLayout:$smartrefreshlayoutVersion"
@@ -96,17 +104,26 @@ dependencies {
     kapt "com.github.bumptech.glide:compiler:$glideVersion"
     implementation "jp.wasabeef:glide-transformations:$glideTransformVersion"
 
+    // database
+    implementation "io.objectbox:objectbox-android:$objectboxVersion"
+    kapt "io.objectbox:objectbox-processor:$objectboxVersion"
+    // some useful Kotlin extension functions
+    implementation "io.objectbox:objectbox-kotlin:$objectboxVersion"
+
     // async
     implementation "org.greenrobot:eventbus:$eventbusVersion"
     kapt "org.greenrobot:eventbus-annotation-processor:$eventbusVersion"
-    implementation "io.reactivex.rxjava2:rxandroid:$rxandroidVersion"
-    implementation "io.reactivex.rxjava2:rxjava:$rxjavaVersion"
+    implementation "com.jeremyliao:live-event-bus-x:$liveDataBusVersion"
+    implementation "io.reactivex.rxjava3:rxandroid:$rxandroidVersion"
+    implementation "io.reactivex.rxjava3:rxjava:$rxjavaVersion"
 
     // utils
+    //noinspection GradleDependency
     implementation "com.alibaba:fastjson:$fastjsonVersion"
     implementation "com.alibaba:arouter-api:$arouterVersion"
     kapt "com.alibaba:arouter-compiler:$arouterCompilerVersion"
     implementation "com.google.code.gson:gson:$gsonVersion"
+    implementation "com.squareup.moshi:moshi-kotlin:$moshiVersion"
 
     // analyze
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakcanaryVersion"

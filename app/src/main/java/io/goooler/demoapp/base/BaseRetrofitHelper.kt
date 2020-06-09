@@ -11,6 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
 import java.util.concurrent.TimeUnit
 
+@Suppress("unused")
 abstract class BaseRetrofitHelper protected constructor() {
 
     private val retrofit by lazy {
@@ -69,6 +70,7 @@ abstract class BaseRetrofitHelper protected constructor() {
         private const val CONNECT_TIMEOUT: Long = 20
         private const val WRITE_TIMEOUT: Long = 10
         private const val READ_TIMEOUT: Long = 10
+
         /**
          * cache size 10 MiB
          */
