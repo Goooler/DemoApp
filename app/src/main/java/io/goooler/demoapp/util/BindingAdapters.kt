@@ -149,43 +149,111 @@ fun View.bindingMarginRight(marginRight: Float) {
 //------------------------View Bg Shape---------------------//
 
 
-@BindingAdapter(value = ["binding_bg_startColor", "binding_bg_endColor",
-    "binding_bg_angle", "binding_bg_radius"], requireAll = true)
-fun View.bindingBgShapeGradual(@ColorInt startColor: Int, @ColorInt endColor: Int, angle: Int, radius: Float) {
-    setBgShapeGradual(gradualColors = intArrayOf(startColor, endColor), angle = angle, radius = radius)
+@BindingAdapter(
+    value = ["binding_bg_startColor", "binding_bg_endColor",
+        "binding_bg_angle", "binding_bg_radius"], requireAll = true
+)
+fun View.bindingBgShapeGradual(
+    @ColorInt startColor: Int,
+    @ColorInt endColor: Int,
+    angle: Int,
+    radius: Float
+) {
+    setBgShapeGradual(
+        gradualColors = intArrayOf(startColor, endColor),
+        angle = angle,
+        radius = radius
+    )
 }
 
-@BindingAdapter(value = ["binding_bg_startColor", "binding_bg_endColor",
-    "binding_bg_angle", "binding_bg_stroke", "binding_bg_strokeColor", "binding_bg_radius"], requireAll = true)
-fun View.bindingBgShapeGradual(@ColorInt startColor: Int, @ColorInt endColor: Int, angle: Int, stroke: Float, @ColorInt strokeColor: Int, radius: Float) {
-    setBgShapeGradual(gradualColors = intArrayOf(startColor, endColor), angle = angle, radius = radius, strokeColor = strokeColor, stroke = stroke)
+@BindingAdapter(
+    value = ["binding_bg_startColor", "binding_bg_endColor",
+        "binding_bg_angle", "binding_bg_stroke", "binding_bg_strokeColor", "binding_bg_radius"],
+    requireAll = true
+)
+fun View.bindingBgShapeGradual(
+    @ColorInt startColor: Int,
+    @ColorInt endColor: Int,
+    angle: Int,
+    stroke: Float,
+    @ColorInt strokeColor: Int,
+    radius: Float
+) {
+    setBgShapeGradual(
+        gradualColors = intArrayOf(startColor, endColor),
+        angle = angle,
+        radius = radius,
+        strokeColor = strokeColor,
+        stroke = stroke
+    )
 }
 
-@BindingAdapter(value = ["binding_bg_startColor", "binding_bg_centerColor", "binding_bg_endColor",
-    "binding_bg_angle", "binding_bg_radius"], requireAll = true)
-fun View.bindingBgShapeGradual(@ColorInt startColor: Int, @ColorInt centerColor: Int, @ColorInt endColor: Int,
-                               angle: Int, radius: Float) {
-    setBgShapeGradual(gradualColors = intArrayOf(startColor, centerColor, endColor), angle = angle, radius = radius)
+@BindingAdapter(
+    value = ["binding_bg_startColor", "binding_bg_centerColor", "binding_bg_endColor",
+        "binding_bg_angle", "binding_bg_radius"], requireAll = true
+)
+fun View.bindingBgShapeGradual(
+    @ColorInt startColor: Int, @ColorInt centerColor: Int, @ColorInt endColor: Int,
+    angle: Int, radius: Float
+) {
+    setBgShapeGradual(
+        gradualColors = intArrayOf(startColor, centerColor, endColor),
+        angle = angle,
+        radius = radius
+    )
 }
 
-@BindingAdapter(value = ["binding_bg_solidColor", "binding_bg_topLeftRadius", "binding_bg_topRightRadius", "binding_bg_bottomLeftRadius", "binding_bg_bottomRightRadius"], requireAll = false)
-fun View.bindingBgShapeCorners(@ColorInt solidColor: Int, topLeft: Float, topRight: Float, bottomLeft: Float, bottomRight: Float) {
+@BindingAdapter(
+    value = ["binding_bg_solidColor", "binding_bg_topLeftRadius", "binding_bg_topRightRadius", "binding_bg_bottomLeftRadius", "binding_bg_bottomRightRadius"],
+    requireAll = false
+)
+fun View.bindingBgShapeCorners(
+    @ColorInt solidColor: Int,
+    topLeft: Float,
+    topRight: Float,
+    bottomLeft: Float,
+    bottomRight: Float
+) {
     setBgShapeCorners(solidColor, topLeft, topRight, bottomLeft, bottomRight)
 }
 
-@BindingAdapter(value = ["binding_bg_startColor", "binding_bg_endColor", "binding_bg_angle"], requireAll = true)
+@BindingAdapter(
+    value = ["binding_bg_startColor", "binding_bg_endColor", "binding_bg_angle"],
+    requireAll = true
+)
 fun View.bindingBgShapeGradual(@ColorInt startColor: Int, @ColorInt endColor: Int, angle: Int) {
     setBgShapeGradual(gradualColors = intArrayOf(startColor, endColor), angle = angle)
 }
 
-@BindingAdapter(value = ["binding_bg_startColor", "binding_bg_centerColor", "binding_bg_endColor", "binding_bg_angle"], requireAll = true)
-fun View.bindingBgShapeGradual(@ColorInt startColor: Int, @ColorInt centerColor: Int, @ColorInt endColor: Int, angle: Int) {
+@BindingAdapter(
+    value = ["binding_bg_startColor", "binding_bg_centerColor", "binding_bg_endColor", "binding_bg_angle"],
+    requireAll = true
+)
+fun View.bindingBgShapeGradual(
+    @ColorInt startColor: Int,
+    @ColorInt centerColor: Int,
+    @ColorInt endColor: Int,
+    angle: Int
+) {
     setBgShapeGradual(gradualColors = intArrayOf(startColor, centerColor, endColor), angle = angle)
 }
 
-@BindingAdapter(value = ["binding_bg_stroke", "binding_bg_strokeColor", "binding_bg_solidColor", "binding_bg_radius"], requireAll = true)
-fun View.bindingBgShapeStroke(stroke: Float, @ColorInt strokeColor: Int, @ColorInt solidColor: Int, radius: Float) {
-    setBgShapeGradual(stroke = stroke, strokeColor = strokeColor, solidColor = solidColor, radius = radius)
+@BindingAdapter(
+    value = ["binding_bg_stroke", "binding_bg_strokeColor", "binding_bg_solidColor", "binding_bg_radius"],
+    requireAll = true
+)
+fun View.bindingBgShapeStroke(
+    stroke: Float,
+    @ColorInt strokeColor: Int,
+    @ColorInt solidColor: Int,
+    radius: Float
+) {
+    setBgShapeGradual(
+        stroke = stroke,
+        strokeColor = strokeColor,
+        solidColor = solidColor,
+        radius = radius
+    )
 }
 
 @BindingAdapter(value = ["binding_bg_solidColor", "binding_bg_radius"], requireAll = true)
@@ -193,10 +261,17 @@ fun View.bindingBgShape(@ColorInt solidColor: Int, radius: Float) {
     setBgShapeGradual(solidColor = solidColor, radius = radius)
 }
 
-@BindingAdapter(value = ["binding_bg_stroke", "binding_bg_strokeColor",
-    "binding_bg_solidOvalColor"], requireAll = true)
+@BindingAdapter(
+    value = ["binding_bg_stroke", "binding_bg_strokeColor",
+        "binding_bg_solidOvalColor"], requireAll = true
+)
 fun View.bindingBgShapeOvalStroke(stroke: Float, @ColorInt strokeColor: Int, solidOvalColor: Int) {
-    setBgShapeGradual(shapeType = GradientDrawable.OVAL, strokeColor = strokeColor, stroke = stroke, solidColor = solidOvalColor)
+    setBgShapeGradual(
+        shapeType = GradientDrawable.OVAL,
+        strokeColor = strokeColor,
+        stroke = stroke,
+        solidColor = solidOvalColor
+    )
 }
 
 @BindingAdapter(value = ["binding_bg_solidOvalColor"], requireAll = true)
@@ -223,7 +298,10 @@ fun ImageView.bindingImageUrl(url: String?, placeholder: Drawable?) {
     ImageLoader.loadOss(this, url, placeholder)
 }
 
-@BindingAdapter(value = ["binding_src_url", "binding_src_placeholder", "binding_src_error"], requireAll = true)
+@BindingAdapter(
+    value = ["binding_src_url", "binding_src_placeholder", "binding_src_error"],
+    requireAll = true
+)
 fun ImageView.bindingImageUrl(url: String?, placeholder: Drawable?, error: Drawable?) {
     ImageLoader.loadOss(this, url, placeholder, error)
 }
@@ -233,12 +311,18 @@ fun ImageView.bindingCircleImageUrl(url: String?, drawable: Drawable?) {
     ImageLoader.loadCircleCropOss(this, url, drawable)
 }
 
-@BindingAdapter(value = ["binding_src_url_center_crop", "binding_src_placeholder"], requireAll = true)
+@BindingAdapter(
+    value = ["binding_src_url_center_crop", "binding_src_placeholder"],
+    requireAll = true
+)
 fun ImageView.bindingCenterCrop(url: String?, drawable: Drawable?) {
     ImageLoader.loadCenterCropOss(this, url, drawable)
 }
 
-@BindingAdapter(value = ["binding_src_url_center_crop", "binding_src_placeholder", "binding_src_error"], requireAll = true)
+@BindingAdapter(
+    value = ["binding_src_url_center_crop", "binding_src_placeholder", "binding_src_error"],
+    requireAll = true
+)
 fun ImageView.bindingCenterCrop(url: String?, drawable: Drawable?, error: Drawable?) {
     ImageLoader.loadCenterCropOss(this, url, drawable, error)
 }
@@ -248,33 +332,47 @@ fun ImageView.bindingRoundedCorner(url: String?, radius: Float) {
     ImageLoader.loadRoundedCornerOss(this, url, radius.toInt())
 }
 
-@BindingAdapter(value = ["binding_src_url", "binding_src_cornerRadius", "binding_src_placeholder"], requireAll = true)
+@BindingAdapter(
+    value = ["binding_src_url", "binding_src_cornerRadius", "binding_src_placeholder"],
+    requireAll = true
+)
 fun ImageView.bindingRoundedCorner(url: String?, radius: Float, drawable: Drawable?) {
     ImageLoader.loadRoundedCornerOss(this, url, radius.toInt(), drawable)
 }
 
-@BindingAdapter(value = ["binding_src_url", "binding_src_cornerRadius", "binding_src_placeholder", "binding_src_error"],
-        requireAll = true)
+@BindingAdapter(
+    value = ["binding_src_url", "binding_src_cornerRadius", "binding_src_placeholder", "binding_src_error"],
+    requireAll = true
+)
 fun ImageView.bindingRoundedCorner(
-        url: String?,
-        radius: Float,
-        drawable: Drawable?,
-        error: Drawable?) {
+    url: String?,
+    radius: Float,
+    drawable: Drawable?,
+    error: Drawable?
+) {
     ImageLoader.loadRoundedCornerOss(this, url, radius.toInt(), drawable, error)
 }
 
-@BindingAdapter(value = ["binding_src_url_center_crop", "binding_src_cornerRadius"], requireAll = true)
+@BindingAdapter(
+    value = ["binding_src_url_center_crop", "binding_src_cornerRadius"],
+    requireAll = true
+)
 fun ImageView.setRoundedCornerCenterCrop(url: String?, radius: Float) {
     ImageLoader.loadCenterCropRoundedCornerOss(this, url, radius.toInt())
 }
 
-@BindingAdapter(value = ["binding_src_url_center_crop", "binding_src_cornerRadius",
-    "binding_src_placeholder"], requireAll = true)
+@BindingAdapter(
+    value = ["binding_src_url_center_crop", "binding_src_cornerRadius",
+        "binding_src_placeholder"], requireAll = true
+)
 fun ImageView.bindingRoundedCornerCenterCrop(url: String?, radius: Float, drawable: Drawable?) {
     ImageLoader.loadCenterCropRoundedCornerOss(this, url, radius.toInt(), drawable)
 }
 
-@BindingAdapter(value = ["binding_src_url_fixWidth", "binding_src_baseWidth", "binding_src_baseHeight"], requireAll = true)
+@BindingAdapter(
+    value = ["binding_src_url_fixWidth", "binding_src_baseWidth", "binding_src_baseHeight"],
+    requireAll = true
+)
 fun ImageView.bindingImageUrlFixWidth(url: String?, baseWidth: Float, baseHeight: Float) {
     val size = url?.getSizeByLoadUrl(baseWidth.toInt(), baseHeight.toInt()) ?: ArrayList()
     val p = layoutParams
@@ -288,7 +386,10 @@ fun ImageView.bindingImageUrlFixWidth(url: String?, baseWidth: Float, baseHeight
     ImageLoader.loadOss(this, url)
 }
 
-@BindingAdapter(value = ["binding_src_url_fixHeight", "binding_src_baseWidth", "binding_src_baseHeight"], requireAll = true)
+@BindingAdapter(
+    value = ["binding_src_url_fixHeight", "binding_src_baseWidth", "binding_src_baseHeight"],
+    requireAll = true
+)
 fun ImageView.bindingImageUrlFixHeight(url: String?, baseWidth: Float, baseHeight: Float) {
     val size = url?.getSizeByLoadUrl(baseWidth.toInt(), baseHeight.toInt()) ?: ArrayList()
     val p = layoutParams
@@ -374,8 +475,8 @@ fun SmartRefreshLayout.bindingOnRefreshListener(listener: OnRefreshListener) {
 }
 
 @BindingAdapter("binding_srl_close_animation")
-fun SmartRefreshLayout.bindingCloseAnimation(isColse: Boolean) {
-    if (isColse) {
+fun SmartRefreshLayout.bindingCloseAnimation(close: Boolean) {
+    if (close) {
         //关闭下拉动画特效，减少延迟感觉
         setReboundDuration(0)
         finishRefresh(0)

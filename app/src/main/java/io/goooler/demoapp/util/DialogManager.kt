@@ -59,9 +59,9 @@ class DialogManager(private val maxSize: Int = 3) : DefaultLifecycleObserver {
     }
 
     class DialogElement(
-            var dialog: DialogFragment?,
-            var fragmentManager: FragmentManager,
-            var tag: String? = null,
-            var priority: Int = 1
+        var dialog: DialogFragment?,
+        var fragmentManager: FragmentManager,
+        var tag: String? = null,
+        var priority: Int = 1
     )
 }

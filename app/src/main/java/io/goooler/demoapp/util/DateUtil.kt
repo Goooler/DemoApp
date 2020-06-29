@@ -40,8 +40,11 @@ object DateUtil {
         } else {
             timestamp
         }
-        return DateTimeFormatter.ofPattern(dateFormat).format(LocalDateTime.ofInstant(
-                Instant.ofEpochMilli(ts), ZoneId.systemDefault()))
+        return DateTimeFormatter.ofPattern(dateFormat).format(
+            LocalDateTime.ofInstant(
+                Instant.ofEpochMilli(ts), ZoneId.systemDefault()
+            )
+        )
     }
 
     /**
@@ -50,7 +53,12 @@ object DateUtil {
      * @return 长整数格式例如 yyyyMMddHHmmss
      */
     fun timestampToDateLong(timestamp: Long?): Long {
-        return java.lang.Long.valueOf(timestampToDateString(timestamp!!, ResUtil.getStringArray(R.array.date_format)[1]))
+        return java.lang.Long.valueOf(
+            timestampToDateString(
+                timestamp!!,
+                ResUtil.getStringArray(R.array.date_format)[1]
+            )
+        )
     }
 
     /**
@@ -61,7 +69,9 @@ object DateUtil {
      * @return 例如 2019（年）、06（月）、（07）日
      */
     private fun timestampToDateUnit(timestamp: Long?, beginIndex: Int, endIndex: Int): Long {
-        return java.lang.Long.valueOf(timestampToDateLong(timestamp).toString().substring(beginIndex, endIndex))
+        return java.lang.Long.valueOf(
+            timestampToDateLong(timestamp).toString().substring(beginIndex, endIndex)
+        )
     }
 
     /**
@@ -83,12 +93,21 @@ object DateUtil {
      */
     @SuppressLint("NewApi")
     fun dateStringToTimestamp(dateString: String, dateFormat: String): Long {
-        return LocalDateTime.from(LocalDateTime.parse(dateString,
-                DateTimeFormatter.ofPattern(dateFormat))).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli()
+        return LocalDateTime.from(
+            LocalDateTime.parse(
+                dateString,
+                DateTimeFormatter.ofPattern(dateFormat)
+            )
+        ).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli()
     }
 
     fun timestampToDateFloat(timestamp: Long?): Float {
-        return java.lang.Float.valueOf(timestampToDateString(timestamp!!, ResUtil.getStringArray(R.array.date_format)[2]))
+        return java.lang.Float.valueOf(
+            timestampToDateString(
+                timestamp!!,
+                ResUtil.getStringArray(R.array.date_format)[2]
+            )
+        )
     }
 }
 /**

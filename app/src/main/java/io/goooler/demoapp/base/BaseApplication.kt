@@ -4,13 +4,12 @@ import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 import com.alibaba.android.arouter.launcher.ARouter
-import com.squareup.leakcanary.LeakCanary
 import io.goooler.demoapp.util.CrashHandler
-import io.goooler.demoapp.util.LogUtil
 import io.goooler.demoapp.util.debugRun
-import io.reactivex.Single
-import io.reactivex.schedulers.Schedulers
-import java.util.concurrent.TimeUnit
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 /**
  * 封装通用方法和一些初始化的动作
@@ -30,19 +29,17 @@ class BaseApplication : Application() {
         context = applicationContext
         CrashHandler.init()
         ARouter.init(this)
-        // 部分三方初始化延时处理
-        Single.just(true)
-                .subscribeOn(Schedulers.io())
-                .delay(2, TimeUnit.SECONDS)
-                .subscribe({
-                    LeakCanary.install(this)
-                    debugRun {
-                        ARouter.openLog()
-                        ARouter.openDebug()
-                    }
-                }, {
-                    LogUtil.d(it)
-                })
+        initLater()
+    }
+
+    private fun initLater() {
+        GlobalScope.launch(Dispatchers.IO) {
+            delay(2000)
+            debugRun {
+                ARouter.openLog()
+                ARouter.openDebug()
+            }
+        }
     }
 
     companion object {

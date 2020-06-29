@@ -39,6 +39,9 @@ object SpUtil {
      * 设置应用是否第一次启动的状态
      */
     fun setFirstRunState(firstRunState: Boolean) {
-        getSpEdit(Constants.SpKey.SP_RUN_INFO).putBoolean(Constants.SpKey.SP_FIRST_RUN, firstRunState).apply()
+        getSpEdit(Constants.SpKey.SP_RUN_INFO).putBoolean(
+            Constants.SpKey.SP_FIRST_RUN,
+            firstRunState
+        ).apply()
     }
 }

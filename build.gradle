@@ -1,29 +1,32 @@
+import java.util.concurrent.TimeUnit
+
 buildscript {
     apply from: "versions.gradle"
 
     repositories {
         google()
-        maven { url 'https://maven.aliyun.com/repository/public' }
+        maven { url(aliyunMaven) }
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:$gradleVersion"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+        classpath(libs["gradlePlugin"])
+        classpath(libs["kotlinPlugin"])
+        classpath(libs["navigationPlugin"])
     }
 
     configurations.all {
         // check for updates every build
-        resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+        resolutionStrategy.cacheChangingModulesFor(0, TimeUnit.SECONDS)
     }
 }
 
 allprojects {
     repositories {
         google()
-        maven { url 'https://maven.aliyun.com/repository/public' }
-        maven { url 'https://jitpack.io' }
+        maven { url(aliyunMaven) }
+        maven { url(jitpackMaven) }
     }
 }
 
 task clean(type: Delete) {
-    delete rootProject.buildDir
+    delete(rootProject.buildDir)
 }

@@ -10,6 +10,8 @@ import android.view.View
 import android.webkit.URLUtil
 import androidx.annotation.ColorInt
 import androidx.annotation.StringRes
+import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
 import io.goooler.demoapp.BuildConfig
 import io.goooler.demoapp.base.BaseApplication
 import io.goooler.demoapp.model.Constants.IMAGE_URL_PREFIX
@@ -22,11 +24,14 @@ import kotlin.math.absoluteValue
 
 //---------------------Log-------------------------------//
 
+
 fun Any?.log() {
     LogUtil.d(this)
 }
 
+
 //---------------------CharSequence-------------------------------//
+
 
 inline fun <reified T> String.fromJson(): T? {
     return JsonUtil.fromJson(this, T::class.java)
@@ -62,7 +67,9 @@ fun String.safeSubstring(startIndex: Int, endIndex: Int): String {
     return substring(begin, end)
 }
 
+
 //---------------------Calculate-------------------------------//
+
 
 /**
  * @param isYuan 默认以分为单位，传入元为单位传 true
@@ -81,21 +88,21 @@ fun Number.formatMoney(isYuan: Boolean = false, trans2W: Boolean = false, scale:
         when {
             trans2W && moneyF / 10000 > 0 -> {
                 return BigDecimal.valueOf(moneyF / 10000)
-                        .setScale(1, BigDecimal.ROUND_DOWN)
-                        .stripTrailingZeros().toPlainString() + "W"
+                    .setScale(1, BigDecimal.ROUND_DOWN)
+                    .stripTrailingZeros().toPlainString() + "W"
             }
 
             else ->
                 BigDecimal.valueOf(moneyF)
-                        .setScale(scale, BigDecimal.ROUND_DOWN)
-                        .stripTrailingZeros().toPlainString()
-                        .let {
-                            return if (it.toDouble().absoluteValue < 0.000001) {
-                                "0"
-                            } else {
-                                it
-                            }
+                    .setScale(scale, BigDecimal.ROUND_DOWN)
+                    .stripTrailingZeros().toPlainString()
+                    .let {
+                        return if (it.toDouble().absoluteValue < 0.000001) {
+                            "0"
+                        } else {
+                            it
                         }
+                    }
 
         }
     } catch (e: Exception) {
@@ -116,27 +123,27 @@ fun String.getSizeByLoadUrl(defaultWidth: Int, defaultHeight: Int): List<Int> {
     }
     val pattern = "$flag(\\d+x\\d+)"
     Regex(pattern)
-            .findAll(this)
-            .forEach {
+        .findAll(this)
+        .forEach {
 
-                // size550x769
-                val sizeXXXxXXX = it.value
-                // 550x769
-                val mXXXxXXX = sizeXXXxXXX.replace(flag, "")
-                val list = mXXXxXXX.split("x")
+            // size550x769
+            val sizeXXXxXXX = it.value
+            // 550x769
+            val mXXXxXXX = sizeXXXxXXX.replace(flag, "")
+            val list = mXXXxXXX.split("x")
 
-                if (list.size < 2) {
-                    return sizeList
-                }
-                // 550
-                val width = list[0].toInt()
-                // 769
-                val height = list[1].toInt()
-                sizeList.clear()
-                sizeList.add(width)
-                sizeList.add(height)
+            if (list.size < 2) {
                 return sizeList
             }
+            // 550
+            val width = list[0].toInt()
+            // 769
+            val height = list[1].toInt()
+            sizeList.clear()
+            sizeList.add(width)
+            sizeList.add(height)
+            return sizeList
+        }
 
     return sizeList
 }
@@ -170,7 +177,9 @@ fun Number.isNotZero(): Boolean {
     return !isZero()
 }
 
+
 //---------------------Date-------------------------------//
+
 
 fun Long.formatTime(pattern: String): String {
     return DateUtil.timestampToDateString(this, pattern)
@@ -209,7 +218,9 @@ fun Long.easyTime(): String {
     }
 }
 
+
 //---------------------Network-------------------------------//
+
 
 fun String.isNetworkUrl(): Boolean {
     return URLUtil.isNetworkUrl(this)
@@ -223,7 +234,9 @@ fun String.toLoadUrl(): String {
     }
 }
 
+
 //---------------------Phone-------------------------------//
+
 
 fun String.isValidPhoneFormat(): Boolean {
     return startsWith(PHONE_FIRST_CHAR) && length == PHONE_LENGTH
@@ -272,13 +285,15 @@ fun Int.px2pt(context: Context): Float {
  * @param stroke 描边粗细
  * @param radius 圆角大小
  */
-fun View.setBgShapeGradual(shapeType: Int = GradientDrawable.RECTANGLE,
-                           @ColorInt gradualColors: IntArray? = null,
-                           angle: Int = -1,
-                           @ColorInt solidColor: Int? = null,
-                           @ColorInt strokeColor: Int = Color.TRANSPARENT,
-                           stroke: Float = 0f,
-                           radius: Float = 0f) {
+fun View.setBgShapeGradual(
+    shapeType: Int = GradientDrawable.RECTANGLE,
+    @ColorInt gradualColors: IntArray? = null,
+    angle: Int = -1,
+    @ColorInt solidColor: Int? = null,
+    @ColorInt strokeColor: Int = Color.TRANSPARENT,
+    stroke: Float = 0f,
+    radius: Float = 0f
+) {
     background = GradientDrawable().apply {
         shape = shapeType
         useLevel = false
@@ -312,24 +327,28 @@ fun View.setBgShapeGradual(shapeType: Int = GradientDrawable.RECTANGLE,
  * @param bottomLeft 左下圆角大小
  * @param bottomRight 左下圆角大小
  */
-fun View.setBgShapeCorners(@ColorInt solidColor: Int = Color.WHITE,
-                           topLeft: Float = 0f,
-                           topRight: Float = 0f,
-                           bottomLeft: Float = 0f,
-                           bottomRight: Float = 0f) {
+fun View.setBgShapeCorners(
+    @ColorInt solidColor: Int = Color.WHITE,
+    topLeft: Float = 0f,
+    topRight: Float = 0f,
+    bottomLeft: Float = 0f,
+    bottomRight: Float = 0f
+) {
     background = GradientDrawable().apply {
         shape = GradientDrawable.RECTANGLE
         setColor(solidColor)
         cornerRadii = floatArrayOf(
-                topLeft, topLeft,
-                topRight, topRight,
-                bottomRight, bottomRight,
-                bottomLeft, bottomLeft
+            topLeft, topLeft,
+            topRight, topRight,
+            bottomRight, bottomRight,
+            bottomLeft, bottomLeft
         )
     }
 }
 
+
 //---------------------SafeTrans-------------------------------//
+
 
 fun String?.safeToBoolean(default: Boolean = false): Boolean {
     if (this == null) return default
@@ -385,33 +404,11 @@ fun String?.safeToColor(@ColorInt default: Int = 0): Int {
     }
 }
 
-//---------------------Func-------------------------------//
-
-fun Boolean.trueRun(whenTrue: () -> Unit = {}): Boolean {
-    if (this) {
-        whenTrue()
-    }
-    return this
-}
-
-fun Boolean.falseRun(whenFalse: () -> Unit = {}): Boolean {
-    if (!this) {
-        whenFalse()
-    }
-    return this
-}
-
-fun debugRun(debug: () -> Unit): Boolean {
-    if (BuildConfig.DEBUG) {
-        debug()
-    }
-    return BuildConfig.DEBUG
-}
 
 //---------------------Collections-------------------------------//
 
-fun <E> MutableCollection<E>.removeIfMatch(predicate: (e: E) -> Boolean): Boolean {
-    Objects.requireNonNull(predicate)
+
+inline fun <E> MutableCollection<E>.removeIfMatch(predicate: (e: E) -> Boolean): Boolean {
     var removed = false
     val each = iterator()
     while (each.hasNext()) {
@@ -450,15 +447,44 @@ fun <T> Collection<T>?.isMultiple(minSize: Int = 2): Boolean {
 /**
  * 取集合内第二个元素
  */
-fun <T> List<T>.second(): T {
-    if (isEmpty()) throw NoSuchElementException("List is empty.")
-    return this[1]
+fun <T> List<T>.secondOrNull(): T? {
+    return if (size < 2) null else this[1]
 }
 
 /**
  * 取集合内第三个元素
  */
-fun <T> List<T>.third(): T {
-    if (isEmpty()) throw NoSuchElementException("List is empty.")
-    return this[2]
+fun <T> List<T>.third(): T? {
+    return if (size < 3) null else this[2]
+}
+
+
+//---------------------Others-------------------------------//
+
+
+inline fun Boolean.trueRun(whenTrue: () -> Unit): Boolean {
+    if (this) {
+        whenTrue()
+    }
+    return this
+}
+
+inline fun Boolean.falseRun(whenFalse: () -> Unit): Boolean {
+    if (!this) {
+        whenFalse()
+    }
+    return this
+}
+
+inline fun FragmentActivity.showDialogFragment(
+    body: FragmentManager.() -> Unit
+) {
+    supportFragmentManager.body()
+}
+
+inline fun debugRun(debug: () -> Unit): Boolean {
+    if (BuildConfig.DEBUG) {
+        debug()
+    }
+    return BuildConfig.DEBUG
 }

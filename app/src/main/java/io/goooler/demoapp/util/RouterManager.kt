@@ -10,9 +10,9 @@ object RouterManager {
 
     fun goLogin(@RouterPath target: String, params: Any) {
         ARouter.getInstance().build(RouterPath.LOGIN)
-                .withString(TARGET, target)
-                .withString(PARAMS, params.toJson())
-                .withFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-                .navigation()
+            .withString(TARGET, target)
+            .withString(PARAMS, params.toJson())
+            .withFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+            .navigation()
     }
 }

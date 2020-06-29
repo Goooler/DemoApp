@@ -2,12 +2,16 @@ package io.goooler.demoapp.base
 
 import androidx.lifecycle.MutableLiveData
 
-class MutableBooleanLiveData : MutableLiveData<Boolean>()
+/**
+ * 自定义一些类型，例如某类的简称、别名等
+ */
 
-class MutableIntLiveData : MutableLiveData<Int>()
+typealias MutableBooleanLiveData = MutableLiveData<Boolean>
 
-class MutableLongLiveData : MutableLiveData<Long>()
+typealias MutableIntLiveData = MutableLiveData<Int>
 
-class MutableDoubleLiveData : MutableLiveData<Double>()
+typealias MutableLongLiveData = MutableLiveData<Long>
 
-class MutableStringLiveData : MutableLiveData<String>()
+typealias MutableDoubleLiveData = MutableLiveData<Double>
+
+typealias MutableStringLiveData = MutableLiveData<String>

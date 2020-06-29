@@ -15,14 +15,20 @@ class BottomTipDialogFragment : BaseDialogFragment() {
 
     private val vm by lazy(LazyThreadSafetyMode.NONE) { getViewModel(BottomTipDialogViewModel::class.java) }
 
-    private val binding by lazy(LazyThreadSafetyMode.NONE) { BottomTipDialogFragmentBinding.inflate(layoutInflater) }
+    private val binding by lazy(LazyThreadSafetyMode.NONE) {
+        BottomTipDialogFragmentBinding.inflate(layoutInflater)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStyle(STYLE_NORMAL, R.style.DialogBottomAnim)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding.lifecycleOwner = this@BottomTipDialogFragment
         binding.vm = vm
         binding.listener = eventListener

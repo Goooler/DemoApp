@@ -11,7 +11,11 @@ import io.goooler.demoapp.widget.ui.BottomTipDialogFragment
 
 class MainFragment : BaseFragment() {
 
-    private val binding by lazy(LazyThreadSafetyMode.NONE) { MainFragmentBinding.inflate(layoutInflater) }
+    private val binding by lazy(LazyThreadSafetyMode.NONE) {
+        MainFragmentBinding.inflate(
+            layoutInflater
+        )
+    }
 
     private val vm by lazy(LazyThreadSafetyMode.NONE) { getViewModel(MainViewModel::class.java) }
 
@@ -22,7 +26,11 @@ class MainFragment : BaseFragment() {
         vm.initData()
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         initOnce
         return binding.root
     }

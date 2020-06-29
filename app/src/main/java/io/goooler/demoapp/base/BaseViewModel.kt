@@ -12,11 +12,12 @@ import androidx.lifecycle.LifecycleOwner
 import io.goooler.demoapp.BuildConfig
 import io.goooler.demoapp.api.HttpResponse
 import io.goooler.demoapp.util.LogUtil
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
+import io.reactivex.rxjava3.disposables.CompositeDisposable
+import io.reactivex.rxjava3.disposables.Disposable
 
 
-open class BaseViewModel(application: Application) : AndroidViewModel(application), DefaultLifecycleObserver {
+open class BaseViewModel(application: Application) : AndroidViewModel(application),
+    DefaultLifecycleObserver {
 
     private val compositeDisposable = CompositeDisposable()
     val toast = MutableStringLiveData()

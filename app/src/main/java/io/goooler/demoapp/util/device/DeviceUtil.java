@@ -1,7 +1,6 @@
 package io.goooler.demoapp.util.device;
 
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Resources;

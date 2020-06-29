@@ -12,7 +12,7 @@ class EventType
  * @param messageCode 接收消息的通信码
  * @param message     消息主体
  */
-(var statusCode: Int, var messageCode: Int, var message: Any) {
+    (var statusCode: Int, var messageCode: Int, var message: Any) {
     /**
      * 状态码有两种，成功和失败
      */

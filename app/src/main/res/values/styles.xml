@@ -28,6 +28,14 @@
         <item name="android:windowExitAnimation">@anim/popup_exit</item>
     </style>
 
+    <style name="DialogTransparentFullWindowTheme" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <!-- windowIsFloating属性设置为false, 默认将Window设置成全屏大小，设置为true，则window大小为wrap_content。 -->
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
     <!--去掉点击后的水波纹效果-->
     <style name="NoClickEffect" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:selectableItemBackground">@null</item>

@@ -6,8 +6,6 @@ import okhttp3.OkHttpClient
 import retrofit2.CallAdapter
 import retrofit2.Converter
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
 import java.util.concurrent.TimeUnit
 
@@ -16,26 +14,16 @@ abstract class BaseRetrofitHelper protected constructor() {
 
     private val retrofit by lazy {
         Retrofit.Builder()
-                .baseUrl(baseUrl)
-                .client(buildOkHttpClient())
-                .addConverterFactory(converterFactory)
-                .addCallAdapterFactory(callAdapterFactory)
-                .build()
+            .baseUrl(baseUrl)
+            .client(buildOkHttpClient())
+            .addConverterFactory(converterFactory)
+            .addCallAdapterFactory(callAdapterFactory)
+            .build()
     }
 
-    /**
-     * 获取API HOST
-     *
-     * @return host url
-     */
-    abstract val baseUrl: String
-
-    /**
-     * 获取Context
-     *
-     * @return Context
-     */
-    protected abstract val context: Context
+    fun <T> createApiService(service: Class<T>): T {
+        return retrofit.create(service)
+    }
 
     /**
      * 添加拦截器
@@ -47,24 +35,32 @@ abstract class BaseRetrofitHelper protected constructor() {
     protected fun buildOkHttpClient(): OkHttpClient {
         val cache = Cache(File(context.cacheDir, "HttpCache"), CACHE_SIZE)
         val builder = OkHttpClient.Builder()
-                .cache(cache)
-                .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
-                .writeTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS)
-                .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
-                .retryOnConnectionFailure(true)
+            .cache(cache)
+            .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
+            .writeTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS)
+            .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
+            .retryOnConnectionFailure(true)
         onAddInterceptor(builder)
         return builder.build()
     }
 
-    protected val converterFactory: Converter.Factory
-        get() = GsonConverterFactory.create()
+    /**
+     * 获取API HOST
+     *
+     * @return host url
+     */
+    protected abstract val baseUrl: String
 
-    protected val callAdapterFactory: CallAdapter.Factory
-        get() = RxJava2CallAdapterFactory.create()
+    /**
+     * 获取Context
+     *
+     * @return Context
+     */
+    protected abstract val context: Context
 
-    fun <T> createApiService(service: Class<T>): T {
-        return retrofit.create(service)
-    }
+    protected abstract val converterFactory: Converter.Factory
+
+    protected abstract val callAdapterFactory: CallAdapter.Factory
 
     companion object {
         private const val CONNECT_TIMEOUT: Long = 20

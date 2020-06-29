@@ -9,28 +9,17 @@ import io.goooler.demoapp.BuildConfig
 
 object LogUtil {
 
-    private const val DEFAULT_LOG_TAG = "goooler"
+    private const val DEFAULT_LOG_TAG = "defaultLogTag"
 
     @JvmStatic
-    fun d(debugInfo: Any?) {
-        debugInfo?.let {
-            log(DEFAULT_LOG_TAG, it.toString())
-        }
+    @JvmOverloads
+    fun d(debugInfo: Any?, tag: String = DEFAULT_LOG_TAG) {
+        out(tag, debugInfo.toString())
     }
 
-    @JvmStatic
-    fun d(tag: Any, debugInfo: Any?) {
-        debugInfo?.let {
-            log(tag.toString(), it.toString())
-        }
-    }
-
-    @JvmStatic
-    private fun log(tag: String, debugInfo: String) {
-        if (BuildConfig.DEBUG) {
-            if (debugInfo.isNotEmpty()) {
-                Log.d(tag, debugInfo)
-            }
+    private fun out(tag: String, debugInfo: String) {
+        if (BuildConfig.DEBUG && debugInfo.isNotEmpty()) {
+            Log.d(tag, debugInfo)
         }
     }
 }

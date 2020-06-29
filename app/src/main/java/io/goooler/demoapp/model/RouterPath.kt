@@ -3,8 +3,8 @@ package io.goooler.demoapp.model
 import androidx.annotation.StringDef
 
 @StringDef(
-        RouterPath.LOGIN,
-        RouterPath.MAIN
+    RouterPath.LOGIN,
+    RouterPath.MAIN
 )
 annotation class RouterPath {
     companion object {

@@ -1,28 +1,28 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
+import java.nio.charset.StandardCharsets
+
+apply plugin: "com.android.application"
+apply plugin: "kotlin-android"
+apply plugin: "kotlin-kapt"
+apply plugin: "androidx.navigation.safeargs.kotlin"
 
 android {
-    compileSdkVersion compileSdk
-    buildToolsVersion buildTool
+    compileSdkVersion(compileSdk)
+    buildToolsVersion(buildTool)
     defaultConfig {
-        applicationId "io.goooler.demoapp"
-        minSdkVersion minSdk
-        targetSdkVersion compileSdk
-        versionCode appVersionCode
-        versionName appVersionName
+        applicationId(packageName)
+        minSdkVersion(minSdk)
+        targetSdkVersion(compileSdk)
+        versionCode(appVersionCode)
+        versionName(appVersionName)
+        ndk { abiFilters(ndkLibs) }
         multiDexEnabled = true
-        ndk {
-            abiFilters "armeabi-v7a", "x86"
-        }
     }
     buildTypes {
         release {
-            minifyEnabled true
-            zipAlignEnabled true
-            shrinkResources true
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            minifyEnabled = true
+            zipAlignEnabled = true
+            shrinkResources = true
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
         debug {
             jniDebuggable = true
@@ -35,17 +35,17 @@ android {
         includeInApk = false
         includeInBundle = false
     }
-    buildFeatures{
+    buildFeatures {
         dataBinding = true
         viewBinding = true
     }
     compileOptions {
-        coreLibraryDesugaringEnabled true
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        coreLibraryDesugaringEnabled = true
+        sourceCompatibility(JavaVersion.VERSION_1_8)
+        targetCompatibility(JavaVersion.VERSION_1_8)
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = JavaVersion.VERSION_1_8
     }
 }
 
@@ -58,77 +58,58 @@ kapt {
 
 dependencies {
     // official
-    implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
-    implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
-    implementation "androidx.core:core-ktx:$ktxVersion"
-    coreLibraryDesugaring "com.android.tools:desugar_jdk_libs:$desugarVersion"
-    implementation "androidx.appcompat:appcompat:$appcompatVersion"
-    implementation "androidx.annotation:annotation:$annotationVersion"
-    implementation "androidx.cardview:cardview:$cardViewlVersion"
-    implementation "androidx.legacy:legacy-support-v4:$supportVersion"
-    implementation "androidx.palette:palette:$cardViewlVersion"
-    implementation "androidx.percentlayout:percentlayout:$cardViewlVersion"
-    implementation "androidx.constraintlayout:constraintlayout:$constraintlayoutVersion"
-    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
-    implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycleVersion"
-    implementation "androidx.lifecycle:lifecycle-livedata:$lifecycleVersion"
-    implementation "androidx.lifecycle:lifecycle-runtime:$lifecycleVersion"
-    implementation "androidx.lifecycle:lifecycle-reactivestreams:$lifecycleVersion"
-    implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycleVersion"
-    //noinspection LifecycleAnnotationProcessorWithJava8
-    kapt "androidx.lifecycle:lifecycle-compiler:$lifecycleVersion"
-    implementation "androidx.navigation:navigation-common-ktx:$navigationVersion"
-    implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
-    implementation "androidx.navigation:navigation-runtime-ktx:$navigationVersion"
-    implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
-    implementation "androidx.multidex:multidex:$multidexVersion"
-    implementation "com.google.android.material:material:$materialVersion"
-    implementation "androidx.recyclerview:recyclerview:$appcompatVersion"
-    implementation "com.google.android:flexbox:$flexboxVersion"
+    implementation(fileTree(dir: "libs", include: ["*.jar", "*.aar"]))
+    coreLibraryDesugaring(libs["desugar"])
+    implementation(libs["kotlin"])
+    implementation(libs["core"])
+    implementation(libs["appcompat"])
+    implementation(libs["annotation"])
+    implementation(libs["multidex"])
+    implementation(libs["legacySupport"])
+    implementation(libs["preference"])
+    implementation(libs["palette"])
+    implementation(libs["percentlayout"])
+    implementation(libs["constraintlayout"])
+    implementation(libs["material"])
+    implementation(libs["recyclerview"])
+    implementation(libs["flexbox"])
+    implementation(libs["cardview"])
+    implementation(libs["lifecycle"])
+    implementation(libs["navigation"])
 
     // UI
-    implementation "com.scwang.smartrefresh:SmartRefreshLayout:$smartrefreshlayoutVersion"
-    implementation "com.scwang.smartrefresh:SmartRefreshHeader:$smartrefreshlayoutVersion"
-    implementation "com.github.PhilJay:MPAndroidChart:$mpchartVersion"
-    implementation "com.airbnb.android:lottie:$lottieVersion"
+    implementation(libs["smartRefreshLayout"])
+    implementation(libs["mpChart"])
+    implementation(libs["lottie"])
 
     // network
-    implementation "org.apache.commons.io:commonsIO:$commonsioVersion"
-    implementation "com.squareup.okhttp3:okhttp:$okhttpVersion"
-    implementation "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
-    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
-    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
-    implementation "com.github.bumptech.glide:glide:$glideVersion"
-    implementation "com.github.bumptech.glide:okhttp3-integration:$glideVersion"
-    kapt "com.github.bumptech.glide:compiler:$glideVersion"
-    implementation "jp.wasabeef:glide-transformations:$glideTransformVersion"
+    implementation(libs["okhttp"])
+    implementation(libs["retrofit"])
+    implementation(libs["glide"])
+    kapt(libs["glideKapt"])
 
     // database
-    implementation "io.objectbox:objectbox-android:$objectboxVersion"
-    kapt "io.objectbox:objectbox-processor:$objectboxVersion"
-    // some useful Kotlin extension functions
-    implementation "io.objectbox:objectbox-kotlin:$objectboxVersion"
+    implementation(libs["objectbox"])
+    kapt(libs["objectboxKapt"])
 
     // async
-    implementation "org.greenrobot:eventbus:$eventbusVersion"
-    kapt "org.greenrobot:eventbus-annotation-processor:$eventbusVersion"
-    implementation "com.jeremyliao:live-event-bus-x:$liveDataBusVersion"
-    implementation "io.reactivex.rxjava3:rxandroid:$rxandroidVersion"
-    implementation "io.reactivex.rxjava3:rxjava:$rxjavaVersion"
+    implementation(libs["eventbus"])
+    kapt(libs["eventbusKapt"])
+    implementation(libs["liveDataBus"])
+    implementation(libs["rxjava"])
 
     // utils
-    //noinspection GradleDependency
-    implementation "com.alibaba:fastjson:$fastjsonVersion"
-    implementation "com.alibaba:arouter-api:$arouterVersion"
-    kapt "com.alibaba:arouter-compiler:$arouterCompilerVersion"
-    implementation "com.google.code.gson:gson:$gsonVersion"
-    implementation "com.squareup.moshi:moshi-kotlin:$moshiVersion"
+    implementation(libs["fastjson"])
+    implementation(libs["arouter"])
+    kapt(libs["arouterKapt"])
+    implementation(libs["gson"])
+    implementation(libs["moshi"])
+    implementation(libs["luban"])
 
     // analyze
-    debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakcanaryVersion"
+    debugImplementation(libs["leakcanary"])
 }
 
 tasks.withType(JavaCompile) {
-    options.encoding = "UTF-8"
+    options.encoding = StandardCharsets.UTF_8
 }
