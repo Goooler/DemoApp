@@ -10,12 +10,11 @@ import androidx.fragment.app.FragmentManager
 import io.goooler.demoapp.R
 import io.goooler.demoapp.base.BaseDialogFragment
 import io.goooler.demoapp.databinding.FullScreenDialogFragmentBinding
+import io.goooler.demoapp.util.unsafeLazy
 
 class FullScreenDialogFragment : BaseDialogFragment() {
 
-    private val binding by lazy(LazyThreadSafetyMode.NONE) {
-        FullScreenDialogFragmentBinding.inflate(layoutInflater)
-    }
+    private val binding by unsafeLazy { FullScreenDialogFragmentBinding.inflate(layoutInflater) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

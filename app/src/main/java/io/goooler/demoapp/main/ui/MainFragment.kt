@@ -7,20 +7,17 @@ import android.view.ViewGroup
 import io.goooler.demoapp.base.BaseFragment
 import io.goooler.demoapp.databinding.MainFragmentBinding
 import io.goooler.demoapp.main.vm.MainViewModel
+import io.goooler.demoapp.util.unsafeLazy
 import io.goooler.demoapp.widget.ui.BottomTipDialogFragment
 
 class MainFragment : BaseFragment() {
 
-    private val binding by lazy(LazyThreadSafetyMode.NONE) {
-        MainFragmentBinding.inflate(
-            layoutInflater
-        )
-    }
+    private val binding by unsafeLazy { MainFragmentBinding.inflate(layoutInflater) }
 
-    private val vm by lazy(LazyThreadSafetyMode.NONE) { getViewModel(MainViewModel::class.java) }
+    private val vm by unsafeLazy { getViewModel(MainViewModel::class.java) }
 
-    private val initOnce by lazy(LazyThreadSafetyMode.NONE) {
-        binding.lifecycleOwner = this@MainFragment
+    private val initOnce by unsafeLazy {
+        binding.lifecycleOwner = this
         binding.vm = vm
         binding.listener = eventListener
         vm.initData()

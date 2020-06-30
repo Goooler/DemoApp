@@ -1,6 +1,7 @@
 package io.goooler.demoapp.base
 
 import androidx.lifecycle.MutableLiveData
+import io.goooler.demoapp.util.SpUtil
 
 /**
  * 自定义一些类型，例如某类的简称、别名等
@@ -15,3 +16,5 @@ typealias MutableLongLiveData = MutableLiveData<Long>
 typealias MutableDoubleLiveData = MutableLiveData<Double>
 
 typealias MutableStringLiveData = MutableLiveData<String>
+
+typealias PrefUtil = SpUtil

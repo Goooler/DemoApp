@@ -63,12 +63,8 @@ class MainViewModel(application: Application) : BaseViewModel(application) {
         MainRepository.getRepoListRx()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .filter {
-                it.isNotNullOrEmpty()
-            }
-            .map {
-                return@map it.firstOrNull()?.name.orEmpty()
-            }
+            .filter { it.isNotNullOrEmpty() }
+            .map { it.firstOrNull()?.name.orEmpty() }
             .subscribe({
                 title.value = it
             }, {

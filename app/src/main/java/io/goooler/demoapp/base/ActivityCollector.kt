@@ -1,15 +1,13 @@
 package io.goooler.demoapp.base
 
 import android.app.Activity
-import io.goooler.demoapp.model.Constants
-import io.goooler.demoapp.util.LogUtil
 import java.util.*
 
 /**
  * 方便管理 activity
  */
 object ActivityCollector {
-    private val activityList: MutableList<Activity> = ArrayList()
+    private val activityList = ArrayList<Activity>()
 
     /**
      * activity 入栈时记录指针
@@ -30,12 +28,9 @@ object ActivityCollector {
      */
     @Suppress("unused")
     fun finishAll() {
-        for (activity in activityList) {
-            if (!activity.isFinishing) {
-                activity.finish()
-            }
+        activityList.forEach {
+            if (!it.isFinishing) it.finish()
         }
         activityList.clear()
-        LogUtil.d(Constants.BASE_ACTIVITY, Constants.FINISH_ALL_ACTIVITY)
     }
 }

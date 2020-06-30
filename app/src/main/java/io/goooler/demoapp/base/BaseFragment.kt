@@ -28,13 +28,13 @@ abstract class BaseFragment : Fragment() {
     }
 
     /**
-     * @param containerId       容器 id
+     * @param containerViewId   容器 id
      * @param fragment          要添加的 fragment
      * @param isAddToBackStack  将要添加的 fragment 是否要添加到返回栈
      * @param tag               fragment 的 tag
      */
     protected fun addFragment(
-        @IdRes containerId: Int,
+        @IdRes containerViewId: Int,
         fragment: Fragment,
         isAddToBackStack: Boolean = false,
         tag: String? = null
@@ -43,18 +43,18 @@ abstract class BaseFragment : Fragment() {
             if (isAddToBackStack) {
                 addToBackStack(tag)
             }
-            add(containerId, fragment, tag)
+            add(containerViewId, fragment, tag)
         }
     }
 
     /**
-     * @param containerId       容器 id
+     * @param containerViewId   容器 id
      * @param fragment          要替换的 fragment
      * @param isAddToBackStack  将要替换的 fragment 是否要添加到返回栈
      * @param tag               fragment 的 tag
      */
     protected fun replaceFragment(
-        @IdRes containerId: Int,
+        @IdRes containerViewId: Int,
         fragment: Fragment,
         isAddToBackStack: Boolean = true,
         tag: String? = null
@@ -63,12 +63,12 @@ abstract class BaseFragment : Fragment() {
             if (isAddToBackStack) {
                 addToBackStack(tag)
             }
-            replace(containerId, fragment, tag)
+            replace(containerViewId, fragment, tag)
         }
     }
 
     protected fun <T : BaseViewModel> getViewModel(modelClass: Class<T>): T {
-        return ViewModelProvider(this@BaseFragment).get(modelClass).apply {
+        return ViewModelProvider(this).get(modelClass).apply {
             lifecycle.addObserver(this)
             observeVm(this)
         }
@@ -81,17 +81,17 @@ abstract class BaseFragment : Fragment() {
         }
     }
 
-    private fun observeVm(vm: BaseViewModel) {
-        vm.toast.observe(this@BaseFragment, Observer {
-            showToast(it)
-        })
-    }
-
     protected fun showToast(@StringRes textId: Int) {
         ToastUtil.showToast(textId)
     }
 
     protected fun showToast(text: String) {
         ToastUtil.showToast(text)
+    }
+
+    private fun observeVm(vm: BaseViewModel) {
+        vm.toast.observe(this, Observer {
+            showToast(it)
+        })
     }
 }

@@ -8,12 +8,8 @@ import io.goooler.demoapp.model.RouterPath
 @Route(path = RouterPath.MAIN)
 class MainActivity : BaseActivity() {
 
-    private val mainFragment by lazy(LazyThreadSafetyMode.NONE) {
-        MainFragment.newInstance()
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        addFragment(android.R.id.content, mainFragment)
+        addFragment(android.R.id.content, MainFragment.newInstance())
     }
 }

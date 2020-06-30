@@ -10,8 +10,6 @@ import android.view.View
 import android.webkit.URLUtil
 import androidx.annotation.ColorInt
 import androidx.annotation.StringRes
-import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.FragmentManager
 import io.goooler.demoapp.BuildConfig
 import io.goooler.demoapp.base.BaseApplication
 import io.goooler.demoapp.model.Constants.IMAGE_URL_PREFIX
@@ -22,12 +20,23 @@ import java.math.BigDecimal
 import java.util.*
 import kotlin.math.absoluteValue
 
-//---------------------Log-------------------------------//
+//---------------------Any-------------------------------//
 
 
 fun Any?.log() {
     LogUtil.d(this)
 }
+
+val isDebug: Boolean
+    get() = BuildConfig.DEBUG
+
+val packageName: String
+    get() = BuildConfig.APPLICATION_ID
+
+val versionCode: Long
+    get() = BuildConfig.VERSION_CODE.toLong()
+
+fun <T> unsafeLazy(initializer: () -> T) = lazy(LazyThreadSafetyMode.NONE, initializer)
 
 
 //---------------------CharSequence-------------------------------//
@@ -84,10 +93,10 @@ fun Number.formatMoney(isYuan: Boolean = false, trans2W: Boolean = false, scale:
         // 分转为元
         toDouble() / 100
     }
-    try {
+    return try {
         when {
             trans2W && moneyF / 10000 > 0 -> {
-                return BigDecimal.valueOf(moneyF / 10000)
+                BigDecimal.valueOf(moneyF / 10000)
                     .setScale(1, BigDecimal.ROUND_DOWN)
                     .stripTrailingZeros().toPlainString() + "W"
             }
@@ -97,7 +106,7 @@ fun Number.formatMoney(isYuan: Boolean = false, trans2W: Boolean = false, scale:
                     .setScale(scale, BigDecimal.ROUND_DOWN)
                     .stripTrailingZeros().toPlainString()
                     .let {
-                        return if (it.toDouble().absoluteValue < 0.000001) {
+                        if (it.toDouble().absoluteValue < 0.000001) {
                             "0"
                         } else {
                             it
@@ -106,7 +115,7 @@ fun Number.formatMoney(isYuan: Boolean = false, trans2W: Boolean = false, scale:
 
         }
     } catch (e: Exception) {
-        return moneyF.toString()
+        moneyF.toString()
     }
 }
 
@@ -177,6 +186,30 @@ fun Number.isNotZero(): Boolean {
     return !isZero()
 }
 
+fun Float.sp2px(): Int {
+    return DimensionUtil.sp2px(BaseApplication.context, this)
+}
+
+fun Float.dp2px(): Int {
+    return DimensionUtil.dp2px(BaseApplication.context, this)
+}
+
+fun Float.pt2px(context: Context): Int {
+    return DimensionUtil.pt2px(context, this)
+}
+
+fun Int.px2sp(): Float {
+    return DimensionUtil.px2sp(BaseApplication.context, this)
+}
+
+fun Int.px2dp(): Float {
+    return DimensionUtil.px2dp(BaseApplication.context, this)
+}
+
+fun Int.px2pt(context: Context): Float {
+    return DimensionUtil.px2pt(context, this)
+}
+
 
 //---------------------Date-------------------------------//
 
@@ -221,11 +254,16 @@ fun Long.easyTime(): String {
 
 //---------------------Network-------------------------------//
 
-
+/**
+ * 验证是否属于正确的 url 格式
+ */
 fun String.isNetworkUrl(): Boolean {
     return URLUtil.isNetworkUrl(this)
 }
 
+/**
+ * 拼上图片前缀
+ */
 fun String.toLoadUrl(): String {
     return if (isNetworkUrl()) {
         this
@@ -235,39 +273,21 @@ fun String.toLoadUrl(): String {
 }
 
 
-//---------------------Phone-------------------------------//
+//---------------------Device-------------------------------//
 
 
+/**
+ * 验证手机号格式是否正确
+ */
 fun String.isValidPhoneFormat(): Boolean {
     return startsWith(PHONE_FIRST_CHAR) && length == PHONE_LENGTH
 }
 
+/**
+ * 隐藏手机号
+ */
 fun String.hidePhone(): String {
     return replace(Regex("(\\d{3})\\d{4}(\\d{4})"), "$1****$2")
-}
-
-fun Float.sp2px(): Int {
-    return DimensionUtil.sp2px(BaseApplication.context, this)
-}
-
-fun Float.dp2px(): Int {
-    return DimensionUtil.dp2px(BaseApplication.context, this)
-}
-
-fun Float.pt2px(context: Context): Int {
-    return DimensionUtil.pt2px(context, this)
-}
-
-fun Int.px2sp(): Float {
-    return DimensionUtil.px2sp(BaseApplication.context, this)
-}
-
-fun Int.px2dp(): Float {
-    return DimensionUtil.px2dp(BaseApplication.context, this)
-}
-
-fun Int.px2pt(context: Context): Float {
-    return DimensionUtil.px2pt(context, this)
 }
 
 
@@ -454,37 +474,34 @@ fun <T> List<T>.secondOrNull(): T? {
 /**
  * 取集合内第三个元素
  */
-fun <T> List<T>.third(): T? {
+fun <T> List<T>.thirdOrNull(): T? {
     return if (size < 3) null else this[2]
 }
 
 
-//---------------------Others-------------------------------//
+//---------------------HigherOrderFunc-------------------------------//
 
 
-inline fun Boolean.trueRun(whenTrue: () -> Unit): Boolean {
+/**
+ * 条件为真时执行
+ */
+inline fun Boolean.trueRun(whenTrue: () -> Unit) {
     if (this) {
         whenTrue()
     }
-    return this
 }
 
-inline fun Boolean.falseRun(whenFalse: () -> Unit): Boolean {
+/**
+ * 条件为假时执行
+ */
+inline fun Boolean.falseRun(whenFalse: () -> Unit) {
     if (!this) {
         whenFalse()
     }
-    return this
 }
 
-inline fun FragmentActivity.showDialogFragment(
-    body: FragmentManager.() -> Unit
-) {
-    supportFragmentManager.body()
-}
-
-inline fun debugRun(debug: () -> Unit): Boolean {
+inline fun debugRun(debug: () -> Unit) {
     if (BuildConfig.DEBUG) {
         debug()
     }
-    return BuildConfig.DEBUG
 }

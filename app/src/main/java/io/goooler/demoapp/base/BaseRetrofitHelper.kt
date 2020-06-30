@@ -9,7 +9,7 @@ import retrofit2.Retrofit
 import java.io.File
 import java.util.concurrent.TimeUnit
 
-@Suppress("unused")
+@Suppress("unused", "MemberVisibilityCanBePrivate")
 abstract class BaseRetrofitHelper protected constructor() {
 
     private val retrofit by lazy {

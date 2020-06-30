@@ -9,15 +9,14 @@ import androidx.fragment.app.FragmentManager
 import io.goooler.demoapp.R
 import io.goooler.demoapp.base.BaseDialogFragment
 import io.goooler.demoapp.databinding.BottomTipDialogFragmentBinding
+import io.goooler.demoapp.util.unsafeLazy
 import io.goooler.demoapp.widget.vm.BottomTipDialogViewModel
 
 class BottomTipDialogFragment : BaseDialogFragment() {
 
-    private val vm by lazy(LazyThreadSafetyMode.NONE) { getViewModel(BottomTipDialogViewModel::class.java) }
+    private val vm by unsafeLazy { getViewModel(BottomTipDialogViewModel::class.java) }
 
-    private val binding by lazy(LazyThreadSafetyMode.NONE) {
-        BottomTipDialogFragmentBinding.inflate(layoutInflater)
-    }
+    private val binding by unsafeLazy { BottomTipDialogFragmentBinding.inflate(layoutInflater) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +28,7 @@ class BottomTipDialogFragment : BaseDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding.lifecycleOwner = this@BottomTipDialogFragment
+        binding.lifecycleOwner = this
         binding.vm = vm
         binding.listener = eventListener
         arguments?.let {
