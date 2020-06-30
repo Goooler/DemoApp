@@ -8,61 +8,58 @@ ext {
     jitpackMaven = "https://jitpack.io"
 
     // sdk
-    compileSdk = 29
-    buildTool = "30.0.0"
-    minSdk = 23
+    appCompileSdk = 29
+    appBuildTool = "30.0.0"
+    appMinSdk = 23
     ndkLibs = ["armeabi-v7a", "x86"] as String[]
 
     // app
     appVersionCode = 1
     appVersionName = "1.0"
-    packageName = "io.goooler.demoapp"
+    appPackageName = "io.goooler.demoapp"
 
     // app dependencies
     coreVersion = "1.3.0"
-    appcompatVersion = "1.1.0"
+    appCompatVersion = "1.1.0"
     supportVersion = "1.0.0"
-    constraintlayoutVersion = "1.1.3"
+    constraintLayoutVersion = "1.1.3"
+    fragmentVersion = '1.2.5'
     materialVersion = "1.1.0"
-    flexboxVersion = "2.0.1"
+    flexBoxVersion = "2.0.1"
     cardViewlVersion = "1.0.0"
+    recyclerViewVersion = "1.1.0"
     annotationVersion = "1.1.0"
     lifecycleVersion = "2.2.0"
     navigationVersion = "2.3.0"
+    workVersion = "2.3.4"
     preferenceVersion = "1.1.1"
-    multidexVersion = "2.0.1"
-    okhttpVersion = "4.7.2"
+    multiDexVersion = "2.0.1"
+    okHttpVersion = "4.7.2"
     retrofitVersion = "2.9.0"
     fastjsonVersion = "1.1.71.android"
     arouterVersion = "1.5.0"
     arouterCompilerVersion = "1.2.2"
     gsonVersion = "2.8.6"
     moshiVersion = "1.9.2"
-    eventbusVersion = "3.2.0"
+    eventBusVersion = "3.2.0"
     liveDataBusVersion = "1.6.1"
-    rxandroidVersion = "3.0.0"
-    rxjavaVersion = "3.0.4"
+    rxAndroidVersion = "3.0.0"
+    rxJavaVersion = "3.0.4"
     rxFastJsonConverterVersion = "2.1.0"
-    picassoVersion = "2.71828"
-    frescoVersion = "2.0.0"
-    mpchartVersion = "v3.1.0"
+    mpChartVersion = "v3.1.0"
     lottieVersion = "3.0.1"
-    smartrefreshlayoutVersion = "1.1.0"
-    daggerVersion = "2.24"
-    exoplayerVersion = "2.10.5"
+    smartRefreshLayoutVersion = "1.1.0"
     glideVersion = "4.11.0"
     glideTransformVersion = "4.1.0"
-    leakcanaryVersion = "2.4"
-    ijkVersion = "0.8.8"
+    leakCanaryVersion = "2.4"
     lubanVersion = "1.1.8"
 
     // buildScript plugin
     gradleVersion = "4.0.0"
     kotlinVersion = "1.3.72"
-    kotlinxVersion = "1.3.7"
+    coroutinesVersion = "1.3.7"
     desugarVersion = "1.0.9"
-    gmsVersion = "4.2.0"
-    objectboxVersion = "2.5.1"
+    objectBoxVersion = "2.5.1"
 
     libs = [
             "gradlePlugin"      : "com.android.tools.build:gradle:$gradleVersion",
@@ -71,39 +68,43 @@ ext {
 
             "core"              : "androidx.core:core-ktx:$coreVersion",
             "desugar"           : "com.android.tools:desugar_jdk_libs:$desugarVersion",
-            "appcompat"         : "androidx.appcompat:appcompat:$appcompatVersion",
+            "appCompat"         : "androidx.appcompat:appcompat:$appCompatVersion",
             "annotation"        : "androidx.annotation:annotation:$annotationVersion",
-            "multidex"          : "androidx.multidex:multidex:$multidexVersion",
+            "multiDex"          : "androidx.multidex:multidex:$multiDexVersion",
+            "fragment"          : "androidx.fragment:fragment-ktx:$fragmentVersion",
             "legacySupport"     : "androidx.legacy:legacy-support-v4:$supportVersion",
             "preference"        : "androidx.preference:preference:$preferenceVersion",
             "palette"           : "androidx.palette:palette-ktx:$cardViewlVersion",
-            "percentlayout"     : "androidx.percentlayout:percentlayout:$cardViewlVersion",
-            "constraintlayout"  : "androidx.constraintlayout:constraintlayout:$constraintlayoutVersion",
+            "percentLayout"     : "androidx.percentlayout:percentlayout:$cardViewlVersion",
+            "constraintLayout"  : "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion",
             "material"          : "com.google.android.material:material:$materialVersion",
-            "recyclerview"      : "androidx.recyclerview:recyclerview:$appcompatVersion",
-            "flexbox"           : "com.google.android:flexbox:$flexboxVersion",
-            "cardview"          : "androidx.cardview:cardview:$cardViewlVersion",
-            "mpChart"           : "com.github.PhilJay:MPAndroidChart:$mpchartVersion",
+            "recyclerView"      : "androidx.recyclerview:recyclerview:$recyclerViewVersion",
+            "workManager"       : "androidx.work:work-runtime-ktx:$workVersion",
+            "flexBox"           : "com.google.android:flexbox:$flexBoxVersion",
+            "cardView"          : "androidx.cardview:cardview:$cardViewlVersion",
+            "mpChart"           : "com.github.PhilJay:MPAndroidChart:$mpChartVersion",
             "lottie"            : "com.airbnb.android:lottie:$lottieVersion",
-            "eventbus"          : "org.greenrobot:eventbus:$eventbusVersion",
+            "eventBus"          : "org.greenrobot:eventbus:$eventBusVersion",
             "liveDataBus"       : "com.jeremyliao:live-event-bus-x:$liveDataBusVersion",
             "fastjson"          : "com.alibaba:fastjson:$fastjsonVersion",
             "arouter"           : "com.alibaba:arouter-api:$arouterVersion",
             "gson"              : "com.google.code.gson:gson:$gsonVersion",
             "moshi"             : "com.squareup.moshi:moshi-kotlin:$moshiVersion",
             "luban"             : "top.zibin:Luban:$lubanVersion",
-            "leakcanary"        : "com.squareup.leakcanary:leakcanary-android:$leakcanaryVersion",
+            "leakCanary"        : "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion",
 
             "glideKapt"         : "com.github.bumptech.glide:compiler:$glideVersion",
-            "objectboxKapt"     : "io.objectbox:objectbox-processor:$objectboxVersion",
-            "eventbusKapt"      : "org.greenrobot:eventbus-annotation-processor:$eventbusVersion",
+            "objectBoxKapt"     : "io.objectbox:objectbox-processor:$objectBoxVersion",
+            "eventBusKapt"      : "org.greenrobot:eventbus-annotation-processor:$eventBusVersion",
             "arouterKapt"       : "com.alibaba:arouter-compiler:$arouterCompilerVersion",
 
             "kotlin"            : [
                     "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion",
                     "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion",
                     "org.jetbrains.kotlin:kotlin-stdlib-common:$kotlinVersion",
-                    "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinxVersion"
+                    "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion",
+                    "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion",
+                    "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion",
             ],
             "lifecycle"         : [
                     "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion",
@@ -122,12 +123,12 @@ ext {
                     "androidx.navigation:navigation-ui-ktx:$navigationVersion"
             ],
             "smartRefreshLayout": [
-                    "com.scwang.smartrefresh:SmartRefreshLayout:$smartrefreshlayoutVersion",
-                    "com.scwang.smartrefresh:SmartRefreshHeader:$smartrefreshlayoutVersion"
+                    "com.scwang.smartrefresh:SmartRefreshLayout:$smartRefreshLayoutVersion",
+                    "com.scwang.smartrefresh:SmartRefreshHeader:$smartRefreshLayoutVersion"
             ],
-            "okhttp"            : [
-                    "com.squareup.okhttp3:okhttp:$okhttpVersion",
-                    "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
+            "okHttp"            : [
+                    "com.squareup.okhttp3:okhttp:$okHttpVersion",
+                    "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
             ],
             "retrofit"          : [
                     "com.squareup.retrofit2:retrofit:$retrofitVersion",
@@ -139,13 +140,13 @@ ext {
                     "com.github.bumptech.glide:okhttp3-integration:$glideVersion",
                     "jp.wasabeef:glide-transformations:$glideTransformVersion"
             ],
-            "objectbox"         : [
-                    "io.objectbox:objectbox-android:$objectboxVersion",
-                    "io.objectbox:objectbox-kotlin:$objectboxVersion"
+            "objectBox"         : [
+                    "io.objectbox:objectbox-android:$objectBoxVersion",
+                    "io.objectbox:objectbox-kotlin:$objectBoxVersion"
             ],
-            "rxjava"            : [
-                    "io.reactivex.rxjava3:rxjava:$rxjavaVersion",
-                    "io.reactivex.rxjava3:rxandroid:$rxandroidVersion",
+            "rxJava"            : [
+                    "io.reactivex.rxjava3:rxjava:$rxJavaVersion",
+                    "io.reactivex.rxjava3:rxandroid:$rxAndroidVersion",
                     "org.ligboy.retrofit2:converter-fastjson-android:$rxFastJsonConverterVersion"
             ]
     ]

@@ -6,15 +6,16 @@ apply plugin: "kotlin-kapt"
 apply plugin: "androidx.navigation.safeargs.kotlin"
 
 android {
-    compileSdkVersion(compileSdk)
-    buildToolsVersion(buildTool)
+    compileSdkVersion(appCompileSdk)
+    buildToolsVersion(appBuildTool)
     defaultConfig {
-        applicationId(packageName)
-        minSdkVersion(minSdk)
-        targetSdkVersion(compileSdk)
+        applicationId(appPackageName)
+        minSdkVersion(appMinSdk)
+        targetSdkVersion(appCompileSdk)
         versionCode(appVersionCode)
         versionName(appVersionName)
         ndk { abiFilters(ndkLibs) }
+        vectorDrawables.useSupportLibrary = true
         multiDexEnabled = true
     }
     buildTypes {
@@ -62,20 +63,22 @@ dependencies {
     coreLibraryDesugaring(libs["desugar"])
     implementation(libs["kotlin"])
     implementation(libs["core"])
-    implementation(libs["appcompat"])
+    implementation(libs["appCompat"])
     implementation(libs["annotation"])
-    implementation(libs["multidex"])
+    implementation(libs["multiDex"])
+    implementation(libs["fragment"])
     implementation(libs["legacySupport"])
     implementation(libs["preference"])
     implementation(libs["palette"])
-    implementation(libs["percentlayout"])
-    implementation(libs["constraintlayout"])
+    implementation(libs["percentLayout"])
+    implementation(libs["constraintLayout"])
     implementation(libs["material"])
-    implementation(libs["recyclerview"])
-    implementation(libs["flexbox"])
-    implementation(libs["cardview"])
+    implementation(libs["recyclerView"])
+    implementation(libs["flexBox"])
+    implementation(libs["cardView"])
     implementation(libs["lifecycle"])
     implementation(libs["navigation"])
+    implementation(libs["workManager"])
 
     // UI
     implementation(libs["smartRefreshLayout"])
@@ -83,20 +86,20 @@ dependencies {
     implementation(libs["lottie"])
 
     // network
-    implementation(libs["okhttp"])
+    implementation(libs["okHttp"])
     implementation(libs["retrofit"])
     implementation(libs["glide"])
     kapt(libs["glideKapt"])
 
     // database
-    implementation(libs["objectbox"])
-    kapt(libs["objectboxKapt"])
+    implementation(libs["objectBox"])
+    kapt(libs["objectBoxKapt"])
 
     // async
-    implementation(libs["eventbus"])
-    kapt(libs["eventbusKapt"])
+    implementation(libs["eventBus"])
+    kapt(libs["eventBusKapt"])
     implementation(libs["liveDataBus"])
-    implementation(libs["rxjava"])
+    implementation(libs["rxJava"])
 
     // utils
     implementation(libs["fastjson"])
@@ -107,7 +110,7 @@ dependencies {
     implementation(libs["luban"])
 
     // analyze
-    debugImplementation(libs["leakcanary"])
+    debugImplementation(libs["leakCanary"])
 }
 
 tasks.withType(JavaCompile) {
