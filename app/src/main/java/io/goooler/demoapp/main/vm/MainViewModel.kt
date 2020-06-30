@@ -7,39 +7,40 @@ import io.goooler.demoapp.base.BaseViewModel
 import io.goooler.demoapp.base.MutableStringLiveData
 import io.goooler.demoapp.main.bean.RepoListBean
 import io.goooler.demoapp.main.repository.MainRepository
+import io.goooler.demoapp.util.defaultAsync
 import io.goooler.demoapp.util.isNotNullOrEmpty
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.schedulers.Schedulers
-import kotlinx.coroutines.*
+import io.goooler.demoapp.util.subscribeAndObserve
+import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.launch
 
 class MainViewModel(application: Application) : BaseViewModel(application) {
 
     val title = MutableStringLiveData()
 
     fun initData() {
-        requestWithKt()
+        requestWithCr()
     }
 
     /**
      * 协程请求处理
      */
-    private fun requestWithKt() {
-        viewModelScope.launch(Dispatchers.Default) {
+    private fun requestWithCr() {
+        viewModelScope.launch {
             try {
-                val google = async(SupervisorJob()) { MainRepository.getRepoListKt("google") }
-                val microsoft = async(SupervisorJob()) { MainRepository.getRepoListKt("microsoft") }
-                val apple = async(SupervisorJob()) { MainRepository.getRepoListKt("apple") }
-                val facebook = async(SupervisorJob()) { MainRepository.getRepoListKt("facebook") }
-                val twitter = async(SupervisorJob()) { MainRepository.getRepoListKt("twitter") }
+                val google = defaultAsync { MainRepository.getRepoListCr("google") }
+                val microsoft = defaultAsync { MainRepository.getRepoListCr("microsoft") }
+                val apple = defaultAsync { MainRepository.getRepoListCr("apple") }
+                val facebook = defaultAsync { MainRepository.getRepoListCr("facebook") }
+                val twitter = defaultAsync { MainRepository.getRepoListCr("twitter") }
 
                 processList(google, microsoft, apple, facebook, twitter).collect {
-                    title.postValue(it)
+                    title.value = it
                 }
                 MainRepository.storeRepos(google.await())
             } catch (e: Exception) {
-                title.postValue(getString(R.string.request_failed))
+                title.value = getString(R.string.request_failed)
                 showToast(e.message)
             }
         }
@@ -62,8 +63,7 @@ class MainViewModel(application: Application) : BaseViewModel(application) {
      */
     private fun requestWithRx() {
         MainRepository.getRepoListRx()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeAndObserve()
             .filter { it.isNotNullOrEmpty() }
             .map { it.firstOrNull()?.name.orEmpty() }
             .subscribe({
@@ -71,9 +71,6 @@ class MainViewModel(application: Application) : BaseViewModel(application) {
             }, {
                 title.value = getString(R.string.request_failed)
                 showToast(it.message)
-            })
-            .let {
-                addDisposable(it)
-            }
+            }).add()
     }
 }

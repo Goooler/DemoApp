@@ -144,9 +144,10 @@ ext {
                     "io.objectbox:objectbox-android:$objectBoxVersion",
                     "io.objectbox:objectbox-kotlin:$objectBoxVersion"
             ],
-            "rxJava"            : [
+            "rx"            : [
                     "io.reactivex.rxjava3:rxjava:$rxJavaVersion",
                     "io.reactivex.rxjava3:rxandroid:$rxAndroidVersion",
+                    "io.reactivex.rxjava3:rxkotlin:$rxAndroidVersion",
                     "org.ligboy.retrofit2:converter-fastjson-android:$rxFastJsonConverterVersion"
             ]
     ]

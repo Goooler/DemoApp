@@ -99,7 +99,7 @@ dependencies {
     implementation(libs["eventBus"])
     kapt(libs["eventBusKapt"])
     implementation(libs["liveDataBus"])
-    implementation(libs["rxJava"])
+    implementation(libs["rx"])
 
     // utils
     implementation(libs["fastjson"])

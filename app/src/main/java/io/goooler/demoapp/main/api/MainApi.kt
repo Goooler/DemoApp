@@ -15,5 +15,5 @@ interface MainApi {
     fun getRepoListRx(@Path("user") user: String): Single<List<RepoListBean>>
 
     @GET("users/{user}/repos")
-    suspend fun getRepoListKt(@Path("user") user: String): List<RepoListBean>
+    suspend fun getRepoListCr(@Path("user") user: String): List<RepoListBean>
 }

@@ -36,8 +36,8 @@ object MainRepository {
         return api.getRepoListRx(user)
     }
 
-    suspend fun getRepoListKt(user: String = USER): List<RepoListBean> {
-        return api.getRepoListKt(user)
+    suspend fun getRepoListCr(user: String = USER): List<RepoListBean> {
+        return api.getRepoListCr(user)
     }
 
     /**

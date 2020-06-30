@@ -16,8 +16,16 @@ import io.goooler.demoapp.model.Constants.IMAGE_URL_PREFIX
 import io.goooler.demoapp.model.Constants.PHONE_FIRST_CHAR
 import io.goooler.demoapp.model.Constants.PHONE_LENGTH
 import io.goooler.demoapp.util.device.DimensionUtil
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Single
+import io.reactivex.rxjava3.schedulers.Schedulers
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.CoroutineStart
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.async
 import java.math.BigDecimal
 import java.util.*
+import kotlin.coroutines.CoroutineContext
 import kotlin.math.absoluteValue
 
 //---------------------Any-------------------------------//
@@ -488,6 +496,25 @@ inline fun <reified T> T.putIntoBox() {
 
 inline fun <reified T> Collection<T>.putIntoBox() {
     return ObjectBox.put(this)
+}
+
+
+//---------------------Coroutine-------------------------------//
+
+
+fun <T> CoroutineScope.defaultAsync(
+    context: CoroutineContext = SupervisorJob(),
+    start: CoroutineStart = CoroutineStart.DEFAULT,
+    block: suspend CoroutineScope.() -> T
+) = async(context, start, block)
+
+
+//---------------------Rx-------------------------------//
+
+
+fun <T> Single<T>.subscribeAndObserve(): Single<T> {
+    return this.subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
 }
 
 

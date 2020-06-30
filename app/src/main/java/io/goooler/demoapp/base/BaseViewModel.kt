@@ -19,20 +19,20 @@ import io.reactivex.rxjava3.disposables.Disposable
 open class BaseViewModel(application: Application) : AndroidViewModel(application),
     DefaultLifecycleObserver {
 
-    private val compositeDisposable = CompositeDisposable()
     val toast = MutableStringLiveData()
 
-    fun addDisposable(disposable: Disposable) {
-        compositeDisposable.add(disposable)
-    }
+    private val compositeDisposable = CompositeDisposable()
 
     override fun onDestroy(owner: LifecycleOwner) {
         compositeDisposable.clear()
     }
 
-    protected fun checkStatusAndEntry(response: HttpResponse<*>): Boolean {
-        return response.status && response.entry != null
+    protected fun Disposable.add() {
+        compositeDisposable.add(this)
     }
+
+    protected fun checkStatusAndEntry(response: HttpResponse<*>) =
+        response.status && response.entry != null
 
     protected fun checkStatusAndEntryWithToast(response: HttpResponse<*>): Boolean {
         return checkStatusAndEntry(response).also {
