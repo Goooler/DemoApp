@@ -59,7 +59,7 @@ ext {
     kotlinVersion = "1.3.72"
     coroutinesVersion = "1.3.7"
     desugarVersion = "1.0.9"
-    objectBoxVersion = "2.5.1"
+    objectBoxVersion = "2.6.0"
 
     libs = [
             "gradlePlugin"      : "com.android.tools.build:gradle:$gradleVersion",

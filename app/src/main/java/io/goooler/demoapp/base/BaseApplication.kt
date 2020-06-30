@@ -5,6 +5,7 @@ import android.content.Context
 import androidx.multidex.MultiDexApplication
 import com.alibaba.android.arouter.launcher.ARouter
 import io.goooler.demoapp.util.CrashHandler
+import io.goooler.demoapp.util.ObjectBox
 import io.goooler.demoapp.util.debugRun
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -29,6 +30,7 @@ class BaseApplication : MultiDexApplication() {
         context = applicationContext
         CrashHandler.init()
         ARouter.init(this)
+        ObjectBox.init(this)
         initLater()
     }
 
@@ -48,5 +50,6 @@ class BaseApplication : MultiDexApplication() {
          */
         @SuppressLint("StaticFieldLeak")
         lateinit var context: Context
+            private set
     }
 }

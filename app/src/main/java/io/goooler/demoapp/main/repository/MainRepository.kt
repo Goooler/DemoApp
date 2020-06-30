@@ -3,6 +3,7 @@ package io.goooler.demoapp.main.repository
 import io.goooler.demoapp.api.RetrofitHelper
 import io.goooler.demoapp.main.api.MainApi
 import io.goooler.demoapp.main.bean.RepoListBean
+import io.goooler.demoapp.util.putIntoBox
 import io.reactivex.rxjava3.core.Single
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -37,5 +38,14 @@ object MainRepository {
 
     suspend fun getRepoListKt(user: String = USER): List<RepoListBean> {
         return api.getRepoListKt(user)
+    }
+
+    /**
+     * 数据库存储
+     */
+    suspend fun storeRepos(list: List<RepoListBean>) {
+        withContext(Dispatchers.IO) {
+            list.putIntoBox()
+        }
     }
 }

@@ -479,6 +479,18 @@ fun <T> List<T>.thirdOrNull(): T? {
 }
 
 
+//---------------------Database-------------------------------//
+
+
+inline fun <reified T> T.putIntoBox() {
+    ObjectBox.put(this)
+}
+
+inline fun <reified T> List<T>.putIntoBox() {
+    return ObjectBox.put(this)
+}
+
+
 //---------------------HigherOrderFunc-------------------------------//
 
 

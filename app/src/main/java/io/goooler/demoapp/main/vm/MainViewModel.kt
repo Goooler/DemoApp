@@ -37,6 +37,7 @@ class MainViewModel(application: Application) : BaseViewModel(application) {
                 processList(google, microsoft, apple, facebook, twitter).collect {
                     title.postValue(it)
                 }
+                MainRepository.storeRepos(google.await())
             } catch (e: Exception) {
                 title.postValue(getString(R.string.request_failed))
                 showToast(e.message)
@@ -47,9 +48,9 @@ class MainViewModel(application: Application) : BaseViewModel(application) {
     /**
      * flow 处理事件
      */
-    private fun processList(vararg list: Deferred<List<RepoListBean>>) = flow {
+    private fun processList(vararg lists: Deferred<List<RepoListBean>>) = flow {
         StringBuilder().run {
-            list.forEach {
+            lists.forEach {
                 append(it.await().firstOrNull()?.name).append("\n")
             }
             emit(toString())
