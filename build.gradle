@@ -1,3 +1,4 @@
+import java.nio.charset.StandardCharsets
 import java.util.concurrent.TimeUnit
 
 buildscript {
@@ -10,7 +11,6 @@ buildscript {
     dependencies {
         classpath(libs["gradlePlugin"])
         classpath(libs["kotlinPlugin"])
-        classpath(libs["navigationPlugin"])
     }
 
     configurations.all {
@@ -25,6 +25,17 @@ allprojects {
         maven { url(aliyunMaven) }
         maven { url(jitpackMaven) }
     }
+}
+
+/**
+ * versionCode 限长 10 位
+ */
+static String buildTime() {
+    return new Date().format("yyMMddHHmm")
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = StandardCharsets.UTF_8
 }
 
 task clean(type: Delete) {

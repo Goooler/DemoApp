@@ -1,9 +1,6 @@
-import java.nio.charset.StandardCharsets
-
 apply plugin: "com.android.application"
 apply plugin: "kotlin-android"
 apply plugin: "kotlin-kapt"
-apply plugin: "androidx.navigation.safeargs.kotlin"
 
 android {
     compileSdkVersion(appTargetSdk)
@@ -115,13 +112,4 @@ dependencies {
 
     // analyze
     debugImplementation(libs["leakCanary"])
-}
-
-def static buildTime() {
-    def date = new Date()
-    return date.format("yyyyMMddHH")
-}
-
-tasks.withType(JavaCompile) {
-    options.encoding = StandardCharsets.UTF_8
 }

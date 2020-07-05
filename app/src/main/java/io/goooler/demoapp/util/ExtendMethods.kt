@@ -41,8 +41,8 @@ val isDebug: Boolean
 val packageName: String
     get() = BuildConfig.APPLICATION_ID
 
-val versionCode: Long
-    get() = BuildConfig.VERSION_CODE.toLong()
+val versionCode: Int
+    get() = BuildConfig.VERSION_CODE
 
 val currentTimeMillis: Long
     get() = System.currentTimeMillis()

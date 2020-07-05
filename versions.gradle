@@ -65,7 +65,6 @@ ext {
     libs = [
             "gradlePlugin"      : "com.android.tools.build:gradle:$gradleVersion",
             "kotlinPlugin"      : "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion",
-            "navigationPlugin"  : "androidx.navigation:navigation-safe-args-gradle-plugin:$navigationVersion",
 
             "core"              : "androidx.core:core-ktx:$coreVersion",
             "desugar"           : "com.android.tools:desugar_jdk_libs:$desugarVersion",
@@ -117,10 +116,10 @@ ext {
                     "androidx.lifecycle:lifecycle-common-java8:$lifecycleVersion"
             ],
             "navigation"        : [
-                    "androidx.navigation:navigation-common-ktx:$navigationVersion",
+                    "androidx.navigation:navigation-ui-ktx:$navigationVersion",
                     "androidx.navigation:navigation-fragment-ktx:$navigationVersion",
-                    "androidx.navigation:navigation-runtime-ktx:$navigationVersion",
-                    "androidx.navigation:navigation-ui-ktx:$navigationVersion"
+                    "androidx.navigation:navigation-common-ktx:$navigationVersion",
+                    "androidx.navigation:navigation-runtime-ktx:$navigationVersion"
             ],
             "smartRefreshLayout": [
                     "com.scwang.smart:refresh-layout-kernel:$smartRefreshLayoutVersion",
