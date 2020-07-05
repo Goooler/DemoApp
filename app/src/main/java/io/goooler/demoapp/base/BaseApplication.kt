@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import androidx.multidex.MultiDexApplication
 import com.alibaba.android.arouter.launcher.ARouter
+import com.tencent.mmkv.MMKV
 import io.goooler.demoapp.util.CrashHandler
 import io.goooler.demoapp.util.ObjectBox
 import io.goooler.demoapp.util.debugRun
@@ -31,6 +32,7 @@ class BaseApplication : MultiDexApplication() {
         CrashHandler.init()
         ARouter.init(this)
         ObjectBox.init(this)
+        MMKV.initialize(this)
         initLater()
     }
 

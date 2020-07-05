@@ -1,6 +1,7 @@
 package io.goooler.demoapp.base
 
 import androidx.lifecycle.MutableLiveData
+import io.goooler.demoapp.util.MkUtil
 import io.goooler.demoapp.util.SpUtil
 
 /**
@@ -20,3 +21,5 @@ typealias MutableFloatLiveData = MutableLiveData<Float>
 typealias MutableStringLiveData = MutableLiveData<String>
 
 typealias PrefUtil = SpUtil
+
+typealias MMKVUtil = MkUtil

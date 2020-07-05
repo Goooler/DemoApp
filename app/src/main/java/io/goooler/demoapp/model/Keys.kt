@@ -12,3 +12,6 @@ annotation class SpKeys {
         const val SP_FIRST_RUN = "firstRun"
     }
 }
+
+@StringDef()
+annotation class MkKeys

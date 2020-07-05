@@ -13,24 +13,44 @@ object SpUtil {
 
     private const val SP_CONFIG = "sp_config"
 
-    /**
-     * 判断应用是否第一次启动
-     */
-    val isFirstRun = getSp().getBoolean(SpKeys.SP_FIRST_RUN, true)
-
-    /**
-     * 设置应用是否第一次启动的状态
-     */
-    fun setFirstRunState(state: Boolean = false) {
-        putBoolean(SpKeys.SP_FIRST_RUN, state)
+    fun getBoolean(@SpKeys key: String, default: Boolean = false): Boolean {
+        return getSp().getBoolean(key, default)
     }
 
-    fun getBoolean(@SpKeys spKey: String, default: Boolean = false): Boolean {
-        return getSp().getBoolean(spKey, default)
+    fun putBoolean(@SpKeys key: String, value: Boolean = true) {
+        getSpEditor {
+            putBoolean(key, value)
+        }
     }
 
-    fun putBoolean(@SpKeys spKey: String, value: Boolean = true) {
-        getSp().edit().putBoolean(spKey, value).apply()
+    fun getLong(@SpKeys key: String, default: Long = 0): Long {
+        return getSp().getLong(key, default)
+    }
+
+    fun putLong(@SpKeys key: String, value: Long) {
+        getSpEditor {
+            putLong(key, value)
+        }
+    }
+
+    fun getFloat(@SpKeys key: String, default: Float = 0f): Float {
+        return getSp().getFloat(key, default)
+    }
+
+    fun putFloat(@SpKeys key: String, value: Float) {
+        getSpEditor {
+            putFloat(key, value)
+        }
+    }
+
+    fun getString(@SpKeys key: String, default: String? = null): String? {
+        return getSp().getString(key, default)
+    }
+
+    fun putString(@SpKeys key: String, value: String) {
+        getSpEditor {
+            putString(key, value)
+        }
     }
 
     /**
@@ -40,5 +60,12 @@ object SpUtil {
      */
     private fun getSp(spName: String = SP_CONFIG): SharedPreferences {
         return BaseApplication.context.getSharedPreferences(spName, MODE_PRIVATE)
+    }
+
+    private inline fun getSpEditor(
+        spName: String = SP_CONFIG,
+        body: SharedPreferences.Editor.() -> SharedPreferences.Editor
+    ) {
+        BaseApplication.context.getSharedPreferences(spName, MODE_PRIVATE).edit().body().apply()
     }
 }
