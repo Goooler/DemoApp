@@ -6,13 +6,13 @@ apply plugin: "kotlin-kapt"
 apply plugin: "androidx.navigation.safeargs.kotlin"
 
 android {
-    compileSdkVersion(appCompileSdk)
+    compileSdkVersion(appTargetSdk)
     buildToolsVersion(appBuildTool)
     defaultConfig {
         applicationId(appPackageName)
         minSdkVersion(appMinSdk)
-        targetSdkVersion(appCompileSdk)
-        versionCode(appVersionCode)
+        targetSdkVersion(appTargetSdk)
+        versionCode(buildTime().toInteger())
         versionName(appVersionName)
         ndk { abiFilters(ndkLibs) }
         vectorDrawables.useSupportLibrary = true
@@ -28,8 +28,15 @@ android {
         debug {
             jniDebuggable = true
             renderscriptDebuggable = true
-            ext.enableCrashlytics = false
+            crunchPngs = false
             ext.alwaysUpdateBuildId = false
+        }
+    }
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            if (output.outputFile != null && output.outputFile.name.endsWith('.apk')) {
+                outputFileName = "Demo_${buildTime()}.apk"
+            }
         }
     }
     dependenciesInfo {
@@ -59,7 +66,7 @@ kapt {
 
 dependencies {
     // official
-    implementation(fileTree(dir: "libs", include: ["*.jar", "*.aar"]))
+    implementation(fileTree(dir: "libs", include: libTypes))
     coreLibraryDesugaring(libs["desugar"])
     implementation(libs["kotlin"])
     implementation(libs["core"])
@@ -70,15 +77,12 @@ dependencies {
     implementation(libs["legacySupport"])
     implementation(libs["preference"])
     implementation(libs["palette"])
-    implementation(libs["percentLayout"])
     implementation(libs["constraintLayout"])
     implementation(libs["material"])
     implementation(libs["recyclerView"])
-    implementation(libs["flexBox"])
     implementation(libs["cardView"])
     implementation(libs["lifecycle"])
     implementation(libs["navigation"])
-    implementation(libs["workManager"])
 
     // UI
     implementation(libs["smartRefreshLayout"])
@@ -111,6 +115,11 @@ dependencies {
 
     // analyze
     debugImplementation(libs["leakCanary"])
+}
+
+def static buildTime() {
+    def date = new Date()
+    return date.format("yyyyMMddHH")
 }
 
 tasks.withType(JavaCompile) {

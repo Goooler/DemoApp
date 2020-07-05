@@ -100,10 +100,10 @@ abstract class BaseActivity : AppCompatActivity() {
     }
 
     protected fun showToast(@StringRes textId: Int) {
-        ToastUtil.showToast(textId)
+        ToastUtil.showToastInMainThread(this, getString(textId))
     }
 
     protected fun showToast(text: String) {
-        ToastUtil.showToast(text)
+        ToastUtil.showToastInMainThread(this, text)
     }
 }

@@ -82,11 +82,11 @@ abstract class BaseFragment : Fragment() {
     }
 
     protected fun showToast(@StringRes textId: Int) {
-        ToastUtil.showToast(textId)
+        ToastUtil.showToastInMainThread(requireContext(), getString(textId))
     }
 
     protected fun showToast(text: String) {
-        ToastUtil.showToast(text)
+        ToastUtil.showToastInMainThread(requireContext(), text)
     }
 
     private fun observeVm(vm: BaseViewModel) {

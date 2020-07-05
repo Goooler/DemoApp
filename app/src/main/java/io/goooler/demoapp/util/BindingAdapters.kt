@@ -12,104 +12,66 @@ import android.view.ViewOutlineProvider
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.ColorInt
+import androidx.core.view.forEach
 import androidx.databinding.BindingAdapter
-import com.scwang.smartrefresh.layout.SmartRefreshLayout
-import com.scwang.smartrefresh.layout.footer.ClassicsFooter
-import com.scwang.smartrefresh.layout.header.ClassicsHeader
-import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener
-import com.scwang.smartrefresh.layout.listener.OnRefreshListener
-import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener
+import com.scwang.smart.refresh.footer.ClassicsFooter
+import com.scwang.smart.refresh.header.ClassicsHeader
+import com.scwang.smart.refresh.layout.SmartRefreshLayout
+import com.scwang.smart.refresh.layout.listener.OnLoadMoreListener
+import com.scwang.smart.refresh.layout.listener.OnRefreshListener
+import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 import io.goooler.demoapp.util.image.ImageLoader
 import java.io.File
 
 //------------------------View --------------------------//
 
 
-@BindingAdapter(value = ["binding_isGone"], requireAll = true)
+@BindingAdapter("binding_isGone")
 fun View.bindingIsGone(isGone: Boolean) {
     visibility = if (isGone) View.GONE else View.VISIBLE
 }
 
-@BindingAdapter(value = ["binding_isVisible"], requireAll = true)
+@BindingAdapter("binding_isVisible")
 fun View.bindingIsVisible(show: Boolean) {
     visibility = if (show) View.VISIBLE else View.INVISIBLE
 }
 
-@BindingAdapter(value = ["binding_isSelected"], requireAll = true)
+@BindingAdapter("binding_isSelected")
 fun View.bindingIsSelect(select: Boolean) {
     isSelected = select
 }
 
-@BindingAdapter(value = ["binding_rect_radius"], requireAll = true)
+@BindingAdapter("binding_rect_radius")
 fun View.bindingRectCornerRadius(radius: Float) {
-    val p = object : ViewOutlineProvider() {
+    outlineProvider = object : ViewOutlineProvider() {
         override fun getOutline(v: View?, outline: Outline?) {
             if (v == null || outline == null) return
             outline.setRoundRect(0, 0, v.width, v.height, radius)
         }
     }
-    outlineProvider = p
     clipToOutline = true
 }
 
-@BindingAdapter(value = ["binding_width", "binding_height"], requireAll = true)
+@BindingAdapter("binding_width", "binding_height")
 fun View.bindingWidthAndHeight(width: Float, height: Float) {
-    val p = layoutParams
-    p.width = width.toInt()
-    p.height = height.toInt()
+    layoutParams.width = width.toInt()
+    layoutParams.height = height.toInt()
     requestLayout()
 }
 
-@BindingAdapter(value = ["binding_width"], requireAll = true)
+@BindingAdapter("binding_width")
 fun View.bindingWidth(width: Float) {
-    val p = layoutParams
-    p.width = width.toInt()
+    layoutParams.width = width.toInt()
     requestLayout()
 }
 
-@BindingAdapter(value = ["binding_height"], requireAll = true)
+@BindingAdapter("binding_height")
 fun View.bindingHeight(height: Float) {
-    val p = layoutParams
-    p.height = height.toInt()
+    layoutParams.height = height.toInt()
     requestLayout()
 }
 
-@BindingAdapter(value = ["binding_padding"], requireAll = true)
-fun View.bindingPadding(padding: Float) {
-    setPadding(padding.toInt(), padding.toInt(), padding.toInt(), padding.toInt())
-}
-
-@BindingAdapter(value = ["binding_paddingTop"], requireAll = true)
-fun View.bindingPaddingTop(topPadding: Float) {
-    setPadding(paddingLeft, topPadding.toInt(), paddingRight, paddingBottom)
-}
-
-@BindingAdapter(value = ["binding_paddingBottom"], requireAll = true)
-fun View.bindingPaddingBottom(bottomPadding: Float) {
-    setPadding(paddingLeft, paddingTop, paddingRight, bottomPadding.toInt())
-}
-
-@BindingAdapter(value = ["binding_paddingLeft"], requireAll = true)
-fun View.bindingPaddingLeft(leftPadding: Float) {
-    setPadding(leftPadding.toInt(), paddingTop, paddingRight, paddingBottom)
-}
-
-@BindingAdapter(value = ["binding_paddingRight"], requireAll = true)
-fun View.bindingPaddingRight(rightPadding: Float) {
-    setPadding(paddingLeft, paddingTop, rightPadding.toInt(), paddingBottom)
-}
-
-@BindingAdapter(value = ["binding_paddingStart"], requireAll = true)
-fun View.bindingPaddingStart(startPadding: Float) {
-    setPaddingRelative(startPadding.toInt(), paddingTop, paddingEnd, paddingBottom)
-}
-
-@BindingAdapter(value = ["binding_paddingEnd"], requireAll = true)
-fun View.bindingPaddingEnd(endPadding: Float) {
-    setPaddingRelative(paddingStart, paddingTop, endPadding.toInt(), paddingBottom)
-}
-
-@BindingAdapter(value = ["binding_marginTop"], requireAll = true)
+@BindingAdapter("binding_marginTop")
 fun View.bindingMarginTop(marginTop: Float) {
     if (layoutParams is ViewGroup.MarginLayoutParams) {
         val p = layoutParams as ViewGroup.MarginLayoutParams
@@ -118,7 +80,7 @@ fun View.bindingMarginTop(marginTop: Float) {
     }
 }
 
-@BindingAdapter(value = ["binding_marginBottom"], requireAll = true)
+@BindingAdapter("binding_marginBottom")
 fun View.bindingMarginBottom(marginBottom: Float) {
     if (layoutParams is ViewGroup.MarginLayoutParams) {
         val p = layoutParams as ViewGroup.MarginLayoutParams
@@ -127,20 +89,20 @@ fun View.bindingMarginBottom(marginBottom: Float) {
     }
 }
 
-@BindingAdapter(value = ["binding_marginLeft"], requireAll = true)
-fun View.bindingMarginLeft(marginLeft: Float) {
+@BindingAdapter("binding_marginStart")
+fun View.bindingMarginStart(marginLeft: Float) {
     if (layoutParams is ViewGroup.MarginLayoutParams) {
         val p = layoutParams as ViewGroup.MarginLayoutParams
-        p.leftMargin = marginLeft.toInt()
+        p.marginStart = marginLeft.toInt()
         layoutParams = p
     }
 }
 
-@BindingAdapter(value = ["binding_marginRight"], requireAll = true)
-fun View.bindingMarginRight(marginRight: Float) {
+@BindingAdapter("binding_marginEnd")
+fun View.bindingMarginEnd(marginRight: Float) {
     if (layoutParams is ViewGroup.MarginLayoutParams) {
         val p = layoutParams as ViewGroup.MarginLayoutParams
-        p.rightMargin = marginRight.toInt()
+        p.marginEnd = marginRight.toInt()
         layoutParams = p
     }
 }
@@ -150,8 +112,10 @@ fun View.bindingMarginRight(marginRight: Float) {
 
 
 @BindingAdapter(
-    value = ["binding_bg_startColor", "binding_bg_endColor",
-        "binding_bg_angle", "binding_bg_radius"], requireAll = true
+    "binding_bg_startColor",
+    "binding_bg_endColor",
+    "binding_bg_angle",
+    "binding_bg_radius"
 )
 fun View.bindingBgShapeGradual(
     @ColorInt startColor: Int,
@@ -167,9 +131,12 @@ fun View.bindingBgShapeGradual(
 }
 
 @BindingAdapter(
-    value = ["binding_bg_startColor", "binding_bg_endColor",
-        "binding_bg_angle", "binding_bg_stroke", "binding_bg_strokeColor", "binding_bg_radius"],
-    requireAll = true
+    "binding_bg_startColor",
+    "binding_bg_endColor",
+    "binding_bg_angle",
+    "binding_bg_stroke",
+    "binding_bg_strokeColor",
+    "binding_bg_radius"
 )
 fun View.bindingBgShapeGradual(
     @ColorInt startColor: Int,
@@ -189,12 +156,18 @@ fun View.bindingBgShapeGradual(
 }
 
 @BindingAdapter(
-    value = ["binding_bg_startColor", "binding_bg_centerColor", "binding_bg_endColor",
-        "binding_bg_angle", "binding_bg_radius"], requireAll = true
+    "binding_bg_startColor",
+    "binding_bg_centerColor",
+    "binding_bg_endColor",
+    "binding_bg_angle",
+    "binding_bg_radius"
 )
 fun View.bindingBgShapeGradual(
-    @ColorInt startColor: Int, @ColorInt centerColor: Int, @ColorInt endColor: Int,
-    angle: Int, radius: Float
+    @ColorInt startColor: Int,
+    @ColorInt centerColor: Int,
+    @ColorInt endColor: Int,
+    angle: Int,
+    radius: Float
 ) {
     setBgShapeGradual(
         gradualColors = intArrayOf(startColor, centerColor, endColor),
@@ -203,8 +176,15 @@ fun View.bindingBgShapeGradual(
     )
 }
 
+/**
+ * 这个比较特殊，requireAll = false
+ */
 @BindingAdapter(
-    value = ["binding_bg_solidColor", "binding_bg_topLeftRadius", "binding_bg_topRightRadius", "binding_bg_bottomLeftRadius", "binding_bg_bottomRightRadius"],
+    value = ["binding_bg_solidColor",
+        "binding_bg_topLeftRadius",
+        "binding_bg_topRightRadius",
+        "binding_bg_bottomLeftRadius",
+        "binding_bg_bottomRightRadius"],
     requireAll = false
 )
 fun View.bindingBgShapeCorners(
@@ -218,16 +198,23 @@ fun View.bindingBgShapeCorners(
 }
 
 @BindingAdapter(
-    value = ["binding_bg_startColor", "binding_bg_endColor", "binding_bg_angle"],
-    requireAll = true
+    "binding_bg_startColor",
+    "binding_bg_endColor",
+    "binding_bg_angle"
 )
-fun View.bindingBgShapeGradual(@ColorInt startColor: Int, @ColorInt endColor: Int, angle: Int) {
+fun View.bindingBgShapeGradual(
+    @ColorInt startColor: Int,
+    @ColorInt endColor: Int,
+    angle: Int
+) {
     setBgShapeGradual(gradualColors = intArrayOf(startColor, endColor), angle = angle)
 }
 
 @BindingAdapter(
-    value = ["binding_bg_startColor", "binding_bg_centerColor", "binding_bg_endColor", "binding_bg_angle"],
-    requireAll = true
+    "binding_bg_startColor",
+    "binding_bg_centerColor",
+    "binding_bg_endColor",
+    "binding_bg_angle"
 )
 fun View.bindingBgShapeGradual(
     @ColorInt startColor: Int,
@@ -239,8 +226,10 @@ fun View.bindingBgShapeGradual(
 }
 
 @BindingAdapter(
-    value = ["binding_bg_stroke", "binding_bg_strokeColor", "binding_bg_solidColor", "binding_bg_radius"],
-    requireAll = true
+    "binding_bg_stroke",
+    "binding_bg_strokeColor",
+    "binding_bg_solidColor",
+    "binding_bg_radius"
 )
 fun View.bindingBgShapeStroke(
     stroke: Float,
@@ -256,16 +245,27 @@ fun View.bindingBgShapeStroke(
     )
 }
 
-@BindingAdapter(value = ["binding_bg_solidColor", "binding_bg_radius"], requireAll = true)
-fun View.bindingBgShape(@ColorInt solidColor: Int, radius: Float) {
+@BindingAdapter(
+    "binding_bg_solidColor",
+    "binding_bg_radius"
+)
+fun View.bindingBgShape(
+    @ColorInt solidColor: Int,
+    radius: Float
+) {
     setBgShapeGradual(solidColor = solidColor, radius = radius)
 }
 
 @BindingAdapter(
-    value = ["binding_bg_stroke", "binding_bg_strokeColor",
-        "binding_bg_solidOvalColor"], requireAll = true
+    "binding_bg_stroke",
+    "binding_bg_strokeColor",
+    "binding_bg_solidOvalColor"
 )
-fun View.bindingBgShapeOvalStroke(stroke: Float, @ColorInt strokeColor: Int, solidOvalColor: Int) {
+fun View.bindingBgShapeOvalStroke(
+    stroke: Float,
+    @ColorInt strokeColor: Int,
+    @ColorInt solidOvalColor: Int
+) {
     setBgShapeGradual(
         shapeType = GradientDrawable.OVAL,
         strokeColor = strokeColor,
@@ -274,7 +274,7 @@ fun View.bindingBgShapeOvalStroke(stroke: Float, @ColorInt strokeColor: Int, sol
     )
 }
 
-@BindingAdapter(value = ["binding_bg_solidOvalColor"], requireAll = true)
+@BindingAdapter("binding_bg_solidOvalColor")
 fun View.bindingBgShapeOval(solidOvalColor: Int) {
     setBgShapeGradual(shapeType = GradientDrawable.OVAL, solidColor = solidOvalColor)
 }
@@ -293,56 +293,94 @@ fun ImageView.bindingCircleImageUrl(url: String?) {
     ImageLoader.loadCircleCropOss(this, url)
 }
 
-@BindingAdapter(value = ["binding_src_url", "binding_src_placeholder"], requireAll = true)
-fun ImageView.bindingImageUrl(url: String?, placeholder: Drawable?) {
+@BindingAdapter(
+    "binding_src_url",
+    "binding_src_placeholder"
+)
+fun ImageView.bindingImageUrl(
+    url: String?,
+    placeholder: Drawable?
+) {
     ImageLoader.loadOss(this, url, placeholder)
 }
 
 @BindingAdapter(
-    value = ["binding_src_url", "binding_src_placeholder", "binding_src_error"],
-    requireAll = true
+    "binding_src_url",
+    "binding_src_placeholder",
+    "binding_src_error"
 )
-fun ImageView.bindingImageUrl(url: String?, placeholder: Drawable?, error: Drawable?) {
+fun ImageView.bindingImageUrl(
+    url: String?,
+    placeholder: Drawable?,
+    error: Drawable?
+) {
     ImageLoader.loadOss(this, url, placeholder, error)
 }
 
-@BindingAdapter(value = ["binding_src_url_circle", "binding_src_placeholder"], requireAll = true)
-fun ImageView.bindingCircleImageUrl(url: String?, drawable: Drawable?) {
+@BindingAdapter(
+    "binding_src_url_circle",
+    "binding_src_placeholder"
+)
+fun ImageView.bindingCircleImageUrl(
+    url: String?,
+    drawable: Drawable?
+) {
     ImageLoader.loadCircleCropOss(this, url, drawable)
 }
 
 @BindingAdapter(
-    value = ["binding_src_url_center_crop", "binding_src_placeholder"],
-    requireAll = true
+    "binding_src_url_center_crop",
+    "binding_src_placeholder"
 )
-fun ImageView.bindingCenterCrop(url: String?, drawable: Drawable?) {
+fun ImageView.bindingCenterCrop(
+    url: String?,
+    drawable: Drawable?
+) {
     ImageLoader.loadCenterCropOss(this, url, drawable)
 }
 
 @BindingAdapter(
-    value = ["binding_src_url_center_crop", "binding_src_placeholder", "binding_src_error"],
-    requireAll = true
+    "binding_src_url_center_crop",
+    "binding_src_placeholder",
+    "binding_src_error"
 )
-fun ImageView.bindingCenterCrop(url: String?, drawable: Drawable?, error: Drawable?) {
+fun ImageView.bindingCenterCrop(
+    url: String?,
+    drawable: Drawable?,
+    error: Drawable?
+) {
     ImageLoader.loadCenterCropOss(this, url, drawable, error)
 }
 
-@BindingAdapter(value = ["binding_src_url", "binding_src_cornerRadius"], requireAll = true)
-fun ImageView.bindingRoundedCorner(url: String?, radius: Float) {
+@BindingAdapter(
+    "binding_src_url",
+    "binding_src_cornerRadius"
+)
+fun ImageView.bindingRoundedCorner(
+    url: String?,
+    radius: Float
+) {
     ImageLoader.loadRoundedCornerOss(this, url, radius.toInt())
 }
 
 @BindingAdapter(
-    value = ["binding_src_url", "binding_src_cornerRadius", "binding_src_placeholder"],
-    requireAll = true
+    "binding_src_url",
+    "binding_src_cornerRadius",
+    "binding_src_placeholder"
 )
-fun ImageView.bindingRoundedCorner(url: String?, radius: Float, drawable: Drawable?) {
+fun ImageView.bindingRoundedCorner(
+    url: String?,
+    radius: Float,
+    drawable: Drawable?
+) {
     ImageLoader.loadRoundedCornerOss(this, url, radius.toInt(), drawable)
 }
 
 @BindingAdapter(
-    value = ["binding_src_url", "binding_src_cornerRadius", "binding_src_placeholder", "binding_src_error"],
-    requireAll = true
+    "binding_src_url",
+    "binding_src_cornerRadius",
+    "binding_src_placeholder",
+    "binding_src_error"
 )
 fun ImageView.bindingRoundedCorner(
     url: String?,
@@ -354,30 +392,42 @@ fun ImageView.bindingRoundedCorner(
 }
 
 @BindingAdapter(
-    value = ["binding_src_url_center_crop", "binding_src_cornerRadius"],
-    requireAll = true
+    "binding_src_url_center_crop",
+    "binding_src_cornerRadius"
 )
-fun ImageView.setRoundedCornerCenterCrop(url: String?, radius: Float) {
+fun ImageView.setRoundedCornerCenterCrop(
+    url: String?,
+    radius: Float
+) {
     ImageLoader.loadCenterCropRoundedCornerOss(this, url, radius.toInt())
 }
 
 @BindingAdapter(
-    value = ["binding_src_url_center_crop", "binding_src_cornerRadius",
-        "binding_src_placeholder"], requireAll = true
+    "binding_src_url_center_crop",
+    "binding_src_cornerRadius",
+    "binding_src_placeholder"
 )
-fun ImageView.bindingRoundedCornerCenterCrop(url: String?, radius: Float, drawable: Drawable?) {
+fun ImageView.bindingRoundedCornerCenterCrop(
+    url: String?,
+    radius: Float,
+    drawable: Drawable?
+) {
     ImageLoader.loadCenterCropRoundedCornerOss(this, url, radius.toInt(), drawable)
 }
 
 @BindingAdapter(
-    value = ["binding_src_url_fixWidth", "binding_src_baseWidth", "binding_src_baseHeight"],
-    requireAll = true
+    "binding_src_url_fixWidth",
+    "binding_src_baseWidth",
+    "binding_src_baseHeight"
 )
-fun ImageView.bindingImageUrlFixWidth(url: String?, baseWidth: Float, baseHeight: Float) {
+fun ImageView.bindingImageUrlFixWidth(
+    url: String?,
+    baseWidth: Float,
+    baseHeight: Float
+) {
     val size = url?.getSizeByLoadUrl(baseWidth.toInt(), baseHeight.toInt()) ?: ArrayList()
-    val p = layoutParams
-    p.height = baseHeight.toInt()
-    p.width = if (size[0] > 0 && size[1] > 0) {
+    layoutParams.height = baseHeight.toInt()
+    layoutParams.width = if (size[0] > 0 && size[1] > 0) {
         (baseHeight / size[1] * size[0]).toInt()
     } else {
         baseWidth.toInt()
@@ -387,14 +437,18 @@ fun ImageView.bindingImageUrlFixWidth(url: String?, baseWidth: Float, baseHeight
 }
 
 @BindingAdapter(
-    value = ["binding_src_url_fixHeight", "binding_src_baseWidth", "binding_src_baseHeight"],
-    requireAll = true
+    "binding_src_url_fixHeight",
+    "binding_src_baseWidth",
+    "binding_src_baseHeight"
 )
-fun ImageView.bindingImageUrlFixHeight(url: String?, baseWidth: Float, baseHeight: Float) {
+fun ImageView.bindingImageUrlFixHeight(
+    url: String?,
+    baseWidth: Float,
+    baseHeight: Float
+) {
     val size = url?.getSizeByLoadUrl(baseWidth.toInt(), baseHeight.toInt()) ?: ArrayList()
-    val p = layoutParams
-    p.width = baseWidth.toInt()
-    p.height = if (size[0] > 0 && size[1] > 0) {
+    layoutParams.width = baseWidth.toInt()
+    layoutParams.height = if (size[0] > 0 && size[1] > 0) {
         (baseWidth / size[0] * size[1]).toInt()
     } else {
         baseHeight.toInt()
@@ -404,19 +458,13 @@ fun ImageView.bindingImageUrlFixHeight(url: String?, baseWidth: Float, baseHeigh
 }
 
 @BindingAdapter("binding_src_file")
-fun ImageView.bindingFileToImage(file: File?) {
-    if (file != null) {
-        val uri = Uri.fromFile(file)
-        setImageURI(uri)
-    }
+fun ImageView.bindingFileToImage(file: File) {
+    setImageURI(Uri.fromFile(file))
 }
 
 @BindingAdapter("binding_src_filePath")
-fun ImageView.bindingFileToImageFromPath(path: String?) {
-    if (path != null) {
-        val uri = Uri.parse(path)
-        setImageURI(uri)
-    }
+fun ImageView.bindingFileToImageFromPath(path: String) {
+    setImageURI(Uri.parse(path))
 }
 
 @BindingAdapter("binding_img_res")
@@ -435,8 +483,7 @@ fun ImageView.bindingImageDrawable(drawable: Drawable) {
 
 @BindingAdapter("binding_font_type")
 fun TextView.bindingImpactTypeface(path: String) {
-    val tf: Typeface = Typeface.createFromAsset(context.assets, path)
-    typeface = tf
+    typeface = Typeface.createFromAsset(context.assets, path)
 }
 
 @BindingAdapter("binding_paint_flag")
@@ -455,11 +502,6 @@ fun TextView.bindingPaintFlagThru(flag: Boolean) {
     }
 }
 
-@BindingAdapter("binding_textColor")
-fun TextView.bindingTextColor(@ColorInt color: Int) {
-    setTextColor(color)
-}
-
 
 //------------------------SmartRefreshLayout--------------------------//
 
@@ -474,6 +516,11 @@ fun SmartRefreshLayout.bindingOnRefreshListener(listener: OnRefreshListener) {
     setOnRefreshListener(listener)
 }
 
+@BindingAdapter("binding_srl_onLoadMoreListener")
+fun SmartRefreshLayout.bindingOnLoadMoreListener(listener: OnLoadMoreListener) {
+    setOnLoadMoreListener(listener)
+}
+
 @BindingAdapter("binding_srl_close_animation")
 fun SmartRefreshLayout.bindingCloseAnimation(close: Boolean) {
     if (close) {
@@ -481,11 +528,6 @@ fun SmartRefreshLayout.bindingCloseAnimation(close: Boolean) {
         setReboundDuration(0)
         finishRefresh(0)
     }
-}
-
-@BindingAdapter("binding_srl_onLoadMoreListener")
-fun SmartRefreshLayout.bindingOnLoadMoreListener(listener: OnLoadMoreListener) {
-    setOnLoadMoreListener(listener)
 }
 
 @BindingAdapter("binding_srl_refreshFinish")
@@ -496,8 +538,8 @@ fun SmartRefreshLayout.bindingRefreshFinish(finish: Boolean) {
 }
 
 @BindingAdapter("binding_srl_isLoadMoreFinish")
-fun SmartRefreshLayout.bindingIsLoadMoreFinish(isFinish: Boolean) {
-    if (isFinish) {
+fun SmartRefreshLayout.bindingLoadMoreFinish(finish: Boolean) {
+    if (finish) {
         finishLoadMore()
     }
 }
@@ -508,89 +550,70 @@ fun SmartRefreshLayout.bindingNoMoreData(noMore: Boolean) {
 }
 
 @BindingAdapter("binding_srl_isEnableLoadMore")
-fun SmartRefreshLayout.bindingIsEnableLoadMore(enable: Boolean) {
+fun SmartRefreshLayout.bindingEnableLoadMore(enable: Boolean) {
     setEnableLoadMore(enable)
 }
 
 @BindingAdapter("binding_srl_isEnableRefresh")
-fun SmartRefreshLayout.bindingIsEnableRefresh(enable: Boolean) {
+fun SmartRefreshLayout.bindingEnableRefresh(enable: Boolean) {
     setEnableRefresh(enable)
 }
 
 @BindingAdapter("binding_srl_isHeaderEmpty")
 fun SmartRefreshLayout.bindingHeaderEmpty(isEmpty: Boolean) {
-    val header = refreshHeader
-    if (header is ClassicsHeader) {
-        for (i in 0 until header.childCount) {
-            val child = header.getChildAt(i)
-            child.alpha = if (isEmpty) {
-                0f
-            } else {
-                1f
-            }
+    (refreshHeader as? ClassicsHeader)?.forEach {
+        it.alpha = if (isEmpty) {
+            0f
+        } else {
+            1f
         }
     }
 }
 
 @BindingAdapter("binding_srl_isFooterEmpty")
 fun SmartRefreshLayout.bindingFooterEmpty(isEmpty: Boolean) {
-    val footer = refreshFooter
-    if (footer is ClassicsFooter) {
-        for (i in 0 until footer.childCount) {
-            val child = footer.getChildAt(i)
-            child.alpha = if (isEmpty) {
-                0f
-            } else {
-                1f
-            }
+    (refreshFooter as? ClassicsFooter)?.forEach {
+        it.alpha = if (isEmpty) {
+            0f
+        } else {
+            1f
         }
     }
 }
 
 @BindingAdapter("binding_srl_headerPrimaryColor")
 fun SmartRefreshLayout.bindingHeaderPrimaryColor(@ColorInt color: Int) {
-    val header = refreshHeader
-    if (header == null) {
+    if (refreshHeader == null) {
         setRefreshHeader(ClassicsHeader(context).apply { setPrimaryColor(color) })
     } else {
-        if (header is ClassicsHeader) {
-            header.setPrimaryColor(color)
-        }
+        (refreshHeader as? ClassicsHeader)?.setPrimaryColor(color)
     }
 }
 
 @BindingAdapter("binding_srl_footerPrimaryColor")
 fun SmartRefreshLayout.bindingFooterPrimaryColor(@ColorInt color: Int) {
-    val footer = refreshFooter
-    if (footer == null) {
+    if (refreshFooter == null) {
         setRefreshFooter(ClassicsFooter(context).apply { setPrimaryColor(color) })
     } else {
-        if (footer is ClassicsFooter) {
-            footer.setPrimaryColor(color)
-        }
+        (refreshFooter as? ClassicsFooter)?.setPrimaryColor(color)
     }
 }
 
 @BindingAdapter("binding_srl_headerAccentColor")
 fun SmartRefreshLayout.bindingHeaderAccentColor(@ColorInt color: Int) {
-    val header = refreshHeader
-    if (header == null) {
+
+    if (refreshHeader == null) {
         setRefreshHeader(ClassicsHeader(context).apply { setAccentColor(color) })
     } else {
-        if (header is ClassicsHeader) {
-            header.setAccentColor(color)
-        }
+        (refreshHeader as? ClassicsHeader)?.setAccentColor(color)
     }
 }
 
 @BindingAdapter("binding_srl_footerAccentColor")
 fun SmartRefreshLayout.bindingFooterAccentColor(@ColorInt color: Int) {
-    val footer = refreshFooter
-    if (footer == null) {
+    if (refreshFooter == null) {
         setRefreshFooter(ClassicsFooter(context).apply { setAccentColor(color) })
     } else {
-        if (footer is ClassicsFooter) {
-            footer.setAccentColor(color)
-        }
+        (refreshFooter as? ClassicsFooter)?.setAccentColor(color)
     }
 }

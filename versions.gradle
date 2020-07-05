@@ -8,13 +8,11 @@ ext {
     jitpackMaven = "https://jitpack.io"
 
     // sdk
-    appCompileSdk = 29
+    appTargetSdk = 29
     appBuildTool = "30.0.0"
     appMinSdk = 23
-    ndkLibs = ["armeabi-v7a", "x86"] as String[]
 
     // app
-    appVersionCode = 1
     appVersionName = "1.0"
     appPackageName = "io.goooler.demoapp"
 
@@ -23,7 +21,7 @@ ext {
     appCompatVersion = "1.1.0"
     supportVersion = "1.0.0"
     constraintLayoutVersion = "1.1.3"
-    fragmentVersion = '1.2.5'
+    fragmentVersion = "1.2.5"
     materialVersion = "1.1.0"
     flexBoxVersion = "2.0.1"
     cardViewlVersion = "1.0.0"
@@ -48,7 +46,7 @@ ext {
     rxFastJsonConverterVersion = "2.1.0"
     mpChartVersion = "v3.1.0"
     lottieVersion = "3.0.1"
-    smartRefreshLayoutVersion = "1.1.0"
+    smartRefreshLayoutVersion = "2.0.1"
     glideVersion = "4.11.0"
     glideTransformVersion = "4.1.0"
     leakCanaryVersion = "2.4"
@@ -60,6 +58,9 @@ ext {
     coroutinesVersion = "1.3.7"
     desugarVersion = "1.0.9"
     objectBoxVersion = "2.6.0"
+
+    ndkLibs = ["armeabi-v7a", "x86"] as String[]
+    libTypes = ["*.jar", "*.aar"] as String[]
 
     libs = [
             "gradlePlugin"      : "com.android.tools.build:gradle:$gradleVersion",
@@ -75,7 +76,6 @@ ext {
             "legacySupport"     : "androidx.legacy:legacy-support-v4:$supportVersion",
             "preference"        : "androidx.preference:preference:$preferenceVersion",
             "palette"           : "androidx.palette:palette-ktx:$cardViewlVersion",
-            "percentLayout"     : "androidx.percentlayout:percentlayout:$cardViewlVersion",
             "constraintLayout"  : "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion",
             "material"          : "com.google.android.material:material:$materialVersion",
             "recyclerView"      : "androidx.recyclerview:recyclerview:$recyclerViewVersion",
@@ -99,10 +99,10 @@ ext {
             "arouterKapt"       : "com.alibaba:arouter-compiler:$arouterCompilerVersion",
 
             "kotlin"            : [
-                    "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion",
                     "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion",
                     "org.jetbrains.kotlin:kotlin-stdlib-common:$kotlinVersion",
                     "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion",
+                    "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion",
                     "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion",
                     "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion",
             ],
@@ -123,8 +123,10 @@ ext {
                     "androidx.navigation:navigation-ui-ktx:$navigationVersion"
             ],
             "smartRefreshLayout": [
-                    "com.scwang.smartrefresh:SmartRefreshLayout:$smartRefreshLayoutVersion",
-                    "com.scwang.smartrefresh:SmartRefreshHeader:$smartRefreshLayoutVersion"
+                    "com.scwang.smart:refresh-layout-kernel:$smartRefreshLayoutVersion",
+                    "com.scwang.smart:refresh-header-classics:$smartRefreshLayoutVersion",
+                    "com.scwang.smart:refresh-header-material:$smartRefreshLayoutVersion",
+                    "com.scwang.smart:refresh-footer-classics:$smartRefreshLayoutVersion"
             ],
             "okHttp"            : [
                     "com.squareup.okhttp3:okhttp:$okHttpVersion",
@@ -144,7 +146,7 @@ ext {
                     "io.objectbox:objectbox-android:$objectBoxVersion",
                     "io.objectbox:objectbox-kotlin:$objectBoxVersion"
             ],
-            "rx"            : [
+            "rx"                : [
                     "io.reactivex.rxjava3:rxjava:$rxJavaVersion",
                     "io.reactivex.rxjava3:rxandroid:$rxAndroidVersion",
                     "io.reactivex.rxjava3:rxkotlin:$rxAndroidVersion",

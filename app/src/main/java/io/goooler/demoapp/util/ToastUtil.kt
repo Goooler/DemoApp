@@ -1,11 +1,10 @@
 package io.goooler.demoapp.util
 
+import android.content.Context
 import android.os.Looper
 import android.widget.Toast
-
-import androidx.annotation.StringRes
-
-import io.goooler.demoapp.base.BaseApplication
+import androidx.annotation.AnyThread
+import androidx.annotation.MainThread
 
 
 /**
@@ -18,23 +17,23 @@ object ToastUtil {
      *
      * @param text string 文本
      */
-    fun showToast(text: String) {
+    @AnyThread
+    fun showToastInAnyThread(context: Context, text: String) {
         if (isMainThread()) {
-            Toast.makeText(BaseApplication.context, text, Toast.LENGTH_SHORT).show()
+            showToastInMainThread(context, text)
         } else {
             Looper.prepare()
-            Toast.makeText(BaseApplication.context, text, Toast.LENGTH_SHORT).show()
+            showToastInMainThread(context, text)
             Looper.loop()
         }
     }
 
     /**
-     * 默认长度 Toast.LENGTH_SHORT
-     *
-     * @param stringId 文本资源 id
+     * 只在主线程调用
      */
-    fun showToast(@StringRes stringId: Int) {
-        showToast(ResUtil.getString(stringId))
+    @MainThread
+    fun showToastInMainThread(context: Context, text: String) {
+        Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
     }
 
     private fun isMainThread(): Boolean {

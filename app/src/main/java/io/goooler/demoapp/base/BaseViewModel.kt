@@ -16,7 +16,7 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.disposables.Disposable
 
 
-open class BaseViewModel(application: Application) : AndroidViewModel(application),
+abstract class BaseViewModel(application: Application) : AndroidViewModel(application),
     DefaultLifecycleObserver {
 
     val toast = MutableStringLiveData()

@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string-array name="date_format">
-        <item>yyyy.MM.dd HH:mm</item>
-        <item>yyyyMMddHHmmss</item>
-        <item>HH.mm</item>
-    </string-array>
-</resources>

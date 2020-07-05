@@ -8,10 +8,10 @@ import io.objectbox.annotation.Transient
 @Entity
 class RepoListBean(
     @Id(assignable = true) var id: Long,
-    var private: Boolean,
-    var fork: Boolean,
-    var name: String?,
-    var description: String?,
+    val private: Boolean,
+    val fork: Boolean,
+    val name: String?,
+    val description: String?,
     @Transient val owner: OwnerBean?
 )
 

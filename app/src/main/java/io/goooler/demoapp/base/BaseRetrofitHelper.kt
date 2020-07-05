@@ -25,13 +25,6 @@ abstract class BaseRetrofitHelper protected constructor() {
         return retrofit.create(service)
     }
 
-    /**
-     * 添加拦截器
-     *
-     * @param builder okhttp builder
-     */
-    protected fun onAddInterceptor(builder: OkHttpClient.Builder?) {}
-
     protected fun buildOkHttpClient(): OkHttpClient {
         val cache = Cache(File(context.cacheDir, "HttpCache"), CACHE_SIZE)
         val builder = OkHttpClient.Builder()
@@ -40,12 +33,17 @@ abstract class BaseRetrofitHelper protected constructor() {
             .writeTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS)
             .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
             .retryOnConnectionFailure(true)
-        onAddInterceptor(builder)
+            .addInterceptor()
         return builder.build()
     }
 
     /**
-     * 获取API HOST
+     * 添加拦截器
+     */
+    protected open fun OkHttpClient.Builder.addInterceptor() = this
+
+    /**
+     * 获取 API HOST
      *
      * @return host url
      */

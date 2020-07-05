@@ -44,6 +44,9 @@ val packageName: String
 val versionCode: Long
     get() = BuildConfig.VERSION_CODE.toLong()
 
+val currentTimeMillis: Long
+    get() = System.currentTimeMillis()
+
 fun <T> unsafeLazy(initializer: () -> T) = lazy(LazyThreadSafetyMode.NONE, initializer)
 
 
@@ -222,7 +225,7 @@ fun Int.px2pt(context: Context): Float {
 //---------------------Date-------------------------------//
 
 
-fun Long.formatTime(pattern: String): String {
+fun Long.toDateString(pattern: String): String {
     return DateUtil.timestampToDateString(this, pattern)
 }
 
@@ -230,7 +233,7 @@ fun Long.easyTime(): String {
     val now = System.currentTimeMillis()
     val t = now - this
     if (t < 0) {// 未来
-        return formatTime("yyyy-MM-dd HH:mm")
+        return toDateString("yyyy-MM-dd HH:mm")
     }
     val oneMinute = 1000 * 60
     val oneHour = oneMinute * 60
@@ -249,13 +252,13 @@ fun Long.easyTime(): String {
     val isSameYear = year1 == year2
 
     return when {
-        !isSameYear -> formatTime("yyyy-MM-dd HH:mm")
-        isYesterday -> formatTime("昨天 HH:mm")
+        !isSameYear -> toDateString("yyyy-MM-dd HH:mm")
+        isYesterday -> toDateString("昨天 HH:mm")
         t < oneMinute -> "刚刚"
         t < oneHour -> (t / oneMinute).toString() + "分钟前"
         t < oneDay -> (t / oneHour).toString() + "小时前"
-        isSameYear -> formatTime("MM-dd HH:mm")
-        else -> formatTime("yyyy-MM-dd HH:mm")
+        isSameYear -> toDateString("MM-dd HH:mm")
+        else -> toDateString("yyyy-MM-dd HH:mm")
     }
 }
 

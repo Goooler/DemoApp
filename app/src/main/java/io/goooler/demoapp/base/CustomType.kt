@@ -15,6 +15,8 @@ typealias MutableLongLiveData = MutableLiveData<Long>
 
 typealias MutableDoubleLiveData = MutableLiveData<Double>
 
+typealias MutableFloatLiveData = MutableLiveData<Float>
+
 typealias MutableStringLiveData = MutableLiveData<String>
 
 typealias PrefUtil = SpUtil
