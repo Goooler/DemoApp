@@ -3,6 +3,7 @@ package io.goooler.demoapp.main.repository
 import io.goooler.demoapp.api.RetrofitHelper
 import io.goooler.demoapp.main.api.MainApi
 import io.goooler.demoapp.main.bean.RepoListBean
+import io.goooler.demoapp.util.ObjectBox
 import io.goooler.demoapp.util.putIntoBox
 import io.reactivex.rxjava3.core.Single
 import kotlinx.coroutines.Dispatchers
@@ -43,9 +44,18 @@ object MainRepository {
     /**
      * 数据库存储
      */
-    suspend fun storeRepos(list: List<RepoListBean>) {
+    suspend fun saveReposToDB(list: List<RepoListBean>) {
         withContext(Dispatchers.IO) {
             list.putIntoBox()
+        }
+    }
+
+    /**
+     * 数据库读取
+     */
+    suspend fun getReposFromDB(): List<RepoListBean> {
+        return withContext(Dispatchers.IO) {
+            ObjectBox.getAll<RepoListBean>()
         }
     }
 }

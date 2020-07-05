@@ -38,7 +38,7 @@ class MainViewModel(application: Application) : BaseViewModel(application) {
                 processList(google, microsoft, apple, facebook, twitter).collect {
                     title.value = it
                 }
-                MainRepository.storeRepos(google.await())
+                MainRepository.saveReposToDB(google.await())
             } catch (e: Exception) {
                 title.value = getString(R.string.request_failed)
                 showToast(e.message)

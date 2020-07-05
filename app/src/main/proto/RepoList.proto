@@ -1,0 +1,20 @@
+//不写默认 proto2
+syntax = "proto3";
+
+package tutorial;
+option java_package = "io.goooler.demoapp.proto";
+option java_outer_classname = "RepoListBeanProto";
+
+message RepoListBean{
+  string name = 1;
+  int64 id = 2;
+  string description = 3;
+  bool fork = 4;
+  bool private = 5;
+
+  message OwnerBean{
+    int64 id = 1;
+    string login = 2;
+    string avatar_url = 3;
+  }
+}

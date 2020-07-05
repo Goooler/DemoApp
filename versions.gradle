@@ -51,13 +51,16 @@ ext {
     glideTransformVersion = "4.1.0"
     leakCanaryVersion = "2.4"
     lubanVersion = "1.1.8"
+    mmkvVersion = "1.2.1"
+    coroutinesVersion = "1.3.7"
+    desugarVersion = "1.0.9"
+    objectBoxVersion = "2.6.0"
+    protocVersion = "3.12.2"
 
     // buildScript plugin
     gradleVersion = "4.0.0"
     kotlinVersion = "1.3.72"
-    coroutinesVersion = "1.3.7"
-    desugarVersion = "1.0.9"
-    objectBoxVersion = "2.6.0"
+    protobufVersion = "0.8.12"
 
     ndkLibs = ["armeabi-v7a", "x86"] as String[]
     libTypes = ["*.jar", "*.aar"] as String[]
@@ -65,6 +68,7 @@ ext {
     libs = [
             "gradlePlugin"      : "com.android.tools.build:gradle:$gradleVersion",
             "kotlinPlugin"      : "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion",
+            "protobufPlugin"    : "com.google.protobuf:protobuf-gradle-plugin:$protobufVersion",
 
             "core"              : "androidx.core:core-ktx:$coreVersion",
             "desugar"           : "com.android.tools:desugar_jdk_libs:$desugarVersion",
@@ -91,6 +95,9 @@ ext {
             "moshi"             : "com.squareup.moshi:moshi-kotlin:$moshiVersion",
             "luban"             : "top.zibin:Luban:$lubanVersion",
             "leakCanary"        : "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion",
+            "mmkv"              : "com.tencent:mmkv-static:$mmkvVersion",
+            "protoc"            : "com.google.protobuf:protoc:$protocVersion",
+            "protobufLite"      : "com.google.protobuf:protobuf-javalite:$protocVersion",
 
             "glideKapt"         : "com.github.bumptech.glide:compiler:$glideVersion",
             "objectBoxKapt"     : "io.objectbox:objectbox-processor:$objectBoxVersion",

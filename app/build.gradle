@@ -1,6 +1,7 @@
 apply plugin: "com.android.application"
 apply plugin: "kotlin-android"
 apply plugin: "kotlin-kapt"
+apply plugin: "com.google.protobuf"
 
 android {
     compileSdkVersion(appTargetSdk)
@@ -44,6 +45,14 @@ android {
         dataBinding = true
         viewBinding = true
     }
+    sourceSets {
+        main {
+            proto {
+            }
+            java {
+            }
+        }
+    }
     compileOptions {
         coreLibraryDesugaringEnabled = true
         sourceCompatibility(JavaVersion.VERSION_1_8)
@@ -51,6 +60,21 @@ android {
     }
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8
+    }
+}
+
+protobuf {
+    protoc {
+        artifact = libs["protoc"]
+    }
+    generateProtoTasks {
+        all().each { task ->
+            task.builtins {
+                java {
+                    option "lite"
+                }
+            }
+        }
     }
 }
 
@@ -92,9 +116,14 @@ dependencies {
     implementation(libs["glide"])
     kapt(libs["glideKapt"])
 
-    // database
+    // trans
     implementation(libs["objectBox"])
     kapt(libs["objectBoxKapt"])
+    implementation(libs["mmkv"])
+    implementation(libs["fastjson"])
+    implementation(libs["gson"])
+    implementation(libs["moshi"])
+    implementation(libs["protobufLite"])
 
     // async
     implementation(libs["eventBus"])
@@ -103,11 +132,8 @@ dependencies {
     implementation(libs["rx"])
 
     // utils
-    implementation(libs["fastjson"])
     implementation(libs["arouter"])
     kapt(libs["arouterKapt"])
-    implementation(libs["gson"])
-    implementation(libs["moshi"])
     implementation(libs["luban"])
 
     // analyze
