@@ -15,6 +15,7 @@ import java.util.List;
  * @author niechaoqun
  * pt 适配的工具类
  */
+@SuppressWarnings("rawtypes")
 public final class AdaptScreenUtil {
 
     private static List<Field> metricsFields;
@@ -68,7 +69,7 @@ public final class AdaptScreenUtil {
             metricsFields = new ArrayList<>();
             Class resCls = resources.getClass();
             Field[] declaredFields = resCls.getDeclaredFields();
-            while (declaredFields != null && declaredFields.length > 0) {
+            while (declaredFields.length > 0) {
                 for (Field field : declaredFields) {
                     if (field.getType().isAssignableFrom(DisplayMetrics.class)) {
                         field.setAccessible(true);

@@ -5,6 +5,7 @@ import android.util.DisplayMetrics;
 import android.util.TypedValue;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Px;
 
 /**
  * @author JokerWan
@@ -26,6 +27,7 @@ public class DimensionUtil {
      * @param dpValue .
      * @return pxValue
      */
+    @Px
     public static int dp2px(@NonNull Context context, float dpValue) {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                 dpValue, context.getResources().getDisplayMetrics());
@@ -50,6 +52,7 @@ public class DimensionUtil {
      * @param spValue .
      * @return pxValue
      */
+    @Px
     public static int sp2px(@NonNull Context context, float spValue) {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP,
                 spValue, context.getResources().getDisplayMetrics());
@@ -73,6 +76,7 @@ public class DimensionUtil {
      * @param ptValue .
      * @return .
      */
+    @Px
     public static int pt2px(@NonNull Context context, final float ptValue) {
         DisplayMetrics metrics = context.getResources().getDisplayMetrics();
         return (int) (ptValue * metrics.xdpi / 72f + 0.5f);

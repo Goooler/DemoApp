@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import io.goooler.demoapp.base.BaseFragment
 import io.goooler.demoapp.databinding.MainFragmentBinding
 import io.goooler.demoapp.main.vm.MainViewModel
+import io.goooler.demoapp.util.device.StatusBarUtil
 import io.goooler.demoapp.util.unsafeLazy
 import io.goooler.demoapp.widget.ui.BottomTipDialogFragment
 
@@ -29,6 +30,7 @@ class MainFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
         initOnce
+        StatusBarUtil.setStatusBarTransparent(requireActivity())
         return binding.root
     }
 

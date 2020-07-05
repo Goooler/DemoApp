@@ -11,6 +11,7 @@ import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.Px;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -131,6 +132,24 @@ public class StatusBarUtil {
     }
 
     /**
+     * 设置6.0后的状态颜色
+     *
+     * @param window            当前窗体
+     * @param isUpdateFontColor 是否改变颜色
+     */
+    private static boolean setAndroid6StatusBar(Window window, boolean isUpdateFontColor) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && window != null) {
+            if (isUpdateFontColor) {
+                window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+            } else {
+                window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+            }
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * 设置状态栏字体图标为深色，需要MIUIV6以上
      *
      * @param window 需要设置的窗口
@@ -163,24 +182,6 @@ public class StatusBarUtil {
             }
         }
         return result;
-    }
-
-    /**
-     * 设置6.0后的状态颜色
-     *
-     * @param window            当前窗体
-     * @param isUpdateFontColor 是否改变颜色
-     */
-    private static boolean setAndroid6StatusBar(Window window, boolean isUpdateFontColor) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && window != null) {
-            if (isUpdateFontColor) {
-                window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-            } else {
-                window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-            }
-            return true;
-        }
-        return false;
     }
 
     /**
@@ -223,6 +224,7 @@ public class StatusBarUtil {
      * @param context context
      * @return 高度（int类型）
      */
+    @Px
     public static int getStatusBarHeight(@Nullable Context context) {
         int result = 0;
         if (context != null) {

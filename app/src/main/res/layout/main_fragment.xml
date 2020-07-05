@@ -23,18 +23,25 @@
         android:focusable="true"
         android:orientation="vertical">
 
+        <io.goooler.demoapp.widget.ui.StatusBarView
+            android:id="@+id/status_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/black"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/tv_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="40dp"
             android:background="@color/black"
             android:gravity="center"
+            android:minHeight="40dp"
             android:onClick="@{()->listener.onTitleClick()}"
             android:text="@{vm.title}"
             android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/status_bar" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

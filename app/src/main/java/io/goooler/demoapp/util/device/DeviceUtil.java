@@ -9,25 +9,16 @@ import android.os.Build;
 import android.os.Environment;
 import android.os.StatFs;
 import android.provider.Settings;
-import android.text.TextUtils;
 import android.text.format.Formatter;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Px;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.LineNumberReader;
 import java.lang.reflect.Method;
-import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.net.SocketException;
-import java.util.Enumeration;
 
 import io.goooler.demoapp.util.LogUtil;
 
@@ -36,6 +27,8 @@ import io.goooler.demoapp.util.LogUtil;
  * Created by liyanfang on 2018/7/3.
  * Fix by feling on 2019/08/17.
  */
+@SuppressWarnings({"unchecked", "rawtypes"})
+@SuppressLint("PrivateApi")
 public class DeviceUtil {
 
     private DeviceUtil() {
@@ -48,6 +41,7 @@ public class DeviceUtil {
      * @param context .
      * @return Screen Width
      */
+    @Px
     public static int getScreenWidth(@NonNull Context context) {
         return getPoint(context).x;
     }
@@ -58,6 +52,7 @@ public class DeviceUtil {
      * @param context .
      * @return Screen Height
      */
+    @Px
     public static int getScreenHeight(@NonNull Context context) {
         return getPoint(context).y;
     }
@@ -73,10 +68,10 @@ public class DeviceUtil {
     }
 
     /**
-     * 获取androidID
+     * 获取 androidID
      *
-     * @param context 上下文
-     * @return android ID
+     * @param context .
+     * @return .
      */
     @NonNull
     public static String getAndroidId(@NonNull Context context) {
@@ -109,14 +104,12 @@ public class DeviceUtil {
     }
 
     /**
-     * 获取是否存在NavigationBar
+     * 是否存在导航栏
      *
      * @param context .
-     * @return NavigationBar is exist.
+     * @return .
      */
-    @SuppressWarnings("unchecked")
-    @SuppressLint("PrivateApi")
-    public static boolean checkDeviceHaveNavigationBar(@NonNull Context context) {
+    public static boolean hasNavigationBar(@NonNull Context context) {
         boolean hasNavigationBar = false;
         Resources rs = context.getResources();
         int id = rs.getIdentifier("config_showNavigationBar", "bool", "android");
@@ -139,12 +132,12 @@ public class DeviceUtil {
     }
 
     /**
-     * 获取虚拟功能NavigationBar键高度
+     * 获取导航栏高度
      *
      * @param context .
-     * @return NavigationBar键高度.
+     * @return .
      */
-    public static int getVirtualBarHeight(@NonNull Context context) {
+    public static int getNavigationBarHeight(@NonNull Context context) {
         int vh = 0;
         WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         Display display = null;
@@ -153,9 +146,7 @@ public class DeviceUtil {
         }
         DisplayMetrics dm = new DisplayMetrics();
         try {
-            @SuppressWarnings("rawtypes")
             Class c = Class.forName("android.view.Display");
-            @SuppressWarnings("unchecked")
             Method method = c.getMethod("getRealMetrics", DisplayMetrics.class);
             method.invoke(display, dm);
             vh = dm.heightPixels - windowManager.getDefaultDisplay().getHeight();
@@ -199,7 +190,7 @@ public class DeviceUtil {
     /**
      * 获取设备制造商
      *
-     * @return MANUFACTURER
+     * @return .
      */
     @NonNull
     public static String getManufacturer() {
@@ -209,7 +200,7 @@ public class DeviceUtil {
     /**
      * 获取CPU指令集
      *
-     * @return SUPPORTED_ABIS
+     * @return .
      */
     @NonNull
     public static String getCpu() {
@@ -219,7 +210,7 @@ public class DeviceUtil {
     /**
      * 获取屏幕物理尺寸（寸）
      *
-     * @return double
+     * @return .
      */
     public static double getScreenSizeOfDevice(@NonNull Context context) {
         WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
@@ -236,176 +227,9 @@ public class DeviceUtil {
     }
 
     /**
-     * 获取MAC地址
-     *
-     * @return mac
-     */
-    @NonNull
-    public static String getMac(@NonNull Context context) {
-        String mac = getWifiMac();
-        if (TextUtils.isEmpty(mac) || !mac.contains(":")) {
-            mac = getEthernetMac();
-            if (TextUtils.isEmpty(mac)) {
-                mac = getMacAddress();
-            }
-        }
-        if (TextUtils.isEmpty(mac)) {
-            mac = getAndroidId(context);
-        }
-        return TextUtils.isEmpty(mac) ? "" : mac.toLowerCase();
-    }
-
-    /**
-     * 获取内存大小
-     *
-     * @return ram
-     */
-    @NonNull
-    public static String getRam() {
-        String path = "/proc/meminfo";
-        String result = null;
-
-        int totalRam = 0;
-
-        try {
-            FileReader fr = new FileReader(path);
-            BufferedReader br = new BufferedReader(fr, 8192);
-            result = br.readLine().split("\\s+")[1];
-            br.close();
-        } catch (IOException e) {
-            LogUtil.d(e);
-        }
-
-        if (result != null) {
-            totalRam = (int) Math.ceil((Float.valueOf(Float.valueOf(result) / (1024 * 1024)).doubleValue()));
-        }
-
-        return totalRam + "GB";
-    }
-
-    /**
-     * 获取Wi-Fi Mac
-     *
-     * @return mac
-     */
-    @NonNull
-    public static String getWifiMac() {
-        String macSerial = null;
-        LineNumberReader lnr = null;
-        try {
-            Process process = Runtime.getRuntime().exec("cat /sys/class/net/wlan0/address");
-            InputStreamReader isr = new InputStreamReader(process.getInputStream());
-            lnr = new LineNumberReader(isr);
-
-            String str;
-            if ((str = lnr.readLine()) != null) {
-                macSerial = str.trim();
-            }
-        } catch (IOException e) {
-            LogUtil.d(e);
-        } finally {
-            try {
-                if (lnr != null) {
-                    lnr.close();
-                }
-            } catch (IOException e) {
-                LogUtil.d(e);
-            }
-        }
-        return macSerial;
-    }
-
-
-    /**
-     * 获取Ethernet Mac
-     *
-     * @return mac
-     */
-    @NonNull
-    public static String getEthernetMac() {
-        BufferedReader reader = null;
-        String ethernetMac = null;
-        try {
-            reader = new BufferedReader(new FileReader("sys/class/net/eth0/address"));
-            ethernetMac = reader.readLine();
-            if (ethernetMac != null) {
-                ethernetMac = ethernetMac.trim();
-            }
-        } catch (Exception e) {
-            LogUtil.d(e);
-        } finally {
-            try {
-                if (reader != null) {
-                    reader.close();
-                }
-            } catch (IOException e) {
-                LogUtil.d(e);
-            }
-        }
-
-        return ethernetMac;
-    }
-
-    /**
-     * 获取 Mac地址
-     *
-     * @return MacAddress
-     */
-    @NonNull
-    public static String getMacAddress() /* throws UnknownHostException */ {
-        String strMacAddr = null;
-        try {
-            InetAddress ip = getLocalNetAddress();
-
-            byte[] b = NetworkInterface.getByInetAddress(ip).getHardwareAddress();
-            StringBuilder buffer = new StringBuilder();
-            for (int i = 0; i < b.length; i++) {
-                if (i != 0) {
-                    buffer.append(':');
-                }
-
-                String str = Integer.toHexString(b[i] & 0xFF);
-                buffer.append(str.length() == 1 ? 0 + str : str);
-            }
-            strMacAddr = buffer.toString();
-        } catch (Exception e) {
-            LogUtil.d(e);
-        }
-
-        return strMacAddr;
-    }
-
-    @NonNull
-    public static InetAddress getLocalNetAddress() {
-        InetAddress ip = null;
-        try {
-            Enumeration<NetworkInterface> enNetInterface = NetworkInterface.getNetworkInterfaces();
-            while (enNetInterface.hasMoreElements()) {
-                NetworkInterface ni = enNetInterface.nextElement();
-                Enumeration<InetAddress> enIp = ni.getInetAddresses();
-                while (enIp.hasMoreElements()) {
-                    ip = enIp.nextElement();
-                    if (!ip.isLoopbackAddress() && !ip.getHostAddress().contains(":")) {
-                        break;
-                    } else {
-                        ip = null;
-                    }
-                }
-
-                if (ip != null) {
-                    break;
-                }
-            }
-        } catch (SocketException e) {
-            LogUtil.d(e);
-        }
-        return ip;
-    }
-
-    /**
      * 获取手机外部存储空间
      *
-     * @return 以M, G为单位的容量
+     * @return 以 M, G 为单位的容量
      */
     @NonNull
     public static String getExternalMemorySize(@NonNull Context context) {
@@ -414,24 +238,5 @@ public class DeviceUtil {
         long blockSizeLong = statFs.getBlockSizeLong();
         long blockCountLong = statFs.getBlockCountLong();
         return Formatter.formatFileSize(context, blockCountLong * blockSizeLong);
-    }
-
-    /**
-     * 获取设备指纹
-     *
-     * @param context .
-     * @return hardwareInfo + androidId
-     */
-    @NonNull
-    public static String getDeviceFingerprint(@NonNull Context context) {
-        String hardwareInfo = Build.ID + Build.DISPLAY + Build.PRODUCT
-                + Build.DEVICE + Build.BOARD + Build.MANUFACTURER
-                + Build.BRAND + Build.MODEL + Build.BOOTLOADER
-                + Build.HARDWARE + Build.TYPE + Build.TAGS
-                + Build.FINGERPRINT + Build.HOST + Build.USER /* + Build.SERIAL */;
-
-        String androidId = Settings.System.getString(context.getContentResolver(),
-                Settings.Secure.ANDROID_ID);
-        return hardwareInfo + androidId;
     }
 }

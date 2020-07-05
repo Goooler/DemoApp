@@ -9,6 +9,7 @@ import android.text.Spanned
 import android.view.View
 import android.webkit.URLUtil
 import androidx.annotation.ColorInt
+import androidx.annotation.Px
 import androidx.annotation.StringRes
 import io.goooler.demoapp.BuildConfig
 import io.goooler.demoapp.base.BaseApplication
@@ -145,7 +146,6 @@ fun String.getSizeByLoadUrl(defaultWidth: Int, defaultHeight: Int): List<Int> {
     Regex(pattern)
         .findAll(this)
         .forEach {
-
             // size550x769
             val sizeXXXxXXX = it.value
             // 550x769
@@ -164,7 +164,6 @@ fun String.getSizeByLoadUrl(defaultWidth: Int, defaultHeight: Int): List<Int> {
             sizeList.add(height)
             return sizeList
         }
-
     return sizeList
 }
 
@@ -197,14 +196,17 @@ fun Number.isNotZero(): Boolean {
     return !isZero()
 }
 
+@Px
 fun Float.sp2px(): Int {
     return DimensionUtil.sp2px(BaseApplication.context, this)
 }
 
+@Px
 fun Float.dp2px(): Int {
     return DimensionUtil.dp2px(BaseApplication.context, this)
 }
 
+@Px
 fun Float.pt2px(context: Context): Int {
     return DimensionUtil.pt2px(context, this)
 }
