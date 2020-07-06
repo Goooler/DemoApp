@@ -1,4 +1,4 @@
-package io.goooler.demoapp.base.core
+package io.goooler.demoapp.base.api
 
 import android.content.Context
 import okhttp3.Cache
@@ -26,7 +26,10 @@ abstract class BaseRetrofitHelper protected constructor() {
     }
 
     protected fun buildOkHttpClient(): OkHttpClient {
-        val cache = Cache(File(context.cacheDir, "HttpCache"), CACHE_SIZE)
+        val cache = Cache(
+            File(context.cacheDir, "HttpCache"),
+            CACHE_SIZE
+        )
         val builder = OkHttpClient.Builder()
             .cache(cache)
             .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)

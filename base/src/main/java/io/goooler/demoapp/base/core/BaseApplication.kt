@@ -1,7 +1,6 @@
 package io.goooler.demoapp.base.core
 
 import android.annotation.SuppressLint
-import android.content.Context
 import androidx.multidex.MultiDexApplication
 import com.alibaba.android.arouter.launcher.ARouter
 import com.tencent.mmkv.MMKV
@@ -28,7 +27,7 @@ abstract class BaseApplication : MultiDexApplication() {
      */
     @SuppressLint("CheckResult")
     private fun initData() {
-        context = applicationContext
+        context = this
         CrashHandler.init()
         ARouter.init(this)
         ObjectBox.init(this)
@@ -51,7 +50,7 @@ abstract class BaseApplication : MultiDexApplication() {
          * 获取全局 context
          */
         @SuppressLint("StaticFieldLeak")
-        lateinit var context: Context
+        lateinit var context: BaseApplication
             private set
     }
 }

@@ -1,13 +1,14 @@
 package io.goooler.demoapp.base.util
 
 import android.app.Application
-import io.goooler.demoapp.base.core.BaseObjectBoxEntity
+import io.goooler.demoapp.base.model.BaseObjectBoxEntity
 import io.objectbox.BoxStore
 import io.objectbox.annotation.Entity
 import io.objectbox.annotation.Id
 
 @Entity
-private class ObjectBoxEntity(@Id override var id: Long) : BaseObjectBoxEntity
+private class ObjectBoxEntity(@Id override var id: Long) :
+    BaseObjectBoxEntity
 
 object ObjectBox {
     lateinit var boxStore: BoxStore

@@ -1,8 +1,8 @@
-package io.goooler.demoapp.base.api
+package io.goooler.demoapp.http
 
 import android.content.Context
+import io.goooler.demoapp.base.api.BaseRetrofitHelper
 import io.goooler.demoapp.base.core.BaseApplication
-import io.goooler.demoapp.base.core.BaseRetrofitHelper
 import retrofit2.CallAdapter
 import retrofit2.Converter
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory

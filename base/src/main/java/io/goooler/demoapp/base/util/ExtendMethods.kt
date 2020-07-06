@@ -13,7 +13,7 @@ import androidx.annotation.Px
 import androidx.annotation.StringRes
 import io.goooler.demoapp.base.BuildConfig
 import io.goooler.demoapp.base.core.BaseApplication
-import io.goooler.demoapp.base.core.BaseObjectBoxEntity
+import io.goooler.demoapp.base.model.BaseObjectBoxEntity
 import io.goooler.demoapp.base.model.Constants.IMAGE_URL_PREFIX
 import io.goooler.demoapp.base.model.Constants.PHONE_FIRST_CHAR
 import io.goooler.demoapp.base.model.Constants.PHONE_LENGTH
