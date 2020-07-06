@@ -13,6 +13,7 @@ import androidx.annotation.Px
 import androidx.annotation.StringRes
 import io.goooler.demoapp.BuildConfig
 import io.goooler.demoapp.base.BaseApplication
+import io.goooler.demoapp.base.BaseObjectBoxEntity
 import io.goooler.demoapp.model.Constants.IMAGE_URL_PREFIX
 import io.goooler.demoapp.model.Constants.PHONE_FIRST_CHAR
 import io.goooler.demoapp.model.Constants.PHONE_LENGTH
@@ -20,14 +21,12 @@ import io.goooler.demoapp.util.device.DimensionUtil
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.CoroutineStart
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.async
+import kotlinx.coroutines.*
 import java.math.BigDecimal
 import java.util.*
 import kotlin.coroutines.CoroutineContext
 import kotlin.math.absoluteValue
+import kotlin.reflect.KClass
 
 //---------------------Any-------------------------------//
 
@@ -47,6 +46,9 @@ val versionCode: Int
 
 val currentTimeMillis: Long
     get() = System.currentTimeMillis()
+
+val currentThreadName: String
+    get() = Thread.currentThread().name
 
 fun <T> unsafeLazy(initializer: () -> T) = lazy(LazyThreadSafetyMode.NONE, initializer)
 
@@ -495,12 +497,16 @@ fun <T> List<T>.thirdOrNull(): T? {
 //---------------------Database-------------------------------//
 
 
-inline fun <reified T> T.putIntoBox() {
+inline fun <reified T : BaseObjectBoxEntity> T.putIntoBox() {
     ObjectBox.put(this)
 }
 
-inline fun <reified T> Collection<T>.putIntoBox() {
+inline fun <reified T : BaseObjectBoxEntity> Collection<T>.putIntoBox() {
     return ObjectBox.put(this)
+}
+
+inline fun <reified T : BaseObjectBoxEntity> KClass<T>.getAllFromBox(): List<T> {
+    return ObjectBox.getAll()
 }
 
 
@@ -512,6 +518,12 @@ fun <T> CoroutineScope.defaultAsync(
     start: CoroutineStart = CoroutineStart.DEFAULT,
     block: suspend CoroutineScope.() -> T
 ) = async(context, start, block)
+
+suspend fun <T> withIoContext(block: suspend CoroutineScope.() -> T) =
+    withContext(Dispatchers.IO, block)
+
+suspend fun <T> withDefaultContext(block: suspend CoroutineScope.() -> T) =
+    withContext(Dispatchers.Default, block)
 
 
 //---------------------Rx-------------------------------//

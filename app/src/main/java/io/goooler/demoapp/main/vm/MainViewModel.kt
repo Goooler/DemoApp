@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import io.goooler.demoapp.R
 import io.goooler.demoapp.base.BaseViewModel
 import io.goooler.demoapp.base.MutableStringLiveData
-import io.goooler.demoapp.main.bean.RepoListBean
+import io.goooler.demoapp.main.api.RepoList
 import io.goooler.demoapp.main.repository.MainRepository
 import io.goooler.demoapp.util.defaultAsync
 import io.goooler.demoapp.util.isNotNullOrEmpty
@@ -49,7 +49,7 @@ class MainViewModel(application: Application) : BaseViewModel(application) {
     /**
      * flow 处理事件
      */
-    private fun processList(vararg lists: Deferred<List<RepoListBean>>) = flow {
+    private fun processList(vararg lists: Deferred<RepoList>) = flow {
         StringBuilder().run {
             lists.forEach {
                 append(it.await().firstOrNull()?.name).append("\n")

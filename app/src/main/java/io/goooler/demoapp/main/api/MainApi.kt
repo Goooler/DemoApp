@@ -6,14 +6,16 @@ import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
 
+internal typealias RepoList = List<RepoListBean>
+
 interface MainApi {
 
     @GET("users/{user}/repos")
-    fun getRepoList(@Path("user") user: String): Call<List<RepoListBean>>
+    fun getRepoList(@Path("user") user: String): Call<RepoList>
 
     @GET("users/{user}/repos")
-    fun getRepoListRx(@Path("user") user: String): Single<List<RepoListBean>>
+    fun getRepoListRx(@Path("user") user: String): Single<RepoList>
 
     @GET("users/{user}/repos")
-    suspend fun getRepoListCr(@Path("user") user: String): List<RepoListBean>
+    suspend fun getRepoListCr(@Path("user") user: String): RepoList
 }

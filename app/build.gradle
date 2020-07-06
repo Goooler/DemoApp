@@ -30,13 +30,13 @@ android {
             ext.alwaysUpdateBuildId = false
         }
     }
-    applicationVariants.all { variant ->
+    /*applicationVariants.all { variant ->
         variant.outputs.all { output ->
             if (output.outputFile != null && output.outputFile.name.endsWith('.apk')) {
                 outputFileName = "Demo_${buildTime()}.apk"
             }
         }
-    }
+    }*/
     dependenciesInfo {
         includeInApk = false
         includeInBundle = false
@@ -48,10 +48,12 @@ android {
     sourceSets {
         main {
             proto {
-            }
-            java {
+                srcDir "src/main/proto"
             }
         }
+    }
+    lintOptions {
+        abortOnError = true
     }
     compileOptions {
         coreLibraryDesugaringEnabled = true
