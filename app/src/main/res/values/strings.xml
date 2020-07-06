@@ -1,25 +1,3 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">Demo</string>
-    <string name="default_username" tools:ignore="UnusedResources">默认用户</string>
-    <string name="default_time" tools:ignore="UnusedResources">默认时间</string>
-    <string name="default_test" tools:ignore="UnusedResources">默认测试文本</string>
-    <string name="welcome" tools:ignore="UnusedResources">欢迎登录</string>
-    <string name="submit" tools:ignore="UnusedResources">登录</string>
-    <string name="sign_up" tools:ignore="UnusedResources">注册</string>
-    <string name="username" tools:ignore="UnusedResources">用户名</string>
-    <string name="password" tools:ignore="UnusedResources">密码</string>
-    <string name="invite_code" tools:ignore="UnusedResources">邀请码</string>
-    <string name="enter" tools:ignore="UnusedResources">确认</string>
-    <string name="commit" tools:ignore="UnusedResources">提交</string>
-    <string name="cancel" tools:ignore="UnusedResources">取消</string>
-    <string name="modify" tools:ignore="UnusedResources">修改</string>
-    <string name="tip" tools:ignore="UnusedResources">提示</string>
-    <string name="next_step" tools:ignore="UnusedResources">下一步</string>
-    <string name="request_failed">请求失败</string>
-    <string name="request_succeed" tools:ignore="UnusedResources">请求成功</string>
-    <string name="data_refreshed" tools:ignore="UnusedResources">数据已刷新</string>
-    <string name="data_no_refreshed" tools:ignore="UnusedResources">暂无更新</string>
-    <string name="data_updated" tools:ignore="UnusedResources">更新成功</string>
-    <string name="one_day_data" tools:ignore="UnusedResources">24小时内数据</string>
-    <string name="main_fragment" tools:ignore="UnusedResources">主页面</string>
+<resources>
+
 </resources>

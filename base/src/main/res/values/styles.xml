@@ -1,0 +1,51 @@
+<resources>
+
+    <!--优化启动黑屏-->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@color/white</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <!--全屏对话框-->
+    <style name="DialogFullScreen" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <!--对话框背景透明-->
+    <style name="DialogTransparentTheme" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <!--底部弹起效果-->
+    <style name="DialogBottomAnim" parent="@android:style/Animation">
+        <item name="android:windowEnterAnimation">@anim/popup_enter</item>
+        <item name="android:windowExitAnimation">@anim/popup_exit</item>
+    </style>
+
+    <style name="DialogTransparentFullWindowTheme" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <!-- windowIsFloating属性设置为false, 默认将Window设置成全屏大小，设置为true，则window大小为wrap_content。 -->
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <!--去掉点击后的水波纹效果-->
+    <style name="NoClickEffect" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:selectableItemBackground">@null</item>
+        <item name="android:selectableItemBackgroundBorderless">@null</item>
+    </style>
+
+    <!--编辑框下划线的颜色-->
+    <style name="EditTextUnderlineStyle">
+        <item name="android:colorControlNormal">@android:color/darker_gray</item>
+        <item name="android:colorControlActivated">@android:color/holo_red_light</item>
+    </style>
+
+</resources>

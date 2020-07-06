@@ -3,6 +3,7 @@ import java.util.concurrent.TimeUnit
 
 buildscript {
     apply from: "versions.gradle"
+    apply from: "modules.gradle"
 
     repositories {
         google()

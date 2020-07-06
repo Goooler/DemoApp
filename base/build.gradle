@@ -1,0 +1,95 @@
+apply plugin: "com.android.library"
+apply plugin: "kotlin-android"
+apply plugin: "kotlin-kapt"
+
+android {
+    compileSdkVersion(appTargetSdk)
+    buildToolsVersion(appBuildTool)
+    defaultConfig {
+        minSdkVersion(appMinSdk)
+        targetSdkVersion(appTargetSdk)
+        versionCode(buildTime().toInteger())
+        versionName(appVersionName)
+        ndk { abiFilters(ndkLibs) }
+        vectorDrawables.useSupportLibrary = true
+        multiDexEnabled = true
+    }
+
+    buildFeatures {
+        dataBinding = true
+        viewBinding = true
+    }
+    lintOptions {
+        abortOnError = true
+    }
+    compileOptions {
+        coreLibraryDesugaringEnabled = true
+        sourceCompatibility(JavaVersion.VERSION_1_8)
+        targetCompatibility(JavaVersion.VERSION_1_8)
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+}
+
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+        arg("objectbox.debug", true)
+    }
+}
+
+dependencies {
+    api(fileTree(dir: "libs", include: libTypes))
+    // official
+    coreLibraryDesugaring(libs["desugar"])
+    api(libs["kotlin"])
+    api(libs["core"])
+    api(libs["appCompat"])
+    api(libs["annotation"])
+    api(libs["multiDex"])
+    api(libs["fragment"])
+    api(libs["legacySupport"])
+    api(libs["preference"])
+    api(libs["palette"])
+    api(libs["constraintLayout"])
+    api(libs["material"])
+    api(libs["recyclerView"])
+    api(libs["cardView"])
+    api(libs["lifecycle"])
+    api(libs["navigation"])
+
+    // UI
+    api(libs["smartRefreshLayout"])
+    api(libs["mpChart"])
+    api(libs["lottie"])
+
+    // network
+    api(libs["okHttp"])
+    api(libs["retrofit"])
+    api(libs["glide"])
+    kapt(libs["glideKapt"])
+
+    // trans
+    api(libs["objectBox"])
+    kapt(libs["objectBoxKapt"])
+    api(libs["mmkv"])
+    api(libs["fastjson"])
+    api(libs["gson"])
+    api(libs["moshi"])
+    api(libs["protobufLite"])
+
+    // async
+    api(libs["eventBus"])
+    kapt(libs["eventBusKapt"])
+    api(libs["liveDataBus"])
+    api(libs["rx"])
+
+    // utils
+    api(libs["arouter"])
+    kapt(libs["arouterKapt"])
+    api(libs["luban"])
+
+    // analyze
+    debugApi(libs["leakCanary"])
+}

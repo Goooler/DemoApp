@@ -3,13 +3,13 @@ package io.goooler.demoapp.main.vm
 import android.app.Application
 import androidx.lifecycle.viewModelScope
 import io.goooler.demoapp.R
-import io.goooler.demoapp.base.BaseViewModel
-import io.goooler.demoapp.base.MutableStringLiveData
+import io.goooler.demoapp.base.core.BaseViewModel
+import io.goooler.demoapp.base.model.MutableStringLiveData
+import io.goooler.demoapp.base.util.defaultAsync
+import io.goooler.demoapp.base.util.isNotNullOrEmpty
+import io.goooler.demoapp.base.util.subscribeAndObserve
 import io.goooler.demoapp.main.api.RepoList
 import io.goooler.demoapp.main.repository.MainRepository
-import io.goooler.demoapp.util.defaultAsync
-import io.goooler.demoapp.util.isNotNullOrEmpty
-import io.goooler.demoapp.util.subscribeAndObserve
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
@@ -38,7 +38,7 @@ class MainViewModel(application: Application) : BaseViewModel(application) {
                 processList(google, microsoft, apple, facebook, twitter).collect {
                     title.value = it
                 }
-                MainRepository.saveReposToDB(google.await())
+                //MainRepository.saveReposToDB(google.await())
             } catch (e: Exception) {
                 title.value = getString(R.string.request_failed)
                 showToast(e.message)

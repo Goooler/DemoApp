@@ -1,7 +1,7 @@
 package io.goooler.demoapp.main.bean
 
 import com.google.gson.annotations.SerializedName
-import io.goooler.demoapp.base.BaseObjectBoxEntity
+import io.goooler.demoapp.base.core.BaseObjectBoxEntity
 import io.objectbox.annotation.Entity
 import io.objectbox.annotation.Id
 import io.objectbox.annotation.Transient

@@ -16,6 +16,7 @@ android {
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled = true
     }
+
     buildTypes {
         release {
             minifyEnabled = true
@@ -56,7 +57,6 @@ android {
         abortOnError = true
     }
     compileOptions {
-        coreLibraryDesugaringEnabled = true
         sourceCompatibility(JavaVersion.VERSION_1_8)
         targetCompatibility(JavaVersion.VERSION_1_8)
     }
@@ -80,64 +80,7 @@ protobuf {
     }
 }
 
-kapt {
-    arguments {
-        arg("AROUTER_MODULE_NAME", project.getName())
-        arg("objectbox.debug", true)
-    }
-}
-
 dependencies {
-    // official
     implementation(fileTree(dir: "libs", include: libTypes))
-    coreLibraryDesugaring(libs["desugar"])
-    implementation(libs["kotlin"])
-    implementation(libs["core"])
-    implementation(libs["appCompat"])
-    implementation(libs["annotation"])
-    implementation(libs["multiDex"])
-    implementation(libs["fragment"])
-    implementation(libs["legacySupport"])
-    implementation(libs["preference"])
-    implementation(libs["palette"])
-    implementation(libs["constraintLayout"])
-    implementation(libs["material"])
-    implementation(libs["recyclerView"])
-    implementation(libs["cardView"])
-    implementation(libs["lifecycle"])
-    implementation(libs["navigation"])
-
-    // UI
-    implementation(libs["smartRefreshLayout"])
-    implementation(libs["mpChart"])
-    implementation(libs["lottie"])
-
-    // network
-    implementation(libs["okHttp"])
-    implementation(libs["retrofit"])
-    implementation(libs["glide"])
-    kapt(libs["glideKapt"])
-
-    // trans
-    implementation(libs["objectBox"])
-    kapt(libs["objectBoxKapt"])
-    implementation(libs["mmkv"])
-    implementation(libs["fastjson"])
-    implementation(libs["gson"])
-    implementation(libs["moshi"])
-    implementation(libs["protobufLite"])
-
-    // async
-    implementation(libs["eventBus"])
-    kapt(libs["eventBusKapt"])
-    implementation(libs["liveDataBus"])
-    implementation(libs["rx"])
-
-    // utils
-    implementation(libs["arouter"])
-    kapt(libs["arouterKapt"])
-    implementation(libs["luban"])
-
-    // analyze
-    debugImplementation(libs["leakCanary"])
+    implementation project(baseModule)
 }

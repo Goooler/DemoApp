@@ -4,12 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import io.goooler.demoapp.base.BaseFragment
+import io.goooler.demoapp.base.core.BaseFragment
+import io.goooler.demoapp.base.util.device.StatusBarUtil
+import io.goooler.demoapp.base.util.unsafeLazy
+import io.goooler.demoapp.base.widget.ui.BottomTipDialogFragment
 import io.goooler.demoapp.databinding.MainFragmentBinding
 import io.goooler.demoapp.main.vm.MainViewModel
-import io.goooler.demoapp.util.device.StatusBarUtil
-import io.goooler.demoapp.util.unsafeLazy
-import io.goooler.demoapp.widget.ui.BottomTipDialogFragment
 
 class MainFragment : BaseFragment() {
 
