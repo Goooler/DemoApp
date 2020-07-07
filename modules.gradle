@@ -1,3 +1,4 @@
 ext {
     baseModule = ":base"
+    commonModule = ":common"
 }

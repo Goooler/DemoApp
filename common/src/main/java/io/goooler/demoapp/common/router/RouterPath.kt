@@ -1,4 +1,4 @@
-package io.goooler.demoapp.base.model
+package io.goooler.demoapp.common.router
 
 import androidx.annotation.StringDef
 

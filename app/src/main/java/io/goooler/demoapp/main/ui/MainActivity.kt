@@ -3,7 +3,7 @@ package io.goooler.demoapp.main.ui
 import android.os.Bundle
 import com.alibaba.android.arouter.facade.annotation.Route
 import io.goooler.demoapp.base.core.BaseActivity
-import io.goooler.demoapp.base.model.RouterPath
+import io.goooler.demoapp.common.router.RouterPath
 
 @Route(path = RouterPath.MAIN)
 class MainActivity : BaseActivity() {

@@ -1,0 +1,35 @@
+apply plugin: "com.android.library"
+apply plugin: "kotlin-android"
+apply plugin: "kotlin-kapt"
+
+android {
+    compileSdkVersion(appTargetSdk)
+    buildToolsVersion(appBuildTool)
+    defaultConfig {
+        minSdkVersion(appMinSdk)
+        targetSdkVersion(appTargetSdk)
+        versionCode(buildTime().toInteger())
+        versionName(appVersionName)
+    }
+
+    compileOptions {
+        sourceCompatibility(JavaVersion.VERSION_1_8)
+        targetCompatibility(JavaVersion.VERSION_1_8)
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+}
+
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation project(baseModule)
+    api(libs["arouter"])
+    kapt(libs["arouterKapt"])
+}

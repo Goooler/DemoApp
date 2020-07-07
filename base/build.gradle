@@ -34,7 +34,6 @@ android {
 
 kapt {
     arguments {
-        arg("AROUTER_MODULE_NAME", project.getName())
         arg("objectbox.debug", true)
     }
 }
@@ -86,8 +85,6 @@ dependencies {
     api(libs["rx"])
 
     // utils
-    api(libs["arouter"])
-    kapt(libs["arouterKapt"])
     api(libs["luban"])
 
     // analyze
