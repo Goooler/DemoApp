@@ -8,7 +8,7 @@ import androidx.annotation.StringDef
 )
 annotation class RouterPath {
     companion object {
-        const val LOGIN: String = "/module/login"
-        const val MAIN: String = "/module/main"
+        const val LOGIN: String = "/login/"
+        const val MAIN: String = "/main/"
     }
 }

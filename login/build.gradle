@@ -1,0 +1,45 @@
+apply plugin: "com.android.library"
+apply plugin: "kotlin-android"
+apply plugin: "kotlin-kapt"
+apply plugin: "com.google.protobuf"
+
+android {
+    compileSdkVersion(appTargetSdk)
+    buildToolsVersion(appBuildTool)
+    defaultConfig {
+        minSdkVersion(appMinSdk)
+        targetSdkVersion(appTargetSdk)
+        versionCode(buildTime().toInteger())
+        versionName(appVersionName)
+        ndk { abiFilters(ndkLibs) }
+        vectorDrawables.useSupportLibrary = true
+    }
+    buildFeatures {
+        dataBinding = true
+        viewBinding = true
+    }
+    lintOptions {
+        abortOnError = true
+    }
+    compileOptions {
+        sourceCompatibility(JavaVersion.VERSION_1_8)
+        targetCompatibility(JavaVersion.VERSION_1_8)
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+}
+
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
+}
+
+dependencies {
+    implementation(fileTree(dir: "libs", include: libTypes))
+    implementation project(baseModule)
+    implementation project(commonModule)
+
+    kapt(libs["arouterKapt"])
+}

@@ -65,6 +65,12 @@ android {
     }
 }
 
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
+}
+
 protobuf {
     protoc {
         artifact = libs["protoc"]
@@ -84,4 +90,7 @@ dependencies {
     implementation(fileTree(dir: "libs", include: libTypes))
     implementation project(baseModule)
     implementation project(commonModule)
+    implementation project(loginModule)
+
+    kapt(libs["arouterKapt"])
 }

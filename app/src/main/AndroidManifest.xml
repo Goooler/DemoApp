@@ -17,7 +17,7 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <application
-        android:name="io.goooler.demoapp.MyApplication"
+        android:name="io.goooler.demoapp.MainApplication"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
         android:icon="@drawable/ic_ss"
@@ -28,7 +28,8 @@
         tools:ignore="AllowBackup,GoogleAppIndexingWarning,HardcodedDebugMode,UnusedAttribute">
         <activity
             android:name=".main.ui.MainActivity"
-            android:launchMode="singleTop">
+            android:launchMode="singleTop" />
+        <activity android:name="io.goooler.demoapp.login.ui.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
