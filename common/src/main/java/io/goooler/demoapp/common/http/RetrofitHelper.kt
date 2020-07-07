@@ -1,4 +1,4 @@
-package io.goooler.demoapp.http
+package io.goooler.demoapp.common.http
 
 import android.content.Context
 import io.goooler.demoapp.base.api.BaseRetrofitHelper

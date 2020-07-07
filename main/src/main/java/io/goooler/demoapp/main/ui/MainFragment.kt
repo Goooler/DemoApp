@@ -8,7 +8,7 @@ import io.goooler.demoapp.base.core.BaseFragment
 import io.goooler.demoapp.base.util.device.StatusBarUtil
 import io.goooler.demoapp.base.util.unsafeLazy
 import io.goooler.demoapp.base.widget.ui.BottomTipDialogFragment
-import io.goooler.demoapp.databinding.MainFragmentBinding
+import io.goooler.demoapp.main.databinding.MainFragmentBinding
 import io.goooler.demoapp.main.vm.MainViewModel
 
 class MainFragment : BaseFragment() {

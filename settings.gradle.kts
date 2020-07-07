@@ -1,3 +1,4 @@
+include(":main")
 include(":login")
 include(":common")
 include(":base")

@@ -46,13 +46,6 @@ android {
         dataBinding = true
         viewBinding = true
     }
-    sourceSets {
-        main {
-            proto {
-                srcDir "src/main/proto"
-            }
-        }
-    }
     lintOptions {
         abortOnError = true
     }
@@ -71,26 +64,12 @@ kapt {
     }
 }
 
-protobuf {
-    protoc {
-        artifact = libs["protoc"]
-    }
-    generateProtoTasks {
-        all().each { task ->
-            task.builtins {
-                java {
-                    option "lite"
-                }
-            }
-        }
-    }
-}
-
 dependencies {
     implementation(fileTree(dir: "libs", include: libTypes))
     implementation project(baseModule)
     implementation project(commonModule)
     implementation project(loginModule)
+    implementation project(mainModule)
 
     kapt(libs["arouterKapt"])
 }
