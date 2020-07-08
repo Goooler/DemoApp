@@ -1,4 +1,4 @@
-package io.goooler.demoapp.base
+package io.goooler.demoapp.base.core
 
 import android.app.Activity
 import java.util.*

@@ -13,5 +13,5 @@ annotation class SpKeys {
     }
 }
 
-@StringDef()
+@StringDef
 annotation class MkKeys

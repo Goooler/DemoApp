@@ -1617,25 +1617,24 @@ object ImageLoader {
         if (imageView.layoutParams.width == ViewGroup.LayoutParams.MATCH_PARENT) {
             val viewParent = imageView.parent
             if (viewParent is ViewGroup) {
-                val viewGroupParent = viewParent
-                if (viewGroupParent.layoutParams.width == ViewGroup.LayoutParams.MATCH_PARENT ||
-                    viewGroupParent.layoutParams.width == ViewGroup.LayoutParams.WRAP_CONTENT
+                if (viewParent.layoutParams.width == ViewGroup.LayoutParams.MATCH_PARENT ||
+                    viewParent.layoutParams.width == ViewGroup.LayoutParams.WRAP_CONTENT
                 ) {
                     // 如果父布局width依然为MATCH_PARENT
                     resizeHeight =
                         if (imageView.layoutParams.height == ViewGroup.LayoutParams.MATCH_PARENT) {
-                            if (viewGroupParent.layoutParams.height == ViewGroup.LayoutParams.MATCH_PARENT ||
-                                viewGroupParent.layoutParams.height == ViewGroup.LayoutParams.WRAP_CONTENT
+                            if (viewParent.layoutParams.height == ViewGroup.LayoutParams.MATCH_PARENT ||
+                                viewParent.layoutParams.height == ViewGroup.LayoutParams.WRAP_CONTENT
                             ) {
                                 return originalUrl
                             } else {
-                                viewGroupParent.layoutParams.height
+                                viewParent.layoutParams.height
                             }
                         } else {
                             imageView.layoutParams.height
                         }
                 } else {
-                    resizeWidth = viewGroupParent.layoutParams.width
+                    resizeWidth = viewParent.layoutParams.width
                 }
             } else {
                 resizeHeight =

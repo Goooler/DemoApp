@@ -14,7 +14,6 @@ android {
         versionName(appVersionName)
         ndk { abiFilters(ndkLibs) }
         vectorDrawables.useSupportLibrary = true
-        multiDexEnabled = true
     }
 
     buildTypes {

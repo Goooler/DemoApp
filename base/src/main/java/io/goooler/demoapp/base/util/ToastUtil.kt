@@ -1,5 +1,6 @@
 package io.goooler.demoapp.base.util
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Looper
 import android.widget.Toast
@@ -17,6 +18,7 @@ object ToastUtil {
      *
      * @param text string 文本
      */
+    @SuppressLint("WrongThread")
     @AnyThread
     fun showToastInAnyThread(context: Context, text: String) {
         if (isMainThread()) {

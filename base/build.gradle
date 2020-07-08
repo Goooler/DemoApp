@@ -19,9 +19,6 @@ android {
         dataBinding = true
         viewBinding = true
     }
-    lintOptions {
-        abortOnError = true
-    }
     compileOptions {
         coreLibraryDesugaringEnabled = true
         sourceCompatibility(JavaVersion.VERSION_1_8)
@@ -29,12 +26,6 @@ android {
     }
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8
-    }
-}
-
-kapt {
-    arguments {
-        arg("objectbox.debug", true)
     }
 }
 
@@ -71,7 +62,6 @@ dependencies {
 
     // trans
     api(libs["objectBox"])
-    kapt(libs["objectBoxKapt"])
     api(libs["mmkv"])
     api(libs["fastjson"])
     api(libs["gson"])

@@ -19,9 +19,6 @@ android {
         dataBinding = true
         viewBinding = true
     }
-    lintOptions {
-        abortOnError = true
-    }
     sourceSets {
         main {
             proto {
@@ -41,6 +38,9 @@ android {
 kapt {
     arguments {
         arg("AROUTER_MODULE_NAME", project.getName())
+    }
+    arguments {
+        arg("objectbox.debug", true)
     }
 }
 

@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import io.goooler.demoapp.base.ActivityCollector
 import io.goooler.demoapp.base.util.DialogManager
 import io.goooler.demoapp.base.util.ToastUtil
 import io.goooler.demoapp.base.util.device.AdaptScreenUtil
@@ -27,7 +26,7 @@ abstract class BaseActivity : AppCompatActivity() {
         manager
     }
 
-    protected val originalResources by unsafeLazy { super.getResources() }
+    protected val originalResources: Resources = super.getResources()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
