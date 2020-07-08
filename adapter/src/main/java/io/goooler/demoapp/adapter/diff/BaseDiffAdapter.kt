@@ -17,9 +17,8 @@ abstract class BaseDiffAdapter<T : IModelDiff<T>> : BaseAdapter<T>() {
         AsyncListDiffer(this, diffCallBack())
     }
 
-    override fun list(): List<T> {
-        return mDiffer.currentList
-    }
+    override val list: List<T>
+        get() = mDiffer.currentList
 
     fun submitList(list: List<T>) {
         mDiffer.submitList(list.multiList())

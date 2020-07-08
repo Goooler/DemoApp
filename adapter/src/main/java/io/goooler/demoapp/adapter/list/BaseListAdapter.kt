@@ -14,10 +14,8 @@ abstract class BaseListAdapter<M : IModelType> : BaseAdapter<M>(), IMutableListD
 
     private val items = ArrayList<M>()
 
-    override fun list(): List<M> {
-        return items
-    }
-
+    override val list: List<M>
+        get() = items
 
     override fun getData(): MutableList<M> {
         return items
@@ -40,11 +38,8 @@ abstract class BaseListAdapter<M : IModelType> : BaseAdapter<M>(), IMutableListD
      */
     override fun addData(list: List<M>) {
         val multiList = list.multiList()
-        val preSize = items.size
-        items.run {
-            addAll(multiList)
-        }
-        notifyItemRangeInserted(preSize, multiList.size)
+        items.addAll(multiList)
+        notifyItemRangeInserted(items.size, multiList.size)
     }
 
     /**
