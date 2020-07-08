@@ -1,3 +1,4 @@
+include(":adapter")
 include(":main")
 include(":login")
 include(":common")

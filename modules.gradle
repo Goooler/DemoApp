@@ -3,4 +3,5 @@ ext {
     commonModule = ":common"
     loginModule = ":login"
     mainModule = ":main"
+    adapterModule = ":adapter"
 }
