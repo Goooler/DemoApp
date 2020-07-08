@@ -20,6 +20,8 @@ typealias MutableFloatLiveData = MutableLiveData<Float>
 
 typealias MutableStringLiveData = MutableLiveData<String>
 
+typealias MutableListLiveData<T> = MutableLiveData<List<T>>
+
 typealias PrefUtil = SpUtil
 
 typealias MMKVUtil = MkUtil

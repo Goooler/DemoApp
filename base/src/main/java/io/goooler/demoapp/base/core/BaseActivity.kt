@@ -26,7 +26,7 @@ abstract class BaseActivity : AppCompatActivity() {
         manager
     }
 
-    protected val originalResources: Resources = super.getResources()
+    protected val originalResources: Resources by unsafeLazy { super.getResources() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

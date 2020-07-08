@@ -25,10 +25,9 @@ abstract class BaseListAdapter<M : IModelType> : BaseAdapter<M>(), IMutableListD
      * 设置数据
      */
     override fun setData(list: List<M>) {
-        val multiList = list.multiList()
         items.run {
             clear()
-            addAll(multiList)
+            addAll(list.multiList())
         }
         notifyDataSetChanged()
     }

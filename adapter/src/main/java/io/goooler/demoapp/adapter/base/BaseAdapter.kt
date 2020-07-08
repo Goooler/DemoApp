@@ -55,7 +55,7 @@ abstract class BaseAdapter<T : IModelType> : RecyclerView.Adapter<BaseViewHolder
 
     abstract fun onCreateVHForAll(binding: ViewDataBinding)
 
-    abstract fun onBindVHForAll(binding: ViewDataBinding, m: T)
+    abstract fun onBindVHForAll(binding: ViewDataBinding, model: T)
 
     /**
      * 初始化各种 viewType 处理委托。添加到 Manager 中。

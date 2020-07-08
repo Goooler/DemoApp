@@ -9,7 +9,7 @@ ext {
 
     // sdk
     appTargetSdk = 29
-    appBuildTool = "30.0.0"
+    appBuildTool = "30.0.1"
     appMinSdk = 23
 
     // app
