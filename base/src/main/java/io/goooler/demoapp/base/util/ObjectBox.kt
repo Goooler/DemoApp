@@ -1,23 +1,18 @@
 package io.goooler.demoapp.base.util
 
-import android.app.Application
 import io.goooler.demoapp.base.model.BaseObjectBoxEntity
 import io.objectbox.BoxStore
-import io.objectbox.annotation.Entity
-import io.objectbox.annotation.Id
+import kotlin.reflect.KClass
 
-@Entity
-private class ObjectBoxEntity(@Id override var id: Long) :
-    BaseObjectBoxEntity
-
+/**
+ * ObjectBox 使用简单封装
+ */
 object ObjectBox {
     lateinit var boxStore: BoxStore
         private set
 
-    internal fun init(application: Application) {
-        boxStore = MyObjectBox.builder()
-            .androidContext(application)
-            .build()
+    fun init(body: () -> BoxStore) {
+        boxStore = body()
     }
 
     /**
@@ -89,4 +84,16 @@ object ObjectBox {
     inline fun <reified T : BaseObjectBoxEntity> removeAll() {
         boxStore.boxFor(T::class.java).removeAll()
     }
+}
+
+inline fun <reified T : BaseObjectBoxEntity> T.putIntoBox() {
+    ObjectBox.put(this)
+}
+
+inline fun <reified T : BaseObjectBoxEntity> Collection<T>.putIntoBox() {
+    return ObjectBox.put(this)
+}
+
+inline fun <reified T : BaseObjectBoxEntity> KClass<T>.getAllFromBox(): List<T> {
+    return ObjectBox.getAll()
 }

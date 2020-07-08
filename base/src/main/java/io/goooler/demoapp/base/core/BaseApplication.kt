@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import androidx.multidex.MultiDexApplication
 import com.tencent.mmkv.MMKV
 import io.goooler.demoapp.base.util.CrashHandler
-import io.goooler.demoapp.base.util.ObjectBox
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
@@ -27,7 +26,6 @@ abstract class BaseApplication : MultiDexApplication() {
     private fun initData() {
         context = this
         CrashHandler.init()
-        ObjectBox.init(this)
         MMKV.initialize(this)
         GlobalScope.launch(Dispatchers.IO) {
             delay(2000)

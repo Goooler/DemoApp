@@ -4,6 +4,7 @@ import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
+import java.util.*
 
 /**
  * 时间转换工具简单封装
@@ -55,5 +56,43 @@ object DateUtil {
                 DateTimeFormatter.ofPattern(dateFormat)
             )
         ).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli()
+    }
+}
+
+fun Long.toDateString(pattern: String): String {
+    return DateUtil.timestampToDateString(this, pattern)
+}
+
+fun Long.easyTime(): String {
+    val now = System.currentTimeMillis()
+    val t = now - this
+    if (t < 0) {
+        // 未来
+        return toDateString("yyyy-MM-dd HH:mm")
+    }
+    val oneMinute = 1000 * 60
+    val oneHour = oneMinute * 60
+    val oneDay = oneHour * 24
+    val c1 = Calendar.getInstance()
+    val c2 = Calendar.getInstance()
+    c1.time = Date(this)
+    c2.time = Date(now)
+    val day1 = c1.get(Calendar.DAY_OF_WEEK)
+    val day2 = c2.get(Calendar.DAY_OF_WEEK)
+    val isYesterday = t < oneDay * 2 && (day2 - day1 == 1 || day2 - day1 == -6)
+
+    val year1 = c1.get(Calendar.YEAR)
+    val year2 = c2.get(Calendar.YEAR)
+
+    val isSameYear = year1 == year2
+
+    return when {
+        !isSameYear -> toDateString("yyyy-MM-dd HH:mm")
+        isYesterday -> toDateString("昨天 HH:mm")
+        t < oneMinute -> "刚刚"
+        t < oneHour -> (t / oneMinute).toString() + "分钟前"
+        t < oneDay -> (t / oneHour).toString() + "小时前"
+        isSameYear -> toDateString("MM-dd HH:mm")
+        else -> toDateString("yyyy-MM-dd HH:mm")
     }
 }

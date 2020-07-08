@@ -1,6 +1,5 @@
 package io.goooler.demoapp.base.util
 
-import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.os.Build
@@ -9,15 +8,11 @@ import android.text.Spanned
 import android.view.View
 import android.webkit.URLUtil
 import androidx.annotation.ColorInt
-import androidx.annotation.Px
 import androidx.annotation.StringRes
 import io.goooler.demoapp.base.BuildConfig
-import io.goooler.demoapp.base.core.BaseApplication
-import io.goooler.demoapp.base.model.BaseObjectBoxEntity
 import io.goooler.demoapp.base.model.Constants.IMAGE_URL_PREFIX
 import io.goooler.demoapp.base.model.Constants.PHONE_FIRST_CHAR
 import io.goooler.demoapp.base.model.Constants.PHONE_LENGTH
-import io.goooler.demoapp.base.util.device.DimensionUtil
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -25,7 +20,6 @@ import kotlinx.coroutines.*
 import java.math.BigDecimal
 import java.util.*
 import kotlin.math.absoluteValue
-import kotlin.reflect.KClass
 
 //---------------------Any-------------------------------//
 
@@ -52,14 +46,6 @@ fun <T> unsafeLazy(initializer: () -> T) = lazy(LazyThreadSafetyMode.NONE, initi
 //---------------------CharSequence-------------------------------//
 
 
-inline fun <reified T> String.fromJson(): T? {
-    return JsonUtil.fromJson(this, T::class.java)
-}
-
-fun Any.toJson(): String {
-    return JsonUtil.toJson(this)
-}
-
 fun String.fromHtml(): Spanned {
     return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
         Html.fromHtml(this, Html.FROM_HTML_MODE_LEGACY)
@@ -84,6 +70,92 @@ fun String.safeSubstring(startIndex: Int, endIndex: Int): String {
     val begin = if (startIndex < 0) 0 else startIndex
     val end = if (endIndex > length) length else endIndex
     return substring(begin, end)
+}
+
+fun String?.safeToBoolean(default: Boolean = false): Boolean {
+    if (this == null) return default
+    return try {
+        toBoolean()
+    } catch (e: Throwable) {
+        default
+    }
+}
+
+fun String?.safeToInt(default: Int = 0): Int {
+    if (this == null) return default
+    return try {
+        toInt()
+    } catch (e: Throwable) {
+        default
+    }
+}
+
+fun String?.safeToLong(default: Long = 0L): Long {
+    if (this == null) return default
+    return try {
+        toLong()
+    } catch (e: Throwable) {
+        default
+    }
+}
+
+fun String?.safeToFloat(default: Float = 0f): Float {
+    if (this == null) return default
+    return try {
+        toFloat()
+    } catch (e: Throwable) {
+        default
+    }
+}
+
+fun String?.safeToDouble(default: Double = 0.0): Double {
+    if (this == null) return default
+    return try {
+        toDouble()
+    } catch (e: Throwable) {
+        default
+    }
+}
+
+@ColorInt
+fun String?.safeToColor(@ColorInt default: Int = 0): Int {
+    return try {
+        Color.parseColor(this)
+    } catch (e: Throwable) {
+        default
+    }
+}
+
+/**
+ * 验证是否属于正确的 url 格式
+ */
+fun String.isNetworkUrl(): Boolean {
+    return URLUtil.isNetworkUrl(this)
+}
+
+/**
+ * 拼上图片前缀
+ */
+fun String.toLoadUrl(): String {
+    return if (isNetworkUrl()) {
+        this
+    } else {
+        IMAGE_URL_PREFIX + this
+    }
+}
+
+/**
+ * 验证手机号格式是否正确
+ */
+fun String.isValidPhoneFormat(): Boolean {
+    return startsWith(PHONE_FIRST_CHAR) && length == PHONE_LENGTH
+}
+
+/**
+ * 隐藏手机号
+ */
+fun String.hidePhone(): String {
+    return replace(Regex("(\\d{3})\\d{4}(\\d{4})"), "$1****$2")
 }
 
 
@@ -194,113 +266,6 @@ fun Number.isNotZero(): Boolean {
     return !isZero()
 }
 
-@Px
-fun Float.sp2px(): Int {
-    return DimensionUtil.sp2px(BaseApplication.context, this)
-}
-
-@Px
-fun Float.dp2px(): Int {
-    return DimensionUtil.dp2px(BaseApplication.context, this)
-}
-
-@Px
-fun Float.pt2px(context: Context): Int {
-    return DimensionUtil.pt2px(context, this)
-}
-
-fun Int.px2sp(): Float {
-    return DimensionUtil.px2sp(BaseApplication.context, this)
-}
-
-fun Int.px2dp(): Float {
-    return DimensionUtil.px2dp(BaseApplication.context, this)
-}
-
-fun Int.px2pt(context: Context): Float {
-    return DimensionUtil.px2pt(context, this)
-}
-
-
-//---------------------Date-------------------------------//
-
-
-fun Long.toDateString(pattern: String): String {
-    return DateUtil.timestampToDateString(this, pattern)
-}
-
-fun Long.easyTime(): String {
-    val now = System.currentTimeMillis()
-    val t = now - this
-    if (t < 0) {// 未来
-        return toDateString("yyyy-MM-dd HH:mm")
-    }
-    val oneMinute = 1000 * 60
-    val oneHour = oneMinute * 60
-    val oneDay = oneHour * 24
-    val c1 = Calendar.getInstance()
-    val c2 = Calendar.getInstance()
-    c1.time = Date(this)
-    c2.time = Date(now)
-    val day1 = c1.get(Calendar.DAY_OF_WEEK)
-    val day2 = c2.get(Calendar.DAY_OF_WEEK)
-    val isYesterday = t < oneDay * 2 && (day2 - day1 == 1 || day2 - day1 == -6)
-
-    val year1 = c1.get(Calendar.YEAR)
-    val year2 = c2.get(Calendar.YEAR)
-
-    val isSameYear = year1 == year2
-
-    return when {
-        !isSameYear -> toDateString("yyyy-MM-dd HH:mm")
-        isYesterday -> toDateString("昨天 HH:mm")
-        t < oneMinute -> "刚刚"
-        t < oneHour -> (t / oneMinute).toString() + "分钟前"
-        t < oneDay -> (t / oneHour).toString() + "小时前"
-        isSameYear -> toDateString("MM-dd HH:mm")
-        else -> toDateString("yyyy-MM-dd HH:mm")
-    }
-}
-
-
-//---------------------Network-------------------------------//
-
-/**
- * 验证是否属于正确的 url 格式
- */
-fun String.isNetworkUrl(): Boolean {
-    return URLUtil.isNetworkUrl(this)
-}
-
-/**
- * 拼上图片前缀
- */
-fun String.toLoadUrl(): String {
-    return if (isNetworkUrl()) {
-        this
-    } else {
-        IMAGE_URL_PREFIX + this
-    }
-}
-
-
-//---------------------Device-------------------------------//
-
-
-/**
- * 验证手机号格式是否正确
- */
-fun String.isValidPhoneFormat(): Boolean {
-    return startsWith(PHONE_FIRST_CHAR) && length == PHONE_LENGTH
-}
-
-/**
- * 隐藏手机号
- */
-fun String.hidePhone(): String {
-    return replace(Regex("(\\d{3})\\d{4}(\\d{4})"), "$1****$2")
-}
-
 
 //---------------------View-------------------------------//
 
@@ -378,64 +343,6 @@ fun View.setBgShapeCorners(
 }
 
 
-//---------------------SafeTrans-------------------------------//
-
-
-fun String?.safeToBoolean(default: Boolean = false): Boolean {
-    if (this == null) return default
-    return try {
-        toBoolean()
-    } catch (e: Throwable) {
-        default
-    }
-}
-
-fun String?.safeToInt(default: Int = 0): Int {
-    if (this == null) return default
-    return try {
-        toInt()
-    } catch (e: Throwable) {
-        default
-    }
-}
-
-fun String?.safeToLong(default: Long = 0L): Long {
-    if (this == null) return default
-    return try {
-        toLong()
-    } catch (e: Throwable) {
-        default
-    }
-}
-
-fun String?.safeToFloat(default: Float = 0f): Float {
-    if (this == null) return default
-    return try {
-        toFloat()
-    } catch (e: Throwable) {
-        default
-    }
-}
-
-fun String?.safeToDouble(default: Double = 0.0): Double {
-    if (this == null) return default
-    return try {
-        toDouble()
-    } catch (e: Throwable) {
-        default
-    }
-}
-
-@ColorInt
-fun String?.safeToColor(@ColorInt default: Int = 0): Int {
-    return try {
-        Color.parseColor(this)
-    } catch (e: Throwable) {
-        default
-    }
-}
-
-
 //---------------------Collections-------------------------------//
 
 
@@ -487,22 +394,6 @@ fun <T> List<T>.secondOrNull(): T? {
  */
 fun <T> List<T>.thirdOrNull(): T? {
     return if (size < 3) null else this[2]
-}
-
-
-//---------------------Database-------------------------------//
-
-
-inline fun <reified T : BaseObjectBoxEntity> T.putIntoBox() {
-    ObjectBox.put(this)
-}
-
-inline fun <reified T : BaseObjectBoxEntity> Collection<T>.putIntoBox() {
-    return ObjectBox.put(this)
-}
-
-inline fun <reified T : BaseObjectBoxEntity> KClass<T>.getAllFromBox(): List<T> {
-    return ObjectBox.getAll()
 }
 
 
