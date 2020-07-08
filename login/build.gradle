@@ -39,7 +39,6 @@ kapt {
 
 dependencies {
     implementation(fileTree(dir: "libs", include: libTypes))
-    implementation project(baseModule)
     implementation project(commonModule)
 
     kapt(libs["arouterKapt"])

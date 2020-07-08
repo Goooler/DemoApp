@@ -1,4 +1,3 @@
-//不写默认 proto2
 syntax = "proto3";
 
 package tutorial;

@@ -75,8 +75,6 @@ dependencies {
     api(libs["mmkv"])
     api(libs["fastjson"])
     api(libs["gson"])
-    api(libs["moshi"])
-    api(libs["protobufLite"])
 
     // async
     api(libs["eventBus"])

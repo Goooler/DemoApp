@@ -28,8 +28,8 @@ kapt {
 }
 
 dependencies {
-    implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation project(baseModule)
+    implementation fileTree(dir: "libs", include: libTypes)
+    api project(baseModule)
     api(libs["arouter"])
     kapt(libs["arouterKapt"])
 }

@@ -61,8 +61,10 @@ protobuf {
 
 dependencies {
     implementation(fileTree(dir: "libs", include: libTypes))
-    implementation project(baseModule)
     implementation project(commonModule)
+
+    implementation(libs["protobufLite"])
+    implementation(libs["moshi"])
 
     kapt(libs["arouterKapt"])
     kapt(libs["objectBoxKapt"])
