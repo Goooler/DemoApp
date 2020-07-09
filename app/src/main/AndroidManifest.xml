@@ -29,6 +29,7 @@
         <activity
             android:name=".main.ui.MainActivity"
             android:launchMode="singleTop" />
+        <activity android:name=".webview.WebActivity" />
         <activity android:name="io.goooler.demoapp.login.ui.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,6 +37,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service
+            android:name="com.tencent.smtt.export.external.DexClassLoaderProviderService"
+            android:label="dexopt"
+            android:process=":dexopt" />
     </application>
 
 </manifest>

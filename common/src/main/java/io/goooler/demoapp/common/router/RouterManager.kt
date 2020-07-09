@@ -20,4 +20,10 @@ object RouterManager {
         ARouter.getInstance().build(RouterPath.MAIN)
             .navigation()
     }
+
+    fun goWeb(url: String) {
+        ARouter.getInstance().build(RouterPath.WEB)
+            .withString(PARAMS, url)
+            .navigation()
+    }
 }

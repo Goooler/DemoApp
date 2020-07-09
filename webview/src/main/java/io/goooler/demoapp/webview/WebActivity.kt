@@ -1,18 +1,18 @@
-package io.goooler.demoapp.login.ui
+package io.goooler.demoapp.webview
 
 import android.os.Bundle
 import com.alibaba.android.arouter.facade.annotation.Route
 import io.goooler.demoapp.base.core.BaseActivity
 import io.goooler.demoapp.common.router.RouterManager
 import io.goooler.demoapp.common.router.RouterPath
-import io.goooler.demoapp.login.R
 
-@Route(path = RouterPath.LOGIN)
-class LoginActivity : BaseActivity() {
+@Route(path = RouterPath.WEB)
+class WebActivity : BaseActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.login_activity)
-        RouterManager.goMain()
-        finish()
+        intent.extras?.getString(RouterManager.PARAMS)?.let {
+            addFragment(android.R.id.content, WebFragment.newInstance(it))
+        }
     }
 }

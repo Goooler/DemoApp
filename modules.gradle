@@ -4,4 +4,25 @@ ext {
     loginModule = ":login"
     mainModule = ":main"
     adapterModule = ":adapter"
+    webModule = ":webview"
+
+    prefix = [
+            "app"    : "app_",
+            "base"   : "base_",
+            "common" : "common_",
+            "login"  : "login_",
+            "main"   : "main_",
+            "adapter": "adapter_",
+            "web"    : "web_"
+    ]
+
+    suffix = [
+            "app"    : "_app",
+            "base"   : "_base",
+            "common" : "_common",
+            "login"  : "_login",
+            "main"   : "_main",
+            "adapter": "_adapter",
+            "web"    : "_web"
+    ]
 }

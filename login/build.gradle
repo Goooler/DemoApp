@@ -3,7 +3,7 @@ apply plugin: "kotlin-android"
 apply plugin: "kotlin-kapt"
 
 android {
-    resourcePrefix "login_"
+    resourcePrefix(prefix["login"])
     compileSdkVersion(appTargetSdk)
     buildToolsVersion(appBuildTool)
     defaultConfig {
@@ -13,6 +13,7 @@ android {
         versionName(appVersionName)
         ndk { abiFilters(ndkLibs) }
         vectorDrawables.useSupportLibrary = true
+        versionNameSuffix(suffix["login"])
     }
     buildFeatures {
         dataBinding = true

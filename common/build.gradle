@@ -3,6 +3,7 @@ apply plugin: "kotlin-android"
 apply plugin: "kotlin-kapt"
 
 android {
+    resourcePrefix(prefix["common"])
     compileSdkVersion(appTargetSdk)
     buildToolsVersion(appBuildTool)
     defaultConfig {
@@ -10,6 +11,7 @@ android {
         targetSdkVersion(appTargetSdk)
         versionCode(buildTime().toInteger())
         versionName(appVersionName)
+        versionNameSuffix(suffix["common"])
     }
 
     compileOptions {

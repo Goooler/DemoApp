@@ -4,11 +4,13 @@ import androidx.annotation.StringDef
 
 @StringDef(
     RouterPath.LOGIN,
-    RouterPath.MAIN
+    RouterPath.MAIN,
+    RouterPath.WEB
 )
 annotation class RouterPath {
     companion object {
-        const val LOGIN: String = "/login/"
-        const val MAIN: String = "/main/"
+        const val LOGIN = "/login/"
+        const val MAIN = "/main/"
+        const val WEB = "/web/"
     }
 }

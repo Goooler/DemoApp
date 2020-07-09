@@ -13,6 +13,7 @@ android {
         ndk { abiFilters(ndkLibs) }
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled = true
+        versionNameSuffix(suffix["base"])
     }
 
     buildFeatures {
@@ -55,6 +56,7 @@ dependencies {
     api(libs["lottie"])
 
     // network
+    api(libs["tbs"])
     api(libs["okHttp"])
     api(libs["retrofit"])
     api(libs["glide"])

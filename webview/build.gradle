@@ -3,7 +3,7 @@ apply plugin: "kotlin-android"
 apply plugin: "kotlin-kapt"
 
 android {
-    resourcePrefix(prefix["adapter"])
+    resourcePrefix(prefix["web"])
     compileSdkVersion(appTargetSdk)
     buildToolsVersion(appBuildTool)
     defaultConfig {
@@ -13,7 +13,7 @@ android {
         versionName(appVersionName)
         ndk { abiFilters(ndkLibs) }
         vectorDrawables.useSupportLibrary = true
-        versionNameSuffix(suffix["adapter"])
+        versionNameSuffix(suffix["web"])
     }
     buildFeatures {
         dataBinding = true
@@ -28,7 +28,15 @@ android {
     }
 }
 
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
+}
+
 dependencies {
     implementation(fileTree(dir: "libs", include: libTypes))
     implementation project(commonModule)
+
+    kapt(libs["arouterKapt"])
 }

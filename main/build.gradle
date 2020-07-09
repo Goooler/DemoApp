@@ -4,7 +4,7 @@ apply plugin: "kotlin-kapt"
 apply plugin: "com.google.protobuf"
 
 android {
-    resourcePrefix "main_"
+    resourcePrefix(prefix["main"])
     compileSdkVersion(appTargetSdk)
     buildToolsVersion(appBuildTool)
     defaultConfig {
@@ -14,6 +14,7 @@ android {
         versionName(appVersionName)
         ndk { abiFilters(ndkLibs) }
         vectorDrawables.useSupportLibrary = true
+        versionNameSuffix(suffix["main"])
     }
     buildFeatures {
         dataBinding = true
