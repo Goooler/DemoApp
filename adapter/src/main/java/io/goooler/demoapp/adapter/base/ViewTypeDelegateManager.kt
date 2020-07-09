@@ -32,7 +32,7 @@ class ViewTypeDelegateManager<M : IModelType> {
      */
     internal fun onBindVH(binding: ViewDataBinding, m: M) {
         if (mIVDs.size() == 0) return
-        mIVDs.get(m.getViewType())?.onBindVH(binding, m)
+        mIVDs.get(m.viewType)?.onBindVH(binding, m)
     }
 
     /**

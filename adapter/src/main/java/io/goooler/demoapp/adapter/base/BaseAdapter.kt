@@ -38,7 +38,7 @@ abstract class BaseAdapter<T : IModelType> : RecyclerView.Adapter<BaseViewHolder
     }
 
     override fun getItemViewType(position: Int): Int {
-        return list[position].getViewType()
+        return list[position].viewType
     }
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {

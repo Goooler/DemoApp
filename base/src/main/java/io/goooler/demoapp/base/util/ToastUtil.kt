@@ -12,6 +12,9 @@ import androidx.annotation.MainThread
  * Toast 简单封装
  */
 object ToastUtil {
+    private val isMainThread = Looper.getMainLooper().thread === Thread.currentThread()
+
+    private var toast: Toast? = null
 
     /**
      * 可在子线程使用的 toast
@@ -21,7 +24,7 @@ object ToastUtil {
     @SuppressLint("WrongThread")
     @AnyThread
     fun showToastInAnyThread(context: Context, text: String) {
-        if (isMainThread()) {
+        if (isMainThread) {
             showToastInMainThread(context, text)
         } else {
             Looper.prepare()
@@ -33,12 +36,16 @@ object ToastUtil {
     /**
      * 只在主线程调用
      */
+    @SuppressLint("ShowToast")
     @MainThread
+    @Synchronized
     fun showToastInMainThread(context: Context, text: String) {
-        Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
-    }
-
-    private fun isMainThread(): Boolean {
-        return Looper.getMainLooper().thread === Thread.currentThread()
+        // 把上一条先置空，再显示下一条
+        if (toast != null) {
+            toast!!.cancel()
+            toast = null
+        }
+        toast = Toast.makeText(context, text, Toast.LENGTH_SHORT)
+        toast!!.show()
     }
 }

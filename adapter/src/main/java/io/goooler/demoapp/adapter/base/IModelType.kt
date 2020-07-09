@@ -11,5 +11,5 @@ interface IModelType {
     /**
      * 获取 viewType，把layout id 当作 viewType。
      */
-    fun getViewType(): Int
+    val viewType: Int
 }
