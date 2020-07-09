@@ -1,4 +1,4 @@
-package io.goooler.demoapp.adapter.base
+package io.goooler.demoapp.adapter.rv.base
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -13,7 +13,8 @@ import androidx.recyclerview.widget.RecyclerView
  * @version 1.0.0
  * @since 1.0.0
  */
-abstract class BaseAdapter<T : IModelType> : RecyclerView.Adapter<BaseViewHolder>() {
+abstract class BaseRvAdapter<T : IModelType> :
+    RecyclerView.Adapter<BaseRvAdapter.BaseViewHolder>() {
 
     private val ivdManager: ViewTypeDelegateManager<T> = ViewTypeDelegateManager()
 
@@ -80,4 +81,6 @@ abstract class BaseAdapter<T : IModelType> : RecyclerView.Adapter<BaseViewHolder
     interface IFix<T> {
         fun fix(list: List<T>): List<T>
     }
+
+    class BaseViewHolder(val binding: ViewDataBinding) : RecyclerView.ViewHolder(binding.root)
 }

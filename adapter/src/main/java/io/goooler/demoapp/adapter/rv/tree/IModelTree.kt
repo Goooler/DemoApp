@@ -1,6 +1,6 @@
 package io.goooler.demoapp.adapter.tree
 
-import io.goooler.demoapp.adapter.base.IModelType
+import io.goooler.demoapp.adapter.rv.base.IModelType
 
 /**
  * Created on 2019/08/22.

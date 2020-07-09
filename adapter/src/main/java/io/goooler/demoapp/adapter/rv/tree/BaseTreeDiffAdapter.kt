@@ -1,8 +1,9 @@
-package io.goooler.demoapp.adapter.tree
+package io.goooler.demoapp.adapter.rv.tree
 
-import io.goooler.demoapp.adapter.base.BaseAdapter
-import io.goooler.demoapp.adapter.diff.BaseDiffAdapter
-import io.goooler.demoapp.adapter.diff.IModelDiff
+import io.goooler.demoapp.adapter.rv.base.BaseRvAdapter
+import io.goooler.demoapp.adapter.rv.diff.BaseDiffAdapter
+import io.goooler.demoapp.adapter.rv.diff.IModelDiff
+import io.goooler.demoapp.adapter.tree.IModelTree
 
 /**
  * Created on 2019/11/18.
@@ -18,8 +19,8 @@ abstract class BaseTreeDiffAdapter<T> :
     }
 }
 
-fun <T : IModelTree<T>> BaseAdapter<T>.fixToTree() {
-    setIFix(object : BaseAdapter.IFix<T> {
+internal fun <T : IModelTree<T>> BaseRvAdapter<T>.fixToTree() {
+    setIFix(object : BaseRvAdapter.IFix<T> {
         override fun fix(list: List<T>) = ArrayList<T>().also {
             list.forEach { tree ->
                 it.addAll(IModelTree.ergodic(tree))

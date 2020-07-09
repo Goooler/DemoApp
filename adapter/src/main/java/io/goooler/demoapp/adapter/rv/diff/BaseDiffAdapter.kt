@@ -1,8 +1,8 @@
-package io.goooler.demoapp.adapter.diff
+package io.goooler.demoapp.adapter.rv.diff
 
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
-import io.goooler.demoapp.adapter.base.BaseAdapter
+import io.goooler.demoapp.adapter.rv.base.BaseRvAdapter
 
 /**
  * Created on 2019/11/18.
@@ -11,7 +11,7 @@ import io.goooler.demoapp.adapter.base.BaseAdapter
  * @version 1.1.0
  * @since 1.1.0
  */
-abstract class BaseDiffAdapter<T : IModelDiff<T>> : BaseAdapter<T>() {
+abstract class BaseDiffAdapter<T : IModelDiff<T>> : BaseRvAdapter<T>() {
 
     private val mDiffer: AsyncListDiffer<T> by lazy {
         AsyncListDiffer(this, diffCallBack())

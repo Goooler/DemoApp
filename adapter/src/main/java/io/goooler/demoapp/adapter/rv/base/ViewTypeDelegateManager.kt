@@ -1,4 +1,4 @@
-package io.goooler.demoapp.adapter.base
+package io.goooler.demoapp.adapter.rv.base
 
 import android.util.SparseArray
 import androidx.databinding.ViewDataBinding
@@ -20,7 +20,7 @@ class ViewTypeDelegateManager<M : IModelType> {
      * @param binding ViewDataBinding
      * @param viewType viewType
      */
-    internal fun onCreateVH(binding: ViewDataBinding, viewType: Int) {
+    fun onCreateVH(binding: ViewDataBinding, viewType: Int) {
         if (mIVDs.size() == 0) return
         mIVDs.get(viewType)?.onCreateVH(binding)
     }
@@ -30,7 +30,7 @@ class ViewTypeDelegateManager<M : IModelType> {
      * @param binding ViewDataBinding
      * @param m model
      */
-    internal fun onBindVH(binding: ViewDataBinding, m: M) {
+    fun onBindVH(binding: ViewDataBinding, m: M) {
         if (mIVDs.size() == 0) return
         mIVDs.get(m.viewType)?.onBindVH(binding, m)
     }

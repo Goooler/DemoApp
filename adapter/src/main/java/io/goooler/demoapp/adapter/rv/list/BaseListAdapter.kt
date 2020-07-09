@@ -1,7 +1,7 @@
-package io.goooler.demoapp.adapter.list
+package io.goooler.demoapp.adapter.rv.list
 
-import io.goooler.demoapp.adapter.base.BaseAdapter
-import io.goooler.demoapp.adapter.base.IModelType
+import io.goooler.demoapp.adapter.rv.base.BaseRvAdapter
+import io.goooler.demoapp.adapter.rv.base.IModelType
 
 /**
  * Created on 2019/08/22.
@@ -10,7 +10,7 @@ import io.goooler.demoapp.adapter.base.IModelType
  * @version 1.0.0
  * @since 1.0.0
  */
-abstract class BaseListAdapter<M : IModelType> : BaseAdapter<M>(), IMutableListData<M> {
+abstract class BaseListAdapter<M : IModelType> : BaseRvAdapter<M>(), IMutableListData<M> {
 
     private val items = ArrayList<M>()
 

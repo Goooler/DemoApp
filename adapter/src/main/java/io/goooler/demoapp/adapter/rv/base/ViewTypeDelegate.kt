@@ -1,4 +1,4 @@
-package io.goooler.demoapp.adapter.base
+package io.goooler.demoapp.adapter.rv.base
 
 import androidx.databinding.ViewDataBinding
 

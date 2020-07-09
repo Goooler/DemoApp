@@ -1,4 +1,4 @@
-package io.goooler.demoapp.adapter.list
+package io.goooler.demoapp.adapter.rv.list
 
 /**
  * Created on 2019/09/30.
