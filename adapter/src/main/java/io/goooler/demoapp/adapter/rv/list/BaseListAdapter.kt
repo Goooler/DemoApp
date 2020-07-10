@@ -1,5 +1,7 @@
 package io.goooler.demoapp.adapter.rv.list
 
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import io.goooler.demoapp.adapter.rv.base.BaseRvAdapter
 import io.goooler.demoapp.adapter.rv.base.IModelType
 
@@ -12,22 +14,28 @@ import io.goooler.demoapp.adapter.rv.base.IModelType
  */
 abstract class BaseListAdapter<M : IModelType> : BaseRvAdapter<M>(), IMutableListData<M> {
 
-    private val items = ArrayList<M>()
+    override val modelList: MutableList<M> = ArrayList()
 
-    override val list: List<M>
-        get() = items
-
-    override fun getData(): MutableList<M> {
-        return items
+    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
+        super.onAttachedToRecyclerView(recyclerView)
+        (recyclerView.layoutManager as? GridLayoutManager)?.let {
+            it.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                override fun getSpanSize(position: Int): Int {
+                    return modelList[position].getSpanSize()
+                }
+            }
+        }
     }
+
+    override fun getData(): MutableList<M> = modelList
 
     /**
      * 设置数据
      */
     override fun setData(list: List<M>) {
-        items.run {
+        modelList.run {
             clear()
-            addAll(list.multiList())
+            addAll(list.toMultiList())
         }
         notifyDataSetChanged()
     }
@@ -36,19 +44,18 @@ abstract class BaseListAdapter<M : IModelType> : BaseRvAdapter<M>(), IMutableLis
      * 添加数据
      */
     override fun addData(list: List<M>) {
-        val multiList = list.multiList()
-        items.addAll(multiList)
-        notifyItemRangeInserted(items.size, multiList.size)
+        val multiList = list.toMultiList()
+        modelList.addAll(multiList)
+        notifyItemRangeInserted(list.size, multiList.size)
     }
 
     /**
      * 只刷新局部数据。
      */
     override fun changeData(list: List<M>) {
-        list.multiList().forEach {
-            if (it in items) {
-                val index = items.indexOf(it)
-                notifyItemChanged(index)
+        modelList.toMultiList().forEach {
+            if (it in modelList) {
+                notifyItemChanged(modelList.indexOf(it))
             }
         }
     }
@@ -57,10 +64,10 @@ abstract class BaseListAdapter<M : IModelType> : BaseRvAdapter<M>(), IMutableLis
      * 只移除局部数据。
      */
     override fun removeData(list: List<M>) {
-        list.multiList().forEach {
-            if (it in items) {
-                val index = items.indexOf(it)
-                items.remove(it)
+        list.toMultiList().forEach {
+            if (it in modelList) {
+                val index = modelList.indexOf(it)
+                modelList.remove(it)
                 notifyItemRemoved(index)
             }
         }
@@ -70,6 +77,6 @@ abstract class BaseListAdapter<M : IModelType> : BaseRvAdapter<M>(), IMutableLis
      * 清空数据
      */
     override fun clearData() {
-        items.clear()
+        modelList.clear()
     }
 }

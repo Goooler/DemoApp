@@ -20,11 +20,9 @@ abstract class BaseTreeDiffAdapter<T> :
 }
 
 internal fun <T : IModelTree<T>> BaseRvAdapter<T>.fixToTree() {
-    setIFix(object : BaseRvAdapter.IFix<T> {
-        override fun fix(list: List<T>) = ArrayList<T>().also {
-            list.forEach { tree ->
-                it.addAll(IModelTree.ergodic(tree))
-            }
-        }
-    })
+    fix = object : BaseRvAdapter.IFix<T> {
+        override fun fix(list: List<T>) = list.map {
+            IModelTree.ergodic(it)
+        }.flatten()
+    }
 }

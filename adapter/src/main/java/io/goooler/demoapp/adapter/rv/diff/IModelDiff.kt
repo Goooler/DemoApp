@@ -13,14 +13,14 @@ interface IModelDiff<D : IModelDiff<D>> : IModelType {
     /**
      * 默认同一个对象内容一样。
      */
-    fun areContentsTheSame(other: D): Boolean {
+    fun isContentTheSame(other: D): Boolean {
         return this == other
     }
 
     /**
      * 默认同一个对象就是同一个 item。
      */
-    fun areItemsTheSame(other: D): Boolean {
+    fun isItemTheSame(other: D): Boolean {
         return this == other
     }
 }

@@ -12,6 +12,6 @@ import io.goooler.demoapp.adapter.tree.IModelTree
  */
 abstract class BaseTreeAdapter<T> : BaseListAdapter<T>() where  T : IModelTree<T> {
     init {
-        this.fixToTree()
+        fixToTree()
     }
 }

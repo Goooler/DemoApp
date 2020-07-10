@@ -13,32 +13,23 @@ import io.goooler.demoapp.adapter.rv.base.BaseRvAdapter
  */
 abstract class BaseDiffAdapter<T : IModelDiff<T>> : BaseRvAdapter<T>() {
 
-    private val mDiffer: AsyncListDiffer<T> by lazy {
+    val differ: AsyncListDiffer<T> by lazy(LazyThreadSafetyMode.NONE) {
         AsyncListDiffer(this, diffCallBack())
     }
 
-    override val list: List<T>
-        get() = mDiffer.currentList
+    override val modelList: MutableList<T> = differ.currentList
 
-    fun submitList(list: List<T>) {
-        mDiffer.submitList(list.multiList())
-    }
+    fun submitList(list: List<T>) = differ.submitList(list.toMultiList())
 
-    fun differ(): AsyncListDiffer<T> {
-        return mDiffer
-    }
-
-    protected open fun diffCallBack(): DiffUtil.ItemCallback<T> {
-        return diffCallBack
-    }
+    protected open fun diffCallBack(): DiffUtil.ItemCallback<T> = diffCallBack
 
     private val diffCallBack = object : DiffUtil.ItemCallback<T>() {
         override fun areContentsTheSame(oldItem: T, newItem: T): Boolean {
-            return oldItem.areContentsTheSame(newItem)
+            return oldItem.isContentTheSame(newItem)
         }
 
         override fun areItemsTheSame(oldItem: T, newItem: T): Boolean {
-            return oldItem.areItemsTheSame(newItem)
+            return oldItem.isItemTheSame(newItem)
         }
 
         override fun getChangePayload(oldItem: T, newItem: T): Any? {

@@ -18,7 +18,9 @@ abstract class BaseRvAdapter<T : IModelType> :
 
     private val ivdManager: ViewTypeDelegateManager<T> = ViewTypeDelegateManager()
 
-    private var fix: IFix<T>? = null
+    var fix: IFix<T>? = null
+
+    protected abstract val modelList: MutableList<T>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
         val holder = createVH(parent, viewType)
@@ -28,19 +30,15 @@ abstract class BaseRvAdapter<T : IModelType> :
     }
 
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
-        val item = list[position]
+        val item = modelList[position]
         onBindVHForAll(holder.binding, item)
         ivdManager.onBindVH(holder.binding, item)
         holder.binding.executePendingBindings()
     }
 
-    override fun getItemCount(): Int {
-        return list.size
-    }
+    override fun getItemCount(): Int = modelList.size
 
-    override fun getItemViewType(position: Int): Int {
-        return list[position].viewType
-    }
+    override fun getItemViewType(position: Int): Int = modelList[position].viewType
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         addDelegate(ivdManager)
@@ -52,14 +50,12 @@ abstract class BaseRvAdapter<T : IModelType> :
         super.onDetachedFromRecyclerView(recyclerView)
     }
 
-    protected abstract val list: List<T>
-
     abstract fun onCreateVHForAll(binding: ViewDataBinding)
 
     abstract fun onBindVHForAll(binding: ViewDataBinding, model: T)
 
     /**
-     * 初始化各种 viewType 处理委托。添加到 Manager 中。
+     * 初始化各种 viewType 处理委托，添加到 Manager 中。
      */
     protected open fun addDelegate(manager: ViewTypeDelegateManager<T>) {}
 
@@ -70,12 +66,8 @@ abstract class BaseRvAdapter<T : IModelType> :
         return BaseViewHolder(binding)
     }
 
-    protected fun List<T>.multiList(): List<T> {
+    protected fun List<T>.toMultiList(): List<T> {
         return fix?.fix(this) ?: this
-    }
-
-    fun setIFix(iMulti: IFix<T>) {
-        fix = iMulti
     }
 
     interface IFix<T> {

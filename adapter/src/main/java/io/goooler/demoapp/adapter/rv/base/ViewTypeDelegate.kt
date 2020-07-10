@@ -16,7 +16,7 @@ interface ViewTypeDelegate<DB : ViewDataBinding, M : IModelType> {
      * viewType 满足某添加后委托生效。使用时写跟 M 的 getViewType() 值相同。
      * @return viewType
      */
-    fun getViewType(): Int
+    val viewType: Int
 
     /**
      * 当创建 ViewHolder 时做什么事。

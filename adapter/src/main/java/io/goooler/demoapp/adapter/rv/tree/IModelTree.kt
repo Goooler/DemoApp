@@ -27,15 +27,15 @@ interface IModelTree<M : IModelTree<M>> : IModelType {
          * 从一颗树中获取所有节点。
          */
         fun <M : IModelTree<M>> ergodic(tree: M): List<M> {
-            return ArrayList<M>().also { list ->
-                findNode(tree, list)
+            return ArrayList<M>().also {
+                findNode(tree, it)
             }
         }
 
         /**
          * 递归遍历。
          */
-        private fun <M : IModelTree<M>> findNode(tree: M, list: ArrayList<M>) {
+        private fun <M : IModelTree<M>> findNode(tree: M, list: MutableList<M>) {
             val childTreeList = tree.getChildren()
             if (childTreeList == null) {
                 list.add(tree)
