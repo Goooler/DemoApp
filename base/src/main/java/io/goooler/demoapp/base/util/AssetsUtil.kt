@@ -9,8 +9,7 @@ import java.io.*
  */
 
 object AssetsUtil {
-    private val assetsManager: AssetManager
-        get() = BaseApplication.context.assets
+    private val assetsManager: AssetManager = BaseApplication.context.assets
 
     fun readStringFromAssets(fileName: String): String? {
         var jsonString: String? = null

@@ -48,7 +48,7 @@
                 android:layout_height="37dp"
                 android:onClick="@{()->listener.onCloseClick()}"
                 android:padding="10dp"
-                android:src="@drawable/common_ic_close_dialog"
+                android:src="@drawable/ic_close"
                 android:tint="@color/white"
                 app:layout_constraintBottom_toBottomOf="@id/tv_title"
                 app:layout_constraintEnd_toEndOf="parent"

@@ -49,3 +49,11 @@ object ToastUtil {
         toast!!.show()
     }
 }
+
+fun String.showToastInMainThread(context: Context) {
+    ToastUtil.showToastInAnyThread(context, this)
+}
+
+fun String.showToastInAnyThread(context: Context) {
+    ToastUtil.showToastInAnyThread(context, this)
+}

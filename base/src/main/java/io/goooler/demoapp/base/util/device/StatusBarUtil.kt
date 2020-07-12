@@ -148,7 +148,7 @@ object StatusBarUtil {
     }
 
     /**
-     * 设置状态栏字体图标为深色，需要MIUIV6以上
+     * 设置状态栏字体图标为深色，需要 MIUI V6 以上
      *
      * @param window 需要设置的窗口
      * @param dark   是否把状态栏字体及图标颜色设置为深色

@@ -54,6 +54,8 @@ dependencies {
     api(libs["smartRefreshLayout"])
     api(libs["mpChart"])
     api(libs["lottie"])
+    api(libs["flycoTabLayout"])
+    api(libs["baseRvHelper"])
 
     // network
     api(libs["tbs"])

@@ -82,8 +82,7 @@ object DeviceUtil {
      *
      * @return .
      */
-    val deviceModel: String
-        get() = Build.MODEL.trim { it <= ' ' }
+    val deviceModel: String = Build.MODEL.trim { it <= ' ' }
 
     /**
      * 是否存在导航栏
@@ -143,40 +142,35 @@ object DeviceUtil {
      *
      * @return version
      */
-    val release: String
-        get() = Build.VERSION.RELEASE
+    val release: String = Build.VERSION.RELEASE
 
     /**
      * 获取设备型号
      *
      * @return device model
      */
-    val model: String
-        get() = Build.MODEL.trim { it <= ' ' }
+    val model: String = Build.MODEL.trim { it <= ' ' }
 
     /**
      * 获取设备品牌
      *
      * @return BRAND
      */
-    val brand: String
-        get() = Build.BRAND
+    val brand: String = Build.BRAND
 
     /**
      * 获取设备制造商
      *
      * @return .
      */
-    val manufacturer: String
-        get() = Build.MANUFACTURER
+    val manufacturer: String = Build.MANUFACTURER
 
     /**
      * 获取CPU指令集
      *
      * @return .
      */
-    val cpu: String
-        get() = Build.SUPPORTED_ABIS[0]
+    val cpu: String = Build.SUPPORTED_ABIS[0]
 
     /**
      * 获取屏幕物理尺寸（寸）

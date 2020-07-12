@@ -1,7 +1,6 @@
 package io.goooler.demoapp.adapter.rv.tree
 
 import io.goooler.demoapp.adapter.rv.list.BaseListAdapter
-import io.goooler.demoapp.adapter.tree.IModelTree
 
 /**
  * Created on 2019/11/18.

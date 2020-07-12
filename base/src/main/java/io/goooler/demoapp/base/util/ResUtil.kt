@@ -14,8 +14,7 @@ import io.goooler.demoapp.base.core.BaseApplication
 @SuppressLint("NewApi")
 object ResUtil {
 
-    private val resources: Resources
-        get() = BaseApplication.context.resources
+    private val resources: Resources = BaseApplication.context.resources
 
     fun getString(@StringRes id: Int): String {
         return resources.getString(id)

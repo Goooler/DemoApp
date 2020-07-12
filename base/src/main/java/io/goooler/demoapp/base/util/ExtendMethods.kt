@@ -13,6 +13,7 @@ import io.goooler.demoapp.base.BuildConfig
 import io.goooler.demoapp.base.model.Constants.IMAGE_URL_PREFIX
 import io.goooler.demoapp.base.model.Constants.PHONE_FIRST_CHAR
 import io.goooler.demoapp.base.model.Constants.PHONE_LENGTH
+import io.goooler.demoapp.base.model.SpKeys
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -28,17 +29,15 @@ fun Any?.log() {
     LogUtil.d(this)
 }
 
-val isDebug: Boolean
-    get() = BuildConfig.DEBUG
+val isDebug: Boolean = BuildConfig.DEBUG
 
-val versionCode: Int
-    get() = BuildConfig.VERSION_CODE
+val isFirstRun: Boolean = SpUtil.getBoolean(SpKeys.SP_FIRST_RUN)
 
-val currentTimeMillis: Long
-    get() = System.currentTimeMillis()
+val versionCode: Int = BuildConfig.VERSION_CODE
 
-val currentThreadName: String
-    get() = Thread.currentThread().name
+val currentTimeMillis: Long = System.currentTimeMillis()
+
+val currentThreadName: String = Thread.currentThread().name
 
 fun <T> unsafeLazy(initializer: () -> T) = lazy(LazyThreadSafetyMode.NONE, initializer)
 

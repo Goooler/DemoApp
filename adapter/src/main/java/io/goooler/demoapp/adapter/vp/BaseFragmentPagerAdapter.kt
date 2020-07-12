@@ -9,7 +9,7 @@ import androidx.viewpager.widget.PagerAdapter
  * 继承自 FragmentStatePagerAdapter，会销毁 fragment
  */
 abstract class BaseFragmentPagerAdapter(
-    private val fragmentManager: FragmentManager,
+    fragmentManager: FragmentManager,
     behavior: Int = BEHAVIOR_SET_USER_VISIBLE_HINT
 ) : FragmentStatePagerAdapter(fragmentManager, behavior) {
 

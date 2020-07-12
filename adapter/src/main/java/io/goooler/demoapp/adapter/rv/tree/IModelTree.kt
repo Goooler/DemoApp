@@ -1,4 +1,4 @@
-package io.goooler.demoapp.adapter.tree
+package io.goooler.demoapp.adapter.rv.tree
 
 import io.goooler.demoapp.adapter.rv.base.IModelType
 
