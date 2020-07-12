@@ -9,11 +9,16 @@ android {
     defaultConfig {
         minSdkVersion(appMinSdk)
         targetSdkVersion(appTargetSdk)
-        versionCode(buildTime().toInteger())
+        versionCode(buildTime())
         versionName(appVersionName)
         ndk { abiFilters(ndkLibs) }
         vectorDrawables.useSupportLibrary = true
         versionNameSuffix(suffix["web"])
+    }
+    flavorDimensions "channel"
+    productFlavors {
+        daily {}
+        online {}
     }
     buildFeatures {
         dataBinding = true
@@ -35,7 +40,6 @@ kapt {
 }
 
 dependencies {
-    implementation(fileTree(dir: "libs", include: libTypes))
     implementation project(commonModule)
 
     kapt(libs["arouterKapt"])

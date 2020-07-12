@@ -8,7 +8,7 @@ android {
     defaultConfig {
         minSdkVersion(appMinSdk)
         targetSdkVersion(appTargetSdk)
-        versionCode(buildTime().toInteger())
+        versionCode(buildTime())
         versionName(appVersionName)
         ndk { abiFilters(ndkLibs) }
         vectorDrawables.useSupportLibrary = true
@@ -31,7 +31,7 @@ android {
 }
 
 dependencies {
-    api(fileTree(dir: "libs", include: libTypes))
+    api(fileTree(dir: libPath, include: libTypes))
     // official
     coreLibraryDesugaring(libs["desugar"])
     api(libs["kotlin"])

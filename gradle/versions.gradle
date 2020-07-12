@@ -43,7 +43,6 @@ ext {
     liveDataBusVersion = "1.6.1"
     rxAndroidVersion = "3.0.0"
     rxJavaVersion = "3.0.4"
-    rxFastJsonConverterVersion = "2.1.0"
     mpChartVersion = "v3.1.0"
     lottieVersion = "3.0.1"
     smartRefreshLayoutVersion = "2.0.1"
@@ -66,51 +65,52 @@ ext {
     protobufVersion = "0.8.12"
 
     ndkLibs = ["armeabi-v7a"] as String[]
-    libTypes = ["*.jar", "*.aar"] as String[]
+    libPath = "libs"
+    libTypes = ["*.jar", "*.aar"]
 
     libs = [
-            "gradlePlugin"      : "com.android.tools.build:gradle:$gradleVersion",
-            "kotlinPlugin"      : "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion",
-            "protobufPlugin"    : "com.google.protobuf:protobuf-gradle-plugin:$protobufVersion",
+            gradlePlugin      : "com.android.tools.build:gradle:$gradleVersion",
+            kotlinPlugin      : "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion",
+            protobufPlugin    : "com.google.protobuf:protobuf-gradle-plugin:$protobufVersion",
 
-            "core"              : "androidx.core:core-ktx:$coreVersion",
-            "desugar"           : "com.android.tools:desugar_jdk_libs:$desugarVersion",
-            "appCompat"         : "androidx.appcompat:appcompat:$appCompatVersion",
-            "annotation"        : "androidx.annotation:annotation:$annotationVersion",
-            "multiDex"          : "androidx.multidex:multidex:$multiDexVersion",
-            "fragment"          : "androidx.fragment:fragment-ktx:$fragmentVersion",
-            "legacySupport"     : "androidx.legacy:legacy-support-v4:$supportVersion",
-            "preference"        : "androidx.preference:preference:$preferenceVersion",
-            "palette"           : "androidx.palette:palette-ktx:$cardViewVersion",
-            "constraintLayout"  : "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion",
-            "material"          : "com.google.android.material:material:$materialVersion",
-            "recyclerView"      : "androidx.recyclerview:recyclerview:$recyclerViewVersion",
-            "workManager"       : "androidx.work:work-runtime-ktx:$workVersion",
-            "flexBox"           : "com.google.android:flexbox:$flexBoxVersion",
-            "cardView"          : "androidx.cardview:cardview:$cardViewVersion",
-            "mpChart"           : "com.github.PhilJay:MPAndroidChart:$mpChartVersion",
-            "lottie"            : "com.airbnb.android:lottie:$lottieVersion",
-            "eventBus"          : "org.greenrobot:eventbus:$eventBusVersion",
-            "liveDataBus"       : "com.jeremyliao:live-event-bus-x:$liveDataBusVersion",
-            "fastjson"          : "com.alibaba:fastjson:$fastjsonVersion",
-            "arouter"           : "com.alibaba:arouter-api:$arouterVersion",
-            "gson"              : "com.google.code.gson:gson:$gsonVersion",
-            "moshi"             : "com.squareup.moshi:moshi-kotlin:$moshiVersion",
-            "luban"             : "top.zibin:Luban:$lubanVersion",
-            "leakCanary"        : "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion",
-            "mmkv"              : "com.tencent:mmkv-static:$mmkvVersion",
-            "protoc"            : "com.google.protobuf:protoc:$protocVersion",
-            "protobufLite"      : "com.google.protobuf:protobuf-javalite:$protocVersion",
-            "tbs"               : "com.tencent.tbs.tbssdk:sdk:$tbsVersion",
-            "baseRvHelper"      : "com.github.CymChad:BaseRecyclerViewAdapterHelper:$baseRvHelperVersion",
-            "flycoTabLayout"    : "com.github.ernestchang:flycotablayout:$flycoTabLayoutVersion",
+            core              : "androidx.core:core-ktx:$coreVersion",
+            desugar           : "com.android.tools:desugar_jdk_libs:$desugarVersion",
+            appCompat         : "androidx.appcompat:appcompat:$appCompatVersion",
+            annotation        : "androidx.annotation:annotation:$annotationVersion",
+            multiDex          : "androidx.multidex:multidex:$multiDexVersion",
+            fragment          : "androidx.fragment:fragment-ktx:$fragmentVersion",
+            legacySupport     : "androidx.legacy:legacy-support-v4:$supportVersion",
+            preference        : "androidx.preference:preference:$preferenceVersion",
+            palette           : "androidx.palette:palette-ktx:$cardViewVersion",
+            constraintLayout  : "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion",
+            material          : "com.google.android.material:material:$materialVersion",
+            recyclerView      : "androidx.recyclerview:recyclerview:$recyclerViewVersion",
+            workManager       : "androidx.work:work-runtime-ktx:$workVersion",
+            flexBox           : "com.google.android:flexbox:$flexBoxVersion",
+            cardView          : "androidx.cardview:cardview:$cardViewVersion",
+            mpChart           : "com.github.PhilJay:MPAndroidChart:$mpChartVersion",
+            lottie            : "com.airbnb.android:lottie:$lottieVersion",
+            eventBus          : "org.greenrobot:eventbus:$eventBusVersion",
+            liveDataBus       : "com.jeremyliao:live-event-bus-x:$liveDataBusVersion",
+            fastjson          : "com.alibaba:fastjson:$fastjsonVersion",
+            arouter           : "com.alibaba:arouter-api:$arouterVersion",
+            gson              : "com.google.code.gson:gson:$gsonVersion",
+            moshi             : "com.squareup.moshi:moshi-kotlin:$moshiVersion",
+            luban             : "top.zibin:Luban:$lubanVersion",
+            leakCanary        : "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion",
+            mmkv              : "com.tencent:mmkv-static:$mmkvVersion",
+            protoc            : "com.google.protobuf:protoc:$protocVersion",
+            protobufLite      : "com.google.protobuf:protobuf-javalite:$protocVersion",
+            tbs               : "com.tencent.tbs.tbssdk:sdk:$tbsVersion",
+            baseRvHelper      : "com.github.CymChad:BaseRecyclerViewAdapterHelper:$baseRvHelperVersion",
+            flycoTabLayout    : "com.github.ernestchang:flycotablayout:$flycoTabLayoutVersion",
 
-            "glideKapt"         : "com.github.bumptech.glide:compiler:$glideVersion",
-            "objectBoxKapt"     : "io.objectbox:objectbox-processor:$objectBoxVersion",
-            "eventBusKapt"      : "org.greenrobot:eventbus-annotation-processor:$eventBusVersion",
-            "arouterKapt"       : "com.alibaba:arouter-compiler:$arouterCompilerVersion",
+            glideKapt         : "com.github.bumptech.glide:compiler:$glideVersion",
+            objectBoxKapt     : "io.objectbox:objectbox-processor:$objectBoxVersion",
+            eventBusKapt      : "org.greenrobot:eventbus-annotation-processor:$eventBusVersion",
+            arouterKapt       : "com.alibaba:arouter-compiler:$arouterCompilerVersion",
 
-            "kotlin"            : [
+            kotlin            : [
                     "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion",
                     "org.jetbrains.kotlin:kotlin-stdlib-common:$kotlinVersion",
                     "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion",
@@ -118,7 +118,7 @@ ext {
                     "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion",
                     "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
             ],
-            "lifecycle"         : [
+            lifecycle         : [
                     "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion",
                     "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion",
                     "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion",
@@ -128,38 +128,37 @@ ext {
                     "androidx.lifecycle:lifecycle-process:$lifecycleVersion",
                     "androidx.lifecycle:lifecycle-common-java8:$lifecycleVersion"
             ],
-            "navigation"        : [
+            navigation        : [
                     "androidx.navigation:navigation-ui-ktx:$navigationVersion",
                     "androidx.navigation:navigation-fragment-ktx:$navigationVersion",
                     "androidx.navigation:navigation-common-ktx:$navigationVersion",
                     "androidx.navigation:navigation-runtime-ktx:$navigationVersion"
             ],
-            "smartRefreshLayout": [
+            smartRefreshLayout: [
                     "com.scwang.smart:refresh-layout-kernel:$smartRefreshLayoutVersion",
                     "com.scwang.smart:refresh-header-classics:$smartRefreshLayoutVersion",
                     "com.scwang.smart:refresh-header-material:$smartRefreshLayoutVersion",
                     "com.scwang.smart:refresh-footer-classics:$smartRefreshLayoutVersion"
             ],
-            "okHttp"            : [
+            okHttp            : [
                     "com.squareup.okhttp3:okhttp:$okHttpVersion",
                     "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
             ],
-            "retrofit"          : [
+            retrofit          : [
                     "com.squareup.retrofit2:retrofit:$retrofitVersion",
                     "com.squareup.retrofit2:adapter-rxjava3:$retrofitVersion",
-                    "com.squareup.retrofit2:converter-gson:$retrofitVersion",
-                    "org.ligboy.retrofit2:converter-fastjson-android:$rxFastJsonConverterVersion"
+                    "com.squareup.retrofit2:converter-gson:$retrofitVersion"
             ],
-            "glide"             : [
+            glide             : [
                     "com.github.bumptech.glide:glide:$glideVersion",
                     "com.github.bumptech.glide:okhttp3-integration:$glideVersion",
                     "jp.wasabeef:glide-transformations:$glideTransformVersion"
             ],
-            "objectBox"         : [
+            objectBox         : [
                     "io.objectbox:objectbox-android:$objectBoxVersion",
                     "io.objectbox:objectbox-kotlin:$objectBoxVersion"
             ],
-            "rx"                : [
+            rx                : [
                     "io.reactivex.rxjava3:rxjava:$rxJavaVersion",
                     "io.reactivex.rxjava3:rxandroid:$rxAndroidVersion",
                     "io.reactivex.rxjava3:rxkotlin:$rxAndroidVersion"

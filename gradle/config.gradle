@@ -1,0 +1,10 @@
+ext {
+    apiHosts = [
+            "https://api.github.com/",
+            "https://api.github.com/"
+    ]
+
+    cleanFileTypes = [
+            "*.log", "*.txt"
+    ]
+}

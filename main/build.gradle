@@ -10,11 +10,16 @@ android {
     defaultConfig {
         minSdkVersion(appMinSdk)
         targetSdkVersion(appTargetSdk)
-        versionCode(buildTime().toInteger())
+        versionCode(buildTime())
         versionName(appVersionName)
         ndk { abiFilters(ndkLibs) }
         vectorDrawables.useSupportLibrary = true
         versionNameSuffix(suffix["main"])
+    }
+    flavorDimensions "channel"
+    productFlavors {
+        daily {}
+        online {}
     }
     buildFeatures {
         dataBinding = true
@@ -61,7 +66,6 @@ protobuf {
 }
 
 dependencies {
-    implementation(fileTree(dir: "libs", include: libTypes))
     implementation project(commonModule)
     implementation project(adapterModule)
 

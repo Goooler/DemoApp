@@ -10,26 +10,40 @@ android {
         applicationId(appPackageName)
         minSdkVersion(appMinSdk)
         targetSdkVersion(appTargetSdk)
-        versionCode(buildTime().toInteger())
+        versionCode(buildTime())
         versionName(appVersionName)
         ndk { abiFilters(ndkLibs) }
         vectorDrawables.useSupportLibrary = true
         versionNameSuffix(suffix["app"])
     }
-
+    signingConfigs {
+        sign {
+            keyAlias(SIGN_KEY_ALIAS)
+            keyPassword(SIGN_KEY_PASSWORD)
+            storeFile file(SIGN_STORE_FILE)
+            storePassword(SIGN_STORE_PASSWORD)
+        }
+    }
     buildTypes {
         release {
+            signingConfig = signingConfigs.sign
             minifyEnabled = true
             zipAlignEnabled = true
             shrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
         debug {
+            signingConfig = signingConfigs.sign
             jniDebuggable = true
             renderscriptDebuggable = true
             crunchPngs = false
             ext.alwaysUpdateBuildId = false
         }
+    }
+    flavorDimensions "channel"
+    productFlavors {
+        daily {}
+        online {}
     }
     /*applicationVariants.all { variant ->
         variant.outputs.all { output ->
@@ -47,7 +61,8 @@ android {
         viewBinding = true
     }
     lintOptions {
-        abortOnError = true
+        abortOnError = false
+        checkReleaseBuilds false
     }
     compileOptions {
         sourceCompatibility(JavaVersion.VERSION_1_8)
@@ -65,8 +80,6 @@ kapt {
 }
 
 dependencies {
-    implementation(fileTree(dir: "libs", include: libTypes))
-    implementation project(baseModule)
     implementation project(commonModule)
     implementation project(loginModule)
     implementation project(mainModule)

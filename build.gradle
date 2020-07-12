@@ -2,8 +2,9 @@ import java.nio.charset.StandardCharsets
 import java.util.concurrent.TimeUnit
 
 buildscript {
-    apply from: "versions.gradle"
-    apply from: "modules.gradle"
+    apply from: "gradle/versions.gradle"
+    apply from: "gradle/modules.gradle"
+    apply from: "gradle/config.gradle"
 
     repositories {
         google()
@@ -32,8 +33,8 @@ allprojects {
 /**
  * versionCode 限长 10 位
  */
-static String buildTime() {
-    return new Date().format("yyMMddHHmm")
+static def buildTime() {
+    return new Date().format("yyMMddHHmm").toInteger()
 }
 
 tasks.withType(JavaCompile) {
@@ -41,5 +42,8 @@ tasks.withType(JavaCompile) {
 }
 
 task clean(type: Delete) {
-    delete(rootProject.buildDir)
+    rootProject.allprojects {
+        delete(it.buildDir)
+        delete(fileTree(dir: it.projectDir, include: cleanFileTypes))
+    }
 }

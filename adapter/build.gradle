@@ -9,7 +9,7 @@ android {
     defaultConfig {
         minSdkVersion(appMinSdk)
         targetSdkVersion(appTargetSdk)
-        versionCode(buildTime().toInteger())
+        versionCode(buildTime())
         versionName(appVersionName)
         ndk { abiFilters(ndkLibs) }
         vectorDrawables.useSupportLibrary = true
@@ -29,6 +29,5 @@ android {
 }
 
 dependencies {
-    implementation(fileTree(dir: "libs", include: libTypes))
-    implementation project(commonModule)
+    implementation project(baseModule)
 }
