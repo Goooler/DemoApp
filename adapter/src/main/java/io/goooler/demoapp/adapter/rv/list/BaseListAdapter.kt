@@ -1,5 +1,6 @@
 package io.goooler.demoapp.adapter.rv.list
 
+import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.goooler.demoapp.adapter.rv.base.BaseRvAdapter
@@ -79,4 +80,11 @@ abstract class BaseListAdapter<M : IModelType> : BaseRvAdapter<M>(), IMutableLis
     override fun clearData() {
         modelList.clear()
     }
+}
+
+@Suppress("UNCHECKED_CAST")
+@BindingAdapter("binding_rv_setData")
+fun RecyclerView.setData(list: List<IModelType>?) {
+    if (list == null) return
+    (adapter as? BaseListAdapter<IModelType>)?.setData(list)
 }

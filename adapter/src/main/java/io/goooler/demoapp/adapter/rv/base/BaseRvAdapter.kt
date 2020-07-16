@@ -16,7 +16,9 @@ import androidx.recyclerview.widget.RecyclerView
 abstract class BaseRvAdapter<T : IModelType> :
     RecyclerView.Adapter<BaseRvAdapter.BaseViewHolder>() {
 
-    private val ivdManager: ViewTypeDelegateManager<T> = ViewTypeDelegateManager()
+    private val ivdManager: ViewTypeDelegateManager<T> by lazy(LazyThreadSafetyMode.NONE) {
+        ViewTypeDelegateManager<T>()
+    }
 
     var fix: IFix<T>? = null
 

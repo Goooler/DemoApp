@@ -19,7 +19,9 @@ abstract class BaseDiffAdapter<T : IModelDiff<T>> : BaseRvAdapter<T>() {
 
     override val modelList: MutableList<T> = differ.currentList
 
-    fun submitList(list: List<T>) = differ.submitList(list.toMultiList())
+    fun submitList(list: List<T>) {
+        differ.submitList(list.toMultiList())
+    }
 
     protected open fun diffCallBack(): DiffUtil.ItemCallback<T> = diffCallBack
 
