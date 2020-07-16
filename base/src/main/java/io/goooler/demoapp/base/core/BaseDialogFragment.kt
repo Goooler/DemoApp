@@ -2,11 +2,12 @@ package io.goooler.demoapp.base.core
 
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatDialogFragment
+import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import io.goooler.demoapp.base.util.ToastUtil
 
-abstract class BaseDialogFragment : AppCompatDialogFragment() {
+abstract class BaseDialogFragment : DialogFragment() {
 
     var dismissListener: OnDismissListener? = null
 
