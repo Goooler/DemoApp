@@ -10,8 +10,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import io.goooler.demoapp.base.BuildConfig
-import io.goooler.demoapp.base.api.HttpResponse
-import io.goooler.demoapp.base.model.MutableStringLiveData
+import io.goooler.demoapp.base.http.HttpResponse
+import io.goooler.demoapp.base.type.MutableStringLiveData
 import io.goooler.demoapp.base.util.LogUtil
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.disposables.Disposable

@@ -15,7 +15,6 @@ android {
         versionCode = buildTime
         versionName = appVersionName
         vectorDrawables.useSupportLibrary = true
-        versionNameSuffix = VersionNameSuffix.app
         ndk { abiFilters(ndkLibs) }
     }
     signingConfigs {
@@ -28,7 +27,7 @@ android {
     }
     buildTypes {
         getByName("release") {
-            signingConfig = signingConfigs.getByName("sign")
+            signingConfig = signingConfigs["sign"]
             isMinifyEnabled = true
             isZipAlignEnabled = true
             isShrinkResources = true
@@ -37,7 +36,7 @@ android {
             )
         }
         getByName("debug") {
-            signingConfig = signingConfigs.getByName("sign")
+            signingConfig = signingConfigs["sign"]
             isJniDebuggable = true
             isRenderscriptDebuggable = true
             isCrunchPngs = false

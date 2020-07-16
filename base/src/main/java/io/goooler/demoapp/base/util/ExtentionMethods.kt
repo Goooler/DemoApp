@@ -10,30 +10,19 @@ import android.webkit.URLUtil
 import androidx.annotation.ColorInt
 import androidx.annotation.StringRes
 import io.goooler.demoapp.base.BuildConfig
-import io.goooler.demoapp.base.model.Constants.IMAGE_URL_PREFIX
-import io.goooler.demoapp.base.model.Constants.PHONE_FIRST_CHAR
-import io.goooler.demoapp.base.model.Constants.PHONE_LENGTH
-import io.goooler.demoapp.base.model.SpKeys
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.coroutines.*
 import java.math.BigDecimal
-import java.util.*
 import kotlin.math.absoluteValue
 
 //---------------------Any-------------------------------//
 
 
-fun Any?.log() {
-    LogUtil.d(this)
-}
-
 val isDebug: Boolean = BuildConfig.DEBUG
 
-val isFirstRun: Boolean = SpUtil.getBoolean(SpKeys.SP_FIRST_RUN)
-
-val versionCode: Int = BuildConfig.VERSION_CODE
+const val versionCode: Int = BuildConfig.VERSION_CODE
 
 val currentTimeMillis: Long = System.currentTimeMillis()
 
@@ -133,21 +122,10 @@ fun String.isNetworkUrl(): Boolean {
 }
 
 /**
- * 拼上图片前缀
- */
-fun String.toLoadUrl(): String {
-    return if (isNetworkUrl()) {
-        this
-    } else {
-        IMAGE_URL_PREFIX + this
-    }
-}
-
-/**
  * 验证手机号格式是否正确
  */
 fun String.isValidPhoneFormat(): Boolean {
-    return startsWith(PHONE_FIRST_CHAR) && length == PHONE_LENGTH
+    return startsWith("1") && length == 11
 }
 
 /**
@@ -198,42 +176,6 @@ fun Number.formatMoney(isYuan: Boolean = false, trans2W: Boolean = false, scale:
     } catch (e: Exception) {
         moneyF.toString()
     }
-}
-
-/**
- * 获取图片宽高比例，如：/assets/img/2019/07/18/n_1563460410803_3849___size550x769.jpg
- */
-fun String.getSizeByLoadUrl(defaultWidth: Int, defaultHeight: Int): List<Int> {
-    val sizeList = ArrayList<Int>()
-    sizeList.add(defaultWidth)
-    sizeList.add(defaultHeight)
-    val flag = "size"
-    if (!contains(IMAGE_URL_PREFIX) || !contains(flag)) {
-        return sizeList
-    }
-    val pattern = "$flag(\\d+x\\d+)"
-    Regex(pattern)
-        .findAll(this)
-        .forEach {
-            // size550x769
-            val sizeXXXxXXX = it.value
-            // 550x769
-            val mXXXxXXX = sizeXXXxXXX.replace(flag, "")
-            val list = mXXXxXXX.split("x")
-
-            if (list.size < 2) {
-                return sizeList
-            }
-            // 550
-            val width = list[0].toInt()
-            // 769
-            val height = list[1].toInt()
-            sizeList.clear()
-            sizeList.add(width)
-            sizeList.add(height)
-            return sizeList
-        }
-    return sizeList
 }
 
 infix fun Double.plus(that: Double): Double {

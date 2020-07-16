@@ -1,4 +1,4 @@
-package io.goooler.demoapp.base.api.converter
+package io.goooler.demoapp.base.http.converter.fastjson
 
 import androidx.annotation.Keep
 import com.alibaba.fastjson.serializer.SerializeConfig

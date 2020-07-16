@@ -1,7 +1,7 @@
-package io.goooler.demoapp.base.model
+package io.goooler.demoapp.base.type
 
 import androidx.annotation.StringDef
-import io.goooler.demoapp.base.model.SpKeys.Companion.SP_FIRST_RUN
+import io.goooler.demoapp.base.type.SpKeys.Companion.SP_FIRST_RUN
 
 // todo 似乎无效，后续优化
 @StringDef(

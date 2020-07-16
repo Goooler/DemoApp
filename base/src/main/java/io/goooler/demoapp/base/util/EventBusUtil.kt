@@ -1,6 +1,6 @@
 package io.goooler.demoapp.base.util
 
-import io.goooler.demoapp.base.model.EventType
+import io.goooler.demoapp.base.type.EventType
 import org.greenrobot.eventbus.EventBus
 
 /**

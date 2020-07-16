@@ -1,7 +1,9 @@
+@file:Suppress("UNUSED_PARAMETER")
+
 package io.goooler.demoapp.base.util
 
 import com.tencent.mmkv.MMKV
-import io.goooler.demoapp.base.model.MkKeys
+import io.goooler.demoapp.base.type.MkKeys
 
 object MkUtil {
     private const val MK_CONFIG = "mk_config"

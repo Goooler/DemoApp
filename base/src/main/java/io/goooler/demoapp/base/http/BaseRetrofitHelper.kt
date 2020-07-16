@@ -1,4 +1,4 @@
-package io.goooler.demoapp.base.api
+package io.goooler.demoapp.base.http
 
 import android.content.Context
 import okhttp3.Cache

@@ -1,4 +1,4 @@
-package io.goooler.demoapp.base.widget.ui
+package io.goooler.demoapp.common.ui
 
 import android.content.DialogInterface
 import android.os.Bundle
@@ -9,16 +9,16 @@ import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
 import io.goooler.demoapp.base.R
 import io.goooler.demoapp.base.core.BaseDialogFragment
-import io.goooler.demoapp.base.databinding.FullScreenDialogFragmentBinding
 import io.goooler.demoapp.base.util.unsafeLazy
+import io.goooler.demoapp.common.databinding.CommonFullScreenDialogFragmentBinding
 
 class FullScreenDialogFragment : BaseDialogFragment() {
 
-    private val binding by unsafeLazy { FullScreenDialogFragmentBinding.inflate(layoutInflater) }
+    private val binding by unsafeLazy { CommonFullScreenDialogFragmentBinding.inflate(layoutInflater) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStyle(STYLE_NORMAL, R.style.DialogTransparentFullWindowTheme)
+        setStyle(STYLE_NORMAL, R.style.DialogFullScreenTheme)
     }
 
     override fun onCreateView(
@@ -51,7 +51,8 @@ class FullScreenDialogFragment : BaseDialogFragment() {
 
     companion object {
         fun show(manager: FragmentManager) {
-            FullScreenDialogFragment().show(manager, null)
+            FullScreenDialogFragment()
+                .show(manager, null)
         }
     }
 }

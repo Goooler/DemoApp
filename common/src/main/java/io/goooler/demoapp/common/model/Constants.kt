@@ -1,4 +1,4 @@
-package io.goooler.demoapp.base.model
+package io.goooler.demoapp.common.model
 
 /**
  * 常量集合
@@ -12,6 +12,4 @@ object Constants {
     const val LABEL = "label"
     const val X = "x"
     const val Y = "y"
-    const val PHONE_FIRST_CHAR = "1"
-    const val PHONE_LENGTH = 11
 }

@@ -3,7 +3,7 @@ package io.goooler.demoapp.main.vm
 import android.app.Application
 import androidx.lifecycle.viewModelScope
 import io.goooler.demoapp.base.core.BaseViewModel
-import io.goooler.demoapp.base.model.MutableStringLiveData
+import io.goooler.demoapp.base.type.MutableStringLiveData
 import io.goooler.demoapp.base.util.defaultAsync
 import io.goooler.demoapp.base.util.isNotNullOrEmpty
 import io.goooler.demoapp.base.util.subscribeAndObserve

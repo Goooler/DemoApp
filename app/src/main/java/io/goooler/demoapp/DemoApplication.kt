@@ -3,8 +3,8 @@ package io.goooler.demoapp
 import com.tencent.smtt.export.external.TbsCoreSettings
 import com.tencent.smtt.sdk.QbSdk
 import io.goooler.demoapp.base.util.ObjectBox
-import io.goooler.demoapp.base.util.isFirstRun
 import io.goooler.demoapp.common.RouterApplication
+import io.goooler.demoapp.common.util.isFirstRun
 import io.goooler.demoapp.main.bean.MyObjectBox
 
 

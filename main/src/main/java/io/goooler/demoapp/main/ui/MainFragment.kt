@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import io.goooler.demoapp.base.core.BaseFragment
 import io.goooler.demoapp.base.util.device.StatusBarUtil
 import io.goooler.demoapp.base.util.unsafeLazy
-import io.goooler.demoapp.base.widget.ui.BottomTipDialogFragment
+import io.goooler.demoapp.common.ui.FullScreenDialogFragment
 import io.goooler.demoapp.main.databinding.MainFragmentBinding
 import io.goooler.demoapp.main.vm.MainViewModel
 
@@ -36,7 +36,7 @@ class MainFragment : BaseFragment() {
 
     private val eventListener = object : EventListener {
         override fun onTitleClick() {
-            BottomTipDialogFragment.show(childFragmentManager, "first", "first content")
+            FullScreenDialogFragment.show(childFragmentManager)
         }
     }
 

@@ -3,7 +3,7 @@ package io.goooler.demoapp.base.util
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import io.goooler.demoapp.base.core.BaseApplication
-import io.goooler.demoapp.base.model.SpKeys
+import io.goooler.demoapp.base.type.SpKeys
 
 /**
  * SharedPreferences 简单封装

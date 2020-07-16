@@ -1,4 +1,4 @@
-package io.goooler.demoapp.base.widget.ui
+package io.goooler.demoapp.base.widget
 
 import android.content.Context
 import android.util.AttributeSet

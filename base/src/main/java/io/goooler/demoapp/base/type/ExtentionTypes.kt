@@ -1,4 +1,4 @@
-package io.goooler.demoapp.base.model
+package io.goooler.demoapp.base.type
 
 import androidx.lifecycle.MutableLiveData
 import io.goooler.demoapp.base.util.MkUtil

@@ -5,7 +5,6 @@ plugins {
 }
 
 android {
-    resourcePrefix(ResourcePrefix.login)
     compileSdkVersion(appTargetSdk)
     buildToolsVersion(appBuildTool)
     defaultConfig {
@@ -15,7 +14,7 @@ android {
         versionName = appVersionName
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled = true
-        versionNameSuffix = VersionNameSuffix.login
+        versionNameSuffix = VersionNameSuffix.base
     }
     buildFeatures {
         dataBinding = true
@@ -34,34 +33,27 @@ dependencies {
     // local
     api(fileTree(localLibs))
 
-    // official
+    // architecture
     api(Libs.kotlin)
     api(Libs.core)
-    api(Libs.appCompat)
     api(Libs.annotation)
     api(Libs.multiDex)
-    api(Libs.fragment)
-    api(Libs.legacySupport)
-    api(Libs.preference)
-    api(Libs.palette)
-    api(Libs.constraintLayout)
-    api(Libs.material)
-    api(Libs.recyclerView)
-    api(Libs.cardView)
     api(Libs.lifecycle)
-    api(Libs.navigation)
 
     // UI
+    api(Libs.appCompat)
+    api(Libs.fragment)
+    api(Libs.material)
+    api(Libs.constraintLayout)
+    api(Libs.recyclerView)
+    api(Libs.cardView)
     api(Libs.smartRefreshLayout)
-    api(Libs.mpChart)
-    api(Libs.lottie)
-    api(Libs.flycoTabLayout)
     api(Libs.baseRvHelper)
 
     // network
-    api(Libs.tbs)
     api(Libs.okHttp)
     api(Libs.retrofit)
+    api(Libs.tbs)
     api(Libs.glide)
     kapt(Libs.glideKapt)
 
@@ -74,13 +66,9 @@ dependencies {
     api(Libs.gson)
 
     // async
+    api(Libs.rx)
     api(Libs.eventBus)
     kapt(Libs.eventBusKapt)
-    api(Libs.liveDataBus)
-    api(Libs.rx)
-
-    // utils
-    api(Libs.luban)
 
     // analyze
     debugApi(Libs.leakCanary)

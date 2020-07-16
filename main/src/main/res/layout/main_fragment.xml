@@ -23,7 +23,7 @@
         android:focusable="true"
         android:orientation="vertical">
 
-        <io.goooler.demoapp.base.widget.ui.StatusBarView
+        <io.goooler.demoapp.base.widget.StatusBarView
             android:id="@+id/status_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

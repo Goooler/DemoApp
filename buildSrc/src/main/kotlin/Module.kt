@@ -19,7 +19,6 @@ object ResourcePrefix {
 }
 
 object VersionNameSuffix {
-    const val app = "_app"
     const val base = "_base"
     const val common = "_common"
     const val login = "_login"

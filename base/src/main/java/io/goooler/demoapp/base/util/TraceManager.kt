@@ -1,9 +1,10 @@
 package io.goooler.demoapp.base.util
 
-//todo
+import io.goooler.demoapp.base.core.BaseApplication
+
 object TraceManager {
 
     fun reportUncaughtException(log: String) {
-
+        ToastUtil.showToastInAnyThread(BaseApplication.context, log)
     }
 }

@@ -23,3 +23,7 @@ object LogUtil {
         }
     }
 }
+
+fun Any?.log() {
+    LogUtil.d(this)
+}

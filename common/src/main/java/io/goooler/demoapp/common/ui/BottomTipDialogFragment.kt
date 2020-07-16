@@ -1,4 +1,4 @@
-package io.goooler.demoapp.base.widget.ui
+package io.goooler.demoapp.common.ui
 
 import android.os.Bundle
 import android.view.Gravity
@@ -8,15 +8,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
 import io.goooler.demoapp.base.R
 import io.goooler.demoapp.base.core.BaseDialogFragment
-import io.goooler.demoapp.base.databinding.BottomTipDialogFragmentBinding
 import io.goooler.demoapp.base.util.unsafeLazy
-import io.goooler.demoapp.base.widget.vm.BottomTipDialogViewModel
+import io.goooler.demoapp.common.databinding.CommonBottomTipDialogFragmentBinding
 
 class BottomTipDialogFragment : BaseDialogFragment() {
 
-    private val vm by unsafeLazy { getViewModel(BottomTipDialogViewModel::class.java) }
-
-    private val binding by unsafeLazy { BottomTipDialogFragmentBinding.inflate(layoutInflater) }
+    private val binding by unsafeLazy { CommonBottomTipDialogFragmentBinding.inflate(layoutInflater) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,11 +26,10 @@ class BottomTipDialogFragment : BaseDialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding.lifecycleOwner = this
-        binding.vm = vm
         binding.listener = eventListener
         arguments?.let {
-            vm.title.set(it.getString(TITLE))
-            vm.content.set(it.getString(CONTENT))
+            binding.tvTitle.text = it.getString(TITLE)
+            binding.tvContent.text = it.getString(CONTENT)
         }
         return binding.root
     }
@@ -56,7 +52,8 @@ class BottomTipDialogFragment : BaseDialogFragment() {
         }
     }
 
-    private val eventListener = object : EventListener {
+    private val eventListener = object :
+        EventListener {
         override fun onCloseClick() {
             dismiss()
         }
@@ -70,15 +67,19 @@ class BottomTipDialogFragment : BaseDialogFragment() {
         private const val TITLE = "title"
         private const val CONTENT = "content"
 
-        fun newInstance(title: String, content: String) = BottomTipDialogFragment().apply {
-            arguments = Bundle().apply {
-                putString(TITLE, title)
-                putString(CONTENT, content)
+        fun newInstance(title: String, content: String) = BottomTipDialogFragment()
+            .apply {
+                arguments = Bundle().apply {
+                    putString(TITLE, title)
+                    putString(CONTENT, content)
+                }
             }
-        }
 
         fun show(manager: FragmentManager, title: String, content: String, tag: String? = null) {
-            newInstance(title, content).show(manager, tag)
+            newInstance(
+                title,
+                content
+            ).show(manager, tag)
         }
     }
 }

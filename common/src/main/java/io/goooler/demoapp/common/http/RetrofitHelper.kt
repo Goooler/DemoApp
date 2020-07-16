@@ -1,9 +1,9 @@
 package io.goooler.demoapp.common.http
 
 import android.content.Context
-import io.goooler.demoapp.base.api.BaseRetrofitHelper
-import io.goooler.demoapp.base.api.converter.FastJsonConverterFactory
 import io.goooler.demoapp.base.core.BaseApplication
+import io.goooler.demoapp.base.http.BaseRetrofitHelper
+import io.goooler.demoapp.base.http.converter.fastjson.FastJsonConverterFactory
 import io.goooler.demoapp.base.util.isDebug
 import io.goooler.demoapp.common.BuildConfig
 import retrofit2.CallAdapter

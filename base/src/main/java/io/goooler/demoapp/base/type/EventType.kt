@@ -1,4 +1,4 @@
-package io.goooler.demoapp.base.model
+package io.goooler.demoapp.base.type
 
 /**
  * 自定义的 EventBus 事件类型
