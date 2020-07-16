@@ -16,14 +16,12 @@ android {
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled = true
         versionNameSuffix = VersionNameSuffix.login
-        ndk { abiFilters(ndkLibs) }
     }
     buildFeatures {
         dataBinding = true
         viewBinding = true
     }
     compileOptions {
-        coreLibraryDesugaringEnabled = true
         sourceCompatibility = javaVersion
         targetCompatibility = javaVersion
     }
@@ -37,7 +35,6 @@ dependencies {
     api(fileTree(localLibs))
 
     // official
-    coreLibraryDesugaring(Libs.desugar)
     api(Libs.kotlin)
     api(Libs.core)
     api(Libs.appCompat)

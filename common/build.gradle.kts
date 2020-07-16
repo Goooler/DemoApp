@@ -15,7 +15,6 @@ android {
         versionName = appVersionName
         vectorDrawables.useSupportLibrary = true
         versionNameSuffix = VersionNameSuffix.common
-        ndk { abiFilters(ndkLibs) }
     }
     flavorDimensions("channel")
     productFlavors {

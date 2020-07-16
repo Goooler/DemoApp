@@ -22,7 +22,7 @@ android {
         create("sign") {
             keyAlias = "key0"
             keyPassword = "demo.app"
-            storeFile = File("${rootDir.path}/demo.jks")
+            storeFile = File("${rootDir.path}/gradle/demo.jks")
             storePassword = "demo.app"
         }
     }
@@ -33,8 +33,7 @@ android {
             isZipAlignEnabled = true
             isShrinkResources = true
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "${rootDir.path}/gradle/proguard-rules.pro"
             )
         }
         getByName("debug") {
@@ -63,6 +62,7 @@ android {
         isCheckReleaseBuilds = false
     }
     compileOptions {
+        coreLibraryDesugaringEnabled = true
         sourceCompatibility = javaVersion
         targetCompatibility = javaVersion
     }
@@ -78,6 +78,7 @@ kapt {
 }
 
 dependencies {
+    coreLibraryDesugaring(Libs.desugar)
     implementation(project(Modules.common))
     implementation(project(Modules.login))
     implementation(project(Modules.main))
