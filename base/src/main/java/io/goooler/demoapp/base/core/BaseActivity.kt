@@ -4,15 +4,15 @@ import android.content.res.Resources
 import android.os.Bundle
 import android.view.WindowManager
 import androidx.annotation.IdRes
+import androidx.annotation.MainThread
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import io.goooler.demoapp.base.util.DialogManager
-import io.goooler.demoapp.base.util.ToastUtil
 import io.goooler.demoapp.base.util.device.AdaptScreenUtil
+import io.goooler.demoapp.base.util.showToastInMainThread
 import io.goooler.demoapp.base.util.unsafeLazy
 
 /**
@@ -93,17 +93,16 @@ abstract class BaseActivity : AppCompatActivity() {
     protected fun <T : BaseViewModel> getViewModel(modelClass: Class<T>): T {
         return ViewModelProvider(this).get(modelClass).apply {
             lifecycle.addObserver(this)
-            toast.observe(this@BaseActivity, Observer {
-                showToast(it)
-            })
         }
     }
 
-    protected fun showToast(@StringRes textId: Int) {
-        ToastUtil.showToastInMainThread(this, getString(textId))
+    @MainThread
+    protected fun showToast(@StringRes strResId: Int) {
+        showToast(getString(strResId))
     }
 
+    @MainThread
     protected fun showToast(text: String) {
-        ToastUtil.showToastInMainThread(this, text)
+        text.showToastInMainThread(this)
     }
 }

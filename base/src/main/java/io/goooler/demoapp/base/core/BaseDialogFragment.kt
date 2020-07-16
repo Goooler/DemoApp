@@ -1,11 +1,10 @@
 package io.goooler.demoapp.base.core
 
+import androidx.annotation.MainThread
 import androidx.annotation.StringRes
-import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.fragment.app.DialogFragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import io.goooler.demoapp.base.util.ToastUtil
+import io.goooler.demoapp.base.util.showToastInMainThread
 
 abstract class BaseDialogFragment : DialogFragment() {
 
@@ -19,22 +18,17 @@ abstract class BaseDialogFragment : DialogFragment() {
     protected fun <T : BaseViewModel> getViewModel(modelClass: Class<T>): T {
         return ViewModelProvider(this).get(modelClass).apply {
             lifecycle.addObserver(this)
-            observeVm(this)
         }
     }
 
-    private fun observeVm(vm: BaseViewModel) {
-        vm.toast.observe(this, Observer<String> {
-            showToast(it)
-        })
+    @MainThread
+    protected fun showToast(@StringRes strResId: Int) {
+        showToast(getString(strResId))
     }
 
-    protected fun showToast(@StringRes textId: Int) {
-        ToastUtil.showToastInMainThread(requireContext(), getString(textId))
-    }
-
+    @MainThread
     protected fun showToast(text: String) {
-        ToastUtil.showToastInMainThread(requireContext(), text)
+        text.showToastInMainThread(requireContext())
     }
 
     interface OnDismissListener {

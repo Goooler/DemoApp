@@ -6,22 +6,27 @@ import android.os.Looper
 import android.widget.Toast
 import androidx.annotation.AnyThread
 import androidx.annotation.MainThread
+import androidx.annotation.StringRes
 
 
 /**
  * Toast 简单封装
  */
+@SuppressLint("WrongThread")
 object ToastUtil {
-    private val isMainThread = Looper.getMainLooper().thread === Thread.currentThread()
 
     private var toast: Toast? = null
+
+    @AnyThread
+    fun showToastInAnyThread(context: Context, @StringRes strResId: Int) {
+        showToastInAnyThread(context, context.getString(strResId))
+    }
 
     /**
      * 可在子线程使用的 toast
      *
      * @param text string 文本
      */
-    @SuppressLint("WrongThread")
     @AnyThread
     fun showToastInAnyThread(context: Context, text: String) {
         if (isMainThread) {
@@ -33,10 +38,14 @@ object ToastUtil {
         }
     }
 
+    @MainThread
+    fun showToastInMainThread(context: Context, @StringRes strResId: Int) {
+        showToastInMainThread(context, context.getString(strResId))
+    }
+
     /**
-     * 只在主线程调用
+     * 只在主线程调用，真正实现 toast 的方法
      */
-    @SuppressLint("ShowToast")
     @MainThread
     @Synchronized
     fun showToastInMainThread(context: Context, text: String) {

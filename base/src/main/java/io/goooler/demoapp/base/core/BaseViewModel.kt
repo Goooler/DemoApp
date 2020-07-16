@@ -2,6 +2,7 @@ package io.goooler.demoapp.base.core
 
 import android.app.Application
 import android.graphics.drawable.Drawable
+import androidx.annotation.AnyThread
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
@@ -11,16 +12,14 @@ import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import io.goooler.demoapp.base.BuildConfig
 import io.goooler.demoapp.base.http.HttpResponse
-import io.goooler.demoapp.base.type.MutableStringLiveData
 import io.goooler.demoapp.base.util.LogUtil
+import io.goooler.demoapp.base.util.showToastInAnyThread
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.disposables.Disposable
 
 
 abstract class BaseViewModel(application: Application) : AndroidViewModel(application),
     DefaultLifecycleObserver {
-
-    val toast = MutableStringLiveData()
 
     private val compositeDisposable = CompositeDisposable()
 
@@ -51,14 +50,14 @@ abstract class BaseViewModel(application: Application) : AndroidViewModel(applic
         }
     }
 
+    @AnyThread
     protected fun showToast(@StringRes strResId: Int) {
-        toast.postValue(getString(strResId))
+        showToast(getString(strResId))
     }
 
+    @AnyThread
     protected fun showToast(msg: String?) {
-        msg?.let {
-            toast.postValue(it)
-        }
+        msg?.showToastInAnyThread(getApplication())
     }
 
     protected fun getColor(@ColorRes id: Int): Int {

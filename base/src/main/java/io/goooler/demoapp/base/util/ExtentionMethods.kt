@@ -3,6 +3,7 @@ package io.goooler.demoapp.base.util
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.os.Build
+import android.os.Looper
 import android.text.Html
 import android.text.Spanned
 import android.view.View
@@ -27,6 +28,8 @@ const val versionCode: Int = BuildConfig.VERSION_CODE
 val currentTimeMillis: Long = System.currentTimeMillis()
 
 val currentThreadName: String = Thread.currentThread().name
+
+val isMainThread = Looper.getMainLooper().thread === Thread.currentThread()
 
 fun <T> unsafeLazy(initializer: () -> T) = lazy(LazyThreadSafetyMode.NONE, initializer)
 

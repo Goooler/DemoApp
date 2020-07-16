@@ -1,12 +1,12 @@
 package io.goooler.demoapp.base.core
 
 import androidx.annotation.IdRes
+import androidx.annotation.MainThread
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import io.goooler.demoapp.base.util.ToastUtil
+import io.goooler.demoapp.base.util.showToastInMainThread
 
 /**
  * Fragment 基类，封装通用方法
@@ -70,28 +70,22 @@ abstract class BaseFragment : Fragment() {
     protected fun <T : BaseViewModel> getViewModel(modelClass: Class<T>): T {
         return ViewModelProvider(this).get(modelClass).apply {
             lifecycle.addObserver(this)
-            observeVm(this)
         }
     }
 
     protected fun <T : BaseViewModel> getViewModelOfActivity(modelClass: Class<T>): T {
         return ViewModelProvider(requireActivity()).get(modelClass).apply {
             lifecycle.addObserver(this)
-            observeVm(this)
         }
     }
 
-    protected fun showToast(@StringRes textId: Int) {
-        ToastUtil.showToastInMainThread(requireContext(), getString(textId))
+    @MainThread
+    protected fun showToast(@StringRes strResId: Int) {
+        showToast(getString(strResId))
     }
 
+    @MainThread
     protected fun showToast(text: String) {
-        ToastUtil.showToastInMainThread(requireContext(), text)
-    }
-
-    private fun observeVm(vm: BaseViewModel) {
-        vm.toast.observe(this, Observer {
-            showToast(it)
-        })
+        text.showToastInMainThread(requireContext())
     }
 }
