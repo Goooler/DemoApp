@@ -11,8 +11,6 @@ import java.util.*
 
 /**
  * 键盘（输入法软键盘）操作
- *
- * @author Ogiso
  */
 object SoftInputUtil {
 

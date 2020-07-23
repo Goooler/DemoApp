@@ -192,7 +192,7 @@ object StatusBarUtil {
 
     /**
      * 设置状态栏图标为深色和魅族特定的文字风格
-     * 可以用来判断是否为Flyme用户
+     * 可以用来判断是否为 Flyme 用户
      *
      * @param window 需要设置的窗口
      * @param dark   是否把状态栏字体及图标颜色设置为深色

@@ -33,8 +33,6 @@ import jp.wasabeef.glide.transformations.BlurTransformation
  *
  *
  * 说明：本类中方法名带有Oss后缀的表示图片URL是阿里云的CDN链接，其它链接将没有获取指定尺寸图片的效果
- *
- * @author Ogiso Created on 4/3/2019
  */
 object ImageLoader {
     private const val OSS_MAX_SUFFIX = "!max"

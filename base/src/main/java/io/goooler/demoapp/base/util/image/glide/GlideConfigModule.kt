@@ -11,7 +11,6 @@ import okhttp3.OkHttpClient
 import java.io.InputStream
 
 /**
- * @author Ogiso
  * Created on 4/2/2019
  */
 @GlideModule

@@ -1,3 +1,5 @@
+import com.android.build.gradle.internal.api.BaseVariantOutputImpl
+
 plugins {
     id("com.android.application")
     id("kotlin-android")
@@ -42,11 +44,12 @@ android {
             isCrunchPngs = false
         }
     }
-    /*applicationVariants.all {
+    applicationVariants.all {
         outputs.all {
-            (this as BaseVariantOutputImpl).outputFileName = "Demo_${buildType.name}_${buildTime}.apk"
+            (this as BaseVariantOutputImpl).outputFileName =
+                "Demo_${versionName}_${versionCode}_${flavorName}_${buildType.name}.apk"
         }
-    }*/
+    }
     flavorDimensions("channel")
     productFlavors {
         create("daily") {}

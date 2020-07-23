@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 import org.gradle.api.JavaVersion
 
 // repo
@@ -141,7 +143,6 @@ object Libs {
     )
     val retrofit = arrayOf(
         "com.squareup.retrofit2:retrofit:$retrofitVersion",
-        "com.squareup.retrofit2:adapter-rxjava3:$retrofitVersion",
         "com.squareup.retrofit2:converter-gson:$retrofitVersion"
     )
     val glide = arrayOf(
@@ -156,6 +157,6 @@ object Libs {
     val rx = arrayOf(
         "io.reactivex.rxjava3:rxjava:$rxJavaVersion",
         "io.reactivex.rxjava3:rxandroid:$rxAndroidVersion",
-        "io.reactivex.rxjava3:rxkotlin:$rxAndroidVersion"
+        "com.squareup.retrofit2:adapter-rxjava3:$retrofitVersion"
     )
 }

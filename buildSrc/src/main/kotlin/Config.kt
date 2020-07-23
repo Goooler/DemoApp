@@ -3,7 +3,7 @@ import org.gradle.api.artifacts.dsl.DependencyHandler
 import java.text.SimpleDateFormat
 import java.util.*
 
-fun DependencyHandler.`api`(names: Array<String>): Array<Dependency?> =
+fun DependencyHandler.api(names: Array<String>): Array<Dependency?> =
     names.map {
         add("api", it)
     }.toTypedArray()

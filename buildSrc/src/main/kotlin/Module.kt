@@ -1,5 +1,4 @@
 object Modules {
-    const val app = ":app"
     const val base = ":base"
     const val common = ":common"
     const val login = ":login"
@@ -10,7 +9,6 @@ object Modules {
 
 object ResourcePrefix {
     const val app = "app_"
-    const val base = "base_"
     const val common = "common_"
     const val login = "login_"
     const val main = "main_"
