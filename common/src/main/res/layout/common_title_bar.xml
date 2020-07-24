@@ -34,7 +34,7 @@
             android:gravity="center"
             android:maxWidth="200pt"
             android:maxLines="1"
-            android:text="@string/default_title"
+            tools:text="@string/default_title"
             android:textColor="@color/color_333333"
             android:textSize="15pt"
             android:textStyle="bold"

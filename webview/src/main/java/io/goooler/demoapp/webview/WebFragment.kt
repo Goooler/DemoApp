@@ -1,5 +1,6 @@
 package io.goooler.demoapp.webview
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -19,8 +20,8 @@ class WebFragment : BaseFragment() {
 
     private val initOnce by unsafeLazy {
         binding.lifecycleOwner = this
-        binding.layoutTitle.listener = eventListener
-        binding.webView.webChromeClient = webClient
+        binding.layoutTitle.listener = listener
+        binding.webView.webChromeClient = listener
     }
 
     override fun onCreateView(
@@ -55,18 +56,11 @@ class WebFragment : BaseFragment() {
         binding.webView.onDestroy()
     }
 
-    private val eventListener = View.OnClickListener {
-        when (it) {
-            binding.layoutTitle.ivLeft -> {
-                finish()
-            }
-            binding.layoutTitle.ivRight -> {
-                showToast(R.string.default_title)
-            }
-        }
+    fun goBack() {
+        if (binding.webView.canGoBack()) binding.webView.goBack() else finish()
     }
 
-    private val webClient = object : WebChromeClient() {
+    private val listener = object : View.OnClickListener, WebChromeClient() {
         override fun onProgressChanged(webView: WebView?, i: Int) {
             super.onProgressChanged(webView, i)
             binding.webViewProgressBar.visibility = if (i >= 100) {
@@ -80,6 +74,20 @@ class WebFragment : BaseFragment() {
         override fun onReceivedTitle(webView: WebView, title: String?) {
             super.onReceivedTitle(webView, title)
             binding.layoutTitle.tvCenter.text = title.orEmpty()
+        }
+
+        override fun onClick(v: View?) {
+            when (v) {
+                binding.layoutTitle.ivLeft -> {
+                    finish()
+                }
+                binding.layoutTitle.ivRight -> {
+                    val intent = Intent().setAction(Intent.ACTION_SEND)
+                        .putExtra(Intent.EXTRA_TEXT, binding.webView.url)
+                        .setType("text/plain")
+                    startActivity(Intent.createChooser(intent, ""))
+                }
+            }
         }
     }
 

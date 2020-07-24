@@ -9,10 +9,17 @@ import io.goooler.demoapp.common.router.RouterPath
 @Route(path = RouterPath.WEB)
 class WebActivity : BaseActivity() {
 
+    private lateinit var webFragment: WebFragment
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         intent.extras?.getString(RouterManager.PARAMS)?.let {
-            addFragment(android.R.id.content, WebFragment.newInstance(it))
+            webFragment = WebFragment.newInstance(it)
+            addFragment(android.R.id.content, webFragment)
         }
+    }
+
+    override fun onBackPressed() {
+        webFragment.goBack()
     }
 }
