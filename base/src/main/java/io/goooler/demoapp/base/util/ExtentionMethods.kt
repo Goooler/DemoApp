@@ -25,11 +25,11 @@ val isDebug: Boolean = BuildConfig.DEBUG
 
 const val versionCode: Int = BuildConfig.VERSION_CODE
 
-val currentTimeMillis: Long = System.currentTimeMillis()
+val currentTimeMillis: Long get() = System.currentTimeMillis()
 
-val currentThreadName: String = Thread.currentThread().name
+val currentThreadName: String get() = Thread.currentThread().name
 
-val isMainThread = Looper.getMainLooper().thread === Thread.currentThread()
+val isMainThread: Boolean get() = Looper.getMainLooper().thread === Thread.currentThread()
 
 fun <T> unsafeLazy(initializer: () -> T) = lazy(LazyThreadSafetyMode.NONE, initializer)
 

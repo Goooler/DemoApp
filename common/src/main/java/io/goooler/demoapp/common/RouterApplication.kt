@@ -6,12 +6,13 @@ import io.goooler.demoapp.base.util.debugRun
 
 open class RouterApplication : BaseApplication() {
 
-    override fun onCreate() {
-        super.onCreate()
+    override fun initData() {
+        super.initData()
         ARouter.init(this)
     }
 
     override fun initLater() {
+        super.initLater()
         debugRun {
             ARouter.openLog()
             ARouter.openDebug()

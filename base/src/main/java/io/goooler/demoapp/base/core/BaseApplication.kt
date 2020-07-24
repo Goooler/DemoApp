@@ -1,10 +1,8 @@
 package io.goooler.demoapp.base.core
 
 import android.annotation.SuppressLint
+import androidx.annotation.WorkerThread
 import androidx.multidex.MultiDexApplication
-import com.tencent.mmkv.MMKV
-import io.goooler.demoapp.base.util.CrashHandler
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -16,24 +14,24 @@ abstract class BaseApplication : MultiDexApplication() {
 
     override fun onCreate() {
         super.onCreate()
-        initData()
-    }
-
-    /**
-     * 应用启动时初始化
-     */
-    @SuppressLint("CheckResult")
-    private fun initData() {
-        context = this
-        CrashHandler.init()
-        MMKV.initialize(this)
-        GlobalScope.launch(Dispatchers.IO) {
+        GlobalScope.launch {
+            initData()
             delay(2000)
             initLater()
         }
     }
 
-    protected open fun initLater() {}
+    /**
+     * 应用启动时初始化
+     */
+    @WorkerThread
+    protected open fun initData() {
+        context = this
+    }
+
+    @WorkerThread
+    protected open fun initLater() {
+    }
 
     companion object {
         /**

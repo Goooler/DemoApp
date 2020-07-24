@@ -14,7 +14,7 @@ fun DependencyHandler.api(names: Array<String>): Array<Dependency?> =
 val buildTime: Int = SimpleDateFormat("yyMMddHHmm", Locale.CHINESE).format(Date()).toInt()
 
 val cleanFileTypes = arrayOf(
-    "*.log", "*.txt"
+    "*.log", "*.txt", "*.classpath", "*.project", "*.settings"
 )
 const val ndkLibs = "armeabi-v7a"
 
