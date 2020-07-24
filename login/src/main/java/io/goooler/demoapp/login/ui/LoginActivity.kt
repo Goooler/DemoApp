@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import com.alibaba.android.arouter.facade.annotation.Route
 import io.goooler.demoapp.base.core.BaseActivity
+import io.goooler.demoapp.base.util.device.StatusBarUtil
 import io.goooler.demoapp.common.router.RouterManager
 import io.goooler.demoapp.common.router.RouterPath
 import io.goooler.demoapp.login.R
@@ -19,6 +20,8 @@ class LoginActivity : BaseActivity() {
             return
         }
         setContentView(R.layout.login_activity)
+        StatusBarUtil.setStatusBarTransparent(this)
+
         RouterManager.goMain()
         finish()
     }

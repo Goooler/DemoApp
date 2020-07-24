@@ -10,23 +10,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.lifecycle.ViewModelProvider
-import io.goooler.demoapp.base.util.DialogManager
 import io.goooler.demoapp.base.util.device.AdaptScreenUtil
 import io.goooler.demoapp.base.util.showToastInMainThread
-import io.goooler.demoapp.base.util.unsafeLazy
 
 /**
  * Activity 基类，封装通用方法
  */
 abstract class BaseActivity : AppCompatActivity() {
 
-    protected val dialogManager by unsafeLazy {
-        val manager = DialogManager()
-        lifecycle.addObserver(manager)
-        manager
-    }
-
-    protected val originalResources: Resources by unsafeLazy { super.getResources() }
+    protected val originalResources: Resources get() = super.getResources()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,12 +26,10 @@ abstract class BaseActivity : AppCompatActivity() {
             setBackgroundDrawable(null)
             setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
         }
-        // activity 入栈 List<Activity> 记录
         ActivityCollector.addActivity(this)
     }
 
     override fun onDestroy() {
-        // activity 出栈 List<Activity> 移除
         ActivityCollector.removeActivity(this)
         super.onDestroy()
     }

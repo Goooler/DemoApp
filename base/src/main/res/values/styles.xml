@@ -3,25 +3,25 @@
     <!--优化启动黑屏-->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowBackground">@color/white</item>
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/transparent</item>
+        <item name="colorPrimaryDark">@color/transparent</item>
+        <item name="colorAccent">@color/transparent</item>
+    </style>
+
+    <style name="BaseDialogTheme" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
     </style>
 
     <!--全屏对话框-->
-    <style name="DialogFullScreenTheme" parent="Theme.AppCompat.Dialog">
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowIsTranslucent">true</item>
-        <!-- windowIsFloating属性设置为false, 默认将Window设置成全屏大小，设置为true，则window大小为wrap_content。 -->
+    <style name="DialogFullScreenTheme" parent="BaseDialogTheme">
         <item name="android:windowIsFloating">false</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
     </style>
 
     <!--对话框背景透明-->
-    <style name="DialogTransparentTheme" parent="Theme.AppCompat.Dialog">
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
+    <style name="DialogTransparentTheme" parent="BaseDialogTheme">
+        <item name="android:windowIsFloating">true</item>
     </style>
 
     <!--底部弹起效果-->

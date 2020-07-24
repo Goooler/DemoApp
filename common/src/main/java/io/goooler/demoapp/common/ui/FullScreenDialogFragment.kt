@@ -1,6 +1,5 @@
 package io.goooler.demoapp.common.ui
 
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.LayoutInflater
@@ -10,15 +9,17 @@ import androidx.fragment.app.FragmentManager
 import io.goooler.demoapp.base.R
 import io.goooler.demoapp.base.core.BaseDialogFragment
 import io.goooler.demoapp.base.util.unsafeLazy
-import io.goooler.demoapp.common.databinding.CommonFullScreenDialogFragmentBinding
+import io.goooler.demoapp.common.databinding.FullScreenDialogFragmentBinding
 
 class FullScreenDialogFragment : BaseDialogFragment() {
 
-    private val binding by unsafeLazy { CommonFullScreenDialogFragmentBinding.inflate(layoutInflater) }
+    private val binding by unsafeLazy {
+        FullScreenDialogFragmentBinding.inflate(layoutInflater)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStyle(STYLE_NORMAL, R.style.DialogFullScreenTheme)
+        setStyle(STYLE_NO_TITLE, R.style.DialogFullScreenTheme)
     }
 
     override fun onCreateView(
@@ -27,32 +28,25 @@ class FullScreenDialogFragment : BaseDialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding.lifecycleOwner = this
-        binding.listener = eventListener
-        dialog?.setOnKeyListener(eventListener)
-        return binding.root
-    }
-
-    private val eventListener = object : View.OnClickListener, DialogInterface.OnKeyListener {
-        override fun onClick(v: View?) {
-            when (v) {
-                binding.ivCenter -> {
-                    dismiss()
+        binding.ivCenter.setOnClickListener {
+            dismiss()
+        }
+        dialog?.run {
+            setCanceledOnTouchOutside(isCancelable)
+            setCancelable(isCancelable)
+            setOnKeyListener { _, keyCode, _ ->
+                when (keyCode) {
+                    KeyEvent.KEYCODE_BACK -> true
+                    else -> false
                 }
             }
         }
-
-        override fun onKey(dialog: DialogInterface?, keyCode: Int, event: KeyEvent?): Boolean {
-            return when (keyCode) {
-                KeyEvent.KEYCODE_BACK -> true
-                else -> false
-            }
-        }
+        return binding.root
     }
 
+    override fun isCancelable(): Boolean = false
+
     companion object {
-        fun show(manager: FragmentManager) {
-            FullScreenDialogFragment()
-                .show(manager, null)
-        }
+        fun show(manager: FragmentManager) = FullScreenDialogFragment().show(manager, null)
     }
 }

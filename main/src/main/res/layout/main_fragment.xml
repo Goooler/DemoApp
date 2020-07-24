@@ -27,14 +27,14 @@
             android:id="@+id/status_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/black"
+            android:background="@color/md_teal_800"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/black"
+            android:background="@color/md_teal_800"
             android:gravity="center"
             android:minHeight="40dp"
             android:onClick="@{()->listener.onTitleClick()}"

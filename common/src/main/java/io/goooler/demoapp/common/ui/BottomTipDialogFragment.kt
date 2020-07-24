@@ -9,15 +9,17 @@ import androidx.fragment.app.FragmentManager
 import io.goooler.demoapp.base.R
 import io.goooler.demoapp.base.core.BaseDialogFragment
 import io.goooler.demoapp.base.util.unsafeLazy
-import io.goooler.demoapp.common.databinding.CommonBottomTipDialogFragmentBinding
+import io.goooler.demoapp.common.databinding.BottomTipDialogFragmentBinding
 
 class BottomTipDialogFragment : BaseDialogFragment() {
 
-    private val binding by unsafeLazy { CommonBottomTipDialogFragmentBinding.inflate(layoutInflater) }
+    private val binding by unsafeLazy {
+        BottomTipDialogFragmentBinding.inflate(layoutInflater)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStyle(STYLE_NORMAL, R.style.DialogBottomAnim)
+        setStyle(STYLE_NORMAL, R.style.DialogTransparentTheme)
     }
 
     override fun onCreateView(
@@ -26,10 +28,12 @@ class BottomTipDialogFragment : BaseDialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding.lifecycleOwner = this
-        binding.listener = eventListener
         arguments?.let {
             binding.tvTitle.text = it.getString(TITLE)
             binding.tvContent.text = it.getString(CONTENT)
+        }
+        binding.ivClose.setOnClickListener {
+            dismiss()
         }
         return binding.root
     }
@@ -40,46 +44,27 @@ class BottomTipDialogFragment : BaseDialogFragment() {
     }
 
     private fun setStyle() {
-        setStyle(STYLE_NORMAL, R.style.DialogTransparentTheme)
-        val param = dialog?.window?.attributes?.apply {
-            width = ViewGroup.LayoutParams.MATCH_PARENT
-            height = ViewGroup.LayoutParams.WRAP_CONTENT
-            gravity = Gravity.BOTTOM
-        }
         dialog?.window?.run {
             setWindowAnimations(R.style.DialogBottomAnim)
-            attributes = param
+            attributes = attributes?.apply {
+                width = ViewGroup.LayoutParams.MATCH_PARENT
+                height = ViewGroup.LayoutParams.WRAP_CONTENT
+                gravity = Gravity.BOTTOM
+            }
         }
-    }
-
-    private val eventListener = object :
-        EventListener {
-        override fun onCloseClick() {
-            dismiss()
-        }
-    }
-
-    interface EventListener {
-        fun onCloseClick()
     }
 
     companion object {
         private const val TITLE = "title"
         private const val CONTENT = "content"
 
-        fun newInstance(title: String, content: String) = BottomTipDialogFragment()
-            .apply {
+        fun show(manager: FragmentManager, title: String, content: String, tag: String? = null) {
+            BottomTipDialogFragment().apply {
                 arguments = Bundle().apply {
                     putString(TITLE, title)
                     putString(CONTENT, content)
                 }
-            }
-
-        fun show(manager: FragmentManager, title: String, content: String, tag: String? = null) {
-            newInstance(
-                title,
-                content
-            ).show(manager, tag)
+            }.show(manager, tag)
         }
     }
 }

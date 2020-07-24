@@ -5,7 +5,6 @@ plugins {
 }
 
 android {
-    resourcePrefix(ResourcePrefix.common)
     compileSdkVersion(appTargetSdk)
     buildToolsVersion(appBuildTool)
     defaultConfig {
