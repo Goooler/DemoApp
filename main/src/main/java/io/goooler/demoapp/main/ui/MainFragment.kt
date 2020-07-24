@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import io.goooler.demoapp.base.core.BaseFragment
 import io.goooler.demoapp.base.util.device.StatusBarUtil
 import io.goooler.demoapp.base.util.unsafeLazy
-import io.goooler.demoapp.common.ui.BottomTipDialogFragment
+import io.goooler.demoapp.common.router.RouterManager
 import io.goooler.demoapp.main.databinding.MainFragmentBinding
 import io.goooler.demoapp.main.vm.MainViewModel
 
@@ -36,7 +36,7 @@ class MainFragment : BaseFragment() {
 
     private val eventListener = object : EventListener {
         override fun onTitleClick() {
-            BottomTipDialogFragment.show(childFragmentManager, "title", "this is content")
+            RouterManager.goWeb("https://www.github.com/")
         }
     }
 

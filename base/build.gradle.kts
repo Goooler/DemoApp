@@ -53,7 +53,6 @@ dependencies {
     // network
     api(Libs.okHttp)
     api(Libs.retrofit)
-    api(Libs.tbs)
     api(Libs.glide)
     kapt(Libs.glideKapt)
 

@@ -4,6 +4,7 @@
     <color name="white">#ffffff</color>
     <color name="transparent">#00000000</color>
     <color name="transparent_30">#4d000000</color>
+    <color name="color_333333">#333333</color>
 
     <!--reds-->
     <color name="md_red_50">#FFEBEE</color>

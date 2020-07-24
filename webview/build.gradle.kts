@@ -42,5 +42,6 @@ kapt {
 
 dependencies {
     implementation(project(Modules.common))
+    api(Libs.tbs)
     kapt(Libs.arouterKapt)
 }
