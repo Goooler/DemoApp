@@ -4,13 +4,16 @@ import android.app.Application
 import androidx.lifecycle.viewModelScope
 import io.goooler.demoapp.base.core.BaseViewModel
 import io.goooler.demoapp.base.type.MutableStringLiveData
-import io.goooler.demoapp.base.util.*
+import io.goooler.demoapp.base.util.defaultAsync
+import io.goooler.demoapp.base.util.isNotNullOrEmpty
+import io.goooler.demoapp.base.util.subscribeAndObserve
 import io.goooler.demoapp.main.R
 import io.goooler.demoapp.main.api.RepoList
 import io.goooler.demoapp.main.repository.MainRepository
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.launch
 
 class MainViewModel(application: Application) : BaseViewModel(application) {
 
@@ -18,10 +21,6 @@ class MainViewModel(application: Application) : BaseViewModel(application) {
 
     fun initData() {
         requestWithCr()
-        GlobalScope.launch(Dispatchers.Main) {
-            delay(6000)
-            currentThreadName.log()
-        }
     }
 
     /**
