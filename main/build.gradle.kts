@@ -29,7 +29,6 @@ android {
     }
     buildFeatures {
         dataBinding = true
-        viewBinding = true
     }
     compileOptions {
         sourceCompatibility = javaVersion

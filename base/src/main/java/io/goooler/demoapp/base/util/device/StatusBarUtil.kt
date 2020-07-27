@@ -9,7 +9,6 @@ import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import androidx.annotation.Px
-import io.goooler.demoapp.base.util.LogUtil.d
 
 /**
  * Fix by feling on 2019/08/17.
@@ -184,7 +183,6 @@ object StatusBarUtil {
                 }
                 result = true
             } catch (e: Exception) {
-                d(e)
             }
         }
         return result
@@ -223,7 +221,6 @@ object StatusBarUtil {
                 window.attributes = lp
                 result = true
             } catch (e: Exception) {
-                d(e)
             }
         }
         return result

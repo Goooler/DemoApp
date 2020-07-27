@@ -2,6 +2,7 @@ package io.goooler.demoapp.base.core
 
 import android.app.Application
 import android.graphics.drawable.Drawable
+import android.util.Log
 import androidx.annotation.AnyThread
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
@@ -12,7 +13,6 @@ import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import io.goooler.demoapp.base.BuildConfig
 import io.goooler.demoapp.base.http.HttpResponse
-import io.goooler.demoapp.base.util.LogUtil
 import io.goooler.demoapp.base.util.showToastInAnyThread
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.disposables.Disposable
@@ -46,7 +46,7 @@ abstract class BaseViewModel(application: Application) : AndroidViewModel(applic
         if (BuildConfig.DEBUG) {
             showToast(throwable.toString())
         } else {
-            LogUtil.d(throwable)
+            Log.d("silentThrowable", throwable.message)
         }
     }
 
@@ -73,6 +73,6 @@ abstract class BaseViewModel(application: Application) : AndroidViewModel(applic
     }
 
     protected fun formatResString(@StringRes resId: Int, vararg args: Any): String {
-        return String.format(getApplication<Application>().getString(resId), *args)
+        return String.format(getApplication<Application>().getString(resId), args)
     }
 }

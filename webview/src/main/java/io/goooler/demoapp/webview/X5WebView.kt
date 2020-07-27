@@ -12,8 +12,8 @@ class X5WebView(context: Context, attrs: AttributeSet?) : WebView(context, attrs
     constructor(context: Context) : this(context, null)
 
     init {
-        view.isClickable = true
         initWebViewSettings()
+        view.isClickable = true
         webViewClient = object : WebViewClient() {
             override fun shouldOverrideUrlLoading(
                 view: WebView,
@@ -59,8 +59,6 @@ class X5WebView(context: Context, attrs: AttributeSet?) : WebView(context, attrs
             setGeolocationEnabled(true)
             setAppCacheMaxSize(Long.MAX_VALUE)
             pluginState = WebSettings.PluginState.ON_DEMAND
-            // 设置缓存模式,一共有四种模式
-            cacheMode = android.webkit.WebSettings.LOAD_NO_CACHE
             // 支持内容重新布局,一共有四种方式
             layoutAlgorithm = WebSettings.LayoutAlgorithm.SINGLE_COLUMN
             // 设置默认字体大小

@@ -1,15 +1,18 @@
 @file:Suppress("UNUSED_PARAMETER")
 
-package io.goooler.demoapp.base.util
+package io.goooler.demoapp.common.util
 
 import com.tencent.mmkv.MMKV
-import io.goooler.demoapp.base.type.MkKeys
+import io.goooler.demoapp.common.type.MkKeys
+
+typealias MMKVUtil = MkUtil
 
 object MkUtil {
     private const val MK_CONFIG = "mk_config"
 
     fun getBoolean(@MkKeys key: String, default: Boolean = false): Boolean {
-        return getMk().decodeBool(key, default)
+        return getMk()
+            .decodeBool(key, default)
     }
 
     fun putBoolean(@MkKeys key: String, value: Boolean = true) {
@@ -17,7 +20,8 @@ object MkUtil {
     }
 
     fun getLong(@MkKeys key: String, default: Long = 0): Long {
-        return getMk().decodeLong(key, default)
+        return getMk()
+            .decodeLong(key, default)
     }
 
     fun putLong(@MkKeys key: String, value: Long) {
@@ -25,7 +29,8 @@ object MkUtil {
     }
 
     fun getDouble(@MkKeys key: String, default: Double = 0.0): Double {
-        return getMk().decodeDouble(key, default)
+        return getMk()
+            .decodeDouble(key, default)
     }
 
     fun putDouble(@MkKeys key: String, value: Double) {
@@ -33,7 +38,8 @@ object MkUtil {
     }
 
     fun getString(@MkKeys key: String, default: String? = null): String? {
-        return getMk().decodeString(key, default)
+        return getMk()
+            .decodeString(key, default)
     }
 
     fun putString(@MkKeys key: String, value: String) {

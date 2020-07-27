@@ -57,7 +57,6 @@ android {
     }
     buildFeatures {
         dataBinding = true
-        viewBinding = true
     }
     lintOptions {
         isAbortOnError = false

@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import androidx.annotation.DrawableRes
+import androidx.core.content.ContextCompat
 
 
 object BitmapUtil {
@@ -13,7 +14,7 @@ object BitmapUtil {
      */
     fun getBitmap(context: Context, @DrawableRes id: Int): Bitmap? {
         var bitmap: Bitmap? = null
-        context.getDrawable(id)?.let {
+        ContextCompat.getDrawable(context, id)?.let {
             bitmap = Bitmap.createBitmap(
                 it.intrinsicWidth,
                 it.intrinsicHeight,

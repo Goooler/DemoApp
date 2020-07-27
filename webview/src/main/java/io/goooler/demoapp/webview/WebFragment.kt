@@ -24,6 +24,10 @@ class WebFragment : BaseFragment() {
         binding.webView.webChromeClient = listener
     }
 
+    fun goBack() {
+        if (binding.webView.canGoBack()) binding.webView.goBack() else finish()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -56,11 +60,21 @@ class WebFragment : BaseFragment() {
         binding.webView.onDestroy()
     }
 
-    fun goBack() {
-        if (binding.webView.canGoBack()) binding.webView.goBack() else finish()
-    }
-
     private val listener = object : View.OnClickListener, WebChromeClient() {
+        override fun onClick(v: View?) {
+            when (v) {
+                binding.layoutTitle.ivLeft -> {
+                    finish()
+                }
+                binding.layoutTitle.ivRight -> {
+                    val intent = Intent().setAction(Intent.ACTION_SEND)
+                        .putExtra(Intent.EXTRA_TEXT, binding.webView.url)
+                        .setType("text/plain")
+                    startActivity(Intent.createChooser(intent, ""))
+                }
+            }
+        }
+
         override fun onProgressChanged(webView: WebView?, i: Int) {
             super.onProgressChanged(webView, i)
             binding.webViewProgressBar.visibility = if (i >= 100) {
@@ -74,20 +88,6 @@ class WebFragment : BaseFragment() {
         override fun onReceivedTitle(webView: WebView, title: String?) {
             super.onReceivedTitle(webView, title)
             binding.layoutTitle.tvCenter.text = title.orEmpty()
-        }
-
-        override fun onClick(v: View?) {
-            when (v) {
-                binding.layoutTitle.ivLeft -> {
-                    finish()
-                }
-                binding.layoutTitle.ivRight -> {
-                    val intent = Intent().setAction(Intent.ACTION_SEND)
-                        .putExtra(Intent.EXTRA_TEXT, binding.webView.url)
-                        .setType("text/plain")
-                    startActivity(Intent.createChooser(intent, ""))
-                }
-            }
         }
     }
 

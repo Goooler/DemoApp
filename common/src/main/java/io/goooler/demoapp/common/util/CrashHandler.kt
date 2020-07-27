@@ -1,4 +1,4 @@
-package io.goooler.demoapp.base.util
+package io.goooler.demoapp.common.util
 
 import android.os.SystemClock
 import android.util.Log

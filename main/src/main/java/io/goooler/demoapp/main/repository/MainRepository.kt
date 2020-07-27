@@ -1,9 +1,9 @@
 package io.goooler.demoapp.main.repository
 
-import io.goooler.demoapp.base.util.getAllFromBox
-import io.goooler.demoapp.base.util.putIntoBox
 import io.goooler.demoapp.base.util.withIoContext
 import io.goooler.demoapp.common.http.RetrofitHelper
+import io.goooler.demoapp.common.util.getAllFromBox
+import io.goooler.demoapp.common.util.putIntoBox
 import io.goooler.demoapp.main.api.MainApi
 import io.goooler.demoapp.main.api.RepoList
 import io.goooler.demoapp.main.bean.RepoListBean

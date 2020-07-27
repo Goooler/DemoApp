@@ -1,6 +1,7 @@
 package io.goooler.demoapp.base.core
 
 import android.annotation.SuppressLint
+import androidx.annotation.MainThread
 import androidx.annotation.WorkerThread
 import androidx.multidex.MultiDexApplication
 import kotlinx.coroutines.GlobalScope
@@ -14,21 +15,24 @@ abstract class BaseApplication : MultiDexApplication() {
 
     override fun onCreate() {
         super.onCreate()
+        initRight()
         GlobalScope.launch {
-            initData()
             delay(2000)
             initLater()
         }
     }
 
     /**
-     * 应用启动时初始化
+     * 立即初始化
      */
-    @WorkerThread
-    protected open fun initData() {
+    @MainThread
+    protected open fun initRight() {
         context = this
     }
 
+    /**
+     * 延迟初始化
+     */
     @WorkerThread
     protected open fun initLater() {
     }

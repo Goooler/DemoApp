@@ -11,7 +11,6 @@ import android.text.format.Formatter
 import android.util.DisplayMetrics
 import android.view.WindowManager
 import androidx.annotation.Px
-import io.goooler.demoapp.base.util.LogUtil.d
 import java.util.*
 import kotlin.math.pow
 import kotlin.math.sqrt
@@ -109,7 +108,6 @@ object DeviceUtil {
                 hasNavigationBar = true
             }
         } catch (e: Exception) {
-            d(e)
         }
         return hasNavigationBar
     }
@@ -131,7 +129,6 @@ object DeviceUtil {
                 method.invoke(it.defaultDisplay, dm)
                 vh = dm.heightPixels - it.defaultDisplay.height
             } catch (e: Exception) {
-                d(e)
             }
         }
         return vh

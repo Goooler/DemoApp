@@ -12,7 +12,6 @@ object JsonUtil {
         return try {
             JSONObject.parseObject(jsonString, clazz)
         } catch (e: JSONException) {
-            LogUtil.d(e.toString())
             null
         }
     }

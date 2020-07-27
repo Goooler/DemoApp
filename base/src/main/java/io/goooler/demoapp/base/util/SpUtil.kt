@@ -3,51 +3,55 @@ package io.goooler.demoapp.base.util
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import io.goooler.demoapp.base.core.BaseApplication
-import io.goooler.demoapp.base.type.SpKeys
 
 /**
  * SharedPreferences 简单封装
  */
+typealias PrefUtil = SpUtil
 
 object SpUtil {
 
     private const val SP_CONFIG = "sp_config"
 
-    fun getBoolean(@SpKeys key: String, default: Boolean = false): Boolean {
-        return getSp().getBoolean(key, default)
+    fun getBoolean(key: String, default: Boolean = false): Boolean {
+        return getSp()
+            .getBoolean(key, default)
     }
 
-    fun putBoolean(@SpKeys key: String, value: Boolean = true) {
+    fun putBoolean(key: String, value: Boolean = true) {
         getSpEditor {
             putBoolean(key, value)
         }
     }
 
-    fun getLong(@SpKeys key: String, default: Long = 0): Long {
-        return getSp().getLong(key, default)
+    fun getLong(key: String, default: Long = 0): Long {
+        return getSp()
+            .getLong(key, default)
     }
 
-    fun putLong(@SpKeys key: String, value: Long) {
+    fun putLong(key: String, value: Long) {
         getSpEditor {
             putLong(key, value)
         }
     }
 
-    fun getFloat(@SpKeys key: String, default: Float = 0f): Float {
-        return getSp().getFloat(key, default)
+    fun getFloat(key: String, default: Float = 0f): Float {
+        return getSp()
+            .getFloat(key, default)
     }
 
-    fun putFloat(@SpKeys key: String, value: Float) {
+    fun putFloat(key: String, value: Float) {
         getSpEditor {
             putFloat(key, value)
         }
     }
 
-    fun getString(@SpKeys key: String, default: String? = null): String? {
-        return getSp().getString(key, default)
+    fun getString(key: String, default: String? = null): String? {
+        return getSp()
+            .getString(key, default)
     }
 
-    fun putString(@SpKeys key: String, value: String) {
+    fun putString(key: String, value: String) {
         getSpEditor {
             putString(key, value)
         }

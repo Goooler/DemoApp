@@ -23,6 +23,7 @@ android {
     productFlavors.all {
         setDimension("channel")
         buildConfigField("String", "CHANNEL", "\"$name\"")
+        buildConfigField("String", "CDN_PREFIX", "\"$cdnPrefix\"")
         if (name == "daily") {
             buildConfigField("String", "API_HOST", "\"${ApiHosts.daily}\"")
         } else if (name == "online") {
@@ -31,7 +32,6 @@ android {
     }
     buildFeatures {
         dataBinding = true
-        viewBinding = true
     }
     compileOptions {
         sourceCompatibility = javaVersion
@@ -51,6 +51,15 @@ kapt {
 
 dependencies {
     api(project(Modules.base))
+
     api(Libs.arouter)
     kapt(Libs.arouterKapt)
+
+    // storage
+    api(Libs.objectBox)
+    api(Libs.mmkv)
+
+    // async
+    api(Libs.eventBus)
+    kapt(Libs.eventBusKapt)
 }

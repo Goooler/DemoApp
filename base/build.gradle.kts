@@ -18,7 +18,6 @@ android {
     }
     buildFeatures {
         dataBinding = true
-        viewBinding = true
     }
     compileOptions {
         sourceCompatibility = javaVersion
@@ -56,18 +55,12 @@ dependencies {
     api(Libs.glide)
     kapt(Libs.glideKapt)
 
-    // storage
-    api(Libs.objectBox)
-    api(Libs.mmkv)
-
     // serializable
     api(Libs.fastjson)
     api(Libs.gson)
 
     // async
     api(Libs.rx)
-    api(Libs.eventBus)
-    kapt(Libs.eventBusKapt)
 
     // analyze
     debugApi(Libs.leakCanary)

@@ -1,4 +1,4 @@
-package io.goooler.demoapp.base.type
+package io.goooler.demoapp.common.type
 
 import androidx.annotation.Keep
 

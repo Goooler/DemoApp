@@ -23,6 +23,8 @@ val localLibs = mapOf(
     "include" to arrayOf("*.jar", "*.aar")
 )
 
+const val cdnPrefix = "https://raw.githubusercontent.com/"
+
 object ApiHosts {
     const val daily = "https://api.github.com/"
     const val online = "https://api.github.com/"

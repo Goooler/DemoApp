@@ -1,6 +1,6 @@
-package io.goooler.demoapp.base.util
+package io.goooler.demoapp.common.util
 
-import io.goooler.demoapp.base.type.BaseObjectBoxEntity
+import io.goooler.demoapp.common.type.BaseObjectBoxEntity
 import io.objectbox.BoxStore
 import kotlin.reflect.KClass
 

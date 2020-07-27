@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.annotation.AnyThread
 import androidx.annotation.MainThread
 import androidx.annotation.StringRes
+import androidx.annotation.WorkerThread
 
 
 /**
@@ -32,10 +33,22 @@ object ToastUtil {
         if (isMainThread) {
             showToastInMainThread(context, text)
         } else {
-            Looper.prepare()
-            showToastInMainThread(context, text)
-            Looper.loop()
+            showToastInWorkerThread(context, text)
         }
+    }
+
+    @WorkerThread
+    fun showToastInWorkerThread(context: Context, text: String) {
+        Looper.prepare()
+        showToastInMainThread(context, text)
+        Looper.loop()
+    }
+
+    @WorkerThread
+    fun showToastInWorkerThread(context: Context, @StringRes strResId: Int) {
+        Looper.prepare()
+        showToastInMainThread(context, strResId)
+        Looper.loop()
     }
 
     @MainThread
@@ -59,10 +72,17 @@ object ToastUtil {
     }
 }
 
+@MainThread
 fun String.showToastInMainThread(context: Context) {
     ToastUtil.showToastInAnyThread(context, this)
 }
 
+@WorkerThread
+fun String.showToastInWorkerThread(context: Context) {
+    ToastUtil.showToastInWorkerThread(context, this)
+}
+
+@AnyThread
 fun String.showToastInAnyThread(context: Context) {
     ToastUtil.showToastInAnyThread(context, this)
 }

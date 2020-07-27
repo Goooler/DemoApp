@@ -1,8 +1,2 @@
-include(":webview")
-include(":adapter")
-include(":main")
-include(":login")
-include(":common")
-include(":base")
-include(":app")
+include(":app", ":base", ":common", ":login", ":main", ":adapter", ":webview")
 rootProject.name = "DemoApp"

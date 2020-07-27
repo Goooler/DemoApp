@@ -9,7 +9,7 @@ import android.text.Spanned
 import android.view.View
 import android.webkit.URLUtil
 import androidx.annotation.ColorInt
-import androidx.annotation.StringRes
+import androidx.lifecycle.MutableLiveData
 import io.goooler.demoapp.base.BuildConfig
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Single
@@ -17,6 +17,25 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.coroutines.*
 import java.math.BigDecimal
 import kotlin.math.absoluteValue
+
+
+//---------------------Types-------------------------------//
+
+
+typealias MutableBooleanLiveData = MutableLiveData<Boolean>
+
+typealias MutableIntLiveData = MutableLiveData<Int>
+
+typealias MutableLongLiveData = MutableLiveData<Long>
+
+typealias MutableDoubleLiveData = MutableLiveData<Double>
+
+typealias MutableFloatLiveData = MutableLiveData<Float>
+
+typealias MutableStringLiveData = MutableLiveData<String>
+
+typealias MutableListLiveData<T> = MutableLiveData<List<T>>
+
 
 //---------------------Any-------------------------------//
 
@@ -44,10 +63,6 @@ fun String.fromHtml(): Spanned {
         @Suppress("DEPRECATION")
         Html.fromHtml(this)
     }
-}
-
-fun String.formatRes(@StringRes resId: Int): String {
-    return String.format(ResUtil.getString(resId), this)
 }
 
 fun CharSequence?.isNotNullOrEmpty(): Boolean {
