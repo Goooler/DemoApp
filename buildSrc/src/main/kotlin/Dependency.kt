@@ -31,7 +31,7 @@ const val navigationVersion = "2.3.0"
 const val workVersion = "2.3.4"
 const val preferenceVersion = "1.1.1"
 const val multiDexVersion = "2.0.1"
-const val okHttpVersion = "4.7.2"
+const val okHttpVersion = "4.8.0"
 const val retrofitVersion = "2.9.0"
 const val fastjsonVersion = "1.1.71.android"
 const val arouterVersion = "1.5.0"
@@ -42,6 +42,7 @@ const val eventBusVersion = "3.2.0"
 const val liveDataBusVersion = "1.6.1"
 const val rxAndroidVersion = "3.0.0"
 const val rxJavaVersion = "3.0.4"
+const val rxPermissionVersion = "0.12"
 const val mpChartVersion = "v3.1.0"
 const val lottieVersion = "3.0.1"
 const val smartRefreshLayoutVersion = "2.0.1"
@@ -157,6 +158,7 @@ object Libs {
     val rx = arrayOf(
         "io.reactivex.rxjava3:rxjava:$rxJavaVersion",
         "io.reactivex.rxjava3:rxandroid:$rxAndroidVersion",
-        "com.squareup.retrofit2:adapter-rxjava3:$retrofitVersion"
+        "com.squareup.retrofit2:adapter-rxjava3:$retrofitVersion",
+        "com.github.tbruyelle:rxpermissions:$rxPermissionVersion"
     )
 }
