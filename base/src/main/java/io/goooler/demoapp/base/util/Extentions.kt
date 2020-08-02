@@ -15,6 +15,7 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.coroutines.*
+import java.io.File
 import java.math.BigDecimal
 import kotlin.math.absoluteValue
 
@@ -221,9 +222,11 @@ fun Number.isZero(): Boolean {
     }
 }
 
-fun Number.isNotZero(): Boolean {
-    return !isZero()
-}
+fun Number.isNotZero(): Boolean = !isZero()
+
+fun Boolean?.orTrue(): Boolean = this ?: true
+
+fun Boolean?.orFalse(): Boolean = this ?: false
 
 
 //---------------------View-------------------------------//
@@ -378,6 +381,12 @@ fun <T> Single<T>.subscribeAndObserve(): Single<T> {
     return this.subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
 }
+
+
+//---------------------File-------------------------------//
+
+
+fun File.notExist(): Boolean = !this.exists()
 
 
 //---------------------HigherOrderFunc-------------------------------//

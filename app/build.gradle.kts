@@ -7,7 +7,6 @@ plugins {
 }
 
 android {
-    resourcePrefix(ResourcePrefix.app)
     compileSdkVersion(appTargetSdk)
     buildToolsVersion(appBuildTool)
     defaultConfig {
@@ -39,6 +38,7 @@ android {
         }
         getByName("debug") {
             signingConfig = signingConfigs["sign"]
+            applicationIdSuffix = ".debug"
             isJniDebuggable = true
             isRenderscriptDebuggable = true
             isCrunchPngs = false

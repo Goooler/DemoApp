@@ -1,6 +1,9 @@
 package io.goooler.demoapp.base.core
 
 import android.annotation.SuppressLint
+import android.app.Application
+import android.os.Build
+import android.webkit.WebView
 import androidx.annotation.MainThread
 import androidx.annotation.WorkerThread
 import androidx.multidex.MultiDexApplication
@@ -28,6 +31,7 @@ abstract class BaseApplication : MultiDexApplication() {
     @MainThread
     protected open fun initRight() {
         context = this
+        initWebView()
     }
 
     /**
@@ -35,6 +39,18 @@ abstract class BaseApplication : MultiDexApplication() {
      */
     @WorkerThread
     protected open fun initLater() {
+    }
+
+    /**
+     * 9.0 以上行为变更，不可多进程使用同一个 webView 目录
+     */
+    private fun initWebView() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            val processName = Application.getProcessName()
+            if (processName != packageName) {
+                WebView.setDataDirectorySuffix(processName)
+            }
+        }
     }
 
     companion object {

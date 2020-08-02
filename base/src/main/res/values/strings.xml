@@ -1,5 +1,4 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">Demo</string>
     <string name="default_username" tools:ignore="UnusedResources">默认用户</string>
     <string name="default_time" tools:ignore="UnusedResources">默认时间</string>
     <string name="default_test" tools:ignore="UnusedResources">默认测试文本</string>
