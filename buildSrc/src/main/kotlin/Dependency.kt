@@ -14,6 +14,7 @@ const val appMinSdk = 23
 // app
 const val appVersionName = "1.0"
 const val appPackageName = "io.goooler.demoapp"
+const val appName = "Demo"
 
 // app dependencies
 const val coreVersion = "1.3.0"

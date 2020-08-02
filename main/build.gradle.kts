@@ -24,8 +24,8 @@ android {
     }
     flavorDimensions("channel")
     productFlavors {
-        create("daily") {}
-        create("online") {}
+        create("daily")
+        create("online")
     }
     buildFeatures {
         dataBinding = true

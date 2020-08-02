@@ -17,6 +17,9 @@ android {
         versionName = appVersionName
         vectorDrawables.useSupportLibrary = true
         ndk { abiFilters(ndkLibs) }
+        manifestPlaceholders = mapOf(
+            "appName" to "Demo"
+        )
     }
     signingConfigs {
         create("sign") {
@@ -32,6 +35,7 @@ android {
             isMinifyEnabled = true
             isZipAlignEnabled = true
             isShrinkResources = true
+            resValue("string", "app_name", appName)
             proguardFiles(
                 "${rootDir.path}/gradle/proguard-rules.pro"
             )
@@ -39,6 +43,8 @@ android {
         getByName("debug") {
             signingConfig = signingConfigs["sign"]
             applicationIdSuffix = ".debug"
+            versionNameSuffix = ".debug"
+            resValue("string", "app_name", "${appName}.debug")
             isJniDebuggable = true
             isRenderscriptDebuggable = true
             isCrunchPngs = false
@@ -52,8 +58,8 @@ android {
     }
     flavorDimensions("channel")
     productFlavors {
-        create("daily") {}
-        create("online") {}
+        create("daily")
+        create("online")
     }
     buildFeatures {
         dataBinding = true

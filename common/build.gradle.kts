@@ -17,8 +17,8 @@ android {
     }
     flavorDimensions("channel")
     productFlavors {
-        create("daily") {}
-        create("online") {}
+        create("daily")
+        create("online")
     }
     productFlavors.all {
         setDimension("channel")
