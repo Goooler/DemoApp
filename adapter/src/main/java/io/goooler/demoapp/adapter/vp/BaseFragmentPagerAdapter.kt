@@ -1,4 +1,3 @@
-
 package io.goooler.demoapp.adapter.vp
 
 import androidx.fragment.app.Fragment
@@ -9,7 +8,7 @@ import androidx.viewpager.widget.PagerAdapter
 /**
  * 继承自 FragmentStatePagerAdapter，会销毁 fragment
  */
-@Suppress("DEPRECATION")
+@Suppress("DEPRECATION", "unused")
 abstract class BaseFragmentPagerAdapter(
     fragmentManager: FragmentManager,
     behavior: Int = BEHAVIOR_SET_USER_VISIBLE_HINT

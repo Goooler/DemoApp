@@ -1,6 +1,7 @@
+@file:Suppress("unused", "PrivateApi")
+
 package io.goooler.demoapp.base.util.device
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Point
 import android.os.Build
@@ -20,7 +21,6 @@ import kotlin.math.sqrt
  * Created by liyanfang on 2018/7/3.
  * Fix by feling on 2019/08/17.
  */
-@SuppressLint("PrivateApi")
 object DeviceUtil {
     /**
      * 获取屏幕宽度。
@@ -75,13 +75,6 @@ object DeviceUtil {
      */
     val isZte: Boolean
         get() = deviceModel.toLowerCase(Locale.getDefault()).contains("zte")
-
-    /**
-     * 获得设备型号
-     *
-     * @return .
-     */
-    val deviceModel: String = Build.MODEL.trim { it <= ' ' }
 
     /**
      * 是否存在导航栏
@@ -201,3 +194,5 @@ object DeviceUtil {
         )
     }
 }
+
+val deviceModel: String = Build.MODEL.trim()

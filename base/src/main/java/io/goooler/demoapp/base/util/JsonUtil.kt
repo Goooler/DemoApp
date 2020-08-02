@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package io.goooler.demoapp.base.util
 
 import com.alibaba.fastjson.JSONException

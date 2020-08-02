@@ -9,7 +9,8 @@ import io.goooler.demoapp.adapter.rv.list.BaseListAdapter
  * @version 1.1.0
  * @since 1.1.0
  */
-abstract class BaseTreeAdapter<T> : BaseListAdapter<T>() where  T : IModelTree<T> {
+@Suppress("unused")
+abstract class BaseTreeAdapter<T> : BaseListAdapter<T>() where T : IModelTree<T> {
     init {
         fixToTree()
     }

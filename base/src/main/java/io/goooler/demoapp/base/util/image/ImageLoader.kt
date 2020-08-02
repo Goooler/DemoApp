@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package io.goooler.demoapp.base.util.image
 
 import android.content.Context
@@ -880,7 +882,8 @@ object ImageLoader {
      */
     fun loadRoundedCorner(
         imageView: ImageView,
-        url: String?, roundingRadius: Int
+        url: String?,
+        roundingRadius: Int
     ) {
         GlideApp.with(imageView)
             .load(url)
@@ -963,7 +966,8 @@ object ImageLoader {
      */
     fun loadRoundedCornerOss(
         imageView: ImageView,
-        url: String?, roundingRadius: Int
+        url: String?,
+        roundingRadius: Int
     ) {
         GlideApp.with(imageView)
             .load(translateOssUrl(imageView, url))
@@ -1175,7 +1179,8 @@ object ImageLoader {
      */
     fun loadCenterCropRoundedCornerOss(
         imageView: ImageView,
-        url: String?, roundingRadius: Int,
+        url: String?,
+        roundingRadius: Int,
         placeholderDrawable: Drawable?
     ) {
         GlideApp.with(imageView)

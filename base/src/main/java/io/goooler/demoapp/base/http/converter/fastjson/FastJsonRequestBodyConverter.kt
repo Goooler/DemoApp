@@ -9,7 +9,6 @@ import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.Converter
 
-
 /**
  * @author baronzhang
  * 16/2/25

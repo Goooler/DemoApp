@@ -1,7 +1,6 @@
 package io.goooler.demoapp.base.core
 
 import android.app.Activity
-import java.util.*
 
 /**
  * 方便管理 activity

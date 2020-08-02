@@ -17,9 +17,9 @@ import io.goooler.demoapp.base.util.showToastInAnyThread
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.disposables.Disposable
 
-
-abstract class BaseViewModel(application: Application) : AndroidViewModel(application),
-    DefaultLifecycleObserver {
+@Suppress("unused", "MemberVisibilityCanBePrivate")
+abstract class BaseViewModel(application: Application) :
+    AndroidViewModel(application), DefaultLifecycleObserver {
 
     private val compositeDisposable = CompositeDisposable()
 

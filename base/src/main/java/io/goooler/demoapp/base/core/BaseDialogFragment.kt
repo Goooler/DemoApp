@@ -6,6 +6,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import io.goooler.demoapp.base.util.showToastInMainThread
 
+@Suppress("unused", "MemberVisibilityCanBePrivate")
 abstract class BaseDialogFragment : DialogFragment() {
 
     var dismissListener: OnDismissListener? = null

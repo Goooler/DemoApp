@@ -1,3 +1,5 @@
+@file:Suppress("unused", "MemberVisibilityCanBePrivate")
+
 package io.goooler.demoapp.base.util
 
 import java.time.Instant
@@ -35,6 +37,7 @@ object DateUtil {
         } else {
             timestamp
         }
+        // todo 研究一下 kt 的时间类
         return DateTimeFormatter.ofPattern(dateFormat).format(
             LocalDateTime.ofInstant(
                 Instant.ofEpochMilli(ts), ZoneId.systemDefault()

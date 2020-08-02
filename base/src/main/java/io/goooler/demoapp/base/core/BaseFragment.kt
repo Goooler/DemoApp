@@ -11,6 +11,7 @@ import io.goooler.demoapp.base.util.showToastInMainThread
 /**
  * Fragment 基类，封装通用方法
  */
+@Suppress("unused")
 abstract class BaseFragment : Fragment() {
 
     /**

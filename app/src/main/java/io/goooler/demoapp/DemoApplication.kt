@@ -8,6 +8,7 @@ import io.goooler.demoapp.common.util.ObjectBox
 import io.goooler.demoapp.common.util.isFirstRun
 import io.goooler.demoapp.main.bean.MyObjectBox
 
+@Suppress("unused")
 class DemoApplication : RouterApplication() {
 
     override fun initRight() {

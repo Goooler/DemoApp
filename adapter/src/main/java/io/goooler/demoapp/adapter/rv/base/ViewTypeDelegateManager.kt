@@ -12,6 +12,7 @@ import androidx.databinding.ViewDataBinding
  * @version 1.0.0
  * @since 1.0.0
  */
+@Suppress("unused")
 class ViewTypeDelegateManager<M : IModelType> {
 
     private val mIVDs: SparseArray<ViewTypeDelegate<ViewDataBinding, M>> = SparseArray()

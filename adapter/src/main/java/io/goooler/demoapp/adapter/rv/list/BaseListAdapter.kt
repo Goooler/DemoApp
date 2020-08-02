@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package io.goooler.demoapp.adapter.rv.list
 
 import androidx.databinding.BindingAdapter

@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package io.goooler.demoapp.base.util
 
 import android.graphics.Outline
@@ -24,7 +26,6 @@ import io.goooler.demoapp.base.util.image.ImageLoader
 import java.io.File
 
 //------------------------View --------------------------//
-
 
 @BindingAdapter("binding_isGone")
 fun View.bindingIsGone(isGone: Boolean) {
@@ -107,9 +108,7 @@ fun View.bindingMarginEnd(marginRight: Float) {
     }
 }
 
-
 //------------------------View Bg Shape---------------------//
-
 
 @BindingAdapter(
     "binding_bg_startColor",
@@ -279,9 +278,7 @@ fun View.bindingBgShapeOval(solidOvalColor: Int) {
     setBgShapeGradual(shapeType = GradientDrawable.OVAL, solidColor = solidOvalColor)
 }
 
-
 //------------------------ImageView--------------------------//
-
 
 @BindingAdapter("binding_src_url")
 fun ImageView.bindingImageUrl(url: String?) {
@@ -435,9 +432,7 @@ fun ImageView.bindingImageDrawable(drawable: Drawable) {
     setImageDrawable(drawable)
 }
 
-
 //------------------------TextView--------------------------//
-
 
 @BindingAdapter("binding_font_type")
 fun TextView.bindingImpactTypeface(path: String) {
@@ -460,9 +455,7 @@ fun TextView.bindingPaintFlagThru(flag: Boolean) {
     }
 }
 
-
 //------------------------SmartRefreshLayout--------------------------//
-
 
 @BindingAdapter("binding_srl_onRefreshLoadMoreListener")
 fun SmartRefreshLayout.bindingOnRefreshLoadMoreListener(listener: OnRefreshLoadMoreListener) {

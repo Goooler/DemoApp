@@ -5,6 +5,7 @@ package io.goooler.demoapp.common.type
  * @param messageCode 接收消息的通信码
  * @param message     消息主体
  */
+@Suppress("unused", "MemberVisibilityCanBePrivate")
 class EventType(val messageCode: Int, val message: Any) {
 
     /**

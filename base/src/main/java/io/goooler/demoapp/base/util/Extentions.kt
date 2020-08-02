@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package io.goooler.demoapp.base.util
 
 import android.graphics.Color
@@ -19,9 +21,7 @@ import java.io.File
 import java.math.BigDecimal
 import kotlin.math.absoluteValue
 
-
 //---------------------Types-------------------------------//
-
 
 typealias MutableBooleanLiveData = MutableLiveData<Boolean>
 
@@ -37,9 +37,7 @@ typealias MutableStringLiveData = MutableLiveData<String>
 
 typealias MutableListLiveData<T> = MutableLiveData<List<T>>
 
-
 //---------------------Any-------------------------------//
-
 
 val isDebug: Boolean = BuildConfig.DEBUG
 
@@ -53,9 +51,7 @@ val isMainThread: Boolean get() = Looper.getMainLooper().thread === Thread.curre
 
 fun <T> unsafeLazy(initializer: () -> T) = lazy(LazyThreadSafetyMode.NONE, initializer)
 
-
 //---------------------CharSequence-------------------------------//
-
 
 fun String.fromHtml(): Spanned {
     return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
@@ -154,9 +150,7 @@ fun String.hidePhone(): String {
     return replace(Regex("(\\d{3})\\d{4}(\\d{4})"), "$1****$2")
 }
 
-
 //---------------------Calculate-------------------------------//
-
 
 /**
  * @param isYuan 默认以分为单位，传入元为单位传 true
@@ -190,7 +184,6 @@ fun Number.formatMoney(isYuan: Boolean = false, trans2W: Boolean = false, scale:
                             it
                         }
                     }
-
         }
     } catch (e: Exception) {
         moneyF.toString()
@@ -228,9 +221,7 @@ fun Boolean?.orTrue(): Boolean = this ?: true
 
 fun Boolean?.orFalse(): Boolean = this ?: false
 
-
 //---------------------View-------------------------------//
-
 
 /**
  * 设置 view 的背景，支持圆形和矩形，渐变色和描边圆角等
@@ -304,9 +295,7 @@ fun View.setBgShapeCorners(
     }
 }
 
-
 //---------------------Collections-------------------------------//
-
 
 inline fun <E> MutableCollection<E>.removeIfMatch(predicate: (e: E) -> Boolean): Boolean {
     var removed = false
@@ -358,9 +347,7 @@ fun <T> List<T>.thirdOrNull(): T? {
     return if (size < 3) null else this[2]
 }
 
-
 //---------------------Coroutine-------------------------------//
-
 
 fun <T> CoroutineScope.defaultAsync(
     start: CoroutineStart = CoroutineStart.DEFAULT,
@@ -373,24 +360,18 @@ suspend fun <T> withIoContext(block: suspend CoroutineScope.() -> T) =
 suspend fun <T> withDefaultContext(block: suspend CoroutineScope.() -> T) =
     withContext(Dispatchers.Default, block)
 
-
 //---------------------Rx-------------------------------//
-
 
 fun <T> Single<T>.subscribeAndObserve(): Single<T> {
     return this.subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
 }
 
-
 //---------------------File-------------------------------//
-
 
 fun File.notExist(): Boolean = !this.exists()
 
-
 //---------------------HigherOrderFunc-------------------------------//
-
 
 /**
  * 条件为真时执行

@@ -7,6 +7,7 @@ package io.goooler.demoapp.adapter.rv.list
  * @version 1.0.0
  * @since 1.0.0
  */
+@Suppress("unused")
 interface IMutableListData<M> {
 
     /**
@@ -34,7 +35,6 @@ interface IMutableListData<M> {
      */
     fun removeData(list: List<M>)
 
-
     /**
      * 设置数据
      */
@@ -55,7 +55,6 @@ interface IMutableListData<M> {
     fun changeData(vararg ms: M) {
         changeData(ms.toList())
     }
-
 
     /**
      * 只移除局部数据。

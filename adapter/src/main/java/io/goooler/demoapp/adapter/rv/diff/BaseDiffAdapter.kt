@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package io.goooler.demoapp.adapter.rv.diff
 
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -13,7 +15,7 @@ import io.goooler.demoapp.adapter.rv.base.BaseRvAdapter
  */
 abstract class BaseDiffAdapter<T : IModelDiff<T>> : BaseRvAdapter<T>() {
 
-    val differ: AsyncListDiffer<T> by lazy(LazyThreadSafetyMode.NONE) {
+    private val differ: AsyncListDiffer<T> by lazy(LazyThreadSafetyMode.NONE) {
         AsyncListDiffer(this, diffCallBack())
     }
 

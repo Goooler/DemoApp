@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package io.goooler.demoapp.base.util.device
 
 import android.annotation.SuppressLint
@@ -17,7 +19,7 @@ import androidx.annotation.Px
  * @date 2018/8/31
  * 状态栏修改
  */
-@SuppressLint("ObsoleteSdkInt")
+@SuppressLint("ObsoleteSdkInt", "MemberVisibilityCanBePrivate")
 object StatusBarUtil {
     /**
      * 设置沉浸式状态栏

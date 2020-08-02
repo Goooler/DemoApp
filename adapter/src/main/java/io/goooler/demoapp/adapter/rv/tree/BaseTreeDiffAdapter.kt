@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package io.goooler.demoapp.adapter.rv.tree
 
 import io.goooler.demoapp.adapter.rv.base.BaseRvAdapter
@@ -12,7 +14,7 @@ import io.goooler.demoapp.adapter.rv.diff.IModelDiff
  * @since 1.1.0
  */
 abstract class BaseTreeDiffAdapter<T> :
-    BaseDiffAdapter<T>() where  T : IModelTree<T>, T : IModelDiff<T> {
+    BaseDiffAdapter<T>() where T : IModelTree<T>, T : IModelDiff<T> {
     init {
         fixToTree()
     }

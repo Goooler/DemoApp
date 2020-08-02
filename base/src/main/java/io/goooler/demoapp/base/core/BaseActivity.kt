@@ -16,6 +16,7 @@ import io.goooler.demoapp.base.util.showToastInMainThread
 /**
  * Activity 基类，封装通用方法
  */
+@Suppress("unused", "MemberVisibilityCanBePrivate")
 abstract class BaseActivity : AppCompatActivity() {
 
     protected val originalResources: Resources get() = super.getResources()

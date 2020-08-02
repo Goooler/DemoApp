@@ -4,7 +4,6 @@ import android.os.SystemClock
 import android.util.Log
 import kotlin.system.exitProcess
 
-
 /**
  * 捕获系统崩溃
  */

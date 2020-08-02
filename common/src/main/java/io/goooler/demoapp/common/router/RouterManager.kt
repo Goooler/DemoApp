@@ -4,6 +4,7 @@ import android.content.Intent
 import com.alibaba.android.arouter.launcher.ARouter
 import io.goooler.demoapp.base.util.toJson
 
+@Suppress("unused", "MemberVisibilityCanBePrivate")
 object RouterManager {
     const val TARGET = "target"
     const val PARAMS = "params"

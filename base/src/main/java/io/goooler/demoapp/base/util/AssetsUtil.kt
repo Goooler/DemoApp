@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package io.goooler.demoapp.base.util
 
 import android.content.res.AssetManager
@@ -26,7 +28,6 @@ object AssetsUtil {
             jsonString = builder.toString()
             reader.close()
         } catch (e: IOException) {
-            // do nothing
         }
         return jsonString
     }
@@ -48,7 +49,6 @@ object AssetsUtil {
             inputStream.close()
             return file
         } catch (e: IOException) {
-            //Logging exception
         }
         return null
     }

@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package io.goooler.demoapp.common.util
 
 import io.goooler.demoapp.base.util.SpUtil

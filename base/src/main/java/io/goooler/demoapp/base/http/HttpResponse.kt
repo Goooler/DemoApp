@@ -5,6 +5,7 @@ import androidx.annotation.Keep
 /**
  * 自定义的 http 返回结果
  */
+@Suppress("unused")
 @Keep
 class HttpResponse<T>(
     val status: Boolean,

@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package io.goooler.demoapp.base.util
 
 import android.annotation.SuppressLint
@@ -8,7 +10,6 @@ import androidx.annotation.AnyThread
 import androidx.annotation.MainThread
 import androidx.annotation.StringRes
 import androidx.annotation.WorkerThread
-
 
 /**
  * Toast 简单封装

@@ -1,9 +1,10 @@
+@file:Suppress("unused")
+
 package io.goooler.demoapp.common.util
 
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import io.goooler.demoapp.base.util.image.ImageLoader
-
 
 @BindingAdapter(
     "binding_src_url_fixWidth",
