@@ -7,9 +7,7 @@ import com.tencent.smtt.sdk.WebSettings
 import com.tencent.smtt.sdk.WebView
 import com.tencent.smtt.sdk.WebViewClient
 
-class X5WebView(context: Context, attrs: AttributeSet?) : WebView(context, attrs) {
-
-    constructor(context: Context) : this(context, null)
+class X5WebView(context: Context, attrs: AttributeSet? = null) : WebView(context, attrs) {
 
     init {
         initWebViewSettings()
@@ -67,8 +65,11 @@ class X5WebView(context: Context, attrs: AttributeSet?) : WebView(context, attrs
     }
 
     fun onDestroy() {
-        webChromeClient = null
+        stopLoading()
+        removeAllViewsInLayout()
+        removeAllViews()
         webViewClient = null
+        webChromeClient = null
         destroy()
     }
 }

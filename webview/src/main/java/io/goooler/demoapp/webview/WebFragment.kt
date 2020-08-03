@@ -55,9 +55,9 @@ class WebFragment : BaseFragment() {
         binding.webView.onPause()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
         binding.webView.onDestroy()
+        super.onDestroyView()
     }
 
     private val listener = object : View.OnClickListener, WebChromeClient() {
@@ -70,7 +70,7 @@ class WebFragment : BaseFragment() {
                     val intent = Intent().setAction(Intent.ACTION_SEND)
                         .putExtra(Intent.EXTRA_TEXT, binding.webView.url)
                         .setType("text/plain")
-                    startActivity(Intent.createChooser(intent, ""))
+                    startActivity(Intent.createChooser(intent, null))
                 }
             }
         }
