@@ -55,6 +55,9 @@ dependencies {
     api(Libs.arouter)
     kapt(Libs.arouterKapt)
 
+    // network
+    api(Libs.coil)
+
     // storage
     api(Libs.objectBox)
     api(Libs.mmkv)

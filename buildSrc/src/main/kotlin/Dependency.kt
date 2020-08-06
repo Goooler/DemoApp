@@ -59,6 +59,7 @@ const val protocVersion = "3.12.2"
 const val tbsVersion = "43903"
 const val baseRvHelperVersion = "3.0.4"
 const val flycoTabLayoutVersion = "2.1.4.2"
+const val coilVersion = "0.11.0"
 
 // buildScript plugin
 const val gradleVersion = "4.0.1"
@@ -103,6 +104,7 @@ object Libs {
     const val tbs = "com.tencent.tbs.tbssdk:sdk:$tbsVersion"
     const val baseRvHelper = "com.github.CymChad:BaseRecyclerViewAdapterHelper:$baseRvHelperVersion"
     const val flycoTabLayout = "com.github.ernestchang:flycotablayout:$flycoTabLayoutVersion"
+    const val coil = "io.coil-kt:coil:$coilVersion"
 
     const val glideKapt = "com.github.bumptech.glide:compiler:$glideVersion"
     const val objectBoxKapt = "io.objectbox:objectbox-processor:$objectBoxVersion"
