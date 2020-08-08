@@ -2,29 +2,86 @@
 
 package io.goooler.demoapp.base.util
 
-import com.alibaba.fastjson.JSONException
 import com.alibaba.fastjson.JSONObject
+import com.alibaba.fastjson.TypeReference
+import com.google.gson.Gson
+import java.lang.reflect.Type
 
-/**
- * 对 fastJson 的简单封装，以便统一异常处理等操作
- */
-object JsonUtil {
+internal object GsonUtil {
+    private val gson = Gson()
 
-    fun <T> fromJson(jsonString: String, clazz: Class<T>): T? {
+    fun <T> fromJson(json: String, classOfT: Class<T>): T? {
         return try {
-            JSONObject.parseObject(jsonString, clazz)
-        } catch (e: JSONException) {
+            gson.fromJson<T>(json, classOfT)
+        } catch (e: Exception) {
             null
         }
     }
 
-    fun toJson(o: Any): String {
-        return JSONObject.toJSONString(o)
+    fun <T> fromJson(json: String, typeOfT: Type): T? {
+        return try {
+            gson.fromJson(json, typeOfT)
+        } catch (e: Exception) {
+            null
+        }
     }
+
+    fun toJson(src: Any): String = gson.toJson(src)
+}
+
+internal object FastJsonUtil {
+    fun <T> fromJson(json: String, classOfT: Class<T>): T? {
+        return try {
+            JSONObject.parseObject(json, classOfT)
+        } catch (e: Exception) {
+            null
+        }
+    }
+
+    fun <T> fromJson(json: String, typeOfT: Type): T? {
+        return try {
+            JSONObject.parseObject(json, typeOfT)
+        } catch (e: Exception) {
+            null
+        }
+    }
+
+    fun <T> fromJson(json: String, typeRef: TypeReference<T>): T? {
+        return try {
+            JSONObject.parseObject(json, typeRef)
+        } catch (e: Exception) {
+            null
+        }
+    }
+
+    fun toJson(src: Any): String {
+        return JSONObject.toJSONString(src)
+    }
+}
+
+object JsonUtil {
+    fun <T> fromJson(json: String, clazz: Class<T>): T? =
+        FastJsonUtil.fromJson(json, clazz)
+
+    fun <T> fromJson(json: String, typeOfT: Type): T? =
+        FastJsonUtil.fromJson(json, typeOfT)
+
+    fun <T> fromJson(json: String, typeRef: TypeReference<T>): T? =
+        FastJsonUtil.fromJson(json, typeRef)
+
+    fun toJson(o: Any): String = FastJsonUtil.toJson(o)
 }
 
 inline fun <reified T> String.fromJson(): T? {
     return JsonUtil.fromJson(this, T::class.java)
+}
+
+inline fun <reified T> String.fromJson(typeOfT: Type): T? {
+    return JsonUtil.fromJson(this, typeOfT)
+}
+
+inline fun <reified T> String.fromJson(typeRef: TypeReference<T>): T? {
+    return JsonUtil.fromJson(this, typeRef)
 }
 
 fun Any.toJson(): String {
