@@ -1,6 +1,9 @@
 package io.goooler.demoapp.base.core
 
+import android.content.ComponentName
+import android.content.Intent
 import android.content.res.Resources
+import android.os.Build
 import android.os.Bundle
 import android.view.WindowManager
 import androidx.annotation.IdRes
@@ -33,6 +36,14 @@ abstract class BaseActivity : AppCompatActivity() {
     override fun onDestroy() {
         ActivityCollector.removeActivity(this)
         super.onDestroy()
+    }
+
+    override fun startService(service: Intent): ComponentName? {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            super.startForegroundService(service)
+        } else {
+            super.startService(service)
+        }
     }
 
     override fun getResources(): Resources {
