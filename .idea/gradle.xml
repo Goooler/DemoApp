@@ -19,6 +19,7 @@
             <option value="$PROJECT_DIR$/common" />
             <option value="$PROJECT_DIR$/login" />
             <option value="$PROJECT_DIR$/main" />
+            <option value="$PROJECT_DIR$/test" />
             <option value="$PROJECT_DIR$/webview" />
           </set>
         </option>

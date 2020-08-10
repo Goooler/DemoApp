@@ -7,7 +7,7 @@ import io.goooler.demoapp.base.util.isNetworkUrl
 import io.goooler.demoapp.common.BuildConfig
 import io.goooler.demoapp.common.type.SpKeys
 
-val isFirstRun: Boolean = SpUtil.getBoolean(SpKeys.SP_FIRST_RUN)
+val isFirstRun: Boolean = SpUtil.getBoolean(SpKeys.SP_FIRST_RUN.key)
 
 /**
  * 拼上图片前缀
