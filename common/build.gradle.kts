@@ -61,8 +61,4 @@ dependencies {
     // storage
     api(Libs.objectBox)
     api(Libs.mmkv)
-
-    // async
-    api(Libs.eventBus)
-    kapt(Libs.eventBusKapt)
 }

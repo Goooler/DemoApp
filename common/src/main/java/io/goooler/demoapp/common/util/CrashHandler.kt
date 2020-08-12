@@ -18,7 +18,7 @@ object CrashHandler : Thread.UncaughtExceptionHandler {
     }
 
     override fun uncaughtException(thread: Thread, ex: Throwable) {
-        TraceManager.reportUncaughtException(Log.getStackTraceString(ex))
+        Log.getStackTraceString(ex)
         // 延时2秒杀死进程
         SystemClock.sleep(2000)
         // 如果系统提供了默认的异常处理器，则交给系统去结束程序，否则就由自己结束自己

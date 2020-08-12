@@ -10,8 +10,7 @@ object MkUtil {
     private const val MK_CONFIG = "mk_config"
 
     fun getBoolean(key: String, default: Boolean = false): Boolean {
-        return getMk()
-            .decodeBool(key, default)
+        return getMk().decodeBool(key, default)
     }
 
     fun putBoolean(key: String, value: Boolean = true) {
@@ -19,8 +18,7 @@ object MkUtil {
     }
 
     fun getLong(key: String, default: Long = 0): Long {
-        return getMk()
-            .decodeLong(key, default)
+        return getMk().decodeLong(key, default)
     }
 
     fun putLong(key: String, value: Long) {
@@ -28,8 +26,7 @@ object MkUtil {
     }
 
     fun getDouble(key: String, default: Double = 0.0): Double {
-        return getMk()
-            .decodeDouble(key, default)
+        return getMk().decodeDouble(key, default)
     }
 
     fun putDouble(key: String, value: Double) {
@@ -37,8 +34,7 @@ object MkUtil {
     }
 
     fun getString(key: String, default: String? = null): String? {
-        return getMk()
-            .decodeString(key, default)
+        return getMk().decodeString(key, default)
     }
 
     fun putString(key: String, value: String) {

@@ -1,4 +1,4 @@
-package io.goooler.demoapp.base.util.image.glide
+package io.goooler.demoapp.base.util.image
 
 import android.content.Context
 import com.bumptech.glide.Glide
@@ -10,9 +10,6 @@ import com.bumptech.glide.module.AppGlideModule
 import okhttp3.OkHttpClient
 import java.io.InputStream
 
-/**
- * Created on 4/2/2019
- */
 @GlideModule
 class GlideConfigModule : AppGlideModule() {
     override fun isManifestParsingEnabled(): Boolean {
@@ -24,11 +21,10 @@ class GlideConfigModule : AppGlideModule() {
         glide: Glide,
         registry: Registry
     ) {
-        val builder = OkHttpClient.Builder()
         registry.replace(
             GlideUrl::class.java,
             InputStream::class.java,
-            OkHttpUrlLoader.Factory(builder.build())
+            OkHttpUrlLoader.Factory(OkHttpClient.Builder().build())
         )
     }
 }

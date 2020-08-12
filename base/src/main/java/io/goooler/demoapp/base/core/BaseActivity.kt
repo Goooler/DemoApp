@@ -13,7 +13,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.lifecycle.ViewModelProvider
-import io.goooler.demoapp.base.util.device.AdaptScreenUtil
+import com.blankj.utilcode.util.AdaptScreenUtils
+import com.blankj.utilcode.util.BarUtils
 import io.goooler.demoapp.base.util.showToastInMainThread
 
 /**
@@ -30,12 +31,7 @@ abstract class BaseActivity : AppCompatActivity() {
             setBackgroundDrawable(null)
             setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
         }
-        ActivityCollector.addActivity(this)
-    }
-
-    override fun onDestroy() {
-        ActivityCollector.removeActivity(this)
-        super.onDestroy()
+        BarUtils.transparentStatusBar(this)
     }
 
     override fun startService(service: Intent): ComponentName? {
@@ -47,7 +43,7 @@ abstract class BaseActivity : AppCompatActivity() {
     }
 
     override fun getResources(): Resources {
-        return AdaptScreenUtil.adaptWidth(originalResources, 360)
+        return AdaptScreenUtils.adaptWidth(originalResources, 360)
     }
 
     /**

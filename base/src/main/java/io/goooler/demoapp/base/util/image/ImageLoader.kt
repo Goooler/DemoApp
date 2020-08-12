@@ -12,7 +12,6 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
-import io.goooler.demoapp.base.util.image.glide.GlideApp
 import jp.wasabeef.glide.transformations.BlurTransformation
 
 /**

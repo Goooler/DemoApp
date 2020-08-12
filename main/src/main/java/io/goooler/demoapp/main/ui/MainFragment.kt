@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import io.goooler.demoapp.base.core.BaseFragment
-import io.goooler.demoapp.base.util.device.StatusBarUtil
 import io.goooler.demoapp.base.util.unsafeLazy
 import io.goooler.demoapp.common.router.RouterManager
 import io.goooler.demoapp.main.databinding.MainFragmentBinding
@@ -30,7 +29,6 @@ class MainFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
         initOnce
-        StatusBarUtil.setStatusBarTransparent(requireActivity())
         return binding.root
     }
 

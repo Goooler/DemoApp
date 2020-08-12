@@ -55,6 +55,9 @@ dependencies {
     api(Libs.glide)
     kapt(Libs.glideKapt)
 
+    // utils
+    api(Libs.utils)
+
     // serializable
     api(Libs.fastjson)
     api(Libs.gson)

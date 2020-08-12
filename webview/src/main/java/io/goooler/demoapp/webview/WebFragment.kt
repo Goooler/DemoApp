@@ -5,10 +5,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.blankj.utilcode.util.BarUtils
 import com.tencent.smtt.sdk.WebChromeClient
 import com.tencent.smtt.sdk.WebView
 import io.goooler.demoapp.base.core.BaseFragment
-import io.goooler.demoapp.base.util.device.StatusBarUtil
 import io.goooler.demoapp.base.util.unsafeLazy
 import io.goooler.demoapp.webview.databinding.WebFragmentBinding
 
@@ -33,8 +33,8 @@ class WebFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        StatusBarUtil.setStatusBarColorBlack(requireActivity())
         initOnce
+        BarUtils.setStatusBarLightMode(requireActivity(), true)
         return binding.root
     }
 
