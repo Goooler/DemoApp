@@ -7,9 +7,12 @@ import android.os.Build
 import android.os.Bundle
 import android.view.WindowManager
 import androidx.annotation.IdRes
+import androidx.annotation.LayoutRes
 import androidx.annotation.MainThread
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.lifecycle.ViewModelProvider
@@ -45,6 +48,9 @@ abstract class BaseActivity : AppCompatActivity() {
     override fun getResources(): Resources {
         return AdaptScreenUtils.adaptWidth(originalResources, 360)
     }
+
+    protected inline fun <reified T : ViewDataBinding> binding(@LayoutRes resId: Int): Lazy<T> =
+        lazy(LazyThreadSafetyMode.NONE) { DataBindingUtil.setContentView<T>(this, resId) }
 
     /**
      * @param containerViewId   容器 id

@@ -12,7 +12,7 @@ import io.goooler.demoapp.common.BuildConfig
 import io.goooler.demoapp.common.type.SpKeys
 import java.util.*
 
-val isFirstRun: Boolean = SPUtils.getInstance().getBoolean(SpKeys.SP_FIRST_RUN.key)
+val isFirstRun: Boolean = SPUtils.getInstance().getBoolean(SpKeys.SP_FIRST_RUN.key, true)
 
 /**
  * 拼上图片前缀

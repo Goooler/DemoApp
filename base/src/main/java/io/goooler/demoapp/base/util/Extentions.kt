@@ -5,12 +5,14 @@ package io.goooler.demoapp.base.util
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.os.Build
+import android.os.Bundle
 import android.os.Looper
 import android.text.Html
 import android.text.Spanned
 import android.view.View
 import android.webkit.URLUtil
 import androidx.annotation.ColorInt
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import io.goooler.demoapp.base.BuildConfig
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -372,6 +374,13 @@ fun <T> Single<T>.subscribeAndObserve(): Single<T> {
 //---------------------File-------------------------------//
 
 fun File.notExist(): Boolean = !this.exists()
+
+//---------------------Fragment-------------------------------//
+
+fun <T : Fragment> T.putArguments(bundle: Bundle): T {
+    arguments = bundle
+    return this
+}
 
 //---------------------HigherOrderFunc-------------------------------//
 

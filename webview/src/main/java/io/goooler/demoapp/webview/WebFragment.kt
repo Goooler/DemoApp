@@ -1,14 +1,14 @@
 package io.goooler.demoapp.webview
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.blankj.utilcode.util.BarUtils
+import androidx.core.os.bundleOf
 import com.tencent.smtt.sdk.WebChromeClient
 import com.tencent.smtt.sdk.WebView
 import io.goooler.demoapp.base.core.BaseFragment
+import io.goooler.demoapp.base.util.putArguments
 import io.goooler.demoapp.base.util.unsafeLazy
 import io.goooler.demoapp.webview.databinding.WebFragmentBinding
 
@@ -20,9 +20,22 @@ class WebFragment : BaseFragment() {
 
     private val initOnce by unsafeLazy {
         binding.lifecycleOwner = this
-        binding.layoutTitle.listener = listener
-        binding.webView.webChromeClient = listener
+        binding.webView.webChromeClient = object : WebChromeClient() {
+            override fun onProgressChanged(webView: WebView, i: Int) {
+                super.onProgressChanged(webView, i)
+                eventListener?.onProgressChanged(i)
+            }
+
+            override fun onReceivedTitle(webView: WebView, title: String) {
+                super.onReceivedTitle(webView, title)
+                eventListener?.onReceivedTitle(title)
+            }
+        }
     }
+
+    var eventListener: EventListener? = null
+
+    val url: String get() = binding.webView.url
 
     fun goBack() {
         if (binding.webView.canGoBack()) binding.webView.goBack() else finish()
@@ -34,7 +47,6 @@ class WebFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
         initOnce
-        BarUtils.setStatusBarLightMode(requireActivity(), true)
         return binding.root
     }
 
@@ -60,44 +72,18 @@ class WebFragment : BaseFragment() {
         super.onDestroyView()
     }
 
-    private val listener = object : View.OnClickListener, WebChromeClient() {
-        override fun onClick(v: View?) {
-            when (v) {
-                binding.layoutTitle.ivLeft -> {
-                    finish()
-                }
-                binding.layoutTitle.ivRight -> {
-                    val intent = Intent().setAction(Intent.ACTION_SEND)
-                        .putExtra(Intent.EXTRA_TEXT, binding.webView.url)
-                        .setType("text/plain")
-                    startActivity(Intent.createChooser(intent, null))
-                }
-            }
-        }
-
-        override fun onProgressChanged(webView: WebView?, i: Int) {
-            super.onProgressChanged(webView, i)
-            binding.webViewProgressBar.visibility = if (i >= 100) {
-                View.GONE
-            } else {
-                binding.webViewProgressBar.progress = i
-                View.VISIBLE
-            }
-        }
-
-        override fun onReceivedTitle(webView: WebView, title: String?) {
-            super.onReceivedTitle(webView, title)
-            binding.layoutTitle.tvCenter.text = title.orEmpty()
-        }
+    interface EventListener {
+        fun onReceivedTitle(title: String)
+        fun onProgressChanged(i: Int)
     }
 
     companion object {
         private const val URL = "url"
 
-        fun newInstance(url: String) = WebFragment().apply {
-            arguments = Bundle().apply {
-                putString(URL, url)
-            }
-        }
+        fun newInstance(url: String) = WebFragment().putArguments(
+            bundleOf(
+                URL to url
+            )
+        )
     }
 }

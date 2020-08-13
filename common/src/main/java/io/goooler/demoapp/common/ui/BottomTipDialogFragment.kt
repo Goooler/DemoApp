@@ -5,9 +5,11 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentManager
 import io.goooler.demoapp.base.R
 import io.goooler.demoapp.base.core.BaseDialogFragment
+import io.goooler.demoapp.base.util.putArguments
 import io.goooler.demoapp.base.util.unsafeLazy
 import io.goooler.demoapp.common.databinding.BottomTipDialogFragmentBinding
 
@@ -59,12 +61,12 @@ class BottomTipDialogFragment : BaseDialogFragment() {
         private const val CONTENT = "content"
 
         fun show(manager: FragmentManager, title: String, content: String, tag: String? = null) {
-            BottomTipDialogFragment().apply {
-                arguments = Bundle().apply {
-                    putString(TITLE, title)
-                    putString(CONTENT, content)
-                }
-            }.show(manager, tag)
+            BottomTipDialogFragment().putArguments(
+                bundleOf(
+                    TITLE to title,
+                    CONTENT to content
+                )
+            ).show(manager, tag)
         }
     }
 }
