@@ -16,7 +16,7 @@ android {
         versionCode = buildTime
         versionName = appVersionName
         vectorDrawables.useSupportLibrary = true
-        ndk { abiFilters(ndkLibs) }
+        ndk { abiFilters("armeabi-v7a", "x86") }
         manifestPlaceholders = mapOf(
             "appName" to "Demo"
         )

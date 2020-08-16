@@ -16,7 +16,6 @@ val buildTime: Int = SimpleDateFormat("yyMMddHHmm", Locale.CHINESE).format(Date(
 val cleanFileTypes = arrayOf(
     "*.log", "*.txt", "*.classpath", "*.project", "*.settings"
 )
-const val ndkLibs = "armeabi-v7a"
 
 val localLibs = mapOf(
     "dir" to "libs",
