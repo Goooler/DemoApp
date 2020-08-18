@@ -2,8 +2,8 @@ import com.android.build.gradle.internal.api.BaseVariantOutputImpl
 
 plugins {
     id("com.android.application")
-    id("kotlin-android")
-    id("kotlin-kapt")
+    kotlin("android")
+    kotlin("kapt")
 }
 
 android {
@@ -16,9 +16,11 @@ android {
         versionCode = buildTime
         versionName = appVersionName
         vectorDrawables.useSupportLibrary = true
-        ndk { abiFilters("armeabi-v7a", "x86") }
-        manifestPlaceholders = mapOf(
-            "appName" to "Demo"
+        ndk { abiFilters.addAll(ndkLibs) }
+        addManifestPlaceholders(
+            mapOf(
+                "appName" to "Demo"
+            )
         )
     }
     signingConfigs {
@@ -69,7 +71,7 @@ android {
         isCheckReleaseBuilds = false
     }
     compileOptions {
-        coreLibraryDesugaringEnabled = true
+        isCoreLibraryDesugaringEnabled = true
         sourceCompatibility = javaVersion
         targetCompatibility = javaVersion
     }

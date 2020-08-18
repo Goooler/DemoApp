@@ -22,6 +22,10 @@ val localLibs = mapOf(
     "include" to arrayOf("*.jar", "*.aar")
 )
 
+val ndkLibs = setOf(
+    "armeabi-v7a", "x86"
+)
+
 const val cdnPrefix = "https://raw.githubusercontent.com/"
 
 object ApiHosts {

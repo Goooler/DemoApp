@@ -63,7 +63,7 @@ const val coilVersion = "0.11.0"
 const val utilsVersion = "1.29.0"
 
 // buildScript plugin
-const val gradleVersion = "4.0.1"
+const val gradleVersion = "4.1.0-rc01"
 const val kotlinVersion = "1.4.0"
 const val protobufVersion = "0.8.12"
 val javaVersion = JavaVersion.VERSION_1_8

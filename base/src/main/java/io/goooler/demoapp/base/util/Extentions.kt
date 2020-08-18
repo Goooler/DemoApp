@@ -43,8 +43,6 @@ typealias MutableListLiveData<T> = MutableLiveData<List<T>>
 
 val isDebug: Boolean = BuildConfig.DEBUG
 
-const val versionCode: Int = BuildConfig.VERSION_CODE
-
 val currentTimeMillis: Long get() = System.currentTimeMillis()
 
 val currentThreadName: String get() = Thread.currentThread().name
