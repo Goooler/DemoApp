@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package io.goooler.demoapp.common.type
 
 enum class SpKeys(val key: String) {

@@ -12,7 +12,7 @@ internal object GsonUtil {
 
     fun <T> fromJson(json: String, classOfT: Class<T>): T? {
         return try {
-            gson.fromJson<T>(json, classOfT)
+            gson.fromJson(json, classOfT)
         } catch (e: Exception) {
             null
         }

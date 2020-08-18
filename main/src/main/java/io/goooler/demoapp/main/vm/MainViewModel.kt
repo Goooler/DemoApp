@@ -10,7 +10,6 @@ import io.goooler.demoapp.main.api.RepoList
 import io.goooler.demoapp.main.repository.MainRepository
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.functions.Function5
 import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.flow.collect
@@ -69,7 +68,7 @@ class MainViewModel(application: Application) : BaseViewModel(application) {
             MainRepository.getRepoListRx("apple"),
             MainRepository.getRepoListRx("facebook"),
             MainRepository.getRepoListRx("twitter"),
-            Function5<RepoList, RepoList, RepoList, RepoList, RepoList, String> { t1, t2, t3, t4, t5 ->
+            { t1, t2, t3, t4, t5 ->
                 """
                     ${t1.firstOrNull()?.name}
                     ${t2.firstOrNull()?.name}

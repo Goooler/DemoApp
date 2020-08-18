@@ -50,7 +50,7 @@ abstract class BaseActivity : AppCompatActivity() {
     }
 
     protected inline fun <reified T : ViewDataBinding> binding(@LayoutRes resId: Int): Lazy<T> =
-        lazy(LazyThreadSafetyMode.NONE) { DataBindingUtil.setContentView<T>(this, resId) }
+        lazy(LazyThreadSafetyMode.NONE) { DataBindingUtil.setContentView(this, resId) }
 
     /**
      * @param containerViewId   容器 id

@@ -17,7 +17,7 @@ abstract class BaseRvAdapter<T : IModelType> :
     RecyclerView.Adapter<BaseRvAdapter.BaseViewHolder>() {
 
     private val ivdManager: ViewTypeDelegateManager<T> by lazy(LazyThreadSafetyMode.NONE) {
-        ViewTypeDelegateManager<T>()
+        ViewTypeDelegateManager()
     }
 
     var fix: IFix<T>? = null
