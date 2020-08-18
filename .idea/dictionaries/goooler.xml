@@ -5,52 +5,17 @@
       <w>alibaba</w>
       <w>aliyun</w>
       <w>arouter</w>
-      <w>baronzhang</w>
-      <w>bumptech</w>
-      <w>cardview</w>
-      <w>constraintlayout</w>
-      <w>demoapp</w>
-      <w>dexopt</w>
-      <w>ernestchang</w>
-      <w>eventbus</w>
-      <w>fastjson</w>
-      <w>feling</w>
-      <w>flexbox</w>
-      <w>flyco</w>
-      <w>flycotablayout</w>
       <w>goooler</w>
-      <w>greenrobot</w>
       <w>gson</w>
       <w>hhmmss</w>
-      <w>javalite</w>
-      <w>jeremyliao</w>
       <w>jitpack</w>
       <w>kapt</w>
       <w>kotlinx</w>
-      <w>leakcanary</w>
-      <w>livedata</w>
       <w>luban</w>
       <w>moshi</w>
-      <w>multidex</w>
-      <w>niechaoqun</w>
-      <w>objectbox</w>
-      <w>okhttp</w>
-      <w>protobuf</w>
-      <w>protoc</w>
-      <w>rxandroid</w>
-      <w>rxjava</w>
-      <w>rxkotlin</w>
-      <w>savedstate</w>
-      <w>smtt</w>
-      <w>squareup</w>
-      <w>tbssdk</w>
+      <w>tbs</w>
       <w>tencent</w>
-      <w>thru</w>
-      <w>viewmodel</w>
-      <w>wasabeef</w>
-      <w>webview</w>
       <w>yyyyMMddHHmmss</w>
-      <w>zibin</w>
     </words>
   </dictionary>
 </component>

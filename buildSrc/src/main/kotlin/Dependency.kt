@@ -1,4 +1,4 @@
-@file:Suppress("unused")
+@file:Suppress("unused", "SpellCheckingInspection")
 
 import org.gradle.api.JavaVersion
 
@@ -8,7 +8,7 @@ const val jitpackMaven = "https://jitpack.io"
 
 // sdk
 const val appTargetSdk = 29
-const val appBuildTool = "30.0.1"
+const val appBuildTool = "30.0.2"
 const val appMinSdk = 23
 
 // app
@@ -17,12 +17,12 @@ const val appPackageName = "io.goooler.demoapp"
 const val appName = "Demo"
 
 // app dependencies
-const val coreVersion = "1.3.0"
+const val coreVersion = "1.3.1"
 const val appCompatVersion = "1.2.0"
 const val supportVersion = "1.0.0"
 const val constraintLayoutVersion = "1.1.3"
 const val fragmentVersion = "1.2.5"
-const val materialVersion = "1.1.0"
+const val materialVersion = "1.2.0"
 const val flexBoxVersion = "2.0.1"
 const val cardViewVersion = "1.0.0"
 const val recyclerViewVersion = "1.1.0"
@@ -32,7 +32,7 @@ const val navigationVersion = "2.3.0"
 const val workVersion = "2.3.4"
 const val preferenceVersion = "1.1.1"
 const val multiDexVersion = "2.0.1"
-const val okHttpVersion = "4.8.0"
+const val okHttpVersion = "4.8.1"
 const val retrofitVersion = "2.9.0"
 const val fastjsonVersion = "1.1.71.android"
 const val arouterVersion = "1.5.0"
@@ -52,7 +52,7 @@ const val glideTransformVersion = "4.1.0"
 const val leakCanaryVersion = "2.4"
 const val lubanVersion = "1.1.8"
 const val mmkvVersion = "1.2.2"
-const val coroutinesVersion = "1.3.7"
+const val coroutinesVersion = "1.3.9"
 const val desugarVersion = "1.0.10"
 const val objectBoxVersion = "2.7.0"
 const val protocVersion = "3.12.4"
@@ -64,7 +64,7 @@ const val utilsVersion = "1.29.0"
 
 // buildScript plugin
 const val gradleVersion = "4.0.1"
-const val kotlinVersion = "1.3.72"
+const val kotlinVersion = "1.4.0"
 const val protobufVersion = "0.8.12"
 val javaVersion = JavaVersion.VERSION_1_8
 
@@ -116,7 +116,6 @@ object Libs {
     val kotlin = arrayOf(
         "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion",
         "org.jetbrains.kotlin:kotlin-stdlib-common:$kotlinVersion",
-        "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion",
         "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion",
         "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion",
         "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
