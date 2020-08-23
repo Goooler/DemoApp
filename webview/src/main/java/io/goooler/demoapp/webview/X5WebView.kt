@@ -11,7 +11,40 @@ class X5WebView(context: Context, attrs: AttributeSet? = null) : WebView(context
 
     init {
         initWebViewSettings()
+    }
+
+    @SuppressLint("SetJavaScriptEnabled")
+    private fun initWebViewSettings() {
         view.isClickable = true
+        settings.run {
+            // 如果访问的页面中要与 Javascript 交互，则 webview 必须设置支持 Javascript
+            javaScriptEnabled = true
+            // 支持通过JS打开新窗口
+            javaScriptCanOpenWindowsAutomatically = true
+            // 设置可以访问文件
+            allowFileAccess = true
+            // 支持缩放，默认为 true，是下面那个的前提
+            setSupportZoom(true)
+            // 设置内置的缩放控件。若为 false，则该 WebView 不可缩放
+            builtInZoomControls = true
+            // 隐藏原生的缩放控件
+            displayZoomControls = false
+            // 将图片调整到适合 webView 的大小
+            useWideViewPort = true
+            setSupportMultipleWindows(true)
+            // 缩放至屏幕的大小
+            loadWithOverviewMode = true
+            setAppCacheEnabled(true)
+            domStorageEnabled = true
+            setGeolocationEnabled(true)
+            setAppCacheMaxSize(Long.MAX_VALUE)
+            pluginState = WebSettings.PluginState.ON_DEMAND
+            // 支持内容重新布局,一共有四种方式
+            layoutAlgorithm = WebSettings.LayoutAlgorithm.SINGLE_COLUMN
+            // 设置默认字体大小
+            defaultFontSize = 18
+        }
+
         webViewClient = object : WebViewClient() {
             override fun shouldOverrideUrlLoading(
                 view: WebView,
@@ -32,44 +65,8 @@ class X5WebView(context: Context, attrs: AttributeSet? = null) : WebView(context
         }
     }
 
-    @SuppressLint("SetJavaScriptEnabled")
-    private fun initWebViewSettings() {
-        settings.run {
-            // 如果访问的页面中要与Javascript交互，则webview必须设置支持Javascript
-            javaScriptEnabled = true
-            // 支持通过JS打开新窗口
-            javaScriptCanOpenWindowsAutomatically = true
-            // 设置可以访问文件
-            allowFileAccess = true
-            // 支持缩放，默认为true。是下面那个的前提
-            setSupportZoom(true)
-            // 设置内置的缩放控件。若为false，则该WebView不可缩放
-            builtInZoomControls = true
-            // 隐藏原生的缩放控件
-            displayZoomControls = false
-            // 将图片调整到适合webView的大小
-            useWideViewPort = true
-            setSupportMultipleWindows(true)
-            // 缩放至屏幕的大小
-            loadWithOverviewMode = true
-            setAppCacheEnabled(true)
-            domStorageEnabled = true
-            setGeolocationEnabled(true)
-            setAppCacheMaxSize(Long.MAX_VALUE)
-            pluginState = WebSettings.PluginState.ON_DEMAND
-            // 支持内容重新布局,一共有四种方式
-            layoutAlgorithm = WebSettings.LayoutAlgorithm.SINGLE_COLUMN
-            // 设置默认字体大小
-            defaultFontSize = 18
-        }
-    }
-
     fun onDestroy() {
         stopLoading()
-        removeAllViewsInLayout()
-        removeAllViews()
-        webViewClient = null
-        webChromeClient = null
         destroy()
     }
 }

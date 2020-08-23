@@ -12,6 +12,7 @@ import android.text.Spanned
 import android.view.View
 import android.webkit.URLUtil
 import androidx.annotation.ColorInt
+import androidx.databinding.ObservableField
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import io.goooler.demoapp.base.BuildConfig
@@ -38,6 +39,10 @@ typealias MutableFloatLiveData = MutableLiveData<Float>
 typealias MutableStringLiveData = MutableLiveData<String>
 
 typealias MutableListLiveData<T> = MutableLiveData<List<T>>
+
+typealias ObservableString = ObservableField<String>
+
+typealias ObservableList<T> = ObservableField<List<T>>
 
 //---------------------Any-------------------------------//
 

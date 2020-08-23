@@ -14,7 +14,7 @@ import io.goooler.demoapp.webview.databinding.WebActivityBinding
 class WebActivity : BaseActivity() {
     private val binding by binding<WebActivityBinding>(R.layout.web_activity)
 
-    private lateinit var webFragment: WebFragment
+    private var webFragment: WebFragment? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,13 +22,13 @@ class WebActivity : BaseActivity() {
         binding.layoutTitle.listener = listener
         intent.extras?.getString(RouterManager.PARAMS)?.let {
             webFragment = WebFragment.newInstance(it)
-            webFragment.eventListener = listener
-            addFragment(R.id.fragment_container, webFragment)
+            webFragment!!.eventListener = listener
+            addFragment(R.id.fragment_container, webFragment!!)
         }
     }
 
     override fun onBackPressed() {
-        webFragment.goBack()
+        webFragment?.goBack()
     }
 
     private val listener = object : View.OnClickListener, WebFragment.EventListener {
@@ -39,7 +39,7 @@ class WebActivity : BaseActivity() {
                 }
                 binding.layoutTitle.ivRight -> {
                     val intent = Intent().setAction(Intent.ACTION_SEND)
-                        .putExtra(Intent.EXTRA_TEXT, webFragment.url)
+                        .putExtra(Intent.EXTRA_TEXT, webFragment?.url)
                         .setType("text/plain")
                     startActivity(Intent.createChooser(intent, null))
                 }
@@ -47,7 +47,7 @@ class WebActivity : BaseActivity() {
         }
 
         override fun onReceivedTitle(title: String) {
-            binding.layoutTitle.tvCenter.text = title
+            binding.layoutTitle.title = title
         }
 
         override fun onProgressChanged(i: Int) {

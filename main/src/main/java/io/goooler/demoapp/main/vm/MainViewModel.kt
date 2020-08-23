@@ -83,7 +83,7 @@ class MainViewModel(application: Application) : BaseViewModel(application) {
                 title.value = it
             }, {
                 title.value = getString(R.string.request_failed)
-                silentThrowable(it)
+                toastThrowable(it)
             }).add()
     }
 }

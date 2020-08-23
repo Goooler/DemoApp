@@ -50,8 +50,8 @@
 
         <!--7.0 以上行为变更，不可直接 Uri.fromFile()-->
         <provider
-            android:name="androidx.core.content.FileProvider"
-            android:authorities="${applicationId}"
+            android:name=".common.content.CommonProvider"
+            android:authorities="${applicationId}.common.content.CommonProvider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

@@ -36,7 +36,7 @@
                 android:layout_height="37dp"
                 android:padding="10dp"
                 android:src="@drawable/ic_close"
-                android:tint="@color/white"
+                app:tint="@color/white"
                 app:layout_constraintBottom_toBottomOf="@id/tv_title"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/tv_title" />

@@ -2,7 +2,6 @@ package io.goooler.demoapp.base.core
 
 import android.app.Application
 import android.graphics.drawable.Drawable
-import android.util.Log
 import androidx.annotation.AnyThread
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
@@ -11,8 +10,8 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
-import io.goooler.demoapp.base.BuildConfig
 import io.goooler.demoapp.base.http.HttpResponse
+import io.goooler.demoapp.base.util.isDebug
 import io.goooler.demoapp.base.util.showToastInAnyThread
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.disposables.Disposable
@@ -43,11 +42,15 @@ abstract class BaseViewModel(application: Application) :
     }
 
     protected fun silentThrowable(throwable: Throwable) {
-        if (BuildConfig.DEBUG) {
-            showToast(throwable.toString())
+        if (isDebug) {
+            toastThrowable(throwable)
         } else {
-            Log.d("silentThrowable", throwable.message)
+            // todo 日志上报
         }
+    }
+
+    protected fun toastThrowable(throwable: Throwable) {
+        showToast(throwable.toString())
     }
 
     @AnyThread

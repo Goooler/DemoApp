@@ -19,6 +19,5 @@ class RepoListBean(
 class OwnerBean(
     val id: Long,
     val login: String?,
-    @SerializedName("avatar_url")
-    val avatarUrl: String?
+    @SerializedName("avatar_url") val avatarUrl: String?
 )
