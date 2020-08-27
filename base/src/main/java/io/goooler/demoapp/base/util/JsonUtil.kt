@@ -2,71 +2,30 @@
 
 package io.goooler.demoapp.base.util
 
-import com.alibaba.fastjson.JSONObject
-import com.alibaba.fastjson.TypeReference
-import com.google.gson.Gson
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import java.lang.reflect.Type
 
-internal object GsonUtil {
-    private val gson = Gson()
-
-    fun <T> fromJson(json: String, classOfT: Class<T>): T? {
-        return try {
-            gson.fromJson(json, classOfT)
-        } catch (e: Exception) {
-            null
-        }
-    }
-
-    fun <T> fromJson(json: String, typeOfT: Type): T? {
-        return try {
-            gson.fromJson(json, typeOfT)
-        } catch (e: Exception) {
-            null
-        }
-    }
-
-    fun toJson(src: Any): String = gson.toJson(src)
-}
-
-internal object FastJsonUtil {
-    fun <T> fromJson(json: String, classOfT: Class<T>): T? {
-        return try {
-            JSONObject.parseObject(json, classOfT)
-        } catch (e: Exception) {
-            null
-        }
-    }
-
-    fun <T> fromJson(json: String, typeOfT: Type): T? {
-        return try {
-            JSONObject.parseObject(json, typeOfT)
-        } catch (e: Exception) {
-            null
-        }
-    }
-
-    fun <T> fromJson(json: String, typeRef: TypeReference<T>): T? {
-        return try {
-            JSONObject.parseObject(json, typeRef)
-        } catch (e: Exception) {
-            null
-        }
-    }
-
-    fun toJson(src: Any): String {
-        return JSONObject.toJSONString(src)
-    }
-}
-
 object JsonUtil {
-    fun <T> fromJson(json: String, clazz: Class<T>): T? =
-        GsonUtil.fromJson(json, clazz)
+    val moshi: Moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
 
-    fun <T> fromJson(json: String, typeOfT: Type): T? =
-        GsonUtil.fromJson(json, typeOfT)
+    fun <T> fromJson(json: String, clazz: Class<T>): T? {
+        return try {
+            moshi.adapter(clazz).fromJson(json)
+        } catch (e: Exception) {
+            null
+        }
+    }
 
-    fun toJson(o: Any): String = GsonUtil.toJson(o)
+    fun <T> fromJson(json: String, typeOfT: Type): T? {
+        return try {
+            moshi.adapter<T>(typeOfT).fromJson(json)
+        } catch (e: Exception) {
+            null
+        }
+    }
+
+    inline fun <reified T : Any> toJson(o: T): String = moshi.adapter(T::class.java).toJson(o)
 }
 
 inline fun <reified T> String.fromJson(): T? = JsonUtil.fromJson(this, T::class.java)

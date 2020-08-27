@@ -38,7 +38,7 @@ const val fastjsonVersion = "1.1.72.android"
 const val arouterVersion = "1.5.0"
 const val arouterCompilerVersion = "1.2.2"
 const val gsonVersion = "2.8.6"
-const val moshiVersion = "1.9.2"
+const val moshiVersion = "1.9.3"
 const val eventBusVersion = "3.2.0"
 const val liveDataBusVersion = "1.6.1"
 const val rxAndroidVersion = "3.0.0"
@@ -95,7 +95,6 @@ object Libs {
     const val liveDataBus = "com.jeremyliao:live-event-bus-x:$liveDataBusVersion"
     const val fastjson = "com.alibaba:fastjson:$fastjsonVersion"
     const val arouter = "com.alibaba:arouter-api:$arouterVersion"
-    const val moshi = "com.squareup.moshi:moshi-kotlin:$moshiVersion"
     const val luban = "top.zibin:Luban:$lubanVersion"
     const val leakCanary = "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"
     const val mmkv = "com.tencent:mmkv-static:$mmkvVersion"
@@ -150,6 +149,11 @@ object Libs {
     val gson = arrayOf(
         "com.google.code.gson:gson:$gsonVersion",
         "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    )
+    val moshi = arrayOf(
+        "com.squareup.moshi:moshi:$moshiVersion",
+        "com.squareup.moshi:moshi-kotlin:$moshiVersion",
+        "com.squareup.retrofit2:converter-moshi:$retrofitVersion"
     )
     val glide = arrayOf(
         "com.github.bumptech.glide:glide:$glideVersion",

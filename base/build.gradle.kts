@@ -58,6 +58,5 @@ dependencies {
     api(Libs.utils)
 
     // serializable
-    api(Libs.fastjson)
-    api(Libs.gson)
+    api(Libs.moshi)
 }
