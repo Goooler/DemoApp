@@ -47,7 +47,6 @@ dependencies {
     api(Libs.recyclerView)
     api(Libs.cardView)
     api(Libs.smartRefreshLayout)
-    api(Libs.baseRvHelper)
 
     // network
     api(Libs.okHttp)
@@ -61,10 +60,4 @@ dependencies {
     // serializable
     api(Libs.fastjson)
     api(Libs.gson)
-
-    // async
-    api(Libs.rx)
-
-    // analyze
-    debugApi(Libs.leakCanary)
 }

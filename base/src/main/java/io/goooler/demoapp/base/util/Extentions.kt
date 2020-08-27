@@ -16,9 +16,6 @@ import androidx.databinding.ObservableField
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import io.goooler.demoapp.base.BuildConfig
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.core.Single
-import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.coroutines.*
 import java.io.File
 import java.math.BigDecimal
@@ -366,13 +363,6 @@ suspend fun <T> withIoContext(block: suspend CoroutineScope.() -> T) =
 
 suspend fun <T> withDefaultContext(block: suspend CoroutineScope.() -> T) =
     withContext(Dispatchers.Default, block)
-
-//---------------------Rx-------------------------------//
-
-fun <T> Single<T>.subscribeAndObserve(): Single<T> {
-    return this.subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-}
 
 //---------------------File-------------------------------//
 

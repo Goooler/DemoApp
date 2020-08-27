@@ -9,26 +9,13 @@ import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.DefaultLifecycleObserver
-import androidx.lifecycle.LifecycleOwner
 import io.goooler.demoapp.base.http.HttpResponse
 import io.goooler.demoapp.base.util.isDebug
 import io.goooler.demoapp.base.util.showToastInAnyThread
-import io.reactivex.rxjava3.disposables.CompositeDisposable
-import io.reactivex.rxjava3.disposables.Disposable
 
 @Suppress("unused", "MemberVisibilityCanBePrivate")
 abstract class BaseViewModel(application: Application) :
     AndroidViewModel(application), DefaultLifecycleObserver {
-
-    private val compositeDisposable = CompositeDisposable()
-
-    override fun onDestroy(owner: LifecycleOwner) {
-        compositeDisposable.clear()
-    }
-
-    protected fun Disposable.add() {
-        compositeDisposable.add(this)
-    }
 
     protected fun checkStatusAndEntry(response: HttpResponse<*>) =
         response.status && response.entry != null

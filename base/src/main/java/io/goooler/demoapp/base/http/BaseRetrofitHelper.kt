@@ -40,23 +40,10 @@ abstract class BaseRetrofitHelper protected constructor() {
         return builder.build()
     }
 
-    /**
-     * 添加拦截器
-     */
-    protected open fun OkHttpClient.Builder.addInterceptor() = this
+    protected open fun OkHttpClient.Builder.addInterceptor(): OkHttpClient.Builder = this
 
-    /**
-     * 获取 API HOST
-     *
-     * @return host url
-     */
     protected abstract val baseUrl: String
 
-    /**
-     * 获取Context
-     *
-     * @return Context
-     */
     protected abstract val context: Context
 
     protected abstract val converterFactory: Converter.Factory
@@ -67,10 +54,6 @@ abstract class BaseRetrofitHelper protected constructor() {
         private const val CONNECT_TIMEOUT: Long = 20
         private const val WRITE_TIMEOUT: Long = 10
         private const val READ_TIMEOUT: Long = 10
-
-        /**
-         * cache size 10 MiB
-         */
         private const val CACHE_SIZE = 10 * 1024 * 1024.toLong()
     }
 }

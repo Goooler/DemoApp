@@ -10,11 +10,6 @@ buildscript {
         classpath(Libs.kotlinPlugin)
         classpath(Libs.protobufPlugin)
     }
-
-    configurations.all {
-        // check for updates every build
-        resolutionStrategy.cacheChangingModulesFor(0, TimeUnit.SECONDS)
-    }
 }
 
 allprojects {

@@ -61,29 +61,16 @@ internal object FastJsonUtil {
 
 object JsonUtil {
     fun <T> fromJson(json: String, clazz: Class<T>): T? =
-        FastJsonUtil.fromJson(json, clazz)
+        GsonUtil.fromJson(json, clazz)
 
     fun <T> fromJson(json: String, typeOfT: Type): T? =
-        FastJsonUtil.fromJson(json, typeOfT)
+        GsonUtil.fromJson(json, typeOfT)
 
-    fun <T> fromJson(json: String, typeRef: TypeReference<T>): T? =
-        FastJsonUtil.fromJson(json, typeRef)
-
-    fun toJson(o: Any): String = FastJsonUtil.toJson(o)
+    fun toJson(o: Any): String = GsonUtil.toJson(o)
 }
 
-inline fun <reified T> String.fromJson(): T? {
-    return JsonUtil.fromJson(this, T::class.java)
-}
+inline fun <reified T> String.fromJson(): T? = JsonUtil.fromJson(this, T::class.java)
 
-inline fun <reified T> String.fromJson(typeOfT: Type): T? {
-    return JsonUtil.fromJson(this, typeOfT)
-}
+inline fun <reified T> String.fromJson(typeOfT: Type): T? = JsonUtil.fromJson(this, typeOfT)
 
-inline fun <reified T> String.fromJson(typeRef: TypeReference<T>): T? {
-    return JsonUtil.fromJson(this, typeRef)
-}
-
-fun Any.toJson(): String {
-    return JsonUtil.toJson(this)
-}
+fun Any.toJson(): String = JsonUtil.toJson(this)

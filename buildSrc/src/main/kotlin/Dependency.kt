@@ -34,7 +34,7 @@ const val preferenceVersion = "1.1.1"
 const val multiDexVersion = "2.0.1"
 const val okHttpVersion = "4.8.1"
 const val retrofitVersion = "2.9.0"
-const val fastjsonVersion = "1.2.73"
+const val fastjsonVersion = "1.1.72.android"
 const val arouterVersion = "1.5.0"
 const val arouterCompilerVersion = "1.2.2"
 const val gsonVersion = "2.8.6"
@@ -42,7 +42,7 @@ const val moshiVersion = "1.9.2"
 const val eventBusVersion = "3.2.0"
 const val liveDataBusVersion = "1.6.1"
 const val rxAndroidVersion = "3.0.0"
-const val rxJavaVersion = "3.0.5"
+const val rxJavaVersion = "3.0.6"
 const val rxPermissionVersion = "0.12"
 const val mpChartVersion = "v3.1.0"
 const val lottieVersion = "3.0.1"
@@ -95,7 +95,6 @@ object Libs {
     const val liveDataBus = "com.jeremyliao:live-event-bus-x:$liveDataBusVersion"
     const val fastjson = "com.alibaba:fastjson:$fastjsonVersion"
     const val arouter = "com.alibaba:arouter-api:$arouterVersion"
-    const val gson = "com.google.code.gson:gson:$gsonVersion"
     const val moshi = "com.squareup.moshi:moshi-kotlin:$moshiVersion"
     const val luban = "top.zibin:Luban:$lubanVersion"
     const val leakCanary = "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"
@@ -107,6 +106,8 @@ object Libs {
     const val flycoTabLayout = "com.github.ernestchang:flycotablayout:$flycoTabLayoutVersion"
     const val coil = "io.coil-kt:coil:$coilVersion"
     const val utils = "com.blankj:utilcodex:$utilsVersion"
+    const val rxPermission = "com.github.tbruyelle:rxpermissions:$rxPermissionVersion"
+    const val retrofit = "com.squareup.retrofit2:retrofit:$retrofitVersion"
 
     const val glideKapt = "com.github.bumptech.glide:compiler:$glideVersion"
     const val objectBoxKapt = "io.objectbox:objectbox-processor:$objectBoxVersion"
@@ -146,8 +147,8 @@ object Libs {
         "com.squareup.okhttp3:okhttp:$okHttpVersion",
         "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
     )
-    val retrofit = arrayOf(
-        "com.squareup.retrofit2:retrofit:$retrofitVersion",
+    val gson = arrayOf(
+        "com.google.code.gson:gson:$gsonVersion",
         "com.squareup.retrofit2:converter-gson:$retrofitVersion"
     )
     val glide = arrayOf(
@@ -162,7 +163,6 @@ object Libs {
     val rx = arrayOf(
         "io.reactivex.rxjava3:rxjava:$rxJavaVersion",
         "io.reactivex.rxjava3:rxandroid:$rxAndroidVersion",
-        "com.squareup.retrofit2:adapter-rxjava3:$retrofitVersion",
-        "com.github.tbruyelle:rxpermissions:$rxPermissionVersion"
+        "com.squareup.retrofit2:adapter-rxjava3:$retrofitVersion"
     )
 }

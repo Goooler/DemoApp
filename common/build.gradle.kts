@@ -21,7 +21,8 @@ android {
         create("online")
     }
     productFlavors.all {
-        setDimension("channel")
+        dimension("channel")
+        buildConfigField("String", "VERSION_NAME", "\"$appVersionName\"")
         buildConfigField("String", "CHANNEL", "\"$name\"")
         buildConfigField("String", "CDN_PREFIX", "\"$cdnPrefix\"")
         if (name == "daily") {
@@ -45,7 +46,6 @@ android {
 kapt {
     arguments {
         arg("AROUTER_MODULE_NAME", project.name)
-        arg("objectbox.debug", true)
     }
 }
 
@@ -57,6 +57,12 @@ dependencies {
 
     // network
     api(Libs.coil)
+
+    // UI
+    api(Libs.baseRvHelper)
+
+    // async
+    api(Libs.rx)
 
     // storage
     api(Libs.objectBox)

@@ -93,4 +93,6 @@ dependencies {
     implementation(project(Modules.main))
     implementation(project(Modules.web))
     kapt(Libs.arouterKapt)
+
+    debugImplementation(Libs.leakCanary)
 }

@@ -10,6 +10,9 @@ import com.blankj.utilcode.util.SizeUtils
 import com.blankj.utilcode.util.TimeUtils
 import io.goooler.demoapp.common.BuildConfig
 import io.goooler.demoapp.common.type.SpKeys
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.core.Single
 import java.util.*
 
 val isFirstRun: Boolean = SPUtils.getInstance().getBoolean(SpKeys.SP_FIRST_RUN.key, true)
@@ -109,3 +112,13 @@ fun Int.px2sp(): Int = SizeUtils.px2sp(this.toFloat())
 fun Int.px2dp(): Int = SizeUtils.px2dp(this.toFloat())
 
 fun Int.px2pt(): Int = AdaptScreenUtils.px2Pt(this.toFloat())
+
+//---------------------Rx-------------------------------//
+
+fun <T> Single<T>.observeOnMainThread(): Single<T> {
+    return observeOn(AndroidSchedulers.mainThread())
+}
+
+fun <T> Observable<T>.observeOnMainThread(): Observable<T> {
+    return observeOn(AndroidSchedulers.mainThread())
+}

@@ -2,21 +2,20 @@ package io.goooler.demoapp.main.vm
 
 import android.app.Application
 import androidx.lifecycle.viewModelScope
-import io.goooler.demoapp.base.core.BaseViewModel
 import io.goooler.demoapp.base.util.MutableStringLiveData
 import io.goooler.demoapp.base.util.defaultAsync
+import io.goooler.demoapp.common.base.BaseRxViewModel
+import io.goooler.demoapp.common.util.observeOnMainThread
 import io.goooler.demoapp.main.R
 import io.goooler.demoapp.main.api.RepoList
 import io.goooler.demoapp.main.repository.MainRepository
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 
-class MainViewModel(application: Application) : BaseViewModel(application) {
+class MainViewModel(application: Application) : BaseRxViewModel(application) {
 
     val title = MutableStringLiveData()
 
@@ -40,8 +39,8 @@ class MainViewModel(application: Application) : BaseViewModel(application) {
                     title.value = it
                 }
             } catch (e: Exception) {
-                title.value = getString(R.string.request_failed)
-                showToast(e.message)
+                title.value = e.message
+                showToast(R.string.request_failed)
             }
         }
     }
@@ -70,20 +69,19 @@ class MainViewModel(application: Application) : BaseViewModel(application) {
             MainRepository.getRepoListRx("twitter"),
             { t1, t2, t3, t4, t5 ->
                 """
-                    ${t1.firstOrNull()?.name}
-                    ${t2.firstOrNull()?.name}
-                    ${t3.firstOrNull()?.name}
-                    ${t4.firstOrNull()?.name}
-                    ${t5.firstOrNull()?.name}
+                    ${t1.firstOrNull()?.owner?.avatarUrl}
+                    ${t2.firstOrNull()?.owner?.avatarUrl}
+                    ${t3.firstOrNull()?.owner?.avatarUrl}
+                    ${t4.firstOrNull()?.owner?.avatarUrl}
+                    ${t5.firstOrNull()?.owner?.avatarUrl}
                 """.trimIndent()
             })
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+            .observeOnMainThread()
             .subscribe({
                 title.value = it
             }, {
-                title.value = getString(R.string.request_failed)
-                toastThrowable(it)
+                title.value = it.message
+                showToast(getString(R.string.request_failed))
             }).add()
     }
 }
