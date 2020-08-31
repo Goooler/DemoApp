@@ -8,6 +8,11 @@ fun DependencyHandler.api(names: Array<String>): Array<Dependency?> =
         add("api", it)
     }.toTypedArray()
 
+fun DependencyHandler.implementation(names: Array<String>): Array<Dependency?> =
+    names.map {
+        add("implementation", it)
+    }.toTypedArray()
+
 /**
  * versionCode 限长 10 位
  */
@@ -22,6 +27,10 @@ val localLibs = mapOf(
 
 val ndkLibs = setOf(
     "armeabi-v7a", "x86"
+)
+
+val manifestFields = mapOf(
+    "appName" to "Demo"
 )
 
 const val cdnPrefix = "https://raw.githubusercontent.com/"

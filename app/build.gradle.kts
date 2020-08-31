@@ -2,8 +2,8 @@ import com.android.build.gradle.internal.api.BaseVariantOutputImpl
 
 plugins {
     id("com.android.application")
-    kotlin("android")
-    kotlin("kapt")
+    id("kotlin-android")
+    id("kotlin-kapt")
 }
 
 android {
@@ -16,12 +16,8 @@ android {
         versionCode = buildTime
         versionName = appVersionName
         vectorDrawables.useSupportLibrary = true
+        addManifestPlaceholders(manifestFields)
         ndk { abiFilters.addAll(ndkLibs) }
-        addManifestPlaceholders(
-            mapOf(
-                "appName" to "Demo"
-            )
-        )
     }
     signingConfigs {
         create("sign") {

@@ -5,8 +5,8 @@ import com.google.protobuf.gradle.protoc
 
 plugins {
     id("com.android.library")
-    kotlin("android")
-    kotlin("kapt")
+    id("kotlin-android")
+    id("kotlin-kapt")
     id("com.google.protobuf")
 }
 
