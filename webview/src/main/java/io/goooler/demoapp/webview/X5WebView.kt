@@ -25,7 +25,7 @@ class X5WebView(context: Context, attrs: AttributeSet? = null) : WebView(context
             allowFileAccess = true
             // 支持缩放，默认为 true，是下面那个的前提
             setSupportZoom(true)
-            // 设置内置的缩放控件。若为 false，则该 WebView 不可缩放
+            // 设置内置的缩放控件，若为 false，则该 WebView 不可缩放
             builtInZoomControls = true
             // 隐藏原生的缩放控件
             displayZoomControls = false

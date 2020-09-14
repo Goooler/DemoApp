@@ -11,7 +11,7 @@ package io.goooler.demoapp.adapter.rv.list
 interface IMutableListData<M> {
 
     /**
-     * 获取数据。
+     * 获取数据
      */
     fun getData(): MutableList<M>
 
@@ -26,12 +26,12 @@ interface IMutableListData<M> {
     fun addData(list: List<M>)
 
     /**
-     * 只刷新局部数据。
+     * 只刷新局部数据
      */
     fun changeData(list: List<M>)
 
     /**
-     * 只移除局部数据。
+     * 只移除局部数据
      */
     fun removeData(list: List<M>)
 
@@ -50,14 +50,14 @@ interface IMutableListData<M> {
     }
 
     /**
-     * 只刷新局部数据。
+     * 只刷新局部数据
      */
     fun changeData(vararg ms: M) {
         changeData(ms.toList())
     }
 
     /**
-     * 只移除局部数据。
+     * 只移除局部数据
      */
     fun removeData(vararg ms: M) {
         removeData(ms.toList())

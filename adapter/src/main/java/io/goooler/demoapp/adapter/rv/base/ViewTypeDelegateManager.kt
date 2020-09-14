@@ -6,7 +6,7 @@ import androidx.databinding.ViewDataBinding
 
 /**
  * Created on 2019/08/31.
- * ViewTypeDelegate 的统一管理类。
+ * ViewTypeDelegate 的统一管理类
  *
  * @author feling
  * @version 1.0.0
@@ -18,7 +18,7 @@ class ViewTypeDelegateManager<M : IModelType> {
     private val mIVDs: SparseArray<ViewTypeDelegate<ViewDataBinding, M>> = SparseArray()
 
     /**
-     * 当创建 ViewHolder 时 getViewType = viewType 的 ViewTypeDelegate 响应执行 onCreateVH 方法。
+     * 当创建 ViewHolder 时 getViewType = viewType 的 ViewTypeDelegate 响应执行 onCreateVH 方法
      * @param binding ViewDataBinding
      * @param viewType viewType
      */
@@ -28,7 +28,7 @@ class ViewTypeDelegateManager<M : IModelType> {
     }
 
     /**
-     * 当绑定 ViewHolder 时 getViewType = viewType 的 ViewTypeDelegate 响应执行 onBindVH 方法。
+     * 当绑定 ViewHolder 时 getViewType = viewType 的 ViewTypeDelegate 响应执行 onBindVH 方法
      * @param binding ViewDataBinding
      * @param model model
      */
@@ -38,7 +38,7 @@ class ViewTypeDelegateManager<M : IModelType> {
     }
 
     /**
-     * 添加 ItemViewDelegate。
+     * 添加 ItemViewDelegate
      *
      * @param ivd ViewTypeDelegate
      */
@@ -48,7 +48,7 @@ class ViewTypeDelegateManager<M : IModelType> {
     }
 
     /**
-     * 消除所有 ItemViewDelegate。
+     * 消除所有 ItemViewDelegate
      */
     fun clear() {
         mIVDs.clear()

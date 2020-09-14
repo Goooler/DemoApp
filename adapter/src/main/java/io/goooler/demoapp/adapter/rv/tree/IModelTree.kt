@@ -5,7 +5,7 @@ import io.goooler.demoapp.adapter.rv.base.IModelType
 /**
  * Created on 2019/08/22.
  *
- * 树。
+ * 树
  *
  * @author feling
  * @version 1.0.0
@@ -13,18 +13,18 @@ import io.goooler.demoapp.adapter.rv.base.IModelType
  */
 interface IModelTree<M : IModelTree<M>> : IModelType {
     /**
-     * 获取子树列表。
+     * 获取子树列表
      */
     fun getChildren(): List<M>? = null
 
     /**
-     * 是否把父节点加到子节点的前一个。
+     * 是否把父节点加到子节点的前一个
      */
     fun isAddParent(): Boolean = false
 
     companion object {
         /**
-         * 从一颗树中获取所有节点。
+         * 从一颗树中获取所有节点
          */
         fun <M : IModelTree<M>> ergodic(tree: M): List<M> {
             return ArrayList<M>().also {
@@ -33,7 +33,7 @@ interface IModelTree<M : IModelTree<M>> : IModelType {
         }
 
         /**
-         * 递归遍历。
+         * 递归遍历
          */
         private fun <M : IModelTree<M>> findNode(tree: M, list: MutableList<M>) {
             val childTreeList = tree.getChildren()

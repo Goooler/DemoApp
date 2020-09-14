@@ -24,7 +24,7 @@ abstract class BaseListAdapter<M : IModelType> : BaseRvAdapter<M>(), IMutableLis
         (recyclerView.layoutManager as? GridLayoutManager)?.let {
             it.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                 override fun getSpanSize(position: Int): Int {
-                    return modelList[position].getSpanSize()
+                    return modelList[position].spanSize
                 }
             }
         }
@@ -53,7 +53,7 @@ abstract class BaseListAdapter<M : IModelType> : BaseRvAdapter<M>(), IMutableLis
     }
 
     /**
-     * 只刷新局部数据。
+     * 只刷新局部数据
      */
     override fun changeData(list: List<M>) {
         modelList.toMultiList().forEach {
@@ -64,7 +64,7 @@ abstract class BaseListAdapter<M : IModelType> : BaseRvAdapter<M>(), IMutableLis
     }
 
     /**
-     * 只移除局部数据。
+     * 只移除局部数据
      */
     override fun removeData(list: List<M>) {
         list.toMultiList().forEach {

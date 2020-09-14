@@ -57,7 +57,7 @@ abstract class BaseRvAdapter<T : IModelType> :
     abstract fun onBindVHForAll(binding: ViewDataBinding, model: T)
 
     /**
-     * 初始化各种 viewType 处理委托，添加到 Manager 中。
+     * 初始化各种 viewType 处理委托，添加到 Manager 中
      */
     protected open fun addDelegate(manager: ViewTypeDelegateManager<T>) {}
 
