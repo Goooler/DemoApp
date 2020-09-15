@@ -2,6 +2,7 @@ package io.goooler.demoapp.adapter.rv.base
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
@@ -16,15 +17,15 @@ import androidx.recyclerview.widget.RecyclerView
 abstract class BaseRvAdapter<T : IModelType> :
     RecyclerView.Adapter<BaseRvAdapter.BaseViewHolder>() {
 
-    private val ivdManager: ViewTypeDelegateManager<T> by lazy(LazyThreadSafetyMode.NONE) {
-        ViewTypeDelegateManager()
+    private val ivdManager by lazy(LazyThreadSafetyMode.NONE) {
+        ViewTypeDelegateManager<T>()
     }
 
     var fix: IFix<T>? = null
 
     protected abstract val modelList: MutableList<T>
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, @LayoutRes viewType: Int): BaseViewHolder {
         val holder = createVH(parent, viewType)
         onCreateVHForAll(holder.binding)
         ivdManager.onCreateVH(holder.binding, viewType)
@@ -61,7 +62,7 @@ abstract class BaseRvAdapter<T : IModelType> :
      */
     protected open fun addDelegate(manager: ViewTypeDelegateManager<T>) {}
 
-    protected open fun createVH(parent: ViewGroup, viewType: Int): BaseViewHolder {
+    protected open fun createVH(parent: ViewGroup, @LayoutRes viewType: Int): BaseViewHolder {
         val binding = DataBindingUtil.inflate<ViewDataBinding>(
             LayoutInflater.from(parent.context), viewType, parent, false
         )
@@ -72,7 +73,7 @@ abstract class BaseRvAdapter<T : IModelType> :
         return fix?.fix(this) ?: this
     }
 
-    interface IFix<T> {
+    fun interface IFix<T> {
         fun fix(list: List<T>): List<T>
     }
 

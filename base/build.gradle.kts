@@ -25,6 +25,7 @@ android {
     }
     kotlinOptions {
         jvmTarget = javaVersion.toString()
+        useIR = true
     }
 }
 

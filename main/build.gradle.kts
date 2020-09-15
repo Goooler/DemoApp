@@ -36,6 +36,7 @@ android {
     }
     kotlinOptions {
         jvmTarget = javaVersion.toString()
+        useIR = true
         freeCompilerArgs = listOf(
             "-Xjvm-default=compatibility"
         )

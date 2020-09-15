@@ -11,11 +11,14 @@ import android.text.Html
 import android.text.Spanned
 import android.view.View
 import android.webkit.URLUtil
+import androidx.activity.ComponentActivity
 import androidx.annotation.ColorInt
 import androidx.databinding.ObservableField
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModelProvider
 import io.goooler.demoapp.base.BuildConfig
+import io.goooler.demoapp.base.core.BaseViewModel
 import kotlinx.coroutines.*
 import java.io.File
 import java.math.BigDecimal
@@ -51,7 +54,7 @@ val currentThreadName: String get() = Thread.currentThread().name
 
 val isMainThread: Boolean get() = Looper.getMainLooper().thread === Thread.currentThread()
 
-fun <T> unsafeLazy(initializer: () -> T) = lazy(LazyThreadSafetyMode.NONE, initializer)
+fun <T> unsafeLazy(initializer: () -> T): Lazy<T> = lazy(LazyThreadSafetyMode.NONE, initializer)
 
 //---------------------CharSequence-------------------------------//
 
@@ -375,7 +378,33 @@ fun <T : Fragment> T.putArguments(bundle: Bundle): T {
     return this
 }
 
-//---------------------HigherOrderFunc-------------------------------//
+inline fun <reified T : BaseViewModel> Fragment.getViewModel(): Lazy<T> {
+    return lazy(LazyThreadSafetyMode.NONE) {
+        ViewModelProvider(this).get(T::class.java).apply {
+            lifecycle.addObserver(this)
+        }
+    }
+}
+
+inline fun <reified T : BaseViewModel> Fragment.getViewModelOfActivity(): Lazy<T> {
+    return lazy(LazyThreadSafetyMode.NONE) {
+        ViewModelProvider(requireActivity()).get(T::class.java).apply {
+            lifecycle.addObserver(this)
+        }
+    }
+}
+
+//---------------------Activity-------------------------------//
+
+inline fun <reified T : BaseViewModel> ComponentActivity.getViewModel(): Lazy<T> {
+    return lazy(LazyThreadSafetyMode.NONE) {
+        ViewModelProvider(this).get(T::class.java).apply {
+            lifecycle.addObserver(this)
+        }
+    }
+}
+
+//---------------------Other-------------------------------//
 
 /**
  * 条件为真时执行

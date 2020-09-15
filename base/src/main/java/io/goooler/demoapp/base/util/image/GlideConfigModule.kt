@@ -12,9 +12,8 @@ import java.io.InputStream
 
 @GlideModule
 class GlideConfigModule : AppGlideModule() {
-    override fun isManifestParsingEnabled(): Boolean {
-        return false
-    }
+
+    override fun isManifestParsingEnabled(): Boolean = false
 
     override fun registerComponents(
         context: Context,

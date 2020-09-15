@@ -15,7 +15,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
-import androidx.lifecycle.ViewModelProvider
 import com.blankj.utilcode.util.AdaptScreenUtils
 import com.blankj.utilcode.util.BarUtils
 import io.goooler.demoapp.base.util.showToastInMainThread
@@ -91,12 +90,6 @@ abstract class BaseActivity : AppCompatActivity() {
                 addToBackStack(tag)
             }
             replace(containerViewId, fragment, tag)
-        }
-    }
-
-    protected fun <T : BaseViewModel> getViewModel(modelClass: Class<T>): T {
-        return ViewModelProvider(this).get(modelClass).apply {
-            lifecycle.addObserver(this)
         }
     }
 

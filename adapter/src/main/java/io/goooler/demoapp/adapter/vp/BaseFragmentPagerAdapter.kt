@@ -25,11 +25,11 @@ abstract class BaseFragmentPagerAdapter(
         notifyDataSetChanged()
     }
 
-    override fun getItem(position: Int) = fragmentList[position]
+    override fun getItem(position: Int): Fragment = fragmentList[position]
 
-    override fun getCount() = fragmentList.size
+    override fun getCount(): Int = fragmentList.size
 
-    override fun getItemPosition(any: Any) = PagerAdapter.POSITION_NONE
+    override fun getItemPosition(any: Any): Int = PagerAdapter.POSITION_NONE
 }
 
 /**

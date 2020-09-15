@@ -15,8 +15,8 @@ import io.goooler.demoapp.adapter.rv.base.BaseRvAdapter
  */
 abstract class BaseDiffAdapter<T : IModelDiff<T>> : BaseRvAdapter<T>() {
 
-    private val differ: AsyncListDiffer<T> by lazy(LazyThreadSafetyMode.NONE) {
-        AsyncListDiffer(this, diffCallBack())
+    private val differ by lazy(LazyThreadSafetyMode.NONE) {
+        AsyncListDiffer(this, diffCallback())
     }
 
     override val modelList: MutableList<T> = differ.currentList
@@ -25,19 +25,16 @@ abstract class BaseDiffAdapter<T : IModelDiff<T>> : BaseRvAdapter<T>() {
         differ.submitList(list.toMultiList())
     }
 
-    protected open fun diffCallBack(): DiffUtil.ItemCallback<T> = diffCallBack
+    protected open fun diffCallback(): DiffUtil.ItemCallback<T> = diffCallback
 
-    private val diffCallBack = object : DiffUtil.ItemCallback<T>() {
-        override fun areContentsTheSame(oldItem: T, newItem: T): Boolean {
-            return oldItem.isContentTheSame(newItem)
-        }
+    private val diffCallback = object : DiffUtil.ItemCallback<T>() {
 
-        override fun areItemsTheSame(oldItem: T, newItem: T): Boolean {
-            return oldItem.isItemTheSame(newItem)
-        }
+        override fun areContentsTheSame(oldItem: T, newItem: T): Boolean =
+            oldItem.isContentTheSame(newItem)
 
-        override fun getChangePayload(oldItem: T, newItem: T): Any? {
-            return null
-        }
+        override fun areItemsTheSame(oldItem: T, newItem: T): Boolean =
+            oldItem.isItemTheSame(newItem)
+
+        override fun getChangePayload(oldItem: T, newItem: T): Any? = null
     }
 }

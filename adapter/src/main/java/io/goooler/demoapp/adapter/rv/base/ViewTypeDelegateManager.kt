@@ -1,6 +1,7 @@
 package io.goooler.demoapp.adapter.rv.base
 
 import android.util.SparseArray
+import androidx.annotation.LayoutRes
 import androidx.core.util.isNotEmpty
 import androidx.databinding.ViewDataBinding
 
@@ -22,7 +23,7 @@ class ViewTypeDelegateManager<M : IModelType> {
      * @param binding ViewDataBinding
      * @param viewType viewType
      */
-    fun onCreateVH(binding: ViewDataBinding, viewType: Int) {
+    fun onCreateVH(binding: ViewDataBinding, @LayoutRes viewType: Int) {
         if (mIVDs.isNotEmpty())
             mIVDs.get(viewType)?.onCreateVH(binding)
     }

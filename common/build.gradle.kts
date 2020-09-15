@@ -40,6 +40,7 @@ android {
     }
     kotlinOptions {
         jvmTarget = javaVersion.toString()
+        useIR = true
     }
 }
 
@@ -54,9 +55,6 @@ dependencies {
 
     api(Libs.arouter)
     kapt(Libs.arouterKapt)
-
-    // network
-    api(Libs.coil)
 
     // UI
     api(Libs.baseRvHelper)

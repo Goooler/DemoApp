@@ -8,7 +8,6 @@ import androidx.annotation.MainThread
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
-import androidx.lifecycle.ViewModelProvider
 import io.goooler.demoapp.base.util.showToastInMainThread
 
 /**
@@ -76,18 +75,6 @@ abstract class BaseFragment : Fragment() {
                 addToBackStack(tag)
             }
             replace(containerViewId, fragment, tag)
-        }
-    }
-
-    protected fun <T : BaseViewModel> getViewModel(modelClass: Class<T>): T {
-        return ViewModelProvider(this).get(modelClass).apply {
-            lifecycle.addObserver(this)
-        }
-    }
-
-    protected fun <T : BaseViewModel> getViewModelOfActivity(modelClass: Class<T>): T {
-        return ViewModelProvider(requireActivity()).get(modelClass).apply {
-            lifecycle.addObserver(this)
         }
     }
 

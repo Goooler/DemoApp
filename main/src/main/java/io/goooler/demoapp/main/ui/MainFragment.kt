@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import io.goooler.demoapp.base.core.BaseFragment
+import io.goooler.demoapp.base.util.getViewModel
 import io.goooler.demoapp.base.util.unsafeLazy
 import io.goooler.demoapp.common.router.RouterManager
 import io.goooler.demoapp.main.databinding.MainFragmentBinding
@@ -14,7 +15,7 @@ class MainFragment : BaseFragment() {
 
     private val binding by unsafeLazy { MainFragmentBinding.inflate(layoutInflater) }
 
-    private val vm by unsafeLazy { getViewModel(MainViewModel::class.java) }
+    private val vm by getViewModel<MainViewModel>()
 
     private val initOnce by unsafeLazy {
         binding.lifecycleOwner = this

@@ -45,8 +45,9 @@ fun View.bindingIsSelect(select: Boolean) {
 fun View.bindingRectCornerRadius(radius: Float) {
     outlineProvider = object : ViewOutlineProvider() {
         override fun getOutline(v: View?, outline: Outline?) {
-            if (v == null || outline == null) return
-            outline.setRoundRect(0, 0, v.width, v.height, radius)
+            if (v != null && outline != null) {
+                outline.setRoundRect(0, 0, v.width, v.height, radius)
+            }
         }
     }
     clipToOutline = true
