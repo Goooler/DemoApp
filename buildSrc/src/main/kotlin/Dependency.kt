@@ -7,9 +7,9 @@ const val aliyunMaven = "https://maven.aliyun.com/repository/public"
 const val jitpackMaven = "https://jitpack.io"
 
 // sdk
-const val appTargetSdk = 29
+const val appTargetSdk = 30
 const val appBuildTool = "30.0.2"
-const val appMinSdk = 23
+const val appMinSdk = 21
 
 // app
 const val appVersionName = "1.0"
@@ -63,7 +63,7 @@ const val coilVersion = "0.11.0"
 const val utilsVersion = "1.29.0"
 
 // buildScript plugin
-const val gradleVersion = "4.1.0-rc02"
+const val gradleVersion = "4.1.0-rc03"
 const val kotlinVersion = "1.4.10"
 const val protobufVersion = "0.8.12"
 val javaVersion = JavaVersion.VERSION_1_8

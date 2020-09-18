@@ -2,12 +2,13 @@
 
 package io.goooler.demoapp.common.util
 
+import android.graphics.drawable.Drawable
 import android.webkit.URLUtil
+import androidx.annotation.ColorRes
+import androidx.annotation.DrawableRes
 import androidx.annotation.Px
-import com.blankj.utilcode.util.AdaptScreenUtils
-import com.blankj.utilcode.util.SPUtils
-import com.blankj.utilcode.util.SizeUtils
-import com.blankj.utilcode.util.TimeUtils
+import androidx.annotation.StringRes
+import com.blankj.utilcode.util.*
 import io.goooler.demoapp.common.BuildConfig
 import io.goooler.demoapp.common.type.SpKeys
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -15,7 +16,9 @@ import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import java.util.*
 
-val isFirstRun: Boolean = SPUtils.getInstance().getBoolean(SpKeys.SP_FIRST_RUN.key, true)
+var isFirstRun: Boolean
+    get() = SPUtils.getInstance().getBoolean(SpKeys.SP_FIRST_RUN.key, true)
+    set(value) = SPUtils.getInstance().put(SpKeys.SP_FIRST_RUN.key, value)
 
 /**
  * 拼上图片前缀
@@ -122,3 +125,14 @@ fun <T> Single<T>.observeOnMainThread(): Single<T> {
 fun <T> Observable<T>.observeOnMainThread(): Observable<T> {
     return observeOn(AndroidSchedulers.mainThread())
 }
+
+//---------------------Res-------------------------------//
+
+fun @receiver:DrawableRes Int.getDrawable(): Drawable? = ResourceUtils.getDrawable(this)
+
+fun @receiver:ColorRes Int.getColor(): Int = ColorUtils.getColor(this)
+
+fun @receiver:StringRes Int.getString(): String = StringUtils.getString(this)
+
+fun @receiver:StringRes Int.formatString(vararg args: Any): String =
+    String.format(getString(), args)

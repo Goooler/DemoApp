@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import com.alibaba.android.arouter.facade.annotation.Route
 import io.goooler.demoapp.base.core.BaseActivity
+import io.goooler.demoapp.base.util.addFragment
 import io.goooler.demoapp.common.router.RouterPath
 
 @Route(path = RouterPath.MAIN)
@@ -11,7 +12,7 @@ class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        addFragment(android.R.id.content, MainFragment.newInstance())
+        supportFragmentManager.addFragment(android.R.id.content, MainFragment.newInstance())
     }
 
     /**

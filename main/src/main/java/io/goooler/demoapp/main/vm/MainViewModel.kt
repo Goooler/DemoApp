@@ -81,7 +81,7 @@ class MainViewModel(application: Application) : BaseRxViewModel(application) {
                 title.value = it
             }, {
                 title.value = it.message
-                showToast(getString(R.string.request_failed))
+                showToast(R.string.request_failed)
             }).add()
     }
 }

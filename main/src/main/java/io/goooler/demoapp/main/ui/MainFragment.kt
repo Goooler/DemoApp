@@ -18,7 +18,7 @@ class MainFragment : BaseFragment() {
     private val vm by getViewModel<MainViewModel>()
 
     private val initOnce by unsafeLazy {
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
         binding.vm = vm
         binding.listener = eventListener
         vm.initData()

@@ -6,24 +6,27 @@ import android.view.View
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.blankj.utilcode.util.BarUtils
 import io.goooler.demoapp.base.core.BaseActivity
+import io.goooler.demoapp.base.util.addFragment
+import io.goooler.demoapp.base.util.unsafeLazy
 import io.goooler.demoapp.common.router.RouterManager
 import io.goooler.demoapp.common.router.RouterPath
 import io.goooler.demoapp.webview.databinding.WebActivityBinding
 
 @Route(path = RouterPath.WEB)
 class WebActivity : BaseActivity() {
-    private val binding by binding<WebActivityBinding>(R.layout.web_activity)
+    private val binding by unsafeLazy { WebActivityBinding.inflate(layoutInflater) }
 
     private var webFragment: WebFragment? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(binding.root)
         BarUtils.setStatusBarLightMode(this, true)
         binding.layoutTitle.listener = listener
         intent.extras?.getString(RouterManager.PARAMS)?.let {
             webFragment = WebFragment.newInstance(it)
             webFragment!!.eventListener = listener
-            addFragment(R.id.fragment_container, webFragment!!)
+            supportFragmentManager.addFragment(R.id.fragment_container, webFragment!!)
         }
     }
 

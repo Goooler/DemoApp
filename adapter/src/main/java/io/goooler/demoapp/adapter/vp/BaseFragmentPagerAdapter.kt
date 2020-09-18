@@ -16,16 +16,23 @@ abstract class BaseFragmentPagerAdapter(
 ) : FragmentStatePagerAdapter(fragmentManager, behavior) {
 
     private val fragmentList = ArrayList<Fragment>()
+    private val titleList = ArrayList<String>()
 
-    open fun setData(list: List<Fragment>) {
-        fragmentList.run {
-            clear()
-            addAll(list)
+    open fun setData(fragments: List<Fragment>? = null, titles: List<String>? = null) {
+        fragments?.let {
+            fragmentList.clear()
+            fragmentList.addAll(it)
+        }
+        titles?.let {
+            titleList.clear()
+            titleList.addAll(it)
         }
         notifyDataSetChanged()
     }
 
     override fun getItem(position: Int): Fragment = fragmentList[position]
+
+    override fun getPageTitle(position: Int): CharSequence? = titleList[position]
 
     override fun getCount(): Int = fragmentList.size
 
@@ -33,7 +40,19 @@ abstract class BaseFragmentPagerAdapter(
 }
 
 /**
- *
+ * 懒加载基类
  */
 abstract class BaseLazyFragmentPagerAdapter(fragmentManager: FragmentManager) :
     BaseFragmentPagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT)
+
+/**
+ * 通用 adapter
+ */
+class CommonFragmentPagerAdapter(fragmentManager: FragmentManager) :
+    BaseFragmentPagerAdapter(fragmentManager)
+
+/**
+ * 通用 lazy adapter
+ */
+class CommonLazyFragmentPagerAdapter(fragmentManager: FragmentManager) :
+    BaseLazyFragmentPagerAdapter(fragmentManager)

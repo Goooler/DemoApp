@@ -2,6 +2,7 @@
 
 package io.goooler.demoapp.base.util
 
+import android.app.Activity
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.os.Build
@@ -13,8 +14,14 @@ import android.view.View
 import android.webkit.URLUtil
 import androidx.activity.ComponentActivity
 import androidx.annotation.ColorInt
+import androidx.annotation.IdRes
+import androidx.annotation.LayoutRes
+import androidx.databinding.DataBindingUtil
 import androidx.databinding.ObservableField
+import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.commit
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import io.goooler.demoapp.base.BuildConfig
@@ -394,6 +401,48 @@ inline fun <reified T : BaseViewModel> Fragment.getViewModelOfActivity(): Lazy<T
     }
 }
 
+/**
+ * @param containerViewId   容器 id
+ * @param fragment          要添加的 fragment
+ * @param isAddToBackStack  将要添加的 fragment 是否要添加到返回栈，默认不添加
+ * @param tag               fragment 的 tag
+ */
+fun FragmentManager.addFragment(
+    @IdRes containerViewId: Int,
+    fragment: Fragment,
+    isAddToBackStack: Boolean = false,
+    tag: String? = null
+) {
+    if (fragment.isAdded) return
+    commit {
+        if (isAddToBackStack) {
+            addToBackStack(tag)
+        }
+        add(containerViewId, fragment, tag)
+    }
+}
+
+/**
+ * @param containerViewId   容器 id
+ * @param fragment          要替换的 fragment
+ * @param isAddToBackStack  将要替换的 fragment 是否要添加到返回栈，默认添加
+ * @param tag               fragment 的 tag
+ */
+fun FragmentManager.replaceFragment(
+    @IdRes containerViewId: Int,
+    fragment: Fragment,
+    isAddToBackStack: Boolean = true,
+    tag: String? = null
+) {
+    if (fragment.isAdded) return
+    commit {
+        if (isAddToBackStack) {
+            addToBackStack(tag)
+        }
+        replace(containerViewId, fragment, tag)
+    }
+}
+
 //---------------------Activity-------------------------------//
 
 inline fun <reified T : BaseViewModel> ComponentActivity.getViewModel(): Lazy<T> {
@@ -403,6 +452,9 @@ inline fun <reified T : BaseViewModel> ComponentActivity.getViewModel(): Lazy<T>
         }
     }
 }
+
+inline fun <reified T : ViewDataBinding> Activity.binding(@LayoutRes resId: Int): Lazy<T> =
+    lazy(LazyThreadSafetyMode.NONE) { DataBindingUtil.setContentView(this, resId) }
 
 //---------------------Other-------------------------------//
 

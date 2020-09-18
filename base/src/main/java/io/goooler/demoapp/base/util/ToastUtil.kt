@@ -87,3 +87,18 @@ fun String.showToastInWorkerThread(context: Context) {
 fun String.showToastInAnyThread(context: Context) {
     ToastUtil.showToastInAnyThread(context, this)
 }
+
+@MainThread
+fun @receiver:StringRes Int.showToastInMainThread(context: Context) {
+    ToastUtil.showToastInAnyThread(context, this)
+}
+
+@WorkerThread
+fun @receiver:StringRes Int.showToastInWorkerThread(context: Context) {
+    ToastUtil.showToastInWorkerThread(context, this)
+}
+
+@AnyThread
+fun @receiver:StringRes Int.showToastInAnyThread(context: Context) {
+    ToastUtil.showToastInAnyThread(context, this)
+}
