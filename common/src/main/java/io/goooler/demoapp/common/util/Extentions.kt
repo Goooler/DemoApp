@@ -4,17 +4,39 @@ package io.goooler.demoapp.common.util
 
 import android.graphics.drawable.Drawable
 import android.webkit.URLUtil
-import androidx.annotation.ColorRes
-import androidx.annotation.DrawableRes
-import androidx.annotation.Px
-import androidx.annotation.StringRes
+import androidx.activity.ComponentActivity
+import androidx.annotation.*
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.blankj.utilcode.util.*
+import io.goooler.demoapp.base.core.BaseApplication
+import io.goooler.demoapp.base.core.BaseViewModel
+import io.goooler.demoapp.base.http.HttpResponse
+import io.goooler.demoapp.base.util.isDebug
+import io.goooler.demoapp.base.util.showToastInAnyThread
 import io.goooler.demoapp.common.BuildConfig
+import io.goooler.demoapp.common.http.RetrofitHelper
 import io.goooler.demoapp.common.type.SpKeys
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import java.util.*
+
+@AnyThread
+fun showToast(@StringRes strResId: Int) {
+    strResId.showToastInAnyThread(BaseApplication.app)
+}
+
+@AnyThread
+fun showToast(msg: String?) {
+    msg?.showToastInAnyThread(BaseApplication.app)
+}
+
+inline fun <reified T> getApiService(): Lazy<T> {
+    return lazy(LazyThreadSafetyMode.NONE) {
+        RetrofitHelper.createApiService(T::class.java)
+    }
+}
 
 var isFirstRun: Boolean
     get() = SPUtils.getInstance().getBoolean(SpKeys.SP_FIRST_RUN.key, true)
@@ -30,35 +52,26 @@ fun String.toLoadUrl(): String {
 /**
  * 获取图片宽高比例，如：/assets/img/2019/07/18/n_1563460410803_3849___size550x769.jpg
  */
-fun String.getSizeByLoadUrl(defaultWidth: Int, defaultHeight: Int): List<Int> {
-    val sizeList = arrayListOf(
+fun String.getPicSizeByUrl(defaultWidth: Int, defaultHeight: Int): Array<Int> {
+    val flag = "size"
+    val sizeArray = arrayOf(
         defaultWidth, defaultHeight
     )
-    val flag = "size"
-    if (!contains(BuildConfig.CDN_PREFIX) || !contains(flag)) {
-        return sizeList
-    }
-    Regex("$flag(\\d+x\\d+)")
-        .findAll(this)
-        .forEach {
-            // size550x769
-            val sizeXXXxXXX = it.value
-            // 550x769
-            val mXXXxXXX = sizeXXXxXXX.replace(flag, "")
-            val list = mXXXxXXX.split("x")
-            if (list.size < 2) {
-                return sizeList
+    if (contains(BuildConfig.CDN_PREFIX) && contains(flag)) {
+        Regex("$flag(\\d+x\\d+)")
+            .findAll(this)
+            .forEach {
+                val mXXXxXXX = it.value.replace(flag, "")
+                val list = mXXXxXXX.split("x")
+                if (list.size == 2) {
+                    sizeArray.apply {
+                        set(0, list[0].toInt())
+                        set(0, list[1].toInt())
+                    }
+                }
             }
-            // 550
-            val width = list[0].toInt()
-            // 769
-            val height = list[1].toInt()
-            sizeList.clear()
-            sizeList.add(width)
-            sizeList.add(height)
-            return sizeList
-        }
-    return sizeList
+    }
+    return sizeArray
 }
 
 fun Long.toDateString(pattern: String): String {
@@ -130,9 +143,63 @@ fun <T> Observable<T>.observeOnMainThread(): Observable<T> {
 
 fun @receiver:DrawableRes Int.getDrawable(): Drawable? = ResourceUtils.getDrawable(this)
 
+@ColorInt
 fun @receiver:ColorRes Int.getColor(): Int = ColorUtils.getColor(this)
 
 fun @receiver:StringRes Int.getString(): String = StringUtils.getString(this)
 
 fun @receiver:StringRes Int.formatString(vararg args: Any): String =
     String.format(getString(), args)
+
+//---------------------Fragment-------------------------------//
+
+inline fun <reified T : BaseViewModel> Fragment.getViewModel(): Lazy<T> {
+    return lazy(LazyThreadSafetyMode.NONE) {
+        ViewModelProvider(this).get(T::class.java).apply {
+            lifecycle.addObserver(this)
+        }
+    }
+}
+
+inline fun <reified T : BaseViewModel> Fragment.getViewModelOfActivity(): Lazy<T> {
+    return lazy(LazyThreadSafetyMode.NONE) {
+        ViewModelProvider(requireActivity()).get(T::class.java).apply {
+            lifecycle.addObserver(this)
+        }
+    }
+}
+
+//---------------------Activity-------------------------------//
+
+inline fun <reified T : BaseViewModel> ComponentActivity.getViewModel(): Lazy<T> {
+    return lazy(LazyThreadSafetyMode.NONE) {
+        ViewModelProvider(this).get(T::class.java).apply {
+            lifecycle.addObserver(this)
+        }
+    }
+}
+
+//---------------------ViewModel-------------------------------//
+
+fun BaseViewModel.checkStatusAndEntry(response: HttpResponse<*>) =
+    response.status && response.entry != null
+
+fun BaseViewModel.checkStatusAndEntryWithToast(response: HttpResponse<*>): Boolean {
+    return checkStatusAndEntry(response).also {
+        if (!it) {
+            showToast(response.message)
+        }
+    }
+}
+
+fun BaseViewModel.silentThrowable(throwable: Throwable) {
+    if (isDebug) {
+        toastThrowable(throwable)
+    } else {
+        // todo 日志上报
+    }
+}
+
+fun BaseViewModel.toastThrowable(throwable: Throwable) {
+    showToast(throwable.toString())
+}

@@ -6,12 +6,9 @@ import android.content.res.Resources
 import android.os.Build
 import android.os.Bundle
 import android.view.WindowManager
-import androidx.annotation.MainThread
-import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import com.blankj.utilcode.util.AdaptScreenUtils
 import com.blankj.utilcode.util.BarUtils
-import io.goooler.demoapp.base.util.showToastInMainThread
 
 /**
  * Activity 基类，封装通用方法
@@ -19,7 +16,7 @@ import io.goooler.demoapp.base.util.showToastInMainThread
 @Suppress("unused", "MemberVisibilityCanBePrivate")
 abstract class BaseActivity : AppCompatActivity() {
 
-    protected val originalResources: Resources get() = super.getResources()
+    val originalResources: Resources get() = super.getResources()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,17 +35,5 @@ abstract class BaseActivity : AppCompatActivity() {
         }
     }
 
-    override fun getResources(): Resources {
-        return AdaptScreenUtils.adaptWidth(originalResources, 360)
-    }
-
-    @MainThread
-    protected fun showToast(@StringRes strResId: Int) {
-        showToast(getString(strResId))
-    }
-
-    @MainThread
-    protected fun showToast(text: String) {
-        text.showToastInMainThread(this)
-    }
+    override fun getResources(): Resources = AdaptScreenUtils.adaptWidth(originalResources, 360)
 }

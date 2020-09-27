@@ -3,10 +3,7 @@ package io.goooler.demoapp.base.core
 import android.content.ComponentName
 import android.content.Intent
 import android.os.Build
-import androidx.annotation.MainThread
-import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
-import io.goooler.demoapp.base.util.showToastInMainThread
 
 /**
  * Fragment 基类，封装通用方法
@@ -34,15 +31,5 @@ abstract class BaseFragment : Fragment() {
         } else {
             activity?.startService(service)
         }
-    }
-
-    @MainThread
-    protected fun showToast(@StringRes strResId: Int) {
-        showToast(getString(strResId))
-    }
-
-    @MainThread
-    protected fun showToast(text: String) {
-        text.showToastInMainThread(requireContext())
     }
 }

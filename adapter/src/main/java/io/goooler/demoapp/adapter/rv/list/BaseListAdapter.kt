@@ -1,4 +1,4 @@
-@file:Suppress("unused")
+@file:Suppress("unused", "UNCHECKED_CAST")
 
 package io.goooler.demoapp.adapter.rv.list
 
@@ -82,7 +82,6 @@ abstract class BaseListAdapter<M : IModelType> : BaseRvAdapter<M>(), IMutableLis
     }
 }
 
-@Suppress("UNCHECKED_CAST")
 @BindingAdapter("binding_rv_setData")
 fun RecyclerView.setData(list: List<IModelType>?) {
     if (list == null) return

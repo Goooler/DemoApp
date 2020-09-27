@@ -7,8 +7,8 @@ import android.content.Context
 import android.os.Looper
 import android.widget.Toast
 import androidx.annotation.AnyThread
-import androidx.annotation.MainThread
 import androidx.annotation.StringRes
+import androidx.annotation.UiThread
 import androidx.annotation.WorkerThread
 
 /**
@@ -52,7 +52,7 @@ object ToastUtil {
         Looper.loop()
     }
 
-    @MainThread
+    @UiThread
     fun showToastInMainThread(context: Context, @StringRes strResId: Int) {
         showToastInMainThread(context, context.getString(strResId))
     }
@@ -60,7 +60,7 @@ object ToastUtil {
     /**
      * 只在主线程调用，真正实现 toast 的方法
      */
-    @MainThread
+    @UiThread
     @Synchronized
     fun showToastInMainThread(context: Context, text: String) {
         // 把上一条先置空，再显示下一条
@@ -73,7 +73,7 @@ object ToastUtil {
     }
 }
 
-@MainThread
+@UiThread
 fun String.showToastInMainThread(context: Context) {
     ToastUtil.showToastInAnyThread(context, this)
 }
@@ -88,7 +88,7 @@ fun String.showToastInAnyThread(context: Context) {
     ToastUtil.showToastInAnyThread(context, this)
 }
 
-@MainThread
+@UiThread
 fun @receiver:StringRes Int.showToastInMainThread(context: Context) {
     ToastUtil.showToastInAnyThread(context, this)
 }

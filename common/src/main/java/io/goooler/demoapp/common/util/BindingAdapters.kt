@@ -19,15 +19,17 @@ fun ImageView.bindingImageUrlFixWidth(
     baseWidth: Float,
     baseHeight: Float
 ) {
-    val size = url?.getSizeByLoadUrl(baseWidth.toInt(), baseHeight.toInt()) ?: ArrayList()
-    layoutParams.height = baseHeight.toInt()
-    layoutParams.width = if (size[0] > 0 && size[1] > 0) {
-        (baseHeight / size[1] * size[0]).toInt()
-    } else {
-        baseWidth.toInt()
+    url?.let {
+        val size = it.getPicSizeByUrl(baseWidth.toInt(), baseHeight.toInt())
+        layoutParams.height = baseHeight.toInt()
+        layoutParams.width = if (size[0] > 0 && size[1] > 0) {
+            (baseHeight / size[1] * size[0]).toInt()
+        } else {
+            baseWidth.toInt()
+        }
+        requestLayout()
+        ImageLoader.load(this, it)
     }
-    requestLayout()
-    ImageLoader.load(this, url)
 }
 
 @BindingAdapter(
@@ -40,15 +42,17 @@ fun ImageView.bindingImageUrlFixHeight(
     baseWidth: Float,
     baseHeight: Float
 ) {
-    val size = url?.getSizeByLoadUrl(baseWidth.toInt(), baseHeight.toInt()) ?: ArrayList()
-    layoutParams.width = baseWidth.toInt()
-    layoutParams.height = if (size[0] > 0 && size[1] > 0) {
-        (baseWidth / size[0] * size[1]).toInt()
-    } else {
-        baseHeight.toInt()
+    url?.let {
+        val size = it.getPicSizeByUrl(baseWidth.toInt(), baseHeight.toInt())
+        layoutParams.width = baseWidth.toInt()
+        layoutParams.height = if (size[0] > 0 && size[1] > 0) {
+            (baseWidth / size[0] * size[1]).toInt()
+        } else {
+            baseHeight.toInt()
+        }
+        requestLayout()
+        ImageLoader.load(this, it)
     }
-    requestLayout()
-    ImageLoader.load(this, url)
 }
 
 @BindingAdapter("binding_src_url")

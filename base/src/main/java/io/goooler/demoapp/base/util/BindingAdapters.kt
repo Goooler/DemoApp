@@ -179,11 +179,13 @@ fun View.bindingBgShapeGradual(
  * 这个比较特殊，requireAll = false
  */
 @BindingAdapter(
-    value = ["binding_bg_solidColor",
+    value = [
+        "binding_bg_solidColor",
         "binding_bg_topLeftRadius",
         "binding_bg_topRightRadius",
         "binding_bg_bottomLeftRadius",
-        "binding_bg_bottomRightRadius"],
+        "binding_bg_bottomRightRadius"
+    ],
     requireAll = false
 )
 fun View.bindingBgShapeCorners(
@@ -341,8 +343,8 @@ fun SmartRefreshLayout.bindingOnLoadMoreListener(listener: OnLoadMoreListener) {
 }
 
 @BindingAdapter("binding_srl_close_animation")
-fun SmartRefreshLayout.bindingCloseAnimation(close: Boolean) {
-    if (close) {
+fun SmartRefreshLayout.bindingCloseAnimation(isClose: Boolean) {
+    if (isClose) {
         //关闭下拉动画特效，减少延迟感觉
         setReboundDuration(0)
         finishRefresh(0)
@@ -350,22 +352,18 @@ fun SmartRefreshLayout.bindingCloseAnimation(close: Boolean) {
 }
 
 @BindingAdapter("binding_srl_refreshFinish")
-fun SmartRefreshLayout.bindingRefreshFinish(finish: Boolean) {
-    if (finish) {
-        finishRefresh()
-    }
+fun SmartRefreshLayout.bindingRefreshFinish(isFinish: Boolean) {
+    if (isFinish) finishRefresh()
 }
 
 @BindingAdapter("binding_srl_isLoadMoreFinish")
-fun SmartRefreshLayout.bindingLoadMoreFinish(finish: Boolean) {
-    if (finish) {
-        finishLoadMore()
-    }
+fun SmartRefreshLayout.bindingLoadMoreFinish(isFinish: Boolean) {
+    if (isFinish) finishLoadMore()
 }
 
 @BindingAdapter("binding_srl_isNoMore")
-fun SmartRefreshLayout.bindingNoMoreData(noMore: Boolean) {
-    setNoMoreData(noMore)
+fun SmartRefreshLayout.bindingNoMoreData(haveNoMore: Boolean) {
+    setNoMoreData(haveNoMore)
 }
 
 @BindingAdapter("binding_srl_isEnableLoadMore")
@@ -381,22 +379,14 @@ fun SmartRefreshLayout.bindingEnableRefresh(enable: Boolean) {
 @BindingAdapter("binding_srl_isHeaderEmpty")
 fun SmartRefreshLayout.bindingHeaderEmpty(isEmpty: Boolean) {
     (refreshHeader as? ClassicsHeader)?.forEach {
-        it.alpha = if (isEmpty) {
-            0f
-        } else {
-            1f
-        }
+        it.alpha = if (isEmpty) 0f else 1f
     }
 }
 
 @BindingAdapter("binding_srl_isFooterEmpty")
 fun SmartRefreshLayout.bindingFooterEmpty(isEmpty: Boolean) {
     (refreshFooter as? ClassicsFooter)?.forEach {
-        it.alpha = if (isEmpty) {
-            0f
-        } else {
-            1f
-        }
+        it.alpha = if (isEmpty) 0f else 1f
     }
 }
 
@@ -420,7 +410,6 @@ fun SmartRefreshLayout.bindingFooterPrimaryColor(@ColorInt color: Int) {
 
 @BindingAdapter("binding_srl_headerAccentColor")
 fun SmartRefreshLayout.bindingHeaderAccentColor(@ColorInt color: Int) {
-
     if (refreshHeader == null) {
         setRefreshHeader(ClassicsHeader(context).apply { setAccentColor(color) })
     } else {

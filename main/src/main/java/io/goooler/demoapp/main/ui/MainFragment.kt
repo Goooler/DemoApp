@@ -5,9 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import io.goooler.demoapp.base.core.BaseFragment
-import io.goooler.demoapp.base.util.getViewModel
 import io.goooler.demoapp.base.util.unsafeLazy
 import io.goooler.demoapp.common.router.RouterManager
+import io.goooler.demoapp.common.util.getViewModel
 import io.goooler.demoapp.main.databinding.MainFragmentBinding
 import io.goooler.demoapp.main.vm.MainViewModel
 

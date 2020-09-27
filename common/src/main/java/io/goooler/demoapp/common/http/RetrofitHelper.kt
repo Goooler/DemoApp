@@ -14,7 +14,7 @@ object RetrofitHelper : BaseRetrofitHelper() {
 
     override val baseUrl: String = BuildConfig.API_HOST
 
-    override val context: Context = BaseApplication.context
+    override val context: Context = BaseApplication.app
 
     override val converterFactory: Converter.Factory = MoshiConverterFactory.create(JsonUtil.moshi)
 

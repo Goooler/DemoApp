@@ -6,6 +6,7 @@ import io.goooler.demoapp.base.util.MutableStringLiveData
 import io.goooler.demoapp.base.util.defaultAsync
 import io.goooler.demoapp.common.base.BaseRxViewModel
 import io.goooler.demoapp.common.util.observeOnMainThread
+import io.goooler.demoapp.common.util.showToast
 import io.goooler.demoapp.main.R
 import io.goooler.demoapp.main.api.RepoList
 import io.goooler.demoapp.main.repository.MainRepository

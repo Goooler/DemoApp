@@ -12,7 +12,6 @@ import android.text.Html
 import android.text.Spanned
 import android.view.View
 import android.webkit.URLUtil
-import androidx.activity.ComponentActivity
 import androidx.annotation.ColorInt
 import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
@@ -23,9 +22,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.commit
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModelProvider
 import io.goooler.demoapp.base.BuildConfig
-import io.goooler.demoapp.base.core.BaseViewModel
 import kotlinx.coroutines.*
 import java.io.File
 import java.math.BigDecimal
@@ -261,7 +258,7 @@ fun View.setBgShapeGradual(
         shape = shapeType
         useLevel = false
         gradientType = GradientDrawable.LINEAR_GRADIENT
-        orientation = when (angle) {
+        orientation = when (angle % 360) {
             45 -> GradientDrawable.Orientation.BL_TR
             90 -> GradientDrawable.Orientation.BOTTOM_TOP
             135 -> GradientDrawable.Orientation.BR_TL
@@ -376,29 +373,13 @@ suspend fun <T> withDefaultContext(block: suspend CoroutineScope.() -> T) =
 
 //---------------------File-------------------------------//
 
-fun File.notExist(): Boolean = !this.exists()
+fun File.notExists(): Boolean = !this.exists()
 
 //---------------------Fragment-------------------------------//
 
 fun <T : Fragment> T.putArguments(bundle: Bundle): T {
     arguments = bundle
     return this
-}
-
-inline fun <reified T : BaseViewModel> Fragment.getViewModel(): Lazy<T> {
-    return lazy(LazyThreadSafetyMode.NONE) {
-        ViewModelProvider(this).get(T::class.java).apply {
-            lifecycle.addObserver(this)
-        }
-    }
-}
-
-inline fun <reified T : BaseViewModel> Fragment.getViewModelOfActivity(): Lazy<T> {
-    return lazy(LazyThreadSafetyMode.NONE) {
-        ViewModelProvider(requireActivity()).get(T::class.java).apply {
-            lifecycle.addObserver(this)
-        }
-    }
 }
 
 /**
@@ -415,9 +396,7 @@ fun FragmentManager.addFragment(
 ) {
     if (fragment.isAdded) return
     commit {
-        if (isAddToBackStack) {
-            addToBackStack(tag)
-        }
+        if (isAddToBackStack) addToBackStack(tag)
         add(containerViewId, fragment, tag)
     }
 }
@@ -436,22 +415,12 @@ fun FragmentManager.replaceFragment(
 ) {
     if (fragment.isAdded) return
     commit {
-        if (isAddToBackStack) {
-            addToBackStack(tag)
-        }
+        if (isAddToBackStack) addToBackStack(tag)
         replace(containerViewId, fragment, tag)
     }
 }
 
 //---------------------Activity-------------------------------//
-
-inline fun <reified T : BaseViewModel> ComponentActivity.getViewModel(): Lazy<T> {
-    return lazy(LazyThreadSafetyMode.NONE) {
-        ViewModelProvider(this).get(T::class.java).apply {
-            lifecycle.addObserver(this)
-        }
-    }
-}
 
 inline fun <reified T : ViewDataBinding> Activity.binding(@LayoutRes resId: Int): Lazy<T> =
     lazy(LazyThreadSafetyMode.NONE) { DataBindingUtil.setContentView(this, resId) }
