@@ -7,6 +7,7 @@ import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
+import androidx.annotation.Px
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
@@ -263,19 +264,19 @@ object ImageLoader {
      *
      * @param imageView      the image view
      * @param url            the url
-     * @param roundingRadius the rounding radius
+     * @param radius the rounding radius
      * @param placeholderId  the placeholder id
      */
     fun loadRoundedCorner(
         imageView: ImageView,
         url: String?,
-        roundingRadius: Int,
+        @Px radius: Int,
         @DrawableRes placeholderId: Int
     ) {
         GlideApp.with(imageView)
             .load(url)
             .placeholder(placeholderId)
-            .apply(RequestOptions.bitmapTransform(RoundedCorners(roundingRadius)))
+            .apply(RequestOptions.bitmapTransform(RoundedCorners(radius)))
             .into(imageView)
     }
 
@@ -284,14 +285,14 @@ object ImageLoader {
      *
      * @param imageView           the image view
      * @param url                 the url
-     * @param roundingRadius      the rounding radius
+     * @param radius      the rounding radius
      * @param placeholderDrawable the placeholder drawable
      * @param errorDrawable       the error Drawable
      */
     fun loadRoundedCorner(
         imageView: ImageView,
         url: String?,
-        roundingRadius: Int,
+        @Px radius: Int,
         placeholderDrawable: Drawable? = null,
         errorDrawable: Drawable? = null
     ) {
@@ -299,7 +300,7 @@ object ImageLoader {
             .load(url)
             .placeholder(placeholderDrawable)
             .error(errorDrawable)
-            .apply(RequestOptions.bitmapTransform(RoundedCorners(roundingRadius)))
+            .apply(RequestOptions.bitmapTransform(RoundedCorners(radius)))
             .into(imageView)
     }
 
@@ -308,19 +309,19 @@ object ImageLoader {
      *
      * @param imageView      the image view
      * @param url            the url
-     * @param roundingRadius the rounding radius
+     * @param radius the rounding radius
      * @param placeholderId  the placeholder id
      */
     fun loadCenterCropRoundedCorner(
         imageView: ImageView,
         url: String?,
-        roundingRadius: Int,
+        @Px radius: Int,
         @DrawableRes placeholderId: Int
     ) {
         GlideApp.with(imageView)
             .load(url)
             .placeholder(placeholderId)
-            .transform(CenterCrop(), RoundedCorners(roundingRadius))
+            .transform(CenterCrop(), RoundedCorners(radius))
             .into(imageView)
     }
 
@@ -329,14 +330,14 @@ object ImageLoader {
      *
      * @param imageView           the image view
      * @param url                 the url
-     * @param roundingRadius      the rounding radius
+     * @param radius      the rounding radius
      * @param placeholderDrawable the placeholder drawable
      * @param errorDrawable       the error drawable
      */
     fun loadCenterCropRoundedCorner(
         imageView: ImageView,
         url: String?,
-        roundingRadius: Int,
+        @Px radius: Int,
         placeholderDrawable: Drawable? = null,
         errorDrawable: Drawable? = null
     ) {
@@ -344,7 +345,7 @@ object ImageLoader {
             .load(url)
             .placeholder(placeholderDrawable)
             .error(errorDrawable)
-            .transform(CenterCrop(), RoundedCorners(roundingRadius))
+            .transform(CenterCrop(), RoundedCorners(radius))
             .into(imageView)
     }
 
@@ -358,7 +359,7 @@ object ImageLoader {
     fun loadCenterCropBlur(
         imageView: ImageView,
         url: String?,
-        radius: Int,
+        @Px radius: Int,
         sampling: Int,
         @DrawableRes placeholderId: Int
     ) {
@@ -380,7 +381,7 @@ object ImageLoader {
     fun loadCenterCropBlur(
         imageView: ImageView,
         url: String?,
-        radius: Int,
+        @Px radius: Int,
         sampling: Int,
         placeholderDrawable: Drawable? = null,
         errorDrawable: Drawable? = null
