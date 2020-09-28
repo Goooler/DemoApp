@@ -21,6 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             app:tabTextColor="@color/white"
+            app:tabTextAppearance="@style/TabTextDisableAllCapsStyle"
             android:background="@color/md_grey_800"
             app:layout_constraintTop_toBottomOf="@id/status_bar" />
 

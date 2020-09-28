@@ -42,4 +42,9 @@
         <item name="android:colorControlActivated">@android:color/holo_red_light</item>
     </style>
 
+    <!--取消 tabLayout 文字全大写-->
+    <style name="TabTextDisableAllCapsStyle" parent="TextAppearance.Design.Tab">
+        <item name="textAllCaps">false</item>
+    </style>
+
 </resources>

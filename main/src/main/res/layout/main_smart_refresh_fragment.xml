@@ -7,7 +7,7 @@
 
         <variable
             name="vm"
-            type="io.goooler.demoapp.main.vm.MainListViewModel" />
+            type="io.goooler.demoapp.main.vm.MainSmartRefreshModel" />
     </data>
 
     <com.scwang.smart.refresh.layout.SmartRefreshLayout

@@ -1,18 +1,18 @@
 package io.goooler.demoapp.main.ui.adapter
 
 import androidx.databinding.ViewDataBinding
+import io.goooler.demoapp.adapter.rv.base.IModelType
 import io.goooler.demoapp.adapter.rv.list.BaseListAdapter
 import io.goooler.demoapp.main.BR
-import io.goooler.demoapp.main.model.MainListItemModel
 
 class MainListAdapter(private val listener: OnEventListener) :
-    BaseListAdapter<MainListItemModel>() {
+    BaseListAdapter<IModelType>() {
 
     override fun onCreateVHForAll(binding: ViewDataBinding) {
         binding.setVariable(BR.listener, listener)
     }
 
-    override fun onBindVHForAll(binding: ViewDataBinding, model: MainListItemModel) {
+    override fun onBindVHForAll(binding: ViewDataBinding, model: IModelType) {
         binding.setVariable(BR.model, model)
     }
 

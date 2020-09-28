@@ -10,17 +10,17 @@ import io.goooler.demoapp.base.core.BaseLazyFragment
 import io.goooler.demoapp.base.util.unsafeLazy
 import io.goooler.demoapp.common.util.getViewModel
 import io.goooler.demoapp.common.util.showToast
-import io.goooler.demoapp.main.databinding.MainListFragmentBinding
+import io.goooler.demoapp.main.databinding.MainSmartRefreshFragmentBinding
 import io.goooler.demoapp.main.ui.adapter.MainListAdapter
-import io.goooler.demoapp.main.vm.MainListViewModel
+import io.goooler.demoapp.main.vm.MainSmartRefreshModel
 
-class MainListFragment : BaseLazyFragment() {
+class MainSmartRefreshFragment : BaseLazyFragment() {
 
-    private val binding by unsafeLazy { MainListFragmentBinding.inflate(layoutInflater) }
+    private val binding by unsafeLazy { MainSmartRefreshFragmentBinding.inflate(layoutInflater) }
 
-    private val vm by getViewModel<MainListViewModel>()
+    private val vm by getViewModel<MainSmartRefreshModel>()
 
-    private val adapter by unsafeLazy {
+    private val listAdapter by unsafeLazy {
         MainListAdapter(listener)
     }
 
@@ -28,9 +28,9 @@ class MainListFragment : BaseLazyFragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.vm = vm
         binding.smartRefresh.setOnRefreshLoadMoreListener(listener)
-        binding.rvList.adapter = adapter
+        binding.rvList.adapter = listAdapter
         vm.listData.observe(viewLifecycleOwner) {
-            adapter.setData(it)
+            listAdapter.setData(it)
         }
     }
 
@@ -66,6 +66,6 @@ class MainListFragment : BaseLazyFragment() {
     }
 
     companion object {
-        fun newInstance() = MainListFragment()
+        fun newInstance() = MainSmartRefreshFragment()
     }
 }

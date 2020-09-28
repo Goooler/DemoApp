@@ -16,7 +16,17 @@ object MainRepository {
 
     private val api by getApiService<MainApi>()
 
-    suspend fun getRepoListCr(user: String = USER): RepoList = api.getRepoListCr(user)
+    suspend fun getRepoListCr(
+        user: String = USER,
+        page: Int = 1,
+        pageSize: Int = Constants.defaultPageSize
+    ): RepoList {
+        val params = hashMapOf<String, Any>(
+            "page" to page,
+            "per_page" to pageSize
+        )
+        return api.getRepoListCr(user, params)
+    }
 
     fun getRepoListRx(
         user: String = USER,

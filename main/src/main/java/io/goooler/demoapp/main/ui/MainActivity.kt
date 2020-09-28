@@ -9,29 +9,35 @@ import io.goooler.demoapp.base.util.unsafeLazy
 import io.goooler.demoapp.common.router.RouterPath
 import io.goooler.demoapp.main.databinding.MainActivityBinding
 import io.goooler.demoapp.main.ui.fragment.MainFragment
-import io.goooler.demoapp.main.ui.fragment.MainListFragment
+import io.goooler.demoapp.main.ui.fragment.MainPagingFragment
+import io.goooler.demoapp.main.ui.fragment.MainSmartRefreshFragment
 
 @Route(path = RouterPath.MAIN)
 class MainActivity : BaseActivity() {
 
     private val binding by unsafeLazy { MainActivityBinding.inflate(layoutInflater) }
 
+    private val pagerAdapter by unsafeLazy { CommonLazyFragmentPagerAdapter(supportFragmentManager) }
+
     private val titles = listOf(
-        "首页", "列表"
+        "首页", "smartRefresh", "paging"
     )
 
     private val fragments = listOf(
-        MainFragment.newInstance(), MainListFragment.newInstance()
+        MainFragment.newInstance(),
+        MainSmartRefreshFragment.newInstance(),
+        MainPagingFragment.newInstance()
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        val pagerAdapter = CommonLazyFragmentPagerAdapter(supportFragmentManager)
-        pagerAdapter.setData(fragments, titles)
+
         binding.tabLayout.setupWithViewPager(binding.viewPager)
-        binding.viewPager.offscreenPageLimit = 10
+        binding.viewPager.offscreenPageLimit = fragments.size
         binding.viewPager.adapter = pagerAdapter
+
+        pagerAdapter.setData(fragments, titles)
     }
 
     /**
