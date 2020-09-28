@@ -23,13 +23,6 @@
         android:focusable="true"
         android:orientation="vertical">
 
-        <io.goooler.demoapp.base.widget.StatusBarView
-            android:id="@+id/status_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/md_teal_800"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <TextView
             android:id="@+id/tv_title"
             android:layout_width="match_parent"
@@ -41,7 +34,7 @@
             android:text="@{vm.title}"
             android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/status_bar" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/bt_one"
@@ -49,18 +42,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:onClick="@{listener}"
-            android:text="跳转去列表页"
-            app:layout_constraintTop_toBottomOf="@id/tv_title"
-            tools:ignore="HardcodedText" />
-
-        <Button
-            android:id="@+id/bt_two"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:onClick="@{listener}"
             android:text="跳转去网页"
-            app:layout_constraintTop_toBottomOf="@id/bt_one" />
+            app:layout_constraintTop_toBottomOf="@id/tv_title" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

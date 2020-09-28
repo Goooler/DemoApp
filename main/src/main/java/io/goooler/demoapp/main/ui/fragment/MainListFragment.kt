@@ -4,10 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.blankj.utilcode.util.BarUtils
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
-import io.goooler.demoapp.base.core.BaseFragment
+import io.goooler.demoapp.base.core.BaseLazyFragment
 import io.goooler.demoapp.base.util.unsafeLazy
 import io.goooler.demoapp.common.util.getViewModel
 import io.goooler.demoapp.common.util.showToast
@@ -15,7 +14,7 @@ import io.goooler.demoapp.main.databinding.MainListFragmentBinding
 import io.goooler.demoapp.main.ui.adapter.MainListAdapter
 import io.goooler.demoapp.main.vm.MainListViewModel
 
-class MainListFragment : BaseFragment() {
+class MainListFragment : BaseLazyFragment() {
 
     private val binding by unsafeLazy { MainListFragmentBinding.inflate(layoutInflater) }
 
@@ -25,8 +24,7 @@ class MainListFragment : BaseFragment() {
         MainListAdapter(listener)
     }
 
-    private val initOnce by unsafeLazy {
-        BarUtils.setStatusBarLightMode(requireActivity(), true)
+    private val initView by unsafeLazy {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.vm = vm
         binding.smartRefresh.setOnRefreshLoadMoreListener(listener)
@@ -34,7 +32,14 @@ class MainListFragment : BaseFragment() {
         vm.listData.observe(viewLifecycleOwner) {
             adapter.setData(it)
         }
+    }
+
+    private val initData by unsafeLazy {
         binding.smartRefresh.autoRefresh()
+    }
+
+    override fun onFragmentResume() {
+        initData
     }
 
     override fun onCreateView(
@@ -42,7 +47,7 @@ class MainListFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        initOnce
+        initView
         return binding.root
     }
 
@@ -58,5 +63,9 @@ class MainListFragment : BaseFragment() {
         override fun onLoadMore(refreshLayout: RefreshLayout) {
             vm.loadMore()
         }
+    }
+
+    companion object {
+        fun newInstance() = MainListFragment()
     }
 }

@@ -10,10 +10,10 @@ abstract class BaseLazyFragment : BaseFragment() {
     /**
      * 用于懒加载
      */
-    protected abstract fun lazyLoad()
+    protected abstract fun onFragmentResume()
 
     override fun onResume() {
         super.onResume()
-        lazyLoad()
+        onFragmentResume()
     }
 }
