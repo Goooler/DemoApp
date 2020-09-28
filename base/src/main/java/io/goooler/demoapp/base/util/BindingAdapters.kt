@@ -356,34 +356,34 @@ fun SmartRefreshLayout.bindingRefreshFinish(isFinish: Boolean) {
     if (isFinish) finishRefresh()
 }
 
-@BindingAdapter("binding_srl_isLoadMoreFinish")
+@BindingAdapter("binding_srl_loadMoreFinish")
 fun SmartRefreshLayout.bindingLoadMoreFinish(isFinish: Boolean) {
     if (isFinish) finishLoadMore()
 }
 
-@BindingAdapter("binding_srl_isNoMore")
-fun SmartRefreshLayout.bindingNoMoreData(haveNoMore: Boolean) {
-    setNoMoreData(haveNoMore)
-}
-
-@BindingAdapter("binding_srl_isEnableLoadMore")
+@BindingAdapter("binding_srl_enableLoadMore")
 fun SmartRefreshLayout.bindingEnableLoadMore(enable: Boolean) {
     setEnableLoadMore(enable)
 }
 
-@BindingAdapter("binding_srl_isEnableRefresh")
+@BindingAdapter("binding_srl_enableRefresh")
 fun SmartRefreshLayout.bindingEnableRefresh(enable: Boolean) {
     setEnableRefresh(enable)
 }
 
-@BindingAdapter("binding_srl_isHeaderEmpty")
+@BindingAdapter("binding_srl_noMore")
+fun SmartRefreshLayout.bindingNoMoreData(haveNoMore: Boolean) {
+    setNoMoreData(haveNoMore)
+}
+
+@BindingAdapter("binding_srl_headerEmpty")
 fun SmartRefreshLayout.bindingHeaderEmpty(isEmpty: Boolean) {
     (refreshHeader as? ClassicsHeader)?.forEach {
         it.alpha = if (isEmpty) 0f else 1f
     }
 }
 
-@BindingAdapter("binding_srl_isFooterEmpty")
+@BindingAdapter("binding_srl_footerEmpty")
 fun SmartRefreshLayout.bindingFooterEmpty(isEmpty: Boolean) {
     (refreshFooter as? ClassicsFooter)?.forEach {
         it.alpha = if (isEmpty) 0f else 1f

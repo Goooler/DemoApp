@@ -1,6 +1,7 @@
 package io.goooler.demoapp.main.repository
 
 import io.goooler.demoapp.base.util.withIoContext
+import io.goooler.demoapp.common.type.Constants
 import io.goooler.demoapp.common.util.getAllFromBox
 import io.goooler.demoapp.common.util.getApiService
 import io.goooler.demoapp.common.util.putIntoBox
@@ -17,7 +18,17 @@ object MainRepository {
 
     suspend fun getRepoListCr(user: String = USER): RepoList = api.getRepoListCr(user)
 
-    fun getRepoListRx(user: String = USER): Observable<RepoList> = api.getRepoListRx(user)
+    fun getRepoListRx(
+        user: String = USER,
+        page: Int = 1,
+        pageSize: Int = Constants.defaultPageSize
+    ): Observable<RepoList> {
+        val params = hashMapOf<String, Any>(
+            "page" to page,
+            "per_page" to pageSize
+        )
+        return api.getRepoListRx(user, params)
+    }
 
     /**
      * 数据库存储

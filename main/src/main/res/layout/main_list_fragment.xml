@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="io.goooler.demoapp.main.vm.MainListViewModel" />
+    </data>
+
+    <com.scwang.smart.refresh.layout.SmartRefreshLayout
+        android:id="@+id/smart_refresh"
+        binding_srl_enableLoadMore="@{vm.isEnableLoadMore}"
+        binding_srl_enableRefresh="@{vm.isEnableRefresh}"
+        binding_srl_loadMoreFinish="@{vm.isLoadMoreFinish}"
+        binding_srl_noMore="@{vm.isNoMore}"
+        binding_srl_refreshFinish="@{vm.isRefreshFinish}"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="30dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/main_fragment_list_item" />
+
+    </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+</layout>

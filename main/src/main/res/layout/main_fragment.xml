@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:ignore="UselessLeaf">
+    tools:ignore="UselessLeaf,HardcodedText">
 
     <data>
 
@@ -12,7 +12,7 @@
 
         <variable
             name="listener"
-            type="io.goooler.demoapp.main.ui.MainFragment.EventListener" />
+            type="android.view.View.OnClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -37,11 +37,30 @@
             android:background="@color/md_teal_800"
             android:gravity="center"
             android:minHeight="40dp"
-            android:onClick="@{()->listener.onTitleClick()}"
+            android:onClick="@{listener}"
             android:text="@{vm.title}"
             android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/status_bar" />
+
+        <Button
+            android:id="@+id/bt_one"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:onClick="@{listener}"
+            android:text="跳转去列表页"
+            app:layout_constraintTop_toBottomOf="@id/tv_title"
+            tools:ignore="HardcodedText" />
+
+        <Button
+            android:id="@+id/bt_two"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:onClick="@{listener}"
+            android:text="跳转去网页"
+            app:layout_constraintTop_toBottomOf="@id/bt_one" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
