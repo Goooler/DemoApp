@@ -21,10 +21,9 @@ abstract class BaseListAdapter<M : IModelType> : BaseRvAdapter<M>(), IMutableLis
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
-        (recyclerView.layoutManager as? GridLayoutManager)?.let {
-            it.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-                override fun getSpanSize(position: Int): Int = modelList[position].spanSize
-            }
+        (recyclerView.layoutManager as? GridLayoutManager)?.spanSizeLookup = object :
+            GridLayoutManager.SpanSizeLookup() {
+            override fun getSpanSize(position: Int): Int = modelList[position].spanSize
         }
     }
 
