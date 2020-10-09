@@ -5,7 +5,6 @@ import io.goooler.demoapp.base.util.MutableBooleanLiveData
 import io.goooler.demoapp.base.util.MutableListLiveData
 import io.goooler.demoapp.common.base.BaseRxViewModel
 import io.goooler.demoapp.common.type.Constants
-import io.goooler.demoapp.common.util.observeOnMainThread
 import io.goooler.demoapp.common.util.toastThrowable
 import io.goooler.demoapp.main.model.MainListItemModel
 import io.goooler.demoapp.main.repository.MainRepository
@@ -35,7 +34,6 @@ class MainSmartRefreshModel(application: Application) : BaseRxViewModel(applicat
 
     private fun fetchListData(page: Int) {
         MainRepository.getRepoListRx("google", page)
-            .observeOnMainThread()
             .map {
                 it.map { bean -> MainListItemModel(bean.owner?.avatarUrl, bean.name) }
             }
@@ -50,14 +48,14 @@ class MainSmartRefreshModel(application: Application) : BaseRxViewModel(applicat
                 finishRefreshAndLoadMore()
             }
             .subscribe({
-                listData.value = _listData
+                listData.postValue(_listData)
             }, {
                 toastThrowable(it)
             }).add()
     }
 
     private fun finishRefreshAndLoadMore() {
-        isRefreshFinish.value = true
-        isLoadMoreFinish.value = true
+        isRefreshFinish.postValue(true)
+        isLoadMoreFinish.postValue(true)
     }
 }

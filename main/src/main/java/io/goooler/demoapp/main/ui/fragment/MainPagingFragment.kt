@@ -44,10 +44,8 @@ class MainPagingFragment : BaseLazyFragment() {
         return binding.root
     }
 
-    private val listener = object : MainListAdapter.OnEventListener {
-        override fun onContentClick(content: String) {
-            showToast(content)
-        }
+    private val listener = MainListAdapter.OnEventListener {
+        showToast(it)
     }
 
     companion object {

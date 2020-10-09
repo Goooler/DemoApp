@@ -5,13 +5,13 @@ import androidx.lifecycle.viewModelScope
 import io.goooler.demoapp.base.util.MutableStringLiveData
 import io.goooler.demoapp.base.util.defaultAsync
 import io.goooler.demoapp.common.base.BaseRxViewModel
-import io.goooler.demoapp.common.util.observeOnMainThread
 import io.goooler.demoapp.common.util.showToast
 import io.goooler.demoapp.main.R
 import io.goooler.demoapp.main.api.RepoList
 import io.goooler.demoapp.main.repository.MainRepository
 import io.reactivex.rxjava3.core.Observable
 import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
@@ -21,14 +21,14 @@ class MainViewModel(application: Application) : BaseRxViewModel(application) {
     val title = MutableStringLiveData()
 
     fun initData() {
-        requestWithRx()
+        requestWithCr()
     }
 
     /**
      * 协程请求处理
      */
     private fun requestWithCr() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.Default) {
             try {
                 val google = defaultAsync { MainRepository.getRepoListCr("google") }
                 val microsoft = defaultAsync { MainRepository.getRepoListCr("microsoft") }
@@ -37,10 +37,10 @@ class MainViewModel(application: Application) : BaseRxViewModel(application) {
                 val twitter = defaultAsync { MainRepository.getRepoListCr("twitter") }
 
                 processList(google, microsoft, apple, facebook, twitter).collect {
-                    title.value = it
+                    title.postValue(it)
                 }
             } catch (e: Exception) {
-                title.value = e.message
+                title.postValue(e.message)
                 showToast(R.string.request_failed)
             }
         }
@@ -77,11 +77,10 @@ class MainViewModel(application: Application) : BaseRxViewModel(application) {
                     ${t5.firstOrNull()?.owner?.avatarUrl}
                 """.trimIndent()
             })
-            .observeOnMainThread()
             .subscribe({
-                title.value = it
+                title.postValue(it)
             }, {
-                title.value = it.message
+                title.postValue(it.message)
                 showToast(R.string.request_failed)
             }).add()
     }

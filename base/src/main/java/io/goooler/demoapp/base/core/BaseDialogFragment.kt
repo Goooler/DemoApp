@@ -8,8 +8,8 @@ abstract class BaseDialogFragment : DialogFragment() {
     var dismissListener: OnDismissListener? = null
 
     override fun dismiss() {
-        super.dismiss()
         dismissListener?.onDismiss()
+        super.dismiss()
     }
 
     fun interface OnDismissListener {

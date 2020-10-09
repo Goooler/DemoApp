@@ -16,7 +16,7 @@ class MainListAdapter(private val listener: OnEventListener) :
         binding.setVariable(BR.model, model)
     }
 
-    interface OnEventListener {
+    fun interface OnEventListener {
         fun onContentClick(content: String)
     }
 }

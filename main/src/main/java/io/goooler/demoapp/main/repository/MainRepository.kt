@@ -1,9 +1,9 @@
 package io.goooler.demoapp.main.repository
 
 import io.goooler.demoapp.base.util.withIoContext
+import io.goooler.demoapp.common.http.RetrofitHelper
 import io.goooler.demoapp.common.type.Constants
 import io.goooler.demoapp.common.util.getAllFromBox
-import io.goooler.demoapp.common.util.getApiService
 import io.goooler.demoapp.common.util.putIntoBox
 import io.goooler.demoapp.main.api.MainApi
 import io.goooler.demoapp.main.api.RepoList
@@ -14,7 +14,7 @@ object MainRepository {
 
     private const val USER = "goooler"
 
-    private val api by getApiService<MainApi>()
+    private val api = RetrofitHelper.createApiService(MainApi::class.java)
 
     suspend fun getRepoListCr(
         user: String = USER,
