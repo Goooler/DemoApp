@@ -454,3 +454,11 @@ object ImageLoader {
         GlideApp.get(context).clearMemory()
     }
 }
+
+fun ImageView.load(
+    url: String?,
+    placeholderDrawable: Drawable? = null,
+    errorDrawable: Drawable? = null
+) {
+    ImageLoader.load(this, url, placeholderDrawable, errorDrawable)
+}
