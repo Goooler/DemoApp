@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
+import com.scwang.smart.refresh.layout.api.RefreshLayout
+import com.scwang.smart.refresh.layout.listener.OnRefreshListener
 import io.goooler.demoapp.base.core.BaseLazyFragment
 import io.goooler.demoapp.base.util.unsafeLazy
 import io.goooler.demoapp.common.util.finishRefreshAndLoadMore
@@ -31,17 +33,16 @@ class MainPagingFragment : BaseLazyFragment() {
 
     private val initView by unsafeLazy {
         binding.lifecycleOwner = viewLifecycleOwner
+        binding.smartRefresh.setOnRefreshListener(listener)
         binding.rvList.adapter = listAdapter
+        binding.layoutError.listener = listener
         listAdapter.addLoadStateListener {
             if (it.refresh !is LoadState.Loading) {
                 binding.smartRefresh.finishRefreshAndLoadMore()
                 if (it.refresh is LoadState.Error) {
-                    //todo
+                    binding.layoutError.root.visibility = View.VISIBLE
                 }
             }
-        }
-        binding.smartRefresh.setOnRefreshListener {
-            listAdapter.refresh()
         }
     }
 
@@ -64,6 +65,22 @@ class MainPagingFragment : BaseLazyFragment() {
     ): View? {
         initView
         return binding.root
+    }
+
+    private val listener = object : OnRefreshListener, View.OnClickListener {
+        override fun onRefresh(refreshLayout: RefreshLayout) {
+            listAdapter.refresh()
+        }
+
+        override fun onClick(v: View?) {
+            when (v) {
+                binding.layoutError.ivError,
+                binding.layoutError.tvTip -> {
+                    listAdapter.refresh()
+                    binding.layoutError.root.visibility = View.GONE
+                }
+            }
+        }
     }
 
     companion object {

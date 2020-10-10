@@ -57,7 +57,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:text="@string/default_title" />
+            tools:text="@string/common_default_title" />
 
         <ImageView
             android:id="@+id/iv_right"

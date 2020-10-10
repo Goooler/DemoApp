@@ -16,7 +16,7 @@
         <include
             android:id="@+id/layout_title"
             layout="@layout/common_title_bar"
-            app:title="@{@string/default_title}" />
+            app:title="@{@string/common_default_title}" />
 
         <ProgressBar
             android:id="@+id/progress_bar"
