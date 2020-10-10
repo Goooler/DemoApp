@@ -9,6 +9,7 @@ import androidx.annotation.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.blankj.utilcode.util.*
+import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import io.goooler.demoapp.base.core.BaseApplication
 import io.goooler.demoapp.base.core.BaseViewModel
 import io.goooler.demoapp.base.http.HttpResponse
@@ -47,6 +48,11 @@ var isFirstRun: Boolean
  */
 fun String.toLoadUrl(): String {
     return if (URLUtil.isNetworkUrl(this)) this else BuildConfig.CDN_PREFIX + this
+}
+
+fun SmartRefreshLayout.finishRefreshAndLoadMore() {
+    finishRefresh()
+    finishLoadMore()
 }
 
 /**

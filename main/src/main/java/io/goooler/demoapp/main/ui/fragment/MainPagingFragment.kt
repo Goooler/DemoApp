@@ -4,16 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.scwang.smart.refresh.layout.api.RefreshLayout
-import com.scwang.smart.refresh.layout.listener.OnRefreshListener
+import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
 import io.goooler.demoapp.base.core.BaseLazyFragment
 import io.goooler.demoapp.base.util.unsafeLazy
+import io.goooler.demoapp.common.util.finishRefreshAndLoadMore
 import io.goooler.demoapp.common.util.getViewModel
 import io.goooler.demoapp.common.util.showToast
 import io.goooler.demoapp.main.databinding.MainPagingFragmentBinding
-import io.goooler.demoapp.main.ui.adapter.MainListAdapter
 import io.goooler.demoapp.main.ui.adapter.MainListPagingAdapter
 import io.goooler.demoapp.main.vm.MainPagingViewModel
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 class MainPagingFragment : BaseLazyFragment() {
 
@@ -22,23 +24,31 @@ class MainPagingFragment : BaseLazyFragment() {
     private val vm by getViewModel<MainPagingViewModel>()
 
     private val listAdapter by unsafeLazy {
-        MainListPagingAdapter(listener)
+        MainListPagingAdapter {
+            showToast(it)
+        }
     }
 
     private val initView by unsafeLazy {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.rvList.adapter = listAdapter
-        binding.smartRefresh.setOnRefreshListener(listener)
+        listAdapter.addLoadStateListener {
+            if (it.refresh !is LoadState.Loading) {
+                binding.smartRefresh.finishRefreshAndLoadMore()
+                if (it.refresh is LoadState.Error) {
+                    //todo
+                }
+            }
+        }
+        binding.smartRefresh.setOnRefreshListener {
+            listAdapter.refresh()
+        }
     }
 
     private val initData by unsafeLazy {
-        vm.listData.observe(viewLifecycleOwner) {
-            listAdapter.submitList(it)
-        }
-        vm.boundaryPageData.observe(viewLifecycleOwner) {
-            if (!it) {
-                binding.smartRefresh.finishLoadMore()
-                binding.smartRefresh.finishRefresh()
+        lifecycleScope.launch {
+            vm.listData.collectLatest {
+                listAdapter.submitData(it)
             }
         }
     }
@@ -54,16 +64,6 @@ class MainPagingFragment : BaseLazyFragment() {
     ): View? {
         initView
         return binding.root
-    }
-
-    private val listener = object : MainListAdapter.OnEventListener, OnRefreshListener {
-        override fun onContentClick(content: String) {
-            showToast(content)
-        }
-
-        override fun onRefresh(refreshLayout: RefreshLayout) {
-            vm.refresh()
-        }
     }
 
     companion object {

@@ -61,7 +61,7 @@ const val baseRvHelperVersion = "3.0.4"
 const val flycoTabLayoutVersion = "2.1.4.2"
 const val coilVersion = "0.11.0"
 const val utilsVersion = "1.29.0"
-const val pagingVersion = "2.1.2"
+const val pagingVersion = "3.0.0-alpha06"
 
 // buildScript plugin
 const val gradleVersion = "4.1.0-rc03"

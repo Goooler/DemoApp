@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import androidx.paging.PagedListAdapter
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,7 +20,7 @@ import io.goooler.demoapp.adapter.rv.base.ViewTypeDelegateManager
  * @since 1.0.0
  */
 abstract class BasePagingAdapter<T : IModelDiff<T>> :
-    PagedListAdapter<T, BaseRvAdapter.BaseViewHolder>(object : DiffUtil.ItemCallback<T>() {
+    PagingDataAdapter<T, BaseRvAdapter.BaseViewHolder>(object : DiffUtil.ItemCallback<T>() {
         override fun areItemsTheSame(oldItem: T, newItem: T): Boolean =
             oldItem.isItemTheSame(newItem)
 
