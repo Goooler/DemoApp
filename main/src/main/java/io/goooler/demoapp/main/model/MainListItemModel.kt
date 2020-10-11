@@ -8,8 +8,7 @@ class MainListItemModel(val logoUrl: String?, val content: String?) :
 
     override val viewType: Int = R.layout.main_fragment_list_item
 
-    override fun isContentTheSame(other: MainListItemModel): Boolean =
-        this.content == other.content
+    override fun isItemTheSame(that: MainListItemModel): Boolean = this.content == that.content
 
-    override fun isItemTheSame(other: MainListItemModel): Boolean = this === other
+    override fun isContentTheSame(that: MainListItemModel): Boolean = true
 }

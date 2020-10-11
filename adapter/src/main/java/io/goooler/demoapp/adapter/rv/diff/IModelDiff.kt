@@ -10,13 +10,14 @@ import io.goooler.demoapp.adapter.rv.base.IModelType
  * @since 1.0.0
  */
 interface IModelDiff<D : IModelDiff<D>> : IModelType {
-    /**
-     * 默认同一个对象内容一样
-     */
-    fun isContentTheSame(other: D): Boolean = this == other
 
     /**
      * 默认同一个对象就是同一个 item
      */
-    fun isItemTheSame(other: D): Boolean = this == other
+    fun isItemTheSame(that: D): Boolean = this == that
+
+    /**
+     * 默认同一个对象内容一样
+     */
+    fun isContentTheSame(that: D): Boolean = this == that
 }

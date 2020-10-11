@@ -19,14 +19,15 @@ import io.goooler.demoapp.adapter.rv.base.ViewTypeDelegateManager
  * @version 1.0.0
  * @since 1.0.0
  */
-abstract class BasePagingAdapter<T : IModelDiff<T>> :
-    PagingDataAdapter<T, BaseRvAdapter.BaseViewHolder>(object : DiffUtil.ItemCallback<T>() {
+abstract class BasePagingAdapter<T : IModelDiff<T>>(
+    diffCallback: DiffUtil.ItemCallback<T> = object : DiffUtil.ItemCallback<T>() {
         override fun areItemsTheSame(oldItem: T, newItem: T): Boolean =
             oldItem.isItemTheSame(newItem)
 
         override fun areContentsTheSame(oldItem: T, newItem: T): Boolean =
             oldItem.isContentTheSame(newItem)
-    }) {
+    }
+) : PagingDataAdapter<T, BaseRvAdapter.BaseViewHolder>(diffCallback) {
 
     private val ivdManager by lazy(LazyThreadSafetyMode.NONE) {
         ViewTypeDelegateManager<T>()
