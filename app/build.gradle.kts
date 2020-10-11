@@ -1,3 +1,4 @@
+import com.android.build.gradle.AbstractAppExtension
 import com.android.build.gradle.internal.api.BaseVariantOutputImpl
 
 plugins {
@@ -6,16 +7,9 @@ plugins {
     id("kotlin-kapt")
 }
 
-android {
-    compileSdkVersion(appTargetSdk)
-    buildToolsVersion(appBuildTool)
+setupCommon().run {
     defaultConfig {
         applicationId = appPackageName
-        minSdkVersion(appMinSdk)
-        targetSdkVersion(appTargetSdk)
-        versionCode = buildTime
-        versionName = appVersionName
-        vectorDrawables.useSupportLibrary = true
         addManifestPlaceholders(manifestFields)
         ndk { abiFilters.addAll(ndkLibs) }
     }
@@ -48,39 +42,18 @@ android {
             isCrunchPngs = false
         }
     }
-    applicationVariants.all {
+    setupFlavors()
+    compileOptions.isCoreLibraryDesugaringEnabled = true
+    (this as AbstractAppExtension).applicationVariants.all {
         outputs.all {
             (this as BaseVariantOutputImpl).outputFileName =
                 "Demo_${versionName}_${versionCode}_${flavorName}_${buildType.name}.apk"
         }
     }
-    flavorDimensions("channel")
-    productFlavors {
-        create("daily")
-        create("online")
-    }
-    buildFeatures {
-        dataBinding = true
-    }
-    lintOptions {
-        isAbortOnError = false
-        isCheckReleaseBuilds = false
-    }
-    compileOptions {
-        isCoreLibraryDesugaringEnabled = true
-        sourceCompatibility = javaVersion
-        targetCompatibility = javaVersion
-    }
-    kotlinOptions {
-        jvmTarget = javaVersion.toString()
-        useIR = true
-    }
 }
 
 kapt {
-    arguments {
-        arg("AROUTER_MODULE_NAME", project.name)
-    }
+    kaptCommon()
 }
 
 dependencies {

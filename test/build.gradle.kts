@@ -4,23 +4,9 @@ plugins {
     id("kotlin-kapt")
 }
 
-android {
-    compileSdkVersion(appTargetSdk)
-    buildToolsVersion(appBuildTool)
+setupCommon().run {
     defaultConfig {
-        minSdkVersion(appMinSdk)
-        targetSdkVersion(appTargetSdk)
-        versionCode = buildTime
-        versionName = appVersionName
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
-    compileOptions {
-        sourceCompatibility = javaVersion
-        targetCompatibility = javaVersion
-    }
-    kotlinOptions {
-        jvmTarget = javaVersion.toString()
-        useIR = true
     }
 }
 

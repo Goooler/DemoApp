@@ -4,37 +4,14 @@ plugins {
     id("kotlin-kapt")
 }
 
-android {
-    compileSdkVersion(appTargetSdk)
-    buildToolsVersion(appBuildTool)
-    defaultConfig {
-        minSdkVersion(appMinSdk)
-        targetSdkVersion(appTargetSdk)
-        versionCode = buildTime
-        versionName = appVersionName
-        vectorDrawables.useSupportLibrary = true
-        multiDexEnabled = true
-        versionNameSuffix = VersionNameSuffix.base
-    }
-    buildFeatures {
-        dataBinding = true
-    }
-    compileOptions {
-        sourceCompatibility = javaVersion
-        targetCompatibility = javaVersion
-    }
-    kotlinOptions {
-        jvmTarget = javaVersion.toString()
-        useIR = true
-    }
-}
+setupCommon()
 
 dependencies {
     // local
     api(fileTree(localLibs))
 
     // architecture
-    api(Libs.kotlin)
+    api(Libs.coroutines)
     api(Libs.core)
     api(Libs.annotation)
     api(Libs.multiDex)

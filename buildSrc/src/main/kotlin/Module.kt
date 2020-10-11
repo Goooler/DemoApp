@@ -1,25 +1,34 @@
+internal object ModuleName {
+    const val base = "base"
+    const val common = "common"
+    const val login = "login"
+    const val main = "main"
+    const val adapter = "adapter"
+    const val web = "webview"
+}
+
 object Modules {
-    const val base = ":base"
-    const val common = ":common"
-    const val login = ":login"
-    const val main = ":main"
-    const val adapter = ":adapter"
-    const val web = ":webview"
+    const val base = ":${ModuleName.base}"
+    const val common = ":${ModuleName.common}"
+    const val login = ":${ModuleName.login}"
+    const val main = ":${ModuleName.main}"
+    const val adapter = ":${ModuleName.adapter}"
+    const val web = ":${ModuleName.web}"
 }
 
 object ResourcePrefix {
-    const val common = "common_"
-    const val login = "login_"
-    const val main = "main_"
-    const val adapter = "adapter_"
-    const val web = "web_"
+    const val common = "${ModuleName.common}_"
+    const val login = "${ModuleName.login}_"
+    const val main = "${ModuleName.main}_"
+    const val adapter = "${ModuleName.adapter}_"
+    const val web = "${ModuleName.web}_"
 }
 
 object VersionNameSuffix {
-    const val base = "_base"
-    const val common = "_common"
-    const val login = "_login"
-    const val main = "_main"
-    const val adapter = "_adapter"
-    const val web = "_web"
+    const val base = "_${ModuleName.base}"
+    const val common = "_${ModuleName.common}"
+    const val login = "_${ModuleName.login}"
+    const val main = "_${ModuleName.main}"
+    const val adapter = "_${ModuleName.adapter}"
+    const val web = "_${ModuleName.web}"
 }

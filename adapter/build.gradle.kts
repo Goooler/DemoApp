@@ -4,31 +4,10 @@ plugins {
     id("kotlin-kapt")
 }
 
-android {
+setupCommon().run {
     resourcePrefix(ResourcePrefix.adapter)
-    compileSdkVersion(appTargetSdk)
-    buildToolsVersion(appBuildTool)
     defaultConfig {
-        minSdkVersion(appMinSdk)
-        targetSdkVersion(appTargetSdk)
-        versionCode = buildTime
-        versionName = appVersionName
-        vectorDrawables.useSupportLibrary = true
         versionNameSuffix = VersionNameSuffix.adapter
-    }
-    buildFeatures {
-        dataBinding = true
-    }
-    compileOptions {
-        sourceCompatibility = javaVersion
-        targetCompatibility = javaVersion
-    }
-    kotlinOptions {
-        jvmTarget = javaVersion.toString()
-        useIR = true
-        freeCompilerArgs = listOf(
-            "-Xjvm-default=compatibility"
-        )
     }
 }
 

@@ -2,10 +2,6 @@
 
 import org.gradle.api.JavaVersion
 
-// repo
-const val aliyunMaven = "https://maven.aliyun.com/repository/public"
-const val jitpackMaven = "https://jitpack.io"
-
 // sdk
 const val appTargetSdk = 30
 const val appBuildTool = "30.0.2"
@@ -17,10 +13,10 @@ const val appPackageName = "io.goooler.demoapp"
 const val appName = "Demo"
 
 // app dependencies
-const val coreVersion = "1.3.1"
+const val coreVersion = "1.3.2"
 const val appCompatVersion = "1.2.0"
 const val supportVersion = "1.0.0"
-const val constraintLayoutVersion = "2.0.1"
+const val constraintLayoutVersion = "2.0.2"
 const val fragmentVersion = "1.2.5"
 const val materialVersion = "1.2.1"
 const val flexBoxVersion = "2.0.1"
@@ -32,24 +28,24 @@ const val navigationVersion = "2.3.0"
 const val workVersion = "2.3.4"
 const val preferenceVersion = "1.1.1"
 const val multiDexVersion = "2.0.1"
-const val okHttpVersion = "4.8.1"
+const val okHttpVersion = "4.9.0"
 const val retrofitVersion = "2.9.0"
 const val fastjsonVersion = "1.1.72.android"
 const val arouterVersion = "1.5.0"
 const val arouterCompilerVersion = "1.2.2"
 const val gsonVersion = "2.8.6"
-const val moshiVersion = "1.9.3"
+const val moshiVersion = "1.11.0"
 const val eventBusVersion = "3.2.0"
 const val liveDataBusVersion = "1.6.1"
 const val rxAndroidVersion = "3.0.0"
-const val rxJavaVersion = "3.0.6"
+const val rxJavaVersion = "3.0.7"
 const val rxPermissionVersion = "0.12"
 const val mpChartVersion = "v3.1.0"
 const val lottieVersion = "3.0.1"
 const val smartRefreshLayoutVersion = "2.0.1"
 const val glideVersion = "4.11.0"
-const val glideTransformVersion = "4.1.0"
-const val leakCanaryVersion = "2.4"
+const val glideTransformVersion = "4.3.0"
+const val leakCanaryVersion = "2.5"
 const val lubanVersion = "1.1.8"
 const val mmkvVersion = "1.2.2"
 const val coroutinesVersion = "1.3.9"
@@ -64,14 +60,10 @@ const val utilsVersion = "1.29.0"
 const val pagingVersion = "3.0.0-alpha06"
 
 // buildScript plugin
-const val gradleVersion = "4.1.0-rc03"
-const val kotlinVersion = "1.4.10"
 const val protobufVersion = "0.8.12"
 val javaVersion = JavaVersion.VERSION_1_8
 
 object Libs {
-    const val gradlePlugin = "com.android.tools.build:gradle:$gradleVersion"
-    const val kotlinPlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
     const val protobufPlugin = "com.google.protobuf:protobuf-gradle-plugin:$protobufVersion"
 
     const val core = "androidx.core:core-ktx:$coreVersion"
@@ -115,10 +107,7 @@ object Libs {
     const val eventBusKapt = "org.greenrobot:eventbus-annotation-processor:$eventBusVersion"
     const val arouterKapt = "com.alibaba:arouter-compiler:$arouterCompilerVersion"
 
-    val kotlin = arrayOf(
-        "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion",
-        "org.jetbrains.kotlin:kotlin-stdlib-common:$kotlinVersion",
-        "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion",
+    val coroutines = arrayOf(
         "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion",
         "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
     )

@@ -10,43 +10,16 @@ plugins {
     id("com.google.protobuf")
 }
 
-android {
+setupCommon().run {
     resourcePrefix(ResourcePrefix.main)
-    compileSdkVersion(appTargetSdk)
-    buildToolsVersion(appBuildTool)
     defaultConfig {
-        minSdkVersion(appMinSdk)
-        targetSdkVersion(appTargetSdk)
-        versionCode = buildTime
-        versionName = appVersionName
-        vectorDrawables.useSupportLibrary = true
         versionNameSuffix = VersionNameSuffix.main
     }
-    flavorDimensions("channel")
-    productFlavors {
-        create("daily")
-        create("online")
-    }
-    buildFeatures {
-        dataBinding = true
-    }
-    compileOptions {
-        sourceCompatibility = javaVersion
-        targetCompatibility = javaVersion
-    }
-    kotlinOptions {
-        jvmTarget = javaVersion.toString()
-        useIR = true
-        freeCompilerArgs = listOf(
-            "-Xjvm-default=compatibility"
-        )
-    }
+    setupFlavors()
 }
 
 kapt {
-    arguments {
-        arg("AROUTER_MODULE_NAME", project.name)
-    }
+    kaptCommon()
 }
 
 protobuf {

@@ -4,40 +4,16 @@ plugins {
     id("kotlin-kapt")
 }
 
-android {
+setupCommon().run {
     resourcePrefix(ResourcePrefix.login)
-    compileSdkVersion(appTargetSdk)
-    buildToolsVersion(appBuildTool)
     defaultConfig {
-        minSdkVersion(appMinSdk)
-        targetSdkVersion(appTargetSdk)
-        versionCode = buildTime
-        versionName = appVersionName
-        vectorDrawables.useSupportLibrary = true
         versionNameSuffix = VersionNameSuffix.login
     }
-    flavorDimensions("channel")
-    productFlavors {
-        create("daily")
-        create("online")
-    }
-    buildFeatures {
-        dataBinding = true
-    }
-    compileOptions {
-        sourceCompatibility = javaVersion
-        targetCompatibility = javaVersion
-    }
-    kotlinOptions {
-        jvmTarget = javaVersion.toString()
-        useIR = true
-    }
+    setupFlavors()
 }
 
 kapt {
-    arguments {
-        arg("AROUTER_MODULE_NAME", project.name)
-    }
+    kaptCommon()
 }
 
 dependencies {

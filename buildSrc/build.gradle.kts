@@ -2,7 +2,9 @@ plugins {
     `kotlin-dsl`
 }
 
-repositories {
-    google()
-    maven("https://maven.aliyun.com/repository/public")
+apply(from = "../repositories.gradle.kts")
+
+dependencies {
+    implementation(rootProject.extra.get("androidPlugin").toString())
+    implementation(rootProject.extra.get("kotlinPlugin").toString())
 }

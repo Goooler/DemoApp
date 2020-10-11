@@ -4,22 +4,11 @@ plugins {
     id("kotlin-kapt")
 }
 
-android {
-    compileSdkVersion(appTargetSdk)
-    buildToolsVersion(appBuildTool)
+setupCommon().run {
     defaultConfig {
-        minSdkVersion(appMinSdk)
-        targetSdkVersion(appTargetSdk)
-        versionCode = buildTime
-        versionName = appVersionName
-        vectorDrawables.useSupportLibrary = true
         versionNameSuffix = VersionNameSuffix.common
     }
-    flavorDimensions("channel")
-    productFlavors {
-        create("daily")
-        create("online")
-    }
+    setupFlavors()
     productFlavors.all {
         dimension("channel")
         buildConfigField("String", "VERSION_NAME", "\"$appVersionName\"")
@@ -31,23 +20,10 @@ android {
             buildConfigField("String", "API_HOST", "\"${ApiHosts.online}\"")
         }
     }
-    buildFeatures {
-        dataBinding = true
-    }
-    compileOptions {
-        sourceCompatibility = javaVersion
-        targetCompatibility = javaVersion
-    }
-    kotlinOptions {
-        jvmTarget = javaVersion.toString()
-        useIR = true
-    }
 }
 
 kapt {
-    arguments {
-        arg("AROUTER_MODULE_NAME", project.name)
-    }
+    kaptCommon()
 }
 
 dependencies {
@@ -55,9 +31,6 @@ dependencies {
 
     api(Libs.arouter)
     kapt(Libs.arouterKapt)
-
-    // UI
-    api(Libs.baseRvHelper)
 
     // async
     api(Libs.rx)

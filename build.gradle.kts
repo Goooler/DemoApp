@@ -1,23 +1,21 @@
 import java.nio.charset.StandardCharsets
 
 buildscript {
+    apply(from = "repositories.gradle.kts")
+
     repositories {
         google()
-        maven(aliyunMaven)
+        maven("https://maven.aliyun.com/repository/public")
     }
     dependencies {
-        classpath(Libs.gradlePlugin)
-        classpath(Libs.kotlinPlugin)
+        classpath(rootProject.extra.get("androidPlugin").toString())
+        classpath(rootProject.extra.get("kotlinPlugin").toString())
         classpath(Libs.protobufPlugin)
     }
 }
 
 allprojects {
-    repositories {
-        google()
-        maven(aliyunMaven)
-        maven(jitpackMaven)
-    }
+    apply(from = "${rootProject.projectDir}/repositories.gradle.kts")
 }
 
 task("clean", Delete::class) {
