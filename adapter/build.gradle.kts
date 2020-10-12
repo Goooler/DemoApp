@@ -12,5 +12,8 @@ setupCommon().run {
 }
 
 dependencies {
-    implementation(project(Modules.base))
+    api(Libs.core)
+    api(Libs.paging)
+    api(Libs.recyclerView)
+    api(Libs.viewPager2)
 }

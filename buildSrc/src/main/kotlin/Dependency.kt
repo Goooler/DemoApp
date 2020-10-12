@@ -58,6 +58,7 @@ const val flycoTabLayoutVersion = "2.1.4.2"
 const val coilVersion = "0.11.0"
 const val utilsVersion = "1.29.0"
 const val pagingVersion = "3.0.0-alpha06"
+const val viewPager2Version = "1.0.0"
 
 // buildScript plugin
 const val protobufVersion = "0.8.12"
@@ -101,6 +102,7 @@ object Libs {
     const val rxPermission = "com.github.tbruyelle:rxpermissions:$rxPermissionVersion"
     const val retrofit = "com.squareup.retrofit2:retrofit:$retrofitVersion"
     const val paging = "androidx.paging:paging-runtime:$pagingVersion"
+    const val viewPager2 = "androidx.viewpager2:viewpager2:$viewPager2Version"
 
     const val glideKapt = "com.github.bumptech.glide:compiler:$glideVersion"
     const val objectBoxKapt = "io.objectbox:objectbox-processor:$objectBoxVersion"

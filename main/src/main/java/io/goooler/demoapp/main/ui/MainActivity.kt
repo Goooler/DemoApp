@@ -3,7 +3,8 @@ package io.goooler.demoapp.main.ui
 import android.content.Intent
 import android.os.Bundle
 import com.alibaba.android.arouter.facade.annotation.Route
-import io.goooler.demoapp.adapter.vp.CommonLazyFragmentPagerAdapter
+import com.google.android.material.tabs.TabLayoutMediator
+import io.goooler.demoapp.adapter.vp.CommonFragmentStateAdapter
 import io.goooler.demoapp.base.core.BaseActivity
 import io.goooler.demoapp.base.util.unsafeLazy
 import io.goooler.demoapp.common.router.RouterPath
@@ -17,7 +18,9 @@ class MainActivity : BaseActivity() {
 
     private val binding by unsafeLazy { MainActivityBinding.inflate(layoutInflater) }
 
-    private val pagerAdapter by unsafeLazy { CommonLazyFragmentPagerAdapter(supportFragmentManager) }
+    private val pagerAdapter by unsafeLazy {
+        CommonFragmentStateAdapter(supportFragmentManager, lifecycle)
+    }
 
     private val titles = listOf(
         "首页", "smartRefresh", "paging"
@@ -33,11 +36,13 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        binding.tabLayout.setupWithViewPager(binding.viewPager)
         binding.viewPager.offscreenPageLimit = fragments.size
         binding.viewPager.adapter = pagerAdapter
+        TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
+            tab.text = titles[position]
+        }.attach()
 
-        pagerAdapter.setData(fragments, titles)
+        pagerAdapter.setData(fragments)
     }
 
     /**

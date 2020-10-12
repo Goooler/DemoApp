@@ -22,8 +22,6 @@ dependencies {
     api(Libs.fragment)
     api(Libs.material)
     api(Libs.constraintLayout)
-    api(Libs.paging)
-    api(Libs.recyclerView)
     api(Libs.cardView)
     api(Libs.smartRefreshLayout)
 
