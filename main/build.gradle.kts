@@ -4,33 +4,23 @@ import com.google.protobuf.gradle.protobuf
 import com.google.protobuf.gradle.protoc
 
 plugins {
-    id("com.android.library")
-    id("kotlin-android")
-    id("kotlin-kapt")
+    id(Plugins.androidLibrary)
+    id(Plugins.kotlinAndroid)
+    id(Plugins.kotlinKapt)
     id("com.google.protobuf")
 }
 
-setupCommon().run {
-    resourcePrefix(ResourcePrefix.main)
-    defaultConfig {
-        versionNameSuffix = VersionNameSuffix.main
-    }
-    setupFlavors()
-}
-
-kapt {
-    kaptCommon()
-}
-
-protobuf {
-    protoc {
-        artifact = Libs.protoc
-    }
-    generateProtoTasks {
-        all().forEach {
-            it.builtins {
-                create("java") {
-                    option("lite")
+setupCommon(Module.Main).run {
+    protobuf {
+        protoc {
+            artifact = Libs.protoc
+        }
+        generateProtoTasks {
+            all().forEach {
+                it.builtins {
+                    create("java") {
+                        option("lite")
+                    }
                 }
             }
         }
@@ -38,8 +28,8 @@ protobuf {
 }
 
 dependencies {
-    implementation(project(Modules.common))
-    implementation(project(Modules.adapter))
+    implementation(project(getModuleName(Module.Common)))
+    implementation(project(getModuleName(Module.Adapter)))
 
     implementation(Libs.protobufLite)
     kapt(Libs.arouterKapt)

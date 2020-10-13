@@ -1,17 +1,17 @@
 plugins {
-    id("com.android.library")
-    id("kotlin-android")
-    id("kotlin-kapt")
+    id(Plugins.androidLibrary)
+    id(Plugins.kotlinAndroid)
+    id(Plugins.kotlinKapt)
 }
 
-setupCommon().run {
+setupCore().run {
     defaultConfig {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 }
 
 dependencies {
-    implementation(project(Modules.base))
+    implementation(project(getModuleName(Module.Base)))
     implementation(Libs.fastjson)
     implementation(Libs.gson)
 

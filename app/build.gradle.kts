@@ -2,9 +2,9 @@ import com.android.build.gradle.AbstractAppExtension
 import com.android.build.gradle.internal.api.BaseVariantOutputImpl
 
 plugins {
-    id("com.android.application")
-    id("kotlin-android")
-    id("kotlin-kapt")
+    id(Plugins.androidApplication)
+    id(Plugins.kotlinAndroid)
+    id(Plugins.kotlinKapt)
 }
 
 setupCommon().run {
@@ -12,6 +12,7 @@ setupCommon().run {
         applicationId = appPackageName
         addManifestPlaceholders(manifestFields)
         ndk { abiFilters.addAll(ndkLibs) }
+        multiDexEnabled = true
     }
     signingConfigs {
         create("sign") {
@@ -42,7 +43,6 @@ setupCommon().run {
             isCrunchPngs = false
         }
     }
-    setupFlavors()
     compileOptions.isCoreLibraryDesugaringEnabled = true
     (this as AbstractAppExtension).applicationVariants.all {
         outputs.all {
@@ -52,16 +52,12 @@ setupCommon().run {
     }
 }
 
-kapt {
-    kaptCommon()
-}
-
 dependencies {
     coreLibraryDesugaring(Libs.desugar)
-    implementation(project(Modules.common))
-    implementation(project(Modules.login))
-    implementation(project(Modules.main))
-    implementation(project(Modules.web))
+    implementation(project(getModuleName(Module.Common)))
+    implementation(project(getModuleName(Module.Login)))
+    implementation(project(getModuleName(Module.Main)))
+    implementation(project(getModuleName(Module.Web)))
     kapt(Libs.arouterKapt)
 
     debugImplementation(Libs.leakCanary)

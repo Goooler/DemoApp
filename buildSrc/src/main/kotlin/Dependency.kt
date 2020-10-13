@@ -1,7 +1,5 @@
 @file:Suppress("unused", "SpellCheckingInspection")
 
-import org.gradle.api.JavaVersion
-
 // sdk
 const val appTargetSdk = 30
 const val appBuildTool = "30.0.2"
@@ -59,10 +57,15 @@ const val coilVersion = "0.11.0"
 const val utilsVersion = "1.29.0"
 const val pagingVersion = "3.0.0-alpha06"
 const val viewPager2Version = "1.0.0"
-
-// buildScript plugin
 const val protobufVersion = "0.8.12"
-val javaVersion = JavaVersion.VERSION_1_8
+
+object Plugins {
+    const val kotlinAndroid = "kotlin-android"
+    const val kotlinKapt = "kotlin-kapt"
+    const val androidLibrary = "com.android.library"
+    const val androidApplication = "com.android.application"
+    const val protobuf = "com.google.protobuf"
+}
 
 object Libs {
     const val protobufPlugin = "com.google.protobuf:protobuf-gradle-plugin:$protobufVersion"

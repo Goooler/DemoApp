@@ -1,7 +1,6 @@
 package io.goooler.demoapp.base.core
 
 import android.annotation.SuppressLint
-import android.app.Application
 import android.os.Build
 import android.webkit.WebView
 import androidx.annotation.MainThread
@@ -50,7 +49,7 @@ abstract class BaseApplication : MultiDexApplication() {
      */
     private fun initWebView() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            val processName = Application.getProcessName()
+            val processName = getProcessName()
             if (processName != packageName) {
                 WebView.setDataDirectorySuffix(processName)
             }

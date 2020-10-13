@@ -1,33 +1,19 @@
 plugins {
-    id("com.android.library")
-    id("kotlin-android")
-    id("kotlin-kapt")
+    id(Plugins.androidLibrary)
+    id(Plugins.kotlinAndroid)
+    id(Plugins.kotlinKapt)
 }
 
-setupCommon().run {
-    defaultConfig {
-        versionNameSuffix = VersionNameSuffix.common
-    }
-    setupFlavors()
+setupCommon(Module.Common).run {
     productFlavors.all {
-        dimension("channel")
         buildConfigField("String", "VERSION_NAME", "\"$appVersionName\"")
-        buildConfigField("String", "CHANNEL", "\"$name\"")
         buildConfigField("String", "CDN_PREFIX", "\"$cdnPrefix\"")
-        if (name == "daily") {
-            buildConfigField("String", "API_HOST", "\"${ApiHosts.daily}\"")
-        } else if (name == "online") {
-            buildConfigField("String", "API_HOST", "\"${ApiHosts.online}\"")
-        }
+        buildConfigField("String", "API_HOST", "\"${apiHosts[name]}\"")
     }
-}
-
-kapt {
-    kaptCommon()
 }
 
 dependencies {
-    api(project(Modules.base))
+    api(project(getModuleName(Module.Base)))
 
     api(Libs.arouter)
     kapt(Libs.arouterKapt)

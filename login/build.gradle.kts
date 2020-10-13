@@ -1,22 +1,12 @@
 plugins {
-    id("com.android.library")
-    id("kotlin-android")
-    id("kotlin-kapt")
+    id(Plugins.androidLibrary)
+    id(Plugins.kotlinAndroid)
+    id(Plugins.kotlinKapt)
 }
 
-setupCommon().run {
-    resourcePrefix(ResourcePrefix.login)
-    defaultConfig {
-        versionNameSuffix = VersionNameSuffix.login
-    }
-    setupFlavors()
-}
-
-kapt {
-    kaptCommon()
-}
+setupCommon(Module.Login)
 
 dependencies {
-    implementation(project(Modules.common))
+    implementation(project(getModuleName(Module.Common)))
     kapt(Libs.arouterKapt)
 }

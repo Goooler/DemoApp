@@ -1,23 +1,13 @@
 plugins {
-    id("com.android.library")
-    id("kotlin-android")
-    id("kotlin-kapt")
+    id(Plugins.androidLibrary)
+    id(Plugins.kotlinAndroid)
+    id(Plugins.kotlinKapt)
 }
 
-setupCommon().run {
-    resourcePrefix(ResourcePrefix.web)
-    defaultConfig {
-        versionNameSuffix = VersionNameSuffix.web
-    }
-    setupFlavors()
-}
-
-kapt {
-    kaptCommon()
-}
+setupCommon(Module.Web)
 
 dependencies {
-    implementation(project(Modules.common))
+    implementation(project(getModuleName(Module.Common)))
     api(Libs.tbs)
     kapt(Libs.arouterKapt)
 }

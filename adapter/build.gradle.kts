@@ -1,15 +1,10 @@
 plugins {
-    id("com.android.library")
-    id("kotlin-android")
-    id("kotlin-kapt")
+    id(Plugins.androidLibrary)
+    id(Plugins.kotlinAndroid)
+    id(Plugins.kotlinKapt)
 }
 
-setupCommon().run {
-    resourcePrefix(ResourcePrefix.adapter)
-    defaultConfig {
-        versionNameSuffix = VersionNameSuffix.adapter
-    }
-}
+setupCommon(Module.Adapter, false)
 
 dependencies {
     api(Libs.core)

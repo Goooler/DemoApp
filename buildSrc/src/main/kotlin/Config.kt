@@ -1,4 +1,5 @@
 import com.android.build.gradle.BaseExtension
+import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 import org.gradle.api.artifacts.Dependency
 import org.gradle.api.artifacts.dsl.DependencyHandler
@@ -24,6 +25,8 @@ fun DependencyHandler.implementation(names: Array<String>): Array<Dependency?> =
  */
 val buildTime: Int = SimpleDateFormat("yyMMddHHmm", Locale.CHINESE).format(Date()).toInt()
 
+val javaVersion = JavaVersion.VERSION_1_8
+
 val cleanFileTypes = arrayOf("*.log", "*.txt", "*.classpath", "*.project", "*.settings")
 
 val localLibs = mapOf(
@@ -41,23 +44,28 @@ val manifestFields = mapOf(
 
 const val cdnPrefix = "https://raw.githubusercontent.com/"
 
-object ApiHosts {
-    const val daily = "https://api.github.com/"
-    const val online = "https://api.github.com/"
-}
+val apiHosts = mapOf(
+    Flavor.Daily.tag to "https://api.github.com/",
+    Flavor.Online.tag to "https://api.github.com/"
+)
 
-fun Project.setupCommon(): BaseExtension {
+fun getModuleName(module: Module) = ":${module.tag}"
+
+fun getResourcePrefix(module: Module) = "${module.tag}_"
+
+fun getVersionNameSuffix(module: Module) = "_${module.tag}"
+
+fun Project.setupCore(): BaseExtension {
     return extensions.getByName<BaseExtension>("android").apply {
         compileSdkVersion(appTargetSdk)
         buildToolsVersion(appBuildTool)
         defaultConfig {
             minSdkVersion(appMinSdk)
             targetSdkVersion(appTargetSdk)
-            versionCode = buildTime
+            versionCode = 20201013
             versionName = appVersionName
             vectorDrawables.useSupportLibrary = true
         }
-        dataBinding.isEnabled = true
         compileOptions {
             sourceCompatibility = javaVersion
             targetCompatibility = javaVersion
@@ -76,16 +84,19 @@ fun Project.setupCommon(): BaseExtension {
     }
 }
 
-fun BaseExtension.setupFlavors() {
-    flavorDimensions("channel")
-    productFlavors {
-        create("daily")
-        create("online")
-    }
-}
-
-fun KaptExtension.kaptCommon() {
-    arguments {
-        arg("AROUTER_MODULE_NAME", project.name)
+fun Project.setupCommon(module: Module? = null, useRouter: Boolean = true): BaseExtension {
+    return setupCore().apply {
+        module?.let {
+            resourcePrefix = getResourcePrefix(it)
+            defaultConfig.versionNameSuffix = getVersionNameSuffix(it)
+        }
+        flavorDimensions("channel")
+        productFlavors {
+            create(Flavor.Daily.tag)
+            create(Flavor.Online.tag)
+        }
+        extensions.getByName<KaptExtension>("kapt").arguments {
+            if (useRouter) arg("AROUTER_MODULE_NAME", project.name)
+        }
     }
 }
