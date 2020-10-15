@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
 import androidx.annotation.Px
+import androidx.databinding.BindingAdapter
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
@@ -455,10 +456,136 @@ object ImageLoader {
     }
 }
 
+//------------------------BindingAdapter--------------------------//
+
+@BindingAdapter("binding_src_url")
+fun ImageView.load(url: String?) {
+    ImageLoader.load(this, url)
+}
+
+@BindingAdapter(
+    "binding_src_url",
+    "binding_src_placeholder"
+)
 fun ImageView.load(
     url: String?,
-    placeholderDrawable: Drawable? = null,
-    errorDrawable: Drawable? = null
+    placeholderDrawable: Drawable?
+) {
+    ImageLoader.load(this, url, placeholderDrawable)
+}
+
+@BindingAdapter(
+    "binding_src_url",
+    "binding_src_placeholder",
+    "binding_src_error"
+)
+fun ImageView.load(
+    url: String?,
+    placeholderDrawable: Drawable?,
+    errorDrawable: Drawable?
 ) {
     ImageLoader.load(this, url, placeholderDrawable, errorDrawable)
+}
+
+@BindingAdapter("binding_src_url_circle")
+fun ImageView.loadCircleCrop(url: String?) {
+    ImageLoader.loadCircleCrop(this, url)
+}
+
+@BindingAdapter(
+    "binding_src_url_circle",
+    "binding_src_placeholder"
+)
+fun ImageView.loadCircleCrop(
+    url: String?,
+    placeholderDrawable: Drawable?,
+) {
+    ImageLoader.loadCircleCrop(this, url, placeholderDrawable)
+}
+
+@BindingAdapter(
+    "binding_src_url_center_crop",
+    "binding_src_placeholder"
+)
+fun ImageView.loadCenterCrop(
+    url: String?,
+    placeholderDrawable: Drawable?
+) {
+    ImageLoader.loadCenterCrop(this, url, placeholderDrawable)
+}
+
+@BindingAdapter(
+    "binding_src_url_center_crop",
+    "binding_src_placeholder",
+    "binding_src_error"
+)
+fun ImageView.loadCenterCrop(
+    url: String?,
+    placeholderDrawable: Drawable?,
+    errorDrawable: Drawable?
+) {
+    ImageLoader.loadCenterCrop(this, url, placeholderDrawable, errorDrawable)
+}
+
+@BindingAdapter(
+    "binding_src_url",
+    "binding_src_cornerRadius"
+)
+fun ImageView.loadRoundedCorner(
+    url: String?,
+    radius: Float
+) {
+    ImageLoader.loadRoundedCorner(this, url, radius.toInt())
+}
+
+@BindingAdapter(
+    "binding_src_url",
+    "binding_src_cornerRadius",
+    "binding_src_placeholder"
+)
+fun ImageView.loadRoundedCorner(
+    url: String?,
+    radius: Float,
+    placeholderDrawable: Drawable?
+) {
+    ImageLoader.loadRoundedCorner(this, url, radius.toInt(), placeholderDrawable)
+}
+
+@BindingAdapter(
+    "binding_src_url",
+    "binding_src_cornerRadius",
+    "binding_src_placeholder",
+    "binding_src_error"
+)
+fun ImageView.loadRoundedCorner(
+    url: String?,
+    radius: Float,
+    placeholderDrawable: Drawable?,
+    errorDrawable: Drawable?
+) {
+    ImageLoader.loadRoundedCorner(this, url, radius.toInt(), placeholderDrawable, errorDrawable)
+}
+
+@BindingAdapter(
+    "binding_src_url_center_crop",
+    "binding_src_cornerRadius"
+)
+fun ImageView.loadCenterCropRoundedCorner(
+    url: String?,
+    radius: Float
+) {
+    ImageLoader.loadCenterCropRoundedCorner(this, url, radius.toInt())
+}
+
+@BindingAdapter(
+    "binding_src_url_center_crop",
+    "binding_src_cornerRadius",
+    "binding_src_placeholder"
+)
+fun ImageView.loadCenterCropRoundedCorner(
+    url: String?,
+    radius: Float,
+    placeholderDrawable: Drawable?
+) {
+    ImageLoader.loadCenterCropRoundedCorner(this, url, radius.toInt(), placeholderDrawable)
 }

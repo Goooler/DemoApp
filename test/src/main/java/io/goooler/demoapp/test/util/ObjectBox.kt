@@ -1,8 +1,8 @@
 @file:Suppress("unused")
 
-package io.goooler.demoapp.common.util
+package io.goooler.demoapp.test.util
 
-import io.goooler.demoapp.common.type.BaseObjectBoxEntity
+import io.goooler.demoapp.test.type.BaseObjectBoxEntity
 import io.objectbox.BoxStore
 import kotlin.reflect.KClass
 

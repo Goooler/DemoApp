@@ -1,7 +1,7 @@
 package io.goooler.demoapp.common.content
 
 import androidx.core.content.FileProvider
-import io.goooler.demoapp.base.util.log
+import io.goooler.demoapp.common.util.log
 
 class CommonProvider : FileProvider() {
 

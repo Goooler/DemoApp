@@ -18,5 +18,5 @@ object RetrofitHelper : BaseRetrofitHelper() {
 
     override val converterFactory: Converter.Factory = MoshiConverterFactory.create(JsonUtil.moshi)
 
-    override val callAdapterFactory: CallAdapter.Factory = RxJava3CallAdapterFactory.create()
+    override val callAdapterFactory: CallAdapter.Factory? = RxJava3CallAdapterFactory.create()
 }

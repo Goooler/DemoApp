@@ -1,20 +1,16 @@
 package io.goooler.demoapp.main.bean
 
 import com.squareup.moshi.Json
-import io.goooler.demoapp.common.type.BaseObjectBoxEntity
-import io.objectbox.annotation.Entity
-import io.objectbox.annotation.Id
-import io.objectbox.annotation.Transient
+import io.goooler.demoapp.base.http.BaseResponse
 
-@Entity
 class RepoListBean(
-    @Id(assignable = true) override var id: Long,
+    val id: Long,
     val private: Boolean,
     val fork: Boolean,
     val name: String?,
     val description: String?,
-    @Transient val owner: OwnerBean? = null
-) : BaseObjectBoxEntity
+    val owner: OwnerBean? = null
+) : BaseResponse
 
 class OwnerBean(
     val id: Long,

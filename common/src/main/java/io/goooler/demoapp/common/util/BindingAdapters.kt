@@ -2,9 +2,13 @@
 
 package io.goooler.demoapp.common.util
 
-import android.graphics.drawable.Drawable
 import android.widget.ImageView
+import androidx.annotation.ColorInt
+import androidx.core.view.forEach
 import androidx.databinding.BindingAdapter
+import com.scwang.smart.refresh.footer.ClassicsFooter
+import com.scwang.smart.refresh.header.ClassicsHeader
+import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import io.goooler.demoapp.base.util.image.ImageLoader
 
 //------------------------ImageLoader--------------------------//
@@ -55,134 +59,79 @@ fun ImageView.bindingImageUrlFixHeight(
     }
 }
 
-@BindingAdapter("binding_src_url")
-fun ImageView.bindingImageUrl(url: String?) {
-    ImageLoader.load(this, url)
+//------------------------SmartRefreshLayout--------------------------//
+
+@BindingAdapter("binding_srl_refreshFinish")
+fun SmartRefreshLayout.bindingRefreshFinish(isFinish: Boolean) {
+    if (isFinish) finishRefresh()
 }
 
-@BindingAdapter("binding_src_url_circle")
-fun ImageView.bindingCircleImageUrl(url: String?) {
-    ImageLoader.loadCircleCrop(this, url)
+@BindingAdapter("binding_srl_loadMoreFinish")
+fun SmartRefreshLayout.bindingLoadMoreFinish(isFinish: Boolean) {
+    if (isFinish) finishLoadMore()
 }
 
-@BindingAdapter(
-    "binding_src_url",
-    "binding_src_placeholder"
-)
-fun ImageView.bindingImageUrl(
-    url: String?,
-    placeholder: Drawable?
-) {
-    ImageLoader.load(this, url, placeholder)
+@BindingAdapter("binding_srl_enableLoadMore")
+fun SmartRefreshLayout.bindingEnableLoadMore(enable: Boolean) {
+    setEnableLoadMore(enable)
 }
 
-@BindingAdapter(
-    "binding_src_url",
-    "binding_src_placeholder",
-    "binding_src_error"
-)
-fun ImageView.bindingImageUrl(
-    url: String?,
-    placeholder: Drawable?,
-    error: Drawable?
-) {
-    ImageLoader.load(this, url, placeholder, error)
+@BindingAdapter("binding_srl_enableRefresh")
+fun SmartRefreshLayout.bindingEnableRefresh(enable: Boolean) {
+    setEnableRefresh(enable)
 }
 
-@BindingAdapter(
-    "binding_src_url_circle",
-    "binding_src_placeholder"
-)
-fun ImageView.bindingCircleImageUrl(
-    url: String?,
-    drawable: Drawable?
-) {
-    ImageLoader.loadCircleCrop(this, url, drawable)
+@BindingAdapter("binding_srl_noMore")
+fun SmartRefreshLayout.bindingNoMoreData(haveNoMore: Boolean) {
+    setNoMoreData(haveNoMore)
 }
 
-@BindingAdapter(
-    "binding_src_url_center_crop",
-    "binding_src_placeholder"
-)
-fun ImageView.bindingCenterCrop(
-    url: String?,
-    drawable: Drawable?
-) {
-    ImageLoader.loadCenterCrop(this, url, drawable)
+@BindingAdapter("binding_srl_headerEmpty")
+fun SmartRefreshLayout.bindingHeaderEmpty(isEmpty: Boolean) {
+    (refreshHeader as? ClassicsHeader)?.forEach {
+        it.alpha = if (isEmpty) 0f else 1f
+    }
 }
 
-@BindingAdapter(
-    "binding_src_url_center_crop",
-    "binding_src_placeholder",
-    "binding_src_error"
-)
-fun ImageView.bindingCenterCrop(
-    url: String?,
-    drawable: Drawable?,
-    error: Drawable?
-) {
-    ImageLoader.loadCenterCrop(this, url, drawable, error)
+@BindingAdapter("binding_srl_footerEmpty")
+fun SmartRefreshLayout.bindingFooterEmpty(isEmpty: Boolean) {
+    (refreshFooter as? ClassicsFooter)?.forEach {
+        it.alpha = if (isEmpty) 0f else 1f
+    }
 }
 
-@BindingAdapter(
-    "binding_src_url",
-    "binding_src_cornerRadius"
-)
-fun ImageView.bindingRoundedCorner(
-    url: String?,
-    radius: Float
-) {
-    ImageLoader.loadRoundedCorner(this, url, radius.toInt())
+@BindingAdapter("binding_srl_headerPrimaryColor")
+fun SmartRefreshLayout.bindingHeaderPrimaryColor(@ColorInt color: Int) {
+    if (refreshHeader == null) {
+        setRefreshHeader(ClassicsHeader(context).apply { setPrimaryColor(color) })
+    } else {
+        (refreshHeader as? ClassicsHeader)?.setPrimaryColor(color)
+    }
 }
 
-@BindingAdapter(
-    "binding_src_url",
-    "binding_src_cornerRadius",
-    "binding_src_placeholder"
-)
-fun ImageView.bindingRoundedCorner(
-    url: String?,
-    radius: Float,
-    drawable: Drawable?
-) {
-    ImageLoader.loadRoundedCorner(this, url, radius.toInt(), drawable)
+@BindingAdapter("binding_srl_footerPrimaryColor")
+fun SmartRefreshLayout.bindingFooterPrimaryColor(@ColorInt color: Int) {
+    if (refreshFooter == null) {
+        setRefreshFooter(ClassicsFooter(context).apply { setPrimaryColor(color) })
+    } else {
+        (refreshFooter as? ClassicsFooter)?.setPrimaryColor(color)
+    }
 }
 
-@BindingAdapter(
-    "binding_src_url",
-    "binding_src_cornerRadius",
-    "binding_src_placeholder",
-    "binding_src_error"
-)
-fun ImageView.bindingRoundedCorner(
-    url: String?,
-    radius: Float,
-    drawable: Drawable?,
-    error: Drawable?
-) {
-    ImageLoader.loadRoundedCorner(this, url, radius.toInt(), drawable, error)
+@BindingAdapter("binding_srl_headerAccentColor")
+fun SmartRefreshLayout.bindingHeaderAccentColor(@ColorInt color: Int) {
+    if (refreshHeader == null) {
+        setRefreshHeader(ClassicsHeader(context).apply { setAccentColor(color) })
+    } else {
+        (refreshHeader as? ClassicsHeader)?.setAccentColor(color)
+    }
 }
 
-@BindingAdapter(
-    "binding_src_url_center_crop",
-    "binding_src_cornerRadius"
-)
-fun ImageView.setRoundedCornerCenterCrop(
-    url: String?,
-    radius: Float
-) {
-    ImageLoader.loadCenterCropRoundedCorner(this, url, radius.toInt())
-}
-
-@BindingAdapter(
-    "binding_src_url_center_crop",
-    "binding_src_cornerRadius",
-    "binding_src_placeholder"
-)
-fun ImageView.bindingRoundedCornerCenterCrop(
-    url: String?,
-    radius: Float,
-    drawable: Drawable?
-) {
-    ImageLoader.loadCenterCropRoundedCorner(this, url, radius.toInt(), drawable)
+@BindingAdapter("binding_srl_footerAccentColor")
+fun SmartRefreshLayout.bindingFooterAccentColor(@ColorInt color: Int) {
+    if (refreshFooter == null) {
+        setRefreshFooter(ClassicsFooter(context).apply { setAccentColor(color) })
+    } else {
+        (refreshFooter as? ClassicsFooter)?.setAccentColor(color)
+    }
 }

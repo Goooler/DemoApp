@@ -10,20 +10,22 @@ import java.io.File
 import java.util.concurrent.TimeUnit
 
 @Suppress("unused", "MemberVisibilityCanBePrivate")
-abstract class BaseRetrofitHelper protected constructor() {
+abstract class BaseRetrofitHelper {
 
     private val retrofit by lazy {
-        Retrofit.Builder()
+        val builder = Retrofit.Builder()
             .baseUrl(baseUrl)
             .client(buildOkHttpClient())
             .addConverterFactory(converterFactory)
-            .addCallAdapterFactory(callAdapterFactory)
-            .build()
+        callAdapterFactory?.let {
+            builder.addCallAdapterFactory(it)
+        }
+        builder.build()
     }
 
-    fun <T> createApiService(service: Class<T>): T {
-        return retrofit.create(service)
-    }
+    fun <T> create(service: Class<T>): T = retrofit.create(service)
+
+    inline fun <reified T> create(): T = create(T::class.java)
 
     protected fun buildOkHttpClient(): OkHttpClient {
         val cache = Cache(
@@ -48,7 +50,7 @@ abstract class BaseRetrofitHelper protected constructor() {
 
     protected abstract val converterFactory: Converter.Factory
 
-    protected abstract val callAdapterFactory: CallAdapter.Factory
+    protected abstract val callAdapterFactory: CallAdapter.Factory?
 
     companion object {
         private const val CONNECT_TIMEOUT: Long = 20

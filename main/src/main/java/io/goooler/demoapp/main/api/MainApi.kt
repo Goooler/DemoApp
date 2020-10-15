@@ -1,5 +1,6 @@
 package io.goooler.demoapp.main.api
 
+import io.goooler.demoapp.base.util.ParamMap
 import io.goooler.demoapp.main.bean.RepoListBean
 import io.reactivex.rxjava3.core.Observable
 import retrofit2.http.GET
@@ -13,12 +14,12 @@ interface MainApi {
     @GET("users/{user}/repos")
     fun getRepoListRx(
         @Path("user") user: String,
-        @QueryMap params: HashMap<String, Any>
+        @QueryMap params: ParamMap
     ): Observable<RepoList>
 
     @GET("users/{user}/repos")
     suspend fun getRepoListCr(
         @Path("user") user: String,
-        @QueryMap params: HashMap<String, Any>
+        @QueryMap params: ParamMap
     ): RepoList
 }

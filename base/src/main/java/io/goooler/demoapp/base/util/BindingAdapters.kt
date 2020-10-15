@@ -2,6 +2,7 @@
 
 package io.goooler.demoapp.base.util
 
+import android.graphics.Color
 import android.graphics.Outline
 import android.graphics.Paint
 import android.graphics.Typeface
@@ -14,17 +15,15 @@ import android.view.ViewOutlineProvider
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.ColorInt
-import androidx.core.view.forEach
 import androidx.databinding.BindingAdapter
-import com.scwang.smart.refresh.footer.ClassicsFooter
-import com.scwang.smart.refresh.header.ClassicsHeader
-import com.scwang.smart.refresh.layout.SmartRefreshLayout
-import com.scwang.smart.refresh.layout.listener.OnLoadMoreListener
-import com.scwang.smart.refresh.layout.listener.OnRefreshListener
-import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 import java.io.File
 
 //------------------------View --------------------------//
+
+@BindingAdapter("binding_isEnable")
+fun View.bindingIsEnable(enable: Boolean) {
+    isEnabled = enable
+}
 
 @BindingAdapter("binding_isGone")
 fun View.bindingIsGone(isGone: Boolean) {
@@ -325,103 +324,76 @@ fun TextView.bindingPaintFlagThru(flag: Boolean) {
     }
 }
 
-//------------------------SmartRefreshLayout--------------------------//
+//---------------------View-------------------------------//
 
-@BindingAdapter("binding_srl_onRefreshLoadMoreListener")
-fun SmartRefreshLayout.bindingOnRefreshLoadMoreListener(listener: OnRefreshLoadMoreListener) {
-    setOnRefreshLoadMoreListener(listener)
-}
-
-@BindingAdapter("binding_srl_onRefreshListener")
-fun SmartRefreshLayout.bindingOnRefreshListener(listener: OnRefreshListener) {
-    setOnRefreshListener(listener)
-}
-
-@BindingAdapter("binding_srl_onLoadMoreListener")
-fun SmartRefreshLayout.bindingOnLoadMoreListener(listener: OnLoadMoreListener) {
-    setOnLoadMoreListener(listener)
-}
-
-@BindingAdapter("binding_srl_close_animation")
-fun SmartRefreshLayout.bindingCloseAnimation(isClose: Boolean) {
-    if (isClose) {
-        //关闭下拉动画特效，减少延迟感觉
-        setReboundDuration(0)
-        finishRefresh(0)
+/**
+ * 设置 view 的背景，支持圆形和矩形，渐变色和描边圆角等
+ *
+ * @param shapeType 背景形状，圆、矩形等
+ * @param gradualColors 渐变色数组，和填充色互斥
+ * @param angle 渐变色角度
+ * @param solidColor 填充色，和渐变色数组互斥
+ * @param strokeColor 描边色
+ * @param stroke 描边粗细
+ * @param radius 圆角大小
+ */
+private fun View.setBgShapeGradual(
+    shapeType: Int = GradientDrawable.RECTANGLE,
+    @ColorInt gradualColors: IntArray? = null,
+    angle: Int = -1,
+    @ColorInt solidColor: Int? = null,
+    @ColorInt strokeColor: Int = Color.TRANSPARENT,
+    stroke: Float = 0f,
+    radius: Float = 0f
+) {
+    background = GradientDrawable().apply {
+        shape = shapeType
+        useLevel = false
+        gradientType = GradientDrawable.LINEAR_GRADIENT
+        orientation = when (angle % 360) {
+            45 -> GradientDrawable.Orientation.BL_TR
+            90 -> GradientDrawable.Orientation.BOTTOM_TOP
+            135 -> GradientDrawable.Orientation.BR_TL
+            180 -> GradientDrawable.Orientation.RIGHT_LEFT
+            225 -> GradientDrawable.Orientation.TR_BL
+            270 -> GradientDrawable.Orientation.TOP_BOTTOM
+            315 -> GradientDrawable.Orientation.TL_BR
+            else -> GradientDrawable.Orientation.LEFT_RIGHT
+        }
+        if (gradualColors != null && solidColor == null) {
+            colors = gradualColors
+        } else if (gradualColors == null && solidColor != null) {
+            setColor(solidColor)
+        }
+        setStroke(stroke.toInt(), strokeColor)
+        cornerRadius = radius
     }
 }
 
-@BindingAdapter("binding_srl_refreshFinish")
-fun SmartRefreshLayout.bindingRefreshFinish(isFinish: Boolean) {
-    if (isFinish) finishRefresh()
-}
-
-@BindingAdapter("binding_srl_loadMoreFinish")
-fun SmartRefreshLayout.bindingLoadMoreFinish(isFinish: Boolean) {
-    if (isFinish) finishLoadMore()
-}
-
-@BindingAdapter("binding_srl_enableLoadMore")
-fun SmartRefreshLayout.bindingEnableLoadMore(enable: Boolean) {
-    setEnableLoadMore(enable)
-}
-
-@BindingAdapter("binding_srl_enableRefresh")
-fun SmartRefreshLayout.bindingEnableRefresh(enable: Boolean) {
-    setEnableRefresh(enable)
-}
-
-@BindingAdapter("binding_srl_noMore")
-fun SmartRefreshLayout.bindingNoMoreData(haveNoMore: Boolean) {
-    setNoMoreData(haveNoMore)
-}
-
-@BindingAdapter("binding_srl_headerEmpty")
-fun SmartRefreshLayout.bindingHeaderEmpty(isEmpty: Boolean) {
-    (refreshHeader as? ClassicsHeader)?.forEach {
-        it.alpha = if (isEmpty) 0f else 1f
-    }
-}
-
-@BindingAdapter("binding_srl_footerEmpty")
-fun SmartRefreshLayout.bindingFooterEmpty(isEmpty: Boolean) {
-    (refreshFooter as? ClassicsFooter)?.forEach {
-        it.alpha = if (isEmpty) 0f else 1f
-    }
-}
-
-@BindingAdapter("binding_srl_headerPrimaryColor")
-fun SmartRefreshLayout.bindingHeaderPrimaryColor(@ColorInt color: Int) {
-    if (refreshHeader == null) {
-        setRefreshHeader(ClassicsHeader(context).apply { setPrimaryColor(color) })
-    } else {
-        (refreshHeader as? ClassicsHeader)?.setPrimaryColor(color)
-    }
-}
-
-@BindingAdapter("binding_srl_footerPrimaryColor")
-fun SmartRefreshLayout.bindingFooterPrimaryColor(@ColorInt color: Int) {
-    if (refreshFooter == null) {
-        setRefreshFooter(ClassicsFooter(context).apply { setPrimaryColor(color) })
-    } else {
-        (refreshFooter as? ClassicsFooter)?.setPrimaryColor(color)
-    }
-}
-
-@BindingAdapter("binding_srl_headerAccentColor")
-fun SmartRefreshLayout.bindingHeaderAccentColor(@ColorInt color: Int) {
-    if (refreshHeader == null) {
-        setRefreshHeader(ClassicsHeader(context).apply { setAccentColor(color) })
-    } else {
-        (refreshHeader as? ClassicsHeader)?.setAccentColor(color)
-    }
-}
-
-@BindingAdapter("binding_srl_footerAccentColor")
-fun SmartRefreshLayout.bindingFooterAccentColor(@ColorInt color: Int) {
-    if (refreshFooter == null) {
-        setRefreshFooter(ClassicsFooter(context).apply { setAccentColor(color) })
-    } else {
-        (refreshFooter as? ClassicsFooter)?.setAccentColor(color)
+/**
+ * 设置 view 在矩形某几个角上需要圆角的背景
+ *
+ * @param solidColor 填充色
+ * @param topLeft 左上圆角大小
+ * @param topRight 右上圆角大小
+ * @param bottomLeft 左下圆角大小
+ * @param bottomRight 左下圆角大小
+ */
+private fun View.setBgShapeCorners(
+    @ColorInt solidColor: Int = Color.WHITE,
+    topLeft: Float = 0f,
+    topRight: Float = 0f,
+    bottomLeft: Float = 0f,
+    bottomRight: Float = 0f
+) {
+    background = GradientDrawable().apply {
+        shape = GradientDrawable.RECTANGLE
+        setColor(solidColor)
+        cornerRadii = floatArrayOf(
+            topLeft, topLeft,
+            topRight, topRight,
+            bottomRight, bottomRight,
+            bottomLeft, bottomLeft
+        )
     }
 }

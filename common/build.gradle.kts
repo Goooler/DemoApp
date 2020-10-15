@@ -18,10 +18,9 @@ dependencies {
     api(Libs.arouter)
     kapt(Libs.arouterKapt)
 
+    // UI
+    api(Libs.smartRefreshLayout)
+
     // async
     api(Libs.rx)
-
-    // storage
-    api(Libs.objectBox)
-    api(Libs.mmkv)
 }

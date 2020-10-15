@@ -6,9 +6,6 @@ import android.webkit.WebView
 import androidx.annotation.MainThread
 import androidx.annotation.WorkerThread
 import androidx.multidex.MultiDexApplication
-import com.scwang.smart.refresh.footer.ClassicsFooter
-import com.scwang.smart.refresh.header.ClassicsHeader
-import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -34,7 +31,6 @@ abstract class BaseApplication : MultiDexApplication() {
     protected open fun initRight() {
         app = this
         initWebView()
-        initSmartRefresh()
     }
 
     /**
@@ -53,21 +49,6 @@ abstract class BaseApplication : MultiDexApplication() {
             if (processName != packageName) {
                 WebView.setDataDirectorySuffix(processName)
             }
-        }
-    }
-
-    private fun initSmartRefresh() {
-        SmartRefreshLayout.setDefaultRefreshHeaderCreator { context, refreshLayout ->
-            refreshLayout.setPrimaryColorsId(
-                android.R.color.transparent, android.R.color.darker_gray
-            )
-            ClassicsHeader(context)
-        }
-        SmartRefreshLayout.setDefaultRefreshFooterCreator { context, refreshLayout ->
-            refreshLayout.setPrimaryColorsId(
-                android.R.color.transparent, android.R.color.darker_gray
-            )
-            ClassicsFooter(context)
         }
     }
 

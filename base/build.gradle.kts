@@ -13,9 +13,9 @@ dependencies {
     // architecture
     api(Libs.coroutines)
     api(Libs.core)
-    api(Libs.annotation)
-    api(Libs.multiDex)
     api(Libs.lifecycle)
+    api(Libs.multiDex)
+    api(Libs.annotation)
 
     // UI
     api(Libs.appCompat)
@@ -23,7 +23,6 @@ dependencies {
     api(Libs.material)
     api(Libs.constraintLayout)
     api(Libs.cardView)
-    api(Libs.smartRefreshLayout)
 
     // network
     api(Libs.okHttp)

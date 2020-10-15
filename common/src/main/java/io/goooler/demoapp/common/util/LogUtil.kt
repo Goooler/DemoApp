@@ -1,9 +1,9 @@
 @file:Suppress("unused")
 
-package io.goooler.demoapp.base.util
+package io.goooler.demoapp.common.util
 
 import android.util.Log
-import io.goooler.demoapp.base.BuildConfig
+import io.goooler.demoapp.common.BuildConfig
 
 /**
  * Log 工具的简单封装，可自由控制全局 log 输出

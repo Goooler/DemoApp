@@ -21,7 +21,7 @@ class MainViewModel(application: Application) : BaseRxViewModel(application) {
     val title = MutableStringLiveData()
 
     fun initData() {
-        requestWithCr()
+        requestWithRx()
     }
 
     /**

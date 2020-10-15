@@ -1,6 +1,6 @@
 @file:Suppress("unused")
 
-package io.goooler.demoapp.base.util
+package io.goooler.demoapp.common.util
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -10,6 +10,8 @@ import androidx.annotation.AnyThread
 import androidx.annotation.StringRes
 import androidx.annotation.UiThread
 import androidx.annotation.WorkerThread
+import io.goooler.demoapp.base.core.BaseApplication
+import io.goooler.demoapp.base.util.isMainThread
 
 /**
  * Toast 简单封装
@@ -20,8 +22,8 @@ object ToastUtil {
     private var toast: Toast? = null
 
     @AnyThread
-    fun showToastInAnyThread(context: Context, @StringRes strResId: Int) {
-        showToastInAnyThread(context, context.getString(strResId))
+    fun show(context: Context, @StringRes strResId: Int) {
+        show(context, context.getString(strResId))
     }
 
     /**
@@ -30,7 +32,7 @@ object ToastUtil {
      * @param text string 文本
      */
     @AnyThread
-    fun showToastInAnyThread(context: Context, text: String) {
+    fun show(context: Context, text: String) {
         if (isMainThread) {
             showToastInMainThread(context, text)
         } else {
@@ -73,32 +75,22 @@ object ToastUtil {
     }
 }
 
-@UiThread
-fun String.showToastInMainThread(context: Context) {
-    ToastUtil.showToastInAnyThread(context, this)
-}
-
-@WorkerThread
-fun String.showToastInWorkerThread(context: Context) {
-    ToastUtil.showToastInWorkerThread(context, this)
+@AnyThread
+fun @receiver:StringRes Int.showToast(context: Context) {
+    ToastUtil.show(context, this)
 }
 
 @AnyThread
-fun String.showToastInAnyThread(context: Context) {
-    ToastUtil.showToastInAnyThread(context, this)
-}
-
-@UiThread
-fun @receiver:StringRes Int.showToastInMainThread(context: Context) {
-    ToastUtil.showToastInAnyThread(context, this)
-}
-
-@WorkerThread
-fun @receiver:StringRes Int.showToastInWorkerThread(context: Context) {
-    ToastUtil.showToastInWorkerThread(context, this)
+fun String.showToast(context: Context) {
+    ToastUtil.show(context, this)
 }
 
 @AnyThread
-fun @receiver:StringRes Int.showToastInAnyThread(context: Context) {
-    ToastUtil.showToastInAnyThread(context, this)
+fun showToast(@StringRes strResId: Int) {
+    strResId.showToast(BaseApplication.app)
+}
+
+@AnyThread
+fun showToast(msg: String?) {
+    msg?.showToast(BaseApplication.app)
 }

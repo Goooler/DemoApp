@@ -3,7 +3,7 @@ package io.goooler.demoapp.base.http
 import androidx.annotation.Keep
 
 @Keep
-interface BaseBean
+interface BaseResponse
 
 /**
  * 自定义的 http 返回结果
@@ -11,7 +11,7 @@ interface BaseBean
 class HttpResponse<T>(
     val status: Boolean,
     val message: String?,
-    val responseCode: Int,
+    val code: Int,
     val count: Int,
     val entry: T? = null
-) : BaseBean
+) : BaseResponse

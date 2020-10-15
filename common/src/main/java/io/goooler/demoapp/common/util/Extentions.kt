@@ -10,38 +10,26 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.blankj.utilcode.util.*
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
-import io.goooler.demoapp.base.core.BaseApplication
 import io.goooler.demoapp.base.core.BaseViewModel
 import io.goooler.demoapp.base.http.HttpResponse
-import io.goooler.demoapp.base.util.isDebug
-import io.goooler.demoapp.base.util.showToastInAnyThread
 import io.goooler.demoapp.common.BuildConfig
-import io.goooler.demoapp.common.http.RetrofitHelper
 import io.goooler.demoapp.common.type.SpKeys
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import java.util.*
 
-@AnyThread
-fun showToast(@StringRes strResId: Int) {
-    strResId.showToastInAnyThread(BaseApplication.app)
-}
-
-@AnyThread
-fun showToast(msg: String?) {
-    msg?.showToastInAnyThread(BaseApplication.app)
-}
-
-inline fun <reified T> getApiService(): Lazy<T> {
-    return lazy(LazyThreadSafetyMode.NONE) {
-        RetrofitHelper.createApiService(T::class.java)
-    }
-}
+val isDebug: Boolean = io.goooler.demoapp.base.BuildConfig.DEBUG
 
 var isFirstRun: Boolean
     get() = SPUtils.getInstance().getBoolean(SpKeys.SP_FIRST_RUN.key, true)
     set(value) = SPUtils.getInstance().put(SpKeys.SP_FIRST_RUN.key, value)
+
+inline fun debugRun(debug: () -> Unit) {
+    if (isDebug) {
+        debug()
+    }
+}
 
 /**
  * 拼上图片前缀

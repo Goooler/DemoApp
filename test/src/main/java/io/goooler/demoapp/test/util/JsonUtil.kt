@@ -1,6 +1,6 @@
 @file:Suppress("unused")
 
-package io.goooler.demoapp.test
+package io.goooler.demoapp.test.util
 
 import com.alibaba.fastjson.JSONObject
 import com.alibaba.fastjson.TypeReference

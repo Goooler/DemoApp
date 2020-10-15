@@ -4,13 +4,11 @@ package io.goooler.demoapp.base.util
 
 import android.app.Activity
 import android.graphics.Color
-import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.os.Bundle
 import android.os.Looper
 import android.text.Html
 import android.text.Spanned
-import android.view.View
 import android.webkit.URLUtil
 import androidx.annotation.ColorInt
 import androidx.annotation.IdRes
@@ -22,7 +20,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.commit
 import androidx.lifecycle.MutableLiveData
-import io.goooler.demoapp.base.BuildConfig
 import kotlinx.coroutines.*
 import java.io.File
 import java.math.BigDecimal
@@ -48,9 +45,9 @@ typealias ObservableString = ObservableField<String>
 
 typealias ObservableList<T> = ObservableField<List<T>>
 
-//---------------------Any-------------------------------//
+typealias ParamMap = HashMap<String, Any>
 
-val isDebug: Boolean = BuildConfig.DEBUG
+//---------------------Any-------------------------------//
 
 val currentTimeMillis: Long get() = System.currentTimeMillis()
 
@@ -232,80 +229,6 @@ fun Boolean?.orTrue(): Boolean = this ?: true
 
 fun Boolean?.orFalse(): Boolean = this ?: false
 
-//---------------------View-------------------------------//
-
-/**
- * 设置 view 的背景，支持圆形和矩形，渐变色和描边圆角等
- *
- * @param shapeType 背景形状，圆、矩形等
- * @param gradualColors 渐变色数组，和填充色互斥
- * @param angle 渐变色角度
- * @param solidColor 填充色，和渐变色数组互斥
- * @param strokeColor 描边色
- * @param stroke 描边粗细
- * @param radius 圆角大小
- */
-fun View.setBgShapeGradual(
-    shapeType: Int = GradientDrawable.RECTANGLE,
-    @ColorInt gradualColors: IntArray? = null,
-    angle: Int = -1,
-    @ColorInt solidColor: Int? = null,
-    @ColorInt strokeColor: Int = Color.TRANSPARENT,
-    stroke: Float = 0f,
-    radius: Float = 0f
-) {
-    background = GradientDrawable().apply {
-        shape = shapeType
-        useLevel = false
-        gradientType = GradientDrawable.LINEAR_GRADIENT
-        orientation = when (angle % 360) {
-            45 -> GradientDrawable.Orientation.BL_TR
-            90 -> GradientDrawable.Orientation.BOTTOM_TOP
-            135 -> GradientDrawable.Orientation.BR_TL
-            180 -> GradientDrawable.Orientation.RIGHT_LEFT
-            225 -> GradientDrawable.Orientation.TR_BL
-            270 -> GradientDrawable.Orientation.TOP_BOTTOM
-            315 -> GradientDrawable.Orientation.TL_BR
-            else -> GradientDrawable.Orientation.LEFT_RIGHT
-        }
-        if (gradualColors != null && solidColor == null) {
-            colors = gradualColors
-        } else if (gradualColors == null && solidColor != null) {
-            setColor(solidColor)
-        }
-        setStroke(stroke.toInt(), strokeColor)
-        cornerRadius = radius
-    }
-}
-
-/**
- * 设置 view 在矩形某几个角上需要圆角的背景
- *
- * @param solidColor 填充色
- * @param topLeft 左上圆角大小
- * @param topRight 右上圆角大小
- * @param bottomLeft 左下圆角大小
- * @param bottomRight 左下圆角大小
- */
-fun View.setBgShapeCorners(
-    @ColorInt solidColor: Int = Color.WHITE,
-    topLeft: Float = 0f,
-    topRight: Float = 0f,
-    bottomLeft: Float = 0f,
-    bottomRight: Float = 0f
-) {
-    background = GradientDrawable().apply {
-        shape = GradientDrawable.RECTANGLE
-        setColor(solidColor)
-        cornerRadii = floatArrayOf(
-            topLeft, topLeft,
-            topRight, topRight,
-            bottomRight, bottomRight,
-            bottomLeft, bottomLeft
-        )
-    }
-}
-
 //---------------------Collections-------------------------------//
 
 inline fun <E> MutableCollection<E>.removeIfMatch(predicate: (e: E) -> Boolean): Boolean {
@@ -357,6 +280,9 @@ fun <T> List<T>.secondOrNull(): T? {
 fun <T> List<T>.thirdOrNull(): T? {
     return if (size < 3) null else this[2]
 }
+
+fun paramMapOf(vararg pairs: Pair<String, Any>): HashMap<String, Any> =
+    HashMap<String, Any>(pairs.size).apply { putAll(pairs) }
 
 //---------------------Coroutine-------------------------------//
 
@@ -442,11 +368,5 @@ inline fun Boolean.trueRun(whenTrue: () -> Unit) {
 inline fun Boolean.falseRun(whenFalse: () -> Unit) {
     if (!this) {
         whenFalse()
-    }
-}
-
-inline fun debugRun(debug: () -> Unit) {
-    if (BuildConfig.DEBUG) {
-        debug()
     }
 }

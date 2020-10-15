@@ -1,6 +1,6 @@
 @file:Suppress("UNUSED_PARAMETER", "unused")
 
-package io.goooler.demoapp.common.util
+package io.goooler.demoapp.test.util
 
 import com.tencent.mmkv.MMKV
 

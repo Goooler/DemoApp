@@ -14,6 +14,8 @@ dependencies {
     implementation(project(getModuleName(Module.Base)))
     implementation(Libs.fastjson)
     implementation(Libs.gson)
+    implementation(Libs.mmkv)
+    implementation(Libs.objectBox)
 
     testImplementation("junit:junit:4.13")
     androidTestImplementation("androidx.test.ext:junit:1.1.2")
