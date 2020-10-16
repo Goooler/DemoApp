@@ -58,6 +58,7 @@ const val utilsVersion = "1.29.0"
 const val pagingVersion = "3.0.0-alpha06"
 const val viewPager2Version = "1.0.0"
 const val protobufVersion = "0.8.12"
+const val photoViewVersion = "2.3.0"
 
 object Plugins {
     const val kotlinAndroid = "kotlin-android"
@@ -106,6 +107,7 @@ object Libs {
     const val retrofit = "com.squareup.retrofit2:retrofit:$retrofitVersion"
     const val paging = "androidx.paging:paging-runtime:$pagingVersion"
     const val viewPager2 = "androidx.viewpager2:viewpager2:$viewPager2Version"
+    const val photoView = "com.github.chrisbanes:PhotoView:$photoViewVersion"
 
     const val glideKapt = "com.github.bumptech.glide:compiler:$glideVersion"
     const val objectBoxKapt = "io.objectbox:objectbox-processor:$objectBoxVersion"

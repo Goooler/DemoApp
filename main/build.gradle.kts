@@ -32,6 +32,7 @@ dependencies {
     implementation(project(getModuleName(Module.Adapter)))
 
     implementation(Libs.protobufLite)
+    implementation(Libs.photoView)
     kapt(Libs.arouterKapt)
     kapt(Libs.objectBoxKapt)
 }

@@ -19,8 +19,11 @@ import kotlinx.coroutines.launch
 class MainViewModel(application: Application) : BaseRxViewModel(application) {
 
     val title = MutableStringLiveData()
+    val oneplusUrl = MutableStringLiveData()
 
     fun initData() {
+        oneplusUrl.value =
+            "https://image01.oneplus.cn/shop/202010/15/1-M00-0C-89-rBqgjV-H7t-AI-nBAAiPBEq6NTM960.jpg"
         requestWithRx()
     }
 
