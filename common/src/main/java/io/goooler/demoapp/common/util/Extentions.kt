@@ -19,7 +19,7 @@ import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import java.util.*
 
-val isDebug: Boolean = io.goooler.demoapp.base.BuildConfig.DEBUG
+val isDebug: Boolean = BuildConfig.DEBUG
 
 var isFirstRun: Boolean
     get() = SPUtils.getInstance().getBoolean(SpKeys.SP_FIRST_RUN.key, true)

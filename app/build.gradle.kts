@@ -11,8 +11,6 @@ setupCommon().run {
     defaultConfig {
         applicationId = appPackageName
         addManifestPlaceholders(manifestFields)
-        ndk { abiFilters.addAll(ndkLibs) }
-        multiDexEnabled = true
     }
     signingConfigs {
         create("sign") {

@@ -1,7 +1,7 @@
 import java.nio.charset.StandardCharsets
 
 buildscript {
-    apply(from = "repositories.gradle.kts")
+    apply("repositories.gradle.kts")
 
     repositories {
         google()
@@ -15,7 +15,7 @@ buildscript {
 }
 
 allprojects {
-    apply(from = "${rootProject.projectDir}/repositories.gradle.kts")
+    apply("${rootDir.path}/repositories.gradle.kts")
 }
 
 task("clean", Delete::class) {
