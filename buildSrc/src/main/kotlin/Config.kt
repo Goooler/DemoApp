@@ -49,6 +49,8 @@ val apiHosts = mapOf(
     Flavor.Online.tag to "https://api.github.com/"
 )
 
+fun Project.findPropertyString(key: String): String = findProperty(key) as String
+
 fun getModuleName(module: Module) = ":${module.tag}"
 
 fun getResourcePrefix(module: Module) = "${module.tag}_"

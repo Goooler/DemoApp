@@ -1,11 +1,12 @@
 plugins {
-    id(Plugins.androidLibrary)
+    id(Plugins.androidApplication)
     id(Plugins.kotlinAndroid)
     id(Plugins.kotlinKapt)
 }
 
-setupCore().run {
+setupCommon().run {
     defaultConfig {
+        applicationId = "${appPackageName}.test"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 }

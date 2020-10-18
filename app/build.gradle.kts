@@ -14,10 +14,10 @@ setupCommon().run {
     }
     signingConfigs {
         create("sign") {
-            keyAlias = "key0"
-            keyPassword = "demo.app"
-            storeFile = File("${rootDir.path}/gradle/demo.jks")
-            storePassword = "demo.app"
+            keyAlias = findPropertyString("keyAlias")
+            keyPassword = findPropertyString("keyPassword")
+            storeFile = File(rootDir.path, findPropertyString("storeFile"))
+            storePassword = findPropertyString("storePassword")
         }
     }
     buildTypes {
