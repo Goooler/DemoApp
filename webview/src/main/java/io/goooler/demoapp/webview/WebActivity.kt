@@ -25,7 +25,7 @@ class WebActivity : BaseActivity() {
         binding.layoutTitle.listener = listener
         intent.extras?.getString(RouterManager.PARAMS)?.let {
             webFragment = WebFragment.newInstance(it)
-            webFragment!!.eventListener = listener
+            webFragment!!.onEventListener = listener
             supportFragmentManager.addFragment(R.id.fragment_container, webFragment!!)
         }
     }
@@ -34,7 +34,7 @@ class WebActivity : BaseActivity() {
         webFragment?.goBack()
     }
 
-    private val listener = object : View.OnClickListener, WebFragment.EventListener {
+    private val listener = object : View.OnClickListener, WebFragment.OnEventListener {
         override fun onClick(v: View?) {
             when (v) {
                 binding.layoutTitle.ivLeft -> {

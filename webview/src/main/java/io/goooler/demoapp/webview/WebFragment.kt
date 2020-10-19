@@ -1,12 +1,12 @@
 package io.goooler.demoapp.webview
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
-import com.tencent.smtt.sdk.WebChromeClient
-import com.tencent.smtt.sdk.WebView
 import io.goooler.demoapp.base.core.BaseFragment
 import io.goooler.demoapp.base.util.putArguments
 import io.goooler.demoapp.base.util.unsafeLazy
@@ -15,27 +15,16 @@ import io.goooler.demoapp.webview.databinding.WebFragmentBinding
 class WebFragment : BaseFragment() {
 
     private val binding by unsafeLazy {
-        WebFragmentBinding.inflate(layoutInflater)
-    }
-
-    private val initOnce by unsafeLazy {
-        binding.lifecycleOwner = this
-        binding.webView.webChromeClient = object : WebChromeClient() {
-            override fun onProgressChanged(webView: WebView, i: Int) {
-                super.onProgressChanged(webView, i)
-                eventListener?.onProgressChanged(i)
-            }
-
-            override fun onReceivedTitle(webView: WebView, title: String) {
-                super.onReceivedTitle(webView, title)
-                eventListener?.onReceivedTitle(title)
-            }
+        WebFragmentBinding.inflate(layoutInflater).apply {
+            lifecycleOwner = viewLifecycleOwner
+            webView.onEventListener = listener
+            lifecycle.addObserver(webView)
         }
     }
 
-    var eventListener: EventListener? = null
+    var onEventListener: OnEventListener? = null
 
-    val url: String get() = binding.webView.url
+    val url: String? get() = binding.webView.url
 
     fun goBack() {
         if (binding.webView.canGoBack()) binding.webView.goBack() else finish()
@@ -46,7 +35,6 @@ class WebFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        initOnce
         return binding.root
     }
 
@@ -57,22 +45,21 @@ class WebFragment : BaseFragment() {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        binding.webView.onResume()
+    private val listener = object : X5WebView.OnEventListener {
+        override fun onInterceptUri(uri: Uri) {
+            startActivity(Intent(Intent.ACTION_VIEW, uri))
+        }
+
+        override fun onReceivedTitle(title: String) {
+            onEventListener?.onReceivedTitle(title)
+        }
+
+        override fun onProgressChanged(i: Int) {
+            onEventListener?.onProgressChanged(i)
+        }
     }
 
-    override fun onPause() {
-        super.onPause()
-        binding.webView.onPause()
-    }
-
-    override fun onDestroyView() {
-        binding.webView.onDestroy()
-        super.onDestroyView()
-    }
-
-    interface EventListener {
+    interface OnEventListener {
         fun onReceivedTitle(title: String)
         fun onProgressChanged(i: Int)
     }

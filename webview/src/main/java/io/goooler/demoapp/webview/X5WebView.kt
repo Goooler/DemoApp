@@ -2,15 +2,44 @@ package io.goooler.demoapp.webview
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.net.Uri
 import android.util.AttributeSet
+import android.webkit.URLUtil
+import androidx.lifecycle.DefaultLifecycleObserver
+import androidx.lifecycle.LifecycleOwner
+import com.tencent.smtt.sdk.WebChromeClient
 import com.tencent.smtt.sdk.WebSettings
 import com.tencent.smtt.sdk.WebView
 import com.tencent.smtt.sdk.WebViewClient
 
-class X5WebView(context: Context, attrs: AttributeSet? = null) : WebView(context, attrs) {
+@Suppress("MemberVisibilityCanBePrivate")
+class X5WebView(context: Context, attrs: AttributeSet? = null) : WebView(context, attrs),
+    DefaultLifecycleObserver {
+
+    var onEventListener: OnEventListener? = null
 
     init {
         initWebViewSettings()
+    }
+
+    fun onDestroy() {
+        stopLoading()
+        destroy()
+    }
+
+    override fun onResume(owner: LifecycleOwner) {
+        super<DefaultLifecycleObserver>.onResume(owner)
+        onResume()
+    }
+
+    override fun onPause(owner: LifecycleOwner) {
+        super<DefaultLifecycleObserver>.onPause(owner)
+        onPause()
+    }
+
+    override fun onDestroy(owner: LifecycleOwner) {
+        onDestroy()
+        super.onDestroy(owner)
     }
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -44,14 +73,16 @@ class X5WebView(context: Context, attrs: AttributeSet? = null) : WebView(context
             // 设置默认字体大小
             defaultFontSize = 18
         }
-
         webViewClient = object : WebViewClient() {
             override fun shouldOverrideUrlLoading(
                 view: WebView,
                 url: String
             ): Boolean {
-                // 防止加载网页时调起系统浏览器
-                view.loadUrl(url)
+                if (URLUtil.isNetworkUrl(url)) {
+                    view.loadUrl(url)
+                } else {
+                    onEventListener?.onInterceptUri(Uri.parse(url))
+                }
                 return true
             }
 
@@ -63,10 +94,22 @@ class X5WebView(context: Context, attrs: AttributeSet? = null) : WebView(context
                 super.onPageFinished(webView, s)
             }
         }
+        webChromeClient = object : WebChromeClient() {
+            override fun onProgressChanged(webView: WebView, i: Int) {
+                super.onProgressChanged(webView, i)
+                onEventListener?.onProgressChanged(i)
+            }
+
+            override fun onReceivedTitle(webView: WebView, title: String) {
+                super.onReceivedTitle(webView, title)
+                onEventListener?.onReceivedTitle(title)
+            }
+        }
     }
 
-    fun onDestroy() {
-        stopLoading()
-        destroy()
+    interface OnEventListener {
+        fun onInterceptUri(uri: Uri)
+        fun onReceivedTitle(title: String)
+        fun onProgressChanged(i: Int)
     }
 }
