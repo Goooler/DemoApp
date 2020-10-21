@@ -11,3 +11,9 @@ enum class Flavor(val tag: String) {
     Daily("daily"),
     Online("online")
 }
+
+enum class BuildConfigField(val tag: String) {
+    VersionName("VERSION_NAME"),
+    CdnPrefix("CDN_PREFIX"),
+    ApiHost("API_HOST")
+}

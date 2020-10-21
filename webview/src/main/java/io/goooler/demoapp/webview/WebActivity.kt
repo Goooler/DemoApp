@@ -31,7 +31,11 @@ class WebActivity : BaseActivity() {
     }
 
     override fun onBackPressed() {
-        webFragment?.goBack()
+        if (webFragment?.canGoBack == true) {
+            webFragment?.goBack()
+        } else {
+            super.onBackPressed()
+        }
     }
 
     private val listener = object : View.OnClickListener, WebFragment.OnEventListener {

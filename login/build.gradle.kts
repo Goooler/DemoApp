@@ -8,5 +8,4 @@ setupCommon(Module.Login)
 
 dependencies {
     implementation(project(getModuleName(Module.Common)))
-    kapt(Libs.arouterKapt)
 }

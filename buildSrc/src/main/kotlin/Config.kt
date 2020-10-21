@@ -1,29 +1,33 @@
+import com.android.build.api.dsl.VariantDimension
 import com.android.build.gradle.BaseExtension
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 import org.gradle.api.artifacts.Dependency
 import org.gradle.api.artifacts.dsl.DependencyHandler
 import org.gradle.api.plugins.ExtensionAware
+import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.getByName
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmOptions
 import org.jetbrains.kotlin.gradle.plugin.KaptExtension
 import java.text.SimpleDateFormat
 import java.util.*
 
-fun DependencyHandler.api(names: Array<String>): Array<Dependency?> =
-    names.map {
-        add("api", it)
-    }.toTypedArray()
+// sdk
+const val appTargetSdk = 30
+const val appBuildTool = "30.0.2"
+const val appMinSdk = 21
 
-fun DependencyHandler.implementation(names: Array<String>): Array<Dependency?> =
-    names.map {
-        add("implementation", it)
-    }.toTypedArray()
+// app
+const val appVersionName = "1.0"
+const val appPackageName = "io.goooler.demoapp"
+const val appName = "Demo"
 
-/**
- * versionCode 限长 10 位
- */
-val buildTime: Int = SimpleDateFormat("yyMMddHHmm", Locale.CHINESE).format(Date()).toInt()
+const val cdnPrefix = "https://raw.githubusercontent.com/"
+
+val apiHosts = mapOf(
+    Flavor.Daily.tag to "https://api.github.com/",
+    Flavor.Online.tag to "https://api.github.com/"
+)
 
 val javaVersion = JavaVersion.VERSION_1_8
 
@@ -42,14 +46,26 @@ val manifestFields = mapOf(
     "appName" to "Demo"
 )
 
-const val cdnPrefix = "https://raw.githubusercontent.com/"
+/**
+ * versionCode 限长 10 位
+ */
+val buildTime: Int = SimpleDateFormat("yyMMddHHmm", Locale.CHINESE).format(Date()).toInt()
 
-val apiHosts = mapOf(
-    Flavor.Daily.tag to "https://api.github.com/",
-    Flavor.Online.tag to "https://api.github.com/"
-)
+fun DependencyHandler.api(names: Array<String>): Array<Dependency?> =
+    names.map {
+        add("api", it)
+    }.toTypedArray()
+
+fun DependencyHandler.implementation(names: Array<String>): Array<Dependency?> =
+    names.map {
+        add("implementation", it)
+    }.toTypedArray()
 
 fun Project.findPropertyString(key: String): String = findProperty(key) as String
+
+fun VariantDimension.putBuildConfigStringField(name: String, value: String?) {
+    buildConfigField("String", name, "\"$value\"")
+}
 
 fun getModuleName(module: Module) = ":${module.tag}"
 
@@ -101,6 +117,10 @@ fun Project.setupCommon(module: Module? = null, useRouter: Boolean = true): Base
         }
         extensions.getByName<KaptExtension>("kapt").arguments {
             if (useRouter) arg("AROUTER_MODULE_NAME", project.name)
+        }
+        dependencies {
+            add("implementation", Libs.arouter)
+            add("kapt", Libs.arouterKapt)
         }
     }
 }

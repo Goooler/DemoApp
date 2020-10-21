@@ -4,11 +4,14 @@ plugins {
     id(Plugins.kotlinKapt)
 }
 
-setupCommon(Module.Adapter, false)
+setupCore().run {
+    resourcePrefix = getResourcePrefix(Module.Adapter)
+    defaultConfig.versionNameSuffix = getVersionNameSuffix(Module.Adapter)
+}
 
 dependencies {
-    api(Libs.core)
-    api(Libs.paging)
+    implementation(Libs.core)
     api(Libs.recyclerView)
+    api(Libs.paging)
     api(Libs.viewPager2)
 }

@@ -24,15 +24,13 @@ dependencies {
     api(Libs.constraintLayout)
     api(Libs.cardView)
 
-    // network
-    api(Libs.okHttp)
-    api(Libs.retrofit)
-    api(Libs.glide)
-    kapt(Libs.glideKapt)
-
     // utils
     api(Libs.utils)
 
-    // serializable
+    // network
+    implementation(Libs.okHttp)
+    implementation(Libs.retrofit)
+    implementation(Libs.glide)
     api(Libs.moshi)
+    kapt(Libs.glideKapt)
 }

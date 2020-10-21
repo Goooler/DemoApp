@@ -26,8 +26,10 @@ class WebFragment : BaseFragment() {
 
     val url: String? get() = binding.webView.url
 
+    val canGoBack: Boolean get() = binding.webView.canGoBack()
+
     fun goBack() {
-        if (binding.webView.canGoBack()) binding.webView.goBack() else finish()
+        binding.webView.goBack()
     }
 
     override fun onCreateView(

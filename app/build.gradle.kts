@@ -56,7 +56,6 @@ dependencies {
     implementation(project(getModuleName(Module.Login)))
     implementation(project(getModuleName(Module.Main)))
     implementation(project(getModuleName(Module.Web)))
-    kapt(Libs.arouterKapt)
 
     debugImplementation(Libs.leakCanary)
 }

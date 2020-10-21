@@ -15,6 +15,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
+import kotlin.math.abs
 
 class MainViewModel(application: Application) : BaseRxViewModel(application) {
 
@@ -32,6 +33,7 @@ class MainViewModel(application: Application) : BaseRxViewModel(application) {
      */
     private fun requestWithCr() {
         viewModelScope.launch(Dispatchers.Default) {
+            abs(1)
             try {
                 val google = defaultAsync { MainRepository.getRepoListCr("google") }
                 val microsoft = defaultAsync { MainRepository.getRepoListCr("microsoft") }

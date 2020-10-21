@@ -6,17 +6,14 @@ plugins {
 
 setupCommon(Module.Common).run {
     productFlavors.all {
-        buildConfigField("String", "VERSION_NAME", "\"$appVersionName\"")
-        buildConfigField("String", "CDN_PREFIX", "\"$cdnPrefix\"")
-        buildConfigField("String", "API_HOST", "\"${apiHosts[name]}\"")
+        putBuildConfigStringField(BuildConfigField.VersionName.tag, appVersionName)
+        putBuildConfigStringField(BuildConfigField.CdnPrefix.tag, cdnPrefix)
+        putBuildConfigStringField(BuildConfigField.ApiHost.tag, apiHosts[name])
     }
 }
 
 dependencies {
     api(project(getModuleName(Module.Base)))
-
-    api(Libs.arouter)
-    kapt(Libs.arouterKapt)
 
     // UI
     api(Libs.smartRefreshLayout)

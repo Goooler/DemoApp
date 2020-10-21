@@ -7,7 +7,7 @@ plugins {
     id(Plugins.androidLibrary)
     id(Plugins.kotlinAndroid)
     id(Plugins.kotlinKapt)
-    id("com.google.protobuf")
+    id(Plugins.protobuf)
 }
 
 setupCommon(Module.Main).run {
@@ -33,6 +33,4 @@ dependencies {
 
     implementation(Libs.protobufLite)
     implementation(Libs.photoView)
-    kapt(Libs.arouterKapt)
-    kapt(Libs.objectBoxKapt)
 }
