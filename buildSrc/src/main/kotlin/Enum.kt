@@ -14,6 +14,7 @@ enum class Flavor(val tag: String) {
 
 enum class BuildConfigField(val tag: String) {
     VersionName("VERSION_NAME"),
+    VersionCode("VERSION_CODE"),
     CdnPrefix("CDN_PREFIX"),
     ApiHost("API_HOST")
 }

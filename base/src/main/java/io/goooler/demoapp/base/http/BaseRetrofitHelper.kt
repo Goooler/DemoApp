@@ -1,13 +1,10 @@
 package io.goooler.demoapp.base.http
 
 import android.content.Context
-import io.goooler.demoapp.base.util.JsonUtil
 import okhttp3.Cache
 import okhttp3.OkHttpClient
-import retrofit2.CallAdapter
 import retrofit2.Converter
 import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
 import java.io.File
 import java.util.concurrent.TimeUnit
 
@@ -15,14 +12,12 @@ import java.util.concurrent.TimeUnit
 abstract class BaseRetrofitHelper {
 
     private val retrofit by lazy {
-        val builder = Retrofit.Builder()
+        Retrofit.Builder()
             .baseUrl(baseUrl)
             .client(buildOkHttpClient())
             .addConverterFactory(converterFactory)
-        callAdapterFactory?.let {
-            builder.addCallAdapterFactory(it)
-        }
-        builder.build()
+            .addCallAdapterFactory()
+            .build()
     }
 
     fun <T> create(service: Class<T>): T = retrofit.create(service)
@@ -46,15 +41,13 @@ abstract class BaseRetrofitHelper {
 
     protected open fun OkHttpClient.Builder.addInterceptor(): OkHttpClient.Builder = this
 
+    protected open fun Retrofit.Builder.addCallAdapterFactory(): Retrofit.Builder = this
+
     protected abstract val baseUrl: String
 
     protected abstract val context: Context
 
-    protected open val converterFactory: Converter.Factory = MoshiConverterFactory.create(
-        JsonUtil.moshi
-    )
-
-    protected open val callAdapterFactory: CallAdapter.Factory? = null
+    protected abstract val converterFactory: Converter.Factory
 
     companion object {
         private const val CONNECT_TIMEOUT: Long = 20

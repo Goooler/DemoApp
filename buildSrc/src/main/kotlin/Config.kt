@@ -19,6 +19,7 @@ const val appMinSdk = 21
 
 // app
 const val appVersionName = "1.0"
+const val appVersionCode = 20201021
 const val appPackageName = "io.goooler.demoapp"
 const val appName = "Demo"
 
@@ -67,6 +68,10 @@ fun VariantDimension.putBuildConfigStringField(name: String, value: String?) {
     buildConfigField("String", name, "\"$value\"")
 }
 
+fun VariantDimension.putBuildConfigIntField(name: String, value: Int) {
+    buildConfigField("Integer", name, value.toString())
+}
+
 fun getModuleName(module: Module) = ":${module.tag}"
 
 fun getResourcePrefix(module: Module) = "${module.tag}_"
@@ -80,7 +85,7 @@ fun Project.setupCore(): BaseExtension {
         defaultConfig {
             minSdkVersion(appMinSdk)
             targetSdkVersion(appTargetSdk)
-            versionCode = 20201013
+            versionCode = appVersionCode
             versionName = appVersionName
             vectorDrawables.useSupportLibrary = true
             ndk { abiFilters.addAll(ndkLibs) }
