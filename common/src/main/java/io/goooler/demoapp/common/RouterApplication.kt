@@ -11,9 +11,9 @@ open class RouterApplication : BaseApplication() {
 
     override fun initRight() {
         super.initRight()
-        initSmartRefresh()
         CrashHandler.init()
         ARouter.init(this)
+        initSmartRefresh()
     }
 
     private fun initSmartRefresh() {

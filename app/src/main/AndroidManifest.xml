@@ -17,7 +17,7 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
-        android:name="io.goooler.demoapp.DemoApplication"
+        android:name=".DemoApplication"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
         android:icon="@drawable/ic_github"
@@ -34,7 +34,7 @@
             android:name=".webview.WebActivity"
             android:configChanges="orientation|screenSize|keyboardHidden" />
 
-        <activity android:name="io.goooler.demoapp.login.ui.LoginActivity">
+        <activity android:name=".login.ui.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

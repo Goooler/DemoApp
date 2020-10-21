@@ -1,11 +1,12 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!--优化启动黑屏-->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/md_purple_500</item>
+        <item name="colorPrimaryVariant">@color/md_purple_700</item>
+        <item name="colorOnPrimary">@color/white</item>
         <item name="android:windowBackground">@color/white</item>
-        <item name="colorPrimary">@color/transparent</item>
-        <item name="colorPrimaryDark">@color/transparent</item>
-        <item name="colorAccent">@color/transparent</item>
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
     </style>
 
     <style name="BaseDialogTheme" parent="Theme.AppCompat.Dialog">
