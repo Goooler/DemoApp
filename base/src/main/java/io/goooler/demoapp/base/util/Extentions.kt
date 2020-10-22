@@ -47,6 +47,12 @@ typealias ObservableList<T> = ObservableField<List<T>>
 
 typealias ParamMap = HashMap<String, Any>
 
+typealias IntList = List<Int>
+
+typealias FloatList = List<Float>
+
+typealias DoubleList = List<Double>
+
 //---------------------Any-------------------------------//
 
 val currentTimeMillis: Long get() = System.currentTimeMillis()

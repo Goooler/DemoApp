@@ -1,4 +1,4 @@
-package io.goooler.demoapp.common.content
+package io.goooler.demoapp.common.provider
 
 import androidx.core.content.FileProvider
 import io.goooler.demoapp.common.util.log
