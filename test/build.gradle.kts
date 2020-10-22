@@ -4,7 +4,7 @@ plugins {
     id(Plugins.kotlinKapt)
 }
 
-setupCommon().run {
+setupApp().run {
     defaultConfig {
         applicationId = "${appPackageName}.test"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -12,7 +12,7 @@ setupCommon().run {
 }
 
 dependencies {
-    implementation(project(getModuleName(Module.Base)))
+    implementation(project(getModuleName(Module.Common)))
     implementation(Libs.fastjson)
     implementation(Libs.gson)
     implementation(Libs.mmkv)

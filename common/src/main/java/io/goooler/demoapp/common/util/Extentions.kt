@@ -43,31 +43,6 @@ fun SmartRefreshLayout.finishRefreshAndLoadMore() {
     finishLoadMore()
 }
 
-/**
- * 获取图片宽高比例，如：/assets/img/2019/07/18/n_1563460410803_3849___size550x769.jpg
- */
-fun String.getPicSizeByUrl(defaultWidth: Int, defaultHeight: Int): Array<Int> {
-    val flag = "size"
-    val sizeArray = arrayOf(
-        defaultWidth, defaultHeight
-    )
-    if (contains(BuildConfig.CDN_PREFIX) && contains(flag)) {
-        Regex("$flag(\\d+x\\d+)")
-            .findAll(this)
-            .forEach {
-                val mXXXxXXX = it.value.replace(flag, "")
-                val list = mXXXxXXX.split("x")
-                if (list.size == 2) {
-                    sizeArray.apply {
-                        set(0, list[0].toInt())
-                        set(0, list[1].toInt())
-                    }
-                }
-            }
-    }
-    return sizeArray
-}
-
 fun Long.toDateString(pattern: String): String {
     return TimeUtils.millis2String(this, pattern)
 }
@@ -183,14 +158,6 @@ fun BaseViewModel.checkStatusAndEntryWithToast(response: HttpResponse<*>): Boole
         if (!it) {
             showToast(response.message)
         }
-    }
-}
-
-fun BaseViewModel.silentThrowable(throwable: Throwable) {
-    if (isDebug) {
-        toastThrowable(throwable)
-    } else {
-        // todo 日志上报
     }
 }
 

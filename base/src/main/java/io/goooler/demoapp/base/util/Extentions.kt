@@ -68,9 +68,7 @@ fun String.fromHtml(): Spanned {
     }
 }
 
-fun CharSequence?.isNotNullOrEmpty(): Boolean {
-    return !isNullOrEmpty()
-}
+fun CharSequence?.isNotNullOrEmpty(): Boolean = !isNullOrEmpty()
 
 /**
  * subString 防越界处理
@@ -135,19 +133,14 @@ fun String?.safeToColor(@ColorInt default: Int = 0): Int {
     }
 }
 
-/**
- * 验证是否属于正确的 url 格式
- */
-fun String.isNetworkUrl(): Boolean {
-    return URLUtil.isNetworkUrl(this)
-}
+fun String?.isNetworkUrl(): Boolean = URLUtil.isNetworkUrl(this)
+
+fun String?.isUri(): Boolean = URLUtil.isValidUrl(this)
 
 /**
  * 验证手机号格式是否正确
  */
-fun String.isValidPhoneFormat(): Boolean {
-    return startsWith("1") && length == 11
-}
+fun String.isValidPhoneFormat(): Boolean = startsWith("1") && length == 11
 
 /**
  * 隐藏手机号
@@ -247,16 +240,12 @@ fun <E> MutableList<E>.remove() {
     removeAt(0)
 }
 
-fun <T> Collection<T>?.isNotNullOrEmpty(): Boolean {
-    return !isNullOrEmpty()
-}
+fun <T> Collection<T>?.isNotNullOrEmpty(): Boolean = !isNullOrEmpty()
 
 /**
  * 判断集合内是否仅有一个元素
  */
-fun <T> Collection<T>?.isSingle(): Boolean {
-    return this != null && size == 1
-}
+fun <T> Collection<T>?.isSingle(): Boolean = this != null && size == 1
 
 /**
  * 判断集合内是否有多个元素
@@ -356,17 +345,17 @@ inline fun <reified T : ViewDataBinding> Activity.binding(@LayoutRes resId: Int)
 /**
  * 条件为真时执行
  */
-inline fun Boolean.trueRun(whenTrue: () -> Unit) {
+inline fun Boolean.trueRun(block: () -> Unit) {
     if (this) {
-        whenTrue()
+        block()
     }
 }
 
 /**
  * 条件为假时执行
  */
-inline fun Boolean.falseRun(whenFalse: () -> Unit) {
+inline fun Boolean.falseRun(block: () -> Unit) {
     if (!this) {
-        whenFalse()
+        block()
     }
 }

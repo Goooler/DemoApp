@@ -2,72 +2,22 @@
 
 package io.goooler.demoapp.common.util
 
-import android.widget.ImageView
 import androidx.annotation.ColorInt
 import androidx.core.view.forEach
 import androidx.databinding.BindingAdapter
 import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
-import io.goooler.demoapp.base.util.image.ImageLoader
-
-//------------------------ImageLoader--------------------------//
-
-@BindingAdapter(
-    "binding_src_url_fixWidth",
-    "binding_src_baseWidth",
-    "binding_src_baseHeight"
-)
-fun ImageView.bindingImageUrlFixWidth(
-    url: String?,
-    baseWidth: Float,
-    baseHeight: Float
-) {
-    url?.let {
-        val size = it.getPicSizeByUrl(baseWidth.toInt(), baseHeight.toInt())
-        layoutParams.height = baseHeight.toInt()
-        layoutParams.width = if (size[0] > 0 && size[1] > 0) {
-            (baseHeight / size[1] * size[0]).toInt()
-        } else {
-            baseWidth.toInt()
-        }
-        requestLayout()
-        ImageLoader.load(this, it)
-    }
-}
-
-@BindingAdapter(
-    "binding_src_url_fixHeight",
-    "binding_src_baseWidth",
-    "binding_src_baseHeight"
-)
-fun ImageView.bindingImageUrlFixHeight(
-    url: String?,
-    baseWidth: Float,
-    baseHeight: Float
-) {
-    url?.let {
-        val size = it.getPicSizeByUrl(baseWidth.toInt(), baseHeight.toInt())
-        layoutParams.width = baseWidth.toInt()
-        layoutParams.height = if (size[0] > 0 && size[1] > 0) {
-            (baseWidth / size[0] * size[1]).toInt()
-        } else {
-            baseHeight.toInt()
-        }
-        requestLayout()
-        ImageLoader.load(this, it)
-    }
-}
 
 //------------------------SmartRefreshLayout--------------------------//
 
 @BindingAdapter("binding_srl_refreshFinish")
-fun SmartRefreshLayout.bindingRefreshFinish(isFinish: Boolean) {
+fun SmartRefreshLayout.bindingFinishRefresh(isFinish: Boolean) {
     if (isFinish) finishRefresh()
 }
 
 @BindingAdapter("binding_srl_loadMoreFinish")
-fun SmartRefreshLayout.bindingLoadMoreFinish(isFinish: Boolean) {
+fun SmartRefreshLayout.bindingFinishLoadMore(isFinish: Boolean) {
     if (isFinish) finishLoadMore()
 }
 

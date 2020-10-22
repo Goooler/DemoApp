@@ -7,41 +7,19 @@ plugins {
     id(Plugins.kotlinKapt)
 }
 
-setupCommon().run {
+setupApp().run {
     defaultConfig {
         applicationId = appPackageName
         addManifestPlaceholders(manifestFields)
     }
-    signingConfigs {
-        create("sign") {
-            keyAlias = findPropertyString("keyAlias")
-            keyPassword = findPropertyString("keyPassword")
-            storeFile = File(rootDir.path, findPropertyString("storeFile"))
-            storePassword = findPropertyString("storePassword")
-        }
-    }
     buildTypes {
         getByName("release") {
-            signingConfig = signingConfigs["sign"]
-            isMinifyEnabled = true
-            isZipAlignEnabled = true
-            isShrinkResources = true
             resValue("string", "app_name", appName)
-            proguardFiles(
-                "${rootDir.path}/gradle/proguard-rules.pro"
-            )
         }
         getByName("debug") {
-            signingConfig = signingConfigs["sign"]
-            applicationIdSuffix = ".debug"
-            versionNameSuffix = ".debug"
             resValue("string", "app_name", "${appName}.debug")
-            isJniDebuggable = true
-            isRenderscriptDebuggable = true
-            isCrunchPngs = false
         }
     }
-    compileOptions.isCoreLibraryDesugaringEnabled = true
     (this as AbstractAppExtension).applicationVariants.all {
         outputs.all {
             (this as BaseVariantOutputImpl).outputFileName =
@@ -51,7 +29,6 @@ setupCommon().run {
 }
 
 dependencies {
-    coreLibraryDesugaring(Libs.desugar)
     implementation(project(getModuleName(Module.Common)))
     implementation(project(getModuleName(Module.Login)))
     implementation(project(getModuleName(Module.Main)))

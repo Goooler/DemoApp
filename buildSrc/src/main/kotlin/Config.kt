@@ -6,9 +6,11 @@ import org.gradle.api.artifacts.Dependency
 import org.gradle.api.artifacts.dsl.DependencyHandler
 import org.gradle.api.plugins.ExtensionAware
 import org.gradle.kotlin.dsl.dependencies
+import org.gradle.kotlin.dsl.get
 import org.gradle.kotlin.dsl.getByName
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmOptions
 import org.jetbrains.kotlin.gradle.plugin.KaptExtension
+import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -126,6 +128,42 @@ fun Project.setupCommon(module: Module? = null, useRouter: Boolean = true): Base
         dependencies {
             add("implementation", Libs.arouter)
             add("kapt", Libs.arouterKapt)
+        }
+    }
+}
+
+fun Project.setupApp(): BaseExtension {
+    return setupCommon().apply {
+        signingConfigs {
+            create("sign") {
+                keyAlias = findPropertyString("keyAlias")
+                keyPassword = findPropertyString("keyPassword")
+                storeFile = File(rootDir.path, findPropertyString("storeFile"))
+                storePassword = findPropertyString("storePassword")
+            }
+        }
+        buildTypes {
+            getByName("release") {
+                signingConfig = signingConfigs["sign"]
+                isMinifyEnabled = true
+                isZipAlignEnabled = true
+                isShrinkResources = true
+                proguardFiles(
+                    "${rootDir.path}/gradle/proguard-rules.pro"
+                )
+            }
+            getByName("debug") {
+                signingConfig = signingConfigs["sign"]
+                applicationIdSuffix = ".debug"
+                versionNameSuffix = ".debug"
+                isJniDebuggable = true
+                isRenderscriptDebuggable = true
+                isCrunchPngs = false
+            }
+        }
+        compileOptions.isCoreLibraryDesugaringEnabled = true
+        dependencies {
+            add("coreLibraryDesugaring", Libs.desugar)
         }
     }
 }
