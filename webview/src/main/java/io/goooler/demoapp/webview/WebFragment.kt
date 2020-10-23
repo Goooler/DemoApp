@@ -18,7 +18,6 @@ class WebFragment : BaseFragment() {
         WebFragmentBinding.inflate(layoutInflater).apply {
             lifecycleOwner = viewLifecycleOwner
             webView.onEventListener = listener
-            lifecycle.addObserver(webView)
         }
     }
 

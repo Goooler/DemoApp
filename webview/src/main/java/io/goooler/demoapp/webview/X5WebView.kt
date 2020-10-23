@@ -5,12 +5,14 @@ import android.content.Context
 import android.net.Uri
 import android.util.AttributeSet
 import android.webkit.URLUtil
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import com.tencent.smtt.sdk.WebChromeClient
 import com.tencent.smtt.sdk.WebSettings
 import com.tencent.smtt.sdk.WebView
 import com.tencent.smtt.sdk.WebViewClient
+import io.goooler.demoapp.base.util.ViewUtil
 
 @Suppress("MemberVisibilityCanBePrivate")
 class X5WebView(context: Context, attrs: AttributeSet? = null) : WebView(context, attrs),
@@ -22,24 +24,37 @@ class X5WebView(context: Context, attrs: AttributeSet? = null) : WebView(context
         initWebViewSettings()
     }
 
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        processLifecycle()
+    }
+
     fun onDestroy() {
         stopLoading()
         destroy()
     }
 
     override fun onResume(owner: LifecycleOwner) {
-        super<DefaultLifecycleObserver>.onResume(owner)
         onResume()
     }
 
     override fun onPause(owner: LifecycleOwner) {
-        super<DefaultLifecycleObserver>.onPause(owner)
         onPause()
     }
 
     override fun onDestroy(owner: LifecycleOwner) {
         onDestroy()
-        super.onDestroy(owner)
+    }
+
+    private fun processLifecycle() {
+        (context as? FragmentActivity)?.let {
+            val fragment = ViewUtil.findSupportFragment(this, it)
+            if (fragment != null) {
+                fragment.lifecycle.addObserver(this)
+            } else {
+                it.lifecycle.addObserver(this)
+            }
+        }
     }
 
     @SuppressLint("SetJavaScriptEnabled")
