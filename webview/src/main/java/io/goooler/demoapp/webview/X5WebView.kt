@@ -24,14 +24,14 @@ class X5WebView(context: Context, attrs: AttributeSet? = null) : WebView(context
         initWebViewSettings()
     }
 
-    override fun onAttachedToWindow() {
-        super.onAttachedToWindow()
-        processLifecycle()
-    }
-
     fun onDestroy() {
         stopLoading()
         destroy()
+    }
+
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        attachToLifecycle()
     }
 
     override fun onResume(owner: LifecycleOwner) {
@@ -46,7 +46,7 @@ class X5WebView(context: Context, attrs: AttributeSet? = null) : WebView(context
         onDestroy()
     }
 
-    private fun processLifecycle() {
+    private fun attachToLifecycle() {
         (context as? FragmentActivity)?.let {
             val fragment = ViewUtil.findSupportFragment(this, it)
             if (fragment != null) {

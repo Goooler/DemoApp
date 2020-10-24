@@ -1,5 +1,7 @@
 import com.android.build.api.dsl.VariantDimension
+import com.android.build.gradle.AbstractAppExtension
 import com.android.build.gradle.BaseExtension
+import com.android.build.gradle.internal.api.BaseVariantOutputImpl
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 import org.gradle.api.artifacts.Dependency
@@ -21,7 +23,7 @@ const val appMinSdk = 21
 
 // app
 const val appVersionName = "1.0"
-const val appVersionCode = 20201021
+const val appVersionCode = 20201024
 const val appPackageName = "io.goooler.demoapp"
 const val appName = "Demo"
 
@@ -43,10 +45,6 @@ val localLibs = mapOf(
 
 val ndkLibs = setOf(
     "armeabi-v7a", "x86"
-)
-
-val manifestFields = mapOf(
-    "appName" to "Demo"
 )
 
 /**
@@ -132,8 +130,16 @@ fun Project.setupCommon(module: Module? = null, useRouter: Boolean = true): Base
     }
 }
 
-fun Project.setupApp(): BaseExtension {
+fun Project.setupApp(appPackageName: String, appName: String): BaseExtension {
     return setupCommon().apply {
+        defaultConfig {
+            applicationId = appPackageName
+            addManifestPlaceholders(
+                mapOf(
+                    "appName" to appName
+                )
+            )
+        }
         signingConfigs {
             create("sign") {
                 keyAlias = findPropertyString("keyAlias")
@@ -159,6 +165,20 @@ fun Project.setupApp(): BaseExtension {
                 isJniDebuggable = true
                 isRenderscriptDebuggable = true
                 isCrunchPngs = false
+            }
+        }
+        buildTypes {
+            getByName("release") {
+                resValue("string", "app_name", appName)
+            }
+            getByName("debug") {
+                resValue("string", "app_name", "${appName}.debug")
+            }
+        }
+        (this as AbstractAppExtension).applicationVariants.all {
+            outputs.all {
+                (this as BaseVariantOutputImpl).outputFileName =
+                    "${appName}_${versionName}_${versionCode}_${flavorName}_${buildType.name}.apk"
             }
         }
         compileOptions.isCoreLibraryDesugaringEnabled = true

@@ -4,9 +4,8 @@ plugins {
     id(Plugins.kotlinKapt)
 }
 
-setupApp().run {
+setupApp("${appPackageName}.test", "test").run {
     defaultConfig {
-        applicationId = "${appPackageName}.test"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 }
