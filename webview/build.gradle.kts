@@ -8,5 +8,4 @@ setupCommon(Module.Web)
 
 dependencies {
     implementation(project(getModuleName(Module.Common)))
-    api(Libs.tbs)
 }

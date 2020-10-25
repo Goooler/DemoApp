@@ -10,9 +10,10 @@ import androidx.core.os.bundleOf
 import io.goooler.demoapp.base.core.BaseFragment
 import io.goooler.demoapp.base.util.putArguments
 import io.goooler.demoapp.base.util.unsafeLazy
+import io.goooler.demoapp.base.widget.CustomWebView
 import io.goooler.demoapp.webview.databinding.WebFragmentBinding
 
-class WebFragment : BaseFragment() {
+class WebFragment private constructor() : BaseFragment() {
 
     private val binding by unsafeLazy {
         WebFragmentBinding.inflate(layoutInflater).apply {
@@ -46,7 +47,7 @@ class WebFragment : BaseFragment() {
         }
     }
 
-    private val listener = object : X5WebView.OnEventListener {
+    private val listener = object : CustomWebView.OnEventListener {
         override fun onInterceptUri(uri: Uri) {
             startActivity(Intent(Intent.ACTION_VIEW, uri))
         }

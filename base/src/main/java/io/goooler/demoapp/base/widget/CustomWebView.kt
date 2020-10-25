@@ -1,21 +1,17 @@
-package io.goooler.demoapp.webview
+package io.goooler.demoapp.base.widget
 
 import android.annotation.SuppressLint
 import android.content.Context
 import android.net.Uri
 import android.util.AttributeSet
-import android.webkit.URLUtil
+import android.webkit.*
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
-import com.tencent.smtt.sdk.WebChromeClient
-import com.tencent.smtt.sdk.WebSettings
-import com.tencent.smtt.sdk.WebView
-import com.tencent.smtt.sdk.WebViewClient
 import io.goooler.demoapp.base.util.ViewUtil
 
 @Suppress("MemberVisibilityCanBePrivate")
-class X5WebView(context: Context, attrs: AttributeSet? = null) : WebView(context, attrs),
+class CustomWebView(context: Context, attrs: AttributeSet? = null) : WebView(context, attrs),
     DefaultLifecycleObserver {
 
     var onEventListener: OnEventListener? = null
@@ -59,7 +55,6 @@ class X5WebView(context: Context, attrs: AttributeSet? = null) : WebView(context
 
     @SuppressLint("SetJavaScriptEnabled")
     private fun initWebViewSettings() {
-        view.isClickable = true
         settings.run {
             // 如果访问的页面中要与 Javascript 交互，则 webview 必须设置支持 Javascript
             javaScriptEnabled = true
@@ -78,11 +73,8 @@ class X5WebView(context: Context, attrs: AttributeSet? = null) : WebView(context
             setSupportMultipleWindows(true)
             // 缩放至屏幕的大小
             loadWithOverviewMode = true
-            setAppCacheEnabled(true)
             domStorageEnabled = true
             setGeolocationEnabled(true)
-            setAppCacheMaxSize(Long.MAX_VALUE)
-            pluginState = WebSettings.PluginState.ON_DEMAND
             // 支持内容重新布局,一共有四种方式
             layoutAlgorithm = WebSettings.LayoutAlgorithm.SINGLE_COLUMN
             // 设置默认字体大小

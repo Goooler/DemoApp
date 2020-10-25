@@ -14,7 +14,7 @@ import io.goooler.demoapp.main.databinding.MainSmartRefreshFragmentBinding
 import io.goooler.demoapp.main.ui.adapter.MainListAdapter
 import io.goooler.demoapp.main.vm.MainSmartRefreshModel
 
-class MainSmartRefreshFragment : BaseLazyFragment() {
+class MainSmartRefreshFragment private constructor() : BaseLazyFragment() {
 
     private val binding by unsafeLazy { MainSmartRefreshFragmentBinding.inflate(layoutInflater) }
 

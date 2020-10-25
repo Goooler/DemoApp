@@ -19,7 +19,7 @@ import io.goooler.demoapp.main.vm.MainPagingViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-class MainPagingFragment : BaseLazyFragment() {
+class MainPagingFragment private constructor() : BaseLazyFragment() {
 
     private val binding by unsafeLazy { MainPagingFragmentBinding.inflate(layoutInflater) }
 

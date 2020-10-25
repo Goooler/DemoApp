@@ -23,7 +23,7 @@ class MainPagingViewModel(application: Application) : BaseViewModel(application)
     private inner class DataSource : BasePagingSource<MainListItemModel>() {
         override suspend fun fetchListData(page: Int): List<MainListItemModel> {
             return MainRepository.getRepoListCr("google", page)
-                .map { bean -> MainListItemModel(bean.owner?.avatarUrl, bean.name) }
+                .map { MainListItemModel(it.owner?.avatarUrl, it.name) }
         }
     }
 }

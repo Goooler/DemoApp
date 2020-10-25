@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:ignore="UselessLeaf">
 
-    <io.goooler.demoapp.webview.X5WebView
+    <io.goooler.demoapp.base.widget.CustomWebView
         android:id="@+id/web_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

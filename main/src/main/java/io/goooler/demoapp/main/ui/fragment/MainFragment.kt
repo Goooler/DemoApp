@@ -11,7 +11,7 @@ import io.goooler.demoapp.common.util.getViewModel
 import io.goooler.demoapp.main.databinding.MainFragmentBinding
 import io.goooler.demoapp.main.vm.MainViewModel
 
-class MainFragment : BaseLazyFragment() {
+class MainFragment private constructor() : BaseLazyFragment() {
 
     private val binding by unsafeLazy { MainFragmentBinding.inflate(layoutInflater) }
 
