@@ -16,6 +16,9 @@ setupCommon(Module.Common).run {
 dependencies {
     api(project(getModuleName(Module.Base)))
 
+    // router
+    api(Libs.arouter)
+
     // UI
     api(Libs.smartRefreshLayout)
 

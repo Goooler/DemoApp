@@ -1,6 +1,7 @@
 package io.goooler.demoapp.common.router
 
 import android.content.Intent
+import com.alibaba.android.arouter.facade.Postcard
 import com.alibaba.android.arouter.launcher.ARouter
 
 @Suppress("unused", "MemberVisibilityCanBePrivate")
@@ -11,20 +12,25 @@ object RouterManager {
 
     fun goLogin(isReLogin: Boolean) {
         val action = if (isReLogin) RE_LOGIN else null
-        ARouter.getInstance().build(RouterPath.LOGIN)
+        buildPostcard(RouterPath.LOGIN)
             .withAction(action)
             .withFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
             .navigation()
     }
 
     fun goMain() {
-        ARouter.getInstance().build(RouterPath.MAIN)
+        buildPostcard(RouterPath.MAIN)
             .navigation()
     }
 
     fun goWeb(url: String) {
-        ARouter.getInstance().build(RouterPath.WEB)
+        buildPostcard(RouterPath.WEB)
             .withString(PARAMS, url)
             .navigation()
+    }
+
+    private fun buildPostcard(@RouterPath path: String): Postcard {
+        return ARouter.getInstance()
+            .build(path)
     }
 }
