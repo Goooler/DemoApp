@@ -3,11 +3,10 @@
 package io.goooler.demoapp.base.util
 
 import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import java.lang.reflect.Type
 
 object JsonUtil {
-    val moshi: Moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
+    val moshi: Moshi = Moshi.Builder().build()
 
     fun <T> fromJson(json: String, clazz: Class<T>): T? {
         return try {

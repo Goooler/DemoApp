@@ -101,6 +101,7 @@ object Libs {
     const val objectBoxKapt = "io.objectbox:objectbox-processor:$objectBoxVersion"
     const val eventBusKapt = "org.greenrobot:eventbus-annotation-processor:$eventBusVersion"
     const val arouterKapt = "com.alibaba:arouter-compiler:$arouterCompilerVersion"
+    const val moshiKapt = "com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion"
 
     val coroutines = arrayOf(
         "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion",
@@ -138,7 +139,6 @@ object Libs {
     )
     val moshi = arrayOf(
         "com.squareup.moshi:moshi:$moshiVersion",
-        "com.squareup.moshi:moshi-kotlin:$moshiVersion",
         "com.squareup.retrofit2:converter-moshi:$retrofitVersion"
     )
     val glide = arrayOf(

@@ -126,6 +126,7 @@ fun Project.setupCommon(module: Module? = null, useRouter: Boolean = true): Base
         dependencies {
             add("implementation", Libs.arouter)
             add("kapt", Libs.arouterKapt)
+            add("kapt", Libs.moshiKapt)
         }
     }
 }

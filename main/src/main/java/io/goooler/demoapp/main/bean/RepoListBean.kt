@@ -1,8 +1,10 @@
 package io.goooler.demoapp.main.bean
 
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 import io.goooler.demoapp.base.http.BaseResponse
 
+@JsonClass(generateAdapter = true)
 class RepoListBean(
     val id: Long,
     val private: Boolean,
@@ -10,10 +12,12 @@ class RepoListBean(
     val name: String?,
     val description: String?,
     val owner: OwnerBean? = null
-) : BaseResponse
+) : BaseResponse {
 
-class OwnerBean(
-    val id: Long,
-    val login: String?,
-    @Json(name = "avatar_url") val avatarUrl: String?
-)
+    @JsonClass(generateAdapter = true)
+    class OwnerBean(
+        val id: Long,
+        val login: String?,
+        @Json(name = "avatar_url") val avatarUrl: String?
+    )
+}
