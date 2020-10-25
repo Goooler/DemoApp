@@ -18,8 +18,11 @@ class LoginActivity : BaseActivity() {
             finish()
             return
         }
-        setContentView(R.layout.login_activity)
-        RouterManager.goMain()
-        finish()
+        if (intent.action == RouterManager.RE_LOGIN) {
+            setContentView(R.layout.login_activity)
+        } else {
+            RouterManager.goMain()
+            finish()
+        }
     }
 }

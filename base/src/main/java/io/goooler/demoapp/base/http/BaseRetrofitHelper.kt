@@ -24,6 +24,18 @@ abstract class BaseRetrofitHelper {
 
     inline fun <reified T> create(): T = create(T::class.java)
 
+    protected open fun OkHttpClient.Builder.addInterceptor(): OkHttpClient.Builder = this
+
+    protected open fun Retrofit.Builder.addCallAdapterFactory(): Retrofit.Builder = this
+
+    protected abstract val baseUrl: String
+
+    protected abstract val context: Context
+
+    protected abstract val converterFactory: Converter.Factory
+
+    protected abstract val statusListener: StatusInterceptor.StatusListener
+
     protected fun buildOkHttpClient(): OkHttpClient {
         val cache = Cache(
             File(context.cacheDir, "HttpCache"),
@@ -35,19 +47,10 @@ abstract class BaseRetrofitHelper {
             .writeTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS)
             .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
             .retryOnConnectionFailure(true)
+            .addInterceptor(StatusInterceptor(statusListener))
             .addInterceptor()
             .build()
     }
-
-    protected open fun OkHttpClient.Builder.addInterceptor(): OkHttpClient.Builder = this
-
-    protected open fun Retrofit.Builder.addCallAdapterFactory(): Retrofit.Builder = this
-
-    protected abstract val baseUrl: String
-
-    protected abstract val context: Context
-
-    protected abstract val converterFactory: Converter.Factory
 
     companion object {
         private const val CONNECT_TIMEOUT: Long = 20

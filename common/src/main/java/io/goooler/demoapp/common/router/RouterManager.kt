@@ -2,17 +2,17 @@ package io.goooler.demoapp.common.router
 
 import android.content.Intent
 import com.alibaba.android.arouter.launcher.ARouter
-import io.goooler.demoapp.base.util.toJson
 
 @Suppress("unused", "MemberVisibilityCanBePrivate")
 object RouterManager {
     const val TARGET = "target"
     const val PARAMS = "params"
+    const val RE_LOGIN = "reLogin"
 
-    fun goLogin(@RouterPath target: String, params: Any) {
+    fun goLogin(isReLogin: Boolean) {
+        val action = if (isReLogin) RE_LOGIN else null
         ARouter.getInstance().build(RouterPath.LOGIN)
-            .withString(TARGET, target)
-            .withString(PARAMS, params.toJson())
+            .withAction(action)
             .withFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
             .navigation()
     }
