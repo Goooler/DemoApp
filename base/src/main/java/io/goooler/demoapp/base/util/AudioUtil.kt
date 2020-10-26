@@ -32,11 +32,8 @@ object AudioUtil {
     private fun setMusicMute(context: Context, mute: Boolean) {
         (context.getSystemService(Service.AUDIO_SERVICE) as? AudioManager)?.let {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                if (mute) {
-                    it.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_MUTE, 0)
-                } else {
-                    it.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_UNMUTE, 0)
-                }
+                val direction = if (mute) AudioManager.ADJUST_UNMUTE else AudioManager.ADJUST_MUTE
+                it.adjustStreamVolume(AudioManager.STREAM_MUSIC, direction, 0)
             } else {
                 @Suppress("DEPRECATION")
                 it.setStreamMute(AudioManager.STREAM_MUSIC, mute)

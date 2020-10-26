@@ -1,6 +1,6 @@
 @file:Suppress("unused")
 
-package io.goooler.demoapp.base.util
+package io.goooler.demoapp.common.util
 
 import android.content.Context
 import android.graphics.Bitmap

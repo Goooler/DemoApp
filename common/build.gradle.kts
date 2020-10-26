@@ -19,6 +19,11 @@ dependencies {
     // router
     api(Libs.arouter)
 
+    // network
+    implementation(Libs.glide)
+    api(Libs.moshi)
+    kapt(Libs.glideKapt)
+
     // UI
     api(Libs.smartRefreshLayout)
 

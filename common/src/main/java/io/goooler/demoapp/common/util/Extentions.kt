@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.blankj.utilcode.util.*
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import io.goooler.demoapp.base.core.BaseViewModel
-import io.goooler.demoapp.base.http.HttpResponse
+import io.goooler.demoapp.base.network.HttpResponse
 import io.goooler.demoapp.common.BuildConfig
 import io.goooler.demoapp.common.type.SpKeys
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers

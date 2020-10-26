@@ -1,7 +1,6 @@
 package io.goooler.demoapp.common.util
 
 import com.blankj.utilcode.util.SPUtils
-import io.goooler.demoapp.base.util.fromJson
 
 object AppUserInfoManager {
 

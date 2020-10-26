@@ -2,12 +2,12 @@ package io.goooler.demoapp.common.http
 
 import android.content.Context
 import io.goooler.demoapp.base.core.BaseApplication
-import io.goooler.demoapp.base.http.BaseRetrofitHelper
-import io.goooler.demoapp.base.http.StatusInterceptor
-import io.goooler.demoapp.base.util.JsonUtil
+import io.goooler.demoapp.base.network.BaseRetrofitHelper
+import io.goooler.demoapp.base.network.interceptor.StatusInterceptor
 import io.goooler.demoapp.common.BuildConfig
 import io.goooler.demoapp.common.http.interceptor.CookieInterceptor
 import io.goooler.demoapp.common.router.RouterManager
+import io.goooler.demoapp.common.util.JsonUtil
 import okhttp3.OkHttpClient
 import retrofit2.Converter
 import retrofit2.Retrofit

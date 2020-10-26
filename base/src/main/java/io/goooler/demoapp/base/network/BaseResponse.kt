@@ -1,4 +1,4 @@
-package io.goooler.demoapp.base.http
+package io.goooler.demoapp.base.network
 
 import androidx.annotation.Keep
 

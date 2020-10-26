@@ -1,6 +1,7 @@
-package io.goooler.demoapp.base.http
+package io.goooler.demoapp.base.network
 
 import android.content.Context
+import io.goooler.demoapp.base.network.interceptor.StatusInterceptor
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import retrofit2.Converter
@@ -37,25 +38,15 @@ abstract class BaseRetrofitHelper {
     protected abstract val statusListener: StatusInterceptor.StatusListener
 
     protected fun buildOkHttpClient(): OkHttpClient {
-        val cache = Cache(
-            File(context.cacheDir, "HttpCache"),
-            CACHE_SIZE
-        )
+        val cache = Cache(File(context.cacheDir, "HttpCache"), 10L * 1024 * 1024)
         return OkHttpClient.Builder()
             .cache(cache)
-            .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
-            .writeTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS)
-            .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
+            .connectTimeout(20L, TimeUnit.SECONDS)
+            .writeTimeout(10L, TimeUnit.SECONDS)
+            .readTimeout(10L, TimeUnit.SECONDS)
             .retryOnConnectionFailure(true)
             .addInterceptor(StatusInterceptor(statusListener))
             .addInterceptor()
             .build()
-    }
-
-    companion object {
-        private const val CONNECT_TIMEOUT: Long = 20
-        private const val WRITE_TIMEOUT: Long = 10
-        private const val READ_TIMEOUT: Long = 10
-        private const val CACHE_SIZE = 10 * 1024 * 1024.toLong()
     }
 }

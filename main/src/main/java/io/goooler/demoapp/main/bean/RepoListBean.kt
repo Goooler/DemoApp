@@ -2,7 +2,7 @@ package io.goooler.demoapp.main.bean
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
-import io.goooler.demoapp.base.http.BaseResponse
+import io.goooler.demoapp.base.network.BaseResponse
 
 @JsonClass(generateAdapter = true)
 class RepoListBean(

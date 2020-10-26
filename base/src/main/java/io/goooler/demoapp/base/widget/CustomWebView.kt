@@ -3,14 +3,16 @@ package io.goooler.demoapp.base.widget
 import android.content.Context
 import android.net.Uri
 import android.util.AttributeSet
+import android.view.View
 import android.webkit.URLUtil
 import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import androidx.collection.ArrayMap
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
-import io.goooler.demoapp.base.util.ViewUtil
 
 @Suppress("MemberVisibilityCanBePrivate", "SetJavaScriptEnabled", "JavascriptInterface")
 class CustomWebView(context: Context, attrs: AttributeSet? = null) : WebView(context, attrs),
@@ -52,7 +54,7 @@ class CustomWebView(context: Context, attrs: AttributeSet? = null) : WebView(con
 
     private fun attachToLifecycle() {
         (context as? FragmentActivity)?.let {
-            val fragment = ViewUtil.findSupportFragment(this, it)
+            val fragment = findSupportFragment(this, it)
             if (fragment != null) {
                 fragment.lifecycle.addObserver(this)
             } else {
@@ -110,6 +112,40 @@ class CustomWebView(context: Context, attrs: AttributeSet? = null) : WebView(con
             override fun onReceivedTitle(webView: WebView, title: String) {
                 super.onReceivedTitle(webView, title)
                 onEventListener?.onReceivedTitle(title)
+            }
+        }
+    }
+
+    private fun findSupportFragment(target: View, activity: FragmentActivity): Fragment? {
+        val tempViewToSupportFragment = ArrayMap<View, Fragment>()
+        findAllSupportFragmentsWithViews(
+            activity.supportFragmentManager.fragments, tempViewToSupportFragment
+        )
+        var result: Fragment? = null
+        val activityRoot = activity.findViewById<View>(android.R.id.content)
+        var current = target
+        while (current != activityRoot) {
+            result = tempViewToSupportFragment[current]
+            if (result != null) {
+                break
+            }
+            current = if (current.parent is View) {
+                current.parent as View
+            } else {
+                break
+            }
+        }
+        tempViewToSupportFragment.clear()
+        return result
+    }
+
+    private fun findAllSupportFragmentsWithViews(
+        topLevelFragments: Collection<Fragment>, result: MutableMap<View, Fragment>
+    ) {
+        topLevelFragments.forEach {
+            it.view?.let { v ->
+                result[v] = it
+                findAllSupportFragmentsWithViews(it.childFragmentManager.fragments, result)
             }
         }
     }

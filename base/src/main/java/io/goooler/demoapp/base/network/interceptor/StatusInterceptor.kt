@@ -1,9 +1,10 @@
-package io.goooler.demoapp.base.http
+package io.goooler.demoapp.base.network.interceptor
 
+import io.goooler.demoapp.base.network.BaseInterceptor
 import okhttp3.Interceptor
 import okhttp3.Response
 
-class StatusInterceptor(private val listener: StatusListener) : Interceptor {
+class StatusInterceptor(private val listener: StatusListener) : BaseInterceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val response = chain.proceed(chain.request())

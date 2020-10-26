@@ -30,7 +30,4 @@ dependencies {
     // network
     implementation(Libs.okHttp)
     implementation(Libs.retrofit)
-    implementation(Libs.glide)
-    api(Libs.moshi)
-    kapt(Libs.glideKapt)
 }
