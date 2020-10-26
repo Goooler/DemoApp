@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.JavascriptInterface
 import androidx.core.os.bundleOf
 import io.goooler.demoapp.base.core.BaseFragment
 import io.goooler.demoapp.base.util.putArguments
@@ -19,6 +20,7 @@ class WebFragment private constructor() : BaseFragment() {
         WebFragmentBinding.inflate(layoutInflater).apply {
             lifecycleOwner = viewLifecycleOwner
             webView.onEventListener = listener
+            webView.jsBridgeCallback = listener
         }
     }
 
@@ -47,7 +49,7 @@ class WebFragment private constructor() : BaseFragment() {
         }
     }
 
-    private val listener = object : CustomWebView.OnEventListener {
+    private val listener = object : CustomWebView.OnEventListener, CustomWebView.JsBridgeCallback {
         override fun onInterceptUri(uri: Uri) {
             startActivity(Intent(Intent.ACTION_VIEW, uri))
         }
@@ -58,6 +60,11 @@ class WebFragment private constructor() : BaseFragment() {
 
         override fun onProgressChanged(i: Int) {
             onEventListener?.onProgressChanged(i)
+        }
+
+        @JavascriptInterface
+        fun setTitle(title: String) {
+            onEventListener?.onReceivedTitle(title)
         }
     }
 

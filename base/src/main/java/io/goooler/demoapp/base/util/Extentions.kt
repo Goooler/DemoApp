@@ -19,6 +19,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.commit
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.*
 import java.io.File
@@ -62,6 +63,8 @@ val currentThreadName: String get() = Thread.currentThread().name
 val isMainThread: Boolean get() = Looper.getMainLooper().thread === Thread.currentThread()
 
 fun <T> unsafeLazy(initializer: () -> T): Lazy<T> = lazy(LazyThreadSafetyMode.NONE, initializer)
+
+fun <T> MutableLiveData<T>.asLiveData(): LiveData<T> = this
 
 //---------------------CharSequence-------------------------------//
 

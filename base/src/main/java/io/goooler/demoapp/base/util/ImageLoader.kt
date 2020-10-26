@@ -1,6 +1,6 @@
 @file:Suppress("unused")
 
-package io.goooler.demoapp.base.util.image
+package io.goooler.demoapp.base.util
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -9,11 +9,19 @@ import android.widget.ImageView
 import androidx.annotation.DrawableRes
 import androidx.annotation.Px
 import androidx.databinding.BindingAdapter
+import com.bumptech.glide.Glide
+import com.bumptech.glide.Registry
+import com.bumptech.glide.annotation.GlideModule
+import com.bumptech.glide.integration.okhttp3.OkHttpUrlLoader
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.model.GlideUrl
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.module.AppGlideModule
 import com.bumptech.glide.request.RequestOptions
 import jp.wasabeef.glide.transformations.BlurTransformation
+import okhttp3.OkHttpClient
+import java.io.InputStream
 
 object ImageLoader {
     /**
@@ -453,6 +461,24 @@ object ImageLoader {
      */
     fun clearMemory(context: Context) {
         GlideApp.get(context).clearMemory()
+    }
+}
+
+@GlideModule
+internal class GlideConfigModule : AppGlideModule() {
+
+    override fun isManifestParsingEnabled(): Boolean = false
+
+    override fun registerComponents(
+        context: Context,
+        glide: Glide,
+        registry: Registry
+    ) {
+        registry.replace(
+            GlideUrl::class.java,
+            InputStream::class.java,
+            OkHttpUrlLoader.Factory(OkHttpClient.Builder().build())
+        )
     }
 }
 
