@@ -7,6 +7,7 @@ import android.content.Context
 import android.media.AudioManager
 import android.os.Build
 
+@Suppress("DEPRECATION")
 object AudioUtil {
 
     /**
@@ -35,7 +36,6 @@ object AudioUtil {
                 val direction = if (mute) AudioManager.ADJUST_UNMUTE else AudioManager.ADJUST_MUTE
                 it.adjustStreamVolume(AudioManager.STREAM_MUSIC, direction, 0)
             } else {
-                @Suppress("DEPRECATION")
                 it.setStreamMute(AudioManager.STREAM_MUSIC, mute)
             }
         }

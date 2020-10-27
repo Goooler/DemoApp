@@ -1,11 +1,11 @@
 package io.goooler.demoapp.base.core
 
 import android.annotation.SuppressLint
+import android.app.Application
 import android.os.Build
 import android.webkit.WebView
 import androidx.annotation.MainThread
 import androidx.annotation.WorkerThread
-import androidx.multidex.MultiDexApplication
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -13,7 +13,8 @@ import kotlinx.coroutines.launch
 /**
  * 封装通用方法和一些初始化的动作
  */
-abstract class BaseApplication : MultiDexApplication() {
+@SuppressLint("StaticFieldLeak")
+abstract class BaseApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
@@ -37,7 +38,7 @@ abstract class BaseApplication : MultiDexApplication() {
      * 延迟初始化
      */
     @WorkerThread
-    protected open fun initLater() {
+    protected open suspend fun initLater() {
     }
 
     /**
@@ -56,7 +57,6 @@ abstract class BaseApplication : MultiDexApplication() {
         /**
          * 获取全局 context
          */
-        @SuppressLint("StaticFieldLeak")
         lateinit var app: BaseApplication
             private set
     }

@@ -7,14 +7,10 @@ plugins {
 setupCore()
 
 dependencies {
-    // local
-    api(fileTree(localLibs))
-
     // architecture
     api(Libs.coroutines)
     api(Libs.core)
     api(Libs.lifecycle)
-    api(Libs.multiDex)
     api(Libs.annotation)
 
     // UI

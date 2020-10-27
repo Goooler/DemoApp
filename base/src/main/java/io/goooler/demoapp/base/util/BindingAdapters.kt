@@ -20,11 +20,6 @@ import java.io.File
 
 //------------------------View --------------------------//
 
-@BindingAdapter("binding_isEnable")
-fun View.bindingIsEnable(enable: Boolean) {
-    isEnabled = enable
-}
-
 @BindingAdapter("binding_isGone")
 fun View.bindingIsGone(isGone: Boolean) {
     visibility = if (isGone) View.GONE else View.VISIBLE

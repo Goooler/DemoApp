@@ -14,6 +14,8 @@ setupCommon(Module.Common).run {
 }
 
 dependencies {
+    // local
+    api(fileTree(localLibs))
     api(project(getModuleName(Module.Base)))
 
     // router

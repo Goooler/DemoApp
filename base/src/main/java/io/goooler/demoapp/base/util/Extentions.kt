@@ -1,4 +1,4 @@
-@file:Suppress("unused")
+@file:Suppress("unused", "DEPRECATION")
 
 package io.goooler.demoapp.base.util
 
@@ -72,7 +72,6 @@ fun String.fromHtml(): Spanned {
     return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
         Html.fromHtml(this, Html.FROM_HTML_MODE_LEGACY)
     } else {
-        @Suppress("DEPRECATION")
         Html.fromHtml(this)
     }
 }

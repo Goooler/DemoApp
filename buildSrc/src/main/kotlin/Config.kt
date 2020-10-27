@@ -89,7 +89,6 @@ fun Project.setupCore(): BaseExtension {
             versionName = appVersionName
             vectorDrawables.useSupportLibrary = true
             ndk { abiFilters.addAll(ndkLibs) }
-            multiDexEnabled = true
         }
         compileOptions {
             sourceCompatibility = javaVersion
