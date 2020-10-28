@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="login_splash_theme" parent="AppTheme">
+        <item name="android:windowBackground">@drawable/login_bg_splash</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+</resources>

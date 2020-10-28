@@ -34,7 +34,15 @@
             android:name=".webview.WebActivity"
             android:configChanges="orientation|screenSize|keyboardHidden" />
 
-        <activity android:name=".login.ui.LoginActivity">
+        <activity
+            android:name=".login.ui.LoginActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTop" />
+
+        <activity
+            android:name=".login.ui.SplashActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/login_splash_theme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
