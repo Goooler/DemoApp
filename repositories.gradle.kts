@@ -7,7 +7,6 @@ rootProject.extra.apply {
 
 repositories {
     google()
-    jcenter()
     maven(rootProject.extra.get("aliyunMaven").toString())
     maven(rootProject.extra.get("jitpackMaven").toString())
 }

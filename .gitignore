@@ -24,6 +24,7 @@ gen
 out
 target
 
+*.apk
 *.class
 *.txt
 *.ear

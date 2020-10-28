@@ -16,6 +16,12 @@ buildscript {
 
 allprojects {
     apply("${rootDir.path}/repositories.gradle.kts")
+    configurations.all {
+        resolutionStrategy.cacheChangingModulesFor(0, TimeUnit.SECONDS)
+    }
+    tasks.withType(JavaCompile::class) {
+        options.encoding = StandardCharsets.UTF_8.toString()
+    }
 }
 
 task("clean", Delete::class) {
@@ -30,8 +36,4 @@ task("clean", Delete::class) {
             )
         )
     }
-}
-
-tasks.withType(JavaCompile::class) {
-    options.encoding = StandardCharsets.UTF_8.toString()
 }
