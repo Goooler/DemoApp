@@ -19,11 +19,14 @@ import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import java.util.*
 
+typealias DimensionUtil = SizeUtils
+typealias SpHelper = SPUtils
+
 val isDebug: Boolean = BuildConfig.DEBUG
 
 var isFirstRun: Boolean
-    get() = SPUtils.getInstance().getBoolean(SpKeys.SP_FIRST_RUN.key, true)
-    set(value) = SPUtils.getInstance().put(SpKeys.SP_FIRST_RUN.key, value)
+    get() = SpHelper.getInstance().getBoolean(SpKeys.SP_FIRST_RUN.key, true)
+    set(value) = SpHelper.getInstance().put(SpKeys.SP_FIRST_RUN.key, value)
 
 inline fun debugRun(debug: () -> Unit) {
     if (isDebug) {
@@ -81,22 +84,22 @@ fun Long.easyTime(): String {
     }
 }
 
-typealias DimensionUtil = SizeUtils
+@Px
+fun @receiver:Dimension(unit = Dimension.SP) Float.sp2px(): Int = SizeUtils.sp2px(this)
 
 @Px
-fun Float.sp2px(): Int = SizeUtils.sp2px(this)
-
-@Px
-fun Float.dp2px(): Int = SizeUtils.dp2px(this)
+fun @receiver:Dimension(unit = Dimension.DP) Float.dp2px(): Int = SizeUtils.dp2px(this)
 
 @Px
 fun Float.pt2px(): Int = AdaptScreenUtils.pt2Px(this)
 
-fun Int.px2sp(): Int = SizeUtils.px2sp(this.toFloat())
+@Dimension(unit = Dimension.SP)
+fun @receiver:Dimension Int.px2sp(): Int = SizeUtils.px2sp(this.toFloat())
 
-fun Int.px2dp(): Int = SizeUtils.px2dp(this.toFloat())
+@Dimension(unit = Dimension.DP)
+fun @receiver:Dimension Int.px2dp(): Int = SizeUtils.px2dp(this.toFloat())
 
-fun Int.px2pt(): Int = AdaptScreenUtils.px2Pt(this.toFloat())
+fun @receiver:Dimension Int.px2pt(): Int = AdaptScreenUtils.px2Pt(this.toFloat())
 
 //---------------------Rx-------------------------------//
 

@@ -347,7 +347,13 @@ private fun View.setBgShapeGradual(
         shape = shapeType
         useLevel = false
         gradientType = GradientDrawable.LINEAR_GRADIENT
-        orientation = when (angle % 360) {
+        val remainder = angle % 45
+        val validAngle = if (remainder >= 22.5) {
+            angle % 360 + 45 - remainder
+        } else {
+            angle % 360 - remainder
+        }
+        orientation = when (validAngle) {
             45 -> GradientDrawable.Orientation.BL_TR
             90 -> GradientDrawable.Orientation.BOTTOM_TOP
             135 -> GradientDrawable.Orientation.BR_TL
