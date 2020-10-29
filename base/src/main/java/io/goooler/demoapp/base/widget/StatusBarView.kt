@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.res.Resources
 import android.util.AttributeSet
 import android.view.View
+import androidx.annotation.Px
 
 /**
  * 为了适配沉浸式状态栏的自定义状态栏，高度适配刘海屏
@@ -15,6 +16,7 @@ class StatusBarView(context: Context, attrs: AttributeSet? = null) : View(contex
         setMeasuredDimension(width, getStatusBarHeight())
     }
 
+    @Px
     private fun getStatusBarHeight(): Int {
         val resources = Resources.getSystem()
         val resourceId = resources.getIdentifier("status_bar_height", "dimen", "android")

@@ -559,7 +559,7 @@ fun ImageView.loadCenterCrop(
 )
 fun ImageView.loadRoundedCorner(
     url: String?,
-    radius: Float
+    @Px radius: Float
 ) {
     ImageLoader.loadRoundedCorner(this, url, radius.toInt())
 }
@@ -571,7 +571,7 @@ fun ImageView.loadRoundedCorner(
 )
 fun ImageView.loadRoundedCorner(
     url: String?,
-    radius: Float,
+    @Px radius: Float,
     placeholderDrawable: Drawable?
 ) {
     ImageLoader.loadRoundedCorner(this, url, radius.toInt(), placeholderDrawable)
@@ -585,7 +585,7 @@ fun ImageView.loadRoundedCorner(
 )
 fun ImageView.loadRoundedCorner(
     url: String?,
-    radius: Float,
+    @Px radius: Float,
     placeholderDrawable: Drawable?,
     errorDrawable: Drawable?
 ) {
@@ -598,7 +598,7 @@ fun ImageView.loadRoundedCorner(
 )
 fun ImageView.loadCenterCropRoundedCorner(
     url: String?,
-    radius: Float
+    @Px radius: Float
 ) {
     ImageLoader.loadCenterCropRoundedCorner(this, url, radius.toInt())
 }
@@ -610,7 +610,7 @@ fun ImageView.loadCenterCropRoundedCorner(
 )
 fun ImageView.loadCenterCropRoundedCorner(
     url: String?,
-    radius: Float,
+    @Px radius: Float,
     placeholderDrawable: Drawable?
 ) {
     ImageLoader.loadCenterCropRoundedCorner(this, url, radius.toInt(), placeholderDrawable)

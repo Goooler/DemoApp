@@ -15,6 +15,8 @@ import android.view.ViewOutlineProvider
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.ColorInt
+import androidx.annotation.DrawableRes
+import androidx.annotation.Px
 import androidx.databinding.BindingAdapter
 import java.io.File
 
@@ -36,7 +38,7 @@ fun View.bindingIsSelect(select: Boolean) {
 }
 
 @BindingAdapter("binding_rect_radius")
-fun View.bindingRectCornerRadius(radius: Float) {
+fun View.bindingRectCornerRadius(@Px radius: Float) {
     outlineProvider = object : ViewOutlineProvider() {
         override fun getOutline(v: View?, outline: Outline?) {
             if (v != null && outline != null) {
@@ -48,26 +50,26 @@ fun View.bindingRectCornerRadius(radius: Float) {
 }
 
 @BindingAdapter("binding_width", "binding_height")
-fun View.bindingWidthAndHeight(width: Float, height: Float) {
+fun View.bindingWidthAndHeight(@Px width: Float, @Px height: Float) {
     layoutParams.width = width.toInt()
     layoutParams.height = height.toInt()
     requestLayout()
 }
 
 @BindingAdapter("binding_width")
-fun View.bindingWidth(width: Float) {
+fun View.bindingWidth(@Px width: Float) {
     layoutParams.width = width.toInt()
     requestLayout()
 }
 
 @BindingAdapter("binding_height")
-fun View.bindingHeight(height: Float) {
+fun View.bindingHeight(@Px height: Float) {
     layoutParams.height = height.toInt()
     requestLayout()
 }
 
 @BindingAdapter("binding_marginTop")
-fun View.bindingMarginTop(marginTop: Float) {
+fun View.bindingMarginTop(@Px marginTop: Float) {
     if (layoutParams is ViewGroup.MarginLayoutParams) {
         val p = layoutParams as ViewGroup.MarginLayoutParams
         p.topMargin = marginTop.toInt()
@@ -76,7 +78,7 @@ fun View.bindingMarginTop(marginTop: Float) {
 }
 
 @BindingAdapter("binding_marginBottom")
-fun View.bindingMarginBottom(marginBottom: Float) {
+fun View.bindingMarginBottom(@Px marginBottom: Float) {
     if (layoutParams is ViewGroup.MarginLayoutParams) {
         val p = layoutParams as ViewGroup.MarginLayoutParams
         p.bottomMargin = marginBottom.toInt()
@@ -85,7 +87,7 @@ fun View.bindingMarginBottom(marginBottom: Float) {
 }
 
 @BindingAdapter("binding_marginStart")
-fun View.bindingMarginStart(marginLeft: Float) {
+fun View.bindingMarginStart(@Px marginLeft: Float) {
     if (layoutParams is ViewGroup.MarginLayoutParams) {
         val p = layoutParams as ViewGroup.MarginLayoutParams
         p.marginStart = marginLeft.toInt()
@@ -94,7 +96,7 @@ fun View.bindingMarginStart(marginLeft: Float) {
 }
 
 @BindingAdapter("binding_marginEnd")
-fun View.bindingMarginEnd(marginRight: Float) {
+fun View.bindingMarginEnd(@Px marginRight: Float) {
     if (layoutParams is ViewGroup.MarginLayoutParams) {
         val p = layoutParams as ViewGroup.MarginLayoutParams
         p.marginEnd = marginRight.toInt()
@@ -114,7 +116,7 @@ fun View.bindingBgShapeGradual(
     @ColorInt startColor: Int,
     @ColorInt endColor: Int,
     angle: Int,
-    radius: Float
+    @Px radius: Float
 ) {
     setBgShapeGradual(
         gradualColors = intArrayOf(startColor, endColor),
@@ -135,9 +137,9 @@ fun View.bindingBgShapeGradual(
     @ColorInt startColor: Int,
     @ColorInt endColor: Int,
     angle: Int,
-    stroke: Float,
+    @Px stroke: Float,
     @ColorInt strokeColor: Int,
-    radius: Float
+    @Px radius: Float
 ) {
     setBgShapeGradual(
         gradualColors = intArrayOf(startColor, endColor),
@@ -160,7 +162,7 @@ fun View.bindingBgShapeGradual(
     @ColorInt centerColor: Int,
     @ColorInt endColor: Int,
     angle: Int,
-    radius: Float
+    @Px radius: Float
 ) {
     setBgShapeGradual(
         gradualColors = intArrayOf(startColor, centerColor, endColor),
@@ -184,10 +186,10 @@ fun View.bindingBgShapeGradual(
 )
 fun View.bindingBgShapeCorners(
     @ColorInt solidColor: Int,
-    topLeft: Float,
-    topRight: Float,
-    bottomLeft: Float,
-    bottomRight: Float
+    @Px topLeft: Float,
+    @Px topRight: Float,
+    @Px bottomLeft: Float,
+    @Px bottomRight: Float
 ) {
     setBgShapeCorners(solidColor, topLeft, topRight, bottomLeft, bottomRight)
 }
@@ -227,10 +229,10 @@ fun View.bindingBgShapeGradual(
     "binding_bg_radius"
 )
 fun View.bindingBgShapeStroke(
-    stroke: Float,
+    @Px stroke: Float,
     @ColorInt strokeColor: Int,
     @ColorInt solidColor: Int,
-    radius: Float
+    @Px radius: Float
 ) {
     setBgShapeGradual(
         stroke = stroke,
@@ -246,7 +248,7 @@ fun View.bindingBgShapeStroke(
 )
 fun View.bindingBgShape(
     @ColorInt solidColor: Int,
-    radius: Float
+    @Px radius: Float
 ) {
     setBgShapeGradual(solidColor = solidColor, radius = radius)
 }
@@ -257,7 +259,7 @@ fun View.bindingBgShape(
     "binding_bg_solidOvalColor"
 )
 fun View.bindingBgShapeOvalStroke(
-    stroke: Float,
+    @Px stroke: Float,
     @ColorInt strokeColor: Int,
     @ColorInt solidOvalColor: Int
 ) {
@@ -270,7 +272,7 @@ fun View.bindingBgShapeOvalStroke(
 }
 
 @BindingAdapter("binding_bg_solidOvalColor")
-fun View.bindingBgShapeOval(solidOvalColor: Int) {
+fun View.bindingBgShapeOval(@ColorInt solidOvalColor: Int) {
     setBgShapeGradual(shapeType = GradientDrawable.OVAL, solidColor = solidOvalColor)
 }
 
@@ -287,7 +289,7 @@ fun ImageView.bindingFileToImageFromPath(path: String) {
 }
 
 @BindingAdapter("binding_img_res")
-fun ImageView.bindingImageResource(res: Int) {
+fun ImageView.bindingImageResource(@DrawableRes res: Int) {
     setImageResource(res)
 }
 
@@ -335,11 +337,11 @@ fun TextView.bindingPaintFlagThru(flag: Boolean) {
 private fun View.setBgShapeGradual(
     shapeType: Int = GradientDrawable.RECTANGLE,
     @ColorInt gradualColors: IntArray? = null,
-    angle: Int = -1,
+    angle: Int = 0,
     @ColorInt solidColor: Int? = null,
     @ColorInt strokeColor: Int = Color.TRANSPARENT,
-    stroke: Float = 0f,
-    radius: Float = 0f
+    @Px stroke: Float = 0f,
+    @Px radius: Float = 0f
 ) {
     background = GradientDrawable().apply {
         shape = shapeType
@@ -376,10 +378,10 @@ private fun View.setBgShapeGradual(
  */
 private fun View.setBgShapeCorners(
     @ColorInt solidColor: Int = Color.WHITE,
-    topLeft: Float = 0f,
-    topRight: Float = 0f,
-    bottomLeft: Float = 0f,
-    bottomRight: Float = 0f
+    @Px topLeft: Float = 0f,
+    @Px topRight: Float = 0f,
+    @Px bottomLeft: Float = 0f,
+    @Px bottomRight: Float = 0f
 ) {
     background = GradientDrawable().apply {
         shape = GradientDrawable.RECTANGLE
