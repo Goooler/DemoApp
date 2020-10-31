@@ -1,11 +1,11 @@
-package io.goooler.demoapp.common.http
+package io.goooler.demoapp.common.network
 
 import android.content.Context
 import io.goooler.demoapp.base.core.BaseApplication
 import io.goooler.demoapp.base.network.BaseRetrofitHelper
 import io.goooler.demoapp.base.network.interceptor.StatusInterceptor
 import io.goooler.demoapp.common.BuildConfig
-import io.goooler.demoapp.common.http.interceptor.CookieInterceptor
+import io.goooler.demoapp.common.network.interceptor.CookieInterceptor
 import io.goooler.demoapp.common.router.RouterManager
 import io.goooler.demoapp.common.util.JsonUtil
 import okhttp3.OkHttpClient

@@ -5,15 +5,15 @@ import android.os.Bundle
 import android.view.View
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.blankj.utilcode.util.BarUtils
-import io.goooler.demoapp.base.core.BaseActivity
 import io.goooler.demoapp.base.util.addFragment
 import io.goooler.demoapp.base.util.unsafeLazy
+import io.goooler.demoapp.common.base.BaseThemeActivity
 import io.goooler.demoapp.common.router.RouterManager
 import io.goooler.demoapp.common.router.RouterPath
 import io.goooler.demoapp.webview.databinding.WebActivityBinding
 
 @Route(path = RouterPath.WEB)
-class WebActivity : BaseActivity() {
+class WebActivity : BaseThemeActivity() {
     private val binding by unsafeLazy { WebActivityBinding.inflate(layoutInflater) }
 
     private var webFragment: WebFragment? = null

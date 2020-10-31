@@ -23,11 +23,14 @@ dependencies {
 
     // network
     implementation(Libs.glide)
-    api(Libs.moshi)
     kapt(Libs.glideKapt)
+    api(Libs.moshi)
 
     // UI
     api(Libs.smartRefreshLayout)
+
+    // utils
+    api(Libs.utils)
 
     // async
     api(Libs.rx)

@@ -1,7 +1,7 @@
 package io.goooler.demoapp.main.repository
 
 import io.goooler.demoapp.base.util.paramMapOf
-import io.goooler.demoapp.common.http.RetrofitHelper
+import io.goooler.demoapp.common.network.RetrofitHelper
 import io.goooler.demoapp.common.type.Constants
 import io.goooler.demoapp.main.api.MainApi
 import io.goooler.demoapp.main.api.RepoList

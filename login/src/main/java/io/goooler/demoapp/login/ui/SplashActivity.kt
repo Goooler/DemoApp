@@ -1,10 +1,10 @@
 package io.goooler.demoapp.login.ui
 
 import android.os.Bundle
-import io.goooler.demoapp.base.core.BaseActivity
+import io.goooler.demoapp.common.base.BaseThemeActivity
 import io.goooler.demoapp.common.router.RouterManager
 
-class SplashActivity : BaseActivity() {
+class SplashActivity : BaseThemeActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

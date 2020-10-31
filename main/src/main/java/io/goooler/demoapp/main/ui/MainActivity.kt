@@ -5,8 +5,8 @@ import android.os.Bundle
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.google.android.material.tabs.TabLayoutMediator
 import io.goooler.demoapp.adapter.vp.CommonFragmentStateAdapter
-import io.goooler.demoapp.base.core.BaseActivity
 import io.goooler.demoapp.base.util.unsafeLazy
+import io.goooler.demoapp.common.base.BaseThemeActivity
 import io.goooler.demoapp.common.router.RouterPath
 import io.goooler.demoapp.main.databinding.MainActivityBinding
 import io.goooler.demoapp.main.ui.fragment.MainFragment
@@ -14,7 +14,7 @@ import io.goooler.demoapp.main.ui.fragment.MainPagingFragment
 import io.goooler.demoapp.main.ui.fragment.MainSmartRefreshFragment
 
 @Route(path = RouterPath.MAIN)
-class MainActivity : BaseActivity() {
+class MainActivity : BaseThemeActivity() {
 
     private val binding by unsafeLazy { MainActivityBinding.inflate(layoutInflater) }
 

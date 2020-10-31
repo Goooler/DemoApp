@@ -8,8 +8,6 @@ import android.os.Build
 import android.os.Bundle
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
-import com.blankj.utilcode.util.AdaptScreenUtils
-import com.blankj.utilcode.util.BarUtils
 
 /**
  * Activity 基类，封装通用方法
@@ -30,7 +28,6 @@ abstract class BaseActivity : AppCompatActivity() {
             setBackgroundDrawable(null)
             setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
         }
-        BarUtils.transparentStatusBar(this)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
     }
 
@@ -41,6 +38,4 @@ abstract class BaseActivity : AppCompatActivity() {
             super.startService(service)
         }
     }
-
-    override fun getResources(): Resources = AdaptScreenUtils.adaptWidth(originalResources, 360)
 }

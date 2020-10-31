@@ -20,9 +20,6 @@ dependencies {
     api(Libs.constraintLayout)
     api(Libs.cardView)
 
-    // utils
-    api(Libs.utils)
-
     // network
     implementation(Libs.okHttp)
     implementation(Libs.retrofit)

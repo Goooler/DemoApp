@@ -6,7 +6,7 @@ import com.squareup.moshi.Moshi
 import java.lang.reflect.Type
 
 object JsonUtil {
-    val moshi: Moshi = Moshi.Builder().build()
+    internal val moshi: Moshi = Moshi.Builder().build()
 
     fun <T> fromJson(json: String, clazz: Class<T>): T? {
         return try {
@@ -24,17 +24,19 @@ object JsonUtil {
         }
     }
 
-    inline fun <reified T : Any> toJson(o: T): String? {
+    fun <T> toJson(o: T?, clazz: Class<T>): String? {
         return try {
-            moshi.adapter(T::class.java).toJson(o)
+            moshi.adapter(clazz).toJson(o)
         } catch (e: Exception) {
             null
         }
     }
+
+    inline fun <reified T> toJson(o: T?): String? = toJson(o, T::class.java)
 }
 
 inline fun <reified T> String.fromJson(): T? = JsonUtil.fromJson(this, T::class.java)
 
 inline fun <reified T> String.fromJson(typeOfT: Type): T? = JsonUtil.fromJson(this, typeOfT)
 
-fun Any.toJson(): String? = JsonUtil.toJson(this)
+fun Any?.toJson(): String? = JsonUtil.toJson(this)

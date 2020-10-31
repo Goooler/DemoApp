@@ -1,4 +1,4 @@
-package io.goooler.demoapp.common.http.interceptor
+package io.goooler.demoapp.common.network.interceptor
 
 import io.goooler.demoapp.base.network.BaseInterceptor
 import io.goooler.demoapp.common.BuildConfig
