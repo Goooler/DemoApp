@@ -1,4 +1,3 @@
-import com.google.protobuf.gradle.builtins
 import com.google.protobuf.gradle.generateProtoTasks
 import com.google.protobuf.gradle.protobuf
 import com.google.protobuf.gradle.protoc
@@ -17,10 +16,8 @@ setupCommon(Module.Main).run {
         }
         generateProtoTasks {
             all().forEach {
-                it.builtins {
-                    create("java") {
-                        option("lite")
-                    }
+                it.builtins.create("java") {
+                    option("lite")
                 }
             }
         }
