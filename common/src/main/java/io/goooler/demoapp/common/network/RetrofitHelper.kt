@@ -7,6 +7,7 @@ import io.goooler.demoapp.base.network.interceptor.StatusInterceptor
 import io.goooler.demoapp.common.BuildConfig
 import io.goooler.demoapp.common.network.interceptor.CookieInterceptor
 import io.goooler.demoapp.common.router.RouterManager
+import io.goooler.demoapp.common.util.AppUserInfoManager
 import io.goooler.demoapp.common.util.JsonUtil
 import okhttp3.OkHttpClient
 import retrofit2.Converter
@@ -23,7 +24,10 @@ object RetrofitHelper : BaseRetrofitHelper() {
     override val converterFactory: Converter.Factory = MoshiConverterFactory.create(JsonUtil.moshi)
 
     override val statusListener: StatusInterceptor.StatusListener =
-        StatusInterceptor.StatusListener { RouterManager.goLogin(true) }
+        StatusInterceptor.StatusListener {
+            AppUserInfoManager.resetUserInfo()
+            RouterManager.goLogin(true)
+        }
 
     override fun Retrofit.Builder.addCallAdapterFactory(): Retrofit.Builder {
         addCallAdapterFactory(RxJava3CallAdapterFactory.create())
