@@ -1,6 +1,7 @@
 package io.goooler.demoapp.base.network
 
 import android.content.Context
+import io.goooler.demoapp.base.network.interceptor.RetryInterceptor
 import io.goooler.demoapp.base.network.interceptor.StatusInterceptor
 import okhttp3.Cache
 import okhttp3.OkHttpClient
@@ -42,10 +43,8 @@ abstract class BaseRetrofitHelper {
         return OkHttpClient.Builder()
             .cache(cache)
             .connectTimeout(20L, TimeUnit.SECONDS)
-            .writeTimeout(10L, TimeUnit.SECONDS)
-            .readTimeout(10L, TimeUnit.SECONDS)
-            .retryOnConnectionFailure(true)
-            .addInterceptor(StatusInterceptor(statusListener))
+            .addInterceptor(StatusInterceptor.create(statusListener))
+            .addInterceptor(RetryInterceptor.create())
             .addInterceptor()
             .build()
     }
