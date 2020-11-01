@@ -1,7 +1,5 @@
 plugins {
     id(Plugins.androidLibrary)
-    id(Plugins.kotlinAndroid)
-    id(Plugins.kotlinKapt)
 }
 
 setupCommon(Module.Common).run {
@@ -15,23 +13,25 @@ setupCommon(Module.Common).run {
 
 dependencies {
     // local
-    api(fileTree(localLibs))
-    api(project(getModuleName(Module.Base)))
+    api(
+        fileTree(localLibs),
+        project(getModuleName(Module.Base))
+    )
 
     // router
     api(Libs.arouter)
 
     // network
-    implementation(Libs.glide)
+    implementation(*Libs.glide)
     kapt(Libs.glideKapt)
-    api(Libs.moshi)
+    api(*Libs.moshi)
 
     // UI
-    api(Libs.smartRefreshLayout)
+    api(*Libs.smartRefreshLayout)
 
     // utils
-    api(Libs.utils)
-
-    // async
-    api(Libs.rx)
+    api(
+        Libs.utils,
+        *Libs.rx
+    )
 }

@@ -19,12 +19,12 @@ import java.util.*
 // sdk
 private const val appTargetSdk = 30
 private const val appBuildTool = "30.0.2"
-private const val appMinSdk = 21
+private const val appMinSdk = 23
 private val javaVersion = JavaVersion.VERSION_1_8
 
 // app
 const val appVersionName = "1.0"
-const val appVersionCode = 20201024
+const val appVersionCode = 20201101
 const val appPackageName = "io.goooler.demoapp"
 const val appName = "Demo"
 
@@ -51,14 +51,24 @@ val localLibs = mapOf(
     "include" to arrayOf("*.jar", "*.aar")
 )
 
-fun DependencyHandler.api(names: Array<String>): Array<Dependency?> =
+fun DependencyHandler.api(vararg names: Any): Array<Dependency?> =
     names.map {
         add("api", it)
     }.toTypedArray()
 
-fun DependencyHandler.implementation(names: Array<String>): Array<Dependency?> =
+fun DependencyHandler.implementation(vararg names: Any): Array<Dependency?> =
     names.map {
         add("implementation", it)
+    }.toTypedArray()
+
+fun DependencyHandler.kapt(vararg names: Any): Array<Dependency?> =
+    names.map {
+        add("kapt", it)
+    }.toTypedArray()
+
+fun DependencyHandler.androidTestImplementation(vararg names: Any): Array<Dependency?> =
+    names.map {
+        add("androidTestImplementation", it)
     }.toTypedArray()
 
 fun VariantDimension.putBuildConfigStringField(name: String, value: String?) {
@@ -79,6 +89,10 @@ private fun Project.findPropertyString(key: String): String = findProperty(key) 
 
 fun Project.setupCore(): BaseExtension {
     return extensions.getByName<BaseExtension>("android").apply {
+        plugins.run {
+            apply(Plugins.kotlinAndroid)
+            apply(Plugins.kotlinKapt)
+        }
         compileSdkVersion(appTargetSdk)
         buildToolsVersion(appBuildTool)
         defaultConfig {
@@ -122,8 +136,7 @@ fun Project.setupCommon(module: Module? = null, useRouter: Boolean = true): Base
             if (useRouter) arg("AROUTER_MODULE_NAME", project.name)
         }
         dependencies {
-            add("kapt", Libs.arouterKapt)
-            add("kapt", Libs.moshiKapt)
+            kapt(Libs.arouterKapt, Libs.moshiKapt)
         }
     }
 }
@@ -180,8 +193,6 @@ fun Project.setupApp(appPackageName: String, appName: String): BaseExtension {
             }
         }
         compileOptions.isCoreLibraryDesugaringEnabled = true
-        dependencies {
-            add("coreLibraryDesugaring", Libs.desugar)
-        }
+        dependencies.add("coreLibraryDesugaring", Libs.desugar)
     }
 }

@@ -50,8 +50,8 @@ private const val protobufVersion = "0.8.13"
 private const val photoViewVersion = "2.3.0"
 
 object Plugins {
-    const val kotlinAndroid = "kotlin-android"
-    const val kotlinKapt = "kotlin-kapt"
+    internal const val kotlinAndroid = "kotlin-android"
+    internal const val kotlinKapt = "kotlin-kapt"
     const val androidLibrary = "com.android.library"
     const val androidApplication = "com.android.application"
     const val protobuf = "com.google.protobuf"

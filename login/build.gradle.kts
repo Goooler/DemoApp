@@ -1,7 +1,5 @@
 plugins {
     id(Plugins.androidLibrary)
-    id(Plugins.kotlinAndroid)
-    id(Plugins.kotlinKapt)
 }
 
 setupCommon(Module.Login)

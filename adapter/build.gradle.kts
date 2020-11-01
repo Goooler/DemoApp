@@ -1,7 +1,5 @@
 plugins {
     id(Plugins.androidLibrary)
-    id(Plugins.kotlinAndroid)
-    id(Plugins.kotlinKapt)
 }
 
 setupCore().run {
@@ -11,7 +9,9 @@ setupCore().run {
 
 dependencies {
     implementation(Libs.core)
-    api(Libs.recyclerView)
-    api(Libs.paging)
-    api(Libs.viewPager2)
+    api(
+        Libs.recyclerView,
+        Libs.paging,
+        Libs.viewPager2
+    )
 }

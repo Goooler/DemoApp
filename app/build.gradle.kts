@@ -1,16 +1,17 @@
 plugins {
     id(Plugins.androidApplication)
-    id(Plugins.kotlinAndroid)
-    id(Plugins.kotlinKapt)
 }
 
 setupApp(appPackageName, appName)
 
 dependencies {
-    implementation(project(getModuleName(Module.Common)))
-    implementation(project(getModuleName(Module.Login)))
-    implementation(project(getModuleName(Module.Main)))
-    implementation(project(getModuleName(Module.Web)))
+    implementation(
+        // projects
+        project(getModuleName(Module.Common)),
+        project(getModuleName(Module.Login)),
+        project(getModuleName(Module.Main)),
+        project(getModuleName(Module.Web))
+    )
 
     debugImplementation(Libs.leakCanary)
 }

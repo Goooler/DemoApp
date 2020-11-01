@@ -4,8 +4,6 @@ import com.google.protobuf.gradle.protoc
 
 plugins {
     id(Plugins.androidLibrary)
-    id(Plugins.kotlinAndroid)
-    id(Plugins.kotlinKapt)
     id(Plugins.protobuf)
 }
 
@@ -25,9 +23,10 @@ setupCommon(Module.Main).run {
 }
 
 dependencies {
-    implementation(project(getModuleName(Module.Common)))
-    implementation(project(getModuleName(Module.Adapter)))
-
-    implementation(Libs.protobufLite)
-    implementation(Libs.photoView)
+    implementation(
+        project(getModuleName(Module.Common)),
+        project(getModuleName(Module.Adapter)),
+        Libs.protobufLite,
+        Libs.photoView
+    )
 }

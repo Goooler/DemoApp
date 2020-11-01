@@ -1,7 +1,5 @@
 plugins {
     id(Plugins.androidApplication)
-    id(Plugins.kotlinAndroid)
-    id(Plugins.kotlinKapt)
 }
 
 setupApp("${appPackageName}.test", "test").run {
@@ -11,13 +9,16 @@ setupApp("${appPackageName}.test", "test").run {
 }
 
 dependencies {
-    implementation(project(getModuleName(Module.Common)))
-    implementation(Libs.fastjson)
-    implementation(Libs.gson)
-    implementation(Libs.mmkv)
-    implementation(Libs.objectBox)
-
+    implementation(
+        project(getModuleName(Module.Common)),
+        Libs.fastjson,
+        *Libs.gson,
+        Libs.mmkv,
+        *Libs.objectBox
+    )
     testImplementation("junit:junit:4.13.1")
-    androidTestImplementation("androidx.test.ext:junit:1.1.2")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
+    androidTestImplementation(
+        "androidx.test.ext:junit:1.1.2",
+        "androidx.test.espresso:espresso-core:3.3.0"
+    )
 }
