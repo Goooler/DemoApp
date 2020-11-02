@@ -1,9 +1,5 @@
-@file:Suppress("unused")
-
 package io.goooler.demoapp.common.type
 
 enum class SpKeys(val key: String) {
-    SP_FIRST_RUN("firstRun")
+    FirstRun("firstRun")
 }
-
-enum class MkKeys(val key: String)

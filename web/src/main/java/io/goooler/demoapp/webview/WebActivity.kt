@@ -12,7 +12,7 @@ import io.goooler.demoapp.common.router.RouterManager
 import io.goooler.demoapp.common.router.RouterPath
 import io.goooler.demoapp.webview.databinding.WebActivityBinding
 
-@Route(path = RouterPath.WEB)
+@Route(path = RouterPath.web)
 class WebActivity : BaseThemeActivity() {
     private val binding by unsafeLazy { WebActivityBinding.inflate(layoutInflater) }
 
@@ -23,7 +23,7 @@ class WebActivity : BaseThemeActivity() {
         setContentView(binding.root)
         BarUtils.setStatusBarLightMode(this, true)
         binding.layoutTitle.listener = listener
-        intent.extras?.getString(RouterManager.PARAMS)?.let {
+        intent.extras?.getString(RouterManager.params)?.let {
             webFragment = WebFragment.newInstance(it)
             webFragment!!.onEventListener = listener
             supportFragmentManager.addFragment(R.id.fragment_container, webFragment!!)

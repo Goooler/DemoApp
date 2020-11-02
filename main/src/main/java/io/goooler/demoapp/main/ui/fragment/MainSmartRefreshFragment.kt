@@ -53,7 +53,7 @@ class MainSmartRefreshFragment private constructor() : BaseLazyFragment() {
 
     private val listener = object : MainListAdapter.OnEventListener, OnRefreshLoadMoreListener {
         override fun onContentClick(content: String) {
-            showToast(content)
+            content.showToast()
         }
 
         override fun onRefresh(refreshLayout: RefreshLayout) {

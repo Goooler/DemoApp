@@ -46,7 +46,7 @@ class MainViewModel(application: Application) : BaseRxViewModel(application) {
                 }
             } catch (e: Exception) {
                 title.postValue(e.message)
-                showToast(R.string.request_failed)
+                R.string.request_failed.showToast()
             }
         }
     }
@@ -86,7 +86,7 @@ class MainViewModel(application: Application) : BaseRxViewModel(application) {
                 title.postValue(it)
             }, {
                 title.postValue(it.message)
-                showToast(R.string.request_failed)
+                R.string.request_failed.showToast()
             }).add()
     }
 }

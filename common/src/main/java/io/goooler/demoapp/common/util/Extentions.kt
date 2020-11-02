@@ -25,8 +25,8 @@ typealias SpHelper = SPUtils
 val isDebug: Boolean = BuildConfig.DEBUG
 
 var isFirstRun: Boolean
-    get() = SpHelper.getInstance().getBoolean(SpKeys.SP_FIRST_RUN.key, true)
-    set(value) = SpHelper.getInstance().put(SpKeys.SP_FIRST_RUN.key, value)
+    get() = SpHelper.getInstance().getBoolean(SpKeys.FirstRun.key, true)
+    set(value) = SpHelper.getInstance().put(SpKeys.FirstRun.key, value)
 
 inline fun debugRun(debug: () -> Unit) {
     if (isDebug) {
@@ -159,11 +159,11 @@ fun BaseViewModel.checkStatusAndEntry(response: HttpResponse<*>) =
 fun BaseViewModel.checkStatusAndEntryWithToast(response: HttpResponse<*>): Boolean {
     return checkStatusAndEntry(response).also {
         if (!it) {
-            showToast(response.message)
+            response.message?.showToast()
         }
     }
 }
 
 fun BaseViewModel.toastThrowable(throwable: Throwable) {
-    showToast(throwable.toString())
+    throwable.toString().showToast()
 }

@@ -11,7 +11,6 @@ import androidx.annotation.StringRes
 import androidx.annotation.UiThread
 import androidx.annotation.WorkerThread
 import io.goooler.demoapp.base.core.BaseApplication
-import io.goooler.demoapp.base.util.isMainThread
 
 /**
  * Toast 简单封装
@@ -33,7 +32,7 @@ object ToastUtil {
      */
     @AnyThread
     fun show(context: Context, text: String) {
-        if (isMainThread) {
+        if (Looper.getMainLooper().thread === Thread.currentThread()) {
             showToastInMainThread(context, text)
         } else {
             showToastInWorkerThread(context, text)
@@ -41,16 +40,14 @@ object ToastUtil {
     }
 
     @WorkerThread
-    fun showToastInWorkerThread(context: Context, text: String) {
-        Looper.prepare()
-        showToastInMainThread(context, text)
-        Looper.loop()
+    fun showToastInWorkerThread(context: Context, @StringRes strResId: Int) {
+        showToastInWorkerThread(context, context.getString(strResId))
     }
 
     @WorkerThread
-    fun showToastInWorkerThread(context: Context, @StringRes strResId: Int) {
+    fun showToastInWorkerThread(context: Context, text: String) {
         Looper.prepare()
-        showToastInMainThread(context, strResId)
+        showToastInMainThread(context, text)
         Looper.loop()
     }
 
@@ -76,21 +73,11 @@ object ToastUtil {
 }
 
 @AnyThread
-fun @receiver:StringRes Int.showToast(context: Context) {
-    ToastUtil.show(context, this)
+fun @receiver:StringRes Int.showToast() {
+    ToastUtil.show(BaseApplication.app, this)
 }
 
 @AnyThread
-fun String.showToast(context: Context) {
-    ToastUtil.show(context, this)
-}
-
-@AnyThread
-fun showToast(@StringRes strResId: Int) {
-    strResId.showToast(BaseApplication.app)
-}
-
-@AnyThread
-fun showToast(msg: String?) {
-    msg?.showToast(BaseApplication.app)
+fun String.showToast() {
+    ToastUtil.show(BaseApplication.app, this)
 }

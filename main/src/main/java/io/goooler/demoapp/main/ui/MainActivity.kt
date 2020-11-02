@@ -13,7 +13,7 @@ import io.goooler.demoapp.main.ui.fragment.MainFragment
 import io.goooler.demoapp.main.ui.fragment.MainPagingFragment
 import io.goooler.demoapp.main.ui.fragment.MainSmartRefreshFragment
 
-@Route(path = RouterPath.MAIN)
+@Route(path = RouterPath.main)
 class MainActivity : BaseThemeActivity() {
 
     private val binding by unsafeLazy { MainActivityBinding.inflate(layoutInflater) }

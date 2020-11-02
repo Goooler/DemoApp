@@ -7,12 +7,12 @@ import io.goooler.demoapp.common.router.RouterManager
 import io.goooler.demoapp.common.router.RouterPath
 import io.goooler.demoapp.login.R
 
-@Route(path = RouterPath.LOGIN)
+@Route(path = RouterPath.login)
 class LoginActivity : BaseThemeActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (intent.action == RouterManager.RE_LOGIN) {
+        if (intent.action == RouterManager.reLogin) {
             setContentView(R.layout.login_activity)
         } else {
             RouterManager.goMain()

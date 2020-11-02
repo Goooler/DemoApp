@@ -26,7 +26,7 @@ class MainPagingFragment private constructor() : BaseLazyFragment() {
     private val vm by getViewModel<MainPagingViewModel>()
 
     private val listAdapter = MainListPagingAdapter {
-        showToast(it)
+        it.showToast()
     }
 
     private val initView by unsafeLazy {
