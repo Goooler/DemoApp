@@ -12,8 +12,7 @@ import androidx.annotation.Px
 class StatusBarView(context: Context, attrs: AttributeSet? = null) : View(context, attrs) {
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-        setMeasuredDimension(width, getStatusBarHeight())
+        setMeasuredDimension(MeasureSpec.getSize(widthMeasureSpec), getStatusBarHeight())
     }
 
     @Px

@@ -45,6 +45,11 @@
                 android:onClick="@{listener}"
                 android:text="跳转去网页" />
 
+            <io.goooler.demoapp.widget.DemoView
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@color/md_grey_100" />
+
             <com.github.chrisbanes.photoview.PhotoView
                 android:id="@+id/pv_content"
                 binding_src_url="@{vm.oneplusUrl}"
