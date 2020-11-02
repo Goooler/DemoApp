@@ -20,7 +20,7 @@
             <option value="$PROJECT_DIR$/login" />
             <option value="$PROJECT_DIR$/main" />
             <option value="$PROJECT_DIR$/test" />
-            <option value="$PROJECT_DIR$/webview" />
+            <option value="$PROJECT_DIR$/web" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

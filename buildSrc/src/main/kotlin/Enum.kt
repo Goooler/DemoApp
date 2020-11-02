@@ -4,7 +4,7 @@ enum class Module(val tag: String, val runAlone: Boolean = false) {
     Login("login"),
     Main("main"),
     Adapter("adapter"),
-    Web("webview")
+    Web("web")
 }
 
 enum class Flavor(val tag: String) {
