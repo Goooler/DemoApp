@@ -21,6 +21,7 @@
             <option value="$PROJECT_DIR$/main" />
             <option value="$PROJECT_DIR$/test" />
             <option value="$PROJECT_DIR$/web" />
+            <option value="$PROJECT_DIR$/widget" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

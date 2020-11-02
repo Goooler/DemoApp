@@ -4,6 +4,7 @@ enum class Module(val tag: String, val runAlone: Boolean = false) {
     Login("login"),
     Main("main"),
     Adapter("adapter"),
+    Widget("widget"),
     Web("web")
 }
 
