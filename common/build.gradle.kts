@@ -22,12 +22,18 @@ dependencies {
     api(Libs.arouter)
 
     // network
-    implementation(*Libs.glide)
+    implementation(
+        *Libs.glide,
+        Libs.okHttpLogInterceptor
+    )
     kapt(Libs.glideKapt)
     api(*Libs.moshi)
 
     // UI
-    api(*Libs.smartRefreshLayout)
+    api(
+        *Libs.smartRefreshLayout,
+        Libs.photoView
+    )
 
     // utils
     api(

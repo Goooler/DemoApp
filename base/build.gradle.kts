@@ -8,8 +8,8 @@ dependencies {
     // architecture
     api(
         *Libs.coroutines,
-        Libs.core,
         *Libs.lifecycle,
+        Libs.core,
         Libs.annotation
     )
 
@@ -24,7 +24,7 @@ dependencies {
 
     // network
     api(
-        *Libs.okHttp,
+        Libs.okHttp,
         Libs.retrofit
     )
 }

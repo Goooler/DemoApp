@@ -3,7 +3,7 @@
 private const val coreVersion = "1.3.2"
 private const val appCompatVersion = "1.2.0"
 private const val supportVersion = "1.0.0"
-private const val constraintLayoutVersion = "2.0.2"
+private const val constraintLayoutVersion = "2.0.4"
 private const val fragmentVersion = "1.2.5"
 private const val materialVersion = "1.2.1"
 private const val flexBoxVersion = "2.0.1"
@@ -14,7 +14,6 @@ private const val lifecycleVersion = "2.2.0"
 private const val navigationVersion = "2.3.0"
 private const val workVersion = "2.3.4"
 private const val preferenceVersion = "1.1.1"
-private const val multiDexVersion = "2.0.1"
 private const val okHttpVersion = "4.9.0"
 private const val retrofitVersion = "2.9.0"
 private const val fastjsonVersion = "1.1.72.android"
@@ -36,7 +35,7 @@ private const val leakCanaryVersion = "2.5"
 private const val lubanVersion = "1.1.8"
 private const val mmkvVersion = "1.2.2"
 private const val coroutinesVersion = "1.4.0"
-private const val desugarVersion = "1.0.10"
+private const val desugarVersion = "1.1.0"
 private const val objectBoxVersion = "2.7.1"
 private const val protocVersion = "3.13.0"
 private const val tbsVersion = "43938"
@@ -44,7 +43,7 @@ private const val baseRvHelperVersion = "3.0.4"
 private const val flycoTabLayoutVersion = "2.1.4.2"
 private const val coilVersion = "0.13.0"
 private const val utilsVersion = "1.30.1"
-private const val pagingVersion = "3.0.0-alpha07"
+private const val pagingVersion = "3.0.0-alpha08"
 private const val viewPager2Version = "1.0.0"
 private const val protobufVersion = "0.8.13"
 private const val photoViewVersion = "2.3.0"
@@ -63,7 +62,6 @@ object Libs {
     const val desugar = "com.android.tools:desugar_jdk_libs:$desugarVersion"
     const val appCompat = "androidx.appcompat:appcompat:$appCompatVersion"
     const val annotation = "androidx.annotation:annotation:$annotationVersion"
-    const val multiDex = "androidx.multidex:multidex:$multiDexVersion"
     const val fragment = "androidx.fragment:fragment-ktx:$fragmentVersion"
     const val legacySupport = "androidx.legacy:legacy-support-v4:$supportVersion"
     const val preference = "androidx.preference:preference:$preferenceVersion"
@@ -92,6 +90,8 @@ object Libs {
     const val coil = "io.coil-kt:coil:$coilVersion"
     const val utils = "com.blankj:utilcodex:$utilsVersion"
     const val rxPermission = "com.github.tbruyelle:rxpermissions:$rxPermissionVersion"
+    const val okHttp = "com.squareup.okhttp3:okhttp:$okHttpVersion"
+    const val okHttpLogInterceptor = "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
     const val retrofit = "com.squareup.retrofit2:retrofit:$retrofitVersion"
     const val paging = "androidx.paging:paging-runtime:$pagingVersion"
     const val viewPager2 = "androidx.viewpager2:viewpager2:$viewPager2Version"
@@ -111,10 +111,7 @@ object Libs {
         "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion",
         "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion",
         "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion",
-        "androidx.lifecycle:lifecycle-reactivestreams-ktx:$lifecycleVersion",
         "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycleVersion",
-        "androidx.lifecycle:lifecycle-service:$lifecycleVersion",
-        "androidx.lifecycle:lifecycle-process:$lifecycleVersion",
         "androidx.lifecycle:lifecycle-common-java8:$lifecycleVersion"
     )
     val navigation = arrayOf(
@@ -128,10 +125,6 @@ object Libs {
         "com.scwang.smart:refresh-header-classics:$smartRefreshLayoutVersion",
         "com.scwang.smart:refresh-header-material:$smartRefreshLayoutVersion",
         "com.scwang.smart:refresh-footer-classics:$smartRefreshLayoutVersion"
-    )
-    val okHttp = arrayOf(
-        "com.squareup.okhttp3:okhttp:$okHttpVersion",
-        "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
     )
     val gson = arrayOf(
         "com.google.code.gson:gson:$gsonVersion",

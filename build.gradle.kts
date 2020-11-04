@@ -16,6 +16,7 @@ buildscript {
 
 allprojects {
     apply("${rootDir.path}/repositories.gradle.kts")
+
     configurations.all {
         resolutionStrategy.cacheChangingModulesFor(0, TimeUnit.SECONDS)
     }

@@ -6,6 +6,7 @@ import io.goooler.demoapp.base.network.BaseRetrofitHelper
 import io.goooler.demoapp.base.network.interceptor.StatusInterceptor
 import io.goooler.demoapp.common.BuildConfig
 import io.goooler.demoapp.common.network.interceptor.CookieInterceptor
+import io.goooler.demoapp.common.network.interceptor.HttpLogger
 import io.goooler.demoapp.common.router.RouterManager
 import io.goooler.demoapp.common.util.AppUserInfoManager
 import io.goooler.demoapp.common.util.JsonUtil
@@ -36,6 +37,7 @@ object RetrofitHelper : BaseRetrofitHelper() {
 
     override fun OkHttpClient.Builder.addInterceptor(): OkHttpClient.Builder {
         addInterceptor(CookieInterceptor.create())
+        addNetworkInterceptor(HttpLogger.newLogInterceptor())
         return this
     }
 }
