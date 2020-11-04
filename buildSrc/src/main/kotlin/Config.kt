@@ -103,6 +103,9 @@ fun Project.setupCore(): BaseExtension {
             vectorDrawables.useSupportLibrary = true
             ndk { abiFilters.addAll(ndkLibs) }
         }
+        sourceSets["main"].apply {
+            java.srcDirs("src/main/kotlin")
+        }
         compileOptions {
             sourceCompatibility = javaVersion
             targetCompatibility = javaVersion
