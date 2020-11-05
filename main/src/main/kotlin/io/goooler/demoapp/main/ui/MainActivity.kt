@@ -1,9 +1,11 @@
 package io.goooler.demoapp.main.ui
 
+import android.Manifest
 import android.content.Intent
 import android.os.Bundle
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.google.android.material.tabs.TabLayoutMediator
+import com.permissionx.guolindev.PermissionX
 import io.goooler.demoapp.adapter.vp.CommonFragmentStateAdapter
 import io.goooler.demoapp.base.util.unsafeLazy
 import io.goooler.demoapp.common.base.BaseThemeActivity
@@ -41,8 +43,30 @@ class MainActivity : BaseThemeActivity() {
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             tab.text = titles[position]
         }.attach()
-
         pagerAdapter.setData(fragments)
+
+        PermissionX.init(this)
+            .permissions(
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.CAMERA,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ).onExplainRequestReason { scope, deniedList ->
+                scope.showRequestReasonDialog(
+                    deniedList,
+                    "Core fundamental are based on these permissions",
+                    "OK",
+                    "Cancel"
+                )
+            }
+            .onForwardToSettings { scope, deniedList ->
+                scope.showForwardToSettingsDialog(
+                    deniedList,
+                    "You need to allow necessary permissions in Settings manually",
+                    "OK",
+                    "Cancel"
+                )
+            }
+            .request { _, _, _ -> }
     }
 
     /**

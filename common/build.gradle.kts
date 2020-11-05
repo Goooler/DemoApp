@@ -37,7 +37,8 @@ dependencies {
 
     // utils
     api(
+        *Libs.rx,
         Libs.utils,
-        *Libs.rx
+        Libs.permissionX
     )
 }
