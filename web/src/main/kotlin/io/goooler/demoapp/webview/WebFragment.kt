@@ -62,6 +62,8 @@ class WebFragment private constructor() : BaseFragment() {
             onEventListener?.onProgressChanged(i)
         }
 
+        override fun loadFinish() = Unit
+
         @JavascriptInterface
         fun setTitle(title: String) {
             onEventListener?.onReceivedTitle(title)

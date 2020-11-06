@@ -39,7 +39,7 @@ class MainFragment private constructor() : BaseLazyFragment() {
     private val eventListener = View.OnClickListener {
         when (it) {
             binding.btOne -> {
-                RouterManager.goWeb("https://www.github.com")
+                RouterManager.goWeb("http://m.youtube.com")
             }
         }
     }

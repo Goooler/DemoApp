@@ -94,7 +94,7 @@ fun Project.setupCore(): BaseExtension {
             apply(Plugins.kotlinKapt)
         }
         compileSdkVersion(appTargetSdk)
-        buildToolsVersion(appBuildTool)
+        buildToolsVersion = appBuildTool
         defaultConfig {
             minSdkVersion(appMinSdk)
             targetSdkVersion(appTargetSdk)

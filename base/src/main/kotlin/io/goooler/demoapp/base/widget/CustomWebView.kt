@@ -2,12 +2,10 @@ package io.goooler.demoapp.base.widget
 
 import android.content.Context
 import android.net.Uri
+import android.net.http.SslError
 import android.util.AttributeSet
 import android.view.View
-import android.webkit.URLUtil
-import android.webkit.WebChromeClient
-import android.webkit.WebView
-import android.webkit.WebViewClient
+import android.webkit.*
 import androidx.collection.ArrayMap
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -54,6 +52,7 @@ class CustomWebView(context: Context, attrs: AttributeSet? = null) : WebView(con
 
     private fun initWebViewSettings() {
         settings.run {
+            mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
             javaScriptEnabled = true
             // 支持通过JS打开新窗口
             javaScriptCanOpenWindowsAutomatically = true
@@ -72,24 +71,31 @@ class CustomWebView(context: Context, attrs: AttributeSet? = null) : WebView(con
             defaultFontSize = 18
         }
         webViewClient = object : WebViewClient() {
+
+            override fun onReceivedSslError(
+                view: WebView,
+                handler: SslErrorHandler,
+                error: SslError
+            ) {
+                handler.proceed()
+            }
+
             override fun shouldOverrideUrlLoading(
                 view: WebView,
                 url: String
             ): Boolean {
-                if (URLUtil.isNetworkUrl(url)) {
-                    view.loadUrl(url)
-                } else {
+                if (!URLUtil.isNetworkUrl(url)) {
                     onEventListener?.onInterceptUri(Uri.parse(url))
                 }
-                return true
+                return false
             }
 
             override fun onPageFinished(
                 webView: WebView,
                 s: String
             ) {
-                webView.loadUrl("javascript:App.resize(document.body.getBoundingClientRect().height)")
                 super.onPageFinished(webView, s)
+                onEventListener?.loadFinish()
             }
         }
         webChromeClient = object : WebChromeClient() {
@@ -154,6 +160,7 @@ class CustomWebView(context: Context, attrs: AttributeSet? = null) : WebView(con
         fun onInterceptUri(uri: Uri)
         fun onReceivedTitle(title: String)
         fun onProgressChanged(i: Int)
+        fun loadFinish()
     }
 
     interface JsBridgeCallback
