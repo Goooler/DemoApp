@@ -3,7 +3,3 @@ plugins {
 }
 
 setupCommon(Module.Login)
-
-dependencies {
-    implementation(project(getModuleName(Module.Common)))
-}

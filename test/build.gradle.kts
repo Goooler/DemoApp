@@ -10,7 +10,6 @@ setupApp("${appPackageName}.test", "test").run {
 
 dependencies {
     implementation(
-        project(getModuleName(Module.Common)),
         Libs.fastjson,
         *Libs.gson,
         Libs.mmkv,

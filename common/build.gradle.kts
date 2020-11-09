@@ -2,14 +2,7 @@ plugins {
     id(Plugins.androidLibrary)
 }
 
-setupCommon(Module.Common).run {
-    productFlavors.all {
-        putBuildConfigIntField(BuildConfigField.VersionCode.tag, appVersionCode)
-        putBuildConfigStringField(BuildConfigField.VersionName.tag, appVersionName)
-        putBuildConfigStringField(BuildConfigField.CdnPrefix.tag, cdnPrefix)
-        putBuildConfigStringField(BuildConfigField.ApiHost.tag, apiHosts[name])
-    }
-}
+setupCommon(Module.Common)
 
 dependencies {
     // local

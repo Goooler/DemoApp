@@ -21,30 +21,21 @@ private const val appTargetSdk = 30
 private const val appBuildTool = "30.0.2"
 private const val appMinSdk = 23
 private val javaVersion = JavaVersion.VERSION_1_8
-
-// app
-const val appVersionName = "1.0"
-const val appVersionCode = 20201101
-const val appPackageName = "io.goooler.demoapp"
-const val appName = "Demo"
-
 private val ndkLibs = setOf(
     "armeabi-v7a", "x86"
 )
 
-/**
- * versionCode 限长 10 位
- */
-private val buildTime: Int = SimpleDateFormat("yyMMddHHmm", Locale.CHINESE).format(Date()).toInt()
-
-val apiHosts = mapOf(
+private const val cdnPrefix = "https://raw.githubusercontent.com/"
+private val apiHosts = mapOf(
     Flavor.Daily.tag to "https://api.github.com/",
     Flavor.Online.tag to "https://api.github.com/"
 )
 
-const val cdnPrefix = "https://raw.githubusercontent.com/"
-
-val cleanFileTypes = arrayOf("*.log", "*.txt", "*.classpath", "*.project", "*.settings")
+// app
+private const val appVersionName = "1.0"
+private const val appVersionCode = 20201109
+const val appPackageName = "io.goooler.demoapp"
+const val appName = "Demo"
 
 val localLibs = mapOf(
     "dir" to "libs",
@@ -71,23 +62,13 @@ fun DependencyHandler.androidTestImplementation(vararg names: Any): Array<Depend
         add("androidTestImplementation", it)
     }.toTypedArray()
 
-fun VariantDimension.putBuildConfigStringField(name: String, value: String?) {
-    buildConfigField("String", name, "\"$value\"")
-}
-
-fun VariantDimension.putBuildConfigIntField(name: String, value: Int) {
-    buildConfigField("Integer", name, value.toString())
-}
-
 fun getModuleName(module: Module) = ":${module.tag}"
 
 fun getResourcePrefix(module: Module) = "${module.tag}_"
 
 fun getVersionNameSuffix(module: Module) = "_${module.tag}"
 
-private fun Project.findPropertyString(key: String): String = findProperty(key) as String
-
-fun Project.setupCore(): BaseExtension {
+fun Project.setupBase(): BaseExtension {
     return extensions.getByName<BaseExtension>("android").apply {
         plugins.run {
             apply(Plugins.kotlinAndroid)
@@ -103,14 +84,14 @@ fun Project.setupCore(): BaseExtension {
             vectorDrawables.useSupportLibrary = true
             ndk { abiFilters.addAll(ndkLibs) }
         }
-        sourceSets["main"].apply {
+        sourceSets["main"].run {
             java.srcDirs("src/main/kotlin")
         }
         compileOptions {
             sourceCompatibility = javaVersion
             targetCompatibility = javaVersion
         }
-        (this as ExtensionAware).extensions.getByName<KotlinJvmOptions>("kotlinOptions").apply {
+        (this as ExtensionAware).extensions.getByName<KotlinJvmOptions>("kotlinOptions").run {
             jvmTarget = javaVersion.toString()
             useIR = true
             freeCompilerArgs = listOf(
@@ -125,7 +106,7 @@ fun Project.setupCore(): BaseExtension {
 }
 
 fun Project.setupCommon(module: Module? = null, useRouter: Boolean = true): BaseExtension {
-    return setupCore().apply {
+    return setupBase().apply {
         module?.let {
             resourcePrefix = getResourcePrefix(it)
             defaultConfig.versionNameSuffix = getVersionNameSuffix(it)
@@ -134,11 +115,22 @@ fun Project.setupCommon(module: Module? = null, useRouter: Boolean = true): Base
         productFlavors {
             create(Flavor.Daily.tag)
             create(Flavor.Online.tag)
+            if (module == Module.Common) {
+                all {
+                    putBuildConfigIntField(BuildConfigField.VersionCode.tag, appVersionCode)
+                    putBuildConfigStringField(BuildConfigField.VersionName.tag, appVersionName)
+                    putBuildConfigStringField(BuildConfigField.CdnPrefix.tag, cdnPrefix)
+                    putBuildConfigStringField(BuildConfigField.ApiHost.tag, apiHosts[name])
+                }
+            }
         }
         extensions.getByName<KaptExtension>("kapt").arguments {
             if (useRouter) arg("AROUTER_MODULE_NAME", project.name)
         }
         dependencies {
+            if (module != Module.Common) {
+                implementation(project(getModuleName(Module.Common)))
+            }
             kapt(Libs.arouterKapt, Libs.moshiKapt)
         }
     }
@@ -156,10 +148,10 @@ fun Project.setupApp(appPackageName: String, appName: String): BaseExtension {
         }
         signingConfigs {
             create("sign") {
-                keyAlias = findPropertyString("keyAlias")
-                keyPassword = findPropertyString("keyPassword")
-                storeFile = File(rootDir.path, findPropertyString("storeFile"))
-                storePassword = findPropertyString("storePassword")
+                keyAlias = getSignProperty("keyAlias")
+                keyPassword = getSignProperty("keyPassword")
+                storeFile = File(rootDir.path, getSignProperty("storeFile"))
+                storePassword = getSignProperty("storePassword")
             }
         }
         buildTypes {
@@ -191,6 +183,7 @@ fun Project.setupApp(appPackageName: String, appName: String): BaseExtension {
         }
         (this as AbstractAppExtension).applicationVariants.all {
             outputs.all {
+                version
                 (this as BaseVariantOutputImpl).outputFileName =
                     "../../../../${appName}_${versionName}_${versionCode}_${flavorName}_${buildType.name}.apk"
             }
@@ -199,3 +192,26 @@ fun Project.setupApp(appPackageName: String, appName: String): BaseExtension {
         dependencies.add("coreLibraryDesugaring", Libs.desugar)
     }
 }
+
+private fun Project.findPropertyString(key: String): String = findProperty(key) as String
+
+private fun Project.getSignProperty(key: String): String {
+    return Properties().apply {
+        rootProject.file("gradle/keystore.properties").inputStream().use {
+            load(it)
+        }
+    }.getProperty(key)
+}
+
+private fun VariantDimension.putBuildConfigStringField(name: String, value: String?) {
+    buildConfigField("String", name, "\"$value\"")
+}
+
+private fun VariantDimension.putBuildConfigIntField(name: String, value: Int) {
+    buildConfigField("Integer", name, value.toString())
+}
+
+/**
+ * versionCode 限长 10 位
+ */
+private val buildTime: Int = SimpleDateFormat("yyMMddHHmm", Locale.CHINESE).format(Date()).toInt()

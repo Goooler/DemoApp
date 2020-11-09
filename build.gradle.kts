@@ -32,9 +32,12 @@ task("clean", Delete::class) {
             fileTree(
                 mapOf(
                     "dir" to projectDir,
-                    "include" to cleanFileTypes
+                    "include" to arrayOf("*.log", "*.txt")
                 )
-            )
+            ),
+            "${projectDir.path}/.classpath",
+            "${projectDir.path}/.project",
+            "${projectDir.path}/.settings"
         )
     }
 }

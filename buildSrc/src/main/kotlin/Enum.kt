@@ -1,11 +1,16 @@
 enum class Module(val tag: String, val runAlone: Boolean = false) {
+    //---------------------base-------------------------------//
     Base("base"),
     Common("common"),
+
+    //---------------------biz-------------------------------//
     Login("login"),
     Main("main"),
+    Web("web"),
+
+    //---------------------func-------------------------------//
     Adapter("adapter"),
     Widget("widget"),
-    Web("web")
 }
 
 enum class Flavor(val tag: String) {
@@ -14,8 +19,8 @@ enum class Flavor(val tag: String) {
 }
 
 enum class BuildConfigField(val tag: String) {
-    VersionName("VERSION_NAME"),
     VersionCode("VERSION_CODE"),
+    VersionName("VERSION_NAME"),
     CdnPrefix("CDN_PREFIX"),
     ApiHost("API_HOST")
 }

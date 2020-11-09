@@ -24,7 +24,6 @@ setupCommon(Module.Main).run {
 
 dependencies {
     implementation(
-        project(getModuleName(Module.Common)),
         project(getModuleName(Module.Adapter)),
         project(getModuleName(Module.Widget)),
         Libs.protobufLite

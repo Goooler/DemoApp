@@ -2,7 +2,7 @@ plugins {
     id(Plugins.androidLibrary)
 }
 
-setupCore()
+setupBase()
 
 dependencies {
     // architecture
