@@ -34,18 +34,18 @@ class MainSmartRefreshModel(application: Application) : BaseRxViewModel(applicat
 
     private fun fetchListData(page: Int) {
         MainRepository.getRepoListRx("google", page)
+            .doFinally {
+                finishRefreshAndLoadMore()
+            }
             .map {
                 it.map { bean -> MainListItemModel(bean.owner?.avatarUrl, bean.name) }
             }
             .doOnNext {
                 _listData.addAll(it)
                 if (it.size < Constants.defaultPageSize) {
-                    isEnableLoadMore.value = false
-                    isNoMore.value = true
+                    isEnableLoadMore.postValue(false)
+                    isNoMore.postValue(true)
                 }
-            }
-            .doFinally {
-                finishRefreshAndLoadMore()
             }
             .subscribe({
                 listData.postValue(_listData)

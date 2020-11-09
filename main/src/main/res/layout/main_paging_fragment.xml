@@ -27,6 +27,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:visibility="gone" />
+
+            <include
+                android:id="@+id/layout_empty"
+                layout="@layout/common_empty_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.scwang.smart.refresh.layout.SmartRefreshLayout>

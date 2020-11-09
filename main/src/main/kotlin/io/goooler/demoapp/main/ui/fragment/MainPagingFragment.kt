@@ -8,8 +8,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshListener
+import io.goooler.demoapp.adapter.rv.datasource.BasePagingSource
 import io.goooler.demoapp.base.core.BaseLazyFragment
 import io.goooler.demoapp.base.util.unsafeLazy
+import io.goooler.demoapp.common.util.disableRefreshAndLoadMore
 import io.goooler.demoapp.common.util.finishRefreshAndLoadMore
 import io.goooler.demoapp.common.util.getViewModel
 import io.goooler.demoapp.common.util.showToast
@@ -34,11 +36,23 @@ class MainPagingFragment private constructor() : BaseLazyFragment() {
         binding.smartRefresh.setOnRefreshListener(listener)
         binding.rvList.adapter = listAdapter
         binding.layoutError.listener = listener
+
         listAdapter.addLoadStateListener {
             if (it.refresh !is LoadState.Loading) {
                 binding.smartRefresh.finishRefreshAndLoadMore()
                 if (it.refresh is LoadState.Error) {
-                    binding.layoutError.root.visibility = View.VISIBLE
+                    when ((it.refresh as LoadState.Error).error) {
+                        is BasePagingSource.EmptyDataException -> {
+                            binding.smartRefresh.disableRefreshAndLoadMore()
+                            binding.layoutEmpty.root.visibility = View.VISIBLE
+                        }
+                        else -> binding.layoutError.root.visibility = View.VISIBLE
+                    }
+                }
+            }
+            when ((it.append as? LoadState.Error)?.error) {
+                is BasePagingSource.NoMoreDataException -> {
+                    binding.smartRefresh.finishLoadMoreWithNoMoreData()
                 }
             }
         }

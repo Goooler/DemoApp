@@ -46,6 +46,11 @@ fun SmartRefreshLayout.finishRefreshAndLoadMore() {
     finishLoadMore()
 }
 
+fun SmartRefreshLayout.disableRefreshAndLoadMore() {
+    setEnableRefresh(false)
+    setEnableLoadMore(false)
+}
+
 fun Long.toDateString(pattern: String): String {
     return TimeUtils.millis2String(this, pattern)
 }
