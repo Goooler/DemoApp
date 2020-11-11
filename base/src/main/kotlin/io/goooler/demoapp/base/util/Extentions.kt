@@ -4,12 +4,15 @@ package io.goooler.demoapp.base.util
 
 import android.app.Activity
 import android.graphics.Color
+import android.graphics.Point
 import android.os.Build
 import android.os.Bundle
 import android.os.Looper
-import android.text.Html
-import android.text.Spanned
+import android.text.*
+import android.text.style.ClickableSpan
+import android.view.View
 import android.webkit.URLUtil
+import android.widget.EditText
 import androidx.annotation.ColorInt
 import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
@@ -38,7 +41,10 @@ typealias MutableDoubleLiveData = MutableLiveData<Double>
 
 typealias MutableFloatLiveData = MutableLiveData<Float>
 
-typealias MutableStringLiveData = MutableLiveData<String>
+/**
+ * 可以双向绑定，暂时定为可空
+ */
+typealias MutableStringLiveData = MutableLiveData<String?>
 
 typealias MutableListLiveData<T> = MutableLiveData<List<T>>
 
@@ -76,7 +82,28 @@ fun String.fromHtml(): Spanned {
     }
 }
 
+fun String.onlyDigits(): String = replace(Regex("\\D*"), "")
+
+fun String.removeAllSpecialCharacters(): String = replace("[^a-zA-Z]+".toRegex(), "")
+
 fun CharSequence?.isNotNullOrEmpty(): Boolean = !isNullOrEmpty()
+
+fun SpannableString.withClickableSpan(
+    clickablePart: String,
+    onClickListener: () -> Unit
+): SpannableString {
+    val clickableSpan = object : ClickableSpan() {
+        override fun onClick(widget: View) = onClickListener()
+    }
+    val clickablePartStart = indexOf(clickablePart)
+    setSpan(
+        clickableSpan,
+        clickablePartStart,
+        clickablePartStart + clickablePart.length,
+        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+    )
+    return this
+}
 
 /**
  * subString 防越界处理
@@ -298,6 +325,21 @@ suspend fun <T> withDefaultContext(block: suspend CoroutineScope.() -> T) =
 
 fun File.notExists(): Boolean = !this.exists()
 
+//---------------------View-------------------------------//
+
+fun EditText.onTextChanged(listener: (String) -> Unit) {
+    this.addTextChangedListener(object : TextWatcher {
+
+        override fun afterTextChanged(s: Editable?) {
+            listener(s.toString())
+        }
+
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) = Unit
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) = Unit
+    })
+}
+
 //---------------------Fragment-------------------------------//
 
 fun <T : Fragment> T.putArguments(bundle: Bundle): T {
@@ -347,6 +389,18 @@ fun FragmentManager.replaceFragment(
 
 inline fun <reified T : ViewDataBinding> Activity.binding(@LayoutRes resId: Int): Lazy<T> =
     lazy(LazyThreadSafetyMode.NONE) { DataBindingUtil.setContentView(this, resId) }
+
+fun Activity.getScreenHeight(): Int {
+    val size = Point()
+    windowManager.defaultDisplay.getSize(size)
+    return size.y
+}
+
+fun Activity.getScreenWidth(): Int {
+    val size = Point()
+    windowManager.defaultDisplay.getSize(size)
+    return size.x
+}
 
 //---------------------Other-------------------------------//
 
