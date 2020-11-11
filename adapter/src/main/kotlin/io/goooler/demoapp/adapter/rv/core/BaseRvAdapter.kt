@@ -1,6 +1,7 @@
 package io.goooler.demoapp.adapter.rv.core
 
 import android.view.ViewGroup
+import androidx.annotation.IntRange
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
 
@@ -21,8 +22,6 @@ abstract class BaseRvAdapter<M : IVhModelType> : RecyclerView.Adapter<BindingVie
 
     private val helper by lazy(LazyThreadSafetyMode.NONE) { RvAdapterHelper(this) }
 
-    private val dataList = ArrayList<M>()
-
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
         helper.onAttachedToRecyclerView(recyclerView)
@@ -33,33 +32,35 @@ abstract class BaseRvAdapter<M : IVhModelType> : RecyclerView.Adapter<BindingVie
         helper.onDetachedFromRecyclerView(recyclerView)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindingViewHolder {
-        return helper.onCreateViewHolder(parent, viewType)
-    }
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        @LayoutRes viewType: Int
+    ): BindingViewHolder = helper.onCreateViewHolder(parent, viewType)
 
-    override fun onBindViewHolder(holder: BindingViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: BindingViewHolder,
+        @IntRange(from = 0) position: Int
+    ) {
         helper.onBindViewHolder(holder, position)
     }
 
     @LayoutRes
-    override fun getItemViewType(position: Int): Int = dataList[position].viewType
+    override fun getItemViewType(@IntRange(from = 0) position: Int): Int =
+        helper.list[position].viewType
 
-    override fun getItemCount(): Int = dataList.size
+    override fun getItemCount(): Int = helper.list.size
+
+    override fun getModel(@IntRange(from = 0) position: Int): M? = helper.list[position]
 
     override fun setList(list: List<M>) {
-        dataList.run {
-            clear()
-            addAll(helper.transform(list))
-        }
+        helper.list = list
         notifyDataSetChanged()
     }
 
-    override fun getList(): List<M> = dataList
-
-    override fun getModel(position: Int): M? = dataList[position]
+    override fun getList(): List<M> = helper.list
 
     override fun refreshItems(items: List<M>) {
-        helper.refreshItems(items, dataList) {
+        helper.refreshItems(items) {
             if (it in 0 until itemCount) {
                 notifyItemChanged(it)
             }

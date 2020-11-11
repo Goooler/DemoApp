@@ -1,6 +1,7 @@
 package io.goooler.demoapp.adapter.rv.core
 
 import android.util.SparseArray
+import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
 
 /**
@@ -23,7 +24,7 @@ class ViewTypeDelegateManager<M : IVhModelType> {
      * @param binding ViewDataBinding
      * @param viewType viewType
      */
-    internal fun onCreateVH(binding: ViewDataBinding, viewType: Int) {
+    internal fun onCreateVH(binding: ViewDataBinding, @LayoutRes viewType: Int) {
         if (mIVDs.size() == 0) return
         mIVDs.get(viewType)?.onCreateVH(binding)
     }
@@ -32,11 +33,11 @@ class ViewTypeDelegateManager<M : IVhModelType> {
      * When bind viewHolder. if VTD.getViewType() == model.viewType executes VTD.onBindVh().
      *
      * @param binding ViewDataBinding
-     * @param m model
+     * @param model model
      */
-    internal fun onBindVH(binding: ViewDataBinding, m: M) {
+    internal fun onBindVH(binding: ViewDataBinding, model: M) {
         if (mIVDs.size() == 0) return
-        mIVDs.get(m.viewType)?.onBindVH(binding, m)
+        mIVDs.get(model.viewType)?.onBindVH(binding, model)
     }
 
     /**

@@ -1,5 +1,6 @@
 package io.goooler.demoapp.adapter.vp
 
+import androidx.annotation.IntRange
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
@@ -21,7 +22,8 @@ abstract class BaseFragmentStateAdapter(fragmentManager: FragmentManager, lifecy
         notifyDataSetChanged()
     }
 
-    override fun createFragment(position: Int): Fragment = fragmentList[position]
+    override fun createFragment(@IntRange(from = 0) position: Int): Fragment =
+        fragmentList[position]
 
     override fun getItemCount(): Int = fragmentList.size
 }

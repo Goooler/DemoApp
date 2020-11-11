@@ -1,6 +1,8 @@
 package io.goooler.demoapp.adapter.rv.paging
 
 import android.view.ViewGroup
+import androidx.annotation.IntRange
+import androidx.annotation.LayoutRes
 import androidx.paging.LoadState
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -27,7 +29,7 @@ abstract class BasePagingRvAdapter<M : IDiffVhModelType>(callback: DiffCallBack<
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
         helper.onAttachedToRecyclerView(recyclerView)
-        listenLoadState()
+        observeLoadState()
     }
 
     override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
@@ -35,19 +37,25 @@ abstract class BasePagingRvAdapter<M : IDiffVhModelType>(callback: DiffCallBack<
         helper.onDetachedFromRecyclerView(recyclerView)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindingViewHolder {
-        return helper.onCreateViewHolder(parent, viewType)
-    }
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        @LayoutRes viewType: Int
+    ): BindingViewHolder = helper.onCreateViewHolder(parent, viewType)
 
-    override fun onBindViewHolder(holder: BindingViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: BindingViewHolder,
+        @IntRange(from = 0) position: Int
+    ) {
         helper.onBindViewHolder(holder, position)
     }
 
-    override fun getItemViewType(position: Int): Int = getItem(position)?.viewType ?: 0
+    @LayoutRes
+    override fun getItemViewType(@IntRange(from = 0) position: Int): Int =
+        getItem(position)?.viewType ?: 0
 
-    override fun getModel(position: Int): M? = getItem(position)
+    override fun getModel(@IntRange(from = 0) position: Int): M? = getItem(position)
 
-    private fun listenLoadState() {
+    private fun observeLoadState() {
         addLoadStateListener {
             when {
                 it.refresh is LoadState.Loading -> onLoadStatusListener?.onRefresh()
@@ -56,13 +64,13 @@ abstract class BasePagingRvAdapter<M : IDiffVhModelType>(callback: DiffCallBack<
                     onLoadStatusListener?.onNotLoading()
                     if (it.refresh is LoadState.Error) {
                         when (val throwable = (it.refresh as LoadState.Error).error) {
-                            is BasePagingSource.EmptyDataException -> onLoadStatusListener?.onEmpty()
+                            is PagingSourceException.EmptyDataException -> onLoadStatusListener?.onEmpty()
                             else -> onLoadStatusListener?.onError(throwable)
                         }
                     }
                     if (it.append is LoadState.Error) {
                         when (val throwable = (it.append as LoadState.Error).error) {
-                            is BasePagingSource.NoMoreDataException -> onLoadStatusListener?.onNoMoreData()
+                            is PagingSourceException.NoMoreDataException -> onLoadStatusListener?.onNoMoreData()
                             else -> onLoadStatusListener?.onError(throwable)
                         }
                     }

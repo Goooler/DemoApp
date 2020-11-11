@@ -1,6 +1,8 @@
 package io.goooler.demoapp.adapter.rv.core
 
 import android.view.ViewGroup
+import androidx.annotation.IntRange
+import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -22,6 +24,17 @@ internal class RvAdapterHelper<M : IVhModelType>(private val adapter: IRvAdapter
 
     private val ivdManager = ViewTypeDelegateManager<M>()
 
+    private val dataList = ArrayList<M>()
+
+    var list: List<M>
+        get() = dataList
+        set(value) {
+            dataList.run {
+                clear()
+                addAll(transform(value))
+            }
+        }
+
     /**
      * Called when RecyclerView starts observing this Adapter.
      */
@@ -41,7 +54,7 @@ internal class RvAdapterHelper<M : IVhModelType>(private val adapter: IRvAdapter
     /**
      * Called when RecyclerView needs a new ViewHolder of the given type to represent an item.
      */
-    fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindingViewHolder {
+    fun onCreateViewHolder(parent: ViewGroup, @LayoutRes viewType: Int): BindingViewHolder {
         return adapter.createVH(parent, viewType).also {
             adapter.onCreateVHForAll(it.binding)
             ivdManager.onCreateVH(it.binding, viewType)
@@ -51,7 +64,7 @@ internal class RvAdapterHelper<M : IVhModelType>(private val adapter: IRvAdapter
     /**
      * Called by RecyclerView to display the data at the specified position.
      */
-    fun onBindViewHolder(holder: BindingViewHolder, position: Int) {
+    fun onBindViewHolder(holder: BindingViewHolder, @IntRange(from = 0) position: Int) {
         adapter.getModel(position)?.let {
             setFullSpan(holder, it)
             adapter.onBindVHForAll(holder.binding, it)
@@ -63,7 +76,7 @@ internal class RvAdapterHelper<M : IVhModelType>(private val adapter: IRvAdapter
     /**
      * Compare the list to find the same items and refresh them.
      */
-    fun refreshItems(items: List<M>, dataList: List<M>, notify: (Int) -> Unit) {
+    fun refreshItems(items: List<M>, notify: (Int) -> Unit) {
         transform(items).forEach {
             if (it in dataList) {
                 notify(dataList.indexOf(it))

@@ -1,6 +1,8 @@
 package io.goooler.demoapp.adapter.rv.diff
 
 import android.view.ViewGroup
+import androidx.annotation.IntRange
+import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -27,8 +29,6 @@ abstract class BaseRvDiffAdapter<M : IDiffVhModelType>(callback: DiffCallBack<M>
 
     private val helper by lazy(LazyThreadSafetyMode.NONE) { RvAdapterHelper(this) }
 
-    private val dataList = ArrayList<M>()
-
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
         helper.onAttachedToRecyclerView(recyclerView)
@@ -39,37 +39,39 @@ abstract class BaseRvDiffAdapter<M : IDiffVhModelType>(callback: DiffCallBack<M>
         helper.onDetachedFromRecyclerView(recyclerView)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindingViewHolder {
-        return helper.onCreateViewHolder(parent, viewType)
-    }
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        @LayoutRes viewType: Int
+    ): BindingViewHolder = helper.onCreateViewHolder(parent, viewType)
 
-    override fun onBindViewHolder(holder: BindingViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: BindingViewHolder,
+        @IntRange(from = 0) position: Int
+    ) {
         helper.onBindViewHolder(holder, position)
     }
 
-    override fun getModel(position: Int): M? = getItem(position)
+    @LayoutRes
+    override fun getItemViewType(@IntRange(from = 0) position: Int): Int =
+        getItem(position)?.viewType ?: 0
 
-    override fun getItemViewType(position: Int): Int = getItem(position)?.viewType ?: 0
+    override fun getModel(@IntRange(from = 0) position: Int): M? = getItem(position)
 
     override fun setList(list: List<M>) {
-        dataList.clear()
-        helper.transform(list).let {
-            dataList.addAll(it)
-            // Always submit a new list.
-            submitList(it)
-        }
+        helper.list = list
+        submitList(helper.transform(list))
     }
 
     /**
      * Just for read.
      */
-    override fun getList(): List<M> = dataList
+    override fun getList(): List<M> = helper.list
 
     /**
      * Please do not use it with setList()!
      */
     override fun refreshItems(items: List<M>) {
-        helper.refreshItems(items, dataList) {
+        helper.refreshItems(items) {
             if (it in 0 until itemCount) {
                 notifyItemChanged(it)
             }

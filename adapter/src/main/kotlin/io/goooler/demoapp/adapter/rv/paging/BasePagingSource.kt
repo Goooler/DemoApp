@@ -11,9 +11,9 @@ abstract class BasePagingSource<T : IDiffVhModelType> : PagingSource<Int, T>() {
             val fetchedList = fetchListData(currentPage)
             if (fetchedList.isEmpty()) {
                 if (currentPage == 1) {
-                    throw EmptyDataException()
+                    throw PagingSourceException.EmptyDataException()
                 } else {
-                    throw NoMoreDataException()
+                    throw PagingSourceException.NoMoreDataException()
                 }
             } else {
                 LoadResult.Page(
@@ -28,7 +28,4 @@ abstract class BasePagingSource<T : IDiffVhModelType> : PagingSource<Int, T>() {
     }
 
     abstract suspend fun fetchListData(page: Int): List<T>
-
-    class EmptyDataException : Exception()
-    class NoMoreDataException : Exception()
 }

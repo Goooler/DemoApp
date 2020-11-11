@@ -2,6 +2,7 @@
 
 package io.goooler.demoapp.adapter.vp
 
+import androidx.annotation.IntRange
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
@@ -30,9 +31,10 @@ abstract class BaseFragmentPagerAdapter(
         notifyDataSetChanged()
     }
 
-    override fun getItem(position: Int): Fragment = fragmentList[position]
+    override fun getItem(@IntRange(from = 0) position: Int): Fragment = fragmentList[position]
 
-    override fun getPageTitle(position: Int): CharSequence? = titleList[position]
+    override fun getPageTitle(@IntRange(from = 0) position: Int): CharSequence? =
+        titleList[position]
 
     override fun getCount(): Int = fragmentList.size
 

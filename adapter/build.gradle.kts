@@ -8,7 +8,6 @@ setupBase().run {
 }
 
 dependencies {
-    implementation(Libs.core)
     api(
         Libs.recyclerView,
         Libs.paging,

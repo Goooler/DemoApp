@@ -2,6 +2,8 @@ package io.goooler.demoapp.adapter.rv.core
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.annotation.IntRange
+import androidx.annotation.LayoutRes
 import androidx.annotation.MainThread
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -31,7 +33,7 @@ interface IRvAdapter<M : IVhModelType> {
     /**
      * Create BaseViewHolder.
      */
-    fun createVH(parent: ViewGroup, viewType: Int): BindingViewHolder {
+    fun createVH(parent: ViewGroup, @LayoutRes viewType: Int): BindingViewHolder {
         val binding = DataBindingUtil.inflate<ViewDataBinding>(
             LayoutInflater.from(parent.context), viewType, parent, false
         )
@@ -46,5 +48,5 @@ interface IRvAdapter<M : IVhModelType> {
     /**
      * Get item by position.
      */
-    fun getModel(position: Int): M?
+    fun getModel(@IntRange(from = 0) position: Int): M?
 }

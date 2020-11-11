@@ -32,7 +32,7 @@ interface ViewTypeDelegate<DB : ViewDataBinding, M : IVhModelType> {
      * What to do when binding the viewHolder.
      *
      * @param binding ViewDataBinding
-     * @param m model
+     * @param model model
      */
-    fun onBindVH(binding: DB, m: M)
+    fun onBindVH(binding: DB, model: M)
 }
