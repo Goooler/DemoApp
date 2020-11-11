@@ -10,18 +10,18 @@ import io.goooler.demoapp.base.core.BaseLazyFragment
 import io.goooler.demoapp.base.util.unsafeLazy
 import io.goooler.demoapp.common.util.getViewModel
 import io.goooler.demoapp.common.util.showToast
-import io.goooler.demoapp.main.databinding.MainSmartRefreshFragmentBinding
-import io.goooler.demoapp.main.ui.adapter.MainListAdapter
-import io.goooler.demoapp.main.vm.MainSmartRefreshModel
+import io.goooler.demoapp.main.databinding.MainSrlFragmentBinding
+import io.goooler.demoapp.main.ui.adapter.MainSrlRvAdapter
+import io.goooler.demoapp.main.vm.MainSrlModel
 
-class MainSmartRefreshFragment private constructor() : BaseLazyFragment() {
+class MainSrlFragment private constructor() : BaseLazyFragment() {
 
-    private val binding by unsafeLazy { MainSmartRefreshFragmentBinding.inflate(layoutInflater) }
+    private val binding by unsafeLazy { MainSrlFragmentBinding.inflate(layoutInflater) }
 
-    private val vm by getViewModel<MainSmartRefreshModel>()
+    private val vm by getViewModel<MainSrlModel>()
 
     private val listAdapter by unsafeLazy {
-        MainListAdapter(listener)
+        MainSrlRvAdapter(listener)
     }
 
     private val initView by unsafeLazy {
@@ -30,7 +30,7 @@ class MainSmartRefreshFragment private constructor() : BaseLazyFragment() {
         binding.smartRefresh.setOnRefreshLoadMoreListener(listener)
         binding.rvList.adapter = listAdapter
         vm.listData.observe(viewLifecycleOwner) {
-            listAdapter.setData(it)
+            listAdapter.setList(it)
         }
     }
 
@@ -51,7 +51,7 @@ class MainSmartRefreshFragment private constructor() : BaseLazyFragment() {
         return binding.root
     }
 
-    private val listener = object : MainListAdapter.OnEventListener, OnRefreshLoadMoreListener {
+    private val listener = object : MainSrlRvAdapter.OnEventListener, OnRefreshLoadMoreListener {
         override fun onContentClick(content: String) {
             content.showToast()
         }
@@ -66,6 +66,6 @@ class MainSmartRefreshFragment private constructor() : BaseLazyFragment() {
     }
 
     companion object {
-        fun newInstance() = MainSmartRefreshFragment()
+        fun newInstance() = MainSrlFragment()
     }
 }

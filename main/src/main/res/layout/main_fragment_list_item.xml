@@ -11,7 +11,7 @@
 
         <variable
             name="listener"
-            type="io.goooler.demoapp.main.ui.adapter.MainListAdapter.OnEventListener" />
+            type="io.goooler.demoapp.main.ui.adapter.MainSrlRvAdapter.OnEventListener" />
     </data>
 
     <androidx.cardview.widget.CardView

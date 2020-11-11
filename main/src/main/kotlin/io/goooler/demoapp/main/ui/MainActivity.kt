@@ -13,7 +13,7 @@ import io.goooler.demoapp.common.router.RouterPath
 import io.goooler.demoapp.main.databinding.MainActivityBinding
 import io.goooler.demoapp.main.ui.fragment.MainFragment
 import io.goooler.demoapp.main.ui.fragment.MainPagingFragment
-import io.goooler.demoapp.main.ui.fragment.MainSmartRefreshFragment
+import io.goooler.demoapp.main.ui.fragment.MainSrlFragment
 
 @Route(path = RouterPath.main)
 class MainActivity : BaseThemeActivity() {
@@ -30,7 +30,7 @@ class MainActivity : BaseThemeActivity() {
 
     private val fragments = listOf(
         MainFragment.newInstance(),
-        MainSmartRefreshFragment.newInstance(),
+        MainSrlFragment.newInstance(),
         MainPagingFragment.newInstance()
     )
 

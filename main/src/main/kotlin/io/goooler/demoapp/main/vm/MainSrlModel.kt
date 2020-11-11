@@ -9,7 +9,7 @@ import io.goooler.demoapp.common.util.toastThrowable
 import io.goooler.demoapp.main.model.MainListItemModel
 import io.goooler.demoapp.main.repository.MainRepository
 
-class MainSmartRefreshModel(application: Application) : BaseRxViewModel(application) {
+class MainSrlModel(application: Application) : BaseRxViewModel(application) {
 
     val listData = MutableListLiveData<MainListItemModel>()
     val isLoadMoreFinish = MutableBooleanLiveData()

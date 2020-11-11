@@ -6,7 +6,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import io.goooler.demoapp.adapter.rv.datasource.BasePagingSource
+import io.goooler.demoapp.adapter.rv.paging.BasePagingSource
 import io.goooler.demoapp.base.core.BaseViewModel
 import io.goooler.demoapp.common.type.Constants
 import io.goooler.demoapp.main.model.MainListItemModel

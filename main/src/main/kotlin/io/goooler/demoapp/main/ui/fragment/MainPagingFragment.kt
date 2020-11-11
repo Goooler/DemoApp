@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshListener
-import io.goooler.demoapp.adapter.rv.diff.BasePagingAdapter
+import io.goooler.demoapp.adapter.rv.paging.BasePagingRvAdapter
 import io.goooler.demoapp.base.core.BaseLazyFragment
 import io.goooler.demoapp.base.util.unsafeLazy
 import io.goooler.demoapp.common.util.disableRefreshAndLoadMore
@@ -15,7 +15,7 @@ import io.goooler.demoapp.common.util.finishRefreshAndLoadMore
 import io.goooler.demoapp.common.util.getViewModel
 import io.goooler.demoapp.common.util.showToast
 import io.goooler.demoapp.main.databinding.MainPagingFragmentBinding
-import io.goooler.demoapp.main.ui.adapter.MainListPagingAdapter
+import io.goooler.demoapp.main.ui.adapter.MainPagingRvAdapter
 import io.goooler.demoapp.main.vm.MainPagingViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -26,7 +26,7 @@ class MainPagingFragment private constructor() : BaseLazyFragment() {
 
     private val vm by getViewModel<MainPagingViewModel>()
 
-    private val listAdapter = MainListPagingAdapter {
+    private val listAdapter = MainPagingRvAdapter {
         it.showToast()
     }
 
@@ -59,7 +59,7 @@ class MainPagingFragment private constructor() : BaseLazyFragment() {
         return binding.root
     }
 
-    private val listener = object : View.OnClickListener, BasePagingAdapter.OnLoadStatusListener,
+    private val listener = object : View.OnClickListener, BasePagingRvAdapter.OnLoadStatusListener,
         OnRefreshListener {
         override fun onRefresh(refreshLayout: RefreshLayout) {
             listAdapter.refresh()

@@ -1,9 +1,9 @@
-package io.goooler.demoapp.adapter.rv.datasource
+package io.goooler.demoapp.adapter.rv.paging
 
 import androidx.paging.PagingSource
-import io.goooler.demoapp.adapter.rv.base.IModelType
+import io.goooler.demoapp.adapter.rv.diff.IDiffVhModelType
 
-abstract class BasePagingSource<T : IModelType> : PagingSource<Int, T>() {
+abstract class BasePagingSource<T : IDiffVhModelType> : PagingSource<Int, T>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, T> {
         return try {
