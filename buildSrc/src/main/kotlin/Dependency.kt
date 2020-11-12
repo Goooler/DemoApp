@@ -1,4 +1,4 @@
-@file:Suppress("unused", "SpellCheckingInspection")
+@file:Suppress("SpellCheckingInspection")
 
 private const val coreVersion = "1.3.2"
 private const val appCompatVersion = "1.2.0"
@@ -17,8 +17,7 @@ private const val preferenceVersion = "1.1.1"
 private const val okHttpVersion = "4.9.0"
 private const val retrofitVersion = "2.9.0"
 private const val fastjsonVersion = "1.1.72.android"
-private const val arouterVersion = "1.5.0"
-private const val arouterCompilerVersion = "1.2.2"
+private const val arouterVersion = "1.5.1"
 private const val gsonVersion = "2.8.6"
 private const val moshiVersion = "1.11.0"
 private const val eventBusVersion = "3.2.0"
@@ -48,14 +47,15 @@ private const val viewPager2Version = "1.0.0"
 private const val protobufVersion = "0.8.13"
 private const val photoViewVersion = "2.3.0"
 private const val permissionXVersion = "1.4.0"
+private const val arouterRegisterVersion = "1.0.2"
 
 object Plugins {
     internal const val kotlinAndroid = "kotlin-android"
     internal const val kotlinKapt = "kotlin-kapt"
     const val androidLibrary = "com.android.library"
     const val androidApplication = "com.android.application"
+    const val arouter = "com.alibaba.arouter"
     const val protobuf = "com.google.protobuf"
-    const val protobufPlugin = "com.google.protobuf:protobuf-gradle-plugin:$protobufVersion"
 }
 
 object Libs {
@@ -99,10 +99,13 @@ object Libs {
     const val photoView = "com.github.chrisbanes:PhotoView:$photoViewVersion"
     const val permissionX = "com.permissionx.guolindev:permissionx:$permissionXVersion"
 
+    const val protobufPlugin = "com.google.protobuf:protobuf-gradle-plugin:$protobufVersion"
+    const val arouterPlugin = "com.alibaba:arouter-register:$arouterRegisterVersion"
+
     const val glideKapt = "com.github.bumptech.glide:compiler:$glideVersion"
     const val objectBoxKapt = "io.objectbox:objectbox-processor:$objectBoxVersion"
     const val eventBusKapt = "org.greenrobot:eventbus-annotation-processor:$eventBusVersion"
-    const val arouterKapt = "com.alibaba:arouter-compiler:$arouterCompilerVersion"
+    const val arouterKapt = "com.alibaba:arouter-compiler:$arouterVersion"
     const val moshiKapt = "com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion"
 
     val coroutines = arrayOf(

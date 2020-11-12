@@ -105,8 +105,9 @@ fun Project.setupBase(): BaseExtension {
     }
 }
 
-fun Project.setupCommon(module: Module? = null, useRouter: Boolean = true): BaseExtension {
+fun Project.setupCommon(module: Module? = null): BaseExtension {
     return setupBase().apply {
+        plugins.apply(Plugins.arouter)
         module?.let {
             resourcePrefix = getResourcePrefix(it)
             defaultConfig.versionNameSuffix = getVersionNameSuffix(it)
@@ -125,7 +126,7 @@ fun Project.setupCommon(module: Module? = null, useRouter: Boolean = true): Base
             }
         }
         extensions.getByName<KaptExtension>("kapt").arguments {
-            if (useRouter) arg("AROUTER_MODULE_NAME", project.name)
+            arg("AROUTER_MODULE_NAME", project.name)
         }
         dependencies {
             if (module != Module.Common) {
