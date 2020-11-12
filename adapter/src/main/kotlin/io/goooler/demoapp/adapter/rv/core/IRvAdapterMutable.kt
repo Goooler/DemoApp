@@ -8,32 +8,23 @@ import androidx.recyclerview.widget.RecyclerView
 interface IRvAdapterMutable<M : IVhModelType> {
 
     /**
-     * Set data list.
+     * Set or Get data list.
      */
-    fun setList(list: List<M>)
-
-    /**
-     * Get data list.
-     */
-    fun getList(): List<M>
+    var list: List<M>
 
     /**
      * Refresh some items.
      */
     fun refreshItems(items: List<M>)
 
-    fun setList(vararg items: M) {
-        setList(items.toList())
-    }
+    fun removeItem(index: Int)
 
-    fun refreshItems(vararg items: M) {
-        refreshItems(items.toList())
-    }
+    fun removeItem(item: M)
 }
 
 @BindingAdapter(value = ["binding_rv_dataList"], requireAll = true)
 fun <M : IVhModelType> RecyclerView.setList(list: List<M>?) {
-    (adapter as? IRvAdapterMutable<M>)?.setList(list.orEmpty())
+    (adapter as? IRvAdapterMutable<M>)?.list = list.orEmpty()
 }
 
 @BindingAdapter(value = ["binding_rv_refreshItems"], requireAll = true)

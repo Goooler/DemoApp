@@ -57,15 +57,12 @@ abstract class BaseRvDiffAdapter<M : IDiffVhModelType>(callback: DiffCallBack<M>
 
     override fun getModel(@IntRange(from = 0) position: Int): M? = getItem(position)
 
-    override fun setList(list: List<M>) {
-        helper.list = list
-        submitList(helper.transform(list))
-    }
-
-    /**
-     * Just for read.
-     */
-    override fun getList(): List<M> = helper.list
+    override var list: List<M>
+        get() = helper.list
+        set(value) {
+            helper.list = value
+            submitList(helper.transform(list))
+        }
 
     /**
      * Please do not use it with setList()!
@@ -75,6 +72,17 @@ abstract class BaseRvDiffAdapter<M : IDiffVhModelType>(callback: DiffCallBack<M>
             if (it in 0 until itemCount) {
                 notifyItemChanged(it)
             }
+        }
+    }
+
+    override fun removeItem(index: Int) {
+        helper.removeItem(index)
+        notifyItemRemoved(index)
+    }
+
+    override fun removeItem(item: M) {
+        helper.removeItem(item) {
+            notifyItemRemoved(it)
         }
     }
 }

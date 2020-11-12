@@ -30,7 +30,7 @@ class MainSrlFragment private constructor() : BaseLazyFragment() {
         binding.smartRefresh.setOnRefreshLoadMoreListener(listener)
         binding.rvList.adapter = listAdapter
         vm.listData.observe(viewLifecycleOwner) {
-            listAdapter.setList(it)
+            listAdapter.list = it
         }
     }
 

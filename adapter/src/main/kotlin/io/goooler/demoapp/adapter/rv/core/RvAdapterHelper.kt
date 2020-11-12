@@ -93,6 +93,19 @@ internal class RvAdapterHelper<M : IVhModelType>(private val adapter: IRvAdapter
         return result
     }
 
+    fun removeItem(index: Int) {
+        dataList.removeAt(index)
+    }
+
+    fun removeItem(item: M, notify: (Int) -> Unit) {
+        dataList.indexOf(item).let {
+            if (it != -1) {
+                removeItem(it)
+                notify(it)
+            }
+        }
+    }
+
     /**
      * Recursively traversing all leaf nodes.
      */

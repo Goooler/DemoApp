@@ -52,18 +52,29 @@ abstract class BaseRvAdapter<M : IVhModelType> : RecyclerView.Adapter<BindingVie
 
     override fun getModel(@IntRange(from = 0) position: Int): M? = helper.list[position]
 
-    override fun setList(list: List<M>) {
-        helper.list = list
-        notifyDataSetChanged()
-    }
-
-    override fun getList(): List<M> = helper.list
+    override var list: List<M>
+        get() = helper.list
+        set(value) {
+            helper.list = value
+            notifyDataSetChanged()
+        }
 
     override fun refreshItems(items: List<M>) {
         helper.refreshItems(items) {
             if (it in 0 until itemCount) {
                 notifyItemChanged(it)
             }
+        }
+    }
+
+    override fun removeItem(index: Int) {
+        helper.removeItem(index)
+        notifyItemRemoved(index)
+    }
+
+    override fun removeItem(item: M) {
+        helper.removeItem(item) {
+            notifyItemRemoved(it)
         }
     }
 }
