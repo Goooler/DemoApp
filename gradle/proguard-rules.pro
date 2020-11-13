@@ -1,4 +1,11 @@
 -verbose
+-dontusemixedcaseclassnames
+-dontskipnonpubliclibraryclasses
+-optimizations !code/simplification/arithmetic,!field/*,!class/merging/*
+-dump class_files.txt
+-printseeds seeds.txt
+-printusage unused.txt
+-printmapping mapping.txt
 -keepattributes *Annotation*
 -keepattributes SourceFile,LineNumberTable
 -keep class **.R$* {*;}
