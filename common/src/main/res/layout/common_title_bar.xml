@@ -65,10 +65,11 @@
             android:layout_height="match_parent"
             android:onClick="@{listener}"
             android:padding="5pt"
-            android:src="@{iconRight ?? @drawable/ic_share}"
+            android:src="@{iconRight}"
             app:layout_constraintEnd_toEndOf="parent"
             app:tint="@color/color_333333"
             tools:src="@drawable/ic_share" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

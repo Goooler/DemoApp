@@ -38,4 +38,5 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+
 </layout>

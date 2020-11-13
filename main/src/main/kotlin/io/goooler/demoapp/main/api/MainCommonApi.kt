@@ -7,19 +7,17 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.QueryMap
 
-internal typealias RepoList = List<MainRepoListBean>
-
 interface MainApi {
 
     @GET("users/{user}/repos")
     fun getRepoListRx(
         @Path("user") user: String,
         @QueryMap params: ParamMap
-    ): Observable<RepoList>
+    ): Observable<List<MainRepoListBean>>
 
     @GET("users/{user}/repos")
     suspend fun getRepoListCr(
         @Path("user") user: String,
         @QueryMap params: ParamMap
-    ): RepoList
+    ): List<MainRepoListBean>
 }

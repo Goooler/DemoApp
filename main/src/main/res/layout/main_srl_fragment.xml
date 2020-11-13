@@ -31,4 +31,5 @@
             tools:listitem="@layout/main_common_rv_item" />
 
     </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+
 </layout>

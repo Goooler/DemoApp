@@ -4,20 +4,20 @@ import io.goooler.demoapp.base.util.paramMapOf
 import io.goooler.demoapp.common.network.RetrofitHelper
 import io.goooler.demoapp.common.type.Constants
 import io.goooler.demoapp.main.api.MainApi
-import io.goooler.demoapp.main.api.RepoList
+import io.goooler.demoapp.main.bean.MainRepoListBean
 import io.reactivex.rxjava3.core.Observable
 
 object MainCommonRepository {
 
     private const val USER = "goooler"
 
-    private val api = RetrofitHelper.create<MainApi>()
+    private val api: MainApi = RetrofitHelper.create()
 
     suspend fun getRepoListCr(
         user: String = USER,
         page: Int = 1,
         pageSize: Int = Constants.defaultPageSize
-    ): RepoList {
+    ): List<MainRepoListBean> {
         val params = paramMapOf(
             "page" to page,
             "per_page" to pageSize
@@ -29,7 +29,7 @@ object MainCommonRepository {
         user: String = USER,
         page: Int = 1,
         pageSize: Int = Constants.defaultPageSize
-    ): Observable<RepoList> {
+    ): Observable<List<MainRepoListBean>> {
         val params = paramMapOf(
             "page" to page,
             "per_page" to pageSize

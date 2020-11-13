@@ -22,26 +22,28 @@ import kotlinx.coroutines.launch
 
 class MainPagingFragment private constructor() : BaseLazyFragment() {
 
-    private val binding by unsafeLazy { MainPagingFragmentBinding.inflate(layoutInflater) }
+    private lateinit var binding: MainPagingFragmentBinding
 
-    private val vm by getViewModel<MainPagingViewModel>()
+    private val vm: MainPagingViewModel by getViewModel()
 
-    private val listAdapter = MainPagingRvAdapter {
+    private val rvAdapter = MainPagingRvAdapter {
         it.showToast()
     }
 
     private val initView by unsafeLazy {
-        binding.lifecycleOwner = viewLifecycleOwner
-        binding.smartRefresh.setOnRefreshListener(listener)
-        binding.rvList.adapter = listAdapter
-        binding.layoutError.listener = listener
-        listAdapter.onLoadStatusListener = listener
+        binding = MainPagingFragmentBinding.inflate(layoutInflater).also {
+            it.lifecycleOwner = viewLifecycleOwner
+            it.smartRefresh.setOnRefreshListener(listener)
+            it.rvList.adapter = rvAdapter
+            it.layoutError.listener = listener
+        }
+        rvAdapter.onLoadStatusListener = listener
     }
 
     private val initData by unsafeLazy {
         lifecycleScope.launch {
             vm.listData.collectLatest {
-                listAdapter.submitData(it)
+                rvAdapter.submitData(it)
             }
         }
     }
@@ -62,14 +64,14 @@ class MainPagingFragment private constructor() : BaseLazyFragment() {
     private val listener = object : View.OnClickListener, BaseRvPagingAdapter.OnLoadStatusListener,
         OnRefreshListener {
         override fun onRefresh(refreshLayout: RefreshLayout) {
-            listAdapter.refresh()
+            rvAdapter.refresh()
         }
 
         override fun onClick(v: View?) {
             when (v) {
                 binding.layoutError.ivError,
                 binding.layoutError.tvTip -> {
-                    listAdapter.refresh()
+                    rvAdapter.refresh()
                     binding.layoutError.root.visibility = View.GONE
                 }
             }

@@ -7,7 +7,7 @@ import io.goooler.demoapp.base.util.defaultAsync
 import io.goooler.demoapp.common.base.BaseRxViewModel
 import io.goooler.demoapp.common.util.showToast
 import io.goooler.demoapp.main.R
-import io.goooler.demoapp.main.api.RepoList
+import io.goooler.demoapp.main.bean.MainRepoListBean
 import io.goooler.demoapp.main.repository.MainCommonRepository
 import io.reactivex.rxjava3.core.Observable
 import kotlinx.coroutines.Deferred
@@ -54,7 +54,7 @@ class MainViewModel(application: Application) : BaseRxViewModel(application) {
     /**
      * flow 处理事件
      */
-    private fun processList(vararg lists: Deferred<RepoList>) = flow {
+    private fun processList(vararg lists: Deferred<List<MainRepoListBean>>) = flow {
         StringBuilder().run {
             lists.forEach {
                 append(it.await().firstOrNull()?.name).append("\n")

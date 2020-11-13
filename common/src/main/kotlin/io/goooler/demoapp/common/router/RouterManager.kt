@@ -7,9 +7,9 @@ import com.alibaba.android.arouter.launcher.ARouter
 
 @Suppress("unused", "MemberVisibilityCanBePrivate")
 object RouterManager {
-    const val target = "target"
-    const val params = "params"
-    const val reLogin = "reLogin"
+    const val TARGET = "target"
+    const val PARAMS = "params"
+    const val RE_LOGIN = "reLogin"
 
     fun go(url: String) {
         val uri = Uri.parse(url)
@@ -27,7 +27,7 @@ object RouterManager {
     }
 
     fun goLogin(isReLogin: Boolean) {
-        val action = if (isReLogin) reLogin else null
+        val action = if (isReLogin) RE_LOGIN else null
         buildPostcard(RouterPath.login)
             .withAction(action)
             .withFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -41,7 +41,7 @@ object RouterManager {
 
     fun goWeb(url: String) {
         buildPostcard(RouterPath.web)
-            .withString(params, url)
+            .withString(PARAMS, url)
             .navigation()
     }
 

@@ -18,12 +18,6 @@ class CustomWebView(context: Context, attrs: AttributeSet? = null) : WebView(con
 
     var onEventListener: OnEventListener? = null
 
-    var jsBridgeCallback: JsBridgeCallback? = null
-        set(value) {
-            field = value
-            if (value != null) addJavascriptInterface(value, "android")
-        }
-
     init {
         initWebViewSettings()
     }
@@ -162,6 +156,4 @@ class CustomWebView(context: Context, attrs: AttributeSet? = null) : WebView(con
         fun onProgressChanged(i: Int)
         fun loadFinish()
     }
-
-    interface JsBridgeCallback
 }

@@ -18,6 +18,6 @@ class MainRepoListBean(
     class OwnerBean(
         val id: Long,
         val login: String?,
-        @Json(name = "avatar_url") val avatarUrl: String?
+        @field:Json(name = "avatar_url") val avatarUrl: String?
     )
 }

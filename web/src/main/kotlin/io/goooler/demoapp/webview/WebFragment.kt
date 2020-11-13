@@ -20,7 +20,7 @@ class WebFragment private constructor() : BaseFragment() {
         WebFragmentBinding.inflate(layoutInflater).apply {
             lifecycleOwner = viewLifecycleOwner
             webView.onEventListener = listener
-            webView.jsBridgeCallback = listener
+            webView.addJavascriptInterface(listener, "android")
         }
     }
 
@@ -49,7 +49,7 @@ class WebFragment private constructor() : BaseFragment() {
         }
     }
 
-    private val listener = object : CustomWebView.OnEventListener, CustomWebView.JsBridgeCallback {
+    private val listener = object : CustomWebView.OnEventListener, JsInterface {
         override fun onInterceptUri(uri: Uri) {
             startActivity(Intent(Intent.ACTION_VIEW, uri))
         }
@@ -65,7 +65,7 @@ class WebFragment private constructor() : BaseFragment() {
         override fun loadFinish() = Unit
 
         @JavascriptInterface
-        fun setTitle(title: String) {
+        override fun setTitle(title: String) {
             onEventListener?.onReceivedTitle(title)
         }
     }

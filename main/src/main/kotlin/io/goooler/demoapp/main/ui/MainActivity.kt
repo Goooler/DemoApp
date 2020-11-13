@@ -18,7 +18,11 @@ import io.goooler.demoapp.main.ui.fragment.MainSrlFragment
 @Route(path = RouterPath.main)
 class MainActivity : BaseThemeActivity() {
 
-    private val binding by unsafeLazy { MainActivityBinding.inflate(layoutInflater) }
+    private val binding by unsafeLazy {
+        MainActivityBinding.inflate(layoutInflater).also {
+            it.lifecycleOwner = this
+        }
+    }
 
     private val pagerAdapter by unsafeLazy {
         CommonFragmentStateAdapter(supportFragmentManager, lifecycle)
