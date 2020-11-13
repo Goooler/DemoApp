@@ -184,7 +184,6 @@ fun Project.setupApp(appPackageName: String, appName: String): BaseExtension {
         }
         (this as AbstractAppExtension).applicationVariants.all {
             outputs.all {
-                version
                 (this as BaseVariantOutputImpl).outputFileName =
                     "../../../../${appName}_${versionName}_${versionCode}_${flavorName}_${buildType.name}.apk"
             }
