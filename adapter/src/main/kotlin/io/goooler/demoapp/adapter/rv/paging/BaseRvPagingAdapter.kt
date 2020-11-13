@@ -19,7 +19,7 @@ import io.goooler.demoapp.adapter.rv.diff.IDiffVhModelType
  * @version 1.0.0
  * @since 1.0.0
  */
-abstract class BasePagingRvAdapter<M : IDiffVhModelType>(callback: DiffCallBack<M> = DiffCallBack()) :
+abstract class BaseRvPagingAdapter<M : IDiffVhModelType>(callback: DiffCallBack<M> = DiffCallBack()) :
     PagingDataAdapter<M, BindingViewHolder>(callback), IRvAdapter<M> {
 
     private val helper by lazy(LazyThreadSafetyMode.NONE) { RvAdapterHelper(this) }

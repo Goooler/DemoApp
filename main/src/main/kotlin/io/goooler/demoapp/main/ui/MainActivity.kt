@@ -11,7 +11,7 @@ import io.goooler.demoapp.base.util.unsafeLazy
 import io.goooler.demoapp.common.base.BaseThemeActivity
 import io.goooler.demoapp.common.router.RouterPath
 import io.goooler.demoapp.main.databinding.MainActivityBinding
-import io.goooler.demoapp.main.ui.fragment.MainFragment
+import io.goooler.demoapp.main.ui.fragment.MainHomeFragment
 import io.goooler.demoapp.main.ui.fragment.MainPagingFragment
 import io.goooler.demoapp.main.ui.fragment.MainSrlFragment
 
@@ -29,7 +29,7 @@ class MainActivity : BaseThemeActivity() {
     )
 
     private val fragments = listOf(
-        MainFragment.newInstance(),
+        MainHomeFragment.newInstance(),
         MainSrlFragment.newInstance(),
         MainPagingFragment.newInstance()
     )

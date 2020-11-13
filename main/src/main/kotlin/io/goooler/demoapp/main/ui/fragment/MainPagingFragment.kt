@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshListener
-import io.goooler.demoapp.adapter.rv.paging.BasePagingRvAdapter
+import io.goooler.demoapp.adapter.rv.paging.BaseRvPagingAdapter
 import io.goooler.demoapp.base.core.BaseLazyFragment
 import io.goooler.demoapp.base.util.unsafeLazy
 import io.goooler.demoapp.common.util.disableRefreshAndLoadMore
@@ -59,7 +59,7 @@ class MainPagingFragment private constructor() : BaseLazyFragment() {
         return binding.root
     }
 
-    private val listener = object : View.OnClickListener, BasePagingRvAdapter.OnLoadStatusListener,
+    private val listener = object : View.OnClickListener, BaseRvPagingAdapter.OnLoadStatusListener,
         OnRefreshListener {
         override fun onRefresh(refreshLayout: RefreshLayout) {
             listAdapter.refresh()

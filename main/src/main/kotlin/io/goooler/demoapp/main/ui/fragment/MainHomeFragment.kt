@@ -8,12 +8,12 @@ import io.goooler.demoapp.base.core.BaseLazyFragment
 import io.goooler.demoapp.base.util.unsafeLazy
 import io.goooler.demoapp.common.router.RouterManager
 import io.goooler.demoapp.common.util.getViewModel
-import io.goooler.demoapp.main.databinding.MainFragmentBinding
+import io.goooler.demoapp.main.databinding.MainHomeFragmentBinding
 import io.goooler.demoapp.main.vm.MainViewModel
 
-class MainFragment private constructor() : BaseLazyFragment() {
+class MainHomeFragment private constructor() : BaseLazyFragment() {
 
-    private val binding by unsafeLazy { MainFragmentBinding.inflate(layoutInflater) }
+    private val binding by unsafeLazy { MainHomeFragmentBinding.inflate(layoutInflater) }
 
     private val vm by getViewModel<MainViewModel>()
 
@@ -45,6 +45,6 @@ class MainFragment private constructor() : BaseLazyFragment() {
     }
 
     companion object {
-        fun newInstance() = MainFragment()
+        fun newInstance() = MainHomeFragment()
     }
 }

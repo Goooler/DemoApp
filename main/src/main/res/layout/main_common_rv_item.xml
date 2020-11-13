@@ -7,11 +7,11 @@
 
         <variable
             name="model"
-            type="io.goooler.demoapp.main.model.MainListItemModel" />
+            type="io.goooler.demoapp.main.model.MainCommonRepoVhModel" />
 
         <variable
             name="listener"
-            type="io.goooler.demoapp.main.ui.adapter.MainSrlRvAdapter.OnEventListener" />
+            type="io.goooler.demoapp.main.model.MainCommonRepoVhModel.OnEventListener" />
     </data>
 
     <androidx.cardview.widget.CardView

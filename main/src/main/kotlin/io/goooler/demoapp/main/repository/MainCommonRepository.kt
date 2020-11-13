@@ -7,7 +7,7 @@ import io.goooler.demoapp.main.api.MainApi
 import io.goooler.demoapp.main.api.RepoList
 import io.reactivex.rxjava3.core.Observable
 
-object MainRepository {
+object MainCommonRepository {
 
     private const val USER = "goooler"
 

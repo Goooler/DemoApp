@@ -3,20 +3,19 @@ package io.goooler.demoapp.main.ui.adapter
 import androidx.databinding.ViewDataBinding
 import io.goooler.demoapp.adapter.rv.diff.BaseRvDiffAdapter
 import io.goooler.demoapp.main.BR
-import io.goooler.demoapp.main.model.MainListItemModel
+import io.goooler.demoapp.main.model.MainCommonRepoVhModel
+import io.goooler.demoapp.main.model.MainCommonVhModel
 
 class MainSrlRvAdapter(private val listener: OnEventListener) :
-    BaseRvDiffAdapter<MainListItemModel>() {
+    BaseRvDiffAdapter<MainCommonVhModel>() {
 
     override fun onCreateVHForAll(binding: ViewDataBinding) {
         binding.setVariable(BR.listener, listener)
     }
 
-    override fun onBindVHForAll(binding: ViewDataBinding, model: MainListItemModel) {
+    override fun onBindVHForAll(binding: ViewDataBinding, model: MainCommonVhModel) {
         binding.setVariable(BR.model, model)
     }
 
-    fun interface OnEventListener {
-        fun onContentClick(content: String)
-    }
+    fun interface OnEventListener : MainCommonRepoVhModel.OnEventListener
 }

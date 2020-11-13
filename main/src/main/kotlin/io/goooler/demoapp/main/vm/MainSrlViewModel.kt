@@ -6,19 +6,20 @@ import io.goooler.demoapp.base.util.MutableListLiveData
 import io.goooler.demoapp.common.base.BaseRxViewModel
 import io.goooler.demoapp.common.type.Constants
 import io.goooler.demoapp.common.util.toastThrowable
-import io.goooler.demoapp.main.model.MainListItemModel
-import io.goooler.demoapp.main.repository.MainRepository
+import io.goooler.demoapp.main.model.MainCommonRepoVhModel
+import io.goooler.demoapp.main.model.MainCommonVhModel
+import io.goooler.demoapp.main.repository.MainCommonRepository
 
-class MainSrlModel(application: Application) : BaseRxViewModel(application) {
+class MainSrlViewModel(application: Application) : BaseRxViewModel(application) {
 
-    val listData = MutableListLiveData<MainListItemModel>()
+    val listData = MutableListLiveData<MainCommonVhModel>()
     val isLoadMoreFinish = MutableBooleanLiveData()
     val isRefreshFinish = MutableBooleanLiveData()
     val isNoMore = MutableBooleanLiveData()
     val isEnableRefresh = MutableBooleanLiveData(true)
     val isEnableLoadMore = MutableBooleanLiveData(true)
 
-    private val _listData = mutableListOf<MainListItemModel>()
+    private val _listData = mutableListOf<MainCommonVhModel>()
     private var page = 1
 
     fun refresh() {
@@ -33,12 +34,12 @@ class MainSrlModel(application: Application) : BaseRxViewModel(application) {
     }
 
     private fun fetchListData(page: Int) {
-        MainRepository.getRepoListRx("google", page)
+        MainCommonRepository.getRepoListRx("google", page)
             .doFinally {
                 finishRefreshAndLoadMore()
             }
             .map {
-                it.map { bean -> MainListItemModel(bean.owner?.avatarUrl, bean.name) }
+                it.map { bean -> MainCommonRepoVhModel(bean.owner?.avatarUrl, bean.name) }
             }
             .doOnNext {
                 _listData.addAll(it)

@@ -12,15 +12,15 @@ import io.goooler.demoapp.common.util.getViewModel
 import io.goooler.demoapp.common.util.showToast
 import io.goooler.demoapp.main.databinding.MainSrlFragmentBinding
 import io.goooler.demoapp.main.ui.adapter.MainSrlRvAdapter
-import io.goooler.demoapp.main.vm.MainSrlModel
+import io.goooler.demoapp.main.vm.MainSrlViewModel
 
 class MainSrlFragment private constructor() : BaseLazyFragment() {
 
     private val binding by unsafeLazy { MainSrlFragmentBinding.inflate(layoutInflater) }
 
-    private val vm by getViewModel<MainSrlModel>()
+    private val vm by getViewModel<MainSrlViewModel>()
 
-    private val listAdapter by unsafeLazy {
+    private val rvAdapter by unsafeLazy {
         MainSrlRvAdapter(listener)
     }
 
@@ -28,10 +28,7 @@ class MainSrlFragment private constructor() : BaseLazyFragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.vm = vm
         binding.smartRefresh.setOnRefreshLoadMoreListener(listener)
-        binding.rvList.adapter = listAdapter
-        vm.listData.observe(viewLifecycleOwner) {
-            listAdapter.list = it
-        }
+        binding.rvList.adapter = rvAdapter
     }
 
     private val initData by unsafeLazy {

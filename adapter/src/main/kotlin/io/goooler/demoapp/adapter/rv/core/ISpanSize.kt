@@ -13,6 +13,10 @@ package io.goooler.demoapp.adapter.rv.core
  * @since 1.0.0
  */
 interface ISpanSize {
+    /**
+     * Get span size. How many lattices does a model occupy.
+     */
+    val spanSize: Int get() = SPAN_SIZE_SINGLE
 
     companion object {
         // full one line.
@@ -23,9 +27,4 @@ interface ISpanSize {
         const val SPAN_SIZE_QUADRUPLE = 4
         const val SPAN_SIZE_QUINTUPLE = 5
     }
-
-    /**
-     * Get span size. How many lattices does a model occupy.
-     */
-    val spanSize: Int get() = SPAN_SIZE_SINGLE
 }

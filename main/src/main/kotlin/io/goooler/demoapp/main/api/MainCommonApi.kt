@@ -1,13 +1,13 @@
 package io.goooler.demoapp.main.api
 
 import io.goooler.demoapp.base.util.ParamMap
-import io.goooler.demoapp.main.bean.RepoListBean
+import io.goooler.demoapp.main.bean.MainRepoListBean
 import io.reactivex.rxjava3.core.Observable
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.QueryMap
 
-internal typealias RepoList = List<RepoListBean>
+internal typealias RepoList = List<MainRepoListBean>
 
 interface MainApi {
 

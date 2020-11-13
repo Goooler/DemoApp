@@ -8,7 +8,7 @@ import io.goooler.demoapp.common.base.BaseRxViewModel
 import io.goooler.demoapp.common.util.showToast
 import io.goooler.demoapp.main.R
 import io.goooler.demoapp.main.api.RepoList
-import io.goooler.demoapp.main.repository.MainRepository
+import io.goooler.demoapp.main.repository.MainCommonRepository
 import io.reactivex.rxjava3.core.Observable
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
@@ -35,11 +35,11 @@ class MainViewModel(application: Application) : BaseRxViewModel(application) {
         viewModelScope.launch(Dispatchers.Default) {
             abs(1)
             try {
-                val google = defaultAsync { MainRepository.getRepoListCr("google") }
-                val microsoft = defaultAsync { MainRepository.getRepoListCr("microsoft") }
-                val apple = defaultAsync { MainRepository.getRepoListCr("apple") }
-                val facebook = defaultAsync { MainRepository.getRepoListCr("facebook") }
-                val twitter = defaultAsync { MainRepository.getRepoListCr("twitter") }
+                val google = defaultAsync { MainCommonRepository.getRepoListCr("google") }
+                val microsoft = defaultAsync { MainCommonRepository.getRepoListCr("microsoft") }
+                val apple = defaultAsync { MainCommonRepository.getRepoListCr("apple") }
+                val facebook = defaultAsync { MainCommonRepository.getRepoListCr("facebook") }
+                val twitter = defaultAsync { MainCommonRepository.getRepoListCr("twitter") }
 
                 processList(google, microsoft, apple, facebook, twitter).collect {
                     title.postValue(it)
@@ -68,11 +68,11 @@ class MainViewModel(application: Application) : BaseRxViewModel(application) {
      */
     private fun requestWithRx() {
         Observable.zip(
-            MainRepository.getRepoListRx("google"),
-            MainRepository.getRepoListRx("microsoft"),
-            MainRepository.getRepoListRx("apple"),
-            MainRepository.getRepoListRx("facebook"),
-            MainRepository.getRepoListRx("twitter"),
+            MainCommonRepository.getRepoListRx("google"),
+            MainCommonRepository.getRepoListRx("microsoft"),
+            MainCommonRepository.getRepoListRx("apple"),
+            MainCommonRepository.getRepoListRx("facebook"),
+            MainCommonRepository.getRepoListRx("twitter"),
             { t1, t2, t3, t4, t5 ->
                 """
                     ${t1.firstOrNull()?.owner?.avatarUrl}

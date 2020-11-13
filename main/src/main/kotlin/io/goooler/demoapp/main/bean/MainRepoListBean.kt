@@ -5,7 +5,7 @@ import com.squareup.moshi.JsonClass
 import io.goooler.demoapp.base.network.BaseResponse
 
 @JsonClass(generateAdapter = true)
-class RepoListBean(
+class MainRepoListBean(
     val id: Long,
     val private: Boolean,
     val fork: Boolean,
