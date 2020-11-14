@@ -16,9 +16,9 @@ object RouterManager {
         if (uri.scheme == "demo") {
             val paths = uri.path?.split("/")
             when (paths?.firstOrNull()) {
-                RouterPath.main -> {
+                RouterPath.MAIN -> {
                 }
-                RouterPath.web -> {
+                RouterPath.WEB -> {
                 }
                 else -> {
                 }
@@ -28,19 +28,19 @@ object RouterManager {
 
     fun goLogin(isReLogin: Boolean) {
         val action = if (isReLogin) RE_LOGIN else null
-        buildPostcard(RouterPath.login)
+        buildPostcard(RouterPath.LOGIN)
             .withAction(action)
             .withFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
             .navigation()
     }
 
     fun goMain() {
-        buildPostcard(RouterPath.main)
+        buildPostcard(RouterPath.MAIN)
             .navigation()
     }
 
     fun goWeb(url: String) {
-        buildPostcard(RouterPath.web)
+        buildPostcard(RouterPath.WEB)
             .withString(PARAMS, url)
             .navigation()
     }

@@ -11,7 +11,7 @@ import io.goooler.demoapp.common.router.RouterManager
 import io.goooler.demoapp.common.router.RouterPath
 import io.goooler.demoapp.webview.databinding.WebActivityBinding
 
-@Route(path = RouterPath.web)
+@Route(path = RouterPath.WEB)
 class WebActivity : BaseThemeActivity() {
     private lateinit var binding: WebActivityBinding
     private var webFragment: WebFragment? = null

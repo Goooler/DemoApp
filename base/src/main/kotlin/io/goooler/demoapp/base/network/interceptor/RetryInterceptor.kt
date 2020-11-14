@@ -11,7 +11,7 @@ class RetryInterceptor private constructor() : BaseInterceptor {
         var retryCount = 0
         val request = chain.request()
         var response = chain.proceed(request)
-        while (!response.isSuccessful && retryCount < maxRetryCount - 1) {
+        while (!response.isSuccessful && retryCount < MAX_RETRY_COUNT - 1) {
             retryCount++
             response.close()
             response = chain.proceed(request)
@@ -20,7 +20,7 @@ class RetryInterceptor private constructor() : BaseInterceptor {
     }
 
     companion object {
-        const val maxRetryCount = 3
+        private const val MAX_RETRY_COUNT = 3
 
         fun create() = RetryInterceptor()
     }

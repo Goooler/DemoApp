@@ -7,7 +7,7 @@ import io.goooler.demoapp.common.router.RouterManager
 import io.goooler.demoapp.common.router.RouterPath
 import io.goooler.demoapp.login.R
 
-@Route(path = RouterPath.login)
+@Route(path = RouterPath.LOGIN)
 class LoginActivity : BaseThemeActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -7,7 +7,7 @@
 
         <variable
             name="vm"
-            type="io.goooler.demoapp.main.vm.MainViewModel" />
+            type="io.goooler.demoapp.main.vm.MainHomeViewModel" />
 
         <variable
             name="listener"

@@ -10,7 +10,7 @@ import io.goooler.demoapp.common.router.RouterManager
 import io.goooler.demoapp.common.util.getViewModel
 import io.goooler.demoapp.main.R
 import io.goooler.demoapp.main.databinding.MainHomeFragmentBinding
-import io.goooler.demoapp.main.vm.MainViewModel
+import io.goooler.demoapp.main.vm.MainHomeViewModel
 
 class MainHomeFragment private constructor() : BaseLazyFragment() {
 
@@ -22,7 +22,7 @@ class MainHomeFragment private constructor() : BaseLazyFragment() {
         }
     }
 
-    private val vm: MainViewModel by getViewModel()
+    private val vm: MainHomeViewModel by getViewModel()
 
     override fun onFragmentResume() {
         vm.initData()

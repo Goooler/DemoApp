@@ -15,7 +15,7 @@ import io.goooler.demoapp.main.ui.fragment.MainHomeFragment
 import io.goooler.demoapp.main.ui.fragment.MainPagingFragment
 import io.goooler.demoapp.main.ui.fragment.MainSrlFragment
 
-@Route(path = RouterPath.main)
+@Route(path = RouterPath.MAIN)
 class MainActivity : BaseThemeActivity() {
 
     private val binding by unsafeLazy {

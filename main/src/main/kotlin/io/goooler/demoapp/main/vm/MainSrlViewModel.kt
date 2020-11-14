@@ -4,7 +4,7 @@ import android.app.Application
 import io.goooler.demoapp.base.util.MutableBooleanLiveData
 import io.goooler.demoapp.base.util.MutableListLiveData
 import io.goooler.demoapp.common.base.BaseRxViewModel
-import io.goooler.demoapp.common.type.Constants
+import io.goooler.demoapp.common.type.CommonConstants
 import io.goooler.demoapp.common.util.toastThrowable
 import io.goooler.demoapp.main.model.MainCommonRepoVhModel
 import io.goooler.demoapp.main.model.MainCommonVhModel
@@ -43,7 +43,7 @@ class MainSrlViewModel(application: Application) : BaseRxViewModel(application) 
             }
             .doOnNext {
                 _listData.addAll(it)
-                if (it.size < Constants.defaultPageSize) {
+                if (it.size < CommonConstants.DEFAULT_PAGE_SIZE) {
                     isEnableLoadMore.postValue(false)
                     isNoMore.postValue(true)
                 }

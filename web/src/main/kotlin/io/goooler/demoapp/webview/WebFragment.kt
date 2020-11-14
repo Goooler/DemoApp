@@ -17,10 +17,10 @@ import io.goooler.demoapp.webview.databinding.WebFragmentBinding
 class WebFragment private constructor() : BaseFragment() {
 
     private val binding by unsafeLazy {
-        WebFragmentBinding.inflate(layoutInflater).apply {
-            lifecycleOwner = viewLifecycleOwner
-            webView.onEventListener = listener
-            webView.addJavascriptInterface(listener, "android")
+        WebFragmentBinding.inflate(layoutInflater).also {
+            it.lifecycleOwner = viewLifecycleOwner
+            it.webView.onEventListener = listener
+            it.webView.addJavascriptInterface(listener, "android")
         }
     }
 

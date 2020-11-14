@@ -7,7 +7,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.QueryMap
 
-interface MainApi {
+interface MainCommonApi {
 
     @GET("users/{user}/repos")
     fun getRepoListRx(
