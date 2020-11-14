@@ -1,4 +1,5 @@
 -verbose
+-allowaccessmodification
 -dontusemixedcaseclassnames
 -dontskipnonpubliclibraryclasses
 -optimizations !code/simplification/arithmetic,!field/*,!class/merging/*
@@ -8,6 +9,7 @@
 -printmapping mapping.txt
 -keepattributes *Annotation*
 -keepattributes SourceFile,LineNumberTable
+-renamesourcefileattribute SourceFile
 -keep class **.R$* {*;}
 -keepclasseswithmembernames class * {
     native <methods>;
@@ -16,13 +18,9 @@
     public static **[] values();
     public static ** valueOf(java.lang.String);
 }
--keep public class * extends android.view.View{
-    *** get*();
-    void set*(***);
-    public <init>(android.content.Context);
-    public <init>(android.content.Context, android.util.AttributeSet);
-    public <init>(android.content.Context, android.util.AttributeSet, int);
-}
+
+
+# Serializable
 -keep class * implements android.os.Parcelable {
     public static final android.os.Parcelable$Creator *;
 }
@@ -43,7 +41,21 @@
 }
 
 
+# View
+-keep public class * extends android.view.View{
+    *** get*();
+    void set*(***);
+    public <init>(android.content.Context);
+    public <init>(android.content.Context, android.util.AttributeSet);
+    public <init>(android.content.Context, android.util.AttributeSet, int);
+    public <init>(android.content.Context, android.util.AttributeSet, int, int);
+}
+
+
 # WebView
+-keepclassmembers class fqcn.of.javascript.interface.for.webview {
+   public *;
+}
 -keepclassmembers class * extends android.webkit.webViewClient {
     public void *(android.webkit.WebView, java.lang.String, android.graphics.Bitmap);
     public boolean *(android.webkit.WebView, java.lang.String);
