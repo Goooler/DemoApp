@@ -195,11 +195,12 @@ fun Project.setupApp(appPackageName: String, appName: String): BaseExtension {
 
 private fun Project.findPropertyString(key: String): String = findProperty(key) as String
 
-private fun Project.getSignProperty(key: String): String {
+private fun Project.getSignProperty(
+    key: String,
+    path: String = "gradle/keystore.properties"
+): String {
     return Properties().apply {
-        rootProject.file("gradle/keystore.properties").inputStream().use {
-            load(it)
-        }
+        rootProject.file(path).inputStream().use(::load)
     }.getProperty(key)
 }
 

@@ -35,9 +35,7 @@ class MainSrlViewModel(application: Application) : BaseRxViewModel(application) 
 
     private fun fetchListData(page: Int) {
         MainCommonRepository.getRepoListRx("google", page)
-            .doFinally {
-                finishRefreshAndLoadMore()
-            }
+            .doFinally(::finishRefreshAndLoadMore)
             .map {
                 it.map { bean -> MainCommonRepoVhModel(bean.owner?.avatarUrl, bean.name) }
             }
@@ -50,9 +48,8 @@ class MainSrlViewModel(application: Application) : BaseRxViewModel(application) 
             }
             .subscribe({
                 listData.postValue(_listData)
-            }, {
-                toastThrowable(it)
-            }).add()
+            }, ::toastThrowable)
+            .autoDispose()
     }
 
     private fun finishRefreshAndLoadMore() {

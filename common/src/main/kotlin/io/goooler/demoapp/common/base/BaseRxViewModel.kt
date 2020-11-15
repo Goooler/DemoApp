@@ -14,7 +14,7 @@ abstract class BaseRxViewModel(application: Application) : BaseViewModel(applica
         compositeDisposable.clear()
     }
 
-    protected fun Disposable.add() {
+    protected fun Disposable.autoDispose() {
         compositeDisposable.add(this)
     }
 }

@@ -85,6 +85,7 @@ class MainHomeViewModel(application: Application) : BaseRxViewModel(application)
             }, {
                 title.postValue(it.message)
                 R.string.request_failed.showToast()
-            }).add()
+            })
+            .autoDispose()
     }
 }
