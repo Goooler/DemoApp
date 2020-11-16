@@ -46,8 +46,9 @@ class CustomWebView(context: Context, attrs: AttributeSet? = null) : WebView(con
 
     private fun initWebViewSettings() {
         settings.run {
-            mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
             javaScriptEnabled = true
+            // 加载来自任何其他来源的内容，即使该来源不安全
+            mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
             // 支持通过JS打开新窗口
             javaScriptCanOpenWindowsAutomatically = true
             // 设置可以访问文件
@@ -60,6 +61,7 @@ class CustomWebView(context: Context, attrs: AttributeSet? = null) : WebView(con
             useWideViewPort = true
             // 缩放至屏幕的大小
             loadWithOverviewMode = true
+            // h5 存储数据
             domStorageEnabled = true
             // 设置默认字体大小
             defaultFontSize = 18
@@ -78,28 +80,27 @@ class CustomWebView(context: Context, attrs: AttributeSet? = null) : WebView(con
                 view: WebView,
                 url: String
             ): Boolean {
-                if (!URLUtil.isNetworkUrl(url)) {
+                return if (URLUtil.isNetworkUrl(url)) {
+                    false
+                } else {
                     onEventListener?.onInterceptUri(Uri.parse(url))
+                    true
                 }
-                return false
             }
 
             override fun onPageFinished(
-                webView: WebView,
+                view: WebView,
                 s: String
             ) {
-                super.onPageFinished(webView, s)
                 onEventListener?.loadFinish()
             }
         }
         webChromeClient = object : WebChromeClient() {
-            override fun onProgressChanged(webView: WebView, i: Int) {
-                super.onProgressChanged(webView, i)
-                onEventListener?.onProgressChanged(i)
+            override fun onProgressChanged(view: WebView, newProgress: Int) {
+                onEventListener?.onProgressChanged(newProgress)
             }
 
-            override fun onReceivedTitle(webView: WebView, title: String) {
-                super.onReceivedTitle(webView, title)
+            override fun onReceivedTitle(view: WebView, title: String) {
                 onEventListener?.onReceivedTitle(title)
             }
         }
