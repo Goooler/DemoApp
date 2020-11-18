@@ -11,8 +11,7 @@ class HttpLogger private constructor() : HttpLoggingInterceptor.Logger {
 
     companion object {
         fun newLogInterceptor(): HttpLoggingInterceptor {
-            return HttpLoggingInterceptor(HttpLogger())
-                .setLevel(HttpLoggingInterceptor.Level.BASIC)
+            return HttpLoggingInterceptor(HttpLogger()).setLevel(HttpLoggingInterceptor.Level.BASIC)
         }
     }
 }

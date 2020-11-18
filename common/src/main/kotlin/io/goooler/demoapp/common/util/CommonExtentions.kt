@@ -11,13 +11,15 @@ import androidx.lifecycle.ViewModelProvider
 import com.blankj.utilcode.util.*
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import io.goooler.demoapp.base.core.BaseViewModel
-import io.goooler.demoapp.base.network.HttpResponse
 import io.goooler.demoapp.common.BuildConfig
+import io.goooler.demoapp.common.network.HttpResponse
 import io.goooler.demoapp.common.type.SpKeys
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
+import java.math.BigDecimal
 import java.util.*
+import kotlin.math.absoluteValue
 
 typealias DimensionUtil = SizeUtils
 typealias SpHelper = SPUtils
@@ -41,11 +43,13 @@ fun String.toLoadUrl(): String {
     return if (URLUtil.isNetworkUrl(this)) this else BuildConfig.CDN_PREFIX + this
 }
 
+@UiThread
 fun SmartRefreshLayout.finishRefreshAndLoadMore() {
     finishRefresh()
     finishLoadMore()
 }
 
+@UiThread
 fun SmartRefreshLayout.disableRefreshAndLoadMore() {
     setEnableRefresh(false)
     setEnableLoadMore(false)
@@ -86,6 +90,44 @@ fun Long.easyTime(): String {
         t < oneDay -> (t / oneHour).toString() + "小时前"
         isSameYear -> toDateString("MM-dd HH:mm")
         else -> toDateString("yyyy-MM-dd HH:mm")
+    }
+}
+
+/**
+ * @param isYuan 默认以分为单位，传入元为单位传 true
+ * @param trans2W 是否需要在超过一万时转换为 1.2w 的形式，不需要的话传 false
+ *
+ * 分是 Long 类型、元是 Double 类型
+ */
+fun Number.formatMoney(isYuan: Boolean = false, trans2W: Boolean = false, scale: Int = 2): String {
+    val moneyF = if (isYuan) {
+        toDouble()
+    } else {
+        // 分转为元
+        toDouble() / 100
+    }
+    return try {
+        when {
+            trans2W && moneyF / 10000 > 0 -> {
+                BigDecimal.valueOf(moneyF / 10000)
+                    .setScale(1, BigDecimal.ROUND_DOWN)
+                    .stripTrailingZeros().toPlainString() + "W"
+            }
+
+            else ->
+                BigDecimal.valueOf(moneyF)
+                    .setScale(scale, BigDecimal.ROUND_DOWN)
+                    .stripTrailingZeros().toPlainString()
+                    .let {
+                        if (it.toDouble().absoluteValue < 0.000001) {
+                            "0"
+                        } else {
+                            it
+                        }
+                    }
+        }
+    } catch (e: Exception) {
+        moneyF.toString()
     }
 }
 

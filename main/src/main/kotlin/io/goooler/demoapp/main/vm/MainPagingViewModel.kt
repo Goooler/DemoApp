@@ -17,7 +17,7 @@ import kotlinx.coroutines.flow.Flow
 class MainPagingViewModel(application: Application) : BaseViewModel(application) {
 
     val listData: Flow<PagingData<MainCommonVhModel>> =
-        Pager(PagingConfig(pageSize = CommonConstants.DEFAULT_PAGE_SIZE)) {
+        Pager(PagingConfig(CommonConstants.DEFAULT_PAGE_SIZE)) {
             DataSource()
         }.flow.cachedIn(viewModelScope)
 

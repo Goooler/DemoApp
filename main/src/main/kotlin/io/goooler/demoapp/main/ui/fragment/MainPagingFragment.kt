@@ -23,21 +23,20 @@ import kotlinx.coroutines.launch
 class MainPagingFragment private constructor() : BaseLazyFragment() {
 
     private lateinit var binding: MainPagingFragmentBinding
+    private lateinit var rvAdapter: MainPagingRvAdapter
 
     private val vm: MainPagingViewModel by getViewModel()
-
-    private val rvAdapter = MainPagingRvAdapter {
-        it.showToast()
-    }
 
     private val initView by unsafeLazy {
         binding = MainPagingFragmentBinding.inflate(layoutInflater).also {
             it.lifecycleOwner = viewLifecycleOwner
             it.smartRefresh.setOnRefreshListener(listener)
-            it.rvList.adapter = rvAdapter
             it.layoutError.listener = listener
         }
-        rvAdapter.onLoadStatusListener = listener
+        rvAdapter = MainPagingRvAdapter(listener).apply {
+            onLoadStatusListener = listener
+        }
+        binding.rvList.adapter = rvAdapter
     }
 
     private val initData by unsafeLazy {
@@ -62,12 +61,12 @@ class MainPagingFragment private constructor() : BaseLazyFragment() {
     }
 
     private val listener = object : View.OnClickListener, BaseRvPagingAdapter.OnLoadStatusListener,
-        OnRefreshListener {
+        OnRefreshListener, MainPagingRvAdapter.OnEventListener {
         override fun onRefresh(refreshLayout: RefreshLayout) {
             rvAdapter.refresh()
         }
 
-        override fun onClick(v: View?) {
+        override fun onClick(v: View) {
             when (v) {
                 binding.layoutError.ivError,
                 binding.layoutError.tvTip -> {
@@ -92,6 +91,10 @@ class MainPagingFragment private constructor() : BaseLazyFragment() {
 
         override fun onError(t: Throwable) {
             binding.layoutError.root.visibility = View.VISIBLE
+        }
+
+        override fun onContentClick(content: String) {
+            content.showToast()
         }
     }
 

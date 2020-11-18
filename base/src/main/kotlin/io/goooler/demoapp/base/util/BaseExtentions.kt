@@ -16,6 +16,7 @@ import android.widget.EditText
 import androidx.annotation.ColorInt
 import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
+import androidx.annotation.UiThread
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ObservableField
 import androidx.databinding.ViewDataBinding
@@ -27,7 +28,6 @@ import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.*
 import java.io.File
 import java.math.BigDecimal
-import kotlin.math.absoluteValue
 
 //---------------------Types-------------------------------//
 
@@ -186,44 +186,6 @@ fun String.hidePhone(): String {
 
 //---------------------Calculate-------------------------------//
 
-/**
- * @param isYuan 默认以分为单位，传入元为单位传 true
- * @param trans2W 是否需要在超过一万时转换为 1.2w 的形式，不需要的话传 false
- *
- * 分是 Long 类型、元是 Double 类型
- */
-fun Number.formatMoney(isYuan: Boolean = false, trans2W: Boolean = false, scale: Int = 2): String {
-    val moneyF = if (isYuan) {
-        toDouble()
-    } else {
-        // 分转为元
-        toDouble() / 100
-    }
-    return try {
-        when {
-            trans2W && moneyF / 10000 > 0 -> {
-                BigDecimal.valueOf(moneyF / 10000)
-                    .setScale(1, BigDecimal.ROUND_DOWN)
-                    .stripTrailingZeros().toPlainString() + "W"
-            }
-
-            else ->
-                BigDecimal.valueOf(moneyF)
-                    .setScale(scale, BigDecimal.ROUND_DOWN)
-                    .stripTrailingZeros().toPlainString()
-                    .let {
-                        if (it.toDouble().absoluteValue < 0.000001) {
-                            "0"
-                        } else {
-                            it
-                        }
-                    }
-        }
-    } catch (e: Exception) {
-        moneyF.toString()
-    }
-}
-
 infix fun Double.plus(that: Double): Double {
     return (BigDecimal(this.toString()) + BigDecimal(that.toString())).toDouble()
 }
@@ -327,6 +289,7 @@ fun File.notExists(): Boolean = !this.exists()
 
 //---------------------View-------------------------------//
 
+@UiThread
 fun EditText.onTextChanged(listener: (String) -> Unit) {
     this.addTextChangedListener(object : TextWatcher {
 
@@ -342,6 +305,7 @@ fun EditText.onTextChanged(listener: (String) -> Unit) {
 
 //---------------------Fragment-------------------------------//
 
+@UiThread
 fun <T : Fragment> T.putArguments(bundle: Bundle): T {
     arguments = bundle
     return this
@@ -353,6 +317,7 @@ fun <T : Fragment> T.putArguments(bundle: Bundle): T {
  * @param isAddToBackStack  将要添加的 fragment 是否要添加到返回栈，默认不添加
  * @param tag               fragment 的 tag
  */
+@UiThread
 fun FragmentManager.addFragment(
     @IdRes containerViewId: Int,
     fragment: Fragment,
@@ -372,6 +337,7 @@ fun FragmentManager.addFragment(
  * @param isAddToBackStack  将要替换的 fragment 是否要添加到返回栈，默认添加
  * @param tag               fragment 的 tag
  */
+@UiThread
 fun FragmentManager.replaceFragment(
     @IdRes containerViewId: Int,
     fragment: Fragment,
@@ -387,6 +353,7 @@ fun FragmentManager.replaceFragment(
 
 //---------------------Activity-------------------------------//
 
+@UiThread
 inline fun <reified T : ViewDataBinding> Activity.binding(@LayoutRes resId: Int): Lazy<T> =
     lazy(LazyThreadSafetyMode.NONE) { DataBindingUtil.setContentView(this, resId) }
 
