@@ -48,6 +48,7 @@ private const val protobufVersion = "0.8.13"
 private const val photoViewVersion = "2.3.0"
 private const val permissionXVersion = "1.4.0"
 private const val arouterRegisterVersion = "1.0.2"
+private const val roomVersion = "2.2.5"
 
 object Plugins {
     internal const val kotlinAndroid = "kotlin-android"
@@ -103,6 +104,7 @@ object Libs {
     const val arouterPlugin = "com.alibaba:arouter-register:$arouterRegisterVersion"
 
     const val glideKapt = "com.github.bumptech.glide:compiler:$glideVersion"
+    const val roomKapt = "androidx.room:room-compiler:$roomVersion"
     const val objectBoxKapt = "io.objectbox:objectbox-processor:$objectBoxVersion"
     const val eventBusKapt = "org.greenrobot:eventbus-annotation-processor:$eventBusVersion"
     const val arouterKapt = "com.alibaba:arouter-compiler:$arouterVersion"
@@ -118,6 +120,10 @@ object Libs {
         "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion",
         "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycleVersion",
         "androidx.lifecycle:lifecycle-common-java8:$lifecycleVersion"
+    )
+    val room = arrayOf(
+        "androidx.room:room-runtime:$roomVersion",
+        "androidx.room:room-ktx:$roomVersion"
     )
     val navigation = arrayOf(
         "androidx.navigation:navigation-ui-ktx:$navigationVersion",

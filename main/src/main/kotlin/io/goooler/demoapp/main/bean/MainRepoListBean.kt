@@ -1,23 +1,38 @@
 package io.goooler.demoapp.main.bean
 
+import androidx.room.ColumnInfo
+import androidx.room.Embedded
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import io.goooler.demoapp.common.network.BaseResponse
 
 @JsonClass(generateAdapter = true)
-class MainRepoListBean(
-    val id: Long,
-    val private: Boolean,
-    val fork: Boolean,
-    val name: String?,
-    val description: String?,
-    val owner: OwnerBean? = null
-) : BaseResponse {
+@Entity(tableName = "main_repo_list")
+class MainRepoListBean : BaseResponse {
+
+    @PrimaryKey
+    var id: Long = 0
+
+    @ColumnInfo
+    var private: Boolean = false
+
+    @ColumnInfo
+    var fork: Boolean = false
+
+    @ColumnInfo
+    var name: String? = null
+
+    @ColumnInfo
+    var description: String? = null
+
+    @Embedded
+    var owner: OwnerBean? = null
 
     @JsonClass(generateAdapter = true)
-    class OwnerBean(
-        val id: Long,
-        val login: String?,
-        @field:Json(name = "avatar_url") val avatarUrl: String?
-    )
+    class OwnerBean {
+        @field:Json(name = "avatar_url")
+        var avatarUrl: String? = null
+    }
 }

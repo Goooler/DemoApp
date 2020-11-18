@@ -7,10 +7,11 @@ enum class Module(val tag: String, val runAlone: Boolean = false) {
     Login("login"),
     Main("main"),
     Web("web"),
+    DB("db"),
 
     //---------------------func-------------------------------//
     Adapter("adapter"),
-    Widget("widget"),
+    Widget("widget")
 }
 
 enum class Flavor(val tag: String) {

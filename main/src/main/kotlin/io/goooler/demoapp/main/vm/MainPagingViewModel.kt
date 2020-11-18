@@ -16,14 +16,16 @@ import kotlinx.coroutines.flow.Flow
 
 class MainPagingViewModel(application: Application) : BaseViewModel(application) {
 
+    private val repository = MainCommonRepository(application)
+
     val listData: Flow<PagingData<MainCommonVhModel>> =
         Pager(PagingConfig(CommonConstants.DEFAULT_PAGE_SIZE)) {
             DataSource()
         }.flow.cachedIn(viewModelScope)
 
-    private class DataSource : BasePagingSource<MainCommonVhModel>() {
+    private inner class DataSource : BasePagingSource<MainCommonVhModel>() {
         override suspend fun fetchListData(page: Int): List<MainCommonVhModel> {
-            return MainCommonRepository.getRepoListCr("google", page)
+            return repository.getRepoListWithCr("google", page)
                 .map { MainCommonRepoVhModel(it.owner?.avatarUrl, it.name) }
         }
     }

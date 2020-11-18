@@ -41,6 +41,9 @@ class MainHomeFragment private constructor() : BaseLazyFragment() {
             R.id.bt_one -> {
                 RouterManager.goWeb("http://m.bilibili.com")
             }
+            R.id.bt_two -> {
+                vm.getRepoListFromDb()
+            }
         }
     }
 

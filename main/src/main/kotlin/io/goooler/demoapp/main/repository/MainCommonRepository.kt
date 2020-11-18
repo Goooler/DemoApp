@@ -1,17 +1,20 @@
 package io.goooler.demoapp.main.repository
 
+import android.app.Application
 import io.goooler.demoapp.base.util.paramMapOf
 import io.goooler.demoapp.common.network.RetrofitHelper
 import io.goooler.demoapp.common.type.CommonConstants
 import io.goooler.demoapp.main.api.MainCommonApi
 import io.goooler.demoapp.main.bean.MainRepoListBean
+import io.goooler.demoapp.main.db.MainDatabase
 import io.reactivex.rxjava3.core.Observable
 
-object MainCommonRepository {
+class MainCommonRepository(app: Application) {
 
     private val api: MainCommonApi = RetrofitHelper.create()
+    private val db = MainDatabase.getInstance(app)
 
-    suspend fun getRepoListCr(
+    suspend fun getRepoListWithCr(
         user: String,
         page: Int = 1,
         pageSize: Int = CommonConstants.DEFAULT_PAGE_SIZE
@@ -23,7 +26,7 @@ object MainCommonRepository {
         return api.getRepoListCr(user, params)
     }
 
-    fun getRepoListRx(
+    fun getRepoListWithRx(
         user: String,
         page: Int = 1,
         pageSize: Int = CommonConstants.DEFAULT_PAGE_SIZE
@@ -33,5 +36,11 @@ object MainCommonRepository {
             CommonConstants.RequestFields.PER_PAGE to pageSize
         )
         return api.getRepoListRx(user, params)
+    }
+
+    suspend fun getRepoListFromDb(): List<MainRepoListBean> = db.mainDao.getRepoList()
+
+    suspend fun insertRepoListIntoDb(entityList: List<MainRepoListBean>) {
+        db.mainDao.insertRepoList(*entityList.toTypedArray())
     }
 }

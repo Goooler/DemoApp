@@ -5,33 +5,29 @@ plugins {
 setupCommon(Module.Common)
 
 dependencies {
-    // local
     api(
+        // local
         fileTree(localLibs),
-        project(getModuleName(Module.Base))
-    )
+        project(getModuleName(Module.Base)),
 
-    // router
-    api(Libs.arouter)
+        // router
+        Libs.arouter,
+
+        // UI
+        *Libs.smartRefreshLayout,
+        Libs.photoView,
+
+        // utils
+        *Libs.room,
+        *Libs.rx,
+        Libs.utils,
+        Libs.permissionX,
+        *Libs.moshi
+    )
 
     // network
     implementation(
         *Libs.glide,
         Libs.okHttpLogInterceptor
-    )
-    kapt(Libs.glideKapt)
-    api(*Libs.moshi)
-
-    // UI
-    api(
-        *Libs.smartRefreshLayout,
-        Libs.photoView
-    )
-
-    // utils
-    api(
-        *Libs.rx,
-        Libs.utils,
-        Libs.permissionX
     )
 }

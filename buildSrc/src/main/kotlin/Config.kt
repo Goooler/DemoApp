@@ -127,12 +127,15 @@ fun Project.setupCommon(module: Module? = null): BaseExtension {
         }
         extensions.getByName<KaptExtension>("kapt").arguments {
             arg("AROUTER_MODULE_NAME", project.name)
+            arg("room.schemaLocation", "$projectDir/build")
+            arg("room.incremental", "true")
+            arg("room.expandProjection", "true")
         }
         dependencies {
             if (module != Module.Common) {
                 implementation(project(getModuleName(Module.Common)))
             }
-            kapt(Libs.arouterKapt, Libs.moshiKapt)
+            kapt(Libs.arouterKapt, Libs.moshiKapt, Libs.roomKapt)
         }
     }
 }

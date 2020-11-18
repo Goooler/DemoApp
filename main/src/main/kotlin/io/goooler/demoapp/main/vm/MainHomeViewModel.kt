@@ -18,13 +18,21 @@ import kotlinx.coroutines.launch
 
 class MainHomeViewModel(application: Application) : BaseRxViewModel(application) {
 
+    private val repository = MainCommonRepository(application)
+
     val title = MutableStringLiveData()
     val oneplusUrl = MutableStringLiveData()
 
     fun initData() {
         oneplusUrl.value =
             "https://image01.oneplus.cn/shop/202010/15/1-M00-0C-89-rBqgjV-H7t-AI-nBAAiPBEq6NTM960.jpg"
-        requestWithRx()
+        requestWithCr()
+    }
+
+    fun getRepoListFromDb() {
+        viewModelScope.launch {
+            repository.getRepoListFromDb().first().name?.showToast()
+        }
     }
 
     /**
@@ -33,15 +41,17 @@ class MainHomeViewModel(application: Application) : BaseRxViewModel(application)
     private fun requestWithCr() {
         viewModelScope.launch(Dispatchers.Default) {
             try {
-                val google = defaultAsync { MainCommonRepository.getRepoListCr("google") }
-                val microsoft = defaultAsync { MainCommonRepository.getRepoListCr("microsoft") }
-                val apple = defaultAsync { MainCommonRepository.getRepoListCr("apple") }
-                val facebook = defaultAsync { MainCommonRepository.getRepoListCr("facebook") }
-                val twitter = defaultAsync { MainCommonRepository.getRepoListCr("twitter") }
+                val google = defaultAsync { repository.getRepoListWithCr("google") }
+                val microsoft = defaultAsync { repository.getRepoListWithCr("microsoft") }
+                val apple = defaultAsync { repository.getRepoListWithCr("apple") }
+                val facebook = defaultAsync { repository.getRepoListWithCr("facebook") }
+                val twitter = defaultAsync { repository.getRepoListWithCr("twitter") }
 
                 processList(google, microsoft, apple, facebook, twitter).collect {
                     title.postValue(it)
                 }
+
+                repository.insertRepoListIntoDb(google.await())
             } catch (e: Exception) {
                 title.postValue(e.message)
                 R.string.request_failed.showToast()
@@ -66,11 +76,11 @@ class MainHomeViewModel(application: Application) : BaseRxViewModel(application)
      */
     private fun requestWithRx() {
         Observable.zip(
-            MainCommonRepository.getRepoListRx("google"),
-            MainCommonRepository.getRepoListRx("microsoft"),
-            MainCommonRepository.getRepoListRx("apple"),
-            MainCommonRepository.getRepoListRx("facebook"),
-            MainCommonRepository.getRepoListRx("twitter"),
+            repository.getRepoListWithRx("google"),
+            repository.getRepoListWithRx("microsoft"),
+            repository.getRepoListWithRx("apple"),
+            repository.getRepoListWithRx("facebook"),
+            repository.getRepoListWithRx("twitter"),
             { t1, t2, t3, t4, t5 ->
                 """
                     ${t1.firstOrNull()?.owner?.avatarUrl}

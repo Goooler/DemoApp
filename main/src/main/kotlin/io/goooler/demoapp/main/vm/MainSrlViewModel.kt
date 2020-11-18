@@ -12,15 +12,16 @@ import io.goooler.demoapp.main.repository.MainCommonRepository
 
 class MainSrlViewModel(application: Application) : BaseRxViewModel(application) {
 
+    private val repository = MainCommonRepository(application)
+    private val _listData = mutableListOf<MainCommonVhModel>()
+    private var page = 1
+
     val listData = MutableListLiveData<MainCommonVhModel>()
     val isLoadMoreFinish = MutableBooleanLiveData()
     val isRefreshFinish = MutableBooleanLiveData()
     val isNoMore = MutableBooleanLiveData()
     val isEnableRefresh = MutableBooleanLiveData(true)
     val isEnableLoadMore = MutableBooleanLiveData(true)
-
-    private val _listData = mutableListOf<MainCommonVhModel>()
-    private var page = 1
 
     fun refresh() {
         page = 1
@@ -34,7 +35,7 @@ class MainSrlViewModel(application: Application) : BaseRxViewModel(application) 
     }
 
     private fun fetchListData(page: Int) {
-        MainCommonRepository.getRepoListRx("google", page)
+        repository.getRepoListWithRx("google", page)
             .doFinally(::finishRefreshAndLoadMore)
             .map {
                 it.map { bean -> MainCommonRepoVhModel(bean.owner?.avatarUrl, bean.name) }

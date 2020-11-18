@@ -13,12 +13,16 @@ open class RouterApplication : BaseApplication() {
     override fun initRight() {
         super.initRight()
         CrashHandler.init()
+        initArouter()
+        initSmartRefresh()
+    }
+
+    private fun initArouter() {
         debugRun {
             ARouter.openLog()
             ARouter.openDebug()
         }
         ARouter.init(this)
-        initSmartRefresh()
     }
 
     private fun initSmartRefresh() {
