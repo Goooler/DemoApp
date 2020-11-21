@@ -10,6 +10,7 @@ buildscript {
     dependencies {
         classpath(rootProject.extra.get("androidPlugin").toString())
         classpath(rootProject.extra.get("kotlinPlugin").toString())
+        classpath(Libs.hiltPlugin)
         classpath(Libs.arouterPlugin)
         classpath(Libs.protobufPlugin)
     }

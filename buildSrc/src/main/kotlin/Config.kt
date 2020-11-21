@@ -107,7 +107,6 @@ fun Project.setupBase(): BaseExtension {
 
 fun Project.setupCommon(module: Module? = null): BaseExtension {
     return setupBase().apply {
-        plugins.apply(Plugins.arouter)
         module?.let {
             resourcePrefix = getResourcePrefix(it)
             defaultConfig.versionNameSuffix = getVersionNameSuffix(it)
@@ -135,7 +134,31 @@ fun Project.setupCommon(module: Module? = null): BaseExtension {
             if (module != Module.Common) {
                 implementation(project(getModuleName(Module.Common)))
             }
-            kapt(Libs.arouterKapt, Libs.moshiKapt, Libs.roomKapt)
+            implementation(
+                // local
+                fileTree(localLibs),
+                project(getModuleName(Module.Base)),
+
+                // router
+                Libs.arouter,
+
+                // UI
+                *Libs.smartRefreshLayout,
+                Libs.photoView,
+
+                // utils
+                Libs.hilt,
+                *Libs.room,
+                *Libs.rx,
+                Libs.utils,
+                Libs.permissionX,
+                *Libs.moshi
+            )
+            kapt(Libs.arouterKapt, Libs.moshiKapt, Libs.roomKapt, Libs.hiltKapt)
+        }
+        plugins.run {
+            apply(Plugins.arouter)
+            apply(Plugins.hilt)
         }
     }
 }

@@ -49,12 +49,14 @@ private const val photoViewVersion = "2.3.0"
 private const val permissionXVersion = "1.4.0"
 private const val arouterRegisterVersion = "1.0.2"
 private const val roomVersion = "2.2.5"
+private const val hiltVersion = "2.28-alpha"
 
 object Plugins {
     internal const val kotlinAndroid = "kotlin-android"
     internal const val kotlinKapt = "kotlin-kapt"
     const val androidLibrary = "com.android.library"
     const val androidApplication = "com.android.application"
+    const val hilt = "dagger.hilt.android.plugin"
     const val arouter = "com.alibaba.arouter"
     const val protobuf = "com.google.protobuf"
 }
@@ -99,9 +101,11 @@ object Libs {
     const val viewPager2 = "androidx.viewpager2:viewpager2:$viewPager2Version"
     const val photoView = "com.github.chrisbanes:PhotoView:$photoViewVersion"
     const val permissionX = "com.permissionx.guolindev:permissionx:$permissionXVersion"
+    const val hilt = "com.google.dagger:hilt-android:$hiltVersion"
 
     const val protobufPlugin = "com.google.protobuf:protobuf-gradle-plugin:$protobufVersion"
     const val arouterPlugin = "com.alibaba:arouter-register:$arouterRegisterVersion"
+    const val hiltPlugin = "com.google.dagger:hilt-android-gradle-plugin:$hiltVersion"
 
     const val glideKapt = "com.github.bumptech.glide:compiler:$glideVersion"
     const val roomKapt = "androidx.room:room-compiler:$roomVersion"
@@ -109,6 +113,7 @@ object Libs {
     const val eventBusKapt = "org.greenrobot:eventbus-annotation-processor:$eventBusVersion"
     const val arouterKapt = "com.alibaba:arouter-compiler:$arouterVersion"
     const val moshiKapt = "com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion"
+    const val hiltKapt = "com.google.dagger:hilt-android-compiler:$hiltVersion"
 
     val coroutines = arrayOf(
         "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion",
