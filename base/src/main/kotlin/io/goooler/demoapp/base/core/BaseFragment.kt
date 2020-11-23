@@ -3,6 +3,7 @@ package io.goooler.demoapp.base.core
 import android.content.ComponentName
 import android.content.Intent
 import android.os.Build
+import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 
 /**
@@ -11,18 +12,24 @@ import androidx.fragment.app.Fragment
 @Suppress("unused")
 abstract class BaseFragment : Fragment() {
 
-    /**
-     * 调用 activity 的返回
-     */
-    protected fun onBackPressed() {
+    protected open fun onBackPressed(): Boolean {
         activity?.onBackPressed()
+        return true
     }
 
-    /**
-     * 调用 activity 的结束
-     */
     protected fun finish() {
         activity?.finish()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        view?.run {
+            isFocusableInTouchMode = true
+            requestFocus()
+            setOnKeyListener { _, keyCode, event ->
+                if (keyCode == KeyEvent.KEYCODE_BACK && event.action == KeyEvent.ACTION_UP) onBackPressed() else false
+            }
+        }
     }
 
     protected fun startService(service: Intent): ComponentName? {
