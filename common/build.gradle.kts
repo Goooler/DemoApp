@@ -7,7 +7,7 @@ setupCommon(Module.Common)
 dependencies {
     // network
     implementation(
-        *Libs.glide,
+        Libs.coil,
         Libs.okHttpLogInterceptor
     )
 }

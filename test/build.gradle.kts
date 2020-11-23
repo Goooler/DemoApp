@@ -10,6 +10,7 @@ setupApp("${appPackageName}.test", "test").run {
 
 dependencies {
     implementation(
+        *Libs.glide,
         Libs.fastjson,
         *Libs.gson,
         Libs.mmkv,
