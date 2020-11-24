@@ -7,11 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
 import io.goooler.demoapp.base.R
-import io.goooler.demoapp.base.core.BaseDialogFragment
 import io.goooler.demoapp.base.util.unsafeLazy
+import io.goooler.demoapp.common.base.BaseThemeDialogFragment
 import io.goooler.demoapp.common.databinding.FullScreenDialogFragmentBinding
 
-class FullScreenDialogFragment : BaseDialogFragment() {
+class FullScreenDialogFragment private constructor() : BaseThemeDialogFragment() {
 
     private val binding by unsafeLazy {
         FullScreenDialogFragmentBinding.inflate(layoutInflater)
@@ -26,7 +26,7 @@ class FullScreenDialogFragment : BaseDialogFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding.lifecycleOwner = this
         binding.ivCenter.setOnClickListener {
             dismiss()

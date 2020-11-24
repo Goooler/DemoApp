@@ -6,12 +6,18 @@ import com.blankj.utilcode.util.AdaptScreenUtils
 import com.blankj.utilcode.util.BarUtils
 import io.goooler.demoapp.base.core.BaseActivity
 
-abstract class BaseThemeActivity : BaseActivity() {
+abstract class BaseThemeActivity : BaseActivity(), ITheme {
 
     override fun getResources(): Resources = AdaptScreenUtils.adaptWidth(originalResources, 360)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         BarUtils.transparentStatusBar(this)
+    }
+
+    override fun showLoading() {
+    }
+
+    override fun hideLoading() {
     }
 }

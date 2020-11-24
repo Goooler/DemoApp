@@ -8,13 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.JavascriptInterface
 import androidx.core.os.bundleOf
-import io.goooler.demoapp.base.core.BaseFragment
 import io.goooler.demoapp.base.util.putArguments
 import io.goooler.demoapp.base.util.unsafeLazy
 import io.goooler.demoapp.base.widget.CustomWebView
+import io.goooler.demoapp.common.base.BaseThemeFragment
 import io.goooler.demoapp.webview.databinding.WebFragmentBinding
 
-class WebFragment private constructor() : BaseFragment() {
+class WebFragment private constructor() : BaseThemeFragment() {
 
     private val binding by unsafeLazy {
         WebFragmentBinding.inflate(layoutInflater).also {
@@ -38,7 +38,7 @@ class WebFragment private constructor() : BaseFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         return binding.root
     }
 

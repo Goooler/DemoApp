@@ -1,6 +1,6 @@
 package io.goooler.demoapp
 
-import io.goooler.demoapp.common.RouterApplication
+import io.goooler.demoapp.common.CommonApplication
 
 @Suppress("unused")
-class DemoApplication : RouterApplication()
+class DemoApplication : CommonApplication()

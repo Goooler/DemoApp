@@ -16,7 +16,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import jp.wasabeef.glide.transformations.BlurTransformation
 
-object ImageLoader {
+object GlideImageLoader {
     /**
      * load image
      *
@@ -461,7 +461,7 @@ object ImageLoader {
 
 @BindingAdapter("binding_src_url")
 fun ImageView.load(url: String?) {
-    ImageLoader.load(this, url)
+    GlideImageLoader.load(this, url)
 }
 
 @BindingAdapter(
@@ -472,7 +472,7 @@ fun ImageView.load(
     url: String?,
     placeholderDrawable: Drawable?
 ) {
-    ImageLoader.load(this, url, placeholderDrawable)
+    GlideImageLoader.load(this, url, placeholderDrawable)
 }
 
 @BindingAdapter(
@@ -485,12 +485,12 @@ fun ImageView.load(
     placeholderDrawable: Drawable?,
     errorDrawable: Drawable?
 ) {
-    ImageLoader.load(this, url, placeholderDrawable, errorDrawable)
+    GlideImageLoader.load(this, url, placeholderDrawable, errorDrawable)
 }
 
 @BindingAdapter("binding_src_url_circle")
 fun ImageView.loadCircleCrop(url: String?) {
-    ImageLoader.loadCircleCrop(this, url)
+    GlideImageLoader.loadCircleCrop(this, url)
 }
 
 @BindingAdapter(
@@ -501,7 +501,7 @@ fun ImageView.loadCircleCrop(
     url: String?,
     placeholderDrawable: Drawable?,
 ) {
-    ImageLoader.loadCircleCrop(this, url, placeholderDrawable)
+    GlideImageLoader.loadCircleCrop(this, url, placeholderDrawable)
 }
 
 @BindingAdapter(
@@ -512,7 +512,7 @@ fun ImageView.loadCenterCrop(
     url: String?,
     placeholderDrawable: Drawable?
 ) {
-    ImageLoader.loadCenterCrop(this, url, placeholderDrawable)
+    GlideImageLoader.loadCenterCrop(this, url, placeholderDrawable)
 }
 
 @BindingAdapter(
@@ -525,7 +525,7 @@ fun ImageView.loadCenterCrop(
     placeholderDrawable: Drawable?,
     errorDrawable: Drawable?
 ) {
-    ImageLoader.loadCenterCrop(this, url, placeholderDrawable, errorDrawable)
+    GlideImageLoader.loadCenterCrop(this, url, placeholderDrawable, errorDrawable)
 }
 
 @BindingAdapter(
@@ -536,7 +536,7 @@ fun ImageView.loadRoundedCorner(
     url: String?,
     @Px radius: Float
 ) {
-    ImageLoader.loadRoundedCorner(this, url, radius.toInt())
+    GlideImageLoader.loadRoundedCorner(this, url, radius.toInt())
 }
 
 @BindingAdapter(
@@ -549,7 +549,7 @@ fun ImageView.loadRoundedCorner(
     @Px radius: Float,
     placeholderDrawable: Drawable?
 ) {
-    ImageLoader.loadRoundedCorner(this, url, radius.toInt(), placeholderDrawable)
+    GlideImageLoader.loadRoundedCorner(this, url, radius.toInt(), placeholderDrawable)
 }
 
 @BindingAdapter(
@@ -564,7 +564,13 @@ fun ImageView.loadRoundedCorner(
     placeholderDrawable: Drawable?,
     errorDrawable: Drawable?
 ) {
-    ImageLoader.loadRoundedCorner(this, url, radius.toInt(), placeholderDrawable, errorDrawable)
+    GlideImageLoader.loadRoundedCorner(
+        this,
+        url,
+        radius.toInt(),
+        placeholderDrawable,
+        errorDrawable
+    )
 }
 
 @BindingAdapter(
@@ -575,7 +581,7 @@ fun ImageView.loadCenterCropRoundedCorner(
     url: String?,
     @Px radius: Float
 ) {
-    ImageLoader.loadCenterCropRoundedCorner(this, url, radius.toInt())
+    GlideImageLoader.loadCenterCropRoundedCorner(this, url, radius.toInt())
 }
 
 @BindingAdapter(
@@ -588,5 +594,5 @@ fun ImageView.loadCenterCropRoundedCorner(
     @Px radius: Float,
     placeholderDrawable: Drawable?
 ) {
-    ImageLoader.loadCenterCropRoundedCorner(this, url, radius.toInt(), placeholderDrawable)
+    GlideImageLoader.loadCenterCropRoundedCorner(this, url, radius.toInt(), placeholderDrawable)
 }

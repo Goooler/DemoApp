@@ -4,6 +4,7 @@ package io.goooler.demoapp.common.util
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.os.Handler
 import android.os.Looper
 import android.widget.Toast
 import androidx.annotation.AnyThread
@@ -18,6 +19,7 @@ import io.goooler.demoapp.base.core.BaseApplication
 @SuppressLint("WrongThread")
 object ToastUtil {
 
+    private val handler by lazy(LazyThreadSafetyMode.NONE) { Handler(Looper.getMainLooper()) }
     private var toast: Toast? = null
 
     @AnyThread
@@ -33,27 +35,27 @@ object ToastUtil {
     @AnyThread
     fun show(context: Context, text: String) {
         if (Looper.getMainLooper().thread === Thread.currentThread()) {
-            showToastInMainThread(context, text)
+            showInMainThread(context, text)
         } else {
-            showToastInWorkerThread(context, text)
+            showInWorkerThread(context, text)
         }
     }
 
     @WorkerThread
-    fun showToastInWorkerThread(context: Context, @StringRes strResId: Int) {
-        showToastInWorkerThread(context, context.getString(strResId))
+    fun showInWorkerThread(context: Context, @StringRes strResId: Int) {
+        showInWorkerThread(context, context.getString(strResId))
     }
 
     @WorkerThread
-    fun showToastInWorkerThread(context: Context, text: String) {
-        Looper.prepare()
-        showToastInMainThread(context, text)
-        Looper.loop()
+    fun showInWorkerThread(context: Context, text: String) {
+        handler.post {
+            showInMainThread(context, text)
+        }
     }
 
     @UiThread
-    fun showToastInMainThread(context: Context, @StringRes strResId: Int) {
-        showToastInMainThread(context, context.getString(strResId))
+    fun showInMainThread(context: Context, @StringRes strResId: Int) {
+        showInMainThread(context, context.getString(strResId))
     }
 
     /**
@@ -61,14 +63,13 @@ object ToastUtil {
      */
     @UiThread
     @Synchronized
-    fun showToastInMainThread(context: Context, text: String) {
+    fun showInMainThread(context: Context, text: String) {
         // 把上一条先置空，再显示下一条
-        if (toast != null) {
-            toast!!.cancel()
-            toast = null
+        toast?.cancel()
+        toast = null
+        toast = Toast.makeText(context, text, Toast.LENGTH_SHORT).also {
+            it.show()
         }
-        toast = Toast.makeText(context, text, Toast.LENGTH_SHORT)
-        toast!!.show()
     }
 }
 

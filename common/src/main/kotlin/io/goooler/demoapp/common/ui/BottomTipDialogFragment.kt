@@ -8,12 +8,12 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentManager
 import io.goooler.demoapp.base.R
-import io.goooler.demoapp.base.core.BaseDialogFragment
 import io.goooler.demoapp.base.util.putArguments
 import io.goooler.demoapp.base.util.unsafeLazy
+import io.goooler.demoapp.common.base.BaseThemeDialogFragment
 import io.goooler.demoapp.common.databinding.BottomTipDialogFragmentBinding
 
-class BottomTipDialogFragment : BaseDialogFragment() {
+class BottomTipDialogFragment private constructor() : BaseThemeDialogFragment() {
 
     private val binding by unsafeLazy {
         BottomTipDialogFragmentBinding.inflate(layoutInflater)
@@ -28,7 +28,7 @@ class BottomTipDialogFragment : BaseDialogFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding.lifecycleOwner = this
         arguments?.let {
             binding.tvTitle.text = it.getString(TITLE)

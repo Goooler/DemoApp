@@ -6,15 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
-import io.goooler.demoapp.base.core.BaseLazyFragment
 import io.goooler.demoapp.base.util.unsafeLazy
+import io.goooler.demoapp.common.base.BaseThemeLazyFragment
 import io.goooler.demoapp.common.util.getViewModel
 import io.goooler.demoapp.common.util.showToast
 import io.goooler.demoapp.main.databinding.MainSrlFragmentBinding
 import io.goooler.demoapp.main.ui.adapter.MainSrlRvAdapter
 import io.goooler.demoapp.main.vm.MainSrlViewModel
 
-class MainSrlFragment private constructor() : BaseLazyFragment() {
+class MainSrlFragment private constructor() : BaseThemeLazyFragment() {
 
     private val binding by unsafeLazy {
         MainSrlFragmentBinding.inflate(layoutInflater).also {
@@ -43,7 +43,7 @@ class MainSrlFragment private constructor() : BaseLazyFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         return binding.root
     }
 

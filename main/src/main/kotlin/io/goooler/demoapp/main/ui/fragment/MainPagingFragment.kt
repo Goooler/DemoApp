@@ -8,8 +8,8 @@ import androidx.lifecycle.lifecycleScope
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshListener
 import io.goooler.demoapp.adapter.rv.paging.BaseRvPagingAdapter
-import io.goooler.demoapp.base.core.BaseLazyFragment
 import io.goooler.demoapp.base.util.unsafeLazy
+import io.goooler.demoapp.common.base.BaseThemeLazyFragment
 import io.goooler.demoapp.common.util.disableRefreshAndLoadMore
 import io.goooler.demoapp.common.util.finishRefreshAndLoadMore
 import io.goooler.demoapp.common.util.getViewModel
@@ -20,7 +20,7 @@ import io.goooler.demoapp.main.vm.MainPagingViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-class MainPagingFragment private constructor() : BaseLazyFragment() {
+class MainPagingFragment private constructor() : BaseThemeLazyFragment() {
 
     private lateinit var binding: MainPagingFragmentBinding
     private lateinit var rvAdapter: MainPagingRvAdapter
@@ -55,7 +55,7 @@ class MainPagingFragment private constructor() : BaseLazyFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         initView
         return binding.root
     }
