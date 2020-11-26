@@ -11,7 +11,7 @@ private const val cardViewVersion = "1.0.0"
 private const val recyclerViewVersion = "1.1.0"
 private const val annotationVersion = "1.1.0"
 private const val lifecycleVersion = "2.2.0"
-private const val navigationVersion = "2.3.0"
+private const val navigationVersion = "2.3.1"
 private const val workVersion = "2.3.4"
 private const val preferenceVersion = "1.1.1"
 private const val okHttpVersion = "4.9.0"
@@ -26,34 +26,35 @@ private const val rxAndroidVersion = "3.0.0"
 private const val rxJavaVersion = "3.0.7"
 private const val rxPermissionVersion = "0.12"
 private const val mpChartVersion = "v3.1.0"
-private const val lottieVersion = "3.0.1"
+private const val lottieVersion = "3.5.0"
 private const val smartRefreshLayoutVersion = "2.0.1"
 private const val glideVersion = "4.11.0"
 private const val glideTransformVersion = "4.3.0"
 private const val leakCanaryVersion = "2.5"
 private const val lubanVersion = "1.1.8"
 private const val mmkvVersion = "1.2.2"
-private const val coroutinesVersion = "1.4.0"
-private const val desugarVersion = "1.1.0"
-private const val objectBoxVersion = "2.7.1"
+private const val coroutinesVersion = "1.4.1"
+private const val desugarVersion = "1.1.1"
+private const val objectBoxVersion = "2.8.1"
 private const val protocVersion = "3.13.0"
 private const val tbsVersion = "43938"
 private const val baseRvHelperVersion = "3.0.4"
 private const val flycoTabLayoutVersion = "2.1.4.2"
-private const val coilVersion = "1.0.0"
+private const val coilVersion = "1.1.0"
 private const val utilsVersion = "1.30.1"
-private const val pagingVersion = "3.0.0-alpha08"
+private const val pagingVersion = "3.0.0-alpha09"
 private const val viewPager2Version = "1.0.0"
-private const val protobufVersion = "0.8.13"
+private const val protobufVersion = "0.8.14"
 private const val photoViewVersion = "2.3.0"
 private const val permissionXVersion = "1.4.0"
 private const val arouterRegisterVersion = "1.0.2"
 private const val roomVersion = "2.2.5"
-private const val hiltVersion = "2.28-alpha"
+private const val hiltVersion = "2.30.1-alpha"
+private const val hiltVmVersion = "1.0.0-alpha02"
 
 object Plugins {
-    internal const val kotlinAndroid = "kotlin-android"
-    internal const val kotlinKapt = "kotlin-kapt"
+    const val kotlinAndroid = "kotlin-android"
+    const val kotlinKapt = "kotlin-kapt"
     const val androidLibrary = "com.android.library"
     const val androidApplication = "com.android.application"
     const val hilt = "dagger.hilt.android.plugin"
@@ -101,19 +102,22 @@ object Libs {
     const val viewPager2 = "androidx.viewpager2:viewpager2:$viewPager2Version"
     const val photoView = "com.github.chrisbanes:PhotoView:$photoViewVersion"
     const val permissionX = "com.permissionx.guolindev:permissionx:$permissionXVersion"
-    const val hilt = "com.google.dagger:hilt-android:$hiltVersion"
 
     const val protobufPlugin = "com.google.protobuf:protobuf-gradle-plugin:$protobufVersion"
     const val arouterPlugin = "com.alibaba:arouter-register:$arouterRegisterVersion"
     const val hiltPlugin = "com.google.dagger:hilt-android-gradle-plugin:$hiltVersion"
 
     const val glideKapt = "com.github.bumptech.glide:compiler:$glideVersion"
-    const val roomKapt = "androidx.room:room-compiler:$roomVersion"
     const val objectBoxKapt = "io.objectbox:objectbox-processor:$objectBoxVersion"
-    const val eventBusKapt = "org.greenrobot:eventbus-annotation-processor:$eventBusVersion"
+    const val eventBusKapt =
+        "org.greenrobot:eventbus-annotation-processor:$eventBusVersion"
+    const val roomKapt = "androidx.room:room-compiler:$roomVersion"
     const val arouterKapt = "com.alibaba:arouter-compiler:$arouterVersion"
     const val moshiKapt = "com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion"
-    const val hiltKapt = "com.google.dagger:hilt-android-compiler:$hiltVersion"
+    val hiltKapt = arrayOf(
+        "com.google.dagger:hilt-android-compiler:$hiltVersion",
+        "androidx.hilt:hilt-compiler:$hiltVmVersion"
+    )
 
     val coroutines = arrayOf(
         "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion",
@@ -129,6 +133,10 @@ object Libs {
     val room = arrayOf(
         "androidx.room:room-runtime:$roomVersion",
         "androidx.room:room-ktx:$roomVersion"
+    )
+    val hilt = arrayOf(
+        "com.google.dagger:hilt-android:$hiltVersion",
+        "androidx.hilt:hilt-lifecycle-viewmodel:$hiltVmVersion"
     )
     val navigation = arrayOf(
         "androidx.navigation:navigation-ui-ktx:$navigationVersion",

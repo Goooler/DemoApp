@@ -11,6 +11,4 @@ dependencies {
         project(getModuleName(Module.Main)),
         project(getModuleName(Module.Web))
     )
-
-    debugImplementation(Libs.leakCanary)
 }

@@ -147,14 +147,14 @@ fun Project.setupCommon(module: Module? = null): BaseExtension {
                 Libs.photoView,
 
                 // utils
-                Libs.hilt,
+                *Libs.hilt,
                 *Libs.room,
                 *Libs.rx,
                 Libs.utils,
                 Libs.permissionX,
                 *Libs.moshi
             )
-            kapt(Libs.arouterKapt, Libs.moshiKapt, Libs.roomKapt, Libs.hiltKapt)
+            kapt(Libs.arouterKapt, Libs.moshiKapt, Libs.roomKapt, *Libs.hiltKapt)
         }
         plugins.run {
             apply(Plugins.arouter)
@@ -215,7 +215,10 @@ fun Project.setupApp(appPackageName: String, appName: String): BaseExtension {
             }
         }
         compileOptions.isCoreLibraryDesugaringEnabled = true
-        dependencies.add("coreLibraryDesugaring", Libs.desugar)
+        dependencies.run {
+            add("coreLibraryDesugaring", Libs.desugar)
+            add("debugImplementation", Libs.leakCanary)
+        }
     }
 }
 

@@ -1,5 +1,3 @@
-import java.nio.charset.StandardCharsets
-
 buildscript {
     apply("repositories.gradle.kts")
 
@@ -18,13 +16,6 @@ buildscript {
 
 allprojects {
     apply("${rootDir.path}/repositories.gradle.kts")
-
-    configurations.all {
-        resolutionStrategy.cacheChangingModulesFor(0, TimeUnit.SECONDS)
-    }
-    tasks.withType(JavaCompile::class) {
-        options.encoding = StandardCharsets.UTF_8.toString()
-    }
 }
 
 task("clean", Delete::class) {
