@@ -41,17 +41,16 @@ abstract class BaseService : Service() {
 
     override fun onBind(intent: Intent?): IBinder? = null
 
-    @Suppress("SameParameterValue")
-    protected fun createNormalNotification(content: String?): Notification {
-        val builder = NotificationCompat.Builder(this, channelId.toString())
-        return if (content.isNullOrEmpty()) {
-            builder.setNotificationSilent().build()
-        } else {
-            builder.setContentTitle(applicationInfo.name)
-                .setContentTitle(content)
-                .setWhen(System.currentTimeMillis())
-                .setSmallIcon(smallIcon)
-                .build()
-        }
+    protected open fun createNormalNotification(content: String?): Notification {
+        return NotificationCompat.Builder(this, channelId.toString()).also {
+            if (content.isNullOrEmpty()) {
+                it.setNotificationSilent()
+            } else {
+                it.setContentTitle(applicationInfo.name)
+                    .setContentTitle(content)
+                    .setWhen(System.currentTimeMillis())
+                    .setSmallIcon(smallIcon)
+            }
+        }.build()
     }
 }
