@@ -173,33 +173,30 @@ fun @receiver:StringRes Int.formatString(vararg args: Any): String =
 //---------------------Fragment-------------------------------//
 
 @MainThread
-inline fun <reified T : BaseViewModel> Fragment.getViewModel(): Lazy<T> {
-    return lazy(LazyThreadSafetyMode.NONE) {
+inline fun <reified T : BaseViewModel> Fragment.getViewModel(): Lazy<T> =
+    lazy(LazyThreadSafetyMode.NONE) {
         ViewModelProvider(this).get(T::class.java).apply {
             lifecycle.addObserver(this)
         }
     }
-}
 
 @MainThread
-inline fun <reified T : BaseViewModel> Fragment.getViewModelOfActivity(): Lazy<T> {
-    return lazy(LazyThreadSafetyMode.NONE) {
+inline fun <reified T : BaseViewModel> Fragment.getViewModelOfActivity(): Lazy<T> =
+    lazy(LazyThreadSafetyMode.NONE) {
         ViewModelProvider(requireActivity()).get(T::class.java).apply {
             lifecycle.addObserver(this)
         }
     }
-}
 
 //---------------------Activity-------------------------------//
 
 @MainThread
-inline fun <reified T : BaseViewModel> ComponentActivity.getViewModel(): Lazy<T> {
-    return lazy(LazyThreadSafetyMode.NONE) {
+inline fun <reified T : BaseViewModel> ComponentActivity.getViewModel(): Lazy<T> =
+    lazy(LazyThreadSafetyMode.NONE) {
         ViewModelProvider(this).get(T::class.java).apply {
             lifecycle.addObserver(this)
         }
     }
-}
 
 //---------------------ViewModel-------------------------------//
 

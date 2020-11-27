@@ -13,7 +13,6 @@ import kotlinx.coroutines.launch
 /**
  * 封装通用方法和一些初始化的动作
  */
-@SuppressLint("StaticFieldLeak")
 abstract class BaseApplication : Application() {
 
     override fun onCreate() {

@@ -12,10 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 /**
  * Activity 基类，封装通用方法
  */
-@Suppress("unused", "MemberVisibilityCanBePrivate")
 abstract class BaseActivity : AppCompatActivity() {
-
-    val originalResources: Resources get() = super.getResources()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

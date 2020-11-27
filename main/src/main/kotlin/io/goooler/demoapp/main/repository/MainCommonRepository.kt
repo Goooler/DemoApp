@@ -1,18 +1,13 @@
 package io.goooler.demoapp.main.repository
 
-import android.app.Application
 import io.goooler.demoapp.base.util.paramMapOf
-import io.goooler.demoapp.common.network.RetrofitHelper
 import io.goooler.demoapp.common.type.CommonConstants
 import io.goooler.demoapp.main.api.MainCommonApi
 import io.goooler.demoapp.main.bean.MainRepoListBean
 import io.goooler.demoapp.main.db.MainDatabase
 import io.reactivex.rxjava3.core.Observable
 
-class MainCommonRepository(app: Application) {
-
-    private val api: MainCommonApi = RetrofitHelper.create()
-    private val db = MainDatabase.getInstance(app)
+class MainCommonRepository(private val api: MainCommonApi, private val db: MainDatabase) {
 
     suspend fun getRepoListWithCr(
         user: String,

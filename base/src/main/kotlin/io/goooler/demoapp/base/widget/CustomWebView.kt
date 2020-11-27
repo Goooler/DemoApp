@@ -12,8 +12,8 @@ import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 
-@Suppress("MemberVisibilityCanBePrivate", "SetJavaScriptEnabled", "JavascriptInterface")
-class CustomWebView(context: Context, attrs: AttributeSet? = null) : WebView(context, attrs),
+@Suppress("SetJavaScriptEnabled", "JavascriptInterface")
+open class CustomWebView(context: Context, attrs: AttributeSet? = null) : WebView(context, attrs),
     DefaultLifecycleObserver {
 
     var onEventListener: OnEventListener? = null
@@ -22,7 +22,7 @@ class CustomWebView(context: Context, attrs: AttributeSet? = null) : WebView(con
         initWebViewSettings()
     }
 
-    fun onDestroy() {
+    open fun onDestroy() {
         stopLoading()
         destroy()
     }

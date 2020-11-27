@@ -10,7 +10,7 @@ import retrofit2.Retrofit
 import java.io.File
 import java.util.concurrent.TimeUnit
 
-@Suppress("unused", "MemberVisibilityCanBePrivate")
+@Suppress("unused")
 abstract class BaseRetrofitHelper {
 
     private val retrofit by lazy {
@@ -38,7 +38,7 @@ abstract class BaseRetrofitHelper {
 
     protected abstract val statusListener: StatusInterceptor.StatusListener
 
-    protected fun buildOkHttpClient(): OkHttpClient {
+    protected open fun buildOkHttpClient(): OkHttpClient {
         val cache = Cache(File(context.cacheDir, "HttpCache"), 10L * 1024 * 1024)
         return OkHttpClient.Builder()
             .cache(cache)

@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 /**
  * Fragment 基类，封装通用方法
  */
-@Suppress("unused")
 abstract class BaseFragment : Fragment() {
 
     protected open fun onBackPressed(): Boolean {
