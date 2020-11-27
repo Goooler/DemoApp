@@ -11,6 +11,7 @@ import io.goooler.demoapp.common.util.getViewModel
 import io.goooler.demoapp.main.R
 import io.goooler.demoapp.main.databinding.MainHomeFragmentBinding
 import io.goooler.demoapp.main.vm.MainHomeViewModel
+import java.util.concurrent.CancellationException
 
 class MainHomeFragment private constructor() : BaseThemeLazyFragment() {
 
@@ -43,6 +44,15 @@ class MainHomeFragment private constructor() : BaseThemeLazyFragment() {
             }
             R.id.bt_two -> {
                 vm.getRepoListFromDb()
+            }
+            R.id.bt_three -> {
+                if (vm.countdownJob?.isActive != true) {
+                    vm.startCountDown {
+
+                    }
+                } else {
+                    vm.countdownJob?.cancel(CancellationException(MainHomeViewModel.CANCEL_MANUALLY))
+                }
             }
         }
     }

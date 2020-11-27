@@ -53,6 +53,14 @@
                 android:onClick="@{listener}"
                 android:text="数据库查询" />
 
+            <Button
+                android:id="@+id/bt_three"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:onClick="@{listener}"
+                android:text="倒计时" />
+
             <io.goooler.demoapp.widget.DemoView
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
