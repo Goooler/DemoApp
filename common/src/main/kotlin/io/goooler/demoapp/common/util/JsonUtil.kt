@@ -12,6 +12,7 @@ object JsonUtil {
         return try {
             moshi.adapter(clazz).fromJson(json)
         } catch (e: Exception) {
+            e.printStackTrace()
             null
         }
     }
@@ -20,6 +21,7 @@ object JsonUtil {
         return try {
             moshi.adapter<T>(typeOfT).fromJson(json)
         } catch (e: Exception) {
+            e.printStackTrace()
             null
         }
     }
@@ -28,6 +30,7 @@ object JsonUtil {
         return try {
             moshi.adapter(clazz).toJson(o)
         } catch (e: Exception) {
+            e.printStackTrace()
             null
         }
     }

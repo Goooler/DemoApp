@@ -149,10 +149,11 @@ fun Project.setupCommon(module: Module? = null): BaseExtension {
                 // utils
                 *Libs.hilt,
                 *Libs.room,
+                *Libs.dataStore,
                 *Libs.rx,
+                *Libs.moshi,
                 Libs.utils,
-                Libs.permissionX,
-                *Libs.moshi
+                Libs.permissionX
             )
             kapt(Libs.arouterKapt, Libs.moshiKapt, Libs.roomKapt, *Libs.hiltKapt)
         }

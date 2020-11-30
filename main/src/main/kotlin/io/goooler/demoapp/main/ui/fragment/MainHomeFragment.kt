@@ -46,6 +46,9 @@ class MainHomeFragment private constructor() : BaseThemeLazyFragment() {
                 vm.getRepoListFromDb()
             }
             R.id.bt_three -> {
+                vm.getRepoListFromDs()
+            }
+            R.id.bt_four -> {
                 if (vm.countdownJob?.isActive != true) {
                     vm.startCountDown {
 

@@ -36,6 +36,14 @@ class MainHomeViewModel(application: Application) : BaseRxViewModel(application)
         }
     }
 
+    fun getRepoListFromDs() {
+        viewModelScope.launch {
+            repository.getRepoListFromDs().collectLatest {
+                it.first().name?.showToast()
+            }
+        }
+    }
+
     fun startCountDown(countDownTime: Int = 30, callback: (CountDownState) -> Unit) {
         countdownJob = viewModelScope.launch {
             flow {
@@ -79,6 +87,7 @@ class MainHomeViewModel(application: Application) : BaseRxViewModel(application)
                 }
 
                 repository.insertRepoListIntoDb(google.await())
+                repository.storeRepoListToDs(google.await())
             } catch (e: Exception) {
                 title.postValue(e.message)
                 R.string.request_failed.showToast()

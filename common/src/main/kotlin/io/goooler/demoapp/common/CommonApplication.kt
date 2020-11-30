@@ -6,6 +6,7 @@ import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import io.goooler.demoapp.base.core.BaseApplication
 import io.goooler.demoapp.common.util.CrashHandler
+import io.goooler.demoapp.common.util.DataStoreUtil
 import io.goooler.demoapp.common.util.debugRun
 
 open class CommonApplication : BaseApplication() {
@@ -13,6 +14,7 @@ open class CommonApplication : BaseApplication() {
     override fun initRight() {
         super.initRight()
         CrashHandler.init()
+        DataStoreUtil.init(this)
         initArouter()
         initSmartRefresh()
     }
