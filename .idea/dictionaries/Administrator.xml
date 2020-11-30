@@ -1,39 +1,58 @@
 <component name="ProjectDictionaryState">
   <dictionary name="Administrator">
     <words>
+      <w>alibaba</w>
       <w>aliyun</w>
       <w>arouter</w>
       <w>backpressure</w>
       <w>balancer</w>
       <w>baronzhang</w>
       <w>blankj</w>
+      <w>bumptech</w>
+      <w>cardview</w>
+      <w>chrisbanes</w>
+      <w>codegen</w>
+      <w>constraintlayout</w>
       <w>databinding</w>
+      <w>datastore</w>
       <w>demoapp</w>
       <w>desugar</w>
       <w>desugaring</w>
       <w>dexopt</w>
       <w>feling</w>
       <w>flowable</w>
+      <w>flyco</w>
       <w>flyme</w>
       <w>goooler</w>
       <w>gson</w>
+      <w>guolindev</w>
       <w>inertance</w>
       <w>kapt</w>
       <w>kotlinx</w>
+      <w>leakcanary</w>
+      <w>livedata</w>
       <w>meizu</w>
       <w>miui</w>
       <w>mmkv</w>
       <w>moshi</w>
       <w>noninfringement</w>
       <w>objectbox</w>
+      <w>okhttp</w>
       <w>oneplus</w>
+      <w>permissionx</w>
       <w>protobuf</w>
       <w>rssi</w>
+      <w>rxandroid</w>
+      <w>savedstate</w>
+      <w>scwang</w>
       <w>smtt</w>
+      <w>squareup</w>
       <w>thru</w>
       <w>uids</w>
       <w>unmute</w>
       <w>utilcode</w>
+      <w>utilcodex</w>
+      <w>viewmodel</w>
       <w>webview</w>
       <w>xjvm</w>
     </words>
