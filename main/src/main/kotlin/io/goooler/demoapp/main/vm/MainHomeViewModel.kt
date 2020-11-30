@@ -6,10 +6,10 @@ import io.goooler.demoapp.base.util.MutableStringLiveData
 import io.goooler.demoapp.base.util.defaultAsync
 import io.goooler.demoapp.common.base.BaseRxViewModel
 import io.goooler.demoapp.common.network.RetrofitHelper
+import io.goooler.demoapp.common.util.RoomHelper
 import io.goooler.demoapp.common.util.showToast
 import io.goooler.demoapp.main.R
 import io.goooler.demoapp.main.bean.MainRepoListBean
-import io.goooler.demoapp.main.db.MainDatabase
 import io.goooler.demoapp.main.repository.MainCommonRepository
 import io.reactivex.rxjava3.core.Observable
 import kotlinx.coroutines.*
@@ -17,8 +17,7 @@ import kotlinx.coroutines.flow.*
 
 class MainHomeViewModel(application: Application) : BaseRxViewModel(application) {
 
-    private val repository =
-        MainCommonRepository(RetrofitHelper.create(), MainDatabase.getInstance(application))
+    private val repository = MainCommonRepository(RetrofitHelper.create(), RoomHelper.create())
 
     val title = MutableStringLiveData()
     val oneplusUrl = MutableStringLiveData()

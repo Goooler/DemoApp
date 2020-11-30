@@ -17,6 +17,7 @@ import io.goooler.demoapp.common.type.SpKeys
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
+import kotlinx.coroutines.flow.Flow
 import java.math.BigDecimal
 import java.util.*
 import kotlin.math.absoluteValue
@@ -34,6 +35,17 @@ inline fun debugRun(debug: () -> Unit) {
     if (isDebug) {
         debug()
     }
+}
+
+suspend inline fun <reified T : Any> SpKeys.getFromDataStore(name: String = "Demo"): Flow<T?> {
+    return DataStoreHelper.getInstance(name).get(key)
+}
+
+suspend inline fun <reified T : Any> T.putIntoDataStore(
+    key: SpKeys,
+    prefName: String = "Demo"
+) {
+    DataStoreHelper.getInstance(prefName).put(key.key, this)
 }
 
 /**

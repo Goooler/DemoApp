@@ -2,10 +2,10 @@ package io.goooler.demoapp.common.util
 
 import androidx.datastore.preferences.*
 import io.goooler.demoapp.base.core.BaseApplication
-import io.goooler.demoapp.common.util.DataStoreHelper.Companion.PREFERENCE_NAME
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
+import java.util.concurrent.ConcurrentHashMap
 
 class DataStoreHelper private constructor(name: String) {
 
@@ -39,24 +39,12 @@ class DataStoreHelper private constructor(name: String) {
     }
 
     companion object {
-        const val PREFERENCE_NAME = "demo_app"
-        private val HELPER_MAP = hashMapOf<String, DataStoreHelper>()
+        private val helperMap = ConcurrentHashMap<String, DataStoreHelper>()
 
-        fun getInstance(name: String = PREFERENCE_NAME): DataStoreHelper {
-            return HELPER_MAP[name] ?: DataStoreHelper(name).also {
-                HELPER_MAP[name] = it
+        fun getInstance(name: String): DataStoreHelper {
+            return helperMap[name] ?: DataStoreHelper(name).also {
+                helperMap[name] = it
             }
         }
     }
-}
-
-suspend inline fun <reified T : Any> String.getFromDataStore(prefName: String = PREFERENCE_NAME): Flow<T?> {
-    return DataStoreHelper.getInstance(prefName).get(this)
-}
-
-suspend inline fun <reified T : Any> T.putIntoDataStore(
-    key: String,
-    prefName: String = PREFERENCE_NAME
-) {
-    DataStoreHelper.getInstance(prefName).put(key, this)
 }

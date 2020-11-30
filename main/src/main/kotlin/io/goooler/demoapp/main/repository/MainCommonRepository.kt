@@ -2,6 +2,7 @@ package io.goooler.demoapp.main.repository
 
 import io.goooler.demoapp.base.util.paramMapOf
 import io.goooler.demoapp.common.type.CommonConstants
+import io.goooler.demoapp.common.type.SpKeys
 import io.goooler.demoapp.common.util.fromJson
 import io.goooler.demoapp.common.util.getFromDataStore
 import io.goooler.demoapp.common.util.putIntoDataStore
@@ -46,16 +47,12 @@ class MainCommonRepository(private val api: MainCommonApi, private val db: MainD
     }
 
     suspend fun getRepoListFromDs(): Flow<List<MainRepoListBean>> {
-        return KEY_REPO_LIST.getFromDataStore<String>().map {
+        return SpKeys.RepoList.getFromDataStore<String>().map {
             it?.fromJson(List::class.java, MainRepoListBean::class.java) ?: emptyList()
         }
     }
 
     suspend fun putRepoListIntoDs(list: List<MainRepoListBean>) {
-        list.toJson().orEmpty().putIntoDataStore(KEY_REPO_LIST)
-    }
-
-    companion object {
-        private const val KEY_REPO_LIST = "repo_list"
+        list.toJson().orEmpty().putIntoDataStore(SpKeys.RepoList)
     }
 }
