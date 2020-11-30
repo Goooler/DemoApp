@@ -3,6 +3,7 @@
 package io.goooler.demoapp.common.util
 
 import com.squareup.moshi.Moshi
+import com.squareup.moshi.Types
 import java.lang.reflect.Type
 
 object JsonUtil {
@@ -26,6 +27,15 @@ object JsonUtil {
         }
     }
 
+    fun <T> fromJson(json: String, rawType: Class<*>, vararg typeArguments: Class<*>): T? {
+        return try {
+            fromJson(json, Types.newParameterizedType(rawType, *typeArguments))
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
+        }
+    }
+
     fun <T> toJson(o: T?, clazz: Class<T>): String? {
         return try {
             moshi.adapter(clazz).toJson(o)
@@ -41,5 +51,8 @@ object JsonUtil {
 inline fun <reified T> String.fromJson(): T? = JsonUtil.fromJson(this, T::class.java)
 
 inline fun <reified T> String.fromJson(typeOfT: Type): T? = JsonUtil.fromJson(this, typeOfT)
+
+inline fun <reified T> String.fromJson(rawType: Class<*>, vararg typeArguments: Class<*>): T? =
+    JsonUtil.fromJson(this, rawType, *typeArguments)
 
 fun Any?.toJson(): String? = JsonUtil.toJson(this)

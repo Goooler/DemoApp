@@ -32,14 +32,14 @@ class MainHomeViewModel(application: Application) : BaseRxViewModel(application)
 
     fun getRepoListFromDb() {
         viewModelScope.launch {
-            repository.getRepoListFromDb().first().name?.showToast()
+            repository.getRepoListFromDb().firstOrNull()?.name?.showToast()
         }
     }
 
     fun getRepoListFromDs() {
         viewModelScope.launch {
             repository.getRepoListFromDs().collectLatest {
-                it.first().name?.showToast()
+                it.firstOrNull()?.name?.showToast()
             }
         }
     }
@@ -86,8 +86,8 @@ class MainHomeViewModel(application: Application) : BaseRxViewModel(application)
                     title.postValue(it)
                 }
 
-                repository.insertRepoListIntoDb(google.await())
-                repository.storeRepoListToDs(google.await())
+                repository.putRepoListIntoDb(google.await())
+                repository.putRepoListIntoDs(google.await())
             } catch (e: Exception) {
                 title.postValue(e.message)
                 R.string.request_failed.showToast()

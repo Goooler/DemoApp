@@ -50,9 +50,7 @@ class MainHomeFragment private constructor() : BaseThemeLazyFragment() {
             }
             R.id.bt_four -> {
                 if (vm.countdownJob?.isActive != true) {
-                    vm.startCountDown {
-
-                    }
+                    vm.startCountDown {}
                 } else {
                     vm.countdownJob?.cancel(CancellationException(MainHomeViewModel.CANCEL_MANUALLY))
                 }

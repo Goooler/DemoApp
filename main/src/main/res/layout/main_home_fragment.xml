@@ -59,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:onClick="@{listener}"
-                android:text="数据库查询" />
+                android:text="DataStore 查询" />
 
             <Button
                 android:id="@+id/bt_four"

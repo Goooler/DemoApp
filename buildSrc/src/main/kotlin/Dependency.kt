@@ -51,7 +51,7 @@ private const val arouterRegisterVersion = "1.0.2"
 private const val roomVersion = "2.2.5"
 private const val hiltVersion = "2.30.1-alpha"
 private const val hiltVmVersion = "1.0.0-alpha02"
-private const val dataStoreVersion = "1.0.0-alpha03"
+private const val dataStoreVersion = "1.0.0-alpha02"
 
 object Plugins {
     const val kotlinAndroid = "kotlin-android"
