@@ -1,7 +1,7 @@
-import java.util.concurrent.TimeUnit
 import java.nio.charset.StandardCharsets
+import java.util.concurrent.TimeUnit
 
-rootProject.extra.apply {
+rootProject.extra.run {
     set("androidPlugin", "com.android.tools.build:gradle:4.1.1")
     set("kotlinPlugin", "org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.20")
     set("aliyunMaven", "https://maven.aliyun.com/repository/public")

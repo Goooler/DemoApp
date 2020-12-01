@@ -3,15 +3,11 @@ package io.goooler.demoapp.base.core
 import android.content.ComponentName
 import android.content.Intent
 import android.content.pm.ActivityInfo
-import android.content.res.Resources
 import android.os.Build
 import android.os.Bundle
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 
-/**
- * Activity 基类，封装通用方法
- */
 abstract class BaseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

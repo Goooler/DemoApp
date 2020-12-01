@@ -5,7 +5,6 @@ import androidx.room.RoomDatabase
 import io.goooler.demoapp.base.core.BaseApplication
 import io.goooler.demoapp.common.type.Databases
 
-@Suppress("UNCHECKED_CAST")
 object RoomHelper {
     const val DB_VERSION = 1
 

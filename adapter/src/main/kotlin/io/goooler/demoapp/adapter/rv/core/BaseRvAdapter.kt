@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 /**
  * Created on 2020/10/22.
  *
- * Simple FeAdapter. You can write your own {@link RecyclerView.Adapter} according to this.
+ * Simple FeAdapter. You can write your own [RecyclerView.Adapter] according to this.
  *
  * @author feling
  * @version 1.0.0

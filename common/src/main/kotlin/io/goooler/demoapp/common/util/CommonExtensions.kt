@@ -2,6 +2,7 @@
 
 package io.goooler.demoapp.common.util
 
+import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.webkit.URLUtil
 import androidx.activity.ComponentActivity
@@ -12,7 +13,6 @@ import com.blankj.utilcode.util.*
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import io.goooler.demoapp.base.core.BaseViewModel
 import io.goooler.demoapp.common.BuildConfig
-import io.goooler.demoapp.common.network.HttpResponse
 import io.goooler.demoapp.common.type.SpKeys
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
@@ -48,13 +48,6 @@ suspend inline fun <reified T : Any> T.putIntoDataStore(
     DataStoreHelper.getInstance(prefName).put(key.key, this)
 }
 
-/**
- * 拼上图片前缀
- */
-fun String.toLoadUrl(): String {
-    return if (URLUtil.isNetworkUrl(this)) this else BuildConfig.CDN_PREFIX + this
-}
-
 @UiThread
 fun SmartRefreshLayout.finishRefreshAndLoadMore() {
     finishRefresh()
@@ -65,6 +58,15 @@ fun SmartRefreshLayout.finishRefreshAndLoadMore() {
 fun SmartRefreshLayout.disableRefreshAndLoadMore() {
     setEnableRefresh(false)
     setEnableLoadMore(false)
+}
+
+//---------------------Convert-------------------------------//
+
+/**
+ * 拼上图片前缀
+ */
+fun String.toLoadUrl(): String {
+    return if (URLUtil.isNetworkUrl(this)) this else BuildConfig.CDN_PREFIX + this
 }
 
 fun Long.toDateString(pattern: String): String {
@@ -143,23 +145,6 @@ fun Number.formatMoney(isYuan: Boolean = false, trans2W: Boolean = false, scale:
     }
 }
 
-@Px
-fun @receiver:Dimension(unit = Dimension.SP) Float.sp2px(): Int = SizeUtils.sp2px(this)
-
-@Px
-fun @receiver:Dimension(unit = Dimension.DP) Float.dp2px(): Int = SizeUtils.dp2px(this)
-
-@Px
-fun Float.pt2px(): Int = AdaptScreenUtils.pt2Px(this)
-
-@Dimension(unit = Dimension.SP)
-fun @receiver:Dimension Int.px2sp(): Int = SizeUtils.px2sp(this.toFloat())
-
-@Dimension(unit = Dimension.DP)
-fun @receiver:Dimension Int.px2dp(): Int = SizeUtils.px2dp(this.toFloat())
-
-fun @receiver:Dimension Int.px2pt(): Int = AdaptScreenUtils.px2Pt(this.toFloat())
-
 //---------------------Rx-------------------------------//
 
 fun <T> Single<T>.observeOnMainThread(): Single<T> {
@@ -181,6 +166,27 @@ fun @receiver:StringRes Int.getString(): String = StringUtils.getString(this)
 
 fun @receiver:StringRes Int.formatString(vararg args: Any): String =
     String.format(getString(), args)
+
+@Px
+fun @receiver:Dimension(unit = Dimension.SP) Float.sp2px(): Int = SizeUtils.sp2px(this)
+
+@Px
+fun @receiver:Dimension(unit = Dimension.DP) Float.dp2px(): Int = SizeUtils.dp2px(this)
+
+@Px
+fun Float.pt2px(): Int = AdaptScreenUtils.pt2Px(this)
+
+@Dimension(unit = Dimension.SP)
+fun @receiver:Dimension Int.px2sp(): Int = SizeUtils.px2sp(this.toFloat())
+
+@Dimension(unit = Dimension.DP)
+fun @receiver:Dimension Int.px2dp(): Int = SizeUtils.px2dp(this.toFloat())
+
+fun @receiver:Dimension Int.px2pt(): Int = AdaptScreenUtils.px2Pt(this.toFloat())
+
+fun Bitmap.toDrawable(): Drawable = ImageUtils.bitmap2Drawable(this)
+
+fun Drawable.toBitmap(): Bitmap = ImageUtils.drawable2Bitmap(this)
 
 //---------------------Fragment-------------------------------//
 
@@ -209,20 +215,3 @@ inline fun <reified T : BaseViewModel> ComponentActivity.getViewModel(): Lazy<T>
             lifecycle.addObserver(this)
         }
     }
-
-//---------------------ViewModel-------------------------------//
-
-fun BaseViewModel.checkStatusAndEntry(response: HttpResponse<*>) =
-    response.status && response.entry != null
-
-fun BaseViewModel.checkStatusAndEntryWithToast(response: HttpResponse<*>): Boolean {
-    return checkStatusAndEntry(response).also {
-        if (!it) {
-            response.message?.showToast()
-        }
-    }
-}
-
-fun BaseViewModel.toastThrowable(throwable: Throwable) {
-    throwable.toString().showToast()
-}

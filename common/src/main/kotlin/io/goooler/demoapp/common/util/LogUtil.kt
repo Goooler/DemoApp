@@ -1,20 +1,12 @@
-@file:Suppress("unused")
-
 package io.goooler.demoapp.common.util
 
 import android.util.Log
 import io.goooler.demoapp.common.BuildConfig
 
-/**
- * Log 工具的简单封装，可自由控制全局 log 输出
- */
-
 object LogUtil {
 
     private const val DEFAULT_LOG_TAG = "defaultLogTag"
 
-    @JvmStatic
-    @JvmOverloads
     fun d(debugInfo: Any?, tag: String = DEFAULT_LOG_TAG) {
         out(tag, debugInfo.toString())
     }

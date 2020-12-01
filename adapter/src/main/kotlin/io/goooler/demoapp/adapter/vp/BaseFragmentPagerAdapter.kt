@@ -9,7 +9,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.PagerAdapter
 
 /**
- * 继承自 FragmentStatePagerAdapter，会销毁 fragment
+ * 继承自 [FragmentStatePagerAdapter]，会销毁 fragment
  */
 abstract class BaseFragmentPagerAdapter(
     fragmentManager: FragmentManager,

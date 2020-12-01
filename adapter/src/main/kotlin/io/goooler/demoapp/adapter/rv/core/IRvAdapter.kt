@@ -7,11 +7,12 @@ import androidx.annotation.LayoutRes
 import androidx.annotation.MainThread
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.recyclerview.widget.RecyclerView
 
 /**
  * Created on 2020/10/21.
  *
- * Please let your RecyclerView.Adapter implements IExtAdapter.
+ * Please let your [RecyclerView.Adapter] implements IExtAdapter.
  *
  * @author feling
  * @version 1.0.0

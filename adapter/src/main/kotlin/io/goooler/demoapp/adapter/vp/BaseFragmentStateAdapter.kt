@@ -7,7 +7,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
 /**
- * viewPager2 的 FragmentStateAdapter 默认就可在 Fragment#onResume 中实现懒加载
+ * ViewPager2 的 [FragmentStateAdapter] 默认就可在 Fragment#onResume 中实现懒加载
  */
 abstract class BaseFragmentStateAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
     FragmentStateAdapter(fragmentManager, lifecycle) {

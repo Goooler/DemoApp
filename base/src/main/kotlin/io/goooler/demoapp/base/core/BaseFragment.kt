@@ -6,9 +6,6 @@ import android.os.Build
 import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 
-/**
- * Fragment 基类，封装通用方法
- */
 abstract class BaseFragment : Fragment() {
 
     protected open fun onBackPressed(): Boolean {
