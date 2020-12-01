@@ -152,6 +152,7 @@ fun Project.setupCommon(module: Module? = null): BaseExtension {
                 *Libs.dataStore,
                 *Libs.rx,
                 *Libs.moshi,
+                Libs.collection,
                 Libs.utils,
                 Libs.permissionX
             )
