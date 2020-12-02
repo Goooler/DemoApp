@@ -14,13 +14,12 @@ import io.goooler.demoapp.adapter.rv.core.RvAdapterHelper
 /**
  * Created on 2020/10/22.
  *
- * DiffListAdapter. This adapter used {@link DiffUtil}.
+ * DiffListAdapter. This adapter used [DiffUtil].
  *
  * @author feling
  * @version 1.0.0
  * @since 1.0.0
  * @see ListAdapter
- * @see DiffUtil
  * @see RvAdapterHelper
  * @see IRvAdapter
  */

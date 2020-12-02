@@ -119,9 +119,7 @@ internal class RvAdapterHelper<M : IVhModelType>(private val adapter: IRvAdapter
     }
 
     /**
-     * Fix span size when recyclerView's layoutManager is GridLayoutManager.
-     *
-     * @see GridLayoutManager
+     * Fix span size when recyclerView's layoutManager is [GridLayoutManager].
      */
     private fun fixSpanSize(recyclerView: RecyclerView) {
         (recyclerView.layoutManager as? GridLayoutManager)?.let {
@@ -137,9 +135,7 @@ internal class RvAdapterHelper<M : IVhModelType>(private val adapter: IRvAdapter
     }
 
     /**
-     * Set full span when recyclerView's layoutManager is StaggeredGridLayoutManager.
-     *
-     * @see StaggeredGridLayoutManager
+     * Set full span when recyclerView's layoutManager is [StaggeredGridLayoutManager].
      */
     private fun setFullSpan(holder: RecyclerView.ViewHolder, item: M) {
         (holder.itemView.layoutParams as? StaggeredGridLayoutManager.LayoutParams)?.let {
