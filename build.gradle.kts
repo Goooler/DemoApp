@@ -1,5 +1,9 @@
+import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
+
+apply(plugin = Plugins.gradleVersionsPlugin)
+
 buildscript {
-    apply("repositories.gradle.kts")
+    apply(extraScriptPath)
 
     repositories {
         google()
@@ -11,11 +15,18 @@ buildscript {
         classpath(Libs.hiltPlugin)
         classpath(Libs.arouterPlugin)
         classpath(Libs.protobufPlugin)
+        classpath(Libs.gradleVersionsPlugin)
     }
 }
 
 allprojects {
-    apply("${rootDir.path}/repositories.gradle.kts")
+    apply("${rootDir.path}/$extraScriptPath")
+}
+
+tasks.named("dependencyUpdates", DependencyUpdatesTask::class).configure {
+    rejectVersionIf {
+        candidate.version.isNotStable()
+    }
 }
 
 task("clean", Delete::class) {

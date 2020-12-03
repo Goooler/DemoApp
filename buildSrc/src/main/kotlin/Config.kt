@@ -36,6 +36,7 @@ private const val appVersionName = "1.0"
 private const val appVersionCode = 20201109
 const val appPackageName = "io.goooler.demoapp"
 const val appName = "Demo"
+const val extraScriptPath = "buildSrc/extra.gradle.kts"
 
 val localLibs = mapOf(
     "dir" to "libs",
@@ -67,6 +68,13 @@ fun getModuleName(module: Module) = ":${module.tag}"
 fun getResourcePrefix(module: Module) = "${module.tag}_"
 
 fun getVersionNameSuffix(module: Module) = "_${module.tag}"
+
+fun String.isNotStable(): Boolean {
+    val stableKeyword =
+        listOf("RELEASE", "FINAL", "GA").any { toUpperCase(Locale.ROOT).contains(it) }
+    val isStable = stableKeyword || "^[0-9,.v-]+(-r)?$".toRegex().matches(this)
+    return isStable.not()
+}
 
 fun Project.setupBase(): BaseExtension {
     return extensions.getByName<BaseExtension>("android").apply {
