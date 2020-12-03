@@ -11,7 +11,6 @@ import io.goooler.demoapp.common.base.BaseThemeViewModel
 import io.goooler.demoapp.common.network.RetrofitHelper
 import io.goooler.demoapp.common.type.CommonConstants
 import io.goooler.demoapp.common.util.RoomHelper
-import io.goooler.demoapp.main.model.MainCommonRepoVhModel
 import io.goooler.demoapp.main.model.MainCommonVhModel
 import io.goooler.demoapp.main.repository.MainCommonRepository
 import kotlinx.coroutines.flow.Flow
@@ -28,7 +27,7 @@ class MainPagingViewModel(application: Application) : BaseThemeViewModel(applica
     private inner class DataSource : BasePagingSource<MainCommonVhModel>() {
         override suspend fun fetchListData(page: Int): List<MainCommonVhModel> {
             return repository.getRepoListWithCr("google", page)
-                .map { MainCommonRepoVhModel(it.owner?.avatarUrl, it.name) }
+                .map { MainCommonVhModel.Repo(it.owner?.avatarUrl, it.name) }
         }
     }
 }

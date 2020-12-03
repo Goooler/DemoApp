@@ -22,7 +22,9 @@ interface ISpanSize {
     val spanSize: Int get() = SPAN_SIZE_SINGLE
 
     companion object {
-        // full one line.
+        /**
+         * fill one line.
+         */
         const val SPAN_SIZE_FULL = -1
         const val SPAN_SIZE_SINGLE = 1
         const val SPAN_SIZE_DOUBLE = 2

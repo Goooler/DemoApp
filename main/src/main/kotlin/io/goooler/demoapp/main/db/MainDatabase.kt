@@ -5,8 +5,11 @@ import androidx.room.RoomDatabase
 import io.goooler.demoapp.common.util.RoomHelper
 import io.goooler.demoapp.main.bean.MainRepoListBean
 
-@Database(entities = [MainRepoListBean::class], version = RoomHelper.DB_VERSION)
+@Database(
+    entities = [MainRepoListBean::class],
+    version = RoomHelper.DB_VERSION
+)
 abstract class MainDatabase : RoomDatabase() {
 
-    abstract val mainDao: MainDao
+    abstract val mainCommonDao: MainCommonDao
 }

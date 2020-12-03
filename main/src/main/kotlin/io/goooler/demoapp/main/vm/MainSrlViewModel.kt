@@ -7,7 +7,6 @@ import io.goooler.demoapp.common.base.BaseRxViewModel
 import io.goooler.demoapp.common.network.RetrofitHelper
 import io.goooler.demoapp.common.type.CommonConstants
 import io.goooler.demoapp.common.util.RoomHelper
-import io.goooler.demoapp.main.model.MainCommonRepoVhModel
 import io.goooler.demoapp.main.model.MainCommonVhModel
 import io.goooler.demoapp.main.repository.MainCommonRepository
 
@@ -39,7 +38,7 @@ class MainSrlViewModel(application: Application) : BaseRxViewModel(application) 
         repository.getRepoListWithRx("google", page)
             .doFinally(::finishRefreshAndLoadMore)
             .map {
-                it.map { bean -> MainCommonRepoVhModel(bean.owner?.avatarUrl, bean.name) }
+                it.map { bean -> MainCommonVhModel.Repo(bean.owner?.avatarUrl, bean.name) }
             }
             .doOnNext {
                 _listData.addAll(it)

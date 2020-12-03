@@ -14,7 +14,9 @@ import io.reactivex.rxjava3.core.Observable
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-class MainCommonRepository(private val api: MainCommonApi, private val db: MainDatabase) {
+class MainCommonRepository(private val api: MainCommonApi, db: MainDatabase) {
+
+    private val dao = db.mainCommonDao
 
     suspend fun getRepoListWithCr(
         user: String,
@@ -40,10 +42,10 @@ class MainCommonRepository(private val api: MainCommonApi, private val db: MainD
         return api.getRepoListRx(user, params)
     }
 
-    suspend fun getRepoListFromDb(): List<MainRepoListBean> = db.mainDao.getRepoList()
+    suspend fun getRepoListFromDb(): List<MainRepoListBean> = dao.getRepoList()
 
     suspend fun putRepoListIntoDb(list: List<MainRepoListBean>) {
-        db.mainDao.insertRepoList(*list.toTypedArray())
+        dao.insertRepoList(*list.toTypedArray())
     }
 
     suspend fun getRepoListFromDs(): Flow<List<MainRepoListBean>> {

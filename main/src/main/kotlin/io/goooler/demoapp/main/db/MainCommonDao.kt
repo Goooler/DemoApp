@@ -7,7 +7,7 @@ import androidx.room.Query
 import io.goooler.demoapp.main.bean.MainRepoListBean
 
 @Dao
-interface MainDao {
+interface MainCommonDao {
 
     @Query("SELECT * FROM main_repo_list")
     suspend fun getRepoList(): List<MainRepoListBean>
