@@ -19,4 +19,4 @@ jobs:
       - name: Clean
         run: ./gradlew clean & find buildSrc -type f -name "*.lock" -delete
       - name: Build
-        run: ./gradlew --parallel build
+        run: ./gradlew --parallel app:assembleOnlineRelease
