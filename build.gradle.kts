@@ -8,6 +8,7 @@ buildscript {
     repositories {
         google()
         maven(rootProject.extra.get("aliyunMaven").toString())
+        gradlePluginPortal()
     }
     dependencies {
         classpath(rootProject.extra.get("androidPlugin").toString())
