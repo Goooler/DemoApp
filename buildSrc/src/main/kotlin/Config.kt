@@ -107,8 +107,8 @@ fun Project.setupBase(): BaseExtension {
             )
         }
         lintOptions {
-            isAbortOnError = false
-            isCheckReleaseBuilds = false
+            isAbortOnError = true
+            isCheckReleaseBuilds = true
         }
     }
 }

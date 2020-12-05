@@ -2,6 +2,7 @@ package io.goooler.demoapp.base.core
 
 import androidx.fragment.app.DialogFragment
 
+@Suppress("MemberVisibilityCanBePrivate")
 abstract class BaseDialogFragment : DialogFragment() {
 
     var dismissListener: OnDismissListener? = null

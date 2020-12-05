@@ -7,8 +7,7 @@
 -printseeds seeds.txt
 -printusage unused.txt
 -printmapping mapping.txt
--keepattributes *Annotation*
--keepattributes SourceFile,LineNumberTable
+-keepattributes *Annotation*,SourceFile,LineNumberTable,Signature
 -renamesourcefileattribute SourceFile
 -keep class **.R$* {*;}
 -keepclasseswithmembernames class * {
@@ -66,7 +65,6 @@
 -keepclassmembers class com.lieyunwang.finance.activity.InfoNewDetailActivity.InJavaScriptLocalObj{
     public *;
 }
--keepattributes *JavascriptInterface*
 
 
 # Arouter
@@ -96,8 +94,6 @@
 
 
 # Gson
--keepattributes Signature
--keepattributes *Annotation*
 -dontwarn sun.misc.**
 -keep class com.google.gson.stream.** { *; }
 -keep class com.google.gson.examples.android.model.** { <fields>; }
