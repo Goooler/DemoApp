@@ -1,6 +1,5 @@
 package io.goooler.demoapp.main.vm
 
-import android.app.Application
 import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
@@ -15,7 +14,7 @@ import io.goooler.demoapp.main.model.MainCommonVhModel
 import io.goooler.demoapp.main.repository.MainCommonRepository
 import kotlinx.coroutines.flow.Flow
 
-class MainPagingViewModel(application: Application) : BaseThemeViewModel(application) {
+class MainPagingViewModel : BaseThemeViewModel() {
 
     private val repository = MainCommonRepository(RetrofitHelper.create(), RoomHelper.create())
 

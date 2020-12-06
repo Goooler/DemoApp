@@ -1,12 +1,11 @@
 package io.goooler.demoapp.common.base
 
-import android.app.Application
 import io.goooler.demoapp.base.core.BaseViewModel
 import io.goooler.demoapp.common.network.HttpResponse
 import io.goooler.demoapp.common.util.showToast
 
 @Suppress("MemberVisibilityCanBePrivate")
-abstract class BaseThemeViewModel(application: Application) : BaseViewModel(application), ITheme {
+abstract class BaseThemeViewModel : BaseViewModel(), ITheme {
 
     override fun showLoading() {
     }

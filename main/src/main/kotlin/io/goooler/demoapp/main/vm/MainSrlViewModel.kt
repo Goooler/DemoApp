@@ -1,6 +1,5 @@
 package io.goooler.demoapp.main.vm
 
-import android.app.Application
 import io.goooler.demoapp.base.util.MutableBooleanLiveData
 import io.goooler.demoapp.base.util.MutableListLiveData
 import io.goooler.demoapp.common.base.BaseRxViewModel
@@ -10,7 +9,7 @@ import io.goooler.demoapp.common.util.RoomHelper
 import io.goooler.demoapp.main.model.MainCommonVhModel
 import io.goooler.demoapp.main.repository.MainCommonRepository
 
-class MainSrlViewModel(application: Application) : BaseRxViewModel(application) {
+class MainSrlViewModel : BaseRxViewModel() {
 
     private val repository = MainCommonRepository(RetrofitHelper.create(), RoomHelper.create())
     private val _listData = mutableListOf<MainCommonVhModel>()

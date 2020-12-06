@@ -1,8 +1,6 @@
 package io.goooler.demoapp.base.core
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.DefaultLifecycleObserver
+import androidx.lifecycle.ViewModel
 
-abstract class BaseViewModel(application: Application) : AndroidViewModel(application),
-    DefaultLifecycleObserver
+abstract class BaseViewModel : ViewModel(), DefaultLifecycleObserver

@@ -1,6 +1,5 @@
 package io.goooler.demoapp.main.vm
 
-import android.app.Application
 import androidx.lifecycle.viewModelScope
 import io.goooler.demoapp.base.util.MutableStringLiveData
 import io.goooler.demoapp.base.util.defaultAsync
@@ -15,7 +14,7 @@ import io.reactivex.rxjava3.core.Observable
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 
-class MainHomeViewModel(application: Application) : BaseRxViewModel(application) {
+class MainHomeViewModel : BaseRxViewModel() {
 
     private val repository = MainCommonRepository(RetrofitHelper.create(), RoomHelper.create())
 

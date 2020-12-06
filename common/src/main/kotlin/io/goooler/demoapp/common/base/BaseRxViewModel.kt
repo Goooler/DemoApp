@@ -1,11 +1,10 @@
 package io.goooler.demoapp.common.base
 
-import android.app.Application
 import androidx.lifecycle.LifecycleOwner
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.disposables.Disposable
 
-abstract class BaseRxViewModel(application: Application) : BaseThemeViewModel(application) {
+abstract class BaseRxViewModel : BaseThemeViewModel() {
 
     private val compositeDisposable = CompositeDisposable()
 
