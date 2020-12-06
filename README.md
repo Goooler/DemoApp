@@ -13,7 +13,7 @@
 - [ ] [Collection](https://developer.android.com/jetpack/androidx/releases/collection)
 - [x] [Room](https://developer.android.com/jetpack/androidx/releases/room)
 - [x] [DataStore](https://developer.android.com/jetpack/androidx/releases/datastore)
-- [ ] [Hilt](https://developer.android.com/jetpack/androidx/releases/hilt)
+- [x] [Hilt](https://developer.android.com/jetpack/androidx/releases/hilt)
 - [ ] [WorkManager](https://developer.android.com/jetpack/androidx/releases/work)
 - [ ] [Compose](https://developer.android.com/jetpack/androidx/releases/compose)
 - [x] [ConstraintLayout](https://developer.android.com/jetpack/androidx/releases/constraintlayout)

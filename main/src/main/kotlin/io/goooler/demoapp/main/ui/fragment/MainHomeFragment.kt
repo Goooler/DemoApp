@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import dagger.hilt.android.AndroidEntryPoint
 import io.goooler.demoapp.base.util.unsafeLazy
 import io.goooler.demoapp.common.base.BaseThemeLazyFragment
 import io.goooler.demoapp.common.router.RouterManager
@@ -13,6 +14,7 @@ import io.goooler.demoapp.main.databinding.MainHomeFragmentBinding
 import io.goooler.demoapp.main.vm.MainHomeViewModel
 import java.util.concurrent.CancellationException
 
+@AndroidEntryPoint
 class MainHomeFragment private constructor() : BaseThemeLazyFragment() {
 
     private val binding by unsafeLazy {

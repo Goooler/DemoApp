@@ -1,11 +1,10 @@
 package io.goooler.demoapp.main.vm
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.viewModelScope
 import io.goooler.demoapp.base.util.MutableStringLiveData
 import io.goooler.demoapp.base.util.defaultAsync
 import io.goooler.demoapp.common.base.BaseRxViewModel
-import io.goooler.demoapp.common.network.RetrofitHelper
-import io.goooler.demoapp.common.util.RoomHelper
 import io.goooler.demoapp.common.util.showToast
 import io.goooler.demoapp.main.R
 import io.goooler.demoapp.main.bean.MainRepoListBean
@@ -14,9 +13,8 @@ import io.reactivex.rxjava3.core.Observable
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 
-class MainHomeViewModel : BaseRxViewModel() {
-
-    private val repository = MainCommonRepository(RetrofitHelper.create(), RoomHelper.create())
+class MainHomeViewModel @ViewModelInject constructor(private val repository: MainCommonRepository) :
+    BaseRxViewModel() {
 
     val title = MutableStringLiveData()
     val oneplusUrl = MutableStringLiveData()

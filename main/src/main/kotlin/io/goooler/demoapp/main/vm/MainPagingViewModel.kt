@@ -1,5 +1,6 @@
 package io.goooler.demoapp.main.vm
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
@@ -7,16 +8,13 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import io.goooler.demoapp.adapter.rv.paging.BasePagingSource
 import io.goooler.demoapp.common.base.BaseThemeViewModel
-import io.goooler.demoapp.common.network.RetrofitHelper
 import io.goooler.demoapp.common.type.CommonConstants
-import io.goooler.demoapp.common.util.RoomHelper
 import io.goooler.demoapp.main.model.MainCommonVhModel
 import io.goooler.demoapp.main.repository.MainCommonRepository
 import kotlinx.coroutines.flow.Flow
 
-class MainPagingViewModel : BaseThemeViewModel() {
-
-    private val repository = MainCommonRepository(RetrofitHelper.create(), RoomHelper.create())
+class MainPagingViewModel @ViewModelInject constructor(private val repository: MainCommonRepository) :
+    BaseThemeViewModel() {
 
     val listData: Flow<PagingData<MainCommonVhModel>> =
         Pager(PagingConfig(CommonConstants.DEFAULT_PAGE_SIZE)) {

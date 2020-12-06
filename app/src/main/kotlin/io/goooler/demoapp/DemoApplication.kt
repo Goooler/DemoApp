@@ -1,6 +1,7 @@
 package io.goooler.demoapp
 
+import dagger.hilt.android.HiltAndroidApp
 import io.goooler.demoapp.common.CommonApplication
 
-@Suppress("unused")
+@HiltAndroidApp
 class DemoApplication : CommonApplication()

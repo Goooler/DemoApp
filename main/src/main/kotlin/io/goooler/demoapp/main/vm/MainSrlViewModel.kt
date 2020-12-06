@@ -1,17 +1,16 @@
 package io.goooler.demoapp.main.vm
 
+import androidx.hilt.lifecycle.ViewModelInject
 import io.goooler.demoapp.base.util.MutableBooleanLiveData
 import io.goooler.demoapp.base.util.MutableListLiveData
 import io.goooler.demoapp.common.base.BaseRxViewModel
-import io.goooler.demoapp.common.network.RetrofitHelper
 import io.goooler.demoapp.common.type.CommonConstants
-import io.goooler.demoapp.common.util.RoomHelper
 import io.goooler.demoapp.main.model.MainCommonVhModel
 import io.goooler.demoapp.main.repository.MainCommonRepository
 
-class MainSrlViewModel : BaseRxViewModel() {
+class MainSrlViewModel @ViewModelInject constructor(private val repository: MainCommonRepository) :
+    BaseRxViewModel() {
 
-    private val repository = MainCommonRepository(RetrofitHelper.create(), RoomHelper.create())
     private val _listData = mutableListOf<MainCommonVhModel>()
     private var page = 1
 

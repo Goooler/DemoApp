@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
+import dagger.hilt.android.AndroidEntryPoint
 import io.goooler.demoapp.base.util.unsafeLazy
 import io.goooler.demoapp.common.base.BaseThemeLazyFragment
 import io.goooler.demoapp.common.util.getViewModel
@@ -14,6 +15,7 @@ import io.goooler.demoapp.main.databinding.MainSrlFragmentBinding
 import io.goooler.demoapp.main.ui.adapter.MainSrlRvAdapter
 import io.goooler.demoapp.main.vm.MainSrlViewModel
 
+@AndroidEntryPoint
 class MainSrlFragment private constructor() : BaseThemeLazyFragment() {
 
     private val binding by unsafeLazy {

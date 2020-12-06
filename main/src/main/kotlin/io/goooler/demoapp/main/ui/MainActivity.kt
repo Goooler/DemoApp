@@ -6,6 +6,7 @@ import android.os.Bundle
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.google.android.material.tabs.TabLayoutMediator
 import com.permissionx.guolindev.PermissionX
+import dagger.hilt.android.AndroidEntryPoint
 import io.goooler.demoapp.adapter.vp.CommonFragmentStateAdapter
 import io.goooler.demoapp.base.util.unsafeLazy
 import io.goooler.demoapp.common.base.BaseThemeActivity
@@ -15,6 +16,7 @@ import io.goooler.demoapp.main.ui.fragment.MainHomeFragment
 import io.goooler.demoapp.main.ui.fragment.MainPagingFragment
 import io.goooler.demoapp.main.ui.fragment.MainSrlFragment
 
+@AndroidEntryPoint
 @Route(path = RouterPath.MAIN)
 class MainActivity : BaseThemeActivity() {
 

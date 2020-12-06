@@ -13,8 +13,9 @@ import io.goooler.demoapp.main.db.MainDatabase
 import io.reactivex.rxjava3.core.Observable
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 
-class MainCommonRepository(private val api: MainCommonApi, db: MainDatabase) {
+class MainCommonRepository @Inject constructor(private val api: MainCommonApi, db: MainDatabase) {
 
     private val dao = db.mainCommonDao
 
