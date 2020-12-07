@@ -1,7 +1,9 @@
 import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
+import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
 
 plugins {
     id(Plugins.gradleVersionsPlugin) version gradleVersionsPluginVersion
+    id(Plugins.ktLintPlugin) version ktLintPluginVersion
 }
 
 buildscript {
@@ -10,7 +12,6 @@ buildscript {
     repositories {
         google()
         maven(rootProject.extra.get("aliyunMaven").toString())
-        gradlePluginPortal()
     }
     dependencies {
         classpath(rootProject.extra.get("androidPlugin").toString())
@@ -22,7 +23,23 @@ buildscript {
 }
 
 allprojects {
-    apply("${rootDir.path}/$extraScriptPath")
+    apply {
+        from("${rootDir.path}/$extraScriptPath")
+        plugin(Plugins.ktLintPlugin)
+    }
+    ktlint {
+        verbose.set(true)
+        android.set(true)
+        ignoreFailures.set(true)
+        reporters {
+            reporter(ReporterType.HTML)
+        }
+        filter {
+            exclude("**/generated/**")
+            exclude("**/tmp/**")
+            include("**/kotlin/**")
+        }
+    }
 }
 
 tasks.named("dependencyUpdates", DependencyUpdatesTask::class).configure {

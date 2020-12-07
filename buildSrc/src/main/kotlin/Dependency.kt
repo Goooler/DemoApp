@@ -56,6 +56,7 @@ private const val hiltVmVersion = "1.0.0-alpha02"
 private const val dataStoreVersion = "1.0.0-alpha02"
 private const val collectionVersion = "1.1.0"
 const val gradleVersionsPluginVersion = "0.36.0"
+const val ktLintPluginVersion = "9.4.1"
 
 object Plugins {
     const val kotlinAndroid = "kotlin-android"
@@ -66,6 +67,7 @@ object Plugins {
     const val arouter = "com.alibaba.arouter"
     const val protobuf = "com.google.protobuf"
     const val gradleVersionsPlugin = "com.github.ben-manes.versions"
+    const val ktLintPlugin = "org.jlleitschuh.gradle.ktlint"
 }
 
 object Libs {

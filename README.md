@@ -54,8 +54,8 @@
 
 ## 重要三方插件
 
-- [x] [GradleVersionsPlugin](https://github.com/ben-manes/gradle-versions-plugin)
-- [ ] [KtLint](https://github.com/pinterest/ktlint.git)
+- [x] [GradleVersionsPlugin](https://github.com/ben-manes/gradle-versions-plugin/releases)
+- [x] [KtLintGradle](https://github.com/JLLeitschuh/ktlint-gradle/releases)
 
 
 
