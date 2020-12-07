@@ -5,7 +5,12 @@ import android.net.Uri
 import android.net.http.SslError
 import android.util.AttributeSet
 import android.view.View
-import android.webkit.*
+import android.webkit.SslErrorHandler
+import android.webkit.URLUtil
+import android.webkit.WebChromeClient
+import android.webkit.WebSettings
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import androidx.collection.ArrayMap
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity

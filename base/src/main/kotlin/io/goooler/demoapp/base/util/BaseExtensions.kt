@@ -8,7 +8,12 @@ import android.graphics.Point
 import android.os.Build
 import android.os.Bundle
 import android.os.Looper
-import android.text.*
+import android.text.Editable
+import android.text.Html
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.TextWatcher
 import android.text.style.ClickableSpan
 import android.view.View
 import android.webkit.URLUtil
@@ -25,7 +30,12 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.commit
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.CoroutineStart
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.async
+import kotlinx.coroutines.withContext
 import java.io.File
 import java.math.BigDecimal
 
