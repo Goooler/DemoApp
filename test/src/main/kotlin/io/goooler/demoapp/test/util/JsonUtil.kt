@@ -14,6 +14,7 @@ internal object GsonUtil {
         return try {
             gson.fromJson(json, classOfT)
         } catch (e: Exception) {
+            e.printStackTrace()
             null
         }
     }
@@ -22,11 +23,19 @@ internal object GsonUtil {
         return try {
             gson.fromJson(json, typeOfT)
         } catch (e: Exception) {
+            e.printStackTrace()
             null
         }
     }
 
-    fun toJson(src: Any): String = gson.toJson(src)
+    fun toJson(src: Any): String? {
+        return try {
+            gson.toJson(src)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
+        }
+    }
 }
 
 internal object FastJsonUtil {
@@ -34,6 +43,7 @@ internal object FastJsonUtil {
         return try {
             JSONObject.parseObject(json, classOfT)
         } catch (e: Exception) {
+            e.printStackTrace()
             null
         }
     }
@@ -42,6 +52,7 @@ internal object FastJsonUtil {
         return try {
             JSONObject.parseObject(json, typeOfT)
         } catch (e: Exception) {
+            e.printStackTrace()
             null
         }
     }
@@ -50,11 +61,16 @@ internal object FastJsonUtil {
         return try {
             JSONObject.parseObject(json, typeRef)
         } catch (e: Exception) {
+            e.printStackTrace()
             null
         }
     }
 
-    fun toJson(src: Any): String {
-        return JSONObject.toJSONString(src)
+    fun toJson(src: Any): String? {
+        return try {
+            JSONObject.toJSONString(src)
+        } catch (e: Exception) {
+            null
+        }
     }
 }
