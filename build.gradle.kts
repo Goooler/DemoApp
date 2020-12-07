@@ -1,6 +1,8 @@
 import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 
-apply(plugin = Plugins.gradleVersionsPlugin)
+plugins {
+    id(Plugins.gradleVersionsPlugin) version gradleVersionsPluginVersion
+}
 
 buildscript {
     apply(extraScriptPath)
@@ -16,7 +18,6 @@ buildscript {
         classpath(Libs.hiltPlugin)
         classpath(Libs.arouterPlugin)
         classpath(Libs.protobufPlugin)
-        classpath(Libs.gradleVersionsPlugin)
     }
 }
 

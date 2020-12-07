@@ -55,7 +55,7 @@ private const val hiltVersion = "2.30.1-alpha"
 private const val hiltVmVersion = "1.0.0-alpha02"
 private const val dataStoreVersion = "1.0.0-alpha02"
 private const val collectionVersion = "1.1.0"
-private const val gradleVersionsPluginVersion = "0.36.0"
+const val gradleVersionsPluginVersion = "0.36.0"
 
 object Plugins {
     const val kotlinAndroid = "kotlin-android"
@@ -116,8 +116,6 @@ object Libs {
     const val protobufPlugin = "com.google.protobuf:protobuf-gradle-plugin:$protobufVersion"
     const val arouterPlugin = "com.alibaba:arouter-register:$arouterRegisterVersion"
     const val hiltPlugin = "com.google.dagger:hilt-android-gradle-plugin:$hiltVersion"
-    const val gradleVersionsPlugin =
-        "com.github.ben-manes:gradle-versions-plugin:$gradleVersionsPluginVersion"
 
     const val glideKapt = "com.github.bumptech.glide:compiler:$glideVersion"
     const val objectBoxKapt = "io.objectbox:objectbox-processor:$objectBoxVersion"
