@@ -31,6 +31,7 @@ allprojects {
         verbose.set(true)
         android.set(true)
         ignoreFailures.set(true)
+        outputColorName.set("YELLOW")
         reporters {
             reporter(ReporterType.HTML)
         }
@@ -42,25 +43,26 @@ allprojects {
     }
 }
 
-tasks.named("dependencyUpdates", DependencyUpdatesTask::class).configure {
-    rejectVersionIf {
-        candidate.version.isStableVersion().not()
+tasks {
+    named(GradleTask.DependencyUpdate.task, DependencyUpdatesTask::class) {
+        rejectVersionIf {
+            candidate.version.isStableVersion().not()
+        }
     }
-}
-
-task("clean", Delete::class) {
-    rootProject.allprojects {
-        delete(buildDir)
-        delete(
-            fileTree(
-                mapOf(
-                    "dir" to projectDir,
-                    "include" to arrayOf("*.log", "*.txt")
-                )
-            ),
-            "${projectDir.path}/.classpath",
-            "${projectDir.path}/.project",
-            "${projectDir.path}/.settings"
-        )
+    create(GradleTask.Clean.task, Delete::class.java) {
+        rootProject.allprojects {
+            delete(buildDir)
+            delete(
+                fileTree(
+                    mapOf(
+                        "dir" to projectDir,
+                        "include" to arrayOf("*.log", "*.txt")
+                    )
+                ),
+                "${projectDir.path}/.classpath",
+                "${projectDir.path}/.project",
+                "${projectDir.path}/.settings"
+            )
+        }
     }
 }

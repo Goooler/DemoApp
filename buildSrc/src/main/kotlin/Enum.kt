@@ -1,4 +1,4 @@
-enum class Module(val tag: String, val runAlone: Boolean = false) {
+enum class Module(val module: String, val runAlone: Boolean = false) {
     //---------------------base-------------------------------//
     Base("base"),
     Common("common"),
@@ -7,14 +7,13 @@ enum class Module(val tag: String, val runAlone: Boolean = false) {
     Login("login"),
     Main("main"),
     Web("web"),
-    DB("db"),
 
     //---------------------func-------------------------------//
     Adapter("adapter"),
     Widget("widget")
 }
 
-enum class Flavor(val tag: String) {
+enum class Flavor(val flavor: String) {
     Daily("daily"),
     Online("online")
 }
@@ -24,4 +23,9 @@ enum class BuildConfigField(val tag: String) {
     VersionName("VERSION_NAME"),
     CdnPrefix("CDN_PREFIX"),
     ApiHost("API_HOST")
+}
+
+enum class GradleTask(val task: String) {
+    Clean("clean"),
+    DependencyUpdate("dependencyUpdates")
 }

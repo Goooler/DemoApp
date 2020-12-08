@@ -29,8 +29,8 @@ private val ndkLibs = setOf(
 
 private const val cdnPrefix = "https://raw.githubusercontent.com/"
 private val apiHosts = mapOf(
-    Flavor.Daily.tag to "https://api.github.com/",
-    Flavor.Online.tag to "https://api.github.com/"
+    Flavor.Daily.flavor to "https://api.github.com/",
+    Flavor.Online.flavor to "https://api.github.com/"
 )
 
 // app
@@ -65,11 +65,11 @@ fun DependencyHandler.androidTestImplementation(vararg names: Any): Array<Depend
         add("androidTestImplementation", it)
     }.toTypedArray()
 
-fun getModuleName(module: Module) = ":${module.tag}"
+fun getModuleName(module: Module) = ":${module.module}"
 
-fun getResourcePrefix(module: Module) = "${module.tag}_"
+fun getResourcePrefix(module: Module) = "${module.module}_"
 
-fun getVersionNameSuffix(module: Module) = "_${module.tag}"
+fun getVersionNameSuffix(module: Module) = "_${module.module}"
 
 fun String.isStableVersion(): Boolean {
     val stableKeyword =
@@ -122,8 +122,8 @@ fun Project.setupCommon(module: Module? = null): BaseExtension {
         }
         flavorDimensions("channel")
         productFlavors {
-            create(Flavor.Daily.tag)
-            create(Flavor.Online.tag)
+            create(Flavor.Daily.flavor)
+            create(Flavor.Online.flavor)
             if (module == Module.Common) {
                 all {
                     putBuildConfigIntField(BuildConfigField.VersionCode.tag, appVersionCode)
