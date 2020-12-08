@@ -2,7 +2,7 @@ plugins {
     id(Plugins.androidApplication)
 }
 
-setupApp("${appPackageName}.test", "test").run {
+setupApp("$appPackageName.test", "test").run {
     defaultConfig {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }

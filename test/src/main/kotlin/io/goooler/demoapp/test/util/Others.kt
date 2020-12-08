@@ -5,4 +5,3 @@ fun <T> unionIterable(one: Iterable<T>, two: Iterable<T>): Iterable<T> = one uni
 fun <T> intersectIterable(one: Iterable<T>, two: Iterable<T>): Iterable<T> = one intersect two
 
 fun <T> subtractIterable(one: Iterable<T>, two: Iterable<T>): Iterable<T> = one subtract two
-

@@ -28,13 +28,15 @@ open class CommonApplication : BaseApplication() {
     private fun initSmartRefresh() {
         SmartRefreshLayout.setDefaultRefreshHeaderCreator { context, refreshLayout ->
             refreshLayout.setPrimaryColorsId(
-                android.R.color.transparent, android.R.color.darker_gray
+                android.R.color.transparent,
+                android.R.color.darker_gray
             )
             ClassicsHeader(context)
         }
         SmartRefreshLayout.setDefaultRefreshFooterCreator { context, refreshLayout ->
             refreshLayout.setPrimaryColorsId(
-                android.R.color.transparent, android.R.color.darker_gray
+                android.R.color.transparent,
+                android.R.color.darker_gray
             )
             ClassicsFooter(context)
         }

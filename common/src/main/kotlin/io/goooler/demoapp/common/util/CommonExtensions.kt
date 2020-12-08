@@ -17,10 +17,10 @@ import io.goooler.demoapp.common.type.SpKeys
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
-import kotlinx.coroutines.flow.Flow
 import java.math.BigDecimal
 import java.util.*
 import kotlin.math.absoluteValue
+import kotlinx.coroutines.flow.Flow
 
 typealias DimensionUtil = SizeUtils
 typealias SpHelper = SPUtils
@@ -60,7 +60,7 @@ fun SmartRefreshLayout.disableRefreshAndLoadMore() {
     setEnableLoadMore(false)
 }
 
-//---------------------Convert-------------------------------//
+// ---------------------Convert-------------------------------//
 
 /**
  * 拼上图片前缀
@@ -145,7 +145,7 @@ fun Number.formatMoney(isYuan: Boolean = false, trans2W: Boolean = false, scale:
     }
 }
 
-//---------------------Rx-------------------------------//
+// ---------------------Rx-------------------------------//
 
 fun <T> Single<T>.observeOnMainThread(): Single<T> {
     return observeOn(AndroidSchedulers.mainThread())
@@ -155,7 +155,7 @@ fun <T> Observable<T>.observeOnMainThread(): Observable<T> {
     return observeOn(AndroidSchedulers.mainThread())
 }
 
-//---------------------Res-------------------------------//
+// ---------------------Res-------------------------------//
 
 fun @receiver:DrawableRes Int.getDrawable(): Drawable? = ResourceUtils.getDrawable(this)
 
@@ -188,7 +188,7 @@ fun Bitmap.toDrawable(): Drawable = ImageUtils.bitmap2Drawable(this)
 
 fun Drawable.toBitmap(): Bitmap = ImageUtils.drawable2Bitmap(this)
 
-//---------------------Fragment-------------------------------//
+// ---------------------Fragment-------------------------------//
 
 @MainThread
 inline fun <reified T : BaseViewModel> Fragment.getViewModel(): Lazy<T> =
@@ -206,7 +206,7 @@ inline fun <reified T : BaseViewModel> Fragment.getViewModelOfActivity(): Lazy<T
         }
     }
 
-//---------------------Activity-------------------------------//
+// ---------------------Activity-------------------------------//
 
 @MainThread
 inline fun <reified T : BaseViewModel> ComponentActivity.getViewModel(): Lazy<T> =

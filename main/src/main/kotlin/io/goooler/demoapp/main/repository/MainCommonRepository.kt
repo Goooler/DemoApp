@@ -11,9 +11,9 @@ import io.goooler.demoapp.main.api.MainCommonApi
 import io.goooler.demoapp.main.bean.MainRepoListBean
 import io.goooler.demoapp.main.db.MainDatabase
 import io.reactivex.rxjava3.core.Observable
+import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import javax.inject.Inject
 
 class MainCommonRepository @Inject constructor(private val api: MainCommonApi, db: MainDatabase) {
 

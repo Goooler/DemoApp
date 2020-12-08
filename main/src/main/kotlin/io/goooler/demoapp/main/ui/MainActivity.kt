@@ -31,7 +31,9 @@ class MainActivity : BaseThemeActivity() {
     }
 
     private val titles = listOf(
-        "首页", "smartRefresh", "paging"
+        "首页",
+        "smartRefresh",
+        "paging"
     )
 
     private val fragments = listOf(

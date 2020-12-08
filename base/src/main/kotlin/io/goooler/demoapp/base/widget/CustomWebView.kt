@@ -18,7 +18,8 @@ import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 
 @Suppress("SetJavaScriptEnabled", "JavascriptInterface")
-open class CustomWebView(context: Context, attrs: AttributeSet? = null) : WebView(context, attrs),
+open class CustomWebView(context: Context, attrs: AttributeSet? = null) :
+    WebView(context, attrs),
     DefaultLifecycleObserver {
 
     var onEventListener: OnEventListener? = null
@@ -113,7 +114,8 @@ open class CustomWebView(context: Context, attrs: AttributeSet? = null) : WebVie
 
     private fun attachToLifecycle() {
         fun findAllSupportFragmentsWithViews(
-            topLevelFragments: Collection<Fragment>, result: MutableMap<View, Fragment>
+            topLevelFragments: Collection<Fragment>,
+            result: MutableMap<View, Fragment>
         ) {
             topLevelFragments.forEach {
                 it.view?.let { v ->
@@ -126,7 +128,8 @@ open class CustomWebView(context: Context, attrs: AttributeSet? = null) : WebVie
         fun findSupportFragment(target: View, activity: FragmentActivity): Fragment? {
             val tempViewToSupportFragment = ArrayMap<View, Fragment>()
             findAllSupportFragmentsWithViews(
-                activity.supportFragmentManager.fragments, tempViewToSupportFragment
+                activity.supportFragmentManager.fragments,
+                tempViewToSupportFragment
             )
             var result: Fragment? = null
             val activityRoot = activity.findViewById<View>(android.R.id.content)

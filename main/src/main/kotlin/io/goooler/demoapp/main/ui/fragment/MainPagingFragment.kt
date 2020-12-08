@@ -62,8 +62,11 @@ class MainPagingFragment private constructor() : BaseThemeLazyFragment() {
         return binding.root
     }
 
-    private val listener = object : View.OnClickListener, BaseRvPagingAdapter.OnLoadStatusListener,
-        OnRefreshListener, MainPagingRvAdapter.OnEventListener {
+    private val listener = object :
+        View.OnClickListener,
+        BaseRvPagingAdapter.OnLoadStatusListener,
+        OnRefreshListener,
+        MainPagingRvAdapter.OnEventListener {
         override fun onRefresh(refreshLayout: RefreshLayout) {
             rvAdapter.refresh()
         }

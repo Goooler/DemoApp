@@ -20,7 +20,7 @@ import androidx.annotation.Px
 import androidx.databinding.BindingAdapter
 import java.io.File
 
-//------------------------View --------------------------//
+// ------------------------View --------------------------//
 
 @BindingAdapter("binding_isGone")
 fun View.bindingIsGone(isGone: Boolean) {
@@ -104,7 +104,7 @@ fun View.bindingMarginEnd(@Px marginRight: Float) {
     }
 }
 
-//------------------------View Bg Shape---------------------//
+// ------------------------View Bg Shape---------------------//
 
 @BindingAdapter(
     "binding_bg_startColor",
@@ -276,7 +276,7 @@ fun View.bindingBgShapeOval(@ColorInt solidOvalColor: Int) {
     setBgShapeGradual(shapeType = GradientDrawable.OVAL, solidColor = solidOvalColor)
 }
 
-//------------------------ImageView--------------------------//
+// ------------------------ImageView--------------------------//
 
 @BindingAdapter("binding_src_file")
 fun ImageView.bindingFileToImage(file: File) {
@@ -298,7 +298,7 @@ fun ImageView.bindingImageDrawable(drawable: Drawable) {
     setImageDrawable(drawable)
 }
 
-//------------------------TextView--------------------------//
+// ------------------------TextView--------------------------//
 
 @BindingAdapter("binding_font_type")
 fun TextView.bindingImpactTypeface(path: String) {
@@ -321,7 +321,7 @@ fun TextView.bindingPaintFlagThru(flag: Boolean) {
     }
 }
 
-//---------------------View-------------------------------//
+// ---------------------View-------------------------------//
 
 /**
  * 设置 view 的背景，支持圆形和矩形，渐变色和描边圆角等
@@ -393,10 +393,14 @@ private fun View.setBgShapeCorners(
         shape = GradientDrawable.RECTANGLE
         setColor(solidColor)
         cornerRadii = floatArrayOf(
-            topLeft, topLeft,
-            topRight, topRight,
-            bottomRight, bottomRight,
-            bottomLeft, bottomLeft
+            topLeft,
+            topLeft,
+            topRight,
+            topRight,
+            bottomRight,
+            bottomRight,
+            bottomLeft,
+            bottomLeft
         )
     }
 }

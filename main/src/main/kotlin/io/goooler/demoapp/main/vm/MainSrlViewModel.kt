@@ -45,9 +45,12 @@ class MainSrlViewModel @ViewModelInject constructor(private val repository: Main
                     isNoMore.postValue(true)
                 }
             }
-            .subscribe({
-                listData.postValue(_listData)
-            }, ::toastThrowable)
+            .subscribe(
+                {
+                    listData.postValue(_listData)
+                },
+                ::toastThrowable
+            )
             .autoDispose()
     }
 

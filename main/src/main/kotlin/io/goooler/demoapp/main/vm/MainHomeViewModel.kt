@@ -130,13 +130,17 @@ class MainHomeViewModel @ViewModelInject constructor(private val repository: Mai
                     ${t4.firstOrNull()?.owner?.avatarUrl}
                     ${t5.firstOrNull()?.owner?.avatarUrl}
                 """.trimIndent()
-            })
-            .subscribe({
-                title.postValue(it)
-            }, {
-                title.postValue(it.message)
-                R.string.request_failed.showToast()
-            })
+            }
+        )
+            .subscribe(
+                {
+                    title.postValue(it)
+                },
+                {
+                    title.postValue(it.message)
+                    R.string.request_failed.showToast()
+                }
+            )
             .autoDispose()
     }
 

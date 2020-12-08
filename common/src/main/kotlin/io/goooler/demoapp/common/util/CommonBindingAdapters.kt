@@ -9,7 +9,7 @@ import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 
-//------------------------SmartRefreshLayout--------------------------//
+// ------------------------SmartRefreshLayout--------------------------//
 
 @BindingAdapter("binding_srl_refreshFinish")
 fun SmartRefreshLayout.bindingFinishRefresh(isFinish: Boolean) {

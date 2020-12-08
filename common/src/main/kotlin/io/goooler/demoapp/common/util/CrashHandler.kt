@@ -13,7 +13,7 @@ object CrashHandler : Thread.UncaughtExceptionHandler {
 
     fun init() {
         defaultHandler = Thread.getDefaultUncaughtExceptionHandler()
-        //将当前应用异常处理器改为默认的
+        // 将当前应用异常处理器改为默认的
         Thread.setDefaultUncaughtExceptionHandler(this)
     }
 

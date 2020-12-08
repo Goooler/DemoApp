@@ -17,8 +17,10 @@ import androidx.recyclerview.widget.RecyclerView
  * @see RvAdapterHelper
  * @see IRvAdapter
  */
-abstract class BaseRvAdapter<M : IVhModelType> : RecyclerView.Adapter<BindingViewHolder>(),
-    IRvAdapter<M>, IRvAdapterMutable<M> {
+abstract class BaseRvAdapter<M : IVhModelType> :
+    RecyclerView.Adapter<BindingViewHolder>(),
+    IRvAdapter<M>,
+    IRvAdapterMutable<M> {
 
     private val helper by lazy(LazyThreadSafetyMode.NONE) { RvAdapterHelper(this) }
 

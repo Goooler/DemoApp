@@ -21,7 +21,9 @@ class AudioPlayService : BaseService() {
         audioManager = (getSystemService(Context.AUDIO_SERVICE) as? AudioManager)?.also {
             // 创建时监听音频焦点
             it.requestAudioFocus(
-                audioFocusChangeListener, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN
+                audioFocusChangeListener,
+                AudioManager.STREAM_MUSIC,
+                AudioManager.AUDIOFOCUS_GAIN
             )
         }
     }

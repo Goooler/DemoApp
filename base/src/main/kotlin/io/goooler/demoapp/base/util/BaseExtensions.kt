@@ -30,16 +30,16 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.commit
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import java.io.File
+import java.math.BigDecimal
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
-import java.io.File
-import java.math.BigDecimal
 
-//---------------------Types-------------------------------//
+// ---------------------Types-------------------------------//
 
 typealias MutableBooleanLiveData = MutableLiveData<Boolean>
 
@@ -70,7 +70,7 @@ typealias FloatList = List<Float>
 
 typealias DoubleList = List<Double>
 
-//---------------------Any-------------------------------//
+// ---------------------Any-------------------------------//
 
 val currentTimeMillis: Long get() = System.currentTimeMillis()
 
@@ -82,7 +82,7 @@ fun <T> unsafeLazy(initializer: () -> T): Lazy<T> = lazy(LazyThreadSafetyMode.NO
 
 fun <T> MutableLiveData<T>.asLiveData(): LiveData<T> = this
 
-//---------------------CharSequence-------------------------------//
+// ---------------------CharSequence-------------------------------//
 
 fun String.fromHtml(): Spanned {
     return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
@@ -194,7 +194,7 @@ fun String.hidePhone(): String {
     return replace(Regex("(\\d{3})\\d{4}(\\d{4})"), "$1****$2")
 }
 
-//---------------------Calculate-------------------------------//
+// ---------------------Calculate-------------------------------//
 
 infix fun Double.plus(that: Double): Double {
     return (BigDecimal(this.toString()) + BigDecimal(that.toString())).toDouble()
@@ -229,7 +229,7 @@ fun Boolean?.orTrue(): Boolean = this ?: true
 
 fun Boolean?.orFalse(): Boolean = this ?: false
 
-//---------------------Collections-------------------------------//
+// ---------------------Collections-------------------------------//
 
 inline fun <E> MutableCollection<E>.removeIfMatch(predicate: (e: E) -> Boolean): Boolean {
     var removed = false
@@ -280,7 +280,7 @@ fun <T> List<T>.thirdOrNull(): T? {
 fun paramMapOf(vararg pairs: Pair<String, Any>): HashMap<String, Any> =
     HashMap<String, Any>(pairs.size).apply { putAll(pairs) }
 
-//---------------------Coroutine-------------------------------//
+// ---------------------Coroutine-------------------------------//
 
 fun <T> CoroutineScope.defaultAsync(
     start: CoroutineStart = CoroutineStart.DEFAULT,
@@ -293,27 +293,30 @@ suspend fun <T> withIoContext(block: suspend CoroutineScope.() -> T) =
 suspend fun <T> withDefaultContext(block: suspend CoroutineScope.() -> T) =
     withContext(Dispatchers.Default, block)
 
-//---------------------File-------------------------------//
+// ---------------------File-------------------------------//
 
 fun File.notExists(): Boolean = !this.exists()
 
-//---------------------View-------------------------------//
+// ---------------------View-------------------------------//
 
 @UiThread
 fun EditText.onTextChanged(listener: (String) -> Unit) {
-    this.addTextChangedListener(object : TextWatcher {
+    this.addTextChangedListener(
+        object : TextWatcher {
 
-        override fun afterTextChanged(s: Editable?) {
-            listener(s.toString())
+            override fun afterTextChanged(s: Editable?) {
+                listener(s.toString())
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) =
+                Unit
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) = Unit
         }
-
-        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) = Unit
-
-        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) = Unit
-    })
+    )
 }
 
-//---------------------Fragment-------------------------------//
+// ---------------------Fragment-------------------------------//
 
 @UiThread
 fun <T : Fragment> T.putArguments(bundle: Bundle): T {
@@ -361,7 +364,7 @@ fun FragmentManager.replaceFragment(
     }
 }
 
-//---------------------Activity-------------------------------//
+// ---------------------Activity-------------------------------//
 
 @UiThread
 inline fun <reified T : ViewDataBinding> Activity.binding(@LayoutRes resId: Int): Lazy<T> =
@@ -379,7 +382,7 @@ fun Activity.getScreenWidth(): Int {
     return size.x
 }
 
-//---------------------Other-------------------------------//
+// ---------------------Other-------------------------------//
 
 /**
  * 条件为真时执行

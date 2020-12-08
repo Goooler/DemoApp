@@ -254,7 +254,7 @@ object ImageLoader {
     }
 }
 
-//------------------------BindingAdapter--------------------------//
+// ------------------------BindingAdapter--------------------------//
 
 @BindingAdapter("binding_src_url")
 fun ImageView.load(url: String?) {
