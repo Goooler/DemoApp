@@ -71,11 +71,10 @@ fun getResourcePrefix(module: Module) = "${module.tag}_"
 
 fun getVersionNameSuffix(module: Module) = "_${module.tag}"
 
-fun String.isNotStable(): Boolean {
+fun String.isStableVersion(): Boolean {
     val stableKeyword =
         listOf("RELEASE", "FINAL", "GA").any { toUpperCase(Locale.ROOT).contains(it) }
-    val isStable = stableKeyword || "^[0-9,.v-]+(-r)?$".toRegex().matches(this)
-    return isStable.not()
+    return stableKeyword || "^[0-9,.v-]+(-r)?$".toRegex().matches(this)
 }
 
 fun Project.setupBase(): BaseExtension {

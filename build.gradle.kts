@@ -14,7 +14,7 @@ buildscript {
         maven(rootProject.extra.get("aliyunMaven").toString())
     }
     dependencies {
-        classpath(rootProject.extra.get("androidPlugin").toString())
+        classpath(rootProject.extra.get("androidGradlePlugin").toString())
         classpath(rootProject.extra.get("kotlinPlugin").toString())
         classpath(Libs.hiltPlugin)
         classpath(Libs.arouterPlugin)
@@ -44,7 +44,7 @@ allprojects {
 
 tasks.named("dependencyUpdates", DependencyUpdatesTask::class).configure {
     rejectVersionIf {
-        candidate.version.isNotStable()
+        candidate.version.isStableVersion().not()
     }
 }
 

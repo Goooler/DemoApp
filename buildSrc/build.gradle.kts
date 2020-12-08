@@ -5,6 +5,6 @@ plugins {
 apply("extra.gradle.kts")
 
 dependencies {
-    implementation(rootProject.extra.get("androidPlugin").toString())
+    implementation(rootProject.extra.get("androidGradlePlugin").toString())
     implementation(rootProject.extra.get("kotlinPlugin").toString())
 }
