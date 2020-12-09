@@ -20,7 +20,7 @@ import java.util.Properties
 
 // sdk
 private const val appTargetSdk = 30
-private const val appBuildTool = "30.0.2"
+private const val appBuildTool = "30.0.3"
 private const val appMinSdk = 23
 private val javaVersion = JavaVersion.VERSION_1_8
 private val ndkLibs = setOf(

@@ -19,6 +19,7 @@
       <w>desugar</w>
       <w>desugaring</w>
       <w>dexopt</w>
+      <w>fastjson</w>
       <w>feling</w>
       <w>flowable</w>
       <w>flyco</w>
@@ -27,10 +28,13 @@
       <w>gson</w>
       <w>guolindev</w>
       <w>inertance</w>
+      <w>jetbrains</w>
+      <w>jitpack</w>
       <w>kapt</w>
       <w>kotlinx</w>
       <w>leakcanary</w>
       <w>livedata</w>
+      <w>luban</w>
       <w>meizu</w>
       <w>miui</w>
       <w>mmkv</w>
@@ -41,6 +45,7 @@
       <w>oneplus</w>
       <w>permissionx</w>
       <w>protobuf</w>
+      <w>protoc</w>
       <w>rssi</w>
       <w>rxandroid</w>
       <w>savedstate</w>
