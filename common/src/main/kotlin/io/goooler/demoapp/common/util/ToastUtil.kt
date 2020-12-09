@@ -2,6 +2,7 @@
 
 package io.goooler.demoapp.common.util
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Handler
 import android.os.Looper
@@ -12,6 +13,7 @@ import androidx.annotation.UiThread
 import androidx.annotation.WorkerThread
 import io.goooler.demoapp.base.core.BaseApplication
 
+@SuppressLint("WrongThread")
 object ToastUtil {
 
     private val handler by lazy(LazyThreadSafetyMode.NONE) { Handler(Looper.getMainLooper()) }

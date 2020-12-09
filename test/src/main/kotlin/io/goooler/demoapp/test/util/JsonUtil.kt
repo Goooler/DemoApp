@@ -70,6 +70,7 @@ internal object FastJsonUtil {
         return try {
             JSONObject.toJSONString(src)
         } catch (e: Exception) {
+            e.printStackTrace()
             null
         }
     }

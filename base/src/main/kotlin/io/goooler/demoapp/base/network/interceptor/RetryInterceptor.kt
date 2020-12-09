@@ -11,7 +11,7 @@ class RetryInterceptor private constructor() : BaseInterceptor {
         var retryCount = 0
         val request = chain.request()
         var response = chain.proceed(request)
-        while (!response.isSuccessful && retryCount < MAX_RETRY_COUNT - 1) {
+        while (response.isSuccessful.not() && retryCount < MAX_RETRY_COUNT - 1) {
             retryCount++
             response.close()
             response = chain.proceed(request)

@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.JavascriptInterface
-import androidx.core.os.bundleOf
 import io.goooler.demoapp.base.util.putArguments
 import io.goooler.demoapp.base.util.unsafeLazy
 import io.goooler.demoapp.base.widget.CustomWebView
@@ -78,10 +77,8 @@ class WebFragment private constructor() : BaseThemeFragment() {
     companion object {
         private const val URL = "url"
 
-        fun newInstance(url: String) = WebFragment().putArguments(
-            bundleOf(
-                URL to url
-            )
+        fun newInstance(url: String): WebFragment = WebFragment().putArguments(
+            URL to url
         )
     }
 }

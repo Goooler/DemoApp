@@ -6,10 +6,24 @@ import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.webkit.URLUtil
 import androidx.activity.ComponentActivity
-import androidx.annotation.*
+import androidx.annotation.ColorInt
+import androidx.annotation.ColorRes
+import androidx.annotation.Dimension
+import androidx.annotation.DrawableRes
+import androidx.annotation.MainThread
+import androidx.annotation.Px
+import androidx.annotation.StringRes
+import androidx.annotation.UiThread
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.blankj.utilcode.util.*
+import com.blankj.utilcode.util.AdaptScreenUtils
+import com.blankj.utilcode.util.ColorUtils
+import com.blankj.utilcode.util.ImageUtils
+import com.blankj.utilcode.util.ResourceUtils
+import com.blankj.utilcode.util.SPUtils
+import com.blankj.utilcode.util.SizeUtils
+import com.blankj.utilcode.util.StringUtils
+import com.blankj.utilcode.util.TimeUtils
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import io.goooler.demoapp.base.core.BaseViewModel
 import io.goooler.demoapp.common.BuildConfig
@@ -17,10 +31,11 @@ import io.goooler.demoapp.common.type.SpKeys
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
-import java.math.BigDecimal
-import java.util.*
-import kotlin.math.absoluteValue
 import kotlinx.coroutines.flow.Flow
+import java.math.BigDecimal
+import java.util.Calendar
+import java.util.Date
+import kotlin.math.absoluteValue
 
 typealias DimensionUtil = SizeUtils
 typealias SpHelper = SPUtils
@@ -97,7 +112,7 @@ fun Long.easyTime(): String {
     val isSameYear = year1 == year2
 
     return when {
-        !isSameYear -> toDateString("yyyy-MM-dd HH:mm")
+        isSameYear.not() -> toDateString("yyyy-MM-dd HH:mm")
         isYesterday -> toDateString("昨天 HH:mm")
         t < oneMinute -> "刚刚"
         t < oneHour -> (t / oneMinute).toString() + "分钟前"
@@ -141,31 +156,50 @@ fun Number.formatMoney(isYuan: Boolean = false, trans2W: Boolean = false, scale:
                     }
         }
     } catch (e: Exception) {
+        e.printStackTrace()
         moneyF.toString()
     }
 }
 
 // ---------------------Rx-------------------------------//
 
-fun <T> Single<T>.observeOnMainThread(): Single<T> {
-    return observeOn(AndroidSchedulers.mainThread())
-}
+fun <T> Single<T>.observeOnMainThread(): Single<T> = observeOn(AndroidSchedulers.mainThread())
 
-fun <T> Observable<T>.observeOnMainThread(): Observable<T> {
-    return observeOn(AndroidSchedulers.mainThread())
-}
+fun <T> Observable<T>.observeOnMainThread(): Observable<T> =
+    observeOn(AndroidSchedulers.mainThread())
 
 // ---------------------Res-------------------------------//
 
-fun @receiver:DrawableRes Int.getDrawable(): Drawable? = ResourceUtils.getDrawable(this)
+fun @receiver:DrawableRes Int.getDrawable(): Drawable? {
+    return try {
+        ResourceUtils.getDrawable(this)
+    } catch (e: Exception) {
+        e.printStackTrace()
+        null
+    }
+}
 
 @ColorInt
-fun @receiver:ColorRes Int.getColor(): Int = ColorUtils.getColor(this)
+fun @receiver:ColorRes Int.getColor(): Int {
+    return try {
+        ColorUtils.getColor(this)
+    } catch (e: Exception) {
+        e.printStackTrace()
+        -1
+    }
+}
 
-fun @receiver:StringRes Int.getString(): String = StringUtils.getString(this)
+fun @receiver:StringRes Int.getString(): String? {
+    return try {
+        StringUtils.getString(this)
+    } catch (e: Exception) {
+        e.printStackTrace()
+        null
+    }
+}
 
 fun @receiver:StringRes Int.formatString(vararg args: Any): String =
-    String.format(getString(), args)
+    String.format(getString().orEmpty(), args)
 
 @Px
 fun @receiver:Dimension(unit = Dimension.SP) Float.sp2px(): Int = SizeUtils.sp2px(this)

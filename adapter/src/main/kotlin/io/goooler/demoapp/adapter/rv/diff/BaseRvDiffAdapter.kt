@@ -64,7 +64,7 @@ abstract class BaseRvDiffAdapter<M : IDiffVhModelType>(callback: DiffCallBack<M>
         }
 
     /**
-     * Please do not use it with setList()!
+     * Please do not use it with setList() !
      */
     override fun refreshItems(items: List<M>) {
         helper.refreshItems(items) {

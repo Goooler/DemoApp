@@ -62,7 +62,7 @@ class AudioPlayService : BaseService() {
     }
 
     private fun resumePlay() {
-        if (!mediaPlayer.isPlaying) mediaPlayer.start()
+        if (mediaPlayer.isPlaying.not()) mediaPlayer.start()
     }
 
     private fun stopPlay() {

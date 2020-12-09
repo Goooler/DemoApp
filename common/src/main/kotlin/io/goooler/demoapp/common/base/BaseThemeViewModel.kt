@@ -18,7 +18,7 @@ abstract class BaseThemeViewModel : BaseViewModel(), ITheme {
 
     protected fun checkStatusAndEntryWithToast(response: HttpResponse<*>): Boolean {
         return checkStatusAndEntry(response).also {
-            if (!it) {
+            if (it.not()) {
                 response.message?.showToast()
             }
         }

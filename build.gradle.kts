@@ -51,8 +51,8 @@ tasks {
     }
     create(GradleTask.Clean.task, Delete::class.java) {
         rootProject.allprojects {
-            delete(buildDir)
             delete(
+                buildDir,
                 fileTree(
                     mapOf(
                         "dir" to projectDir,

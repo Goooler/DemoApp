@@ -22,6 +22,7 @@ import androidx.annotation.ColorInt
 import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
 import androidx.annotation.UiThread
+import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ObservableField
 import androidx.databinding.ViewDataBinding
@@ -30,14 +31,14 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.commit
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import java.io.File
-import java.math.BigDecimal
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
+import java.io.File
+import java.math.BigDecimal
 
 // ---------------------Types-------------------------------//
 
@@ -96,7 +97,7 @@ fun String.onlyDigits(): String = replace(Regex("\\D*"), "")
 
 fun String.removeAllSpecialCharacters(): String = replace("[^a-zA-Z]+".toRegex(), "")
 
-fun CharSequence?.isNotNullOrEmpty(): Boolean = !isNullOrEmpty()
+fun CharSequence?.isNotNullOrEmpty(): Boolean = isNullOrEmpty().not()
 
 fun SpannableString.withClickableSpan(
     clickablePart: String,
@@ -129,6 +130,7 @@ fun String?.safeToBoolean(default: Boolean = false): Boolean {
     return try {
         toBoolean()
     } catch (e: Throwable) {
+        e.printStackTrace()
         default
     }
 }
@@ -138,6 +140,7 @@ fun String?.safeToInt(default: Int = 0): Int {
     return try {
         toInt()
     } catch (e: Throwable) {
+        e.printStackTrace()
         default
     }
 }
@@ -147,6 +150,7 @@ fun String?.safeToLong(default: Long = 0L): Long {
     return try {
         toLong()
     } catch (e: Throwable) {
+        e.printStackTrace()
         default
     }
 }
@@ -156,6 +160,7 @@ fun String?.safeToFloat(default: Float = 0f): Float {
     return try {
         toFloat()
     } catch (e: Throwable) {
+        e.printStackTrace()
         default
     }
 }
@@ -165,6 +170,7 @@ fun String?.safeToDouble(default: Double = 0.0): Double {
     return try {
         toDouble()
     } catch (e: Throwable) {
+        e.printStackTrace()
         default
     }
 }
@@ -174,6 +180,7 @@ fun String?.safeToColor(@ColorInt default: Int = 0): Int {
     return try {
         Color.parseColor(this)
     } catch (e: Throwable) {
+        e.printStackTrace()
         default
     }
 }
@@ -221,9 +228,17 @@ fun Number.isZero(): Boolean {
     }
 }
 
-fun Number.isNotZero(): Boolean = !isZero()
+fun Number.isNotZero(): Boolean = isZero().not()
 
 fun Int?.orZero(): Int = this ?: 0
+
+fun Int.isInvalid(invalidValue: Int = -1) = this == invalidValue
+
+fun Int.isValid(invalidValue: Int = -1) = isInvalid(invalidValue).not()
+
+fun Long.isInvalid(invalidValue: Long = -1) = this == invalidValue
+
+fun Long.isValid(invalidValue: Long = -1) = isInvalid(invalidValue).not()
 
 fun Boolean?.orTrue(): Boolean = this ?: true
 
@@ -247,7 +262,7 @@ fun <E> MutableList<E>.remove() {
     removeAt(0)
 }
 
-fun <T> Collection<T>?.isNotNullOrEmpty(): Boolean = !isNullOrEmpty()
+fun <T> Collection<T>?.isNotNullOrEmpty(): Boolean = isNullOrEmpty().not()
 
 /**
  * 判断集合内是否仅有一个元素
@@ -295,7 +310,7 @@ suspend fun <T> withDefaultContext(block: suspend CoroutineScope.() -> T) =
 
 // ---------------------File-------------------------------//
 
-fun File.notExists(): Boolean = !this.exists()
+fun File.notExists(): Boolean = exists().not()
 
 // ---------------------View-------------------------------//
 
@@ -323,6 +338,10 @@ fun <T : Fragment> T.putArguments(bundle: Bundle): T {
     arguments = bundle
     return this
 }
+
+@UiThread
+fun <T : Fragment> T.putArguments(vararg pairs: Pair<String, Any?>): T =
+    putArguments(bundleOf(*pairs))
 
 /**
  * @param containerViewId   容器 id
@@ -397,7 +416,7 @@ inline fun Boolean.trueRun(block: () -> Unit) {
  * 条件为假时执行
  */
 inline fun Boolean.falseRun(block: () -> Unit) {
-    if (!this) {
+    if (this.not()) {
         block()
     }
 }

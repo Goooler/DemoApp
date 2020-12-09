@@ -5,7 +5,6 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentManager
 import io.goooler.demoapp.base.R
 import io.goooler.demoapp.base.util.putArguments
@@ -62,10 +61,8 @@ class BottomTipDialogFragment private constructor() : BaseThemeDialogFragment() 
 
         fun show(manager: FragmentManager, title: String, content: String, tag: String? = null) {
             BottomTipDialogFragment().putArguments(
-                bundleOf(
-                    TITLE to title,
-                    CONTENT to content
-                )
+                TITLE to title,
+                CONTENT to content
             ).show(manager, tag)
         }
     }
