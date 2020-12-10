@@ -1,7 +1,8 @@
 import com.android.build.api.dsl.VariantDimension
-import com.android.build.gradle.AbstractAppExtension
 import com.android.build.gradle.BaseExtension
+import com.android.build.gradle.LibraryExtension
 import com.android.build.gradle.internal.api.BaseVariantOutputImpl
+import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 import org.gradle.api.artifacts.Dependency
@@ -77,6 +78,8 @@ fun String.isStableVersion(): Boolean {
     return stableKeyword || "^[0-9,.v-]+(-r)?$".toRegex().matches(this)
 }
 
+fun BaseExtension.asLibraryExtension(): LibraryExtension = this as LibraryExtension
+
 fun Project.setupBase(): BaseExtension {
     return extensions.getByName<BaseExtension>("android").apply {
         plugins.run {
@@ -97,6 +100,8 @@ fun Project.setupBase(): BaseExtension {
             java.srcDirs("src/main/kotlin")
         }
         compileOptions {
+            incremental = true
+            setDefaultJavaVersion(javaVersion)
             sourceCompatibility = javaVersion
             targetCompatibility = javaVersion
         }
@@ -174,8 +179,8 @@ fun Project.setupCommon(module: Module? = null): BaseExtension {
     }
 }
 
-fun Project.setupApp(appPackageName: String, appName: String): BaseExtension {
-    return setupCommon().apply {
+fun Project.setupApp(appPackageName: String, appName: String): BaseAppModuleExtension {
+    return (setupCommon() as BaseAppModuleExtension).apply {
         defaultConfig {
             applicationId = appPackageName
             addManifestPlaceholders(
@@ -219,7 +224,7 @@ fun Project.setupApp(appPackageName: String, appName: String): BaseExtension {
                 resValue("string", "app_name", "${appName}.debug")
             }
         }
-        (this as AbstractAppExtension).applicationVariants.all {
+        applicationVariants.all {
             outputs.all {
                 (this as BaseVariantOutputImpl).outputFileName =
                     "../../../../${appName}_${versionName}_${versionCode}_${flavorName}_${buildType.name}.apk"
