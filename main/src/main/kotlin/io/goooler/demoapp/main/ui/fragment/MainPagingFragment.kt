@@ -33,7 +33,7 @@ class MainPagingFragment private constructor() : BaseThemeLazyFragment() {
         binding = MainPagingFragmentBinding.inflate(layoutInflater).also {
             it.lifecycleOwner = viewLifecycleOwner
             it.smartRefresh.setOnRefreshListener(listener)
-            it.layoutError.listener = listener
+            it.listener = listener
         }
         rvAdapter = MainPagingRvAdapter(listener).apply {
             onLoadStatusListener = listener
@@ -77,6 +77,9 @@ class MainPagingFragment private constructor() : BaseThemeLazyFragment() {
                 binding.layoutError.tvTip -> {
                     rvAdapter.refresh()
                     binding.layoutError.root.visibility = View.GONE
+                }
+                binding.fabRemove -> {
+
                 }
             }
         }

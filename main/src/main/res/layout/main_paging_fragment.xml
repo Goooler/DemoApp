@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="listener"
+            type="android.view.View.OnClickListener" />
+    </data>
+
     <com.scwang.smart.refresh.layout.SmartRefreshLayout
         android:id="@+id/smart_refresh"
         android:layout_width="match_parent"
@@ -23,11 +30,25 @@
                 app:spanCount="2"
                 tools:listitem="@layout/main_common_rv_item" />
 
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:layout_width="50dp"
+                android:id="@+id/fab_remove"
+                android:src="@drawable/common_ic_minus"
+                android:clickable="true"
+                android:focusable="true"
+                android:backgroundTint="@color/md_red_700"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_margin="10dp"
+                android:onClick="@{listener}"
+                android:layout_height="50dp" />
+
             <include
                 android:id="@+id/layout_error"
                 layout="@layout/common_error_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                app:listener="@{listener}"
                 android:visibility="gone" />
 
             <include
