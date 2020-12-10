@@ -18,7 +18,7 @@
 - [ ] [Compose](https://developer.android.com/jetpack/androidx/releases/compose)
 - [x] [ConstraintLayout](https://developer.android.com/jetpack/androidx/releases/constraintlayout)
 - [ ] [MotionLayout](https://developer.android.com/training/constraint-layout/motionlayout)
-- [ ] [CoordinatorLayout](https://developer.android.com/jetpack/androidx/releases/coordinatorlayout)
+- [x] [CoordinatorLayout](https://developer.android.com/jetpack/androidx/releases/coordinatorlayout)
 - [x] [RecyclerView](https://developer.android.com/jetpack/androidx/releases/recyclerview)
 - [x] [CardView](https://developer.android.com/jetpack/androidx/releases/cardview)
 - [x] [VectorDrawable](https://developer.android.com/jetpack/androidx/releases/vectordrawable)

@@ -14,46 +14,41 @@
             type="io.goooler.demoapp.main.model.MainCommonVhModel.Repo.OnEventListener" />
     </data>
 
-    <androidx.cardview.widget.CardView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        tools:background="@color/md_teal_600"
+        binding_bg_radius="@{@dimen/dp_15}"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
-        android:backgroundTint="@color/md_teal_600"
-        app:cardCornerRadius="15dp">
+        binding_bg_solidColor="@{@color/md_teal_600}"
+        android:layout_height="wrap_content">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/iv_logo"
+            binding_src_url="@{model.logoUrl}"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_youtube"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/iv_logo"
-                binding_src_url="@{model.logoUrl}"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/ic_youtube"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:onClick="@{()->listener.onContentClick(model.content)}"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:text="@{model.content}"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_logo"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="这是一段描述性的文字" />
 
-            <TextView
-                android:id="@+id/tv_content"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp"
-                android:onClick="@{()->listener.onContentClick(model.content)}"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:text="@{model.content}"
-                android:textColor="@color/white"
-                android:textSize="15sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/iv_logo"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="这是一段描述性的文字" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
