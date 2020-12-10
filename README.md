@@ -10,7 +10,7 @@
 - [x] [Lifecycle](https://developer.android.com/jetpack/androidx/releases/lifecycle)
 - [ ] [Navigation](https://developer.android.com/jetpack/androidx/releases/navigation)
 - [x] [Annotation](https://developer.android.com/jetpack/androidx/releases/annotation)
-- [ ] [Collection](https://developer.android.com/jetpack/androidx/releases/collection)
+- [x] [Collection](https://developer.android.com/jetpack/androidx/releases/collection)
 - [x] [Room](https://developer.android.com/jetpack/androidx/releases/room)
 - [x] [DataStore](https://developer.android.com/jetpack/androidx/releases/datastore)
 - [x] [Hilt](https://developer.android.com/jetpack/androidx/releases/hilt)

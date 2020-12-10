@@ -3,6 +3,7 @@ package io.goooler.demoapp.base.widget
 import android.content.Context
 import android.net.Uri
 import android.net.http.SslError
+import android.util.ArrayMap
 import android.util.AttributeSet
 import android.view.View
 import android.webkit.SslErrorHandler
@@ -11,7 +12,6 @@ import android.webkit.WebChromeClient
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import androidx.collection.ArrayMap
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.DefaultLifecycleObserver
