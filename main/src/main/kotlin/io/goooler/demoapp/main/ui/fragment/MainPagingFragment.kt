@@ -79,7 +79,6 @@ class MainPagingFragment private constructor() : BaseThemeLazyFragment() {
                     binding.layoutError.root.visibility = View.GONE
                 }
                 binding.fabRemove -> {
-
                 }
             }
         }

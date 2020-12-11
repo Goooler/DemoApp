@@ -6,10 +6,10 @@ import androidx.datastore.preferences.edit
 import androidx.datastore.preferences.emptyPreferences
 import androidx.datastore.preferences.preferencesKey
 import io.goooler.demoapp.base.core.BaseApplication
-import java.util.concurrent.ConcurrentHashMap
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
+import java.util.concurrent.ConcurrentHashMap
 
 class DataStoreHelper private constructor(name: String) {
 
