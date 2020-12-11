@@ -32,6 +32,7 @@
       <w>jetpack</w>
       <w>jitpack</w>
       <w>kapt</w>
+      <w>kotlinter</w>
       <w>kotlinx</w>
       <w>leakcanary</w>
       <w>livedata</w>

@@ -1,9 +1,9 @@
 import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
-import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
+import org.jmailen.gradle.kotlinter.support.ReporterType
 
 plugins {
     id(Plugins.gradleVersionsPlugin) version gradleVersionsPluginVersion
-    id(Plugins.ktLintPlugin) version ktLintPluginVersion
+    id(Plugins.kotlinterPlugin) version kotlinterPluginVersion
 }
 
 buildscript {
@@ -25,21 +25,12 @@ buildscript {
 allprojects {
     apply {
         from("${rootDir.path}/$extraScriptPath")
-        plugin(Plugins.ktLintPlugin)
+        plugin(Plugins.kotlinterPlugin)
     }
-    ktlint {
-        verbose.set(true)
-        android.set(true)
-        ignoreFailures.set(true)
-        outputColorName.set("YELLOW")
-        reporters {
-            reporter(ReporterType.HTML)
-        }
-        filter {
-            exclude("**/generated/**")
-            exclude("**/tmp/**")
-            include("**/kotlin/**")
-        }
+    kotlinter {
+        ignoreFailures = true
+        indentSize = 4
+        reporters = arrayOf(ReporterType.checkstyle.name, ReporterType.html.name)
     }
 }
 
