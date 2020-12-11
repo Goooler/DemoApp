@@ -16,8 +16,8 @@ abstract class BaseFragmentPagerAdapter(
   behavior: Int = BEHAVIOR_SET_USER_VISIBLE_HINT
 ) : FragmentStatePagerAdapter(fragmentManager, behavior) {
 
-  private val fragmentList = ArrayList<Fragment>()
-  private val titleList = ArrayList<String>()
+  private val fragmentList = mutableListOf<Fragment>()
+  private val titleList = mutableListOf<String>()
 
   open fun setData(fragments: List<Fragment>? = null, titles: List<String>? = null) {
     fragments?.let {

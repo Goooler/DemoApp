@@ -12,7 +12,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 abstract class BaseFragmentStateAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
   FragmentStateAdapter(fragmentManager, lifecycle) {
 
-  private val fragmentList = ArrayList<Fragment>()
+  private val fragmentList = mutableListOf<Fragment>()
 
   open fun setData(fragments: List<Fragment>? = null) {
     fragments?.let {

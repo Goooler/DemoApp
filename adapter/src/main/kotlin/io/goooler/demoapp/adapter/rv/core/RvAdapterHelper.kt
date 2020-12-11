@@ -24,7 +24,7 @@ internal class RvAdapterHelper<M : IVhModelType>(private val adapter: IRvAdapter
 
   private val ivdManager = ViewTypeDelegateManager<M>()
 
-  private val dataList = ArrayList<M>()
+  private val dataList = mutableListOf<M>()
 
   var list: List<M>
     get() = dataList
@@ -88,7 +88,7 @@ internal class RvAdapterHelper<M : IVhModelType>(private val adapter: IRvAdapter
    * Transform data list. Always return a new list.
    */
   fun transform(original: List<M>): List<M> {
-    val result = ArrayList<M>()
+    val result = mutableListOf<M>()
     original.forEach { findLeaf(it, result) }
     return result
   }
@@ -110,7 +110,7 @@ internal class RvAdapterHelper<M : IVhModelType>(private val adapter: IRvAdapter
    * Recursively traversing all leaf nodes.
    */
   @Suppress("UNCHECKED_CAST")
-  private fun findLeaf(model: M, list: ArrayList<M>) {
+  private fun findLeaf(model: M, list: MutableList<M>) {
     if (model is IVhModelWrapper<*>) {
       model.asList().forEach { findLeaf(it as M, list) }
     } else {
