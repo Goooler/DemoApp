@@ -66,11 +66,9 @@ fun DependencyHandler.androidTestImplementation(vararg names: Any): Array<Depend
     add("androidTestImplementation", it)
   }.toTypedArray()
 
-fun getModuleName(module: Module) = ":${module.module}"
-
-fun getResourcePrefix(module: Module) = "${module.module}_"
-
-fun getVersionNameSuffix(module: Module) = "_${module.module}"
+val Module.moduleName: String get() = ":${tag}"
+val Module.resourcePrefix: String get() = "${tag}_"
+val Module.versionNameSuffix: String get() = "_${tag}"
 
 fun String.isStableVersion(): Boolean {
   val stableKeyword = listOf("RELEASE", "FINAL", "GA").any { toUpperCase(Locale.ROOT).contains(it) }
@@ -121,8 +119,8 @@ fun Project.setupBase(): BaseExtension {
 fun Project.setupCommon(module: Module? = null): BaseExtension {
   return setupBase().apply {
     module?.let {
-      resourcePrefix = getResourcePrefix(it)
-      defaultConfig.versionNameSuffix = getVersionNameSuffix(it)
+      resourcePrefix = it.resourcePrefix
+      defaultConfig.versionNameSuffix = it.versionNameSuffix
     }
     flavorDimensions("channel")
     productFlavors {
@@ -145,12 +143,12 @@ fun Project.setupCommon(module: Module? = null): BaseExtension {
     }
     dependencies {
       if (module != Module.Common) {
-        implementation(project(getModuleName(Module.Common)))
+        implementation(project(Module.Common.moduleName))
       }
       implementation(
         // local
         fileTree(localLibs),
-        project(getModuleName(Module.Base)),
+        project(Module.Base.moduleName),
 
         // router
         Libs.arouter,

@@ -1,4 +1,4 @@
-enum class Module(val module: String, val runAlone: Boolean = false) {
+enum class Module(val tag: String, val runAlone: Boolean = false) {
   //---------------------base-------------------------------//
   Base("base"),
   Common("common"),

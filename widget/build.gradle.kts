@@ -3,8 +3,8 @@ plugins {
 }
 
 setupBase().run {
-  resourcePrefix = getResourcePrefix(Module.Widget)
-  defaultConfig.versionNameSuffix = getVersionNameSuffix(Module.Widget)
+  resourcePrefix = Module.Widget.resourcePrefix
+  defaultConfig.versionNameSuffix = Module.Widget.versionNameSuffix
 }
 
 dependencies {

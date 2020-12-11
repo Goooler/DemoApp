@@ -7,8 +7,8 @@ setupApp(appPackageName, appName)
 dependencies {
   implementation(
     // projects
-    project(getModuleName(Module.Login)),
-    project(getModuleName(Module.Main)),
-    project(getModuleName(Module.Web))
+    project(Module.Login.moduleName),
+    project(Module.Main.moduleName),
+    project(Module.Web.moduleName)
   )
 }
