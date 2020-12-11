@@ -28,9 +28,8 @@ allprojects {
         plugin(Plugins.kotlinterPlugin)
     }
     kotlinter {
-        ignoreFailures = true
         indentSize = 4
-        reporters = arrayOf(ReporterType.checkstyle.name, ReporterType.html.name)
+        reporters = arrayOf(ReporterType.html.name)
     }
 }
 
