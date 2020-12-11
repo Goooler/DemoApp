@@ -4,8 +4,8 @@ import io.goooler.demoapp.base.core.ILazyFragment
 
 abstract class BaseThemeLazyFragment : BaseThemeFragment(), ITheme, ILazyFragment {
 
-    override fun onResume() {
-        super.onResume()
-        onFragmentResume()
-    }
+  override fun onResume() {
+    super.onResume()
+    onFragmentResume()
+  }
 }

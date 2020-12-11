@@ -21,36 +21,36 @@ import androidx.recyclerview.widget.RecyclerView
 @MainThread
 interface IRvAdapter<M : IVhModelType> {
 
-    /**
-     * What to do when creating the viewHolder for all.
-     */
-    fun onCreateVHForAll(binding: ViewDataBinding)
+  /**
+   * What to do when creating the viewHolder for all.
+   */
+  fun onCreateVHForAll(binding: ViewDataBinding)
 
-    /**
-     * What to do when binding the viewHolder for all.
-     */
-    fun onBindVHForAll(binding: ViewDataBinding, model: M)
+  /**
+   * What to do when binding the viewHolder for all.
+   */
+  fun onBindVHForAll(binding: ViewDataBinding, model: M)
 
-    /**
-     * Create BaseViewHolder.
-     */
-    fun createVH(parent: ViewGroup, @LayoutRes viewType: Int): BindingViewHolder {
-        val binding = DataBindingUtil.inflate<ViewDataBinding>(
-            LayoutInflater.from(parent.context),
-            viewType,
-            parent,
-            false
-        )
-        return BindingViewHolder(binding)
-    }
+  /**
+   * Create BaseViewHolder.
+   */
+  fun createVH(parent: ViewGroup, @LayoutRes viewType: Int): BindingViewHolder {
+    val binding = DataBindingUtil.inflate<ViewDataBinding>(
+      LayoutInflater.from(parent.context),
+      viewType,
+      parent,
+      false
+    )
+    return BindingViewHolder(binding)
+  }
 
-    /**
-     * Init ViewTypeDelegateManager. You can add VTDs.
-     */
-    fun initManager(manager: ViewTypeDelegateManager<M>) {}
+  /**
+   * Init ViewTypeDelegateManager. You can add VTDs.
+   */
+  fun initManager(manager: ViewTypeDelegateManager<M>) {}
 
-    /**
-     * Get item by position.
-     */
-    fun getModel(@IntRange(from = 0) position: Int): M?
+  /**
+   * Get item by position.
+   */
+  fun getModel(@IntRange(from = 0) position: Int): M?
 }

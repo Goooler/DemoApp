@@ -18,52 +18,52 @@ import io.goooler.demoapp.main.vm.MainSrlViewModel
 @AndroidEntryPoint
 class MainSrlFragment private constructor() : BaseThemeLazyFragment() {
 
-    private val binding by unsafeLazy {
-        MainSrlFragmentBinding.inflate(layoutInflater).also {
-            it.lifecycleOwner = viewLifecycleOwner
-            it.vm = vm
-            it.smartRefresh.setOnRefreshLoadMoreListener(listener)
-            it.rvList.adapter = rvAdapter
-        }
+  private val binding by unsafeLazy {
+    MainSrlFragmentBinding.inflate(layoutInflater).also {
+      it.lifecycleOwner = viewLifecycleOwner
+      it.vm = vm
+      it.smartRefresh.setOnRefreshLoadMoreListener(listener)
+      it.rvList.adapter = rvAdapter
+    }
+  }
+
+  private val vm: MainSrlViewModel by getViewModel()
+
+  private val rvAdapter by unsafeLazy {
+    MainSrlRvAdapter(listener)
+  }
+
+  private val initData by unsafeLazy {
+    binding.smartRefresh.autoRefresh()
+  }
+
+  override fun onFragmentResume() {
+    initData
+  }
+
+  override fun onCreateView(
+    inflater: LayoutInflater,
+    container: ViewGroup?,
+    savedInstanceState: Bundle?
+  ): View {
+    return binding.root
+  }
+
+  private val listener = object : MainSrlRvAdapter.OnEventListener, OnRefreshLoadMoreListener {
+    override fun onContentClick(content: String) {
+      content.showToast()
     }
 
-    private val vm: MainSrlViewModel by getViewModel()
-
-    private val rvAdapter by unsafeLazy {
-        MainSrlRvAdapter(listener)
+    override fun onRefresh(refreshLayout: RefreshLayout) {
+      vm.refresh()
     }
 
-    private val initData by unsafeLazy {
-        binding.smartRefresh.autoRefresh()
+    override fun onLoadMore(refreshLayout: RefreshLayout) {
+      vm.loadMore()
     }
+  }
 
-    override fun onFragmentResume() {
-        initData
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        return binding.root
-    }
-
-    private val listener = object : MainSrlRvAdapter.OnEventListener, OnRefreshLoadMoreListener {
-        override fun onContentClick(content: String) {
-            content.showToast()
-        }
-
-        override fun onRefresh(refreshLayout: RefreshLayout) {
-            vm.refresh()
-        }
-
-        override fun onLoadMore(refreshLayout: RefreshLayout) {
-            vm.loadMore()
-        }
-    }
-
-    companion object {
-        fun newInstance() = MainSrlFragment()
-    }
+  companion object {
+    fun newInstance(): MainSrlFragment = MainSrlFragment()
+  }
 }

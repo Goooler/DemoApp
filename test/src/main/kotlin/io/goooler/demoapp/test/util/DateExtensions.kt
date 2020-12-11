@@ -12,46 +12,46 @@ object ago
 object fromNow
 
 val Int.nanoseconds: Duration
-    get() = Duration.ofNanos(toLong())
+  get() = Duration.ofNanos(toLong())
 
 val Int.microseconds: Duration
-    get() = Duration.ofNanos(toLong() * 1000L)
+  get() = Duration.ofNanos(toLong() * 1000L)
 
 val Int.milliseconds: Duration
-    get() = Duration.ofMillis(toLong())
+  get() = Duration.ofMillis(toLong())
 
 val Int.seconds: Duration
-    get() = Duration.ofSeconds(toLong())
+  get() = Duration.ofSeconds(toLong())
 
 val Int.minutes: Duration
-    get() = Duration.ofMinutes(toLong())
+  get() = Duration.ofMinutes(toLong())
 
 val Int.hours: Duration
-    get() = Duration.ofHours(toLong())
+  get() = Duration.ofHours(toLong())
 
 val Int.days: Period
-    get() = Period.ofDays(this)
+  get() = Period.ofDays(this)
 
 val Int.weeks: Period
-    get() = Period.ofWeeks(this)
+  get() = Period.ofWeeks(this)
 
 val Int.months: Period
-    get() = Period.ofMonths(this)
+  get() = Period.ofMonths(this)
 
 val Int.years: Period
-    get() = Period.ofYears(this)
+  get() = Period.ofYears(this)
 
 val Duration.ago: LocalDateTime
-    get() = baseTime() - this
+  get() = baseTime() - this
 
 val Duration.fromNow: LocalDateTime
-    get() = baseTime() + this
+  get() = baseTime() + this
 
 val Period.ago: LocalDate
-    get() = baseDate() - this
+  get() = baseDate() - this
 
 val Period.fromNow: LocalDate
-    get() = baseDate() + this
+  get() = baseDate() + this
 
 infix fun Int.nanoseconds(fromNow: fromNow): LocalDateTime = baseTime().plusNanos(toLong())
 
@@ -62,7 +62,7 @@ infix fun Int.microseconds(fromNow: fromNow): LocalDateTime = baseTime().plusNan
 infix fun Int.microseconds(ago: ago): LocalDateTime = baseTime().minusNanos(1000L * toLong())
 
 infix fun Int.milliseconds(fromNow: fromNow): LocalDateTime =
-    baseTime().plusNanos(1000000L * toLong())
+  baseTime().plusNanos(1000000L * toLong())
 
 infix fun Int.milliseconds(ago: ago): LocalDateTime = baseTime().minusNanos(1000000L * toLong())
 

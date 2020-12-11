@@ -43,36 +43,32 @@ typealias SpHelper = SPUtils
 val isDebug: Boolean = BuildConfig.DEBUG
 
 var isFirstRun: Boolean
-    get() = SpHelper.getInstance().getBoolean(SpKeys.FirstRun.key, true)
-    set(value) = SpHelper.getInstance().put(SpKeys.FirstRun.key, value)
+  get() = SpHelper.getInstance().getBoolean(SpKeys.FirstRun.key, true)
+  set(value) = SpHelper.getInstance().put(SpKeys.FirstRun.key, value)
 
 inline fun debugRun(debug: () -> Unit) {
-    if (isDebug) {
-        debug()
-    }
+  if (isDebug) {
+    debug()
+  }
 }
 
-suspend inline fun <reified T : Any> SpKeys.getFromDataStore(name: String = "Demo"): Flow<T?> {
-    return DataStoreHelper.getInstance(name).get(key)
-}
+suspend inline fun <reified T : Any> SpKeys.getFromDataStore(name: String = "Demo"): Flow<T?> =
+  DataStoreHelper.getInstance(name).get(key)
 
-suspend inline fun <reified T : Any> T.putIntoDataStore(
-    key: SpKeys,
-    prefName: String = "Demo"
-) {
-    DataStoreHelper.getInstance(prefName).put(key.key, this)
+suspend inline fun <reified T : Any> T.putIntoDataStore(key: SpKeys, prefName: String = "Demo") {
+  DataStoreHelper.getInstance(prefName).put(key.key, this)
 }
 
 @UiThread
 fun SmartRefreshLayout.finishRefreshAndLoadMore() {
-    finishRefresh()
-    finishLoadMore()
+  finishRefresh()
+  finishLoadMore()
 }
 
 @UiThread
 fun SmartRefreshLayout.disableRefreshAndLoadMore() {
-    setEnableRefresh(false)
-    setEnableLoadMore(false)
+  setEnableRefresh(false)
+  setEnableLoadMore(false)
 }
 
 // ---------------------Convert-------------------------------//
@@ -81,45 +77,43 @@ fun SmartRefreshLayout.disableRefreshAndLoadMore() {
  * 拼上图片前缀
  */
 fun String.toLoadUrl(): String {
-    return if (URLUtil.isNetworkUrl(this)) this else BuildConfig.CDN_PREFIX + this
+  return if (URLUtil.isNetworkUrl(this)) this else BuildConfig.CDN_PREFIX + this
 }
 
-fun Long.toDateString(pattern: String): String {
-    return TimeUtils.millis2String(this, pattern)
-}
+fun Long.toDateString(pattern: String): String = TimeUtils.millis2String(this, pattern)
 
 fun Long.easyTime(): String {
-    val now = System.currentTimeMillis()
-    val t = now - this
-    if (t < 0) {
-        // 未来
-        return toDateString("yyyy-MM-dd HH:mm")
-    }
-    val oneMinute = 1000 * 60
-    val oneHour = oneMinute * 60
-    val oneDay = oneHour * 24
-    val c1 = Calendar.getInstance()
-    val c2 = Calendar.getInstance()
-    c1.time = Date(this)
-    c2.time = Date(now)
-    val day1 = c1.get(Calendar.DAY_OF_WEEK)
-    val day2 = c2.get(Calendar.DAY_OF_WEEK)
-    val isYesterday = t < oneDay * 2 && (day2 - day1 == 1 || day2 - day1 == -6)
+  val now = System.currentTimeMillis()
+  val t = now - this
+  if (t < 0) {
+    // 未来
+    return toDateString("yyyy-MM-dd HH:mm")
+  }
+  val oneMinute = 1000 * 60
+  val oneHour = oneMinute * 60
+  val oneDay = oneHour * 24
+  val c1 = Calendar.getInstance()
+  val c2 = Calendar.getInstance()
+  c1.time = Date(this)
+  c2.time = Date(now)
+  val day1 = c1.get(Calendar.DAY_OF_WEEK)
+  val day2 = c2.get(Calendar.DAY_OF_WEEK)
+  val isYesterday = t < oneDay * 2 && (day2 - day1 == 1 || day2 - day1 == -6)
 
-    val year1 = c1.get(Calendar.YEAR)
-    val year2 = c2.get(Calendar.YEAR)
+  val year1 = c1.get(Calendar.YEAR)
+  val year2 = c2.get(Calendar.YEAR)
 
-    val isSameYear = year1 == year2
+  val isSameYear = year1 == year2
 
-    return when {
-        isSameYear.not() -> toDateString("yyyy-MM-dd HH:mm")
-        isYesterday -> toDateString("昨天 HH:mm")
-        t < oneMinute -> "刚刚"
-        t < oneHour -> (t / oneMinute).toString() + "分钟前"
-        t < oneDay -> (t / oneHour).toString() + "小时前"
-        isSameYear -> toDateString("MM-dd HH:mm")
-        else -> toDateString("yyyy-MM-dd HH:mm")
-    }
+  return when {
+    isSameYear.not() -> toDateString("yyyy-MM-dd HH:mm")
+    isYesterday -> toDateString("昨天 HH:mm")
+    t < oneMinute -> "刚刚"
+    t < oneHour -> (t / oneMinute).toString() + "分钟前"
+    t < oneDay -> (t / oneHour).toString() + "小时前"
+    isSameYear -> toDateString("MM-dd HH:mm")
+    else -> toDateString("yyyy-MM-dd HH:mm")
+  }
 }
 
 /**
@@ -129,36 +123,36 @@ fun Long.easyTime(): String {
  * 分是 Long 类型、元是 Double 类型
  */
 fun Number.formatMoney(isYuan: Boolean = false, trans2W: Boolean = false, scale: Int = 2): String {
-    val moneyF = if (isYuan) {
-        toDouble()
-    } else {
-        // 分转为元
-        toDouble() / 100
-    }
-    return try {
-        when {
-            trans2W && moneyF / 10000 > 0 -> {
-                BigDecimal.valueOf(moneyF / 10000)
-                    .setScale(1, BigDecimal.ROUND_DOWN)
-                    .stripTrailingZeros().toPlainString() + "W"
-            }
+  val moneyF = if (isYuan) {
+    toDouble()
+  } else {
+    // 分转为元
+    toDouble() / 100
+  }
+  return try {
+    when {
+      trans2W && moneyF / 10000 > 0 -> {
+        BigDecimal.valueOf(moneyF / 10000)
+          .setScale(1, BigDecimal.ROUND_DOWN)
+          .stripTrailingZeros().toPlainString() + "W"
+      }
 
-            else ->
-                BigDecimal.valueOf(moneyF)
-                    .setScale(scale, BigDecimal.ROUND_DOWN)
-                    .stripTrailingZeros().toPlainString()
-                    .let {
-                        if (it.toDouble().absoluteValue < 0.000001) {
-                            "0"
-                        } else {
-                            it
-                        }
-                    }
-        }
-    } catch (e: Exception) {
-        e.printStackTrace()
-        moneyF.toString()
+      else ->
+        BigDecimal.valueOf(moneyF)
+          .setScale(scale, BigDecimal.ROUND_DOWN)
+          .stripTrailingZeros().toPlainString()
+          .let {
+            if (it.toDouble().absoluteValue < 0.000001) {
+              "0"
+            } else {
+              it
+            }
+          }
     }
+  } catch (e: Exception) {
+    e.printStackTrace()
+    moneyF.toString()
+  }
 }
 
 // ---------------------Rx-------------------------------//
@@ -166,40 +160,40 @@ fun Number.formatMoney(isYuan: Boolean = false, trans2W: Boolean = false, scale:
 fun <T> Single<T>.observeOnMainThread(): Single<T> = observeOn(AndroidSchedulers.mainThread())
 
 fun <T> Observable<T>.observeOnMainThread(): Observable<T> =
-    observeOn(AndroidSchedulers.mainThread())
+  observeOn(AndroidSchedulers.mainThread())
 
 // ---------------------Res-------------------------------//
 
 fun @receiver:DrawableRes Int.getDrawable(): Drawable? {
-    return try {
-        ResourceUtils.getDrawable(this)
-    } catch (e: Exception) {
-        e.printStackTrace()
-        null
-    }
+  return try {
+    ResourceUtils.getDrawable(this)
+  } catch (e: Exception) {
+    e.printStackTrace()
+    null
+  }
 }
 
 @ColorInt
 fun @receiver:ColorRes Int.getColor(): Int {
-    return try {
-        ColorUtils.getColor(this)
-    } catch (e: Exception) {
-        e.printStackTrace()
-        -1
-    }
+  return try {
+    ColorUtils.getColor(this)
+  } catch (e: Exception) {
+    e.printStackTrace()
+    -1
+  }
 }
 
 fun @receiver:StringRes Int.getString(): String? {
-    return try {
-        StringUtils.getString(this)
-    } catch (e: Exception) {
-        e.printStackTrace()
-        null
-    }
+  return try {
+    StringUtils.getString(this)
+  } catch (e: Exception) {
+    e.printStackTrace()
+    null
+  }
 }
 
 fun @receiver:StringRes Int.formatString(vararg args: Any): String =
-    String.format(getString().orEmpty(), args)
+  String.format(getString().orEmpty(), args)
 
 @Px
 fun @receiver:Dimension(unit = Dimension.SP) Float.sp2px(): Int = SizeUtils.sp2px(this)
@@ -226,26 +220,26 @@ fun Drawable.toBitmap(): Bitmap = ImageUtils.drawable2Bitmap(this)
 
 @MainThread
 inline fun <reified T : BaseViewModel> Fragment.getViewModel(): Lazy<T> =
-    lazy(LazyThreadSafetyMode.NONE) {
-        ViewModelProvider(this).get(T::class.java).apply {
-            lifecycle.addObserver(this)
-        }
+  lazy(LazyThreadSafetyMode.NONE) {
+    ViewModelProvider(this).get(T::class.java).apply {
+      lifecycle.addObserver(this)
     }
+  }
 
 @MainThread
 inline fun <reified T : BaseViewModel> Fragment.getViewModelOfActivity(): Lazy<T> =
-    lazy(LazyThreadSafetyMode.NONE) {
-        ViewModelProvider(requireActivity()).get(T::class.java).apply {
-            lifecycle.addObserver(this)
-        }
+  lazy(LazyThreadSafetyMode.NONE) {
+    ViewModelProvider(requireActivity()).get(T::class.java).apply {
+      lifecycle.addObserver(this)
     }
+  }
 
 // ---------------------Activity-------------------------------//
 
 @MainThread
 inline fun <reified T : BaseViewModel> ComponentActivity.getViewModel(): Lazy<T> =
-    lazy(LazyThreadSafetyMode.NONE) {
-        ViewModelProvider(this).get(T::class.java).apply {
-            lifecycle.addObserver(this)
-        }
+  lazy(LazyThreadSafetyMode.NONE) {
+    ViewModelProvider(this).get(T::class.java).apply {
+      lifecycle.addObserver(this)
     }
+  }

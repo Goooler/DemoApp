@@ -6,9 +6,9 @@ import androidx.annotation.Keep
 interface BaseResponse
 
 class HttpResponse<T>(
-    val status: Boolean,
-    val message: String?,
-    val code: Int,
-    val count: Int,
-    val entry: T? = null
+  val status: Boolean,
+  val message: String?,
+  val code: Int,
+  val count: Int,
+  val entry: T? = null
 ) : BaseResponse

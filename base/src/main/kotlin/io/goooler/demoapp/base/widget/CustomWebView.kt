@@ -19,150 +19,139 @@ import androidx.lifecycle.LifecycleOwner
 
 @Suppress("SetJavaScriptEnabled", "JavascriptInterface")
 open class CustomWebView(context: Context, attrs: AttributeSet? = null) :
-    WebView(context, attrs),
-    DefaultLifecycleObserver {
+  WebView(context, attrs),
+  DefaultLifecycleObserver {
 
-    var onEventListener: OnEventListener? = null
+  var onEventListener: OnEventListener? = null
 
-    init {
-        initWebViewSettings()
+  init {
+    initWebViewSettings()
+  }
+
+  open fun onDestroy() {
+    stopLoading()
+    destroy()
+  }
+
+  override fun onResume(owner: LifecycleOwner) {
+    onResume()
+  }
+
+  override fun onPause(owner: LifecycleOwner) {
+    onPause()
+  }
+
+  override fun onDestroy(owner: LifecycleOwner) {
+    onDestroy()
+  }
+
+  override fun onAttachedToWindow() {
+    super.onAttachedToWindow()
+    attachToLifecycle()
+  }
+
+  private fun initWebViewSettings() {
+    settings.run {
+      javaScriptEnabled = true
+      // 加载来自任何其他来源的内容，即使该来源不安全
+      mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
+      // 支持通过JS打开新窗口
+      javaScriptCanOpenWindowsAutomatically = true
+      // 设置可以访问文件
+      allowFileAccess = true
+      // 设置内置的缩放控件，若为 false，则该 WebView 不可缩放
+      builtInZoomControls = true
+      // 隐藏原生的缩放控件
+      displayZoomControls = false
+      // 将图片调整到适合 webView 的大小
+      useWideViewPort = true
+      // 缩放至屏幕的大小
+      loadWithOverviewMode = true
+      // h5 存储数据
+      domStorageEnabled = true
+      // 设置默认字体大小
+      defaultFontSize = 18
     }
+    webViewClient = object : WebViewClient() {
+      override fun onReceivedSslError(view: WebView, handler: SslErrorHandler, error: SslError) {
+        handler.proceed()
+      }
 
-    open fun onDestroy() {
-        stopLoading()
-        destroy()
-    }
-
-    override fun onResume(owner: LifecycleOwner) {
-        onResume()
-    }
-
-    override fun onPause(owner: LifecycleOwner) {
-        onPause()
-    }
-
-    override fun onDestroy(owner: LifecycleOwner) {
-        onDestroy()
-    }
-
-    override fun onAttachedToWindow() {
-        super.onAttachedToWindow()
-        attachToLifecycle()
-    }
-
-    private fun initWebViewSettings() {
-        settings.run {
-            javaScriptEnabled = true
-            // 加载来自任何其他来源的内容，即使该来源不安全
-            mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
-            // 支持通过JS打开新窗口
-            javaScriptCanOpenWindowsAutomatically = true
-            // 设置可以访问文件
-            allowFileAccess = true
-            // 设置内置的缩放控件，若为 false，则该 WebView 不可缩放
-            builtInZoomControls = true
-            // 隐藏原生的缩放控件
-            displayZoomControls = false
-            // 将图片调整到适合 webView 的大小
-            useWideViewPort = true
-            // 缩放至屏幕的大小
-            loadWithOverviewMode = true
-            // h5 存储数据
-            domStorageEnabled = true
-            // 设置默认字体大小
-            defaultFontSize = 18
+      override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
+        return if (URLUtil.isNetworkUrl(url)) {
+          false
+        } else {
+          onEventListener?.onInterceptUri(Uri.parse(url))
+          true
         }
-        webViewClient = object : WebViewClient() {
+      }
 
-            override fun onReceivedSslError(
-                view: WebView,
-                handler: SslErrorHandler,
-                error: SslError
-            ) {
-                handler.proceed()
-            }
+      override fun onPageFinished(view: WebView, s: String) {
+        onEventListener?.loadFinish()
+      }
+    }
+    webChromeClient = object : WebChromeClient() {
+      override fun onProgressChanged(view: WebView, newProgress: Int) {
+        onEventListener?.onProgressChanged(newProgress)
+      }
 
-            override fun shouldOverrideUrlLoading(
-                view: WebView,
-                url: String
-            ): Boolean {
-                return if (URLUtil.isNetworkUrl(url)) {
-                    false
-                } else {
-                    onEventListener?.onInterceptUri(Uri.parse(url))
-                    true
-                }
-            }
+      override fun onReceivedTitle(view: WebView, title: String) {
+        onEventListener?.onReceivedTitle(title)
+      }
+    }
+  }
 
-            override fun onPageFinished(
-                view: WebView,
-                s: String
-            ) {
-                onEventListener?.loadFinish()
-            }
+  private fun attachToLifecycle() {
+    fun findAllSupportFragmentsWithViews(
+      topLevelFragments: Collection<Fragment>,
+      result: MutableMap<View, Fragment>
+    ) {
+      topLevelFragments.forEach {
+        it.view?.let { v ->
+          result[v] = it
+          findAllSupportFragmentsWithViews(it.childFragmentManager.fragments, result)
         }
-        webChromeClient = object : WebChromeClient() {
-            override fun onProgressChanged(view: WebView, newProgress: Int) {
-                onEventListener?.onProgressChanged(newProgress)
-            }
-
-            override fun onReceivedTitle(view: WebView, title: String) {
-                onEventListener?.onReceivedTitle(title)
-            }
-        }
+      }
     }
 
-    private fun attachToLifecycle() {
-        fun findAllSupportFragmentsWithViews(
-            topLevelFragments: Collection<Fragment>,
-            result: MutableMap<View, Fragment>
-        ) {
-            topLevelFragments.forEach {
-                it.view?.let { v ->
-                    result[v] = it
-                    findAllSupportFragmentsWithViews(it.childFragmentManager.fragments, result)
-                }
-            }
+    fun findSupportFragment(target: View, activity: FragmentActivity): Fragment? {
+      val tempViewToSupportFragment = ArrayMap<View, Fragment>()
+      findAllSupportFragmentsWithViews(
+        activity.supportFragmentManager.fragments,
+        tempViewToSupportFragment
+      )
+      var result: Fragment? = null
+      val activityRoot = activity.findViewById<View>(android.R.id.content)
+      var current = target
+      while (current != activityRoot) {
+        result = tempViewToSupportFragment[current]
+        if (result != null) {
+          break
         }
-
-        fun findSupportFragment(target: View, activity: FragmentActivity): Fragment? {
-            val tempViewToSupportFragment = ArrayMap<View, Fragment>()
-            findAllSupportFragmentsWithViews(
-                activity.supportFragmentManager.fragments,
-                tempViewToSupportFragment
-            )
-            var result: Fragment? = null
-            val activityRoot = activity.findViewById<View>(android.R.id.content)
-            var current = target
-            while (current != activityRoot) {
-                result = tempViewToSupportFragment[current]
-                if (result != null) {
-                    break
-                }
-                current = if (current.parent is View) {
-                    current.parent as View
-                } else {
-                    break
-                }
-            }
-            tempViewToSupportFragment.clear()
-            return result
+        current = if (current.parent is View) {
+          current.parent as View
+        } else {
+          break
         }
-
-        (context as? FragmentActivity)?.let {
-            val fragment = findSupportFragment(this, it)
-            if (fragment != null) {
-                fragment.lifecycle.addObserver(this)
-            } else {
-                it.lifecycle.addObserver(this)
-            }
-        }
+      }
+      tempViewToSupportFragment.clear()
+      return result
     }
 
-    interface OnEventListener {
-        fun onInterceptUri(uri: Uri)
-        fun onReceivedTitle(title: String)
-        fun onProgressChanged(i: Int)
-        fun loadFinish()
+    (context as? FragmentActivity)?.let {
+      val fragment = findSupportFragment(this, it)
+      if (fragment != null) {
+        fragment.lifecycle.addObserver(this)
+      } else {
+        it.lifecycle.addObserver(this)
+      }
     }
+  }
+
+  interface OnEventListener {
+    fun onInterceptUri(uri: Uri)
+    fun onReceivedTitle(title: String)
+    fun onProgressChanged(i: Int)
+    fun loadFinish()
+  }
 }

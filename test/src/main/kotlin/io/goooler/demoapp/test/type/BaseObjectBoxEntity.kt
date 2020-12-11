@@ -6,5 +6,5 @@ import io.objectbox.annotation.BaseEntity
 @Keep
 @BaseEntity
 interface BaseObjectBoxEntity {
-    var id: Long
+  var id: Long
 }

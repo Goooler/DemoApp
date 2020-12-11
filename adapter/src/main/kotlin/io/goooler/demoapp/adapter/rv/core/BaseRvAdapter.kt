@@ -18,65 +18,60 @@ import androidx.recyclerview.widget.RecyclerView
  * @see IRvAdapter
  */
 abstract class BaseRvAdapter<M : IVhModelType> :
-    RecyclerView.Adapter<BindingViewHolder>(),
-    IRvAdapter<M>,
-    IRvAdapterMutable<M> {
+  RecyclerView.Adapter<BindingViewHolder>(),
+  IRvAdapter<M>,
+  IRvAdapterMutable<M> {
 
-    private val helper by lazy(LazyThreadSafetyMode.NONE) { RvAdapterHelper(this) }
+  private val helper by lazy(LazyThreadSafetyMode.NONE) { RvAdapterHelper(this) }
 
-    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
-        super.onAttachedToRecyclerView(recyclerView)
-        helper.onAttachedToRecyclerView(recyclerView)
+  override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
+    super.onAttachedToRecyclerView(recyclerView)
+    helper.onAttachedToRecyclerView(recyclerView)
+  }
+
+  override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
+    super.onDetachedFromRecyclerView(recyclerView)
+    helper.onDetachedFromRecyclerView(recyclerView)
+  }
+
+  override fun onCreateViewHolder(parent: ViewGroup, @LayoutRes viewType: Int): BindingViewHolder =
+    helper.onCreateViewHolder(parent, viewType)
+
+  override fun onBindViewHolder(holder: BindingViewHolder, @IntRange(from = 0) position: Int) {
+    helper.onBindViewHolder(holder, position)
+  }
+
+  @LayoutRes
+  override fun getItemViewType(@IntRange(from = 0) position: Int): Int =
+    helper.list[position].viewType
+
+  override fun getItemCount(): Int = helper.list.size
+
+  override fun getModel(@IntRange(from = 0) position: Int): M? = helper.list[position]
+
+  override var list: List<M>
+    get() = helper.list
+    set(value) {
+      helper.list = value
+      notifyDataSetChanged()
     }
 
-    override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
-        super.onDetachedFromRecyclerView(recyclerView)
-        helper.onDetachedFromRecyclerView(recyclerView)
+  override fun refreshItems(items: List<M>) {
+    helper.refreshItems(items) {
+      if (it in 0 until itemCount) {
+        notifyItemChanged(it)
+      }
     }
+  }
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        @LayoutRes viewType: Int
-    ): BindingViewHolder = helper.onCreateViewHolder(parent, viewType)
+  override fun removeItem(index: Int) {
+    helper.removeItem(index)
+    notifyItemRemoved(index)
+  }
 
-    override fun onBindViewHolder(
-        holder: BindingViewHolder,
-        @IntRange(from = 0) position: Int
-    ) {
-        helper.onBindViewHolder(holder, position)
+  override fun removeItem(item: M) {
+    helper.removeItem(item) {
+      notifyItemRemoved(it)
     }
-
-    @LayoutRes
-    override fun getItemViewType(@IntRange(from = 0) position: Int): Int =
-        helper.list[position].viewType
-
-    override fun getItemCount(): Int = helper.list.size
-
-    override fun getModel(@IntRange(from = 0) position: Int): M? = helper.list[position]
-
-    override var list: List<M>
-        get() = helper.list
-        set(value) {
-            helper.list = value
-            notifyDataSetChanged()
-        }
-
-    override fun refreshItems(items: List<M>) {
-        helper.refreshItems(items) {
-            if (it in 0 until itemCount) {
-                notifyItemChanged(it)
-            }
-        }
-    }
-
-    override fun removeItem(index: Int) {
-        helper.removeItem(index)
-        notifyItemRemoved(index)
-    }
-
-    override fun removeItem(item: M) {
-        helper.removeItem(item) {
-            notifyItemRemoved(it)
-        }
-    }
+  }
 }

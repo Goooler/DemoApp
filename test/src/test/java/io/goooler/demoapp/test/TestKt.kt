@@ -4,7 +4,7 @@ import org.junit.Test
 
 class TestKt {
 
-    @Test
-    fun out() {
-    }
+  @Test
+  fun out() {
+  }
 }

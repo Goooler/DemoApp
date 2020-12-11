@@ -1,30 +1,30 @@
 plugins {
-    id(Plugins.androidLibrary)
+  id(Plugins.androidLibrary)
 }
 
 setupBase()
 
 dependencies {
-    // architecture
-    api(
-        *Libs.coroutines,
-        *Libs.lifecycle,
-        Libs.core,
-        Libs.annotation
-    )
+  // architecture
+  api(
+    *Libs.coroutines,
+    *Libs.lifecycle,
+    Libs.core,
+    Libs.annotation
+  )
 
-    // UI
-    api(
-        Libs.appCompat,
-        Libs.fragment,
-        Libs.material,
-        Libs.constraintLayout,
-        Libs.cardView
-    )
+  // UI
+  api(
+    Libs.appCompat,
+    Libs.fragment,
+    Libs.material,
+    Libs.constraintLayout,
+    Libs.cardView
+  )
 
-    // network
-    api(
-        Libs.okHttp,
-        Libs.retrofit
-    )
+  // network
+  api(
+    Libs.okHttp,
+    Libs.retrofit
+  )
 }

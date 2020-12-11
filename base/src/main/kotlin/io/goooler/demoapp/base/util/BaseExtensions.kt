@@ -86,11 +86,11 @@ fun <T> MutableLiveData<T>.asLiveData(): LiveData<T> = this
 // ---------------------CharSequence-------------------------------//
 
 fun String.fromHtml(): Spanned {
-    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-        Html.fromHtml(this, Html.FROM_HTML_MODE_LEGACY)
-    } else {
-        Html.fromHtml(this)
-    }
+  return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+    Html.fromHtml(this, Html.FROM_HTML_MODE_LEGACY)
+  } else {
+    Html.fromHtml(this)
+  }
 }
 
 fun String.onlyDigits(): String = replace(Regex("\\D*"), "")
@@ -100,89 +100,89 @@ fun String.removeAllSpecialCharacters(): String = replace("[^a-zA-Z]+".toRegex()
 fun CharSequence?.isNotNullOrEmpty(): Boolean = isNullOrEmpty().not()
 
 fun SpannableString.withClickableSpan(
-    clickablePart: String,
-    onClickListener: () -> Unit
+  clickablePart: String,
+  onClickListener: () -> Unit
 ): SpannableString {
-    val clickableSpan = object : ClickableSpan() {
-        override fun onClick(widget: View) = onClickListener()
-    }
-    val clickablePartStart = indexOf(clickablePart)
-    setSpan(
-        clickableSpan,
-        clickablePartStart,
-        clickablePartStart + clickablePart.length,
-        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-    )
-    return this
+  val clickableSpan = object : ClickableSpan() {
+    override fun onClick(widget: View) = onClickListener()
+  }
+  val clickablePartStart = indexOf(clickablePart)
+  setSpan(
+    clickableSpan,
+    clickablePartStart,
+    clickablePartStart + clickablePart.length,
+    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+  )
+  return this
 }
 
 /**
  * subString 防越界处理
  */
 fun String.safeSubstring(startIndex: Int, endIndex: Int): String {
-    val begin = if (startIndex < 0) 0 else startIndex
-    val end = if (endIndex > length) length else endIndex
-    return substring(begin, end)
+  val begin = if (startIndex < 0) 0 else startIndex
+  val end = if (endIndex > length) length else endIndex
+  return substring(begin, end)
 }
 
 fun String?.safeToBoolean(default: Boolean = false): Boolean {
-    if (this == null) return default
-    return try {
-        toBoolean()
-    } catch (e: Throwable) {
-        e.printStackTrace()
-        default
-    }
+  if (this == null) return default
+  return try {
+    toBoolean()
+  } catch (e: Throwable) {
+    e.printStackTrace()
+    default
+  }
 }
 
 fun String?.safeToInt(default: Int = 0): Int {
-    if (this == null) return default
-    return try {
-        toInt()
-    } catch (e: Throwable) {
-        e.printStackTrace()
-        default
-    }
+  if (this == null) return default
+  return try {
+    toInt()
+  } catch (e: Throwable) {
+    e.printStackTrace()
+    default
+  }
 }
 
 fun String?.safeToLong(default: Long = 0L): Long {
-    if (this == null) return default
-    return try {
-        toLong()
-    } catch (e: Throwable) {
-        e.printStackTrace()
-        default
-    }
+  if (this == null) return default
+  return try {
+    toLong()
+  } catch (e: Throwable) {
+    e.printStackTrace()
+    default
+  }
 }
 
 fun String?.safeToFloat(default: Float = 0f): Float {
-    if (this == null) return default
-    return try {
-        toFloat()
-    } catch (e: Throwable) {
-        e.printStackTrace()
-        default
-    }
+  if (this == null) return default
+  return try {
+    toFloat()
+  } catch (e: Throwable) {
+    e.printStackTrace()
+    default
+  }
 }
 
 fun String?.safeToDouble(default: Double = 0.0): Double {
-    if (this == null) return default
-    return try {
-        toDouble()
-    } catch (e: Throwable) {
-        e.printStackTrace()
-        default
-    }
+  if (this == null) return default
+  return try {
+    toDouble()
+  } catch (e: Throwable) {
+    e.printStackTrace()
+    default
+  }
 }
 
 @ColorInt
 fun String?.safeToColor(@ColorInt default: Int = 0): Int {
-    return try {
-        Color.parseColor(this)
-    } catch (e: Throwable) {
-        e.printStackTrace()
-        default
-    }
+  return try {
+    Color.parseColor(this)
+  } catch (e: Throwable) {
+    e.printStackTrace()
+    default
+  }
 }
 
 fun String?.isNetworkUrl(): Boolean = URLUtil.isNetworkUrl(this)
@@ -198,34 +198,34 @@ fun String.isValidPhoneFormat(): Boolean = startsWith("1") && length == 11
  * 隐藏手机号
  */
 fun String.hidePhone(): String {
-    return replace(Regex("(\\d{3})\\d{4}(\\d{4})"), "$1****$2")
+  return replace(Regex("(\\d{3})\\d{4}(\\d{4})"), "$1****$2")
 }
 
 // ---------------------Calculate-------------------------------//
 
 infix fun Double.plus(that: Double): Double {
-    return (BigDecimal(this.toString()) + BigDecimal(that.toString())).toDouble()
+  return (BigDecimal(this.toString()) + BigDecimal(that.toString())).toDouble()
 }
 
 infix fun Double.minus(that: Double): Double {
-    return (BigDecimal(this.toString()) - BigDecimal(that.toString())).toDouble()
+  return (BigDecimal(this.toString()) - BigDecimal(that.toString())).toDouble()
 }
 
 infix fun Double.times(that: Double): Double {
-    return (BigDecimal(this.toString()) * BigDecimal(that.toString())).toDouble()
+  return (BigDecimal(this.toString()) * BigDecimal(that.toString())).toDouble()
 }
 
 infix fun Double.div(that: Double): Double {
-    return (BigDecimal(this.toString()) / BigDecimal(that.toString())).toDouble()
+  return (BigDecimal(this.toString()) / BigDecimal(that.toString())).toDouble()
 }
 
 fun Number.isZero(): Boolean {
-    return when (this) {
-        is Double -> BigDecimal(this.toString()) == BigDecimal("0.0")
-        is Long -> this == 0L
-        is Short, is Int -> this == 0
-        else -> false
-    }
+  return when (this) {
+    is Double -> BigDecimal(this.toString()) == BigDecimal("0.0")
+    is Long -> this == 0L
+    is Short, is Int -> this == 0
+    else -> false
+  }
 }
 
 fun Number.isNotZero(): Boolean = isZero().not()
@@ -247,19 +247,19 @@ fun Boolean?.orFalse(): Boolean = this ?: false
 // ---------------------Collections-------------------------------//
 
 inline fun <E> MutableCollection<E>.removeIfMatch(predicate: (e: E) -> Boolean): Boolean {
-    var removed = false
-    val each = iterator()
-    while (each.hasNext()) {
-        if (predicate(each.next())) {
-            each.remove()
-            removed = true
-        }
+  var removed = false
+  val each = iterator()
+  while (each.hasNext()) {
+    if (predicate(each.next())) {
+      each.remove()
+      removed = true
     }
-    return removed
+  }
+  return removed
 }
 
 fun <E> MutableList<E>.remove() {
-    removeAt(0)
+  removeAt(0)
 }
 
 fun <T> Collection<T>?.isNotNullOrEmpty(): Boolean = isNullOrEmpty().not()
@@ -274,39 +274,39 @@ fun <T> Collection<T>?.isSingle(): Boolean = this != null && size == 1
  * @param minSize 最小为 2
  */
 fun <T> Collection<T>?.isMultiple(minSize: Int = 2): Boolean {
-    val min = if (minSize < 2) 2 else minSize
-    return this != null && size >= min
+  val min = if (minSize < 2) 2 else minSize
+  return this != null && size >= min
 }
 
 /**
  * 取集合内第二个元素
  */
 fun <T> List<T>.secondOrNull(): T? {
-    return if (size < 2) null else this[1]
+  return if (size < 2) null else this[1]
 }
 
 /**
  * 取集合内第三个元素
  */
 fun <T> List<T>.thirdOrNull(): T? {
-    return if (size < 3) null else this[2]
+  return if (size < 3) null else this[2]
 }
 
 fun paramMapOf(vararg pairs: Pair<String, Any>): HashMap<String, Any> =
-    HashMap<String, Any>(pairs.size).apply { putAll(pairs) }
+  HashMap<String, Any>(pairs.size).apply { putAll(pairs) }
 
 // ---------------------Coroutine-------------------------------//
 
 fun <T> CoroutineScope.defaultAsync(
-    start: CoroutineStart = CoroutineStart.DEFAULT,
-    block: suspend CoroutineScope.() -> T
+  start: CoroutineStart = CoroutineStart.DEFAULT,
+  block: suspend CoroutineScope.() -> T
 ) = async(SupervisorJob(), start, block)
 
 suspend fun <T> withIoContext(block: suspend CoroutineScope.() -> T) =
-    withContext(Dispatchers.IO, block)
+  withContext(Dispatchers.IO, block)
 
 suspend fun <T> withDefaultContext(block: suspend CoroutineScope.() -> T) =
-    withContext(Dispatchers.Default, block)
+  withContext(Dispatchers.Default, block)
 
 // ---------------------File-------------------------------//
 
@@ -316,32 +316,32 @@ fun File.notExists(): Boolean = exists().not()
 
 @UiThread
 fun EditText.onTextChanged(listener: (String) -> Unit) {
-    this.addTextChangedListener(
-        object : TextWatcher {
+  this.addTextChangedListener(
+    object : TextWatcher {
 
-            override fun afterTextChanged(s: Editable?) {
-                listener(s.toString())
-            }
+      override fun afterTextChanged(s: Editable?) {
+        listener(s.toString())
+      }
 
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) =
-                Unit
+      override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) =
+        Unit
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) = Unit
-        }
-    )
+      override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) = Unit
+    }
+  )
 }
 
 // ---------------------Fragment-------------------------------//
 
 @UiThread
 fun <T : Fragment> T.putArguments(bundle: Bundle): T {
-    arguments = bundle
-    return this
+  arguments = bundle
+  return this
 }
 
 @UiThread
 fun <T : Fragment> T.putArguments(vararg pairs: Pair<String, Any?>): T =
-    putArguments(bundleOf(*pairs))
+  putArguments(bundleOf(*pairs))
 
 /**
  * @param containerViewId   容器 id
@@ -351,16 +351,16 @@ fun <T : Fragment> T.putArguments(vararg pairs: Pair<String, Any?>): T =
  */
 @UiThread
 fun FragmentManager.addFragment(
-    @IdRes containerViewId: Int,
-    fragment: Fragment,
-    isAddToBackStack: Boolean = false,
-    tag: String? = null
+  @IdRes containerViewId: Int,
+  fragment: Fragment,
+  isAddToBackStack: Boolean = false,
+  tag: String? = null
 ) {
-    if (fragment.isAdded) return
-    commit {
-        if (isAddToBackStack) addToBackStack(tag)
-        add(containerViewId, fragment, tag)
-    }
+  if (fragment.isAdded) return
+  commit {
+    if (isAddToBackStack) addToBackStack(tag)
+    add(containerViewId, fragment, tag)
+  }
 }
 
 /**
@@ -371,34 +371,34 @@ fun FragmentManager.addFragment(
  */
 @UiThread
 fun FragmentManager.replaceFragment(
-    @IdRes containerViewId: Int,
-    fragment: Fragment,
-    isAddToBackStack: Boolean = true,
-    tag: String? = null
+  @IdRes containerViewId: Int,
+  fragment: Fragment,
+  isAddToBackStack: Boolean = true,
+  tag: String? = null
 ) {
-    if (fragment.isAdded) return
-    commit {
-        if (isAddToBackStack) addToBackStack(tag)
-        replace(containerViewId, fragment, tag)
-    }
+  if (fragment.isAdded) return
+  commit {
+    if (isAddToBackStack) addToBackStack(tag)
+    replace(containerViewId, fragment, tag)
+  }
 }
 
 // ---------------------Activity-------------------------------//
 
 @UiThread
 inline fun <reified T : ViewDataBinding> Activity.binding(@LayoutRes resId: Int): Lazy<T> =
-    lazy(LazyThreadSafetyMode.NONE) { DataBindingUtil.setContentView(this, resId) }
+  lazy(LazyThreadSafetyMode.NONE) { DataBindingUtil.setContentView(this, resId) }
 
 fun Activity.getScreenHeight(): Int {
-    val size = Point()
-    windowManager.defaultDisplay.getSize(size)
-    return size.y
+  val size = Point()
+  windowManager.defaultDisplay.getSize(size)
+  return size.y
 }
 
 fun Activity.getScreenWidth(): Int {
-    val size = Point()
-    windowManager.defaultDisplay.getSize(size)
-    return size.x
+  val size = Point()
+  windowManager.defaultDisplay.getSize(size)
+  return size.x
 }
 
 // ---------------------Other-------------------------------//
@@ -407,16 +407,16 @@ fun Activity.getScreenWidth(): Int {
  * 条件为真时执行
  */
 inline fun Boolean.trueRun(block: () -> Unit) {
-    if (this) {
-        block()
-    }
+  if (this) {
+    block()
+  }
 }
 
 /**
  * 条件为假时执行
  */
 inline fun Boolean.falseRun(block: () -> Unit) {
-    if (this.not()) {
-        block()
-    }
+  if (this.not()) {
+    block()
+  }
 }

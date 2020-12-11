@@ -10,26 +10,26 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
  * ViewPager2 的 [FragmentStateAdapter] 默认就可在 Fragment#onResume 中实现懒加载
  */
 abstract class BaseFragmentStateAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
-    FragmentStateAdapter(fragmentManager, lifecycle) {
+  FragmentStateAdapter(fragmentManager, lifecycle) {
 
-    private val fragmentList = ArrayList<Fragment>()
+  private val fragmentList = ArrayList<Fragment>()
 
-    open fun setData(fragments: List<Fragment>? = null) {
-        fragments?.let {
-            fragmentList.clear()
-            fragmentList.addAll(it)
-        }
-        notifyDataSetChanged()
+  open fun setData(fragments: List<Fragment>? = null) {
+    fragments?.let {
+      fragmentList.clear()
+      fragmentList.addAll(it)
     }
+    notifyDataSetChanged()
+  }
 
-    override fun createFragment(@IntRange(from = 0) position: Int): Fragment =
-        fragmentList[position]
+  override fun createFragment(@IntRange(from = 0) position: Int): Fragment =
+    fragmentList[position]
 
-    override fun getItemCount(): Int = fragmentList.size
+  override fun getItemCount(): Int = fragmentList.size
 }
 
 /**
  * 通用 adapter
  */
 class CommonFragmentStateAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
-    BaseFragmentStateAdapter(fragmentManager, lifecycle)
+  BaseFragmentStateAdapter(fragmentManager, lifecycle)

@@ -17,52 +17,52 @@ import java.util.concurrent.CancellationException
 @AndroidEntryPoint
 class MainHomeFragment private constructor() : BaseThemeLazyFragment() {
 
-    private val binding by unsafeLazy {
-        MainHomeFragmentBinding.inflate(layoutInflater).also {
-            it.lifecycleOwner = viewLifecycleOwner
-            it.vm = vm
-            it.listener = eventListener
+  private val binding by unsafeLazy {
+    MainHomeFragmentBinding.inflate(layoutInflater).also {
+      it.lifecycleOwner = viewLifecycleOwner
+      it.vm = vm
+      it.listener = eventListener
+    }
+  }
+
+  private val vm: MainHomeViewModel by getViewModel()
+
+  override fun onFragmentResume() {
+    vm.initData()
+  }
+
+  override fun onCreateView(
+    inflater: LayoutInflater,
+    container: ViewGroup?,
+    savedInstanceState: Bundle?
+  ): View {
+    return binding.root
+  }
+
+  private val eventListener = View.OnClickListener {
+    when (it.id) {
+      R.id.bt_one -> {
+        RouterManager.goWeb("http://m.bilibili.com")
+      }
+      R.id.bt_two -> {
+        vm.getRepoListFromDb()
+      }
+      R.id.bt_three -> {
+        vm.getRepoListFromDs()
+      }
+      R.id.bt_four -> {
+        if (vm.countdownJob?.isActive != true) {
+          vm.startCountDown {}
+        } else {
+          vm.countdownJob?.cancel(
+            CancellationException(MainHomeViewModel.CANCEL_MANUALLY)
+          )
         }
+      }
     }
+  }
 
-    private val vm: MainHomeViewModel by getViewModel()
-
-    override fun onFragmentResume() {
-        vm.initData()
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        return binding.root
-    }
-
-    private val eventListener = View.OnClickListener {
-        when (it.id) {
-            R.id.bt_one -> {
-                RouterManager.goWeb("http://m.bilibili.com")
-            }
-            R.id.bt_two -> {
-                vm.getRepoListFromDb()
-            }
-            R.id.bt_three -> {
-                vm.getRepoListFromDs()
-            }
-            R.id.bt_four -> {
-                if (vm.countdownJob?.isActive != true) {
-                    vm.startCountDown {}
-                } else {
-                    vm.countdownJob?.cancel(
-                        CancellationException(MainHomeViewModel.CANCEL_MANUALLY)
-                    )
-                }
-            }
-        }
-    }
-
-    companion object {
-        fun newInstance() = MainHomeFragment()
-    }
+  companion object {
+    fun newInstance(): MainHomeFragment = MainHomeFragment()
+  }
 }

@@ -9,15 +9,15 @@ import retrofit2.http.QueryMap
 
 interface MainCommonApi {
 
-    @GET("users/{user}/repos")
-    fun getRepoListRx(
-        @Path("user") user: String,
-        @QueryMap params: ParamMap
-    ): Observable<List<MainRepoListBean>>
+  @GET("users/{user}/repos")
+  fun getRepoListRx(
+    @Path("user") user: String,
+    @QueryMap params: ParamMap
+  ): Observable<List<MainRepoListBean>>
 
-    @GET("users/{user}/repos")
-    suspend fun getRepoListCr(
-        @Path("user") user: String,
-        @QueryMap params: ParamMap
-    ): List<MainRepoListBean>
+  @GET("users/{user}/repos")
+  suspend fun getRepoListCr(
+    @Path("user") user: String,
+    @QueryMap params: ParamMap
+  ): List<MainRepoListBean>
 }

@@ -9,9 +9,9 @@ import io.goooler.demoapp.main.bean.MainRepoListBean
 @Dao
 interface MainCommonDao {
 
-    @Query("SELECT * FROM main_repo_list")
-    suspend fun getRepoList(): List<MainRepoListBean>
+  @Query("SELECT * FROM main_repo_list")
+  suspend fun getRepoList(): List<MainRepoListBean>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertRepoList(vararg entities: MainRepoListBean)
+  @Insert(onConflict = OnConflictStrategy.REPLACE)
+  suspend fun insertRepoList(vararg entities: MainRepoListBean)
 }

@@ -14,25 +14,25 @@ import androidx.databinding.ViewDataBinding
  */
 interface ViewTypeDelegate<DB : ViewDataBinding, M : IVhModelType> {
 
-    /**
-     * The delegate takes effect when this.getViewType() == model.getViewType().
-     *
-     * @[LayoutRes]
-     */
-    val viewType: Int
+  /**
+   * The delegate takes effect when this.getViewType() == model.getViewType().
+   *
+   * @[LayoutRes]
+   */
+  val viewType: Int
 
-    /**
-     * What to do when creating the viewHolder.
-     *
-     * @param binding ViewDataBinding
-     */
-    fun onCreateVH(binding: DB)
+  /**
+   * What to do when creating the viewHolder.
+   *
+   * @param binding ViewDataBinding
+   */
+  fun onCreateVH(binding: DB)
 
-    /**
-     * What to do when binding the viewHolder.
-     *
-     * @param binding ViewDataBinding
-     * @param model model
-     */
-    fun onBindVH(binding: DB, model: M)
+  /**
+   * What to do when binding the viewHolder.
+   *
+   * @param binding ViewDataBinding
+   * @param model model
+   */
+  fun onBindVH(binding: DB, model: M)
 }

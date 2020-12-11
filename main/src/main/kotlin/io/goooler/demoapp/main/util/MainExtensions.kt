@@ -4,9 +4,9 @@ import androidx.databinding.ViewDataBinding
 import io.goooler.demoapp.main.BR
 
 internal fun ViewDataBinding.bindListener(listener: Any) {
-    setVariable(BR.listener, listener)
+  setVariable(BR.listener, listener)
 }
 
 internal fun ViewDataBinding.bindModel(model: Any) {
-    setVariable(BR.model, model)
+  setVariable(BR.model, model)
 }

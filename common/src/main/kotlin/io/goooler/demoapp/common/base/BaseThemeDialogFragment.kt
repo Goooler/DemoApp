@@ -4,9 +4,9 @@ import io.goooler.demoapp.base.core.BaseDialogFragment
 
 abstract class BaseThemeDialogFragment : BaseDialogFragment(), ITheme {
 
-    override fun showLoading() {
-    }
+  override fun showLoading() {
+  }
 
-    override fun hideLoading() {
-    }
+  override fun hideLoading() {
+  }
 }

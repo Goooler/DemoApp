@@ -10,13 +10,13 @@ import io.goooler.demoapp.login.R
 @Route(path = RouterPath.LOGIN)
 class LoginActivity : BaseThemeActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        if (intent.action == RouterManager.RE_LOGIN) {
-            setContentView(R.layout.login_activity)
-        } else {
-            RouterManager.goMain()
-            finish()
-        }
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    if (intent.action == RouterManager.RE_LOGIN) {
+      setContentView(R.layout.login_activity)
+    } else {
+      RouterManager.goMain()
+      finish()
     }
+  }
 }

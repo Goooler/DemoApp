@@ -6,13 +6,13 @@ import io.reactivex.rxjava3.disposables.Disposable
 
 abstract class BaseRxViewModel : BaseThemeViewModel() {
 
-    private val compositeDisposable = CompositeDisposable()
+  private val compositeDisposable = CompositeDisposable()
 
-    override fun onDestroy(owner: LifecycleOwner) {
-        compositeDisposable.clear()
-    }
+  override fun onDestroy(owner: LifecycleOwner) {
+    compositeDisposable.clear()
+  }
 
-    protected fun Disposable.autoDispose() {
-        compositeDisposable.add(this)
-    }
+  protected fun Disposable.autoDispose() {
+    compositeDisposable.add(this)
+  }
 }

@@ -12,8 +12,8 @@ import io.goooler.demoapp.main.repository.MainCommonRepository
 @InstallIn(SingletonComponent::class)
 object MainProviderModule {
 
-    @Provides
-    fun provideMainCommonRepository(): MainCommonRepository {
-        return MainCommonRepository(RetrofitHelper.create(), RoomHelper.create())
-    }
+  @Provides
+  fun provideMainCommonRepository(): MainCommonRepository {
+    return MainCommonRepository(RetrofitHelper.create(), RoomHelper.create())
+  }
 }

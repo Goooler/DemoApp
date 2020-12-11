@@ -18,26 +18,25 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 
 object RetrofitHelper : BaseRetrofitHelper() {
 
-    override val baseUrl: String = BuildConfig.API_HOST
+  override val baseUrl: String = BuildConfig.API_HOST
 
-    override val context: Context = BaseApplication.app
+  override val context: Context = BaseApplication.app
 
-    override val converterFactory: Converter.Factory = MoshiConverterFactory.create(JsonUtil.moshi)
+  override val converterFactory: Converter.Factory = MoshiConverterFactory.create(JsonUtil.moshi)
 
-    override val statusListener: StatusInterceptor.StatusListener =
-        StatusInterceptor.StatusListener {
-            AppUserInfoManager.resetUserInfo()
-            RouterManager.goLogin(true)
-        }
+  override val statusListener: StatusInterceptor.StatusListener = StatusInterceptor.StatusListener {
+    AppUserInfoManager.resetUserInfo()
+    RouterManager.goLogin(true)
+  }
 
-    override fun Retrofit.Builder.addCallAdapterFactory(): Retrofit.Builder {
-        addCallAdapterFactory(RxJava3CallAdapterFactory.create())
-        return this
-    }
+  override fun Retrofit.Builder.addCallAdapterFactory(): Retrofit.Builder {
+    addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+    return this
+  }
 
-    override fun OkHttpClient.Builder.addInterceptor(): OkHttpClient.Builder {
-        addInterceptor(CookieInterceptor.create())
-        addNetworkInterceptor(HttpLogger.newLogInterceptor())
-        return this
-    }
+  override fun OkHttpClient.Builder.addInterceptor(): OkHttpClient.Builder {
+    addInterceptor(CookieInterceptor.create())
+    addNetworkInterceptor(HttpLogger.newLogInterceptor())
+    return this
+  }
 }

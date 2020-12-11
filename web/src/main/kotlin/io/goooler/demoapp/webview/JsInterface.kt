@@ -2,5 +2,5 @@ package io.goooler.demoapp.webview
 
 interface JsInterface {
 
-    fun setTitle(title: String)
+  fun setTitle(title: String)
 }

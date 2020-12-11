@@ -6,9 +6,9 @@ import io.goooler.demoapp.common.router.RouterManager
 
 class SplashActivity : BaseThemeActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        RouterManager.goMain()
-        overridePendingTransition(0, 0)
-    }
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    RouterManager.goMain()
+    overridePendingTransition(0, 0)
+  }
 }

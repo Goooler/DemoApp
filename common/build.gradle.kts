@@ -1,13 +1,13 @@
 plugins {
-    id(Plugins.androidLibrary)
+  id(Plugins.androidLibrary)
 }
 
 setupCommon(Module.Common)
 
 dependencies {
-    // network
-    implementation(
-        Libs.coil,
-        Libs.okHttpLogInterceptor
-    )
+  // network
+  implementation(
+    Libs.coil,
+    Libs.okHttpLogInterceptor
+  )
 }

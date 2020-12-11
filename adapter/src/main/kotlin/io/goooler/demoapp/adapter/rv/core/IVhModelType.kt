@@ -11,9 +11,9 @@ import androidx.annotation.LayoutRes
  */
 interface IVhModelType {
 
-    /**
-     * Get the viewType. You can treat layout ID as viewType.
-     * @[LayoutRes]
-     */
-    val viewType: Int
+  /**
+   * Get the viewType. You can treat layout ID as viewType.
+   * @[LayoutRes]
+   */
+  val viewType: Int
 }

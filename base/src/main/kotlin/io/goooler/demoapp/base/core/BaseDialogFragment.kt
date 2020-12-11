@@ -5,14 +5,14 @@ import androidx.fragment.app.DialogFragment
 @Suppress("MemberVisibilityCanBePrivate")
 abstract class BaseDialogFragment : DialogFragment() {
 
-    var dismissListener: OnDismissListener? = null
+  var dismissListener: OnDismissListener? = null
 
-    override fun dismiss() {
-        dismissListener?.onDismiss()
-        super.dismiss()
-    }
+  override fun dismiss() {
+    dismissListener?.onDismiss()
+    super.dismiss()
+  }
 
-    fun interface OnDismissListener {
-        fun onDismiss()
-    }
+  fun interface OnDismissListener {
+    fun onDismiss()
+  }
 }

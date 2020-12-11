@@ -12,23 +12,23 @@ import java.lang.reflect.Type
 
 object FastJsonConverterFactory : Converter.Factory() {
 
-    val instance: FastJsonConverterFactory = this
+  val instance: FastJsonConverterFactory = this
 
-    override fun requestBodyConverter(
-        type: Type,
-        parameterAnnotations: Array<Annotation>,
-        methodAnnotations: Array<Annotation>,
-        retrofit: Retrofit
-    ): Converter<Any, RequestBody> = Converter {
-        JSON.toJSONBytes(it, SerializeConfig.getGlobalInstance())
-            .toRequestBody("application/json; charset=UTF-8".toMediaType())
-    }
+  override fun requestBodyConverter(
+    type: Type,
+    parameterAnnotations: Array<Annotation>,
+    methodAnnotations: Array<Annotation>,
+    retrofit: Retrofit
+  ): Converter<Any, RequestBody> = Converter {
+    JSON.toJSONBytes(it, SerializeConfig.getGlobalInstance())
+      .toRequestBody("application/json; charset=UTF-8".toMediaType())
+  }
 
-    override fun responseBodyConverter(
-        type: Type,
-        annotations: Array<Annotation>,
-        retrofit: Retrofit
-    ): Converter<ResponseBody, Any> = Converter {
-        JSON.parseObject(it.string(), type)
-    }
+  override fun responseBodyConverter(
+    type: Type,
+    annotations: Array<Annotation>,
+    retrofit: Retrofit
+  ): Converter<ResponseBody, Any> = Converter {
+    JSON.parseObject(it.string(), type)
+  }
 }

@@ -13,40 +13,40 @@ import io.goooler.demoapp.common.databinding.FullScreenDialogFragmentBinding
 
 class FullScreenDialogFragment private constructor() : BaseThemeDialogFragment() {
 
-    private val binding by unsafeLazy {
-        FullScreenDialogFragmentBinding.inflate(layoutInflater)
-    }
+  private val binding by unsafeLazy {
+    FullScreenDialogFragmentBinding.inflate(layoutInflater)
+  }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setStyle(STYLE_NO_TITLE, R.style.DialogFullScreenTheme)
-    }
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    setStyle(STYLE_NO_TITLE, R.style.DialogFullScreenTheme)
+  }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding.lifecycleOwner = this
-        binding.ivCenter.setOnClickListener {
-            dismiss()
+  override fun onCreateView(
+    inflater: LayoutInflater,
+    container: ViewGroup?,
+    savedInstanceState: Bundle?
+  ): View {
+    binding.lifecycleOwner = this
+    binding.ivCenter.setOnClickListener {
+      dismiss()
+    }
+    dialog?.run {
+      setCanceledOnTouchOutside(isCancelable)
+      setCancelable(isCancelable)
+      setOnKeyListener { _, keyCode, _ ->
+        when (keyCode) {
+          KeyEvent.KEYCODE_BACK -> true
+          else -> false
         }
-        dialog?.run {
-            setCanceledOnTouchOutside(isCancelable)
-            setCancelable(isCancelable)
-            setOnKeyListener { _, keyCode, _ ->
-                when (keyCode) {
-                    KeyEvent.KEYCODE_BACK -> true
-                    else -> false
-                }
-            }
-        }
-        return binding.root
+      }
     }
+    return binding.root
+  }
 
-    override fun isCancelable(): Boolean = false
+  override fun isCancelable(): Boolean = false
 
-    companion object {
-        fun show(manager: FragmentManager) = FullScreenDialogFragment().show(manager, null)
-    }
+  companion object {
+    fun show(manager: FragmentManager) = FullScreenDialogFragment().show(manager, null)
+  }
 }

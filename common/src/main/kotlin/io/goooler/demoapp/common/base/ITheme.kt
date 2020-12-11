@@ -2,7 +2,7 @@ package io.goooler.demoapp.common.base
 
 internal interface ITheme {
 
-    fun showLoading()
+  fun showLoading()
 
-    fun hideLoading()
+  fun hideLoading()
 }

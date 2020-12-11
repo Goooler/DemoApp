@@ -25,13 +25,13 @@ private const val appBuildTool = "30.0.3"
 private const val appMinSdk = 23
 private val javaVersion = JavaVersion.VERSION_1_8
 private val ndkLibs = setOf(
-    "armeabi-v7a", "x86"
+  "armeabi-v7a", "x86"
 )
 
 private const val cdnPrefix = "https://raw.githubusercontent.com/"
 private val apiHosts = mapOf(
-    Flavor.Daily.flavor to "https://api.github.com/",
-    Flavor.Online.flavor to "https://api.github.com/"
+  Flavor.Daily.flavor to "https://api.github.com/",
+  Flavor.Online.flavor to "https://api.github.com/"
 )
 
 // app
@@ -42,29 +42,29 @@ const val appName = "Demo"
 const val extraScriptPath = "buildSrc/extra.gradle.kts"
 
 val localLibs = mapOf(
-    "dir" to "libs",
-    "include" to arrayOf("*.jar", "*.aar")
+  "dir" to "libs",
+  "include" to arrayOf("*.jar", "*.aar")
 )
 
 fun DependencyHandler.api(vararg names: Any): Array<Dependency?> =
-    names.map {
-        add("api", it)
-    }.toTypedArray()
+  names.map {
+    add("api", it)
+  }.toTypedArray()
 
 fun DependencyHandler.implementation(vararg names: Any): Array<Dependency?> =
-    names.map {
-        add("implementation", it)
-    }.toTypedArray()
+  names.map {
+    add("implementation", it)
+  }.toTypedArray()
 
 fun DependencyHandler.kapt(vararg names: Any): Array<Dependency?> =
-    names.map {
-        add("kapt", it)
-    }.toTypedArray()
+  names.map {
+    add("kapt", it)
+  }.toTypedArray()
 
 fun DependencyHandler.androidTestImplementation(vararg names: Any): Array<Dependency?> =
-    names.map {
-        add("androidTestImplementation", it)
-    }.toTypedArray()
+  names.map {
+    add("androidTestImplementation", it)
+  }.toTypedArray()
 
 fun getModuleName(module: Module) = ":${module.module}"
 
@@ -73,188 +73,187 @@ fun getResourcePrefix(module: Module) = "${module.module}_"
 fun getVersionNameSuffix(module: Module) = "_${module.module}"
 
 fun String.isStableVersion(): Boolean {
-    val stableKeyword =
-        listOf("RELEASE", "FINAL", "GA").any { toUpperCase(Locale.ROOT).contains(it) }
-    return stableKeyword || "^[0-9,.v-]+(-r)?$".toRegex().matches(this)
+  val stableKeyword = listOf("RELEASE", "FINAL", "GA").any { toUpperCase(Locale.ROOT).contains(it) }
+  return stableKeyword || "^[0-9,.v-]+(-r)?$".toRegex().matches(this)
 }
 
 fun BaseExtension.asLibraryExtension(): LibraryExtension = this as LibraryExtension
 
 fun Project.setupBase(): BaseExtension {
-    return extensions.getByName<BaseExtension>("android").apply {
-        plugins.run {
-            apply(Plugins.kotlinAndroid)
-            apply(Plugins.kotlinKapt)
-        }
-        compileSdkVersion(appTargetSdk)
-        buildToolsVersion = appBuildTool
-        defaultConfig {
-            minSdkVersion(appMinSdk)
-            targetSdkVersion(appTargetSdk)
-            versionCode = appVersionCode
-            versionName = appVersionName
-            vectorDrawables.useSupportLibrary = true
-            ndk { abiFilters.addAll(ndkLibs) }
-        }
-        sourceSets["main"].run {
-            java.srcDirs("src/main/kotlin")
-        }
-        compileOptions {
-            incremental = true
-            setDefaultJavaVersion(javaVersion)
-            sourceCompatibility = javaVersion
-            targetCompatibility = javaVersion
-        }
-        (this as ExtensionAware).extensions.getByName<KotlinJvmOptions>("kotlinOptions").run {
-            jvmTarget = javaVersion.toString()
-            useIR = true
-            freeCompilerArgs = listOf(
-                "-Xjvm-default=compatibility"
-            )
-        }
-        lintOptions {
-            isAbortOnError = true
-            isCheckReleaseBuilds = true
-        }
+  return extensions.getByName<BaseExtension>("android").apply {
+    plugins.run {
+      apply(Plugins.kotlinAndroid)
+      apply(Plugins.kotlinKapt)
     }
+    compileSdkVersion(appTargetSdk)
+    buildToolsVersion = appBuildTool
+    defaultConfig {
+      minSdkVersion(appMinSdk)
+      targetSdkVersion(appTargetSdk)
+      versionCode = appVersionCode
+      versionName = appVersionName
+      vectorDrawables.useSupportLibrary = true
+      ndk { abiFilters.addAll(ndkLibs) }
+    }
+    sourceSets["main"].run {
+      java.srcDirs("src/main/kotlin")
+    }
+    compileOptions {
+      incremental = true
+      setDefaultJavaVersion(javaVersion)
+      sourceCompatibility = javaVersion
+      targetCompatibility = javaVersion
+    }
+    (this as ExtensionAware).extensions.getByName<KotlinJvmOptions>("kotlinOptions").run {
+      jvmTarget = javaVersion.toString()
+      useIR = true
+      freeCompilerArgs = listOf(
+        "-Xjvm-default=compatibility"
+      )
+    }
+    lintOptions {
+      isAbortOnError = true
+      isCheckReleaseBuilds = true
+    }
+  }
 }
 
 fun Project.setupCommon(module: Module? = null): BaseExtension {
-    return setupBase().apply {
-        module?.let {
-            resourcePrefix = getResourcePrefix(it)
-            defaultConfig.versionNameSuffix = getVersionNameSuffix(it)
-        }
-        flavorDimensions("channel")
-        productFlavors {
-            create(Flavor.Daily.flavor)
-            create(Flavor.Online.flavor)
-            if (module == Module.Common) {
-                all {
-                    putBuildConfigIntField(BuildConfigField.VersionCode.tag, appVersionCode)
-                    putBuildConfigStringField(BuildConfigField.VersionName.tag, appVersionName)
-                    putBuildConfigStringField(BuildConfigField.CdnPrefix.tag, cdnPrefix)
-                    putBuildConfigStringField(BuildConfigField.ApiHost.tag, apiHosts[name])
-                }
-            }
-        }
-        extensions.getByName<KaptExtension>("kapt").arguments {
-            arg("AROUTER_MODULE_NAME", project.name)
-            arg("room.schemaLocation", "$projectDir/build")
-            arg("room.incremental", "true")
-            arg("room.expandProjection", "true")
-        }
-        dependencies {
-            if (module != Module.Common) {
-                implementation(project(getModuleName(Module.Common)))
-            }
-            implementation(
-                // local
-                fileTree(localLibs),
-                project(getModuleName(Module.Base)),
-
-                // router
-                Libs.arouter,
-
-                // UI
-                *Libs.smartRefreshLayout,
-                Libs.photoView,
-
-                // utils
-                *Libs.hilt,
-                *Libs.room,
-                *Libs.dataStore,
-                *Libs.rx,
-                *Libs.moshi,
-                Libs.collection,
-                Libs.utils,
-                Libs.permissionX
-            )
-            kapt(Libs.arouterKapt, Libs.moshiKapt, Libs.roomKapt, *Libs.hiltKapt)
-        }
-        plugins.run {
-            apply(Plugins.arouter)
-            apply(Plugins.hilt)
-        }
+  return setupBase().apply {
+    module?.let {
+      resourcePrefix = getResourcePrefix(it)
+      defaultConfig.versionNameSuffix = getVersionNameSuffix(it)
     }
+    flavorDimensions("channel")
+    productFlavors {
+      create(Flavor.Daily.flavor)
+      create(Flavor.Online.flavor)
+      if (module == Module.Common) {
+        all {
+          putBuildConfigIntField(BuildConfigField.VersionCode.tag, appVersionCode)
+          putBuildConfigStringField(BuildConfigField.VersionName.tag, appVersionName)
+          putBuildConfigStringField(BuildConfigField.CdnPrefix.tag, cdnPrefix)
+          putBuildConfigStringField(BuildConfigField.ApiHost.tag, apiHosts[name])
+        }
+      }
+    }
+    extensions.getByName<KaptExtension>("kapt").arguments {
+      arg("AROUTER_MODULE_NAME", project.name)
+      arg("room.schemaLocation", "$projectDir/build")
+      arg("room.incremental", "true")
+      arg("room.expandProjection", "true")
+    }
+    dependencies {
+      if (module != Module.Common) {
+        implementation(project(getModuleName(Module.Common)))
+      }
+      implementation(
+        // local
+        fileTree(localLibs),
+        project(getModuleName(Module.Base)),
+
+        // router
+        Libs.arouter,
+
+        // UI
+        *Libs.smartRefreshLayout,
+        Libs.photoView,
+
+        // utils
+        *Libs.hilt,
+        *Libs.room,
+        *Libs.dataStore,
+        *Libs.rx,
+        *Libs.moshi,
+        Libs.collection,
+        Libs.utils,
+        Libs.permissionX
+      )
+      kapt(Libs.arouterKapt, Libs.moshiKapt, Libs.roomKapt, *Libs.hiltKapt)
+    }
+    plugins.run {
+      apply(Plugins.arouter)
+      apply(Plugins.hilt)
+    }
+  }
 }
 
 fun Project.setupApp(appPackageName: String, appName: String): BaseAppModuleExtension {
-    return (setupCommon() as BaseAppModuleExtension).apply {
-        defaultConfig {
-            applicationId = appPackageName
-            addManifestPlaceholders(
-                mapOf(
-                    "appName" to appName
-                )
-            )
-        }
-        signingConfigs {
-            create("sign") {
-                keyAlias = getSignProperty("keyAlias")
-                keyPassword = getSignProperty("keyPassword")
-                storeFile = File(rootDir.path, getSignProperty("storeFile"))
-                storePassword = getSignProperty("storePassword")
-            }
-        }
-        buildTypes {
-            getByName("release") {
-                signingConfig = signingConfigs["sign"]
-                isMinifyEnabled = true
-                isZipAlignEnabled = true
-                isShrinkResources = true
-                proguardFiles(
-                    "${rootDir.path}/gradle/proguard-rules.pro"
-                )
-            }
-            getByName("debug") {
-                signingConfig = signingConfigs["sign"]
-                applicationIdSuffix = ".debug"
-                versionNameSuffix = ".debug"
-                isJniDebuggable = true
-                isRenderscriptDebuggable = true
-                isCrunchPngs = false
-            }
-        }
-        buildTypes {
-            getByName("release") {
-                resValue("string", "app_name", appName)
-            }
-            getByName("debug") {
-                resValue("string", "app_name", "${appName}.debug")
-            }
-        }
-        applicationVariants.all {
-            outputs.all {
-                (this as BaseVariantOutputImpl).outputFileName =
-                    "../../../../${appName}_${versionName}_${versionCode}_${flavorName}_${buildType.name}.apk"
-            }
-        }
-        compileOptions.isCoreLibraryDesugaringEnabled = true
-        dependencies.run {
-            add("coreLibraryDesugaring", Libs.desugar)
-            add("debugImplementation", Libs.leakCanary)
-        }
+  return (setupCommon() as BaseAppModuleExtension).apply {
+    defaultConfig {
+      applicationId = appPackageName
+      addManifestPlaceholders(
+        mapOf(
+          "appName" to appName
+        )
+      )
     }
+    signingConfigs {
+      create("sign") {
+        keyAlias = getSignProperty("keyAlias")
+        keyPassword = getSignProperty("keyPassword")
+        storeFile = File(rootDir.path, getSignProperty("storeFile"))
+        storePassword = getSignProperty("storePassword")
+      }
+    }
+    buildTypes {
+      getByName("release") {
+        signingConfig = signingConfigs["sign"]
+        isMinifyEnabled = true
+        isZipAlignEnabled = true
+        isShrinkResources = true
+        proguardFiles(
+          "${rootDir.path}/gradle/proguard-rules.pro"
+        )
+      }
+      getByName("debug") {
+        signingConfig = signingConfigs["sign"]
+        applicationIdSuffix = ".debug"
+        versionNameSuffix = ".debug"
+        isJniDebuggable = true
+        isRenderscriptDebuggable = true
+        isCrunchPngs = false
+      }
+    }
+    buildTypes {
+      getByName("release") {
+        resValue("string", "app_name", appName)
+      }
+      getByName("debug") {
+        resValue("string", "app_name", "${appName}.debug")
+      }
+    }
+    applicationVariants.all {
+      outputs.all {
+        (this as BaseVariantOutputImpl).outputFileName =
+          "../../../../${appName}_${versionName}_${versionCode}_${flavorName}_${buildType.name}.apk"
+      }
+    }
+    compileOptions.isCoreLibraryDesugaringEnabled = true
+    dependencies.run {
+      add("coreLibraryDesugaring", Libs.desugar)
+      add("debugImplementation", Libs.leakCanary)
+    }
+  }
 }
 
 private fun Project.findPropertyString(key: String): String = findProperty(key) as String
 
 private fun Project.getSignProperty(
-    key: String,
-    path: String = "gradle/keystore.properties"
+  key: String,
+  path: String = "gradle/keystore.properties"
 ): String {
-    return Properties().apply {
-        rootProject.file(path).inputStream().use(::load)
-    }.getProperty(key)
+  return Properties().apply {
+    rootProject.file(path).inputStream().use(::load)
+  }.getProperty(key)
 }
 
 private fun VariantDimension.putBuildConfigStringField(name: String, value: String?) {
-    buildConfigField("String", name, "\"$value\"")
+  buildConfigField("String", name, "\"$value\"")
 }
 
 private fun VariantDimension.putBuildConfigIntField(name: String, value: Int) {
-    buildConfigField("Integer", name, value.toString())
+  buildConfigField("Integer", name, value.toString())
 }
 
 /**

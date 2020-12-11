@@ -12,45 +12,45 @@ import androidx.core.app.NotificationCompat
 
 abstract class BaseService : Service() {
 
-    /**
-     * 必须不为 0
-     */
-    protected open val channelId: Int = 1
+  /**
+   * 必须不为 0
+   */
+  protected open val channelId: Int = 1
 
-    protected open val contentTitle: String = ""
+  protected open val contentTitle: String = ""
 
-    protected open val channelName: String get() = getString(applicationInfo.labelRes)
+  protected open val channelName: String get() = getString(applicationInfo.labelRes)
 
-    protected open val smallIcon: Int get() = applicationInfo.icon
+  protected open val smallIcon: Int get() = applicationInfo.icon
 
-    protected open val notification: Notification get() = createNormalNotification(contentTitle)
+  protected open val notification: Notification get() = createNormalNotification(contentTitle)
 
-    override fun onCreate() {
-        super.onCreate()
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(
-                channelId.toString(),
-                channelName,
-                NotificationManager.IMPORTANCE_MIN
-            )
-            (getSystemService(Context.NOTIFICATION_SERVICE) as? NotificationManager)
-                ?.createNotificationChannel(channel)
-            startForeground(channelId, notification)
-        }
+  override fun onCreate() {
+    super.onCreate()
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+      val channel = NotificationChannel(
+        channelId.toString(),
+        channelName,
+        NotificationManager.IMPORTANCE_MIN
+      )
+      (getSystemService(Context.NOTIFICATION_SERVICE) as? NotificationManager)
+        ?.createNotificationChannel(channel)
+      startForeground(channelId, notification)
     }
+  }
 
-    override fun onBind(intent: Intent?): IBinder? = null
+  override fun onBind(intent: Intent?): IBinder? = null
 
-    protected open fun createNormalNotification(content: String?): Notification {
-        return NotificationCompat.Builder(this, channelId.toString()).also {
-            if (content.isNullOrEmpty()) {
-                it.setNotificationSilent()
-            } else {
-                it.setContentTitle(applicationInfo.name)
-                    .setContentTitle(content)
-                    .setWhen(System.currentTimeMillis())
-                    .setSmallIcon(smallIcon)
-            }
-        }.build()
-    }
+  protected open fun createNormalNotification(content: String?): Notification {
+    return NotificationCompat.Builder(this, channelId.toString()).also {
+      if (content.isNullOrEmpty()) {
+        it.setNotificationSilent()
+      } else {
+        it.setContentTitle(applicationInfo.name)
+          .setContentTitle(content)
+          .setWhen(System.currentTimeMillis())
+          .setSmallIcon(smallIcon)
+      }
+    }.build()
+  }
 }

@@ -12,16 +12,16 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 @Suppress("unused")
 abstract class BaseLazyFragment : BaseFragment(), ILazyFragment {
 
-    override fun onResume() {
-        super.onResume()
-        onFragmentResume()
-    }
+  override fun onResume() {
+    super.onResume()
+    onFragmentResume()
+  }
 }
 
 interface ILazyFragment {
 
-    /**
-     * 用于懒加载
-     */
-    fun onFragmentResume()
+  /**
+   * 用于懒加载
+   */
+  fun onFragmentResume()
 }

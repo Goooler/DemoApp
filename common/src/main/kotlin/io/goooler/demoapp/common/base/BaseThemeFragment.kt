@@ -4,9 +4,9 @@ import io.goooler.demoapp.base.core.BaseFragment
 
 abstract class BaseThemeFragment : BaseFragment(), ITheme {
 
-    override fun showLoading() {
-    }
+  override fun showLoading() {
+  }
 
-    override fun hideLoading() {
-    }
+  override fun hideLoading() {
+  }
 }

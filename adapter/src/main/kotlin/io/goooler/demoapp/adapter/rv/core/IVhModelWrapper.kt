@@ -11,10 +11,10 @@ package io.goooler.demoapp.adapter.rv.core
  */
 interface IVhModelWrapper<M : IVhModelType> : IVhModelType {
 
-    override val viewType: Int get() = throw RuntimeException("Wrapper can not getViewType()!")
+  override val viewType: Int get() = throw RuntimeException("Wrapper can not getViewType()!")
 
-    /**
-     * As sub model list.
-     */
-    fun asList(): List<M>
+  /**
+   * As sub model list.
+   */
+  fun asList(): List<M>
 }

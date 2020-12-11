@@ -5,13 +5,12 @@ import okhttp3.logging.HttpLoggingInterceptor
 
 class HttpLogger private constructor() : HttpLoggingInterceptor.Logger {
 
-    override fun log(message: String) {
-        LogUtil.d("networkLogTag", message)
-    }
+  override fun log(message: String) {
+    LogUtil.d("networkLogTag", message)
+  }
 
-    companion object {
-        fun newLogInterceptor(): HttpLoggingInterceptor {
-            return HttpLoggingInterceptor(HttpLogger()).setLevel(HttpLoggingInterceptor.Level.BASIC)
-        }
-    }
+  companion object {
+    fun newLogInterceptor(): HttpLoggingInterceptor =
+      HttpLoggingInterceptor(HttpLogger()).setLevel(HttpLoggingInterceptor.Level.BASIC)
+  }
 }

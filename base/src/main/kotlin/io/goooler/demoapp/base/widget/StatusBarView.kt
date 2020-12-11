@@ -11,14 +11,14 @@ import androidx.annotation.Px
  */
 class StatusBarView(context: Context, attrs: AttributeSet? = null) : View(context, attrs) {
 
-    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        setMeasuredDimension(MeasureSpec.getSize(widthMeasureSpec), getStatusBarHeight())
-    }
+  override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+    setMeasuredDimension(MeasureSpec.getSize(widthMeasureSpec), getStatusBarHeight())
+  }
 
-    @Px
-    private fun getStatusBarHeight(): Int {
-        val resources = Resources.getSystem()
-        val resourceId = resources.getIdentifier("status_bar_height", "dimen", "android")
-        return resources.getDimensionPixelSize(resourceId)
-    }
+  @Px
+  private fun getStatusBarHeight(): Int {
+    val resources = Resources.getSystem()
+    val resourceId = resources.getIdentifier("status_bar_height", "dimen", "android")
+    return resources.getDimensionPixelSize(resourceId)
+  }
 }

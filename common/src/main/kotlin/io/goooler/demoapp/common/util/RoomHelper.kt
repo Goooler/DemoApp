@@ -6,11 +6,11 @@ import io.goooler.demoapp.base.core.BaseApplication
 import io.goooler.demoapp.common.type.Databases
 
 object RoomHelper {
-    const val DB_VERSION = 1
+  const val DB_VERSION = 1
 
-    inline fun <reified T : RoomDatabase> create(db: Databases = Databases.Demo): T {
-        return Room.databaseBuilder(BaseApplication.app, T::class.java, db.dbName)
-            .fallbackToDestructiveMigration()
-            .build()
-    }
+  inline fun <reified T : RoomDatabase> create(db: Databases = Databases.Demo): T {
+    return Room.databaseBuilder(BaseApplication.app, T::class.java, db.dbName)
+      .fallbackToDestructiveMigration()
+      .build()
+  }
 }

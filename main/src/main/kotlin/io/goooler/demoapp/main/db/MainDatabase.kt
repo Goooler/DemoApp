@@ -6,10 +6,10 @@ import io.goooler.demoapp.common.util.RoomHelper
 import io.goooler.demoapp.main.bean.MainRepoListBean
 
 @Database(
-    entities = [MainRepoListBean::class],
-    version = RoomHelper.DB_VERSION
+  entities = [MainRepoListBean::class],
+  version = RoomHelper.DB_VERSION
 )
 abstract class MainDatabase : RoomDatabase() {
 
-    abstract val mainCommonDao: MainCommonDao
+  abstract val mainCommonDao: MainCommonDao
 }

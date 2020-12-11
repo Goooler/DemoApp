@@ -1,12 +1,12 @@
 plugins {
-    id(Plugins.androidLibrary)
+  id(Plugins.androidLibrary)
 }
 
 setupBase().run {
-    resourcePrefix = getResourcePrefix(Module.Widget)
-    defaultConfig.versionNameSuffix = getVersionNameSuffix(Module.Widget)
+  resourcePrefix = getResourcePrefix(Module.Widget)
+  defaultConfig.versionNameSuffix = getVersionNameSuffix(Module.Widget)
 }
 
 dependencies {
-    implementation(Libs.core)
+  implementation(Libs.core)
 }

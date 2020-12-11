@@ -1,5 +1,5 @@
 plugins {
-    id(Plugins.androidLibrary)
+  id(Plugins.androidLibrary)
 }
 
 setupCommon(Module.Web)

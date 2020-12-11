@@ -1,16 +1,16 @@
 plugins {
-    id(Plugins.androidLibrary)
+  id(Plugins.androidLibrary)
 }
 
 setupBase().run {
-    resourcePrefix = getResourcePrefix(Module.Adapter)
-    defaultConfig.versionNameSuffix = getVersionNameSuffix(Module.Adapter)
+  resourcePrefix = getResourcePrefix(Module.Adapter)
+  defaultConfig.versionNameSuffix = getVersionNameSuffix(Module.Adapter)
 }
 
 dependencies {
-    api(
-        Libs.recyclerView,
-        Libs.paging,
-        Libs.viewPager2
-    )
+  api(
+    Libs.recyclerView,
+    Libs.paging,
+    Libs.viewPager2
+  )
 }
