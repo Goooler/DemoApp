@@ -45,9 +45,7 @@ class MainSrlFragment private constructor() : BaseThemeLazyFragment() {
     inflater: LayoutInflater,
     container: ViewGroup?,
     savedInstanceState: Bundle?
-  ): View {
-    return binding.root
-  }
+  ): View = binding.root
 
   private val listener = object : MainSrlRvAdapter.OnEventListener, OnRefreshLoadMoreListener {
     override fun onContentClick(content: String) {

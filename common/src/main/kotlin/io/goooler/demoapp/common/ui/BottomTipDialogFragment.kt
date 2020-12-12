@@ -15,7 +15,16 @@ import io.goooler.demoapp.common.databinding.BottomTipDialogFragmentBinding
 class BottomTipDialogFragment private constructor() : BaseThemeDialogFragment() {
 
   private val binding by unsafeLazy {
-    BottomTipDialogFragmentBinding.inflate(layoutInflater)
+    BottomTipDialogFragmentBinding.inflate(layoutInflater).also {
+      it.lifecycleOwner = this
+      arguments?.let { bundle ->
+        it.tvTitle.text = bundle.getString(TITLE)
+        it.tvContent.text = bundle.getString(CONTENT)
+      }
+      it.ivClose.setOnClickListener {
+        dismiss()
+      }
+    }
   }
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,17 +36,7 @@ class BottomTipDialogFragment private constructor() : BaseThemeDialogFragment() 
     inflater: LayoutInflater,
     container: ViewGroup?,
     savedInstanceState: Bundle?
-  ): View {
-    binding.lifecycleOwner = this
-    arguments?.let {
-      binding.tvTitle.text = it.getString(TITLE)
-      binding.tvContent.text = it.getString(CONTENT)
-    }
-    binding.ivClose.setOnClickListener {
-      dismiss()
-    }
-    return binding.root
-  }
+  ): View = binding.root
 
   override fun onResume() {
     super.onResume()

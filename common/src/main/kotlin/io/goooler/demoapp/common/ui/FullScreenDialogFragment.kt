@@ -14,7 +14,12 @@ import io.goooler.demoapp.common.databinding.FullScreenDialogFragmentBinding
 class FullScreenDialogFragment private constructor() : BaseThemeDialogFragment() {
 
   private val binding by unsafeLazy {
-    FullScreenDialogFragmentBinding.inflate(layoutInflater)
+    FullScreenDialogFragmentBinding.inflate(layoutInflater).also {
+      it.lifecycleOwner = this
+      it.ivCenter.setOnClickListener {
+        dismiss()
+      }
+    }
   }
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,10 +32,6 @@ class FullScreenDialogFragment private constructor() : BaseThemeDialogFragment()
     container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View {
-    binding.lifecycleOwner = this
-    binding.ivCenter.setOnClickListener {
-      dismiss()
-    }
     dialog?.run {
       setCanceledOnTouchOutside(isCancelable)
       setCancelable(isCancelable)

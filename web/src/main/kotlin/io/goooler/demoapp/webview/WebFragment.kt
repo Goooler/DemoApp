@@ -20,6 +20,9 @@ class WebFragment private constructor() : BaseThemeFragment() {
       it.lifecycleOwner = viewLifecycleOwner
       it.webView.onEventListener = listener
       it.webView.addJavascriptInterface(listener, "android")
+      arguments?.getString(URL)?.let { url ->
+        it.webView.loadUrl(url)
+      }
     }
   }
 
@@ -37,16 +40,7 @@ class WebFragment private constructor() : BaseThemeFragment() {
     inflater: LayoutInflater,
     container: ViewGroup?,
     savedInstanceState: Bundle?
-  ): View {
-    return binding.root
-  }
-
-  override fun onActivityCreated(savedInstanceState: Bundle?) {
-    super.onActivityCreated(savedInstanceState)
-    arguments?.getString(URL)?.let {
-      binding.webView.loadUrl(it)
-    }
-  }
+  ): View = binding.root
 
   private val listener = object : CustomWebView.OnEventListener, JsInterface {
     override fun onInterceptUri(uri: Uri) {

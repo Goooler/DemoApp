@@ -21,7 +21,7 @@ class MainHomeFragment private constructor() : BaseThemeLazyFragment() {
     MainHomeFragmentBinding.inflate(layoutInflater).also {
       it.lifecycleOwner = viewLifecycleOwner
       it.vm = vm
-      it.listener = eventListener
+      it.listener = listener
     }
   }
 
@@ -35,11 +35,9 @@ class MainHomeFragment private constructor() : BaseThemeLazyFragment() {
     inflater: LayoutInflater,
     container: ViewGroup?,
     savedInstanceState: Bundle?
-  ): View {
-    return binding.root
-  }
+  ): View = binding.root
 
-  private val eventListener = View.OnClickListener {
+  private val listener = View.OnClickListener {
     when (it.id) {
       R.id.bt_one -> {
         RouterManager.goWeb("http://m.bilibili.com")
