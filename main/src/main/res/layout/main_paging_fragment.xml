@@ -1,64 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
+  <data>
 
-        <variable
-            name="listener"
-            type="android.view.View.OnClickListener" />
-    </data>
+    <variable
+      name="listener"
+      type="android.view.View.OnClickListener" />
+  </data>
 
-    <com.scwang.smart.refresh.layout.SmartRefreshLayout
-        android:id="@+id/smart_refresh"
+  <com.scwang.smart.refresh.layout.SmartRefreshLayout
+    android:id="@+id/smart_refresh"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+
+      <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white">
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+        app:spanCount="2"
+        tools:listitem="@layout/main_common_rv_item" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+      <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="50dp"
+        android:id="@+id/fab_remove"
+        android:src="@drawable/common_ic_minus"
+        android:clickable="true"
+        android:focusable="true"
+        android:backgroundTint="@color/md_red_700"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="10dp"
+        android:onClick="@{listener}"
+        android:layout_height="50dp" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_list"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
-                android:orientation="vertical"
-                app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
-                app:spanCount="2"
-                tools:listitem="@layout/main_common_rv_item" />
+      <include
+        android:id="@+id/layout_error"
+        layout="@layout/common_error_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:listener="@{listener}"
+        android:visibility="gone" />
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:layout_width="50dp"
-                android:id="@+id/fab_remove"
-                android:src="@drawable/common_ic_minus"
-                android:clickable="true"
-                android:focusable="true"
-                android:backgroundTint="@color/md_red_700"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_margin="10dp"
-                android:onClick="@{listener}"
-                android:layout_height="50dp" />
+      <include
+        android:id="@+id/layout_empty"
+        layout="@layout/common_empty_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <include
-                android:id="@+id/layout_error"
-                layout="@layout/common_error_layout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:listener="@{listener}"
-                android:visibility="gone" />
-
-            <include
-                android:id="@+id/layout_empty"
-                layout="@layout/common_empty_layout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="gone" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+  </com.scwang.smart.refresh.layout.SmartRefreshLayout>
 
 </layout>

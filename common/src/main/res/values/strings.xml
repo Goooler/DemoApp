@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="common_default_title">默认标题</string>
-    <string name="common_retry_tip">加载出错了，点击重试</string>
-    <string name="common_empty_tip">暂无数据</string>
+  <string name="common_default_title">默认标题</string>
+  <string name="common_retry_tip">加载出错了，点击重试</string>
+  <string name="common_empty_tip">暂无数据</string>
 </resources>

@@ -1,74 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
+  <data>
 
-        <variable
-            name="listener"
-            type="android.view.View.OnClickListener" />
+    <variable
+      name="listener"
+      type="android.view.View.OnClickListener" />
 
-        <variable
-            name="title"
-            type="String" />
+    <variable
+      name="title"
+      type="String" />
 
-        <variable
-            name="iconLeft"
-            type="android.graphics.drawable.Drawable" />
+    <variable
+      name="iconLeft"
+      type="android.graphics.drawable.Drawable" />
 
-        <variable
-            name="iconRight"
-            type="android.graphics.drawable.Drawable" />
+    <variable
+      name="iconRight"
+      type="android.graphics.drawable.Drawable" />
 
-        <variable
-            name="bgColor"
-            type="int" />
-    </data>
+    <variable
+      name="bgColor"
+      type="int" />
+  </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="45pt"
-        android:background="@{bgColor == 0 ? @color/white : bgColor}">
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="45pt"
+    android:background="@{bgColor == 0 ? @color/white : bgColor}">
 
-        <ImageView
-            android:id="@+id/iv_left"
-            android:layout_width="30pt"
-            android:layout_height="match_parent"
-            android:onClick="@{listener}"
-            android:padding="5pt"
-            android:src="@{iconLeft ?? @drawable/ic_back}"
-            app:layout_constraintStart_toStartOf="parent"
-            app:tint="@color/color_333333"
-            tools:src="@drawable/ic_back" />
+    <ImageView
+      android:id="@+id/iv_left"
+      android:layout_width="30pt"
+      android:layout_height="match_parent"
+      android:onClick="@{listener}"
+      android:padding="5pt"
+      android:src="@{iconLeft ?? @drawable/ic_back}"
+      app:layout_constraintStart_toStartOf="parent"
+      app:tint="@color/color_333333"
+      tools:src="@drawable/ic_back" />
 
-        <TextView
-            android:id="@+id/tv_center"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:ellipsize="end"
-            android:gravity="center"
-            android:maxWidth="200pt"
-            android:maxLines="1"
-            android:text="@{title}"
-            android:textColor="@color/color_333333"
-            android:textSize="15pt"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:text="@string/common_default_title" />
+    <TextView
+      android:id="@+id/tv_center"
+      android:layout_width="wrap_content"
+      android:layout_height="match_parent"
+      android:ellipsize="end"
+      android:gravity="center"
+      android:maxWidth="200pt"
+      android:maxLines="1"
+      android:text="@{title}"
+      android:textColor="@color/color_333333"
+      android:textSize="15pt"
+      android:textStyle="bold"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      tools:text="@string/common_default_title" />
 
-        <ImageView
-            android:id="@+id/iv_right"
-            android:layout_width="30pt"
-            android:layout_height="match_parent"
-            android:onClick="@{listener}"
-            android:padding="5pt"
-            android:src="@{iconRight}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:tint="@color/color_333333"
-            tools:src="@drawable/ic_share" />
+    <ImageView
+      android:id="@+id/iv_right"
+      android:layout_width="30pt"
+      android:layout_height="match_parent"
+      android:onClick="@{listener}"
+      android:padding="5pt"
+      android:src="@{iconRight}"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:tint="@color/color_333333"
+      tools:src="@drawable/ic_share" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+  </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

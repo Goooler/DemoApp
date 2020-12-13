@@ -1,51 +1,51 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <!--优化启动黑屏-->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/md_purple_500</item>
-        <item name="colorPrimaryVariant">@color/md_purple_700</item>
-        <item name="colorOnPrimary">@color/white</item>
-        <item name="android:windowBackground">@color/white</item>
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-    </style>
+  <!--优化启动黑屏-->
+  <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <item name="colorPrimary">@color/md_purple_500</item>
+    <item name="colorPrimaryVariant">@color/md_purple_700</item>
+    <item name="colorOnPrimary">@color/white</item>
+    <item name="android:windowBackground">@color/white</item>
+    <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+  </style>
 
-    <style name="BaseDialogTheme" parent="Theme.AppCompat.Dialog">
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
-    </style>
+  <style name="BaseDialogTheme" parent="Theme.AppCompat.Dialog">
+    <item name="android:windowNoTitle">true</item>
+    <item name="android:windowIsTranslucent">true</item>
+    <item name="android:windowBackground">@android:color/transparent</item>
+  </style>
 
-    <!--全屏对话框-->
-    <style name="DialogFullScreenTheme" parent="BaseDialogTheme">
-        <item name="android:windowIsFloating">false</item>
-    </style>
+  <!--全屏对话框-->
+  <style name="DialogFullScreenTheme" parent="BaseDialogTheme">
+    <item name="android:windowIsFloating">false</item>
+  </style>
 
-    <!--对话框背景透明-->
-    <style name="DialogTransparentTheme" parent="BaseDialogTheme">
-        <item name="android:windowIsFloating">true</item>
-    </style>
+  <!--对话框背景透明-->
+  <style name="DialogTransparentTheme" parent="BaseDialogTheme">
+    <item name="android:windowIsFloating">true</item>
+  </style>
 
-    <!--底部弹起效果-->
-    <style name="DialogBottomAnim" parent="@android:style/Animation">
-        <item name="android:windowEnterAnimation">@anim/popup_enter</item>
-        <item name="android:windowExitAnimation">@anim/popup_exit</item>
-    </style>
+  <!--底部弹起效果-->
+  <style name="DialogBottomAnim" parent="@android:style/Animation">
+    <item name="android:windowEnterAnimation">@anim/popup_enter</item>
+    <item name="android:windowExitAnimation">@anim/popup_exit</item>
+  </style>
 
-    <!--去掉点击后的水波纹效果-->
-    <style name="NoClickEffect" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:selectableItemBackground">@null</item>
-        <item name="android:selectableItemBackgroundBorderless">@null</item>
-    </style>
+  <!--去掉点击后的水波纹效果-->
+  <style name="NoClickEffect" parent="Theme.AppCompat.Light.NoActionBar">
+    <item name="android:selectableItemBackground">@null</item>
+    <item name="android:selectableItemBackgroundBorderless">@null</item>
+  </style>
 
-    <!--编辑框下划线的颜色-->
-    <style name="EditTextUnderlineStyle">
-        <item name="android:colorControlNormal">@android:color/darker_gray</item>
-        <item name="android:colorControlActivated">@android:color/holo_red_light</item>
-    </style>
+  <!--编辑框下划线的颜色-->
+  <style name="EditTextUnderlineStyle">
+    <item name="android:colorControlNormal">@android:color/darker_gray</item>
+    <item name="android:colorControlActivated">@android:color/holo_red_light</item>
+  </style>
 
-    <!--取消 tabLayout 文字全大写-->
-    <style name="TabTextDisableAllCapsStyle" parent="TextAppearance.Design.Tab">
-        <item name="textAllCaps">false</item>
-    </style>
+  <!--取消 tabLayout 文字全大写-->
+  <style name="TabTextDisableAllCapsStyle" parent="TextAppearance.Design.Tab">
+    <item name="textAllCaps">false</item>
+  </style>
 
 </resources>
