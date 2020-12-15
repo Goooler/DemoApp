@@ -21,7 +21,8 @@ sealed class MainCommonVhModel : IDiffVhModelType, ISpanSize {
     override fun isContentTheSame(that: IDiffVhModelType): Boolean = true
 
     interface OnEventListener {
-      fun onContentClick(content: String)
+      fun onContentClick(content: String) {}
+      fun onItemClick(item: MainCommonVhModel) {}
     }
   }
 }

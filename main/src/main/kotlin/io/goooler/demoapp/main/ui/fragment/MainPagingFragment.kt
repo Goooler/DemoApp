@@ -14,8 +14,8 @@ import io.goooler.demoapp.common.base.BaseThemeLazyFragment
 import io.goooler.demoapp.common.util.disableRefreshAndLoadMore
 import io.goooler.demoapp.common.util.finishRefreshAndLoadMore
 import io.goooler.demoapp.common.util.getViewModel
-import io.goooler.demoapp.common.util.showToast
 import io.goooler.demoapp.main.databinding.MainPagingFragmentBinding
+import io.goooler.demoapp.main.model.MainCommonVhModel
 import io.goooler.demoapp.main.ui.adapter.MainPagingRvAdapter
 import io.goooler.demoapp.main.vm.MainPagingViewModel
 import kotlinx.coroutines.flow.collectLatest
@@ -100,8 +100,8 @@ class MainPagingFragment private constructor() : BaseThemeLazyFragment() {
       binding.layoutError.root.visibility = View.VISIBLE
     }
 
-    override fun onContentClick(content: String) {
-      content.showToast()
+    override fun onItemClick(item: MainCommonVhModel) {
+      vm.removeItem(item)
     }
   }
 
