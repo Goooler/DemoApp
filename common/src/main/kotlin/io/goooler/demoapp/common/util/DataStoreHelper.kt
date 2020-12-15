@@ -1,10 +1,10 @@
 package io.goooler.demoapp.common.util
 
-import androidx.datastore.preferences.Preferences
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.emptyPreferences
+import androidx.datastore.preferences.core.preferencesKey
 import androidx.datastore.preferences.createDataStore
-import androidx.datastore.preferences.edit
-import androidx.datastore.preferences.emptyPreferences
-import androidx.datastore.preferences.preferencesKey
 import io.goooler.demoapp.base.core.BaseApplication
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
