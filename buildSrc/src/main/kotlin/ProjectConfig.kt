@@ -20,9 +20,9 @@ import java.util.Locale
 import java.util.Properties
 
 // sdk
-private const val appTargetSdk = 30
-private const val appBuildTool = "30.0.3"
-private const val appMinSdk = 23
+private const val globalTargetSdk = 30
+private const val globalBuildTool = "30.0.3"
+private const val globalMinSdk = 23
 private val javaVersion = JavaVersion.VERSION_1_8
 private val ndkLibs = setOf(
   "armeabi-v7a", "x86"
@@ -35,8 +35,8 @@ private val apiHosts = mapOf(
 )
 
 // app
-private const val appVersionName = "1.0"
-private const val appVersionCode = 20201109
+private const val globalVersionName = "1.0"
+private const val globalVersionCode = 20201214
 const val appPackageName = "io.goooler.demoapp"
 const val appName = "Demo"
 const val extraScriptPath = "buildSrc/extra.gradle.kts"
@@ -67,8 +67,6 @@ fun DependencyHandler.androidTestImplementation(vararg names: Any): Array<Depend
   }.toTypedArray()
 
 val Module.moduleName: String get() = ":${tag}"
-val Module.resourcePrefix: String get() = "${tag}_"
-val Module.versionNameSuffix: String get() = "_${tag}"
 
 fun String.isStableVersion(): Boolean {
   val stableKeyword = listOf("RELEASE", "FINAL", "GA").any { toUpperCase(Locale.ROOT).contains(it) }
@@ -77,25 +75,27 @@ fun String.isStableVersion(): Boolean {
 
 fun BaseExtension.asLibraryExtension(): LibraryExtension = this as LibraryExtension
 
-fun Project.setupBase(): BaseExtension {
+fun Project.setupBase(module: Module? = null): BaseExtension {
   return extensions.getByName<BaseExtension>("android").apply {
     plugins.run {
       apply(Plugins.kotlinAndroid)
       apply(Plugins.kotlinKapt)
     }
-    compileSdkVersion(appTargetSdk)
-    buildToolsVersion = appBuildTool
+    compileSdkVersion(globalTargetSdk)
+    buildToolsVersion = globalBuildTool
     defaultConfig {
-      minSdkVersion(appMinSdk)
-      targetSdkVersion(appTargetSdk)
-      versionCode = appVersionCode
-      versionName = appVersionName
+      minSdkVersion(globalMinSdk)
+      targetSdkVersion(globalTargetSdk)
+      versionCode = globalVersionCode
+      versionName = globalVersionName
       vectorDrawables.useSupportLibrary = true
       ndk { abiFilters.addAll(ndkLibs) }
+      module?.let {
+        resourcePrefix = "${it.tag}_"
+        versionNameSuffix = "_${it.tag}"
+      }
     }
-    sourceSets["main"].run {
-      java.srcDirs("src/main/kotlin")
-    }
+    sourceSets["main"].java.srcDirs("src/main/kotlin")
     compileOptions {
       incremental = true
       setDefaultJavaVersion(javaVersion)
@@ -117,19 +117,15 @@ fun Project.setupBase(): BaseExtension {
 }
 
 fun Project.setupCommon(module: Module? = null): BaseExtension {
-  return setupBase().apply {
-    module?.let {
-      resourcePrefix = it.resourcePrefix
-      defaultConfig.versionNameSuffix = it.versionNameSuffix
-    }
+  return setupBase(module).apply {
     flavorDimensions("channel")
     productFlavors {
       create(Flavor.Daily.flavor)
       create(Flavor.Online.flavor)
       if (module == Module.Common) {
         all {
-          putBuildConfigIntField(BuildConfigField.VersionCode.tag, appVersionCode)
-          putBuildConfigStringField(BuildConfigField.VersionName.tag, appVersionName)
+          putBuildConfigIntField(BuildConfigField.VersionCode.tag, globalVersionCode)
+          putBuildConfigStringField(BuildConfigField.VersionName.tag, globalVersionName)
           putBuildConfigStringField(BuildConfigField.CdnPrefix.tag, cdnPrefix)
           putBuildConfigStringField(BuildConfigField.ApiHost.tag, apiHosts[name])
         }

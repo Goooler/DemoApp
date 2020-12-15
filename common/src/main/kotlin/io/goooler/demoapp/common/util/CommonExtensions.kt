@@ -27,6 +27,7 @@ import com.blankj.utilcode.util.TimeUtils
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import io.goooler.demoapp.base.core.BaseViewModel
 import io.goooler.demoapp.common.BuildConfig
+import io.goooler.demoapp.common.network.HttpResponse
 import io.goooler.demoapp.common.type.SpKeys
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
@@ -57,6 +58,20 @@ suspend inline fun <reified T : Any> SpKeys.getFromDataStore(name: String = "Dem
 
 suspend inline fun <reified T : Any> T.putIntoDataStore(key: SpKeys, prefName: String = "Demo") {
   DataStoreHelper.getInstance(prefName).put(key.key, this)
+}
+
+fun Throwable.toast() {
+  toString().showToast()
+}
+
+fun HttpResponse<*>.checkStatusAndEntry() = status && entry != null
+
+fun HttpResponse<*>.checkStatusAndEntryWithToast(): Boolean {
+  return checkStatusAndEntry().also {
+    if (it.not()) {
+      message?.showToast()
+    }
+  }
 }
 
 @UiThread

@@ -32,7 +32,7 @@ class MainHomeViewModel @ViewModelInject constructor(private val repository: Mai
   fun initData() {
     oneplusUrl.value =
       "https://image01.oneplus.cn/shop/202010/15/1-M00-0C-89-rBqgjV-H7t-AI-nBAAiPBEq6NTM960.jpg"
-    requestWithCr()
+    requestWithRx()
   }
 
   fun getRepoListFromDb() {
@@ -124,11 +124,11 @@ class MainHomeViewModel @ViewModelInject constructor(private val repository: Mai
       repository.getRepoListWithRx("twitter"),
       { t1, t2, t3, t4, t5 ->
         """
-                    ${t1.firstOrNull()?.owner?.avatarUrl}
-                    ${t2.firstOrNull()?.owner?.avatarUrl}
-                    ${t3.firstOrNull()?.owner?.avatarUrl}
-                    ${t4.firstOrNull()?.owner?.avatarUrl}
-                    ${t5.firstOrNull()?.owner?.avatarUrl}
+        ${t1.firstOrNull()?.owner?.avatarUrl}
+        ${t2.firstOrNull()?.owner?.avatarUrl}
+        ${t3.firstOrNull()?.owner?.avatarUrl}
+        ${t4.firstOrNull()?.owner?.avatarUrl}
+        ${t5.firstOrNull()?.owner?.avatarUrl}
         """.trimIndent()
       }
     )

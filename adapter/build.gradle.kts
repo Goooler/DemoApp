@@ -2,10 +2,7 @@ plugins {
   id(Plugins.androidLibrary)
 }
 
-setupBase().run {
-  resourcePrefix = Module.Adapter.resourcePrefix
-  defaultConfig.versionNameSuffix = Module.Adapter.versionNameSuffix
-}
+setupBase(Module.Adapter)
 
 dependencies {
   api(

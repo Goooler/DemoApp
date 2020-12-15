@@ -1,5 +1,6 @@
 package io.goooler.demoapp.base.core
 
+import android.annotation.TargetApi
 import android.app.Application
 import android.os.Build
 import android.webkit.WebView
@@ -39,6 +40,7 @@ abstract class BaseApplication : Application() {
   /**
    * 9.0 以上行为变更，不可多进程使用同一个 webView 目录
    */
+  @TargetApi(Build.VERSION_CODES.P)
   private fun initWebView() {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
       val processName = getProcessName()
