@@ -11,21 +11,14 @@ import io.goooler.demoapp.base.util.unsafeLazy
 import io.goooler.demoapp.common.base.BaseThemeLazyFragment
 import io.goooler.demoapp.common.util.getViewModel
 import io.goooler.demoapp.common.util.showToast
+import io.goooler.demoapp.main.R
 import io.goooler.demoapp.main.databinding.MainSrlFragmentBinding
 import io.goooler.demoapp.main.ui.adapter.MainSrlRvAdapter
 import io.goooler.demoapp.main.vm.MainSrlViewModel
 
 @AndroidEntryPoint
-class MainSrlFragment private constructor() : BaseThemeLazyFragment() {
-
-  private val binding by unsafeLazy {
-    MainSrlFragmentBinding.inflate(layoutInflater).also {
-      it.lifecycleOwner = viewLifecycleOwner
-      it.vm = vm
-      it.smartRefresh.setOnRefreshLoadMoreListener(listener)
-      it.rvList.adapter = rvAdapter
-    }
-  }
+class MainSrlFragment private constructor(override val layoutId: Int = R.layout.main_srl_fragment) :
+  BaseThemeLazyFragment<MainSrlFragmentBinding>() {
 
   private val vm: MainSrlViewModel by getViewModel()
 
@@ -45,7 +38,11 @@ class MainSrlFragment private constructor() : BaseThemeLazyFragment() {
     inflater: LayoutInflater,
     container: ViewGroup?,
     savedInstanceState: Bundle?
-  ): View = binding.root
+  ): View = binding.also {
+    it.vm = vm
+    it.smartRefresh.setOnRefreshLoadMoreListener(listener)
+    it.rvList.adapter = rvAdapter
+  }.root
 
   private val listener = object : MainSrlRvAdapter.OnEventListener, OnRefreshLoadMoreListener {
     override fun onContentClick(content: String) {

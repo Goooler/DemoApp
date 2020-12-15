@@ -4,6 +4,7 @@ package io.goooler.demoapp.common.util
 
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
+import android.view.LayoutInflater
 import android.webkit.URLUtil
 import androidx.activity.ComponentActivity
 import androidx.annotation.ColorInt
@@ -14,8 +15,10 @@ import androidx.annotation.MainThread
 import androidx.annotation.Px
 import androidx.annotation.StringRes
 import androidx.annotation.UiThread
+import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.viewbinding.ViewBinding
 import com.blankj.utilcode.util.AdaptScreenUtils
 import com.blankj.utilcode.util.ColorUtils
 import com.blankj.utilcode.util.ImageUtils
@@ -249,6 +252,14 @@ inline fun <reified T : BaseViewModel> Fragment.getViewModelOfActivity(): Lazy<T
     }
   }
 
+inline fun <reified T : ViewDataBinding> Fragment.inflate(crossinline transform: (T) -> Unit = {}): Lazy<T> =
+  lazy(LazyThreadSafetyMode.NONE) {
+    layoutInflater.inflateBinding<T>().also {
+      it.lifecycleOwner = viewLifecycleOwner
+      transform(it)
+    }
+  }
+
 // ---------------------Activity-------------------------------//
 
 @MainThread
@@ -258,3 +269,17 @@ inline fun <reified T : BaseViewModel> ComponentActivity.getViewModel(): Lazy<T>
       lifecycle.addObserver(this)
     }
   }
+
+inline fun <reified T : ViewDataBinding> ComponentActivity.inflate(crossinline transform: (T) -> Unit = {}): Lazy<T> =
+  lazy(LazyThreadSafetyMode.NONE) {
+    layoutInflater.inflateBinding<T>().also {
+      setContentView(it.root)
+      it.lifecycleOwner = this
+      transform(it)
+    }
+  }
+
+inline fun <reified T : ViewBinding> LayoutInflater.inflateBinding(): T {
+  val method = T::class.java.getMethod("inflate", LayoutInflater::class.java)
+  return method.invoke(null, this) as T
+}

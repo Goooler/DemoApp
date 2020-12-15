@@ -8,23 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.JavascriptInterface
 import io.goooler.demoapp.base.util.putArguments
-import io.goooler.demoapp.base.util.unsafeLazy
 import io.goooler.demoapp.base.widget.CustomWebView
 import io.goooler.demoapp.common.base.BaseThemeFragment
 import io.goooler.demoapp.webview.databinding.WebFragmentBinding
 
-class WebFragment private constructor() : BaseThemeFragment() {
-
-  private val binding by unsafeLazy {
-    WebFragmentBinding.inflate(layoutInflater).also {
-      it.lifecycleOwner = viewLifecycleOwner
-      it.webView.onEventListener = listener
-      it.webView.addJavascriptInterface(listener, "android")
-      arguments?.getString(URL)?.let { url ->
-        it.webView.loadUrl(url)
-      }
-    }
-  }
+class WebFragment private constructor(override val layoutId: Int = R.layout.web_fragment) :
+  BaseThemeFragment<WebFragmentBinding>() {
 
   var onEventListener: OnEventListener? = null
 
@@ -40,7 +29,13 @@ class WebFragment private constructor() : BaseThemeFragment() {
     inflater: LayoutInflater,
     container: ViewGroup?,
     savedInstanceState: Bundle?
-  ): View = binding.root
+  ): View = binding.also {
+    it.webView.onEventListener = listener
+    it.webView.addJavascriptInterface(listener, "android")
+    arguments?.getString(URL)?.let { url ->
+      it.webView.loadUrl(url)
+    }
+  }.root
 
   private val listener = object : CustomWebView.OnEventListener, JsInterface {
     override fun onInterceptUri(uri: Uri) {

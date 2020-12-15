@@ -14,6 +14,7 @@ import io.goooler.demoapp.common.base.BaseThemeLazyFragment
 import io.goooler.demoapp.common.util.disableRefreshAndLoadMore
 import io.goooler.demoapp.common.util.finishRefreshAndLoadMore
 import io.goooler.demoapp.common.util.getViewModel
+import io.goooler.demoapp.main.R
 import io.goooler.demoapp.main.databinding.MainPagingFragmentBinding
 import io.goooler.demoapp.main.model.MainCommonVhModel
 import io.goooler.demoapp.main.ui.adapter.MainPagingRvAdapter
@@ -22,24 +23,12 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class MainPagingFragment private constructor() : BaseThemeLazyFragment() {
-
-  private lateinit var binding: MainPagingFragmentBinding
-  private lateinit var rvAdapter: MainPagingRvAdapter
+class MainPagingFragment private constructor(override val layoutId: Int = R.layout.main_paging_fragment) :
+  BaseThemeLazyFragment<MainPagingFragmentBinding>() {
 
   private val vm: MainPagingViewModel by getViewModel()
 
-  private val initView by unsafeLazy {
-    binding = MainPagingFragmentBinding.inflate(layoutInflater).also {
-      it.lifecycleOwner = viewLifecycleOwner
-      it.smartRefresh.setOnRefreshListener(listener)
-      it.listener = listener
-    }
-    rvAdapter = MainPagingRvAdapter(listener).apply {
-      onLoadStatusListener = listener
-    }
-    binding.rvList.adapter = rvAdapter
-  }
+  private lateinit var rvAdapter: MainPagingRvAdapter
 
   private val initData by unsafeLazy {
     lifecycleScope.launch {
@@ -58,8 +47,14 @@ class MainPagingFragment private constructor() : BaseThemeLazyFragment() {
     container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View {
-    initView
-    return binding.root
+    return binding.also {
+      rvAdapter = MainPagingRvAdapter(listener).apply {
+        onLoadStatusListener = listener
+      }
+      it.rvList.adapter = rvAdapter
+      it.smartRefresh.setOnRefreshListener(listener)
+      it.listener = listener
+    }.root
   }
 
   private val listener = object :

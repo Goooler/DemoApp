@@ -12,18 +12,15 @@ import io.goooler.demoapp.common.router.RouterPath
 import io.goooler.demoapp.webview.databinding.WebActivityBinding
 
 @Route(path = RouterPath.WEB)
-class WebActivity : BaseThemeActivity() {
-  private lateinit var binding: WebActivityBinding
+class WebActivity(override val layoutId: Int = R.layout.web_activity) :
+  BaseThemeActivity<WebActivityBinding>() {
+
   private var webFragment: WebFragment? = null
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    binding = WebActivityBinding.inflate(layoutInflater).also {
-      it.layoutTitle.listener = listener
-      it.lifecycleOwner = this
-      setContentView(it.root)
-    }
     BarUtils.setStatusBarLightMode(this, true)
+    binding.layoutTitle.listener = listener
     intent.extras?.getString(RouterManager.PARAMS)?.let { url ->
       webFragment = WebFragment.newInstance(url).also {
         it.onEventListener = listener
