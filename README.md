@@ -56,6 +56,7 @@
 
 - [x] [GradleVersionsPlugin](https://github.com/ben-manes/gradle-versions-plugin/releases)
 - [x] [KotlinterGradle](https://github.com/jeremymailen/kotlinter-gradle/releases)
+- [x] [BintrayPublish](https://github.com/panpf/bintray-publish/releases)
 
 
 

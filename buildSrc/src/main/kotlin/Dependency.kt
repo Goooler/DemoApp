@@ -55,8 +55,9 @@ private const val hiltVersion = "2.30.1-alpha"
 private const val hiltVmVersion = "1.0.0-alpha02"
 private const val dataStoreVersion = "1.0.0-alpha05"
 private const val collectionVersion = "1.1.0"
-const val gradleVersionsPluginVersion = "0.36.0"
-const val kotlinterPluginVersion = "3.3.0"
+private const val bintrayPublishVersion = "1.0.0"
+const val dependencyUpdateVersion = "0.36.0"
+const val kotlinterVersion = "3.3.0"
 
 object Plugins {
   const val kotlinAndroid = "kotlin-android"
@@ -66,8 +67,9 @@ object Plugins {
   const val hilt = "dagger.hilt.android.plugin"
   const val arouter = "com.alibaba.arouter"
   const val protobuf = "com.google.protobuf"
-  const val gradleVersionsPlugin = "com.github.ben-manes.versions"
-  const val kotlinterPlugin = "org.jmailen.kotlinter"
+  const val dependencyUpdate = "com.github.ben-manes.versions"
+  const val kotlinter = "org.jmailen.kotlinter"
+  const val bintrayPublish = "com.github.panpf.bintray-publish"
 }
 
 object Libs {
@@ -117,6 +119,8 @@ object Libs {
   const val protobufPlugin = "com.google.protobuf:protobuf-gradle-plugin:$protobufVersion"
   const val arouterPlugin = "com.alibaba:arouter-register:$arouterRegisterVersion"
   const val hiltPlugin = "com.google.dagger:hilt-android-gradle-plugin:$hiltVersion"
+  const val bintrayPublishPlugin =
+    "com.github.panpf.bintray-publish:bintray-publish:$bintrayPublishVersion"
 
   const val glideKapt = "com.github.bumptech.glide:compiler:$glideVersion"
   const val objectBoxKapt = "io.objectbox:objectbox-processor:$objectBoxVersion"

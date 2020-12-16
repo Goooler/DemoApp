@@ -2,8 +2,8 @@ import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 import org.jmailen.gradle.kotlinter.support.ReporterType
 
 plugins {
-  id(Plugins.gradleVersionsPlugin) version gradleVersionsPluginVersion
-  id(Plugins.kotlinterPlugin) version kotlinterPluginVersion
+  id(Plugins.dependencyUpdate) version dependencyUpdateVersion
+  id(Plugins.kotlinter) version kotlinterVersion
 }
 
 buildscript {
@@ -19,13 +19,14 @@ buildscript {
     classpath(Libs.hiltPlugin)
     classpath(Libs.arouterPlugin)
     classpath(Libs.protobufPlugin)
+    classpath(Libs.bintrayPublishPlugin)
   }
 }
 
 allprojects {
   apply {
     from("${rootDir.path}/$extraScriptPath")
-    plugin(Plugins.kotlinterPlugin)
+    plugin(Plugins.kotlinter)
   }
   kotlinter {
     indentSize = 2
