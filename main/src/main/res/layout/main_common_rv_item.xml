@@ -15,15 +15,15 @@
   </data>
 
   <androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    tools:background="@color/md_teal_600"
     binding_bg_radius="@{@dimen/dp_15}"
-    android:onClick="@{()->listener.onItemClick(model)}"
+    binding_bg_solidColor="@{@color/md_teal_600}"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:layout_marginStart="10dp"
     android:layout_marginEnd="10dp"
     android:layout_marginBottom="10dp"
-    binding_bg_solidColor="@{@color/md_teal_600}"
-    android:layout_height="wrap_content">
+    android:onClick="@{()->listener.onItemClick(model)}"
+    tools:background="@color/md_teal_600">
 
     <ImageView
       android:id="@+id/iv_logo"

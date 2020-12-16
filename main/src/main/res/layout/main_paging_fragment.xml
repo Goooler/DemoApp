@@ -31,25 +31,25 @@
         tools:listitem="@layout/main_common_rv_item" />
 
       <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:layout_width="50dp"
         android:id="@+id/fab_remove"
-        android:src="@drawable/common_ic_minus"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:backgroundTint="@color/md_red_700"
         android:clickable="true"
         android:focusable="true"
-        android:backgroundTint="@color/md_red_700"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="10dp"
         android:onClick="@{listener}"
-        android:layout_height="50dp" />
+        android:src="@drawable/common_ic_minus"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
       <include
         android:id="@+id/layout_error"
         layout="@layout/common_error_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:listener="@{listener}"
-        android:visibility="gone" />
+        android:visibility="gone"
+        app:listener="@{listener}" />
 
       <include
         android:id="@+id/layout_empty"

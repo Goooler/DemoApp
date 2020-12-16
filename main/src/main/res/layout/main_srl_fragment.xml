@@ -36,10 +36,10 @@
           app:layout_scrollFlags="scroll|enterAlwaysCollapsed">
 
           <ImageView
-            app:layout_constraintTop_toTopOf="parent"
-            android:src="@drawable/ic_pic_placeholder"
             android:layout_width="match_parent"
-            android:layout_height="200dp" />
+            android:layout_height="200dp"
+            android:src="@drawable/ic_pic_placeholder"
+            app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

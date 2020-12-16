@@ -1,27 +1,34 @@
 <component name="InspectionProjectProfileManager">
   <profile version="1.0">
     <option name="myName" value="Project Default" />
-    <inspection_tool class="AndroidLintAllowBackup" enabled="false" level="WARNING" enabled_by_default="false" />
-    <inspection_tool class="AndroidLintContentDescription" enabled="false" level="WARNING" enabled_by_default="false" />
-    <inspection_tool class="AndroidLintHardcodedText" enabled="false" level="WARNING" enabled_by_default="false" />
-    <inspection_tool class="AndroidLintUnusedAttribute" enabled="false" level="WARNING" enabled_by_default="false" />
-    <inspection_tool class="AndroidLintUnusedResources" enabled="false" level="WARNING" enabled_by_default="false" />
-    <inspection_tool class="AndroidLintUselessLeaf" enabled="false" level="WARNING" enabled_by_default="false" />
-    <inspection_tool class="ConstantConditions" enabled="true" level="WARNING" enabled_by_default="true">
+    <inspection_tool class="AndroidLintAllowBackup" enabled="false" enabled_by_default="false"
+      level="WARNING" />
+    <inspection_tool class="AndroidLintContentDescription" enabled="false" enabled_by_default="false"
+      level="WARNING" />
+    <inspection_tool class="AndroidLintHardcodedText" enabled="false" enabled_by_default="false"
+      level="WARNING" />
+    <inspection_tool class="AndroidLintUnusedAttribute" enabled="false" enabled_by_default="false"
+      level="WARNING" />
+    <inspection_tool class="AndroidLintUnusedResources" enabled="false" enabled_by_default="false"
+      level="WARNING" />
+    <inspection_tool class="AndroidLintUselessLeaf" enabled="false" enabled_by_default="false"
+      level="WARNING" />
+    <inspection_tool class="ConstantConditions" enabled="true" enabled_by_default="true"
+      level="WARNING">
       <option name="SUGGEST_NULLABLE_ANNOTATIONS" value="false" />
       <option name="DONT_REPORT_TRUE_ASSERT_STATEMENTS" value="false" />
     </inspection_tool>
-    <inspection_tool class="EmptyMethod" enabled="true" level="WARNING" enabled_by_default="true">
+    <inspection_tool class="EmptyMethod" enabled="true" enabled_by_default="true" level="WARNING">
       <option name="EXCLUDE_ANNOS">
         <value>
           <list size="1">
-            <item index="0" class="java.lang.String" itemvalue="org.junit.Test" />
+            <item class="java.lang.String" index="0" itemvalue="org.junit.Test" />
           </list>
         </value>
       </option>
       <option name="commentsAreContent" value="false" />
     </inspection_tool>
-    <inspection_tool class="JavaDoc" enabled="true" level="WARNING" enabled_by_default="true">
+    <inspection_tool class="JavaDoc" enabled="true" enabled_by_default="true" level="WARNING">
       <option name="TOP_LEVEL_CLASS_OPTIONS">
         <value>
           <option name="ACCESS_JAVADOC_REQUIRED_FOR" value="none" />
@@ -52,8 +59,11 @@
       <option name="IGNORE_POINT_TO_ITSELF" value="false" />
       <option name="myAdditionalJavadocTags" value="date" />
     </inspection_tool>
-    <inspection_tool class="KotlinUnusedImport" enabled="true" level="ERROR" enabled_by_default="true" />
-    <inspection_tool class="RedundantSemicolon" enabled="true" level="ERROR" enabled_by_default="true" />
-    <inspection_tool class="ShrinkerUnresolvedReference" enabled="false" level="ERROR" enabled_by_default="false" />
+    <inspection_tool class="KotlinUnusedImport" enabled="true" enabled_by_default="true"
+      level="ERROR" />
+    <inspection_tool class="RedundantSemicolon" enabled="true" enabled_by_default="true"
+      level="ERROR" />
+    <inspection_tool class="ShrinkerUnresolvedReference" enabled="false" enabled_by_default="false"
+      level="ERROR" />
   </profile>
 </component>
