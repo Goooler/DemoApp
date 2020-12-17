@@ -14,9 +14,5 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
-      - name: Make gradlew executable
-        run: chmod +x ./gradlew
-      - name: Clean
-        run: ./gradlew clean & find buildSrc -type f -name "*.lock" -delete
       - name: Build
         run: ./gradlew --parallel app:assembleOnlineRelease

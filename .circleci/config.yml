@@ -11,11 +11,5 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Make gradlew executable
-          command: chmod +x ./gradlew
-      - run:
-          name: Clean
-          command: ./gradlew clean & find buildSrc -type f -name "*.lock" -delete
-      - run:
           name: Build
           command: ./gradlew --parallel app:assembleOnlineRelease
