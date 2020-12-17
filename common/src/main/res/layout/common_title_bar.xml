@@ -64,7 +64,7 @@
       android:layout_height="match_parent"
       android:onClick="@{listener}"
       android:padding="5pt"
-      android:src="@{iconRight}"
+      android:src="@{iconRight ?? @drawable/ic_share}"
       app:layout_constraintEnd_toEndOf="parent"
       app:tint="@color/color_333333"
       tools:src="@drawable/ic_share" />

@@ -19,7 +19,7 @@ class WebActivity : BaseThemeActivity<WebActivityBinding>(R.layout.web_activity)
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     BarUtils.setStatusBarLightMode(this, true)
-    binding.layoutTitle.listener = listener
+    binding.listener = listener
     intent.extras?.getString(RouterManager.PARAMS)?.let { url ->
       webFragment = WebFragment.newInstance(url).also {
         it.onEventListener = listener

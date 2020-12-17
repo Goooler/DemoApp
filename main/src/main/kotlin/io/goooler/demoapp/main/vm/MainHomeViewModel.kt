@@ -26,12 +26,9 @@ class MainHomeViewModel @ViewModelInject constructor(private val repository: Mai
   BaseRxViewModel() {
 
   val title = MutableStringLiveData()
-  val oneplusUrl = MutableStringLiveData()
   var countdownJob: Job? = null
 
   fun initData() {
-    oneplusUrl.value =
-      "https://image01.oneplus.cn/shop/202010/15/1-M00-0C-89-rBqgjV-H7t-AI-nBAAiPBEq6NTM960.jpg"
     requestWithCr()
   }
 
