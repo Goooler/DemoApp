@@ -10,12 +10,9 @@ import androidx.databinding.ViewDataBinding
 import io.goooler.demoapp.base.core.BaseFragment
 import io.goooler.demoapp.base.util.unsafeLazy
 
-abstract class BaseThemeFragment<VB : ViewDataBinding> : BaseFragment(), ITheme {
-
-  /**
-   * @[LayoutRes]
-   */
-  protected abstract val layoutId: Int
+abstract class BaseThemeFragment<VB : ViewDataBinding>(@LayoutRes private val layoutId: Int) :
+  BaseFragment(),
+  ITheme {
 
   protected val binding: VB by unsafeLazy {
     DataBindingUtil.inflate<VB>(layoutInflater, layoutId, null, false).also {

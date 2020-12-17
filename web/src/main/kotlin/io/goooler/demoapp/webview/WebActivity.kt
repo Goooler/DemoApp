@@ -12,8 +12,7 @@ import io.goooler.demoapp.common.router.RouterPath
 import io.goooler.demoapp.webview.databinding.WebActivityBinding
 
 @Route(path = RouterPath.WEB)
-class WebActivity(override val layoutId: Int = R.layout.web_activity) :
-  BaseThemeActivity<WebActivityBinding>() {
+class WebActivity : BaseThemeActivity<WebActivityBinding>(R.layout.web_activity) {
 
   private var webFragment: WebFragment? = null
 
@@ -39,11 +38,11 @@ class WebActivity(override val layoutId: Int = R.layout.web_activity) :
 
   private val listener = object : View.OnClickListener, WebFragment.OnEventListener {
     override fun onClick(v: View) {
-      when (v.id) {
-        R.id.iv_left -> {
+      when (v) {
+        binding.layoutTitle.ivLeft -> {
           finish()
         }
-        R.id.iv_right -> {
+        binding.layoutTitle.ivRight -> {
           val intent = Intent().setAction(Intent.ACTION_SEND)
             .putExtra(Intent.EXTRA_TEXT, webFragment?.url)
             .setType("text/plain")

@@ -9,8 +9,7 @@ import io.goooler.demoapp.login.R
 import io.goooler.demoapp.login.databinding.LoginActivityBinding
 
 @Route(path = RouterPath.LOGIN)
-class LoginActivity(override val layoutId: Int = R.layout.login_activity) :
-  BaseThemeActivity<LoginActivityBinding>() {
+class LoginActivity : BaseThemeActivity<LoginActivityBinding>(R.layout.login_activity) {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)

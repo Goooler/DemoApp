@@ -23,7 +23,8 @@ abstract class BaseFragment : Fragment() {
       isFocusableInTouchMode = true
       requestFocus()
       setOnKeyListener { _, keyCode, event ->
-        if (keyCode == KeyEvent.KEYCODE_BACK && event.action == KeyEvent.ACTION_UP) onBackPressed() else false
+        val flag = keyCode == KeyEvent.KEYCODE_BACK && event.action == KeyEvent.ACTION_UP
+        if (flag) onBackPressed() else false
       }
     }
   }

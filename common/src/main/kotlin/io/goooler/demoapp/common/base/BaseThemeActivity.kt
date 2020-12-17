@@ -10,14 +10,11 @@ import com.blankj.utilcode.util.BarUtils
 import io.goooler.demoapp.base.core.BaseActivity
 
 @Suppress("MemberVisibilityCanBePrivate")
-abstract class BaseThemeActivity<VB : ViewDataBinding> : BaseActivity(), ITheme {
+abstract class BaseThemeActivity<VB : ViewDataBinding>(@LayoutRes private val layoutId: Int) :
+  BaseActivity(),
+  ITheme {
 
   val originalResources: Resources get() = super.getResources()
-
-  /**
-   * @[LayoutRes]
-   */
-  protected abstract val layoutId: Int
 
   protected lateinit var binding: VB
 

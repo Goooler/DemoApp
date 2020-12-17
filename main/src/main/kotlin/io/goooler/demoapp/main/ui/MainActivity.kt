@@ -19,8 +19,7 @@ import io.goooler.demoapp.main.ui.fragment.MainSrlFragment
 
 @AndroidEntryPoint
 @Route(path = RouterPath.MAIN)
-class MainActivity(override val layoutId: Int = R.layout.main_activity) :
-  BaseThemeActivity<MainActivityBinding>() {
+class MainActivity : BaseThemeActivity<MainActivityBinding>(R.layout.main_activity) {
 
   private val pagerAdapter by unsafeLazy {
     CommonFragmentStateAdapter(supportFragmentManager, lifecycle)

@@ -14,8 +14,8 @@ import io.goooler.demoapp.main.vm.MainHomeViewModel
 import java.util.concurrent.CancellationException
 
 @AndroidEntryPoint
-class MainHomeFragment private constructor(override val layoutId: Int = R.layout.main_home_fragment) :
-  BaseThemeLazyFragment<MainHomeFragmentBinding>() {
+class MainHomeFragment private constructor() :
+  BaseThemeLazyFragment<MainHomeFragmentBinding>(R.layout.main_home_fragment) {
 
   private val vm: MainHomeViewModel by getViewModel()
 
@@ -33,17 +33,17 @@ class MainHomeFragment private constructor(override val layoutId: Int = R.layout
   }.root
 
   private val listener = View.OnClickListener {
-    when (it.id) {
-      R.id.bt_one -> {
+    when (it) {
+      binding.btOne -> {
         RouterManager.goWeb("http://m.bilibili.com")
       }
-      R.id.bt_two -> {
+      binding.btTwo -> {
         vm.getRepoListFromDb()
       }
-      R.id.bt_three -> {
+      binding.btThree -> {
         vm.getRepoListFromDs()
       }
-      R.id.bt_four -> {
+      binding.btFour -> {
         if (vm.countdownJob?.isActive != true) {
           vm.startCountDown {}
         } else {

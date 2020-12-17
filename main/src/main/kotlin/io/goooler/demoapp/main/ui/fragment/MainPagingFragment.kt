@@ -23,8 +23,8 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class MainPagingFragment private constructor(override val layoutId: Int = R.layout.main_paging_fragment) :
-  BaseThemeLazyFragment<MainPagingFragmentBinding>() {
+class MainPagingFragment private constructor() :
+  BaseThemeLazyFragment<MainPagingFragmentBinding>(R.layout.main_paging_fragment) {
 
   private val vm: MainPagingViewModel by getViewModel()
 

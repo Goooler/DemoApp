@@ -12,8 +12,8 @@ import io.goooler.demoapp.base.widget.CustomWebView
 import io.goooler.demoapp.common.base.BaseThemeFragment
 import io.goooler.demoapp.webview.databinding.WebFragmentBinding
 
-class WebFragment private constructor(override val layoutId: Int = R.layout.web_fragment) :
-  BaseThemeFragment<WebFragmentBinding>() {
+class WebFragment private constructor() :
+  BaseThemeFragment<WebFragmentBinding>(R.layout.web_fragment) {
 
   var onEventListener: OnEventListener? = null
 
