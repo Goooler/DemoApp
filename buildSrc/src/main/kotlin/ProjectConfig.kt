@@ -73,8 +73,6 @@ fun String.isStableVersion(): Boolean {
   return stableKeyword || "^[0-9,.v-]+(-r)?$".toRegex().matches(this)
 }
 
-fun BaseExtension.asLibraryExtension(): LibraryExtension = this as LibraryExtension
-
 fun Project.setupBase(module: Module? = null): BaseExtension {
   return extensions.getByName<BaseExtension>("android").apply {
     plugins.run {
@@ -116,61 +114,8 @@ fun Project.setupBase(module: Module? = null): BaseExtension {
   }
 }
 
-fun Project.setupCommon(module: Module? = null): BaseExtension {
-  return setupBase(module).apply {
-    flavorDimensions("channel")
-    productFlavors {
-      create(Flavor.Daily.flavor)
-      create(Flavor.Online.flavor)
-      if (module == Module.Common) {
-        all {
-          putBuildConfigIntField(BuildConfigField.VersionCode.tag, globalVersionCode)
-          putBuildConfigStringField(BuildConfigField.VersionName.tag, globalVersionName)
-          putBuildConfigStringField(BuildConfigField.CdnPrefix.tag, cdnPrefix)
-          putBuildConfigStringField(BuildConfigField.ApiHost.tag, apiHosts[name])
-        }
-      }
-    }
-    extensions.getByName<KaptExtension>("kapt").arguments {
-      arg("AROUTER_MODULE_NAME", project.name)
-      arg("room.schemaLocation", "$projectDir/build")
-      arg("room.incremental", "true")
-      arg("room.expandProjection", "true")
-    }
-    dependencies {
-      if (module != Module.Common) {
-        implementation(project(Module.Common.moduleName))
-      }
-      implementation(
-        // local
-        fileTree(localLibs),
-        project(Module.Base.moduleName),
-
-        // router
-        Libs.arouter,
-
-        // UI
-        *Libs.smartRefreshLayout,
-        Libs.photoView,
-
-        // utils
-        *Libs.hilt,
-        *Libs.room,
-        *Libs.dataStore,
-        *Libs.rx,
-        *Libs.moshi,
-        Libs.collection,
-        Libs.utils,
-        Libs.permissionX
-      )
-      kapt(Libs.arouterKapt, Libs.moshiKapt, Libs.roomKapt, *Libs.hiltKapt)
-    }
-    plugins.run {
-      apply(Plugins.arouter)
-      apply(Plugins.hilt)
-    }
-  }
-}
+fun Project.setupModule(module: Module? = null): LibraryExtension =
+  setupCommon(module) as LibraryExtension
 
 fun Project.setupApp(appPackageName: String, appName: String): BaseAppModuleExtension {
   return (setupCommon() as BaseAppModuleExtension).apply {
@@ -227,6 +172,62 @@ fun Project.setupApp(appPackageName: String, appName: String): BaseAppModuleExte
     dependencies.run {
       add("coreLibraryDesugaring", Libs.desugar)
       add("debugImplementation", Libs.leakCanary)
+    }
+  }
+}
+
+private fun Project.setupCommon(module: Module? = null): BaseExtension {
+  return setupBase(module).apply {
+    flavorDimensions("channel")
+    productFlavors {
+      create(Flavor.Daily.flavor)
+      create(Flavor.Online.flavor)
+      if (module == Module.Common) {
+        all {
+          putBuildConfigIntField(BuildConfigField.VersionCode.tag, globalVersionCode)
+          putBuildConfigStringField(BuildConfigField.VersionName.tag, globalVersionName)
+          putBuildConfigStringField(BuildConfigField.CdnPrefix.tag, cdnPrefix)
+          putBuildConfigStringField(BuildConfigField.ApiHost.tag, apiHosts[name])
+        }
+      }
+    }
+    extensions.getByName<KaptExtension>("kapt").arguments {
+      arg("AROUTER_MODULE_NAME", project.name)
+      arg("room.schemaLocation", "$projectDir/build")
+      arg("room.incremental", "true")
+      arg("room.expandProjection", "true")
+    }
+    dependencies {
+      if (module != Module.Common) {
+        implementation(project(Module.Common.moduleName))
+      }
+      implementation(
+        // local
+        fileTree(localLibs),
+        project(Module.Base.moduleName),
+
+        // router
+        Libs.arouter,
+
+        // UI
+        *Libs.smartRefreshLayout,
+        Libs.photoView,
+
+        // utils
+        *Libs.hilt,
+        *Libs.room,
+        *Libs.dataStore,
+        *Libs.rx,
+        *Libs.moshi,
+        Libs.collection,
+        Libs.utils,
+        Libs.permissionX
+      )
+      kapt(Libs.arouterKapt, Libs.moshiKapt, Libs.roomKapt, *Libs.hiltKapt)
+    }
+    plugins.run {
+      apply(Plugins.arouter)
+      apply(Plugins.hilt)
     }
   }
 }

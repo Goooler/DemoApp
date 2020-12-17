@@ -27,5 +27,7 @@ enum class BuildConfigField(val tag: String) {
 
 enum class GradleTask(val task: String) {
   Clean("clean"),
-  DependencyUpdate("dependencyUpdates")
+  DependencyUpdate("dependencyUpdates"),
+  LintKotlin("lintKotlin"),
+  FormatKotlin("formatKotlin")
 }

@@ -2,7 +2,7 @@ plugins {
   id(Plugins.androidLibrary)
 }
 
-setupCommon(Module.Common)
+setupModule(Module.Common)
 
 dependencies {
   // network

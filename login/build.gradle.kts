@@ -2,4 +2,4 @@ plugins {
   id(Plugins.androidLibrary)
 }
 
-setupCommon(Module.Login)
+setupModule(Module.Login)
