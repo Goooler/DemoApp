@@ -6,6 +6,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import io.goooler.demoapp.common.network.RetrofitHelper
 import io.goooler.demoapp.common.util.RoomHelper
+import io.goooler.demoapp.main.db.MainDatabase
 import io.goooler.demoapp.main.repository.MainCommonRepository
 
 @Module
@@ -13,7 +14,6 @@ import io.goooler.demoapp.main.repository.MainCommonRepository
 object MainProviderModule {
 
   @Provides
-  fun provideMainCommonRepository(): MainCommonRepository {
-    return MainCommonRepository(RetrofitHelper.create(), RoomHelper.create())
-  }
+  fun provideMainCommonRepository(): MainCommonRepository =
+    MainCommonRepository(RetrofitHelper.create(), RoomHelper.create<MainDatabase>().mainCommonDao)
 }

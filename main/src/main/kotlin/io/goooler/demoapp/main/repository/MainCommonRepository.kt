@@ -9,15 +9,16 @@ import io.goooler.demoapp.common.util.putIntoDataStore
 import io.goooler.demoapp.common.util.toJson
 import io.goooler.demoapp.main.api.MainCommonApi
 import io.goooler.demoapp.main.bean.MainRepoListBean
-import io.goooler.demoapp.main.db.MainDatabase
+import io.goooler.demoapp.main.db.MainCommonDao
 import io.reactivex.rxjava3.core.Observable
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-class MainCommonRepository @Inject constructor(private val api: MainCommonApi, db: MainDatabase) {
-
-  private val dao = db.mainCommonDao
+class MainCommonRepository @Inject constructor(
+  private val api: MainCommonApi,
+  private val dao: MainCommonDao
+) {
 
   suspend fun getRepoListWithCr(
     user: String,
@@ -28,20 +29,14 @@ class MainCommonRepository @Inject constructor(private val api: MainCommonApi, d
       CommonConstants.RequestFields.PAGE to page,
       CommonConstants.RequestFields.PER_PAGE to pageSize
     )
-    return api.getRepoListCr(user, params)
+    return api.getRepoListWithCr(user, params)
   }
 
   fun getRepoListWithRx(
     user: String,
     page: Int = 1,
     pageSize: Int = CommonConstants.DEFAULT_PAGE_SIZE
-  ): Observable<List<MainRepoListBean>> {
-    val params = paramMapOf(
-      CommonConstants.RequestFields.PAGE to page,
-      CommonConstants.RequestFields.PER_PAGE to pageSize
-    )
-    return api.getRepoListRx(user, params)
-  }
+  ): Observable<List<MainRepoListBean>> = api.getRepoListWithRx(user, page, pageSize)
 
   suspend fun getRepoListFromDb(): List<MainRepoListBean> = dao.getRepoList()
 

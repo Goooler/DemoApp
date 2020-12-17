@@ -26,8 +26,8 @@ class MainPagingViewModel @ViewModelInject constructor(private val repository: M
       DataSource()
     }.flow
       .cachedIn(viewModelScope)
-      .combine(removedItemsFlow) { paging, removed ->
-        paging.filter { it !in removed }
+      .combine(removedItemsFlow) { source, removed ->
+        source.filter { it !in removed }
       }
 
   fun removeItem(item: MainCommonVhModel) {
