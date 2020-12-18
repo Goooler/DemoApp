@@ -6,21 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
-import io.goooler.demoapp.base.util.unsafeLazy
 import io.goooler.demoapp.common.R
 import io.goooler.demoapp.common.base.BaseThemeDialogFragment
-import io.goooler.demoapp.common.databinding.FullScreenDialogFragmentBinding
+import io.goooler.demoapp.common.databinding.CommonFullScreenDialogFragmentBinding
 
-class FullScreenDialogFragment private constructor() : BaseThemeDialogFragment() {
-
-  private val binding by unsafeLazy {
-    FullScreenDialogFragmentBinding.inflate(layoutInflater).also {
-      it.lifecycleOwner = this
-      it.ivCenter.setOnClickListener {
-        dismiss()
-      }
-    }
-  }
+class FullScreenDialogFragment private constructor() :
+  BaseThemeDialogFragment<CommonFullScreenDialogFragmentBinding>(R.layout.common_full_screen_dialog_fragment) {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -42,7 +33,11 @@ class FullScreenDialogFragment private constructor() : BaseThemeDialogFragment()
         }
       }
     }
-    return binding.root
+    return binding.also {
+      it.ivCenter.setOnClickListener {
+        dismiss()
+      }
+    }.root
   }
 
   override fun isCancelable(): Boolean = false

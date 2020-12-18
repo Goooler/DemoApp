@@ -11,7 +11,7 @@
       android:id="@+id/iv_center"
       android:layout_width="100pt"
       android:layout_height="100pt"
-      android:src="@drawable/ic_youtube"
+      android:src="@drawable/common_ic_youtube"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"

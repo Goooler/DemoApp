@@ -38,7 +38,7 @@
           <ImageView
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:src="@drawable/ic_pic_placeholder"
+            android:src="@drawable/common_ic_pic_placeholder"
             app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

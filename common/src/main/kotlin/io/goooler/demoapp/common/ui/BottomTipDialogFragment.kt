@@ -7,25 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
 import io.goooler.demoapp.base.util.putArguments
-import io.goooler.demoapp.base.util.unsafeLazy
 import io.goooler.demoapp.common.R
 import io.goooler.demoapp.common.base.BaseThemeDialogFragment
-import io.goooler.demoapp.common.databinding.BottomTipDialogFragmentBinding
+import io.goooler.demoapp.common.databinding.CommonBottomTipDialogFragmentBinding
 
-class BottomTipDialogFragment private constructor() : BaseThemeDialogFragment() {
-
-  private val binding by unsafeLazy {
-    BottomTipDialogFragmentBinding.inflate(layoutInflater).also {
-      it.lifecycleOwner = this
-      arguments?.let { bundle ->
-        it.tvTitle.text = bundle.getString(TITLE)
-        it.tvContent.text = bundle.getString(CONTENT)
-      }
-      it.ivClose.setOnClickListener {
-        dismiss()
-      }
-    }
-  }
+class BottomTipDialogFragment private constructor() :
+  BaseThemeDialogFragment<CommonBottomTipDialogFragmentBinding>(R.layout.common_bottom_tip_dialog_fragment) {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -36,7 +23,15 @@ class BottomTipDialogFragment private constructor() : BaseThemeDialogFragment() 
     inflater: LayoutInflater,
     container: ViewGroup?,
     savedInstanceState: Bundle?
-  ): View = binding.root
+  ): View = binding.also {
+    arguments?.let { bundle ->
+      it.tvTitle.text = bundle.getString(TITLE)
+      it.tvContent.text = bundle.getString(CONTENT)
+    }
+    it.ivClose.setOnClickListener {
+      dismiss()
+    }
+  }.root
 
   override fun onResume() {
     super.onResume()

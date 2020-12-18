@@ -37,10 +37,10 @@
       android:layout_height="match_parent"
       android:onClick="@{listener}"
       android:padding="5pt"
-      android:src="@{iconLeft ?? @drawable/ic_back}"
+      android:src="@{iconLeft ?? @drawable/common_ic_back}"
       app:layout_constraintStart_toStartOf="parent"
       app:tint="@color/color_333333"
-      tools:src="@drawable/ic_back" />
+      tools:src="@drawable/common_ic_back" />
 
     <TextView
       android:id="@+id/tv_center"
@@ -64,10 +64,10 @@
       android:layout_height="match_parent"
       android:onClick="@{listener}"
       android:padding="5pt"
-      android:src="@{iconRight ?? @drawable/ic_share}"
+      android:src="@{iconRight ?? @drawable/common_ic_share}"
       app:layout_constraintEnd_toEndOf="parent"
       app:tint="@color/color_333333"
-      tools:src="@drawable/ic_share" />
+      tools:src="@drawable/common_ic_share" />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 
