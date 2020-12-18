@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="ResourceName">
 
   <!--优化启动黑屏-->
   <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">

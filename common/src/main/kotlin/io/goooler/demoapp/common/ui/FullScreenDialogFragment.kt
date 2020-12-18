@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
-import io.goooler.demoapp.base.R
 import io.goooler.demoapp.base.util.unsafeLazy
+import io.goooler.demoapp.common.R
 import io.goooler.demoapp.common.base.BaseThemeDialogFragment
 import io.goooler.demoapp.common.databinding.FullScreenDialogFragmentBinding
 

@@ -92,7 +92,7 @@ class MainHomeViewModel @ViewModelInject constructor(private val repository: Mai
         repository.putRepoListIntoDs(google.await())
       } catch (e: Exception) {
         title.postValue(e.message)
-        R.string.request_failed.showToast()
+        R.string.common_request_failed.showToast()
       }
     }
   }
@@ -135,7 +135,7 @@ class MainHomeViewModel @ViewModelInject constructor(private val repository: Mai
         },
         {
           title.postValue(it.message)
-          R.string.request_failed.showToast()
+          R.string.common_request_failed.showToast()
         }
       )
       .autoDispose()

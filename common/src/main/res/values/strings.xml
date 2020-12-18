@@ -3,4 +3,26 @@
   <string name="common_default_title">默认标题</string>
   <string name="common_retry_tip">加载出错了，点击重试</string>
   <string name="common_empty_tip">暂无数据</string>
+  <string name="common_default_username">默认用户</string>
+  <string name="common_default_time">默认时间</string>
+  <string name="common_default_test">默认测试文本</string>
+  <string name="common_welcome">欢迎登录</string>
+  <string name="common_submit">登录</string>
+  <string name="common_sign_up">注册</string>
+  <string name="common_username">用户名</string>
+  <string name="common_password">密码</string>
+  <string name="common_invite_code">邀请码</string>
+  <string name="common_enter">确认</string>
+  <string name="common_commit">提交</string>
+  <string name="common_cancel">取消</string>
+  <string name="common_modify">修改</string>
+  <string name="common_tip">提示</string>
+  <string name="common_next_step">下一步</string>
+  <string name="common_request_failed">请求失败</string>
+  <string name="common_request_succeed">请求成功</string>
+  <string name="common_data_refreshed">数据已刷新</string>
+  <string name="common_data_no_refreshed">暂无更新</string>
+  <string name="common_data_updated">更新成功</string>
+  <string name="common_one_day_data">24小时内数据</string>
+  <string name="common_main_fragment">主页面</string>
 </resources>
