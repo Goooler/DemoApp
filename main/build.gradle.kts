@@ -7,7 +7,7 @@ plugins {
   id(Plugins.protobuf)
 }
 
-setupModule(Module.Main).run {
+setupModule(Module.Main) {
   protobuf {
     protoc {
       artifact = Libs.protoc

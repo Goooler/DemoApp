@@ -11,11 +11,11 @@ buildscript {
 
   repositories {
     google()
-    maven(rootProject.extra.get("aliyunMaven").toString())
+    maven(rootProject.getExtra("aliyunMaven"))
   }
   dependencies {
-    classpath(rootProject.extra.get("androidGradlePlugin").toString())
-    classpath(rootProject.extra.get("kotlinPlugin").toString())
+    classpath(rootProject.getExtra("androidGradlePlugin"))
+    classpath(rootProject.getExtra("kotlinPlugin"))
     classpath(Libs.hiltPlugin)
     classpath(Libs.arouterPlugin)
     classpath(Libs.protobufPlugin)

@@ -1,5 +1,6 @@
 package io.goooler.demoapp.base.core
 
+import android.annotation.SuppressLint
 import android.content.ComponentName
 import android.content.Intent
 import android.content.pm.ActivityInfo
@@ -8,6 +9,7 @@ import android.os.Bundle
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 
+@SuppressLint("SourceLockedOrientationActivity")
 abstract class BaseActivity : AppCompatActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {

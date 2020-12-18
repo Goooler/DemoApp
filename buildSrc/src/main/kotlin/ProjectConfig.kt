@@ -73,7 +73,11 @@ fun String.isStableVersion(): Boolean {
   return stableKeyword || "^[0-9,.v-]+(-r)?$".toRegex().matches(this)
 }
 
-fun Project.setupBase(module: Module? = null): BaseExtension {
+fun ExtensionAware.getExtra(name: String): Any {
+  return extensions.extraProperties.get(name) ?: throw Exception("ExtraProperty $name is null")
+}
+
+fun Project.setupBase(module: Module? = null, block: BaseExtension.() -> Unit = {}): BaseExtension {
   return extensions.getByName<BaseExtension>("android").apply {
     plugins.run {
       apply(Plugins.kotlinAndroid)
@@ -111,13 +115,24 @@ fun Project.setupBase(module: Module? = null): BaseExtension {
       isAbortOnError = true
       isCheckReleaseBuilds = true
     }
+    block()
   }
 }
 
-fun Project.setupModule(module: Module? = null): LibraryExtension =
-  setupCommon(module) as LibraryExtension
+fun Project.setupModule(
+  module: Module? = null,
+  block: LibraryExtension.() -> Unit = {}
+): LibraryExtension {
+  return (setupCommon(module) as LibraryExtension).apply {
+    block()
+  }
+}
 
-fun Project.setupApp(appPackageName: String, appName: String): BaseAppModuleExtension {
+fun Project.setupApp(
+  appPackageName: String,
+  appName: String,
+  block: BaseAppModuleExtension.() -> Unit = {}
+): BaseAppModuleExtension {
   return (setupCommon() as BaseAppModuleExtension).apply {
     defaultConfig {
       applicationId = appPackageName
@@ -137,29 +152,20 @@ fun Project.setupApp(appPackageName: String, appName: String): BaseAppModuleExte
     }
     buildTypes {
       getByName("release") {
+        resValue("string", "app_name", appName)
         signingConfig = signingConfigs["sign"]
         isMinifyEnabled = true
-        isZipAlignEnabled = true
         isShrinkResources = true
-        proguardFiles(
-          "${rootDir.path}/gradle/proguard-rules.pro"
-        )
+        proguardFiles("${rootDir.path}/gradle/proguard-rules.pro")
       }
       getByName("debug") {
+        resValue("string", "app_name", "${appName}.debug")
         signingConfig = signingConfigs["sign"]
         applicationIdSuffix = ".debug"
         versionNameSuffix = ".debug"
         isJniDebuggable = true
         isRenderscriptDebuggable = true
         isCrunchPngs = false
-      }
-    }
-    buildTypes {
-      getByName("release") {
-        resValue("string", "app_name", appName)
-      }
-      getByName("debug") {
-        resValue("string", "app_name", "${appName}.debug")
       }
     }
     applicationVariants.all {
@@ -173,11 +179,12 @@ fun Project.setupApp(appPackageName: String, appName: String): BaseAppModuleExte
       add("coreLibraryDesugaring", Libs.desugar)
       add("debugImplementation", Libs.leakCanary)
     }
+    block()
   }
 }
 
 private fun Project.setupCommon(module: Module? = null): BaseExtension {
-  return setupBase(module).apply {
+  return setupBase(module) {
     flavorDimensions("channel")
     productFlavors {
       create(Flavor.Daily.flavor)
