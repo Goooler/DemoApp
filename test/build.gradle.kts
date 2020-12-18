@@ -14,7 +14,8 @@ dependencies {
     Libs.fastjson,
     *Libs.gson,
     Libs.mmkv,
-    *Libs.objectBox
+    *Libs.objectBox,
+    *Libs.amap
   )
   testImplementation("junit:junit:4.13.1")
   androidTestImplementation(
