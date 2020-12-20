@@ -5,6 +5,7 @@ import android.content.Intent
 import android.media.AudioAttributes
 import android.media.AudioManager
 import android.media.MediaPlayer
+import androidx.core.content.getSystemService
 import io.goooler.demoapp.base.core.BaseService
 import io.goooler.demoapp.base.util.unsafeLazy
 
@@ -18,7 +19,7 @@ class AudioPlayService : BaseService() {
 
   override fun onCreate() {
     super.onCreate()
-    audioManager = (getSystemService(Context.AUDIO_SERVICE) as? AudioManager)?.also {
+    audioManager = getSystemService<AudioManager>()?.also {
       // 创建时监听音频焦点
       it.requestAudioFocus(
         audioFocusChangeListener,

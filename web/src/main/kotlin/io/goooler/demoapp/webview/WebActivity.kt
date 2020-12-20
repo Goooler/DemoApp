@@ -1,10 +1,10 @@
 package io.goooler.demoapp.webview
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.browser.customtabs.CustomTabsIntent
+import androidx.core.net.toUri
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.blankj.utilcode.util.BarUtils
 import io.goooler.demoapp.base.util.addFragment
@@ -26,7 +26,7 @@ class WebActivity : BaseThemeActivity<WebActivityBinding>(R.layout.web_activity)
       if (intent.action == RouterManager.USE_CHROME) {
         CustomTabsIntent.Builder()
           .build()
-          .launchUrl(this, Uri.parse(url))
+          .launchUrl(this, url.toUri())
         finish()
       } else {
         webFragment = WebFragment.newInstance(url).also {

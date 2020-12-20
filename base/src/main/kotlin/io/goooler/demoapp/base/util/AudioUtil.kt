@@ -2,10 +2,10 @@
 
 package io.goooler.demoapp.base.util
 
-import android.app.Service
 import android.content.Context
 import android.media.AudioManager
 import android.os.Build
+import androidx.core.content.ContextCompat
 
 @Suppress("DEPRECATION")
 object AudioUtil {
@@ -31,7 +31,7 @@ object AudioUtil {
    * @param mute 是否静音
    */
   private fun setMusicMute(context: Context, mute: Boolean) {
-    (context.getSystemService(Service.AUDIO_SERVICE) as? AudioManager)?.let {
+    ContextCompat.getSystemService(context, AudioManager::class.java)?.let {
       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
         val direction = if (mute) AudioManager.ADJUST_UNMUTE else AudioManager.ADJUST_MUTE
         it.adjustStreamVolume(AudioManager.STREAM_MUSIC, direction, 0)
