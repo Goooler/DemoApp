@@ -24,6 +24,7 @@
 - [x] [VectorDrawable](https://developer.android.com/jetpack/androidx/releases/vectordrawable)
 - [x] [Paging](https://developer.android.com/jetpack/androidx/releases/paging)
 - [x] [ViewPager2](https://developer.android.com/jetpack/androidx/releases/viewpager2)
+- [x] [Browser](https://developer.android.com/jetpack/androidx/releases/browser)
 - [ ] [Benchmark](https://developer.android.com/jetpack/androidx/releases/benchmark)
 
 

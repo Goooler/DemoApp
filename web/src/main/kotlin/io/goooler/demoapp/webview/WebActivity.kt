@@ -1,8 +1,10 @@
 package io.goooler.demoapp.webview
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import androidx.browser.customtabs.CustomTabsIntent
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.blankj.utilcode.util.BarUtils
 import io.goooler.demoapp.base.util.addFragment
@@ -21,9 +23,16 @@ class WebActivity : BaseThemeActivity<WebActivityBinding>(R.layout.web_activity)
     BarUtils.setStatusBarLightMode(this, true)
     binding.listener = listener
     intent.extras?.getString(RouterManager.PARAMS)?.let { url ->
-      webFragment = WebFragment.newInstance(url).also {
-        it.onEventListener = listener
-        supportFragmentManager.addFragment(R.id.fragment_container, it)
+      if (intent.action == RouterManager.USE_CHROME) {
+        CustomTabsIntent.Builder()
+          .build()
+          .launchUrl(this, Uri.parse(url))
+        finish()
+      } else {
+        webFragment = WebFragment.newInstance(url).also {
+          it.onEventListener = listener
+          supportFragmentManager.addFragment(R.id.fragment_container, it)
+        }
       }
     }
   }

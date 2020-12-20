@@ -3,3 +3,7 @@ plugins {
 }
 
 setupModule(Module.Web)
+
+dependencies {
+  implementation(Libs.browser)
+}

@@ -10,6 +10,7 @@ object RouterManager {
   const val TARGET = "target"
   const val PARAMS = "params"
   const val RE_LOGIN = "reLogin"
+  const val USE_CHROME = "useChrome"
 
   fun go(url: String) {
     val uri = Uri.parse(url)
@@ -39,8 +40,10 @@ object RouterManager {
       .navigation()
   }
 
-  fun goWeb(url: String) {
+  fun goWeb(url: String, useChrome: Boolean = false) {
+    val action = if (useChrome) USE_CHROME else null
     buildPostcard(RouterPath.WEB)
+      .withAction(action)
       .withString(PARAMS, url)
       .navigation()
   }
