@@ -2,7 +2,7 @@
 
 
 
-## 用到和计划使用的 JetPack 库：
+## 用到和计划使用的 Jetpack 库：
 
 - [x] [Core](https://developer.android.com/jetpack/androidx/releases/core)
 - [x] [AppCompat](https://developer.android.com/jetpack/androidx/releases/appcompat)
@@ -25,6 +25,7 @@
 - [x] [Paging](https://developer.android.com/jetpack/androidx/releases/paging)
 - [x] [ViewPager2](https://developer.android.com/jetpack/androidx/releases/viewpager2)
 - [x] [Browser](https://developer.android.com/jetpack/androidx/releases/browser)
+- [x] [WebKit](https://developer.android.com/jetpack/androidx/releases/webkit)
 - [ ] [Benchmark](https://developer.android.com/jetpack/androidx/releases/benchmark)
 
 

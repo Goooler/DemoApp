@@ -57,6 +57,7 @@ private const val dataStoreVersion = "1.0.0-alpha05"
 private const val collectionVersion = "1.1.0"
 private const val bintrayPublishVersion = "1.0.0"
 private const val browserVersion = "1.3.0"
+private const val webKitVersion = "1.4.0"
 const val dependencyUpdateVersion = "0.36.0"
 const val kotlinterVersion = "3.3.0"
 
@@ -117,6 +118,7 @@ object Libs {
   const val photoView = "com.github.chrisbanes:PhotoView:$photoViewVersion"
   const val permissionX = "com.permissionx.guolindev:permissionx:$permissionXVersion"
   const val browser = "androidx.browser:browser:$browserVersion"
+  const val webKit = "androidx.webkit:webkit:$webKitVersion"
 
   const val protobufPlugin = "com.google.protobuf:protobuf-gradle-plugin:$protobufVersion"
   const val arouterPlugin = "com.alibaba:arouter-register:$arouterRegisterVersion"

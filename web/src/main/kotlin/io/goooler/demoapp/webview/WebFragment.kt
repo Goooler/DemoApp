@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.JavascriptInterface
 import io.goooler.demoapp.base.util.putArguments
-import io.goooler.demoapp.base.widget.CustomWebView
 import io.goooler.demoapp.common.base.BaseThemeFragment
 import io.goooler.demoapp.webview.databinding.WebFragmentBinding
 
@@ -37,7 +36,7 @@ class WebFragment private constructor() :
     }
   }.root
 
-  private val listener = object : CustomWebView.OnEventListener, JsInterface {
+  private val listener = object : CompatWebView.OnEventListener, JsInterface {
     override fun onInterceptUri(uri: Uri) {
       startActivity(Intent(Intent.ACTION_VIEW, uri))
     }

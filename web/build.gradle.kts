@@ -5,5 +5,8 @@ plugins {
 setupModule(Module.Web)
 
 dependencies {
-  implementation(Libs.browser)
+  implementation(
+    Libs.browser,
+    Libs.webKit
+  )
 }

@@ -1,4 +1,4 @@
-package io.goooler.demoapp.base.widget
+package io.goooler.demoapp.webview
 
 import android.content.Context
 import android.net.Uri
@@ -11,14 +11,14 @@ import android.webkit.URLUtil
 import android.webkit.WebChromeClient
 import android.webkit.WebSettings
 import android.webkit.WebView
-import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
+import androidx.webkit.WebViewClientCompat
 
 @Suppress("SetJavaScriptEnabled", "JavascriptInterface")
-open class CustomWebView(context: Context, attrs: AttributeSet? = null) :
+open class CompatWebView(context: Context, attrs: AttributeSet? = null) :
   WebView(context, attrs),
   DefaultLifecycleObserver {
 
@@ -72,7 +72,7 @@ open class CustomWebView(context: Context, attrs: AttributeSet? = null) :
       // 设置默认字体大小
       defaultFontSize = 18
     }
-    webViewClient = object : WebViewClient() {
+    webViewClient = object : WebViewClientCompat() {
       override fun onReceivedSslError(view: WebView, handler: SslErrorHandler, error: SslError) {
         handler.proceed()
       }
