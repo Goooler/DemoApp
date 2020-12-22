@@ -4,6 +4,7 @@ import android.content.Context
 import io.goooler.demoapp.base.network.interceptor.RetryInterceptor
 import io.goooler.demoapp.base.network.interceptor.StatusInterceptor
 import okhttp3.Cache
+import okhttp3.Dispatcher
 import okhttp3.OkHttpClient
 import retrofit2.Converter
 import retrofit2.Retrofit
@@ -40,9 +41,13 @@ abstract class BaseRetrofitHelper {
 
   protected open fun buildOkHttpClient(): OkHttpClient {
     val cache = Cache(File(context.cacheDir, "HttpCache"), 10L * 1024 * 1024)
+    val dispatcher = Dispatcher().apply {
+      maxRequestsPerHost = maxRequests / 2
+    }
     return OkHttpClient.Builder()
       .cache(cache)
       .connectTimeout(20L, TimeUnit.SECONDS)
+      .dispatcher(dispatcher)
       .addInterceptor(StatusInterceptor.create(statusListener))
       .addInterceptor(RetryInterceptor.create())
       .addInterceptor()

@@ -13,14 +13,14 @@ buildscript {
     google()
     maven(rootProject.getExtra("aliyunMaven"))
   }
-  dependencies {
-    classpath(rootProject.getExtra("androidGradlePlugin"))
-    classpath(rootProject.getExtra("kotlinPlugin"))
-    classpath(Libs.hiltPlugin)
-    classpath(Libs.arouterPlugin)
-    classpath(Libs.protobufPlugin)
-    classpath(Libs.bintrayPublishPlugin)
-  }
+  classpath(
+    rootProject.getExtra("androidGradlePlugin"),
+    rootProject.getExtra("kotlinPlugin"),
+    Libs.hiltPlugin,
+    Libs.arouterPlugin,
+    Libs.protobufPlugin,
+    Libs.bintrayPublishPlugin
+  )
 }
 
 allprojects {
@@ -42,18 +42,13 @@ tasks {
   }
   create(GradleTask.Clean.task, Delete::class.java) {
     rootProject.allprojects {
-      delete(
-        buildDir,
-        fileTree(
-          mapOf(
-            "dir" to projectDir,
-            "include" to arrayOf("*.log", "*.txt")
-          )
-        ),
-        "${projectDir.path}/.classpath",
-        "${projectDir.path}/.project",
-        "${projectDir.path}/.settings"
+      val customFileTypes = fileTree(
+        mapOf(
+          "dir" to projectDir,
+          "include" to arrayOf("*.log", "*.txt")
+        )
       )
+      delete(buildDir, customFileTypes)
     }
   }
 }

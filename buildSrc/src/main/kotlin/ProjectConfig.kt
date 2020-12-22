@@ -8,6 +8,7 @@ import org.gradle.api.Project
 import org.gradle.api.artifacts.Dependency
 import org.gradle.api.artifacts.dsl.DependencyHandler
 import org.gradle.api.plugins.ExtensionAware
+import org.gradle.kotlin.dsl.ScriptHandlerScope
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.get
 import org.gradle.kotlin.dsl.getByName
@@ -45,6 +46,14 @@ val localLibs = mapOf(
   "dir" to "libs",
   "include" to arrayOf("*.jar", "*.aar")
 )
+
+fun ScriptHandlerScope.classpath(vararg names: Any) {
+  dependencies {
+    for (name in names) {
+      add("classpath", name)
+    }
+  }
+}
 
 fun DependencyHandler.api(vararg names: Any): Array<Dependency?> =
   names.map {

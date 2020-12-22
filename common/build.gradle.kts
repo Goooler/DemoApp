@@ -5,8 +5,8 @@ plugins {
 setupModule(Module.Common)
 
 dependencies {
-  // network
   implementation(
+    // network
     Libs.coil,
     Libs.okHttpLogInterceptor
   )

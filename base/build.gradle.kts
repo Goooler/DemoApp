@@ -7,25 +7,21 @@ plugins {
 setupBase()
 
 dependencies {
-  // architecture
   api(
+    // architecture
     *Libs.coroutines,
     *Libs.lifecycle,
     Libs.core,
-    Libs.annotation
-  )
+    Libs.annotation,
 
-  // UI
-  api(
+    // UI
     Libs.appCompat,
     Libs.fragment,
     Libs.material,
     Libs.constraintLayout,
-    Libs.cardView
-  )
+    Libs.cardView,
 
-  // network
-  api(
+    // network
     Libs.okHttp,
     Libs.retrofit
   )
