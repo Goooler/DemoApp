@@ -10,6 +10,7 @@ import io.goooler.demoapp.adapter.rv.core.BindingViewHolder
 import io.goooler.demoapp.adapter.rv.core.IRvAdapter
 import io.goooler.demoapp.adapter.rv.core.IRvAdapterMutable
 import io.goooler.demoapp.adapter.rv.core.RvAdapterHelper
+import java.util.Collections
 
 /**
  * Created on 2020/10/22.
@@ -57,7 +58,7 @@ abstract class BaseRvDiffAdapter<M : IDiffVhModelType>(callback: DiffCallBack<M>
   override fun getModel(@IntRange(from = 0) position: Int): M? = getItem(position)
 
   override var list: List<M>
-    get() = helper.list
+    get() = Collections.unmodifiableList(helper.list)
     set(value) {
       helper.list = value
       submitList(helper.transform(list))

@@ -39,6 +39,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
 import java.io.File
 import java.math.BigDecimal
+import java.util.Collections
 
 // ---------------------Types-------------------------------//
 
@@ -291,6 +292,12 @@ fun <T> List<T>.secondOrNull(): T? {
 fun <T> List<T>.thirdOrNull(): T? {
   return if (size < 3) null else this[2]
 }
+
+fun <E> List<E>.toUnmodifiableList(): List<E> = Collections.unmodifiableList(this)
+
+fun <T> Set<T>.toUnmodifiableSet(): Set<T> = Collections.unmodifiableSet(this)
+
+fun <K, V> Map<K, V>.toUnmodifiableMap(): Map<K, V> = Collections.unmodifiableMap(this)
 
 fun paramMapOf(vararg pairs: Pair<String, Any>): HashMap<String, Any> =
   HashMap<String, Any>(pairs.size).apply { putAll(pairs) }

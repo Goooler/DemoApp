@@ -4,6 +4,7 @@ import android.view.ViewGroup
 import androidx.annotation.IntRange
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
+import java.util.Collections
 
 /**
  * Created on 2020/10/22.
@@ -50,7 +51,7 @@ abstract class BaseRvAdapter<M : IVhModelType> :
   override fun getModel(@IntRange(from = 0) position: Int): M? = helper.list[position]
 
   override var list: List<M>
-    get() = helper.list
+    get() = Collections.unmodifiableList(helper.list)
     set(value) {
       helper.list = value
       notifyDataSetChanged()
