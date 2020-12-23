@@ -75,6 +75,11 @@ fun DependencyHandler.androidTestImplementation(vararg names: Any): Array<Depend
     add("androidTestImplementation", it)
   }.toTypedArray()
 
+fun DependencyHandler.testImplementation(vararg names: Any): Array<Dependency?> =
+  names.map {
+    add("testImplementation", it)
+  }.toTypedArray()
+
 val Module.moduleName: String get() = ":${tag}"
 
 fun String.isStableVersion(): Boolean {
