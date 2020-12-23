@@ -52,6 +52,9 @@ class MainHomeFragment private constructor() :
           )
         }
       }
+      binding.btFive -> {
+        RouterManager.goWidget()
+      }
     }
   }
 

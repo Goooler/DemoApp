@@ -40,6 +40,11 @@ object RouterManager {
       .navigation()
   }
 
+  fun goWidget() {
+    buildPostcard(RouterPath.WIDGET)
+      .navigation()
+  }
+
   fun goWeb(url: String, useChrome: Boolean = false) {
     val action = if (useChrome) USE_CHROME else null
     buildPostcard(RouterPath.WEB)

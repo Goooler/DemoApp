@@ -31,6 +31,10 @@
       android:launchMode="singleTask" />
 
     <activity
+      android:name=".main.ui.WidgetActivity"
+      android:launchMode="singleTask" />
+
+    <activity
       android:name=".webview.WebActivity"
       android:configChanges="orientation|screenSize|keyboardHidden" />
 

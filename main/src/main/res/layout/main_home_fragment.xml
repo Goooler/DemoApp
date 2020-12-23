@@ -68,10 +68,14 @@
         android:onClick="@{listener}"
         android:text="倒计时" />
 
-      <io.goooler.demoapp.widget.DemoView
+      <Button
+        android:id="@+id/bt_five"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="@color/md_grey_100" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:onClick="@{listener}"
+        android:text="跳转去自定义 View"
+        android:textAllCaps="false" />
 
     </LinearLayout>
 

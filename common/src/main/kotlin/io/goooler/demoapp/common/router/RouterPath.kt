@@ -4,4 +4,5 @@ object RouterPath {
   const val LOGIN = "/login/"
   const val MAIN = "/main/"
   const val WEB = "/web/"
+  const val WIDGET = "/widget/"
 }
