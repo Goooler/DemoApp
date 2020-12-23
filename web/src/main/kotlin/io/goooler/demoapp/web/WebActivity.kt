@@ -1,4 +1,4 @@
-package io.goooler.demoapp.webview
+package io.goooler.demoapp.web
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,7 +11,7 @@ import io.goooler.demoapp.base.util.addFragment
 import io.goooler.demoapp.common.base.BaseThemeActivity
 import io.goooler.demoapp.common.router.RouterManager
 import io.goooler.demoapp.common.router.RouterPath
-import io.goooler.demoapp.webview.databinding.WebActivityBinding
+import io.goooler.demoapp.web.databinding.WebActivityBinding
 
 @Route(path = RouterPath.WEB)
 class WebActivity : BaseThemeActivity<WebActivityBinding>(R.layout.web_activity) {

@@ -1,4 +1,4 @@
-package io.goooler.demoapp.webview
+package io.goooler.demoapp.web
 
 import android.content.Intent
 import android.net.Uri
@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import android.webkit.JavascriptInterface
 import io.goooler.demoapp.base.util.putArguments
 import io.goooler.demoapp.common.base.BaseThemeFragment
-import io.goooler.demoapp.webview.databinding.WebFragmentBinding
+import io.goooler.demoapp.web.databinding.WebFragmentBinding
 
 class WebFragment private constructor() :
   BaseThemeFragment<WebFragmentBinding>(R.layout.web_fragment) {

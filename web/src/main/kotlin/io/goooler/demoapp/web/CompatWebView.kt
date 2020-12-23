@@ -1,4 +1,4 @@
-package io.goooler.demoapp.webview
+package io.goooler.demoapp.web
 
 import android.content.Context
 import android.net.Uri

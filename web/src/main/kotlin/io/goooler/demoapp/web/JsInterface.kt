@@ -1,4 +1,4 @@
-package io.goooler.demoapp.webview
+package io.goooler.demoapp.web
 
 interface JsInterface {
 
