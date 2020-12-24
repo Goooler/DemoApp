@@ -1,1 +1,24 @@
-<manifest package="io.goooler.demoapp.login" />
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+  package="io.goooler.demoapp.login">
+
+  <application>
+
+    <activity
+      android:name=".ui.LoginActivity"
+      android:configChanges="orientation|screenSize|keyboardHidden"
+      android:launchMode="singleTop" />
+
+    <activity
+      android:name=".ui.SplashActivity"
+      android:launchMode="singleTop"
+      android:theme="@style/login_splash_theme">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
+    </activity>
+
+  </application>
+
+</manifest>

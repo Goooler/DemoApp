@@ -2,67 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
   package="io.goooler.demoapp">
 
-  <uses-permission android:name="android.permission.INTERNET" />
-  <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEM" />
-  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-  <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-  <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-  <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-  <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-  <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
-  <uses-permission android:name="android.permission.ACCESS_COARSE_UPDATES" />
-  <uses-permission android:name="android.permission.CAMERA" />
-  <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-  <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-  <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-
-  <!--suppress AndroidDomInspection -->
   <application
     android:name=".DemoApplication"
     android:allowBackup="true"
     android:hardwareAccelerated="true"
     android:icon="@drawable/common_ic_github"
     android:label="@string/app_name"
-    android:networkSecurityConfig="@xml/network_security_config"
     android:supportsRtl="true"
-    android:theme="@style/AppTheme">
-    <activity
-      android:name=".main.ui.MainActivity"
-      android:launchMode="singleTask" />
-
-    <activity
-      android:name=".main.ui.WidgetActivity"
-      android:launchMode="singleTask" />
-
-    <activity
-      android:name=".web.WebActivity"
-      android:configChanges="orientation|screenSize|keyboardHidden" />
-
-    <activity
-      android:name=".login.ui.LoginActivity"
-      android:configChanges="orientation|screenSize|keyboardHidden"
-      android:launchMode="singleTop" />
-
-    <activity
-      android:name=".login.ui.SplashActivity"
-      android:launchMode="singleTop"
-      android:theme="@style/login_splash_theme">
-      <intent-filter>
-        <action android:name="android.intent.action.MAIN" />
-        <category android:name="android.intent.category.LAUNCHER" />
-      </intent-filter>
-    </activity>
-
-    <!--7.0 以上行为变更，不可直接 Uri.fromFile()-->
-    <provider
-      android:name=".common.provider.CommonProvider"
-      android:authorities="${applicationId}.common.content.CommonProvider"
-      android:exported="false"
-      android:grantUriPermissions="true">
-      <meta-data
-        android:name="android.support.FILE_PROVIDER_PATHS"
-        android:resource="@xml/file_path" />
-    </provider>
-  </application>
+    android:theme="@style/AppTheme" />
 
 </manifest>

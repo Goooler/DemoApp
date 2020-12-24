@@ -1,1 +1,13 @@
-<manifest package="io.goooler.demoapp.web" />
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+  package="io.goooler.demoapp.web">
+
+  <application>
+
+    <activity
+      android:name=".WebActivity"
+      android:configChanges="orientation|screenSize|keyboardHidden" />
+
+  </application>
+
+</manifest>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<paths>
+<paths xmlns:tools="http://schemas.android.com/tools"
+  tools:ignore="ResourceName">
   <external-path
     name="select_photo"
     path="." />
