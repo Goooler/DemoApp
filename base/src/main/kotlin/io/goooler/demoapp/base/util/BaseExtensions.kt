@@ -1,4 +1,5 @@
 @file:Suppress("unused", "DEPRECATION")
+@file:JvmName("BaseExtensionUtil")
 
 package io.goooler.demoapp.base.util
 

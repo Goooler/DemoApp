@@ -1,4 +1,5 @@
 @file:Suppress("unused")
+@file:JvmName("CommonExtensionUtil")
 
 package io.goooler.demoapp.common.util
 

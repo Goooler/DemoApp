@@ -10,17 +10,13 @@ object AppUserInfoManager {
   private val spUtil = SPUtils.getInstance("spUserInfoName")
   private var info: UserInfoBean? = null
 
-  var userId: String? = null
-    get() = info?.userId
+  var userId: String? = info?.userId
     private set
-  var token: String? = null
-    get() = info?.token
+  var token: String? = info?.token
     private set
-  var userName: String? = null
-    get() = info?.userName
+  var userName: String? = info?.userName
     private set
-  var nickName: String? = null
-    get() = info?.nickName
+  var nickName: String? = info?.nickName
     private set
 
   init {

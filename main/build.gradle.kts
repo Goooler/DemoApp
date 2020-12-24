@@ -4,9 +4,7 @@ import com.google.protobuf.gradle.protoc
 
 setupModule(Module.Main)
 
-plugins {
-  id(Plugins.protobuf)
-}
+applyPlugin(Plugins.protobuf)
 
 protobuf {
   protoc {

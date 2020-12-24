@@ -14,11 +14,9 @@ abstract class BaseThemeActivity<VB : ViewDataBinding>(@LayoutRes private val la
   BaseActivity(),
   ITheme {
 
-  val originalResources: Resources get() = super.getResources()
-
   protected lateinit var binding: VB
 
-  override fun getResources(): Resources = AdaptScreenUtils.adaptWidth(originalResources, 360)
+  override fun getResources(): Resources = AdaptScreenUtils.adaptWidth(super.getResources(), 360)
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)

@@ -8,6 +8,7 @@ import org.gradle.api.Project
 import org.gradle.api.artifacts.Dependency
 import org.gradle.api.artifacts.dsl.DependencyHandler
 import org.gradle.api.plugins.ExtensionAware
+import org.gradle.api.plugins.PluginAware
 import org.gradle.kotlin.dsl.ScriptHandlerScope
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.get
@@ -85,6 +86,14 @@ val Module.moduleName: String get() = ":${tag}"
 fun String.isStableVersion(): Boolean {
   val stableKeyword = listOf("RELEASE", "FINAL", "GA").any { toUpperCase(Locale.ROOT).contains(it) }
   return stableKeyword || "^[0-9,.v-]+(-r)?$".toRegex().matches(this)
+}
+
+fun PluginAware.applyPlugin(vararg names: String) {
+  apply {
+    for (name in names) {
+      plugin(name)
+    }
+  }
 }
 
 fun ExtensionAware.getExtra(name: String): Any {

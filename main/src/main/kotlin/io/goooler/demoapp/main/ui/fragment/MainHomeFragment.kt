@@ -34,27 +34,21 @@ class MainHomeFragment private constructor() :
 
   private val listener = View.OnClickListener {
     when (it) {
-      binding.btOne -> {
-        RouterManager.goWeb("http://m.bilibili.com")
-      }
-      binding.btTwo -> {
-        vm.getRepoListFromDb()
-      }
-      binding.btThree -> {
-        vm.getRepoListFromDs()
-      }
-      binding.btFour -> {
-        if (vm.countdownJob?.isActive != true) {
-          vm.startCountDown {}
-        } else {
-          vm.countdownJob?.cancel(
-            CancellationException(MainHomeViewModel.CANCEL_MANUALLY)
-          )
-        }
-      }
-      binding.btFive -> {
-        RouterManager.goWidget()
-      }
+      binding.btOne -> RouterManager.goWeb("http://m.bilibili.com")
+      binding.btTwo -> vm.getRepoListFromDb()
+      binding.btThree -> vm.getRepoListFromDs()
+      binding.btFour -> countdown()
+      binding.btFive -> RouterManager.goWidget()
+    }
+  }
+
+  private fun countdown() {
+    if (vm.countdownJob?.isActive != true) {
+      vm.startCountDown {}
+    } else {
+      vm.countdownJob?.cancel(
+        CancellationException(MainHomeViewModel.CANCEL_MANUALLY)
+      )
     }
   }
 

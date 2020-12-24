@@ -1,6 +1,4 @@
-plugins {
-  id(Plugins.androidLibrary)
-}
+applyPlugin(Plugins.androidLibrary)
 
 setupBase(Module.Widget)
 
