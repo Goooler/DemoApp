@@ -92,11 +92,11 @@ fun ExtensionAware.getExtra(name: String): Any {
 }
 
 fun Project.setupBase(module: Module? = null, block: BaseExtension.() -> Unit = {}): BaseExtension {
+  plugins.run {
+    apply(Plugins.kotlinAndroid)
+    apply(Plugins.kotlinKapt)
+  }
   return extensions.getByName<BaseExtension>("android").apply {
-    plugins.run {
-      apply(Plugins.kotlinAndroid)
-      apply(Plugins.kotlinKapt)
-    }
     compileSdkVersion(globalTargetSdk)
     buildToolsVersion = globalBuildTool
     defaultConfig {
@@ -137,6 +137,7 @@ fun Project.setupModule(
   module: Module? = null,
   block: LibraryExtension.() -> Unit = {}
 ): LibraryExtension {
+  plugins.apply(Plugins.androidLibrary)
   return (setupCommon(module) as LibraryExtension).apply {
     block()
   }
@@ -147,6 +148,7 @@ fun Project.setupApp(
   appName: String,
   block: BaseAppModuleExtension.() -> Unit = {}
 ): BaseAppModuleExtension {
+  plugins.apply(Plugins.androidApplication)
   return (setupCommon() as BaseAppModuleExtension).apply {
     defaultConfig {
       applicationId = appPackageName

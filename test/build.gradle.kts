@@ -1,7 +1,3 @@
-plugins {
-  id(Plugins.androidApplication)
-}
-
 setupApp("$appPackageName.test", "test") {
   defaultConfig {
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"

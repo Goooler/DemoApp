@@ -2,21 +2,20 @@ import com.google.protobuf.gradle.generateProtoTasks
 import com.google.protobuf.gradle.protobuf
 import com.google.protobuf.gradle.protoc
 
+setupModule(Module.Main)
+
 plugins {
-  id(Plugins.androidLibrary)
   id(Plugins.protobuf)
 }
 
-setupModule(Module.Main) {
-  protobuf {
-    protoc {
-      artifact = Libs.protoc
-    }
-    generateProtoTasks {
-      all().forEach {
-        it.builtins.create("java") {
-          option("lite")
-        }
+protobuf {
+  protoc {
+    artifact = Libs.protoc
+  }
+  generateProtoTasks {
+    all().forEach {
+      it.builtins.create("java") {
+        option("lite")
       }
     }
   }
