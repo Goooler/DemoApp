@@ -1,9 +1,6 @@
 package io.goooler.demoapp.main.ui.fragment
 
-import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshListener
@@ -42,19 +39,15 @@ class MainPagingFragment private constructor() :
     initData
   }
 
-  override fun onCreateView(
-    inflater: LayoutInflater,
-    container: ViewGroup?,
-    savedInstanceState: Bundle?
-  ): View {
-    return binding.also {
+  override fun initOnce() {
+    binding.let {
       rvAdapter = MainPagingRvAdapter(listener).apply {
         onLoadStatusListener = listener
       }
       it.rvList.adapter = rvAdapter
       it.smartRefresh.setOnRefreshListener(listener)
       it.listener = listener
-    }.root
+    }
   }
 
   private val listener = object :

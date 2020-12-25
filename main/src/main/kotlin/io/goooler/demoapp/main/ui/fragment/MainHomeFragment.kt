@@ -1,12 +1,10 @@
 package io.goooler.demoapp.main.ui.fragment
 
-import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import dagger.hilt.android.AndroidEntryPoint
 import io.goooler.demoapp.common.base.BaseThemeLazyFragment
 import io.goooler.demoapp.common.router.RouterManager
+import io.goooler.demoapp.common.ui.FullScreenDialogFragment
 import io.goooler.demoapp.common.util.getViewModel
 import io.goooler.demoapp.main.R
 import io.goooler.demoapp.main.databinding.MainHomeFragmentBinding
@@ -23,22 +21,21 @@ class MainHomeFragment private constructor() :
     vm.initData()
   }
 
-  override fun onCreateView(
-    inflater: LayoutInflater,
-    container: ViewGroup?,
-    savedInstanceState: Bundle?
-  ): View = binding.also {
-    it.vm = vm
-    it.listener = listener
-  }.root
+  override fun initOnce() {
+    binding.let {
+      it.vm = vm
+      it.listener = listener
+    }
+  }
 
   private val listener = View.OnClickListener {
     when (it) {
-      binding.btOne -> RouterManager.goWeb("http://m.bilibili.com")
-      binding.btTwo -> vm.getRepoListFromDb()
-      binding.btThree -> vm.getRepoListFromDs()
-      binding.btFour -> countdown()
-      binding.btFive -> RouterManager.goWidget()
+      binding.bt1 -> RouterManager.goWeb("http://m.bilibili.com")
+      binding.bt2 -> vm.getRepoListFromDb()
+      binding.bt3 -> vm.getRepoListFromDs()
+      binding.bt4 -> countdown()
+      binding.bt5 -> RouterManager.goWidget()
+      binding.bt6 -> FullScreenDialogFragment.show(childFragmentManager)
     }
   }
 

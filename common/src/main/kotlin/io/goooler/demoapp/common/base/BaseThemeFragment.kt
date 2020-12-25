@@ -8,17 +8,12 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import io.goooler.demoapp.base.core.BaseFragment
-import io.goooler.demoapp.base.util.unsafeLazy
 
 abstract class BaseThemeFragment<VB : ViewDataBinding>(@LayoutRes private val layoutId: Int) :
   BaseFragment(),
   ITheme {
 
-  protected val binding: VB by unsafeLazy {
-    DataBindingUtil.inflate<VB>(layoutInflater, layoutId, null, false).also {
-      it.lifecycleOwner = viewLifecycleOwner
-    }
-  }
+  protected lateinit var binding: VB
 
   override fun showLoading() {
   }
@@ -26,9 +21,22 @@ abstract class BaseThemeFragment<VB : ViewDataBinding>(@LayoutRes private val la
   override fun hideLoading() {
   }
 
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    binding = DataBindingUtil.inflate(layoutInflater, layoutId, null, false)
+    initOnce()
+  }
+
   override fun onCreateView(
     inflater: LayoutInflater,
     container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View = binding.root
+
+  protected open fun initOnce() {}
+
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+    binding.lifecycleOwner = viewLifecycleOwner
+  }
 }

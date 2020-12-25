@@ -8,17 +8,20 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import io.goooler.demoapp.base.core.BaseDialogFragment
-import io.goooler.demoapp.base.util.unsafeLazy
 
 abstract class BaseThemeDialogFragment<VB : ViewDataBinding>(@LayoutRes private val layoutId: Int) :
   BaseDialogFragment(),
   ITheme {
 
-  protected val binding: VB by unsafeLazy {
-    DataBindingUtil.inflate<VB>(layoutInflater, layoutId, null, false).also {
-      it.lifecycleOwner = viewLifecycleOwner
-    }
+  protected lateinit var binding: VB
+
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    binding = DataBindingUtil.inflate(layoutInflater, layoutId, null, false)
+    initView()
   }
+
+  protected open fun initView() {}
 
   override fun showLoading() {
   }
@@ -31,4 +34,9 @@ abstract class BaseThemeDialogFragment<VB : ViewDataBinding>(@LayoutRes private 
     container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View = binding.root
+
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+    binding.lifecycleOwner = viewLifecycleOwner
+  }
 }

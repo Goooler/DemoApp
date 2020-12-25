@@ -2,8 +2,6 @@ package io.goooler.demoapp.common.ui
 
 import android.os.Bundle
 import android.view.Gravity
-import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
 import io.goooler.demoapp.base.util.putArguments
@@ -19,19 +17,17 @@ class BottomTipDialogFragment private constructor() :
     setStyle(STYLE_NORMAL, R.style.DialogTransparentTheme)
   }
 
-  override fun onCreateView(
-    inflater: LayoutInflater,
-    container: ViewGroup?,
-    savedInstanceState: Bundle?
-  ): View = binding.also {
-    arguments?.let { bundle ->
-      it.tvTitle.text = bundle.getString(TITLE)
-      it.tvContent.text = bundle.getString(CONTENT)
+  override fun initView() {
+    binding.let {
+      arguments?.let { bundle ->
+        it.tvTitle.text = bundle.getString(TITLE)
+        it.tvContent.text = bundle.getString(CONTENT)
+      }
+      it.ivClose.setOnClickListener {
+        dismiss()
+      }
     }
-    it.ivClose.setOnClickListener {
-      dismiss()
-    }
-  }.root
+  }
 
   override fun onResume() {
     super.onResume()

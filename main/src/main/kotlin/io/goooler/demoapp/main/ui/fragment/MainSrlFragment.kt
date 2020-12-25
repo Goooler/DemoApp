@@ -1,9 +1,5 @@
 package io.goooler.demoapp.main.ui.fragment
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 import dagger.hilt.android.AndroidEntryPoint
@@ -34,15 +30,13 @@ class MainSrlFragment private constructor() :
     initData
   }
 
-  override fun onCreateView(
-    inflater: LayoutInflater,
-    container: ViewGroup?,
-    savedInstanceState: Bundle?
-  ): View = binding.also {
-    it.vm = vm
-    it.smartRefresh.setOnRefreshLoadMoreListener(listener)
-    it.rvList.adapter = rvAdapter
-  }.root
+  override fun initOnce() {
+    binding.let {
+      it.vm = vm
+      it.smartRefresh.setOnRefreshLoadMoreListener(listener)
+      it.rvList.adapter = rvAdapter
+    }
+  }
 
   private val listener = object : MainSrlRvAdapter.OnEventListener, OnRefreshLoadMoreListener {
     override fun onContentClick(content: String) {

@@ -2,10 +2,6 @@ package io.goooler.demoapp.web
 
 import android.content.Intent
 import android.net.Uri
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.webkit.JavascriptInterface
 import io.goooler.demoapp.base.util.putArguments
 import io.goooler.demoapp.common.base.BaseThemeFragment
@@ -24,17 +20,15 @@ class WebFragment private constructor() :
     binding.webView.goBack()
   }
 
-  override fun onCreateView(
-    inflater: LayoutInflater,
-    container: ViewGroup?,
-    savedInstanceState: Bundle?
-  ): View = binding.also {
-    it.webView.onEventListener = listener
-    it.webView.addJavascriptInterface(listener, "android")
-    arguments?.getString(URL)?.let { url ->
-      it.webView.loadUrl(url)
+  override fun initOnce() {
+    binding.let {
+      it.webView.onEventListener = listener
+      it.webView.addJavascriptInterface(listener, "android")
+      arguments?.getString(URL)?.let { url ->
+        it.webView.loadUrl(url)
+      }
     }
-  }.root
+  }
 
   private val listener = object : CompatWebView.OnEventListener, JsInterface {
     override fun onInterceptUri(uri: Uri) {

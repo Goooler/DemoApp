@@ -36,7 +36,7 @@
         android:textColor="@color/white" />
 
       <Button
-        android:id="@+id/bt_one"
+        android:id="@+id/bt_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -44,7 +44,7 @@
         android:text="跳转去网页" />
 
       <Button
-        android:id="@+id/bt_two"
+        android:id="@+id/bt_2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -52,7 +52,7 @@
         android:text="数据库查询" />
 
       <Button
-        android:id="@+id/bt_three"
+        android:id="@+id/bt_3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -61,7 +61,7 @@
         android:textAllCaps="false" />
 
       <Button
-        android:id="@+id/bt_four"
+        android:id="@+id/bt_4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -69,12 +69,21 @@
         android:text="倒计时" />
 
       <Button
-        android:id="@+id/bt_five"
+        android:id="@+id/bt_5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:onClick="@{listener}"
         android:text="跳转去自定义 View"
+        android:textAllCaps="false" />
+
+      <Button
+        android:id="@+id/bt_6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:onClick="@{listener}"
+        android:text="全屏对话框"
         android:textAllCaps="false" />
 
     </LinearLayout>

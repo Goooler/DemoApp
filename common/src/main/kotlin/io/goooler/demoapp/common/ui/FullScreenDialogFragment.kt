@@ -18,6 +18,12 @@ class FullScreenDialogFragment private constructor() :
     setStyle(STYLE_NO_TITLE, R.style.DialogFullScreenTheme)
   }
 
+  override fun initView() {
+    binding.ivCenter.setOnClickListener {
+      dismiss()
+    }
+  }
+
   override fun onCreateView(
     inflater: LayoutInflater,
     container: ViewGroup?,
@@ -33,11 +39,7 @@ class FullScreenDialogFragment private constructor() :
         }
       }
     }
-    return binding.also {
-      it.ivCenter.setOnClickListener {
-        dismiss()
-      }
-    }.root
+    return super.onCreateView(inflater, container, savedInstanceState)
   }
 
   override fun isCancelable(): Boolean = false
