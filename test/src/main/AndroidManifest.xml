@@ -3,7 +3,7 @@
   package="io.goooler.demoapp.test">
 
   <application
-    android:name="io.goooler.demoapp.common.CommonApplication"
+    android:name=".TestApplication"
     android:allowBackup="true"
     android:hardwareAccelerated="true"
     android:icon="@drawable/common_ic_github"

@@ -8,7 +8,7 @@ import io.goooler.demoapp.base.core.BaseApplication
 import io.goooler.demoapp.common.util.CrashHandler
 import io.goooler.demoapp.common.util.debugRun
 
-open class CommonApplication : BaseApplication() {
+abstract class CommonApplication : BaseApplication() {
 
   override fun initRight() {
     super.initRight()
