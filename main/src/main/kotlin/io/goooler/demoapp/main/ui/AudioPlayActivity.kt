@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import com.alibaba.android.arouter.facade.annotation.Route
 import io.goooler.demoapp.common.base.BaseThemeActivity
+import io.goooler.demoapp.common.router.RouterManager
 import io.goooler.demoapp.common.router.RouterPath
 import io.goooler.demoapp.common.service.AudioPlayService
 import io.goooler.demoapp.common.util.getString
@@ -34,6 +35,9 @@ class AudioPlayActivity :
       }
       binding.btStop -> {
         AudioPlayService.stopPlay(this)
+      }
+      binding.btGoMain -> {
+        RouterManager.goMain()
       }
     }
   }

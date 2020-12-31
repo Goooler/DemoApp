@@ -10,5 +10,6 @@ class SplashActivity : BaseActivity() {
     super.onCreate(savedInstanceState)
     RouterManager.goMain()
     overridePendingTransition(0, 0)
+    finish()
   }
 }

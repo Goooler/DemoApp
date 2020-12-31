@@ -46,5 +46,12 @@
       android:onClick="@{listener}"
       android:text="停止播放" />
 
+    <Button
+      android:id="@+id/bt_go_main"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:onClick="@{listener}"
+      android:text="返回主页" />
+
   </LinearLayout>
 </layout>
