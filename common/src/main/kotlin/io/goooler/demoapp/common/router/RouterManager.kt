@@ -45,6 +45,11 @@ object RouterManager {
       .navigation()
   }
 
+  fun goAudioPlay() {
+    buildPostcard(RouterPath.AUDIO_PLAY)
+      .navigation()
+  }
+
   fun goWeb(url: String, useChrome: Boolean = false) {
     val action = if (useChrome) USE_CHROME else null
     buildPostcard(RouterPath.WEB)

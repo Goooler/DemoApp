@@ -5,6 +5,7 @@ import android.content.Intent
 import android.media.AudioAttributes
 import android.media.AudioManager
 import android.media.MediaPlayer
+import android.os.Build
 import androidx.core.content.getSystemService
 import io.goooler.demoapp.base.core.BaseService
 import io.goooler.demoapp.base.util.unsafeLazy
@@ -19,14 +20,7 @@ class AudioPlayService : BaseService() {
 
   override fun onCreate() {
     super.onCreate()
-    audioManager = getSystemService<AudioManager>()?.also {
-      // 创建时监听音频焦点
-      it.requestAudioFocus(
-        audioFocusChangeListener,
-        AudioManager.STREAM_MUSIC,
-        AudioManager.AUDIOFOCUS_GAIN
-      )
-    }
+    audioManager = getSystemService()
   }
 
   override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -37,17 +31,7 @@ class AudioPlayService : BaseService() {
     intent?.getStringExtra(STREAM_URL)?.let {
       if (it.isNotEmpty() && it != lastStreamUrl) {
         lastStreamUrl = it
-        mediaPlayer.run {
-          reset()
-          val audioAttr = AudioAttributes.Builder()
-            .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC).build()
-          setAudioAttributes(audioAttr)
-          setDataSource(it)
-          prepareAsync()
-          setOnPreparedListener {
-            start()
-          }
-        }
+        startPlay(it)
       }
     }
     return super.onStartCommand(intent, flags, startId)
@@ -58,18 +42,47 @@ class AudioPlayService : BaseService() {
     super.onDestroy()
   }
 
-  private fun pausePlay() {
-    if (mediaPlayer.isPlaying) mediaPlayer.pause()
+  private fun startPlay(source: String) {
+    requestAudioFocus()
+    mediaPlayer.run {
+      reset()
+      val audioAttr = AudioAttributes.Builder()
+        .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC).build()
+      setAudioAttributes(audioAttr)
+      setDataSource(source)
+      prepareAsync()
+      setOnPreparedListener {
+        start()
+      }
+    }
   }
 
   private fun resumePlay() {
+    requestAudioFocus()
     if (mediaPlayer.isPlaying.not()) mediaPlayer.start()
   }
 
+  private fun pausePlay() {
+    abandonAudioFocus()
+    if (mediaPlayer.isPlaying) mediaPlayer.pause()
+  }
+
   private fun stopPlay() {
-    // 停止后注销监听
-    audioManager?.abandonAudioFocus(audioFocusChangeListener)
+    abandonAudioFocus()
+    audioManager = null
     mediaPlayer.stop()
+  }
+
+  private fun requestAudioFocus() {
+    audioManager?.requestAudioFocus(
+      audioFocusChangeListener,
+      AudioManager.STREAM_MUSIC,
+      AudioManager.AUDIOFOCUS_GAIN
+    )
+  }
+
+  private fun abandonAudioFocus() {
+    audioManager?.abandonAudioFocus(audioFocusChangeListener)
   }
 
   private val audioFocusChangeListener by unsafeLazy {
@@ -89,9 +102,24 @@ class AudioPlayService : BaseService() {
   }
 
   companion object {
-    const val STREAM_URL = "streamUrl"
-    const val RESUME = "resume"
-    const val PAUSE = "pause"
+    private const val STREAM_URL = "streamUrl"
+    private const val RESUME = "resume"
+    private const val PAUSE = "pause"
+
+    fun startPlay(context: Context, url: String) {
+      val intent = Intent(context, AudioPlayService::class.java).putExtra(STREAM_URL, url)
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        context.startForegroundService(intent)
+      } else {
+        context.startService(intent)
+      }
+    }
+
+    fun resumePlay(context: Context) {
+      val intent = Intent(context, AudioPlayService::class.java)
+        .setAction(RESUME)
+      context.startService(intent)
+    }
 
     fun pausePlay(context: Context) {
       val intent = Intent(context, AudioPlayService::class.java)
@@ -99,10 +127,8 @@ class AudioPlayService : BaseService() {
       context.startService(intent)
     }
 
-    fun resumePlay(context: Context) {
-      val intent = Intent(context, AudioPlayService::class.java)
-        .setAction(RESUME)
-      context.startService(intent)
+    fun stopPlay(context: Context) {
+      context.stopService(Intent(context, AudioPlayService::class.java))
     }
   }
 }
