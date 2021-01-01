@@ -40,7 +40,7 @@ tasks {
       candidate.version.isStableVersion().not()
     }
   }
-  create(GradleTask.Clean.task, Delete::class.java) {
+  create(GradleTask.Clean.task, Delete::class) {
     rootProject.allprojects {
       val customFileTypes = fileTree(
         mapOf(
