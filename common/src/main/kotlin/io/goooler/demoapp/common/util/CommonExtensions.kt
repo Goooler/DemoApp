@@ -29,6 +29,8 @@ import com.blankj.utilcode.util.SizeUtils
 import com.blankj.utilcode.util.StringUtils
 import com.blankj.utilcode.util.TimeUtils
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
+import io.goooler.demoapp.base.core.BaseActivity
+import io.goooler.demoapp.base.core.BaseFragment
 import io.goooler.demoapp.base.core.BaseViewModel
 import io.goooler.demoapp.common.BuildConfig
 import io.goooler.demoapp.common.network.HttpResponse
@@ -238,17 +240,9 @@ fun Drawable.toBitmap(): Bitmap = ImageUtils.drawable2Bitmap(this)
 // ---------------------Fragment-------------------------------//
 
 @MainThread
-inline fun <reified T : BaseViewModel> Fragment.getViewModel(): Lazy<T> =
+inline fun <reified T : BaseViewModel> BaseFragment.getViewModel(): Lazy<T> =
   lazy(LazyThreadSafetyMode.NONE) {
     ViewModelProvider(this).get(T::class.java).apply {
-      lifecycle.addObserver(this)
-    }
-  }
-
-@MainThread
-inline fun <reified T : BaseViewModel> Fragment.getViewModelOfActivity(): Lazy<T> =
-  lazy(LazyThreadSafetyMode.NONE) {
-    ViewModelProvider(requireActivity()).get(T::class.java).apply {
       lifecycle.addObserver(this)
     }
   }
@@ -264,7 +258,7 @@ inline fun <reified T : ViewDataBinding> Fragment.inflate(crossinline transform:
 // ---------------------Activity-------------------------------//
 
 @MainThread
-inline fun <reified T : BaseViewModel> ComponentActivity.getViewModel(): Lazy<T> =
+inline fun <reified T : BaseViewModel> BaseActivity.getViewModel(): Lazy<T> =
   lazy(LazyThreadSafetyMode.NONE) {
     ViewModelProvider(this).get(T::class.java).apply {
       lifecycle.addObserver(this)
