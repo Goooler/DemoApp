@@ -16,12 +16,19 @@ abstract class BaseLazyFragment : BaseFragment(), ILazyFragment {
     super.onResume()
     onFragmentResume()
   }
+
+  override fun onPause() {
+    super.onPause()
+    onFragmentPause()
+  }
 }
 
+/**
+ * 用于懒加载
+ */
 interface ILazyFragment {
 
-  /**
-   * 用于懒加载
-   */
   fun onFragmentResume()
+
+  fun onFragmentPause() {}
 }

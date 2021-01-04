@@ -13,4 +13,9 @@ abstract class BaseThemeLazyFragment<B : ViewDataBinding>(@LayoutRes layoutId: I
     super.onResume()
     onFragmentResume()
   }
+
+  override fun onPause() {
+    super.onPause()
+    onFragmentPause()
+  }
 }
