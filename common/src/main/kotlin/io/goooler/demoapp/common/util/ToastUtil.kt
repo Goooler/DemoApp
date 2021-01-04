@@ -12,12 +12,13 @@ import androidx.annotation.StringRes
 import androidx.annotation.UiThread
 import androidx.annotation.WorkerThread
 import io.goooler.demoapp.base.core.BaseApplication
+import java.lang.ref.WeakReference
 
-@SuppressLint("WrongThread")
+@SuppressLint("WrongThread", "ShowToast")
 object ToastUtil {
 
   private val handler by lazy { Handler(Looper.getMainLooper()) }
-  private var toast: Toast? = null
+  private var toast: WeakReference<Toast?>? = null
 
   @AnyThread
   fun show(context: Context, @StringRes strResId: Int) {
@@ -62,10 +63,11 @@ object ToastUtil {
   @Synchronized
   fun showInMainThread(context: Context, text: String) {
     // 把上一条先置空，再显示下一条
-    toast?.cancel()
+    toast?.get()?.cancel()
     toast = null
-    toast = Toast.makeText(context, text, Toast.LENGTH_SHORT).also {
+    Toast.makeText(context, text, Toast.LENGTH_SHORT).also {
       it.show()
+      toast = WeakReference(it)
     }
   }
 }
