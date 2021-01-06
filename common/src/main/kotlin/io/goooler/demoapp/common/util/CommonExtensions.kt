@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.webkit.URLUtil
 import androidx.activity.ComponentActivity
+import androidx.annotation.AnyThread
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.annotation.Dimension
@@ -30,8 +31,10 @@ import com.blankj.utilcode.util.StringUtils
 import com.blankj.utilcode.util.TimeUtils
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import io.goooler.demoapp.base.core.BaseActivity
+import io.goooler.demoapp.base.core.BaseApplication
 import io.goooler.demoapp.base.core.BaseFragment
 import io.goooler.demoapp.base.core.BaseViewModel
+import io.goooler.demoapp.base.util.ToastUtil
 import io.goooler.demoapp.common.BuildConfig
 import io.goooler.demoapp.common.network.HttpResponse
 import io.goooler.demoapp.common.type.SpKeys
@@ -68,6 +71,16 @@ suspend inline fun <reified T : Any> T.putIntoDataStore(key: SpKeys, prefName: S
 
 fun Throwable.toast() {
   toString().showToast()
+}
+
+@AnyThread
+fun @receiver:StringRes Int.showToast() {
+  ToastUtil.show(BaseApplication.app, this)
+}
+
+@AnyThread
+fun String.showToast() {
+  ToastUtil.show(BaseApplication.app, this)
 }
 
 fun HttpResponse<*>.checkStatusAndEntry() = status && entry != null

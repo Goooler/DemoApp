@@ -1,6 +1,6 @@
 @file:Suppress("unused")
 
-package io.goooler.demoapp.common.util
+package io.goooler.demoapp.base.util
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -11,7 +11,6 @@ import androidx.annotation.AnyThread
 import androidx.annotation.StringRes
 import androidx.annotation.UiThread
 import androidx.annotation.WorkerThread
-import io.goooler.demoapp.base.core.BaseApplication
 import java.lang.ref.WeakReference
 
 @SuppressLint("WrongThread", "ShowToast")
@@ -46,9 +45,7 @@ object ToastUtil {
 
   @WorkerThread
   fun showInWorkerThread(context: Context, text: String) {
-    handler.post {
-      showInMainThread(context, text)
-    }
+    handler.post { showInMainThread(context, text) }
   }
 
   @UiThread
@@ -70,14 +67,4 @@ object ToastUtil {
       toast = WeakReference(it)
     }
   }
-}
-
-@AnyThread
-fun @receiver:StringRes Int.showToast() {
-  ToastUtil.show(BaseApplication.app, this)
-}
-
-@AnyThread
-fun String.showToast() {
-  ToastUtil.show(BaseApplication.app, this)
 }

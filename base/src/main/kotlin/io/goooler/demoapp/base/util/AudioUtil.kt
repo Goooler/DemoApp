@@ -11,13 +11,6 @@ import androidx.core.content.ContextCompat
 object AudioUtil {
 
   /**
-   * 音频静音
-   */
-  fun setMusicMute(context: Context) {
-    setMusicMute(context, true)
-  }
-
-  /**
    * 取消音频静音
    */
   fun setMusicUnmute(context: Context) {
@@ -30,7 +23,7 @@ object AudioUtil {
    * @param context .
    * @param mute 是否静音
    */
-  private fun setMusicMute(context: Context, mute: Boolean) {
+  fun setMusicMute(context: Context, mute: Boolean = true) {
     ContextCompat.getSystemService(context, AudioManager::class.java)?.let {
       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
         val direction = if (mute) AudioManager.ADJUST_UNMUTE else AudioManager.ADJUST_MUTE
