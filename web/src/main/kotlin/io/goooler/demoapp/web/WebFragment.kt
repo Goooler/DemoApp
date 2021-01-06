@@ -10,6 +10,8 @@ import io.goooler.demoapp.web.databinding.WebFragmentBinding
 class WebFragment private constructor() :
   BaseThemeFragment<WebFragmentBinding>(R.layout.web_fragment) {
 
+  private lateinit var headers: Map<String, String>
+
   var onEventListener: OnEventListener? = null
 
   val url: String? get() = binding.webView.url
@@ -21,11 +23,16 @@ class WebFragment private constructor() :
   }
 
   override fun initOnce() {
+    headers = mapOf(
+      "buildType" to BuildConfig.BUILD_TYPE,
+      "flavor" to BuildConfig.FLAVOR
+    )
+
     binding.let {
       it.webView.onEventListener = listener
       it.webView.addJavascriptInterface(listener, "android")
       arguments?.getString(URL)?.let { url ->
-        it.webView.loadUrl(url)
+        it.webView.loadUrl(url, headers)
       }
     }
   }

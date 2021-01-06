@@ -18,9 +18,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.webkit.WebViewClientCompat
 
 @Suppress("SetJavaScriptEnabled", "JavascriptInterface")
-open class CompatWebView(context: Context, attrs: AttributeSet? = null) :
-  WebView(context, attrs),
-  DefaultLifecycleObserver {
+open class CompatWebView(context: Context, attrs: AttributeSet? = null) : WebView(context, attrs) {
 
   var onEventListener: OnEventListener? = null
 
@@ -33,18 +31,6 @@ open class CompatWebView(context: Context, attrs: AttributeSet? = null) :
     destroy()
   }
 
-  override fun onResume(owner: LifecycleOwner) {
-    onResume()
-  }
-
-  override fun onPause(owner: LifecycleOwner) {
-    onPause()
-  }
-
-  override fun onDestroy(owner: LifecycleOwner) {
-    onDestroy()
-  }
-
   override fun onAttachedToWindow() {
     super.onAttachedToWindow()
     attachToLifecycle()
@@ -52,11 +38,12 @@ open class CompatWebView(context: Context, attrs: AttributeSet? = null) :
 
   private fun initWebViewSettings() {
     settings.run {
+      // 允许 js 运行
       javaScriptEnabled = true
+      // 支持通过 js 打开新窗口
+      javaScriptCanOpenWindowsAutomatically = true
       // 加载来自任何其他来源的内容，即使该来源不安全
       mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
-      // 支持通过JS打开新窗口
-      javaScriptCanOpenWindowsAutomatically = true
       // 设置可以访问文件
       allowFileAccess = true
       // 设置内置的缩放控件，若为 false，则该 WebView 不可缩放
@@ -86,7 +73,7 @@ open class CompatWebView(context: Context, attrs: AttributeSet? = null) :
         }
       }
 
-      override fun onPageFinished(view: WebView, s: String) {
+      override fun onPageFinished(view: WebView, url: String) {
         onEventListener?.loadFinish()
       }
     }
@@ -141,10 +128,24 @@ open class CompatWebView(context: Context, attrs: AttributeSet? = null) :
     (context as? FragmentActivity)?.let {
       val fragment = findSupportFragment(this, it)
       if (fragment != null) {
-        fragment.lifecycle.addObserver(this)
+        fragment.lifecycle.addObserver(lifecycleObserver)
       } else {
-        it.lifecycle.addObserver(this)
+        it.lifecycle.addObserver(lifecycleObserver)
       }
+    }
+  }
+
+  private val lifecycleObserver = object : DefaultLifecycleObserver {
+    override fun onResume(owner: LifecycleOwner) {
+      onResume()
+    }
+
+    override fun onPause(owner: LifecycleOwner) {
+      onPause()
+    }
+
+    override fun onDestroy(owner: LifecycleOwner) {
+      onDestroy()
     }
   }
 
