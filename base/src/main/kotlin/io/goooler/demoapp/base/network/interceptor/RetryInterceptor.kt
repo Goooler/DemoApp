@@ -1,10 +1,11 @@
 package io.goooler.demoapp.base.network.interceptor
 
-import io.goooler.demoapp.base.network.BaseInterceptor
 import okhttp3.Interceptor
 import okhttp3.Response
 
-class RetryInterceptor private constructor() : BaseInterceptor {
+object RetryInterceptor : Interceptor {
+
+  private const val MAX_RETRY_COUNT = 3
 
   @Synchronized
   override fun intercept(chain: Interceptor.Chain): Response {
@@ -17,11 +18,5 @@ class RetryInterceptor private constructor() : BaseInterceptor {
       response = chain.proceed(request)
     }
     return response
-  }
-
-  companion object {
-    private const val MAX_RETRY_COUNT = 3
-
-    fun create() = RetryInterceptor()
   }
 }

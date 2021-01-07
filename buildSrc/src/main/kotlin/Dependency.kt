@@ -112,6 +112,7 @@ object Libs {
   const val rxPermission = "com.github.tbruyelle:rxpermissions:$rxPermissionVersion"
   const val okHttp = "com.squareup.okhttp3:okhttp:$okHttpVersion"
   const val okHttpLogInterceptor = "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
+  const val okHttpBrotliInterceptor = "com.squareup.okhttp3:okhttp-brotli:$okHttpVersion"
   const val retrofit = "com.squareup.retrofit2:retrofit:$retrofitVersion"
   const val paging = "androidx.paging:paging-runtime:$pagingVersion"
   const val viewPager2 = "androidx.viewpager2:viewpager2:$viewPager2Version"

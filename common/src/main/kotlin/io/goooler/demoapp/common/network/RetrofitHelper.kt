@@ -11,6 +11,7 @@ import io.goooler.demoapp.common.router.RouterManager
 import io.goooler.demoapp.common.util.AppUserInfoManager
 import io.goooler.demoapp.common.util.JsonUtil
 import okhttp3.OkHttpClient
+import okhttp3.brotli.BrotliInterceptor
 import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
@@ -35,7 +36,8 @@ object RetrofitHelper : BaseRetrofitHelper() {
   }
 
   override fun OkHttpClient.Builder.addInterceptor(): OkHttpClient.Builder {
-    addInterceptor(CookieInterceptor.create())
+    addInterceptor(CookieInterceptor)
+    addInterceptor(BrotliInterceptor)
     addNetworkInterceptor(HttpLogger.newLogInterceptor())
     return this
   }

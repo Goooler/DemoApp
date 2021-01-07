@@ -49,7 +49,7 @@ abstract class BaseRetrofitHelper {
       .connectTimeout(20L, TimeUnit.SECONDS)
       .dispatcher(dispatcher)
       .addInterceptor(StatusInterceptor.create(statusListener))
-      .addInterceptor(RetryInterceptor.create())
+      .addInterceptor(RetryInterceptor)
       .addInterceptor()
       .build()
   }

@@ -4,6 +4,7 @@ dependencies {
   implementation(
     // network
     Libs.coil,
-    Libs.okHttpLogInterceptor
+    Libs.okHttpLogInterceptor,
+    Libs.okHttpBrotliInterceptor
   )
 }

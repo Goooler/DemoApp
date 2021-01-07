@@ -12,8 +12,6 @@ import java.lang.reflect.Type
 
 object FastJsonConverterFactory : Converter.Factory() {
 
-  val instance: FastJsonConverterFactory = this
-
   override fun requestBodyConverter(
     type: Type,
     parameterAnnotations: Array<Annotation>,
