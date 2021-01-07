@@ -45,6 +45,11 @@ object RouterManager {
       .navigation()
   }
 
+  fun goMap() {
+    buildPostcard(RouterPath.MAP)
+      .navigation()
+  }
+
   fun goAudioPlay() {
     buildPostcard(RouterPath.AUDIO_PLAY)
       .navigation()

@@ -4,6 +4,7 @@ include(
   ":common",
   ":login",
   ":main",
+  ":map",
   ":web",
   ":adapter",
   ":widget",

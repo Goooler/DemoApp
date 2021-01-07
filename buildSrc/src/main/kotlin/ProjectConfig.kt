@@ -164,9 +164,7 @@ fun Project.setupApp(
     defaultConfig {
       applicationId = appPackageName
       addManifestPlaceholders(
-        mapOf(
-          "appName" to appName
-        )
+        mapOf("appName" to appName)
       )
     }
     signingConfigs {

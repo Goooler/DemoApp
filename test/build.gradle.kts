@@ -10,8 +10,7 @@ dependencies {
     Libs.fastjson,
     *Libs.gson,
     Libs.mmkv,
-    *Libs.objectBox,
-    *Libs.amap
+    *Libs.objectBox
   )
   testImplementation(
     "junit:junit:4.13.1",

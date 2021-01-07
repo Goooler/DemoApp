@@ -6,6 +6,7 @@ enum class Module(val tag: String, val runAlone: Boolean = false) {
   //---------------------biz-------------------------------//
   Login("login"),
   Main("main"),
+  Map("map"),
   Web("web"),
 
   //---------------------func-------------------------------//

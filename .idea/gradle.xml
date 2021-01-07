@@ -18,13 +18,13 @@
             <option value="$PROJECT_DIR$/common" />
             <option value="$PROJECT_DIR$/login" />
             <option value="$PROJECT_DIR$/main" />
+            <option value="$PROJECT_DIR$/map" />
             <option value="$PROJECT_DIR$/test" />
             <option value="$PROJECT_DIR$/web" />
             <option value="$PROJECT_DIR$/widget" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
-        <option name="useQualifiedModuleNames" value="true" />
       </GradleProjectSettings>
     </option>
   </component>

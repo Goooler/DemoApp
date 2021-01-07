@@ -196,8 +196,8 @@ object Libs {
     "com.squareup.retrofit2:adapter-rxjava3:$retrofitVersion"
   )
   val amap = arrayOf(
-    "com.amap.api:map2d:latest.integration",
-    //"com.amap.api:navi-3dmap:latest.integration",
+    //"com.amap.api:map2d:latest.integration",
+    "com.amap.api:navi-3dmap:latest.integration",
     "com.amap.api:search:latest.integration",
     "com.amap.api:location:latest.integration"
   )

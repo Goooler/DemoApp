@@ -37,6 +37,7 @@ class MainHomeFragment private constructor() :
       binding.bt5 -> RouterManager.goWidget()
       binding.bt6 -> FullScreenDialogFragment.show(childFragmentManager)
       binding.bt7 -> RouterManager.goAudioPlay()
+      binding.bt8 -> RouterManager.goMap()
     }
   }
 

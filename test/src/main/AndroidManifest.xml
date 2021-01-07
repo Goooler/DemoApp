@@ -11,10 +11,6 @@
     android:supportsRtl="true"
     android:theme="@style/AppTheme">
 
-    <meta-data
-      android:name="com.amap.api.v2.apikey"
-      android:value="ab0ee784fe95f3de2af3db07e11c37ed" />
-
   </application>
 
 </manifest>
