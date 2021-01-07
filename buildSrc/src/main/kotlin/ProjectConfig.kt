@@ -37,7 +37,7 @@ private val apiHosts = mapOf(
 
 // app
 private const val globalVersionName = "1.0"
-private const val globalVersionCode = 20201214
+private const val globalVersionCode = 20210107
 const val appPackageName = "io.goooler.demoapp"
 const val appName = "Demo"
 const val extraScriptPath = "buildSrc/extra.gradle.kts"
@@ -186,11 +186,11 @@ fun Project.setupApp(
           exclude("**/*.java")
           exclude("**/*.version")
           exclude("**/*.*_module")
-          exclude("META-INF/services*")
-          exclude("META-INF/com*")
-          exclude("kotlin*")
-          exclude("okhttp3*")
-          exclude("google*")
+          exclude("META-INF/services/**")
+          exclude("META-INF/com/**")
+          exclude("kotlin/**")
+          exclude("okhttp3/**")
+          exclude("google/**")
         }
       }
       getByName("debug") {
