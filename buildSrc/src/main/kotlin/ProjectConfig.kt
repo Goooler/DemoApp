@@ -27,9 +27,7 @@ private const val globalTargetSdk = 30
 private const val globalBuildTool = "30.0.3"
 private const val globalMinSdk = 23
 private val javaVersion = JavaVersion.VERSION_1_8
-private val ndkLibs = setOf(
-  "arm64-v8a", "x86"
-)
+private val ndkLibs = setOf("arm64-v8a")
 
 private const val cdnPrefix = "https://raw.githubusercontent.com/"
 private val apiHosts = mapOf(
