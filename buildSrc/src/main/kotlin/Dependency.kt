@@ -29,7 +29,7 @@ private const val rxJavaVersion = "3.0.9"
 private const val rxPermissionVersion = "0.12"
 private const val mpChartVersion = "v3.1.0"
 private const val lottieVersion = "3.5.0"
-private const val smartRefreshLayoutVersion = "2.0.1"
+private const val smartRefreshLayoutVersion = "2.0.3"
 private const val glideVersion = "4.11.0"
 private const val glideTransformVersion = "4.3.0"
 private const val leakCanaryVersion = "2.6"
@@ -171,7 +171,6 @@ object Libs {
   val smartRefreshLayout = arrayOf(
     "com.scwang.smart:refresh-layout-kernel:$smartRefreshLayoutVersion",
     "com.scwang.smart:refresh-header-classics:$smartRefreshLayoutVersion",
-    "com.scwang.smart:refresh-header-material:$smartRefreshLayoutVersion",
     "com.scwang.smart:refresh-footer-classics:$smartRefreshLayoutVersion"
   )
   val gson = arrayOf(

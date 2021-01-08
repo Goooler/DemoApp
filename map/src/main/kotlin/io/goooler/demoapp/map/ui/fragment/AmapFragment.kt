@@ -10,7 +10,7 @@ import io.goooler.demoapp.map.databinding.MapAmapFragmentBinding
 class AmapFragment private constructor() :
   BaseThemeFragment<MapAmapFragmentBinding>(R.layout.map_amap_fragment) {
 
-  lateinit var mapView: MapView
+  private lateinit var mapView: MapView
 
   override fun initOnce() {
     mapView = binding.mapView
@@ -38,11 +38,9 @@ class AmapFragment private constructor() :
   }
 
   private val listener = object : LocationSource {
-    override fun activate(locationChangedListener: LocationSource.OnLocationChangedListener) {
-    }
+    override fun activate(locationChangedListener: LocationSource.OnLocationChangedListener) {}
 
-    override fun deactivate() {
-    }
+    override fun deactivate() {}
   }
 
   companion object {
