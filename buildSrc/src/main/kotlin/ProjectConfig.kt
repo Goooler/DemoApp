@@ -101,10 +101,7 @@ fun ExtensionAware.getExtra(name: String): Any {
 }
 
 fun Project.setupBase(module: Module? = null, block: BaseExtension.() -> Unit = {}): BaseExtension {
-  plugins.run {
-    apply(Plugins.kotlinAndroid)
-    apply(Plugins.kotlinKapt)
-  }
+  applyPlugin(Plugins.kotlinAndroid, Plugins.kotlinKapt)
   return extensions.getByName<BaseExtension>("android").apply {
     compileSdkVersion(globalTargetSdk)
     buildToolsVersion = globalBuildTool
@@ -146,7 +143,7 @@ fun Project.setupModule(
   module: Module? = null,
   block: LibraryExtension.() -> Unit = {}
 ): LibraryExtension {
-  plugins.apply(Plugins.androidLibrary)
+  applyPlugin(Plugins.androidLibrary)
   return (setupCommon(module) as LibraryExtension).apply {
     block()
   }
@@ -157,7 +154,7 @@ fun Project.setupApp(
   appName: String,
   block: BaseAppModuleExtension.() -> Unit = {}
 ): BaseAppModuleExtension {
-  plugins.apply(Plugins.androidApplication)
+  applyPlugin(Plugins.androidApplication)
   return (setupCommon() as BaseAppModuleExtension).apply {
     defaultConfig {
       applicationId = appPackageName
@@ -267,10 +264,7 @@ private fun Project.setupCommon(module: Module? = null): BaseExtension {
       )
       kapt(Libs.arouterKapt, Libs.moshiKapt, Libs.roomKapt, *Libs.hiltKapt)
     }
-    plugins.run {
-      apply(Plugins.arouter)
-      apply(Plugins.hilt)
-    }
+    applyPlugin(Plugins.arouter, Plugins.hilt)
   }
 }
 
