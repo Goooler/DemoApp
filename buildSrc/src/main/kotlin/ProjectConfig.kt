@@ -65,6 +65,11 @@ fun DependencyHandler.implementation(vararg names: Any): Array<Dependency?> =
     add("implementation", it)
   }.toTypedArray()
 
+fun DependencyHandler.debugImplementation(vararg names: Any): Array<Dependency?> =
+  names.map {
+    add("debugImplementation", it)
+  }.toTypedArray()
+
 fun DependencyHandler.kapt(vararg names: Any): Array<Dependency?> =
   names.map {
     add("kapt", it)
@@ -209,7 +214,6 @@ fun Project.setupApp(
     compileOptions.isCoreLibraryDesugaringEnabled = true
     dependencies.run {
       add("coreLibraryDesugaring", Libs.desugar)
-      add("debugImplementation", Libs.leakCanary)
     }
     block()
   }

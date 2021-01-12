@@ -7,4 +7,8 @@ dependencies {
     Libs.okHttpLogInterceptor,
     Libs.okHttpBrotliInterceptor
   )
+  debugImplementation(
+    Libs.leakCanary,
+    Libs.doraemonKit
+  )
 }

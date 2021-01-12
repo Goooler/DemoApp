@@ -1,10 +1,12 @@
 package io.goooler.demoapp.common
 
 import com.alibaba.android.arouter.launcher.ARouter
+import com.didichuxing.doraemonkit.DoraemonKit
 import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import io.goooler.demoapp.base.core.BaseApplication
+import io.goooler.demoapp.common.type.CommonConstants
 import io.goooler.demoapp.common.util.CrashHandler
 import io.goooler.demoapp.common.util.debugRun
 
@@ -15,6 +17,7 @@ abstract class CommonApplication : BaseApplication() {
     CrashHandler.init()
     initArouter()
     initSmartRefresh()
+    initDoKit()
   }
 
   private fun initArouter() {
@@ -23,6 +26,10 @@ abstract class CommonApplication : BaseApplication() {
       ARouter.openDebug()
     }
     ARouter.init(this)
+  }
+
+  private fun initDoKit() {
+    DoraemonKit.install(this, CommonConstants.DORAEMON_KIT_KEY)
   }
 
   private fun initSmartRefresh() {
