@@ -11,7 +11,7 @@ buildscript {
 
   repositories {
     google()
-    maven(rootProject.getExtra("aliyunMaven"))
+    jcenter()
   }
   classpath(
     rootProject.getExtra("androidGradlePlugin"),
