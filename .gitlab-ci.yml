@@ -50,19 +50,8 @@ before_script:
   - sdkmanager --sdk_root=${ANDROID_HOME} "platform-tools"
   - sdkmanager --sdk_root=${ANDROID_HOME} "build-tools;${ANDROID_BUILD_TOOLS}"
 
-  # Not necessary, but just for surity
-  - chmod +x ./gradlew
-
-# Basic android and gradle stuff
-# Check linting
-lintDebug:
-  interruptible: true
-  stage: build
-  script:
-    - ./gradlew -Pci --console=plain :app:lintDebug -PbuildDir=lint
-
 # Make Project
-assembleOnlineRelease:
+build:
   interruptible: true
   stage: build
   script:
