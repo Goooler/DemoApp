@@ -121,7 +121,8 @@ object Libs {
   const val permissionX = "com.permissionx.guolindev:permissionx:$permissionXVersion"
   const val browser = "androidx.browser:browser:$browserVersion"
   const val webKit = "androidx.webkit:webkit:$webKitVersion"
-  const val doraemonKit = "com.didichuxing.doraemonkit:dokitx:$doraemonKitVersion"
+  const val doraemonKitDebug = "com.didichuxing.doraemonkit:dokitx:$doraemonKitVersion"
+  const val doraemonKitRelease = "com.didichuxing.doraemonkit:dokitx-no-op:$doraemonKitVersion"
 
   const val protobufPlugin = "com.google.protobuf:protobuf-gradle-plugin:$protobufVersion"
   const val arouterPlugin = "com.alibaba:arouter-register:$arouterRegisterVersion"

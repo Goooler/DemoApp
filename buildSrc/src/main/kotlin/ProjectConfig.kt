@@ -70,6 +70,11 @@ fun DependencyHandler.debugImplementation(vararg names: Any): Array<Dependency?>
     add("debugImplementation", it)
   }.toTypedArray()
 
+fun DependencyHandler.releaseImplementation(vararg names: Any): Array<Dependency?> =
+  names.map {
+    add("releaseImplementation", it)
+  }.toTypedArray()
+
 fun DependencyHandler.kapt(vararg names: Any): Array<Dependency?> =
   names.map {
     add("kapt", it)
@@ -231,6 +236,10 @@ private fun Project.setupCommon(module: Module? = null): BaseExtension {
           putBuildConfigStringField(BuildConfigField.VersionName.tag, globalVersionName)
           putBuildConfigStringField(BuildConfigField.CdnPrefix.tag, cdnPrefix)
           putBuildConfigStringField(BuildConfigField.ApiHost.tag, apiHosts[name])
+          putBuildConfigStringField(
+            BuildConfigField.DoraemonKitKey.tag,
+            "4a8c3eef29f029bc197705faad83f43d"
+          )
         }
       }
     }

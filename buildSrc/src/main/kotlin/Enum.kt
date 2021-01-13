@@ -23,7 +23,8 @@ enum class BuildConfigField(val tag: String) {
   VersionCode("VERSION_CODE"),
   VersionName("VERSION_NAME"),
   CdnPrefix("CDN_PREFIX"),
-  ApiHost("API_HOST")
+  ApiHost("API_HOST"),
+  DoraemonKitKey("DORAEMON_KIT_KEY")
 }
 
 enum class GradleTask(val task: String) {

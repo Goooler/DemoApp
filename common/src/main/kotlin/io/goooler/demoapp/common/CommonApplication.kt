@@ -6,7 +6,6 @@ import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import io.goooler.demoapp.base.core.BaseApplication
-import io.goooler.demoapp.common.type.CommonConstants
 import io.goooler.demoapp.common.util.CrashHandler
 import io.goooler.demoapp.common.util.debugRun
 
@@ -29,7 +28,7 @@ abstract class CommonApplication : BaseApplication() {
   }
 
   private fun initDoKit() {
-    DoraemonKit.install(this, CommonConstants.DORAEMON_KIT_KEY)
+    DoraemonKit.install(this, BuildConfig.DORAEMON_KIT_KEY)
   }
 
   private fun initSmartRefresh() {
