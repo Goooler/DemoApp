@@ -26,6 +26,7 @@ buildscript {
 allprojects {
   apply {
     from("${rootDir.path}/$extraScriptPath")
+    plugin(Plugins.dependencyUpdate)
     plugin(Plugins.kotlinter)
   }
   kotlinter {

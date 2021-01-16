@@ -3,7 +3,7 @@ import com.android.build.gradle.BaseExtension
 import com.android.build.gradle.LibraryExtension
 import com.android.build.gradle.internal.api.BaseVariantOutputImpl
 import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
-import org.gradle.api.GradleException
+import org.gradle.api.InvalidUserDataException
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 import org.gradle.api.artifacts.Dependency
@@ -106,8 +106,8 @@ fun PluginAware.applyPlugin(vararg names: String) {
 }
 
 fun ExtensionAware.getExtra(name: String): Any {
-  return extensions.extraProperties.get(name)
-    ?: throw GradleException("ExtraProperty $name is null")
+  return extensions.extraProperties[name]
+    ?: throw InvalidUserDataException("ExtraProperty $name is null")
 }
 
 fun Project.setupBase(module: Module? = null, block: BaseExtension.() -> Unit = {}): BaseExtension {
