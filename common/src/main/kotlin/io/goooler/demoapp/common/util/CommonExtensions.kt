@@ -52,7 +52,7 @@ typealias SpHelper = SPUtils
 
 val isDebug: Boolean = BuildConfig.DEBUG
 
-var isFirstRun: Boolean
+inline var isFirstRun: Boolean
   get() = SpHelper.getInstance().getBoolean(SpKeys.FirstRun.key, true)
   set(value) = SpHelper.getInstance().put(SpKeys.FirstRun.key, value)
 

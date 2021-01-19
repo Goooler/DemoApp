@@ -75,11 +75,11 @@ typealias DoubleList = List<Double>
 
 // ---------------------Any-------------------------------//
 
-val currentTimeMillis: Long get() = System.currentTimeMillis()
+inline val currentTimeMillis: Long get() = System.currentTimeMillis()
 
-val currentThreadName: String get() = Thread.currentThread().name
+inline val currentThreadName: String get() = Thread.currentThread().name
 
-val isMainThread: Boolean get() = Looper.getMainLooper().thread === Thread.currentThread()
+inline val isMainThread: Boolean get() = Looper.getMainLooper().thread === Thread.currentThread()
 
 fun <T> unsafeLazy(initializer: () -> T): Lazy<T> = lazy(LazyThreadSafetyMode.NONE, initializer)
 
