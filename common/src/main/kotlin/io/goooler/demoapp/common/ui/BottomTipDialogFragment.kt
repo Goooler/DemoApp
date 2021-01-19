@@ -17,7 +17,7 @@ class BottomTipDialogFragment private constructor() :
     setStyle(STYLE_NORMAL, R.style.DialogTransparentTheme)
   }
 
-  override fun initView() {
+  override fun initOnce() {
     binding.let {
       arguments?.let { bundle ->
         it.tvTitle.text = bundle.getString(TITLE)

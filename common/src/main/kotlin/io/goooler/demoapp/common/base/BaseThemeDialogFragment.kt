@@ -18,10 +18,10 @@ abstract class BaseThemeDialogFragment<VB : ViewDataBinding>(@LayoutRes private 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     binding = DataBindingUtil.inflate(layoutInflater, layoutId, null, false)
-    initView()
+    initOnce()
   }
 
-  protected open fun initView() {}
+  protected open fun initOnce() {}
 
   override fun showLoading() {
   }

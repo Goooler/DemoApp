@@ -18,7 +18,7 @@ class FullScreenDialogFragment private constructor() :
     setStyle(STYLE_NO_TITLE, R.style.DialogFullScreenTheme)
   }
 
-  override fun initView() {
+  override fun initOnce() {
     binding.ivCenter.setOnClickListener {
       dismiss()
     }
