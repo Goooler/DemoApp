@@ -1,11 +1,11 @@
 import com.github.panpf.bintray.publish.PublishExtension
 
-applyPlugin(Plugins.androidLibrary)
+applyPlugins(Plugins.androidLibrary)
 
 setupBase()
 
 dependencies {
-  api(
+  apis(
     // architecture
     *Libs.coroutines,
     *Libs.lifecycle,
@@ -25,7 +25,7 @@ dependencies {
   )
 }
 
-applyPlugin(Plugins.bintrayPublish)
+applyPlugins(Plugins.bintrayPublish)
 
 configure<PublishExtension> {
   userOrg = "goooler"

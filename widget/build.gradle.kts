@@ -1,7 +1,7 @@
-applyPlugin(Plugins.androidLibrary)
+applyPlugins(Plugins.androidLibrary)
 
 setupBase(Module.Widget)
 
 dependencies {
-  implementation(Libs.core)
+  implementations(Libs.core)
 }

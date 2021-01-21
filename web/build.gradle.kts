@@ -1,7 +1,7 @@
 setupModule(Module.Web)
 
 dependencies {
-  implementation(
+  implementations(
     Libs.browser,
     Libs.webKit
   )

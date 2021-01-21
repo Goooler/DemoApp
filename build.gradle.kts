@@ -13,7 +13,7 @@ buildscript {
     google()
     jcenter()
   }
-  classpath(
+  classpaths(
     rootProject.getExtra("androidGradlePlugin"),
     rootProject.getExtra("kotlinPlugin"),
     Libs.hiltPlugin,

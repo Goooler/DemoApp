@@ -4,7 +4,7 @@ import com.google.protobuf.gradle.protoc
 
 setupModule(Module.Main)
 
-applyPlugin(Plugins.protobuf)
+applyPlugins(Plugins.protobuf)
 
 protobuf {
   protoc {
@@ -20,7 +20,7 @@ protobuf {
 }
 
 dependencies {
-  implementation(
+  implementations(
     project(Module.Adapter.moduleName),
     project(Module.Widget.moduleName),
     Libs.protobufLite

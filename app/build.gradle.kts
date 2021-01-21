@@ -1,7 +1,7 @@
 setupApp(appPackageName, appName)
 
 dependencies {
-  implementation(
+  implementations(
     // projects
     project(Module.Login.moduleName),
     project(Module.Main.moduleName),

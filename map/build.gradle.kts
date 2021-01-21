@@ -10,5 +10,5 @@ setupModule(Module.Map) {
 }
 
 dependencies {
-  implementation(*Libs.amap)
+  implementations(*Libs.amap)
 }

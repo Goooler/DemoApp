@@ -1,9 +1,9 @@
-applyPlugin(Plugins.androidLibrary)
+applyPlugins(Plugins.androidLibrary)
 
 setupBase(Module.Adapter)
 
 dependencies {
-  api(
+  apis(
     Libs.recyclerView,
     Libs.paging,
     Libs.viewPager2

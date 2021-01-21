@@ -47,7 +47,7 @@ val localLibs = mapOf(
   "include" to arrayOf("*.jar", "*.aar")
 )
 
-fun ScriptHandlerScope.classpath(vararg names: Any) {
+fun ScriptHandlerScope.classpaths(vararg names: Any) {
   dependencies {
     for (name in names) {
       add("classpath", name)
@@ -55,37 +55,37 @@ fun ScriptHandlerScope.classpath(vararg names: Any) {
   }
 }
 
-fun DependencyHandler.api(vararg names: Any): Array<Dependency?> =
+fun DependencyHandler.apis(vararg names: Any): Array<Dependency?> =
   names.map {
     add("api", it)
   }.toTypedArray()
 
-fun DependencyHandler.implementation(vararg names: Any): Array<Dependency?> =
+fun DependencyHandler.implementations(vararg names: Any): Array<Dependency?> =
   names.map {
     add("implementation", it)
   }.toTypedArray()
 
-fun DependencyHandler.debugImplementation(vararg names: Any): Array<Dependency?> =
+fun DependencyHandler.debugImplementations(vararg names: Any): Array<Dependency?> =
   names.map {
     add("debugImplementation", it)
   }.toTypedArray()
 
-fun DependencyHandler.releaseImplementation(vararg names: Any): Array<Dependency?> =
+fun DependencyHandler.releaseImplementations(vararg names: Any): Array<Dependency?> =
   names.map {
     add("releaseImplementation", it)
   }.toTypedArray()
 
-fun DependencyHandler.kapt(vararg names: Any): Array<Dependency?> =
+fun DependencyHandler.kapts(vararg names: Any): Array<Dependency?> =
   names.map {
     add("kapt", it)
   }.toTypedArray()
 
-fun DependencyHandler.androidTestImplementation(vararg names: Any): Array<Dependency?> =
+fun DependencyHandler.androidTestImplementations(vararg names: Any): Array<Dependency?> =
   names.map {
     add("androidTestImplementation", it)
   }.toTypedArray()
 
-fun DependencyHandler.testImplementation(vararg names: Any): Array<Dependency?> =
+fun DependencyHandler.testImplementations(vararg names: Any): Array<Dependency?> =
   names.map {
     add("testImplementation", it)
   }.toTypedArray()
@@ -97,7 +97,7 @@ fun String.isStableVersion(): Boolean {
   return stableKeyword || "^[0-9,.v-]+(-r)?$".toRegex().matches(this)
 }
 
-fun PluginAware.applyPlugin(vararg names: String) {
+fun PluginAware.applyPlugins(vararg names: String) {
   apply {
     for (name in names) {
       plugin(name)
@@ -111,7 +111,7 @@ fun ExtensionAware.getExtra(name: String): Any {
 }
 
 fun Project.setupBase(module: Module? = null, block: BaseExtension.() -> Unit = {}): BaseExtension {
-  applyPlugin(Plugins.kotlinAndroid, Plugins.kotlinKapt)
+  applyPlugins(Plugins.kotlinAndroid, Plugins.kotlinKapt)
   return extensions.getByName<BaseExtension>("android").apply {
     compileSdkVersion(globalTargetSdk)
     buildToolsVersion = globalBuildTool
@@ -153,7 +153,7 @@ fun Project.setupModule(
   module: Module? = null,
   block: LibraryExtension.() -> Unit = {}
 ): LibraryExtension {
-  applyPlugin(Plugins.androidLibrary)
+  applyPlugins(Plugins.androidLibrary)
   return (setupCommon(module) as LibraryExtension).apply {
     block()
   }
@@ -164,7 +164,7 @@ fun Project.setupApp(
   appName: String,
   block: BaseAppModuleExtension.() -> Unit = {}
 ): BaseAppModuleExtension {
-  applyPlugin(Plugins.androidApplication)
+  applyPlugins(Plugins.androidApplication)
   return (setupCommon() as BaseAppModuleExtension).apply {
     defaultConfig {
       applicationId = appPackageName
@@ -251,9 +251,9 @@ private fun Project.setupCommon(module: Module? = null): BaseExtension {
     }
     dependencies {
       if (module != Module.Common) {
-        implementation(project(Module.Common.moduleName))
+        implementations(project(Module.Common.moduleName))
       }
-      implementation(
+      implementations(
         // local
         fileTree(localLibs),
         project(Module.Base.moduleName),
@@ -275,9 +275,9 @@ private fun Project.setupCommon(module: Module? = null): BaseExtension {
         Libs.utils,
         Libs.permissionX
       )
-      kapt(Libs.arouterKapt, Libs.moshiKapt, Libs.roomKapt, *Libs.hiltKapt)
+      kapts(Libs.arouterKapt, Libs.moshiKapt, Libs.roomKapt, *Libs.hiltKapt)
     }
-    applyPlugin(Plugins.arouter, Plugins.hilt)
+    applyPlugins(Plugins.arouter, Plugins.hilt)
   }
 }
 

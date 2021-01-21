@@ -1,15 +1,15 @@
 setupModule(Module.Common)
 
 dependencies {
-  implementation(
+  implementations(
     // network
     Libs.coil,
     Libs.okHttpLogInterceptor,
     Libs.okHttpBrotliInterceptor
   )
-  debugImplementation(
+  debugImplementations(
     Libs.leakCanary,
     Libs.doraemonKitDebug
   )
-  releaseImplementation(Libs.doraemonKitRelease)
+  releaseImplementations(Libs.doraemonKitRelease)
 }

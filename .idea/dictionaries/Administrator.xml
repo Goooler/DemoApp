@@ -12,6 +12,7 @@
       <w>bumptech</w>
       <w>cardview</w>
       <w>chrisbanes</w>
+      <w>classpaths</w>
       <w>codegen</w>
       <w>constraintlayout</w>
       <w>databinding</w>
@@ -34,6 +35,7 @@
       <w>jetpack</w>
       <w>jitpack</w>
       <w>kapt</w>
+      <w>kapts</w>
       <w>kotlinter</w>
       <w>kotlinx</w>
       <w>leakcanary</w>

@@ -5,18 +5,18 @@ setupApp("$appPackageName.test", "test") {
 }
 
 dependencies {
-  implementation(
+  implementations(
     *Libs.glide,
     Libs.fastjson,
     *Libs.gson,
     Libs.mmkv,
     *Libs.objectBox
   )
-  testImplementation(
+  testImplementations(
     "junit:junit:4.13.1",
     "org.robolectric:robolectric:4.4"
   )
-  androidTestImplementation(
+  androidTestImplementations(
     "androidx.test.ext:junit:1.1.2",
     "androidx.test.espresso:espresso-core:3.3.0"
   )
