@@ -10,7 +10,7 @@ import android.view.View
 
 class DemoView(context: Context, attrs: AttributeSet? = null) : View(context, attrs) {
 
-  private val paint = Paint()
+  private val paint = Paint(Paint.ANTI_ALIAS_FLAG)
   private val rectF = RectF()
   private var widthSize = 0
   private var heightSize = 0
