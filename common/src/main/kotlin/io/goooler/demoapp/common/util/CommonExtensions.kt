@@ -6,6 +6,7 @@ package io.goooler.demoapp.common.util
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
+import android.view.View
 import android.webkit.URLUtil
 import androidx.activity.ComponentActivity
 import androidx.annotation.AnyThread
@@ -17,9 +18,14 @@ import androidx.annotation.MainThread
 import androidx.annotation.Px
 import androidx.annotation.StringRes
 import androidx.annotation.UiThread
+import androidx.collection.ArrayMap
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.coroutineScope
 import androidx.viewbinding.ViewBinding
 import com.blankj.utilcode.util.AdaptScreenUtils
 import com.blankj.utilcode.util.ColorUtils
@@ -291,3 +297,49 @@ inline fun <reified T : ViewBinding> LayoutInflater.inflateBinding(): T {
   val method = T::class.java.getMethod("inflate", LayoutInflater::class.java)
   return method.invoke(null, this) as T
 }
+
+val View.lifecycle: Lifecycle?
+  get() {
+    fun findAllSupportFragmentsWithViews(
+      topLevelFragments: Collection<Fragment>,
+      result: MutableMap<View, Fragment>
+    ) {
+      topLevelFragments.forEach {
+        it.view?.let { v ->
+          result[v] = it
+          findAllSupportFragmentsWithViews(it.childFragmentManager.fragments, result)
+        }
+      }
+    }
+
+    fun findSupportFragment(target: View, activity: FragmentActivity): Fragment? {
+      val tempViewToSupportFragment = ArrayMap<View, Fragment>()
+      findAllSupportFragmentsWithViews(
+        activity.supportFragmentManager.fragments,
+        tempViewToSupportFragment
+      )
+      var result: Fragment? = null
+      val activityRoot = activity.findViewById<View>(android.R.id.content)
+      var current = target
+      while (current != activityRoot) {
+        result = tempViewToSupportFragment[current]
+        if (result != null) {
+          break
+        }
+        current = if (current.parent is View) {
+          current.parent as View
+        } else {
+          break
+        }
+      }
+      tempViewToSupportFragment.clear()
+      return result
+    }
+
+    (context as? FragmentActivity)?.let {
+      return findSupportFragment(this, it)?.lifecycle ?: it.lifecycle
+    }
+    return null
+  }
+
+val View.lifecycleScope: LifecycleCoroutineScope? get() = lifecycle?.coroutineScope
