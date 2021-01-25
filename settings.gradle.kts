@@ -10,4 +10,3 @@ include(
   ":widget",
   ":test"
 )
-rootProject.name = "DemoApp"

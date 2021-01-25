@@ -11,7 +11,11 @@ enum class Module(val tag: String, val runAlone: Boolean = false) {
 
   //---------------------func-------------------------------//
   Adapter("adapter"),
-  Widget("widget")
+  Widget("widget"),
+
+  //---------------------app-------------------------------//
+  App("app"),
+  Test("test")
 }
 
 enum class Flavor(val flavor: String) {
