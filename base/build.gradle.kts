@@ -15,9 +15,6 @@ dependencies {
     // UI
     Libs.appCompat,
     Libs.fragment,
-    Libs.material,
-    Libs.constraintLayout,
-    Libs.cardView,
 
     // network
     Libs.okHttp,

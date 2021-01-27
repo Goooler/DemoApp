@@ -262,6 +262,9 @@ private fun Project.setupCommon(module: Module? = null): BaseExtension {
         Libs.arouter,
 
         // UI
+        Libs.constraintLayout,
+        Libs.cardView,
+        Libs.material,
         *Libs.smartRefreshLayout,
         Libs.photoView,
 
