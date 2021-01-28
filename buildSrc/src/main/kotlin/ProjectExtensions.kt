@@ -29,15 +29,15 @@ private const val globalMinSdk = 23
 private val javaVersion = JavaVersion.VERSION_1_8
 private val ndkLibs = setOf("arm64-v8a")
 
-private const val cdnPrefix = "https://raw.githubusercontent.com/"
-private val apiHosts = mapOf(
+const val cdnPrefix = "https://raw.githubusercontent.com/"
+val apiHosts = mapOf(
   Flavor.Daily.flavor to "https://api.github.com/",
   Flavor.Online.flavor to "https://api.github.com/"
 )
 
 // app
-private const val globalVersionName = "1.0"
-private const val globalVersionCode = 20210107
+const val globalVersionName = "1.0"
+const val globalVersionCode = 20210107
 const val appPackageName = "io.goooler.demoapp"
 const val appName = "Demo"
 const val extraScriptPath = "buildSrc/extra.gradle.kts"
@@ -108,6 +108,14 @@ fun PluginAware.applyPlugins(vararg names: String) {
 fun ExtensionAware.getExtra(name: String): Any {
   return extensions.extraProperties[name]
     ?: throw InvalidUserDataException("ExtraProperty $name is null")
+}
+
+fun VariantDimension.putBuildConfigStringField(name: String, value: String?) {
+  buildConfigField("String", name, "\"$value\"")
+}
+
+fun VariantDimension.putBuildConfigIntField(name: String, value: Int) {
+  buildConfigField("Integer", name, value.toString())
 }
 
 fun Project.setupBase(module: Module? = null, block: BaseExtension.() -> Unit = {}): BaseExtension {
@@ -230,18 +238,6 @@ private fun Project.setupCommon(module: Module? = null): BaseExtension {
     productFlavors {
       create(Flavor.Daily.flavor)
       create(Flavor.Online.flavor)
-      if (module == Module.Common) {
-        all {
-          putBuildConfigIntField(BuildConfigField.VersionCode.tag, globalVersionCode)
-          putBuildConfigStringField(BuildConfigField.VersionName.tag, globalVersionName)
-          putBuildConfigStringField(BuildConfigField.CdnPrefix.tag, cdnPrefix)
-          putBuildConfigStringField(BuildConfigField.ApiHost.tag, apiHosts[name])
-          putBuildConfigStringField(
-            BuildConfigField.DoraemonKitKey.tag,
-            "4a8c3eef29f029bc197705faad83f43d"
-          )
-        }
-      }
     }
     extensions.getByName<KaptExtension>("kapt").arguments {
       arg("AROUTER_MODULE_NAME", project.name)
@@ -293,14 +289,6 @@ private fun Project.getSignProperty(
   return Properties().apply {
     rootProject.file(path).inputStream().use(::load)
   }.getProperty(key)
-}
-
-private fun VariantDimension.putBuildConfigStringField(name: String, value: String?) {
-  buildConfigField("String", name, "\"$value\"")
-}
-
-private fun VariantDimension.putBuildConfigIntField(name: String, value: Int) {
-  buildConfigField("Integer", name, value.toString())
 }
 
 /**

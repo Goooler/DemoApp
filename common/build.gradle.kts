@@ -1,4 +1,12 @@
-setupModule(Module.Common)
+setupModule(Module.Common) {
+  productFlavors.all {
+    putBuildConfigIntField(BuildConfigField.VersionCode.tag, globalVersionCode)
+    putBuildConfigStringField(BuildConfigField.VersionName.tag, globalVersionName)
+    putBuildConfigStringField(BuildConfigField.CdnPrefix.tag, cdnPrefix)
+    putBuildConfigStringField(BuildConfigField.ApiHost.tag, apiHosts[name])
+    putBuildConfigStringField(BuildConfigField.DoraemonKitKey.tag, ApiKey.DoraemonKit.key)
+  }
+}
 
 dependencies {
   implementations(
