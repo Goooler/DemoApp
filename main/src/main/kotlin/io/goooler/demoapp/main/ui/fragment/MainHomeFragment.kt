@@ -31,13 +31,12 @@ class MainHomeFragment private constructor() :
   private val listener = View.OnClickListener {
     when (it) {
       binding.bt1 -> RouterManager.goWeb("http://m.bilibili.com")
-      binding.bt2 -> vm.getRepoListFromDb()
+      binding.bt2 -> RouterManager.goMap()
       binding.bt3 -> vm.getRepoListFromDs()
       binding.bt4 -> countdown()
       binding.bt5 -> RouterManager.goWidget()
       binding.bt6 -> FullScreenDialogFragment.show(childFragmentManager)
       binding.bt7 -> RouterManager.goAudioPlay()
-      binding.bt8 -> RouterManager.goMap()
     }
   }
 

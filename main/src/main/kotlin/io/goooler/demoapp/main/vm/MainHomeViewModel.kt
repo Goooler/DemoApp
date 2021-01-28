@@ -32,12 +32,6 @@ class MainHomeViewModel @ViewModelInject constructor(private val repository: Mai
     requestWithCr()
   }
 
-  fun getRepoListFromDb() {
-    viewModelScope.launch {
-      repository.getRepoListFromDb().firstOrNull()?.name?.showToast()
-    }
-  }
-
   fun getRepoListFromDs() {
     viewModelScope.launch {
       repository.getRepoListFromDs().collectLatest {
@@ -76,7 +70,20 @@ class MainHomeViewModel @ViewModelInject constructor(private val repository: Mai
    * 协程请求处理
    */
   private fun requestWithCr() {
-    viewModelScope.launch(Dispatchers.Default) {
+    viewModelScope.launch(Dispatchers.IO) {
+      try {
+        val google = defaultAsync { repository.getRepoListFromDb("google") }
+        val microsoft = defaultAsync { repository.getRepoListFromDb("microsoft") }
+        val apple = defaultAsync { repository.getRepoListFromDb("apple") }
+        val facebook = defaultAsync { repository.getRepoListFromDb("facebook") }
+        val twitter = defaultAsync { repository.getRepoListFromDb("twitter") }
+
+        processList(google, microsoft, apple, facebook, twitter).collect {
+          title.postValue(it)
+        }
+      } catch (_: Exception) {
+      }
+
       try {
         val google = defaultAsync { repository.getRepoListWithCr("google") }
         val microsoft = defaultAsync { repository.getRepoListWithCr("microsoft") }
@@ -88,7 +95,7 @@ class MainHomeViewModel @ViewModelInject constructor(private val repository: Mai
           title.postValue(it)
         }
 
-        repository.putRepoListIntoDb(google.await())
+        putRepoListIntoDb(google, microsoft, apple, facebook, twitter)
         repository.putRepoListIntoDs(google.await())
       } catch (e: Exception) {
         title.postValue(e.message)
@@ -106,6 +113,12 @@ class MainHomeViewModel @ViewModelInject constructor(private val repository: Mai
         append(it.await().firstOrNull()?.name).append("\n")
       }
       emit(toString())
+    }
+  }
+
+  private suspend fun putRepoListIntoDb(vararg lists: Deferred<List<MainRepoListBean>>) {
+    lists.forEach {
+      repository.putRepoListIntoDb(it.await())
     }
   }
 

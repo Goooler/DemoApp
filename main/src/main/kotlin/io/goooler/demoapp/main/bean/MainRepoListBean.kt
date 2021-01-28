@@ -32,7 +32,12 @@ class MainRepoListBean : BaseResponse {
 
   @JsonClass(generateAdapter = true)
   class OwnerBean {
-    @field:Json(name = "avatar_url")
+    @ColumnInfo(name = "owner_name")
+    @Json(name = "login")
+    var ownerName: String? = null
+
+    @ColumnInfo(name = "avatar_url")
+    @Json(name = "avatar_url")
     var avatarUrl: String? = null
   }
 }

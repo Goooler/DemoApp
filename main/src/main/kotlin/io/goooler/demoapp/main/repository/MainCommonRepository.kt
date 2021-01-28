@@ -38,7 +38,8 @@ class MainCommonRepository @Inject constructor(
     pageSize: Int = CommonConstants.DEFAULT_PAGE_SIZE
   ): Observable<List<MainRepoListBean>> = api.getRepoListWithRx(user, page, pageSize)
 
-  suspend fun getRepoListFromDb(): List<MainRepoListBean> = dao.getRepoList()
+  suspend fun getRepoListFromDb(ownerName: String): List<MainRepoListBean> =
+    dao.getRepoList(ownerName)
 
   suspend fun putRepoListIntoDb(list: List<MainRepoListBean>) {
     dao.insertRepoList(*list.toTypedArray())
