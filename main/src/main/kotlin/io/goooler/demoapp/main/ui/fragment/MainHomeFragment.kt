@@ -2,6 +2,7 @@ package io.goooler.demoapp.main.ui.fragment
 
 import android.view.View
 import dagger.hilt.android.AndroidEntryPoint
+import io.goooler.demoapp.base.util.unsafeLazy
 import io.goooler.demoapp.common.base.BaseThemeLazyFragment
 import io.goooler.demoapp.common.router.RouterManager
 import io.goooler.demoapp.common.ui.FullScreenDialogFragment
@@ -17,8 +18,10 @@ class MainHomeFragment private constructor() :
 
   private val vm: MainHomeViewModel by getViewModel()
 
+  private val initData by unsafeLazy { vm.initData() }
+
   override fun onFragmentResume() {
-    vm.initData()
+    initData
   }
 
   override fun initOnce() {
