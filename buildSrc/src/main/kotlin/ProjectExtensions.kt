@@ -276,7 +276,7 @@ private fun Project.setupCommon(module: Module? = null): BaseExtension {
       )
       kapts(Libs.arouterKapt, Libs.moshiKapt, Libs.roomKapt, *Libs.hiltKapt)
     }
-    applyPlugins(Plugins.arouter, Plugins.hilt)
+    applyPlugins(Plugins.kotlinParcelize, Plugins.arouter, Plugins.hilt)
   }
 }
 
