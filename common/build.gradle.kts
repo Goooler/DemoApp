@@ -11,7 +11,7 @@ setupModule(Module.Common) {
 dependencies {
   implementations(
     // network
-    Libs.coil,
+    *Libs.coil,
     Libs.okHttpLogInterceptor,
     Libs.okHttpBrotliInterceptor
   )

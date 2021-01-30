@@ -30,8 +30,8 @@ private const val rxPermissionVersion = "0.12"
 private const val mpChartVersion = "v3.1.0"
 private const val lottieVersion = "3.5.0"
 private const val smartRefreshLayoutVersion = "2.0.3"
-private const val glideVersion = "4.11.0"
-private const val glideTransformVersion = "4.3.0"
+private const val glideVersion = "4.12.0"
+private const val glideTransformationVersion = "4.3.0"
 private const val leakCanaryVersion = "2.6"
 private const val lubanVersion = "1.1.8"
 private const val mmkvVersion = "1.2.7"
@@ -43,6 +43,7 @@ private const val tbsVersion = "43938"
 private const val baseRvHelperVersion = "3.0.4"
 private const val flycoTabLayoutVersion = "1.3.3"
 private const val coilVersion = "1.1.1"
+private const val coilTransformationVersion = "1.0.0"
 private const val utilsVersion = "1.30.5"
 private const val pagingVersion = "3.0.0-alpha13"
 private const val viewPager2Version = "1.0.0"
@@ -109,7 +110,6 @@ object Libs {
   const val tbs = "com.tencent.tbs.tbssdk:sdk:$tbsVersion"
   const val baseRvHelper = "com.github.CymChad:BaseRecyclerViewAdapterHelper:$baseRvHelperVersion"
   const val flycoTabLayout = "com.lzp:FlycoTabLayoutZ:lastversion:$flycoTabLayoutVersion"
-  const val coil = "io.coil-kt:coil:$coilVersion"
   const val utils = "com.blankj:utilcodex:$utilsVersion"
   const val rxPermission = "com.github.tbruyelle:rxpermissions:$rxPermissionVersion"
   const val okHttp = "com.squareup.okhttp3:okhttp:$okHttpVersion"
@@ -187,7 +187,13 @@ object Libs {
   val glide = arrayOf(
     "com.github.bumptech.glide:glide:$glideVersion",
     "com.github.bumptech.glide:okhttp3-integration:$glideVersion",
-    "jp.wasabeef:glide-transformations:$glideTransformVersion"
+    "jp.wasabeef:glide-transformations:$glideTransformationVersion"
+  )
+  val coil = arrayOf(
+    "io.coil-kt:coil:$coilVersion",
+    "io.coil-kt:coil-gif:$coilVersion",
+    "io.coil-kt:coil-svg:$coilVersion",
+    "com.github.Commit451.coil-transformations:transformations:$coilTransformationVersion"
   )
   val objectBox = arrayOf(
     "io.objectbox:objectbox-android:$objectBoxVersion",
