@@ -7,6 +7,7 @@ import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import io.goooler.demoapp.base.core.BaseApplication
 import io.goooler.demoapp.common.util.CrashHandler
+import io.goooler.demoapp.common.util.ImageLoader
 import io.goooler.demoapp.common.util.debugRun
 
 abstract class CommonApplication : BaseApplication() {
@@ -15,6 +16,7 @@ abstract class CommonApplication : BaseApplication() {
     super.initRight()
     CrashHandler.init()
     initArouter()
+    initImageLoader()
     initSmartRefresh()
     initDoKit()
   }
@@ -29,6 +31,10 @@ abstract class CommonApplication : BaseApplication() {
 
   private fun initDoKit() {
     DoraemonKit.install(this, BuildConfig.DORAEMON_KIT_KEY)
+  }
+
+  private fun initImageLoader() {
+    ImageLoader.init(this)
   }
 
   private fun initSmartRefresh() {

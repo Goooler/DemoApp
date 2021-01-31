@@ -2,12 +2,18 @@
 
 package io.goooler.demoapp.common.util
 
+import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
+import android.os.Build
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
 import androidx.annotation.Px
 import androidx.databinding.BindingAdapter
+import coil.Coil
+import coil.decode.GifDecoder
+import coil.decode.ImageDecoderDecoder
+import coil.decode.SvgDecoder
 import coil.load
 import coil.request.CachePolicy
 import coil.size.Scale
@@ -15,6 +21,20 @@ import coil.transform.CircleCropTransformation
 import coil.transform.RoundedCornersTransformation
 
 object ImageLoader {
+
+  fun init(context: Context) {
+    val imageLoader = coil.ImageLoader.Builder(context)
+      .crossfade(true)
+      .componentRegistry {
+        val gifDecoder = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) ImageDecoderDecoder()
+        else GifDecoder()
+        add(gifDecoder)
+        add(SvgDecoder(context))
+      }
+      .build()
+    Coil.setImageLoader(imageLoader)
+  }
+
   /**
    * load image
    *
