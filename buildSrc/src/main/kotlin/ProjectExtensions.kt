@@ -94,7 +94,7 @@ val Module.moduleName: String get() = ":${tag}"
 
 fun String.isStableVersion(): Boolean {
   val stableKeyword = listOf("RELEASE", "FINAL", "GA").any { toUpperCase(Locale.ROOT).contains(it) }
-  return stableKeyword || "^[0-9,.v-]+(-r)?$".toRegex().matches(this)
+  return stableKeyword || Regex("^[0-9,.v-]+(-r)?$").matches(this)
 }
 
 fun PluginAware.applyPlugins(vararg names: String) {

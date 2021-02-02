@@ -14,7 +14,7 @@ dependencies {
   )
   testImplementations(
     "junit:junit:4.13.1",
-    "org.robolectric:robolectric:4.5"
+    "org.robolectric:robolectric:4.5.1"
   )
   androidTestImplementations(
     "androidx.test.ext:junit:1.1.2",
