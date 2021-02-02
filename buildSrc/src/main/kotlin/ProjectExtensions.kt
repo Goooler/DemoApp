@@ -280,7 +280,7 @@ private fun Project.setupCommon(module: Module? = null): BaseExtension {
   }
 }
 
-private fun Project.findPropertyString(key: String): String = findProperty(key) as String
+private fun Project.findPropertyString(key: String): String = property(key).toString()
 
 private fun Project.getSignProperty(
   key: String,
