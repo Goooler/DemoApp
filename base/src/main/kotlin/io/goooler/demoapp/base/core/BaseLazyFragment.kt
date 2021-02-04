@@ -1,11 +1,11 @@
-package io.goooler.demoapp.base.core
+@file:Suppress("KDocUnresolvedReference")
 
-import androidx.fragment.app.FragmentStatePagerAdapter
+package io.goooler.demoapp.base.core
 
 /**
  * Fragment 实现懒加载的基类，在 ViewPager 中使用
  * AndroidX 中懒加载使用新方法，
- * 1. ViewPager 使用 [FragmentStatePagerAdapter] 时传入 BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
+ * 1. ViewPager 使用 [androidx.fragment.app.FragmentStatePagerAdapter] 时传入 BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
  * 2. ViewPager2 使用 [androidx.viewpager2.adapter.FragmentStateAdapter] 默认就支持
  */
 @Suppress("unused")
