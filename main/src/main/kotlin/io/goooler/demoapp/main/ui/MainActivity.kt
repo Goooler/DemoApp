@@ -26,7 +26,7 @@ class MainActivity : BaseThemeActivity<MainActivityBinding>(R.layout.main_activi
   }
 
   private val titles = listOf(
-    "首页",
+    "home",
     "smartRefresh",
     "paging"
   )
