@@ -223,9 +223,8 @@ infix fun Double.div(that: Double): Double {
 
 fun Number.isZero(): Boolean {
   return when (this) {
-    is Double -> BigDecimal(this.toString()) == BigDecimal("0.0")
-    is Long -> this == 0L
-    is Short, is Int -> this == 0
+    is Byte, is Short, is Int, is Long -> this == 0
+    is Float, is Double -> BigDecimal(this.toString()) == BigDecimal("0.0")
     else -> false
   }
 }
