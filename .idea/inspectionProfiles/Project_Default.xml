@@ -3,8 +3,8 @@
     <option name="myName" value="Project Default" />
     <inspection_tool class="AndroidLintAllowBackup" enabled="false" enabled_by_default="false"
       level="WARNING" />
-    <inspection_tool class="AndroidLintContentDescription" enabled="false" enabled_by_default="false"
-      level="WARNING" />
+    <inspection_tool class="AndroidLintContentDescription" enabled="false"
+      enabled_by_default="false" level="WARNING" />
     <inspection_tool class="AndroidLintHardcodedText" enabled="false" enabled_by_default="false"
       level="WARNING" />
     <inspection_tool class="AndroidLintUnusedAttribute" enabled="false" enabled_by_default="false"
