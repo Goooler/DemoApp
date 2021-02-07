@@ -65,12 +65,14 @@ open class CompatWebView(context: Context, attrs: AttributeSet? = null) : WebVie
       }
 
       override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
-        return if (URLUtil.isNetworkUrl(url)) {
-          false
-        } else {
-          onEventListener?.onInterceptUri(Uri.parse(url))
-          true
-        }
+        return if (URLUtil.isValidUrl(url)) {
+          if (URLUtil.isNetworkUrl(url)) {
+            false
+          } else {
+            onEventListener?.onInterceptUri(Uri.parse(url))
+            true
+          }
+        } else false
       }
 
       override fun onPageFinished(view: WebView, url: String) {

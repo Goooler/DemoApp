@@ -33,7 +33,7 @@ class MainHomeFragment private constructor() :
 
   private val listener = View.OnClickListener {
     when (it) {
-      binding.bt1 -> RouterManager.goWeb("http://m.bilibili.com")
+      binding.bt1 -> RouterManager.goWeb("bilibili.com")
       binding.bt2 -> RouterManager.goMap()
       binding.bt3 -> vm.getRepoListFromDs()
       binding.bt4 -> countdown()
