@@ -40,6 +40,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
 import java.io.File
 import java.math.BigDecimal
+import java.net.URLConnection
 import java.util.Collections
 
 // ---------------------Types-------------------------------//
@@ -94,6 +95,8 @@ fun String.fromHtml(): Spanned {
     Html.fromHtml(this)
   }
 }
+
+fun String.toMimeType(): String = URLConnection.getFileNameMap().getContentTypeFor(this) ?: this
 
 fun String.onlyDigits(): String = replace(Regex("\\D*"), "")
 

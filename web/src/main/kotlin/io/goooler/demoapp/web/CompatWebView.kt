@@ -8,6 +8,7 @@ import android.util.AttributeSet
 import android.view.View
 import android.webkit.SslErrorHandler
 import android.webkit.URLUtil
+import android.webkit.ValueCallback
 import android.webkit.WebChromeClient
 import android.webkit.WebSettings
 import android.webkit.WebView
@@ -87,6 +88,15 @@ open class CompatWebView(context: Context, attrs: AttributeSet? = null) : WebVie
       override fun onReceivedTitle(view: WebView, title: String) {
         onEventListener?.onReceivedTitle(title)
       }
+
+      override fun onShowFileChooser(
+        view: WebView,
+        filePathCallback: ValueCallback<Array<Uri>>,
+        fileChooserParams: FileChooserParams
+      ): Boolean {
+        return onEventListener?.onShowFileChooser(filePathCallback, fileChooserParams)
+          ?: super.onShowFileChooser(view, filePathCallback, fileChooserParams)
+      }
     }
   }
 
@@ -154,6 +164,11 @@ open class CompatWebView(context: Context, attrs: AttributeSet? = null) : WebVie
   interface OnEventListener {
     fun onInterceptUri(uri: Uri)
     fun onReceivedTitle(title: String)
+    fun onShowFileChooser(
+      filePathCallback: ValueCallback<Array<Uri>>,
+      fileChooserParams: WebChromeClient.FileChooserParams
+    ): Boolean
+
     fun onProgressChanged(i: Int)
     fun loadFinish()
   }

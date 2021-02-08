@@ -3,7 +3,10 @@ package io.goooler.demoapp.web
 import android.content.Intent
 import android.net.Uri
 import android.webkit.JavascriptInterface
+import android.webkit.ValueCallback
+import android.webkit.WebChromeClient
 import io.goooler.demoapp.base.util.putArguments
+import io.goooler.demoapp.base.util.toMimeType
 import io.goooler.demoapp.common.base.BaseThemeFragment
 import io.goooler.demoapp.web.databinding.WebFragmentBinding
 
@@ -11,6 +14,7 @@ class WebFragment private constructor() :
   BaseThemeFragment<WebFragmentBinding>(R.layout.web_fragment) {
 
   private lateinit var headers: Map<String, String>
+  private var uploadMessage: ValueCallback<Array<Uri>>? = null
 
   var onEventListener: OnEventListener? = null
 
@@ -37,6 +41,14 @@ class WebFragment private constructor() :
     }
   }
 
+  override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    super.onActivityResult(requestCode, resultCode, data)
+    if (requestCode == FILE_CHOOSER_RESULT_CODE) {
+      uploadMessage?.onReceiveValue(WebChromeClient.FileChooserParams.parseResult(resultCode, data))
+      uploadMessage = null
+    }
+  }
+
   private val listener = object : CompatWebView.OnEventListener, JsInterface {
     override fun onInterceptUri(uri: Uri) {
       startActivity(Intent(Intent.ACTION_VIEW, uri))
@@ -44,6 +56,21 @@ class WebFragment private constructor() :
 
     override fun onReceivedTitle(title: String) {
       onEventListener?.onReceivedTitle(title)
+    }
+
+    override fun onShowFileChooser(
+      filePathCallback: ValueCallback<Array<Uri>>,
+      fileChooserParams: WebChromeClient.FileChooserParams
+    ): Boolean {
+      uploadMessage = filePathCallback
+      val canMultiSelect =
+        fileChooserParams.mode == WebChromeClient.FileChooserParams.MODE_OPEN_MULTIPLE
+      val intent = Intent(Intent.ACTION_GET_CONTENT)
+        .addCategory(Intent.CATEGORY_OPENABLE)
+        .putExtra(Intent.EXTRA_ALLOW_MULTIPLE, canMultiSelect)
+        .setType(fileChooserParams.acceptTypes.firstOrNull()?.toMimeType() ?: "*/*")
+      startActivityForResult(Intent.createChooser(intent, "选择操作"), FILE_CHOOSER_RESULT_CODE)
+      return true
     }
 
     override fun onProgressChanged(i: Int) {
@@ -65,6 +92,7 @@ class WebFragment private constructor() :
 
   companion object {
     private const val URL = "url"
+    private const val FILE_CHOOSER_RESULT_CODE = 100
 
     fun newInstance(url: String): WebFragment = WebFragment().putArguments(
       URL to url
