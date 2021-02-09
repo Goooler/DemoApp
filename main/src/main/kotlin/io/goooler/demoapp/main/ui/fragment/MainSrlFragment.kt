@@ -13,8 +13,7 @@ import io.goooler.demoapp.main.ui.adapter.MainSrlRvAdapter
 import io.goooler.demoapp.main.vm.MainSrlViewModel
 
 @AndroidEntryPoint
-class MainSrlFragment private constructor() :
-  BaseThemeLazyFragment<MainSrlFragmentBinding>(R.layout.main_srl_fragment) {
+class MainSrlFragment : BaseThemeLazyFragment<MainSrlFragmentBinding>(R.layout.main_srl_fragment) {
 
   private val vm: MainSrlViewModel by getViewModel()
 

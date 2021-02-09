@@ -7,8 +7,7 @@ import io.goooler.demoapp.common.base.BaseThemeFragment
 import io.goooler.demoapp.map.R
 import io.goooler.demoapp.map.databinding.MapAmapFragmentBinding
 
-class AmapFragment private constructor() :
-  BaseThemeFragment<MapAmapFragmentBinding>(R.layout.map_amap_fragment) {
+class AmapFragment : BaseThemeFragment<MapAmapFragmentBinding>(R.layout.map_amap_fragment) {
 
   private lateinit var mapView: MapView
 

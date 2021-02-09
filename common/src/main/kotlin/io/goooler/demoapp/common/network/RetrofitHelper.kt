@@ -1,5 +1,6 @@
 package io.goooler.demoapp.common.network
 
+import android.annotation.SuppressLint
 import android.content.Context
 import io.goooler.demoapp.base.core.BaseApplication
 import io.goooler.demoapp.base.network.BaseRetrofitHelper
@@ -17,6 +18,7 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 
+@SuppressLint("StaticFieldLeak")
 object RetrofitHelper : BaseRetrofitHelper() {
 
   override val baseUrl: String = BuildConfig.API_HOST
