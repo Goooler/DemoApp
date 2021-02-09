@@ -13,7 +13,7 @@ import io.goooler.demoapp.web.databinding.WebFragmentBinding
 class WebFragment : BaseThemeFragment<WebFragmentBinding>(R.layout.web_fragment) {
 
   private lateinit var headers: Map<String, String>
-  private var uploadMessage: ValueCallback<Array<Uri>>? = null
+  private var fileChooserCallback: ValueCallback<Array<Uri>>? = null
 
   var onEventListener: OnEventListener? = null
 
@@ -43,8 +43,13 @@ class WebFragment : BaseThemeFragment<WebFragmentBinding>(R.layout.web_fragment)
   override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
     super.onActivityResult(requestCode, resultCode, data)
     if (requestCode == FILE_CHOOSER_RESULT_CODE) {
-      uploadMessage?.onReceiveValue(WebChromeClient.FileChooserParams.parseResult(resultCode, data))
-      uploadMessage = null
+      fileChooserCallback?.onReceiveValue(
+        WebChromeClient.FileChooserParams.parseResult(
+          resultCode,
+          data
+        )
+      )
+      fileChooserCallback = null
     }
   }
 
@@ -61,7 +66,7 @@ class WebFragment : BaseThemeFragment<WebFragmentBinding>(R.layout.web_fragment)
       filePathCallback: ValueCallback<Array<Uri>>,
       fileChooserParams: WebChromeClient.FileChooserParams
     ): Boolean {
-      uploadMessage = filePathCallback
+      fileChooserCallback = filePathCallback
       val canMultiSelect =
         fileChooserParams.mode == WebChromeClient.FileChooserParams.MODE_OPEN_MULTIPLE
       val intent = Intent(Intent.ACTION_GET_CONTENT)
