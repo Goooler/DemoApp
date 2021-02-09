@@ -361,8 +361,8 @@ fun <T : Fragment> T.putArguments(vararg pairs: Pair<String, Any?>): T =
  */
 @UiThread
 fun FragmentManager.addFragment(
-  @IdRes containerViewId: Int,
   fragment: Fragment,
+  @IdRes containerViewId: Int = android.R.id.content,
   isAddToBackStack: Boolean = false,
   tag: String? = null
 ) {
@@ -381,8 +381,8 @@ fun FragmentManager.addFragment(
  */
 @UiThread
 fun FragmentManager.replaceFragment(
-  @IdRes containerViewId: Int,
   fragment: Fragment,
+  @IdRes containerViewId: Int = android.R.id.content,
   isAddToBackStack: Boolean = true,
   tag: String? = null
 ) {
