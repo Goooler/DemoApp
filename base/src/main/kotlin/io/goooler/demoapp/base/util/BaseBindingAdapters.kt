@@ -23,8 +23,8 @@ import java.io.File
 // ------------------------View --------------------------//
 
 @BindingAdapter("binding_isGone")
-fun View.bindingIsGone(isGone: Boolean) {
-  visibility = if (isGone) View.GONE else View.VISIBLE
+fun View.bindingIsGone(gone: Boolean) {
+  visibility = if (gone) View.GONE else View.VISIBLE
 }
 
 @BindingAdapter("binding_isVisible")
@@ -40,10 +40,8 @@ fun View.bindingIsSelect(select: Boolean) {
 @BindingAdapter("binding_rect_radius")
 fun View.bindingRectCornerRadius(@Px radius: Float) {
   outlineProvider = object : ViewOutlineProvider() {
-    override fun getOutline(v: View?, outline: Outline?) {
-      if (v != null && outline != null) {
-        outline.setRoundRect(0, 0, v.width, v.height, radius)
-      }
+    override fun getOutline(view: View, outline: Outline) {
+      outline.setRoundRect(0, 0, view.width, view.height, radius)
     }
   }
   clipToOutline = true
@@ -69,39 +67,23 @@ fun View.bindingHeight(@Px height: Float) {
 }
 
 @BindingAdapter("binding_marginTop")
-fun View.bindingMarginTop(@Px marginTop: Float) {
-  if (layoutParams is ViewGroup.MarginLayoutParams) {
-    val p = layoutParams as ViewGroup.MarginLayoutParams
-    p.topMargin = marginTop.toInt()
-    layoutParams = p
-  }
+fun View.bindingMarginTop(@Px margin: Float) {
+  marginDirection(1, margin)
 }
 
 @BindingAdapter("binding_marginBottom")
-fun View.bindingMarginBottom(@Px marginBottom: Float) {
-  if (layoutParams is ViewGroup.MarginLayoutParams) {
-    val p = layoutParams as ViewGroup.MarginLayoutParams
-    p.bottomMargin = marginBottom.toInt()
-    layoutParams = p
-  }
+fun View.bindingMarginBottom(@Px margin: Float) {
+  marginDirection(3, margin)
 }
 
 @BindingAdapter("binding_marginStart")
-fun View.bindingMarginStart(@Px marginLeft: Float) {
-  if (layoutParams is ViewGroup.MarginLayoutParams) {
-    val p = layoutParams as ViewGroup.MarginLayoutParams
-    p.marginStart = marginLeft.toInt()
-    layoutParams = p
-  }
+fun View.bindingMarginStart(@Px margin: Float) {
+  marginDirection(0, margin)
 }
 
 @BindingAdapter("binding_marginEnd")
-fun View.bindingMarginEnd(@Px marginRight: Float) {
-  if (layoutParams is ViewGroup.MarginLayoutParams) {
-    val p = layoutParams as ViewGroup.MarginLayoutParams
-    p.marginEnd = marginRight.toInt()
-    layoutParams = p
-  }
+fun View.bindingMarginEnd(@Px margin: Float) {
+  marginDirection(2, margin)
 }
 
 // ------------------------View Bg Shape---------------------//
@@ -321,7 +303,7 @@ fun TextView.bindingPaintFlagThru(flag: Boolean) {
   }
 }
 
-// ---------------------View-------------------------------//
+// ---------------------Private-------------------------------//
 
 /**
  * 设置 view 的背景，支持圆形和矩形，渐变色和描边圆角等
@@ -402,5 +384,18 @@ private fun View.setBgShapeCorners(
       bottomLeft,
       bottomLeft
     )
+  }
+}
+
+private fun View.marginDirection(direction: Int, @Px margin: Float) {
+  if (layoutParams is ViewGroup.MarginLayoutParams) {
+    val p = layoutParams as ViewGroup.MarginLayoutParams
+    when (direction) {
+      0 -> p.marginStart = margin.toInt()
+      1 -> p.topMargin = margin.toInt()
+      2 -> p.marginEnd = margin.toInt()
+      else -> p.bottomMargin = margin.toInt()
+    }
+    layoutParams = p
   }
 }
