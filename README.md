@@ -6,6 +6,7 @@
 
 - [x] [Core](https://developer.android.com/jetpack/androidx/releases/core)
 - [x] [AppCompat](https://developer.android.com/jetpack/androidx/releases/appcompat)
+- [x] [Activity](https://developer.android.com/jetpack/androidx/releases/activity)
 - [x] [Fragment](https://developer.android.com/jetpack/androidx/releases/fragment)
 - [x] [Lifecycle](https://developer.android.com/jetpack/androidx/releases/lifecycle)
 - [ ] [Navigation](https://developer.android.com/jetpack/androidx/releases/navigation)
