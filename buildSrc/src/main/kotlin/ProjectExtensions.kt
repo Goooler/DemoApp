@@ -97,12 +97,13 @@ fun String.isStableVersion(): Boolean {
   return stableKeyword || Regex("^[0-9,.v-]+(-r)?$").matches(this)
 }
 
-fun PluginAware.applyPlugins(vararg names: String) {
+fun PluginAware.applyPlugins(vararg names: String, block: () -> Unit = {}) {
   apply {
     for (name in names) {
       plugin(name)
     }
   }
+  block()
 }
 
 fun ExtensionAware.getExtra(name: String): Any {

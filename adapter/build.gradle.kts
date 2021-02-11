@@ -1,6 +1,6 @@
-applyPlugins(Plugins.androidLibrary)
-
-setupBase(Module.Adapter)
+applyPlugins(Plugins.androidLibrary) {
+  setupBase(Module.Adapter)
+}
 
 dependencies {
   apis(

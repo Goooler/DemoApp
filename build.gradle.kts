@@ -42,7 +42,7 @@ tasks {
     }
   }
   create(GradleTask.Clean.task, Delete::class) {
-    rootProject.allprojects {
+    allprojects {
       val customFileTypes = fileTree(
         mapOf(
           "dir" to projectDir,
