@@ -1,5 +1,6 @@
 plugins {
   `kotlin-dsl`
+  `kotlin-dsl-precompiled-script-plugins`
 }
 
 apply("extra.gradle.kts")
