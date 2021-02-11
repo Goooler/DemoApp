@@ -23,6 +23,7 @@ dependencies {
   implementations(
     project(Module.Adapter.moduleName),
     project(Module.Widget.moduleName),
+    Libs.coordinatorLayout,
     Libs.protobufLite
   )
 }
