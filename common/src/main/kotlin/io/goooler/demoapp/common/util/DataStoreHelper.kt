@@ -26,7 +26,7 @@ class DataStoreHelper private constructor(name: String) {
       }
   }
 
-  suspend inline fun <reified T : Any> get(key: String): Flow<T?> = get(preferencesKey<T>(key))
+  suspend inline fun <reified T : Any> get(key: String): Flow<T?> = get(preferencesKey(key))
 
   suspend fun <T> put(key: Preferences.Key<T>, value: T) {
     try {

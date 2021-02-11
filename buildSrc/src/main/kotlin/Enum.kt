@@ -1,3 +1,5 @@
+@file:Suppress("SpellCheckingInspection")
+
 enum class Module(val tag: String, val runAlone: Boolean = false) {
   //---------------------base-------------------------------//
   Base("base"),
