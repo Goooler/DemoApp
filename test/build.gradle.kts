@@ -13,7 +13,7 @@ dependencies {
     *Libs.objectBox
   )
   testImplementations(
-    "junit:junit:4.13.1",
+    "junit:junit:4.13.2",
     "org.robolectric:robolectric:4.5.1"
   )
   androidTestImplementations(
