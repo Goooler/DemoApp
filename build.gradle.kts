@@ -1,17 +1,13 @@
 import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
+import org.jmailen.gradle.kotlinter.KotlinterExtension
 import org.jmailen.gradle.kotlinter.support.ReporterType
-
-plugins {
-  id(Plugins.dependencyUpdate) version dependencyUpdateVersion
-  id(Plugins.kotlinter) version kotlinterVersion
-}
 
 buildscript {
   apply(extraScriptPath)
 
   repositories {
     google()
-    jcenter()
+    gradlePluginPortal()
   }
   classpaths(
     rootProject.getExtra("androidGradlePlugin"),
@@ -19,6 +15,8 @@ buildscript {
     Libs.hiltPlugin,
     Libs.arouterPlugin,
     Libs.protobufPlugin,
+    Libs.kotlinterPlugin,
+    Libs.dependencyUpdatesPlugin,
     Libs.bintrayPublishPlugin
   )
 }
@@ -29,7 +27,7 @@ allprojects {
     plugin(Plugins.dependencyUpdate)
     plugin(Plugins.kotlinter)
   }
-  kotlinter {
+  configure<KotlinterExtension> {
     indentSize = 2
     reporters = arrayOf(ReporterType.html.name)
   }

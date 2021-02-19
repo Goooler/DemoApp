@@ -59,8 +59,8 @@ private const val bintrayPublishVersion = "1.0.0"
 private const val browserVersion = "1.3.0"
 private const val webKitVersion = "1.4.0"
 private const val doraemonKitVersion = "3.3.5"
-const val dependencyUpdateVersion = "0.36.0"
-const val kotlinterVersion = "3.3.0"
+private const val dependencyUpdateVersion = "0.36.0"
+private const val kotlinterVersion = "3.3.0"
 
 object Plugins {
   const val kotlinAndroid = "kotlin-android"
@@ -128,6 +128,9 @@ object Libs {
   const val hiltPlugin = "com.google.dagger:hilt-android-gradle-plugin:$hiltVersion"
   const val bintrayPublishPlugin =
     "com.github.panpf.bintray-publish:bintray-publish:$bintrayPublishVersion"
+  const val kotlinterPlugin = "org.jmailen.gradle:kotlinter-gradle:$kotlinterVersion"
+  const val dependencyUpdatesPlugin =
+    "com.github.ben-manes:gradle-versions-plugin:$dependencyUpdateVersion"
 
   const val glideKapt = "com.github.bumptech.glide:compiler:$glideVersion"
   const val objectBoxKapt = "io.objectbox:objectbox-processor:$objectBoxVersion"
