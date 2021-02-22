@@ -40,14 +40,6 @@ tasks {
     }
   }
   create(GradleTask.Clean.task, Delete::class) {
-    allprojects {
-      val customFileTypes = fileTree(
-        mapOf(
-          "dir" to projectDir,
-          "include" to arrayOf("*.log", "*.txt")
-        )
-      )
-      delete(buildDir, customFileTypes)
-    }
+    delete(rootProject.buildDir)
   }
 }
