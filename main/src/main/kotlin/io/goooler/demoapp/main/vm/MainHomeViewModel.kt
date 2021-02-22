@@ -1,7 +1,7 @@
 package io.goooler.demoapp.main.vm
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.goooler.demoapp.base.util.MutableStringLiveData
 import io.goooler.demoapp.base.util.defaultAsync
 import io.goooler.demoapp.common.base.BaseRxViewModel
@@ -21,8 +21,10 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MainHomeViewModel @ViewModelInject constructor(private val repository: MainCommonRepository) :
+@HiltViewModel
+class MainHomeViewModel @Inject constructor(private val repository: MainCommonRepository) :
   BaseRxViewModel() {
 
   val title = MutableStringLiveData()

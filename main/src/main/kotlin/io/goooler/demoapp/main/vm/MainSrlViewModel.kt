@@ -1,6 +1,6 @@
 package io.goooler.demoapp.main.vm
 
-import androidx.hilt.lifecycle.ViewModelInject
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.goooler.demoapp.base.util.MutableBooleanLiveData
 import io.goooler.demoapp.base.util.MutableListLiveData
 import io.goooler.demoapp.base.util.MutableStringLiveData
@@ -9,8 +9,10 @@ import io.goooler.demoapp.common.type.CommonConstants
 import io.goooler.demoapp.common.util.toast
 import io.goooler.demoapp.main.model.MainCommonVhModel
 import io.goooler.demoapp.main.repository.MainCommonRepository
+import javax.inject.Inject
 
-class MainSrlViewModel @ViewModelInject constructor(private val repository: MainCommonRepository) :
+@HiltViewModel
+class MainSrlViewModel @Inject constructor(private val repository: MainCommonRepository) :
   BaseRxViewModel() {
 
   private val _listData = mutableListOf<MainCommonVhModel>()
