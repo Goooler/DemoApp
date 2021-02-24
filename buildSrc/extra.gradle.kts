@@ -2,7 +2,7 @@ import java.nio.charset.StandardCharsets
 import java.util.concurrent.TimeUnit
 
 rootProject.extra.run {
-  set("androidGradlePlugin", "com.android.tools.build:gradle:4.2.0-beta04")
+  set("androidGradlePlugin", "com.android.tools.build:gradle:4.2.0-beta05")
   set("kotlinPlugin", "org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.30")
   set("aliyunMaven", "https://maven.aliyun.com/repository/public")
 }
