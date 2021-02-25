@@ -4,7 +4,7 @@ import io.goooler.demoapp.common.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.Response
 
-object CookieInterceptor : Interceptor {
+object HeaderInterceptor : Interceptor {
 
   override fun intercept(chain: Interceptor.Chain): Response {
     val builder = chain.request().newBuilder()
