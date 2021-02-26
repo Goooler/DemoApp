@@ -18,10 +18,10 @@ import androidx.annotation.MainThread
 import androidx.annotation.Px
 import androidx.annotation.StringRes
 import androidx.annotation.UiThread
-import androidx.collection.ArrayMap
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.ViewModelProvider
@@ -298,46 +298,17 @@ inline fun <reified T : ViewBinding> LayoutInflater.inflateBinding(): T {
   return method.invoke(null, this) as T
 }
 
+val View.attachedFragment: Fragment?
+  get() = try {
+    FragmentManager.findFragment(this)
+  } catch (_: Exception) {
+    null
+  }
+
 val View.lifecycle: Lifecycle?
   get() {
-    fun findAllSupportFragmentsWithViews(
-      topLevelFragments: Collection<Fragment>,
-      result: MutableMap<View, Fragment>
-    ) {
-      topLevelFragments.forEach {
-        it.view?.let { v ->
-          result[v] = it
-          findAllSupportFragmentsWithViews(it.childFragmentManager.fragments, result)
-        }
-      }
-    }
-
-    fun findSupportFragment(target: View, activity: FragmentActivity): Fragment? {
-      val tempViewToSupportFragment = ArrayMap<View, Fragment>()
-      findAllSupportFragmentsWithViews(
-        activity.supportFragmentManager.fragments,
-        tempViewToSupportFragment
-      )
-      var result: Fragment? = null
-      val activityRoot = activity.findViewById<View>(android.R.id.content)
-      var current = target
-      while (current != activityRoot) {
-        result = tempViewToSupportFragment[current]
-        if (result != null) {
-          break
-        }
-        current = if (current.parent is View) {
-          current.parent as View
-        } else {
-          break
-        }
-      }
-      tempViewToSupportFragment.clear()
-      return result
-    }
-
     (context as? FragmentActivity)?.let {
-      return findSupportFragment(this, it)?.lifecycle ?: it.lifecycle
+      return attachedFragment?.lifecycle ?: it.lifecycle
     }
     return null
   }
