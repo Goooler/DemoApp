@@ -3,9 +3,7 @@ package io.goooler.demoapp.web
 import android.content.Context
 import android.net.Uri
 import android.net.http.SslError
-import android.util.ArrayMap
 import android.util.AttributeSet
-import android.view.View
 import android.webkit.SslErrorHandler
 import android.webkit.URLUtil
 import android.webkit.ValueCallback
@@ -14,6 +12,7 @@ import android.webkit.WebSettings
 import android.webkit.WebView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.webkit.WebViewClientCompat
@@ -101,44 +100,12 @@ open class CompatWebView(context: Context, attrs: AttributeSet? = null) : WebVie
   }
 
   private fun attachToLifecycle() {
-    fun findAllSupportFragmentsWithViews(
-      topLevelFragments: Collection<Fragment>,
-      result: MutableMap<View, Fragment>
-    ) {
-      topLevelFragments.forEach {
-        it.view?.let { v ->
-          result[v] = it
-          findAllSupportFragmentsWithViews(it.childFragmentManager.fragments, result)
-        }
-      }
-    }
-
-    fun findSupportFragment(target: View, activity: FragmentActivity): Fragment? {
-      val tempViewToSupportFragment = ArrayMap<View, Fragment>()
-      findAllSupportFragmentsWithViews(
-        activity.supportFragmentManager.fragments,
-        tempViewToSupportFragment
-      )
-      var result: Fragment? = null
-      val activityRoot = activity.findViewById<View>(android.R.id.content)
-      var current = target
-      while (current != activityRoot) {
-        result = tempViewToSupportFragment[current]
-        if (result != null) {
-          break
-        }
-        current = if (current.parent is View) {
-          current.parent as View
-        } else {
-          break
-        }
-      }
-      tempViewToSupportFragment.clear()
-      return result
-    }
-
     (context as? FragmentActivity)?.let {
-      val fragment = findSupportFragment(this, it)
+      val fragment = try {
+        FragmentManager.findFragment<Fragment>(this)
+      } catch (_: Exception) {
+        null
+      }
       if (fragment != null) {
         fragment.lifecycle.addObserver(lifecycleObserver)
       } else {
