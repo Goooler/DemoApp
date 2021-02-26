@@ -14,6 +14,7 @@ dependencies {
 
     // UI
     Libs.appCompat,
+    Libs.activity,
     Libs.fragment,
 
     // network
