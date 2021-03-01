@@ -202,9 +202,12 @@ fun Project.setupApp(
           exclude("**/*.java")
           exclude("**/*.version")
           exclude("**/*.*_module")
+          exclude("*.txt")
           exclude("META-INF/services/**")
           exclude("META-INF/com/**")
+          exclude("com/**")
           exclude("kotlin/**")
+          exclude("kotlinx/**")
           exclude("okhttp3/**")
           exclude("google/**")
         }

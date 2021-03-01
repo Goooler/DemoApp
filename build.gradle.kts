@@ -34,7 +34,7 @@ allprojects {
 }
 
 tasks {
-  named(GradleTask.DependencyUpdate.task, DependencyUpdatesTask::class) {
+  named<DependencyUpdatesTask>(GradleTask.DependencyUpdate.task) {
     rejectVersionIf {
       candidate.version.isStableVersion().not()
     }
