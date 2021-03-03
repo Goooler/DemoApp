@@ -28,6 +28,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ObservableField
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.commit
 import androidx.lifecycle.LiveData
@@ -393,7 +394,47 @@ fun FragmentManager.replaceFragment(
   }
 }
 
+@UiThread
+fun Fragment.addFragment(
+  fragment: Fragment,
+  @IdRes containerViewId: Int = android.R.id.content,
+  isAddToBackStack: Boolean = false,
+  tag: String? = null
+) {
+  childFragmentManager.addFragment(fragment, containerViewId, isAddToBackStack, tag)
+}
+
+@UiThread
+fun Fragment.replaceFragment(
+  fragment: Fragment,
+  @IdRes containerViewId: Int = android.R.id.content,
+  isAddToBackStack: Boolean = false,
+  tag: String? = null
+) {
+  childFragmentManager.addFragment(fragment, containerViewId, isAddToBackStack, tag)
+}
+
 // ---------------------Activity-------------------------------//
+
+@UiThread
+fun FragmentActivity.addFragment(
+  fragment: Fragment,
+  @IdRes containerViewId: Int = android.R.id.content,
+  isAddToBackStack: Boolean = false,
+  tag: String? = null
+) {
+  supportFragmentManager.addFragment(fragment, containerViewId, isAddToBackStack, tag)
+}
+
+@UiThread
+fun FragmentActivity.replaceFragment(
+  fragment: Fragment,
+  @IdRes containerViewId: Int = android.R.id.content,
+  isAddToBackStack: Boolean = false,
+  tag: String? = null
+) {
+  supportFragmentManager.addFragment(fragment, containerViewId, isAddToBackStack, tag)
+}
 
 @UiThread
 inline fun <reified T : ViewDataBinding> Activity.binding(@LayoutRes resId: Int): Lazy<T> =

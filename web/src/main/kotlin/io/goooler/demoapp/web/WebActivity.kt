@@ -31,7 +31,7 @@ class WebActivity : BaseThemeActivity<WebActivityBinding>(R.layout.web_activity)
       } else {
         webFragment = WebFragment.newInstance(url).also {
           it.onEventListener = listener
-          supportFragmentManager.addFragment(it, R.id.fragment_container)
+          addFragment(it, R.id.fragment_container)
         }
       }
     }
