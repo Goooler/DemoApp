@@ -4,16 +4,16 @@ import com.google.protobuf.gradle.protoc
 
 setupModule(Module.Main)
 
-applyPlugins(Plugins.protobuf)
-
-protobuf {
-  protoc {
-    artifact = Libs.protoc
-  }
-  generateProtoTasks {
-    all().forEach {
-      it.builtins.create("java") {
-        option("lite")
+applyPlugins(Plugins.protobuf) {
+  protobuf {
+    protoc {
+      artifact = Libs.protoc
+    }
+    generateProtoTasks {
+      all().forEach {
+        it.builtins.create("java") {
+          option("lite")
+        }
       }
     }
   }

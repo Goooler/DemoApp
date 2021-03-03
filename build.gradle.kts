@@ -16,8 +16,7 @@ buildscript {
     Libs.arouterPlugin,
     Libs.protobufPlugin,
     Libs.kotlinterPlugin,
-    Libs.dependencyUpdatesPlugin,
-    Libs.bintrayPublishPlugin
+    Libs.dependencyUpdatesPlugin
   )
 }
 

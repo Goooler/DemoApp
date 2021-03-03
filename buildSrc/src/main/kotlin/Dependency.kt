@@ -73,7 +73,6 @@ object Plugins {
   const val protobuf = "com.google.protobuf"
   const val dependencyUpdate = "com.github.ben-manes.versions"
   const val kotlinter = "org.jmailen.kotlinter"
-  const val bintrayPublish = "com.github.panpf.bintray-publish"
 }
 
 object Libs {
