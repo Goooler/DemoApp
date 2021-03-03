@@ -5,6 +5,8 @@ import android.net.Uri
 import android.webkit.JavascriptInterface
 import android.webkit.ValueCallback
 import android.webkit.WebChromeClient
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import io.goooler.demoapp.base.util.putArguments
 import io.goooler.demoapp.base.util.toMimeType
 import io.goooler.demoapp.common.base.BaseThemeFragment
@@ -14,6 +16,7 @@ class WebFragment : BaseThemeFragment<WebFragmentBinding>(R.layout.web_fragment)
 
   private lateinit var headers: Map<String, String>
   private var fileChooserCallback: ValueCallback<Array<Uri>>? = null
+  private lateinit var fileChooserLauncher: ActivityResultLauncher<Intent>
 
   var onEventListener: OnEventListener? = null
 
@@ -38,19 +41,14 @@ class WebFragment : BaseThemeFragment<WebFragmentBinding>(R.layout.web_fragment)
         it.webView.loadUrl(url, headers)
       }
     }
-  }
 
-  override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-    super.onActivityResult(requestCode, resultCode, data)
-    if (requestCode == FILE_CHOOSER_RESULT_CODE) {
-      fileChooserCallback?.onReceiveValue(
-        WebChromeClient.FileChooserParams.parseResult(
-          resultCode,
-          data
+    fileChooserLauncher =
+      registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+        fileChooserCallback?.onReceiveValue(
+          WebChromeClient.FileChooserParams.parseResult(it.resultCode, it.data)
         )
-      )
-      fileChooserCallback = null
-    }
+        fileChooserCallback = null
+      }
   }
 
   private val listener = object : CompatWebView.OnEventListener, JsInterface {
@@ -69,11 +67,8 @@ class WebFragment : BaseThemeFragment<WebFragmentBinding>(R.layout.web_fragment)
       fileChooserCallback = filePathCallback
       val canMultiSelect =
         fileChooserParams.mode == WebChromeClient.FileChooserParams.MODE_OPEN_MULTIPLE
-      val intent = Intent(Intent.ACTION_GET_CONTENT)
-        .addCategory(Intent.CATEGORY_OPENABLE)
-        .putExtra(Intent.EXTRA_ALLOW_MULTIPLE, canMultiSelect)
-        .setType(fileChooserParams.acceptTypes.firstOrNull()?.toMimeType() ?: "*/*")
-      startActivityForResult(Intent.createChooser(intent, "选择操作"), FILE_CHOOSER_RESULT_CODE)
+      val mimeType = fileChooserParams.acceptTypes.firstOrNull()?.toMimeType() ?: "*/*"
+      startFileChooser(canMultiSelect, mimeType)
       return true
     }
 
@@ -89,6 +84,14 @@ class WebFragment : BaseThemeFragment<WebFragmentBinding>(R.layout.web_fragment)
     }
   }
 
+  private fun startFileChooser(canMultiSelect: Boolean, mimeType: String) {
+    val intent = Intent(Intent.ACTION_GET_CONTENT)
+      .addCategory(Intent.CATEGORY_OPENABLE)
+      .putExtra(Intent.EXTRA_ALLOW_MULTIPLE, canMultiSelect)
+      .setType(mimeType)
+    fileChooserLauncher.launch(intent)
+  }
+
   interface OnEventListener {
     fun onReceivedTitle(title: String)
     fun onProgressChanged(i: Int)
@@ -96,7 +99,6 @@ class WebFragment : BaseThemeFragment<WebFragmentBinding>(R.layout.web_fragment)
 
   companion object {
     private const val URL = "url"
-    private const val FILE_CHOOSER_RESULT_CODE = 100
 
     fun newInstance(url: String): WebFragment = WebFragment().putArguments(
       URL to url

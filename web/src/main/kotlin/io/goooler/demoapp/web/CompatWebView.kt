@@ -17,7 +17,7 @@ import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.webkit.WebViewClientCompat
 
-@Suppress("SetJavaScriptEnabled", "JavascriptInterface")
+@Suppress("SetJavaScriptEnabled")
 open class CompatWebView(context: Context, attrs: AttributeSet? = null) : WebView(context, attrs) {
 
   var onEventListener: OnEventListener? = null
@@ -130,13 +130,16 @@ open class CompatWebView(context: Context, attrs: AttributeSet? = null) : WebVie
 
   interface OnEventListener {
     fun onInterceptUri(uri: Uri)
+
     fun onReceivedTitle(title: String)
+
     fun onShowFileChooser(
       filePathCallback: ValueCallback<Array<Uri>>,
       fileChooserParams: WebChromeClient.FileChooserParams
     ): Boolean
 
     fun onProgressChanged(i: Int)
+
     fun loadFinish()
   }
 }
