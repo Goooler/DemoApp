@@ -196,21 +196,21 @@ fun Project.setupApp(
         isMinifyEnabled = true
         isShrinkResources = true
         proguardFiles("${rootDir.path}/gradle/proguard-rules.pro")
-        packagingOptions {
-          exclude("**/*.proto")
-          exclude("**/*.bin")
-          exclude("**/*.java")
-          exclude("**/*.version")
-          exclude("**/*.*_module")
-          exclude("*.txt")
-          exclude("META-INF/services/**")
-          exclude("META-INF/com/**")
-          exclude("com/**")
-          exclude("kotlin/**")
-          exclude("kotlinx/**")
-          exclude("okhttp3/**")
-          exclude("google/**")
-        }
+        packagingOptions.resources.excludes += setOf(
+          "**/*.proto",
+          "**/*.bin",
+          "**/*.java",
+          "**/*.version",
+          "**/*.*_module",
+          "*.txt",
+          "META-INF/services/**",
+          "META-INF/com/**",
+          "com/**",
+          "kotlin/**",
+          "kotlinx/**",
+          "okhttp3/**",
+          "google/**"
+        )
       }
       getByName("debug") {
         resValue("string", "app_name", "${appName}.debug")
