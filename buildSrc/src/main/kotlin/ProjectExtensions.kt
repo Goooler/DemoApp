@@ -119,6 +119,10 @@ fun VariantDimension.putBuildConfigIntField(name: String, value: Int) {
   buildConfigField("Integer", name, value.toString())
 }
 
+fun BaseExtension.kotlinOptions(block: KotlinJvmOptions.() -> Unit) {
+  (this as ExtensionAware).extensions.getByName<KotlinJvmOptions>("kotlinOptions").block()
+}
+
 fun Project.setupBase(module: Module? = null, block: BaseExtension.() -> Unit = {}): BaseExtension {
   applyPlugins(Plugins.kotlinAndroid, Plugins.kotlinKapt)
   return extensions.getByName<BaseExtension>("android").apply {
@@ -143,7 +147,7 @@ fun Project.setupBase(module: Module? = null, block: BaseExtension.() -> Unit = 
       sourceCompatibility = javaVersion
       targetCompatibility = javaVersion
     }
-    (this as ExtensionAware).extensions.getByName<KotlinJvmOptions>("kotlinOptions").run {
+    kotlinOptions {
       jvmTarget = javaVersion.toString()
       useIR = true
       freeCompilerArgs = listOf(
