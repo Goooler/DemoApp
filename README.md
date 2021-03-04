@@ -66,7 +66,7 @@
 
 ## 其他次要三方库
 
-- [x] [ProtoBuf](https://github.com/protocolbuffers/protobuf/releases)
+- [ ] [ProtoBuf](https://github.com/protocolbuffers/protobuf/releases)
 - [x] [MMKV](https://github.com/Tencent/MMKV/releases)
 - [x] [ObjectBox](https://github.com/objectbox/objectbox-java/releases)
 - [x] [Amap](https://lbs.amap.com/api/android-sdk/guide/create-project/android-studio-create-project)

@@ -14,7 +14,6 @@ buildscript {
     rootProject.getExtra("kotlinPlugin"),
     Libs.hiltPlugin,
     Libs.arouterPlugin,
-    Libs.protobufPlugin,
     Libs.kotlinterPlugin,
     Libs.dependencyUpdatesPlugin
   )
