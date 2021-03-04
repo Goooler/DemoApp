@@ -36,6 +36,7 @@ import com.blankj.utilcode.util.SizeUtils
 import com.blankj.utilcode.util.StringUtils
 import com.blankj.utilcode.util.TimeUtils
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
+import dagger.hilt.android.internal.managers.ViewComponentManager
 import io.goooler.demoapp.base.core.BaseActivity
 import io.goooler.demoapp.base.core.BaseApplication
 import io.goooler.demoapp.base.core.BaseFragment
@@ -307,10 +308,12 @@ val View.attachedFragment: Fragment?
 
 val View.lifecycle: Lifecycle?
   get() {
-    (context as? FragmentActivity)?.let {
-      return attachedFragment?.lifecycle ?: it.lifecycle
+    val baseContext = when (context) {
+      is ViewComponentManager.FragmentContextWrapper ->
+        (context as ViewComponentManager.FragmentContextWrapper).baseContext
+      else -> context
     }
-    return null
+    return attachedFragment?.lifecycle ?: (baseContext as? FragmentActivity)?.lifecycle
   }
 
 val View.lifecycleScope: LifecycleCoroutineScope? get() = lifecycle?.coroutineScope

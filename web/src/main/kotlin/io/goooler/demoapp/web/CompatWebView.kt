@@ -100,17 +100,15 @@ open class CompatWebView(context: Context, attrs: AttributeSet? = null) : WebVie
   }
 
   private fun attachToLifecycle() {
-    (context as? FragmentActivity)?.let {
-      val fragment = try {
-        FragmentManager.findFragment<Fragment>(this)
-      } catch (_: Exception) {
-        null
-      }
-      if (fragment != null) {
-        fragment.lifecycle.addObserver(lifecycleObserver)
-      } else {
-        it.lifecycle.addObserver(lifecycleObserver)
-      }
+    val fragment = try {
+      FragmentManager.findFragment<Fragment>(this)
+    } catch (_: Exception) {
+      null
+    }
+    if (fragment != null) {
+      fragment.lifecycle.addObserver(lifecycleObserver)
+    } else {
+      (context as? FragmentActivity)?.lifecycle?.addObserver(lifecycleObserver)
     }
   }
 
