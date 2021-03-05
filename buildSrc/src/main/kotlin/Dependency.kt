@@ -61,6 +61,8 @@ private const val webKitVersion = "1.4.0"
 private const val doraemonKitVersion = "3.3.5"
 private const val dependencyUpdateVersion = "0.38.0"
 private const val kotlinterVersion = "3.3.0"
+private const val accompanistVersion = "0.6.1"
+const val composeVersion = "1.0.0-beta01"
 
 object Plugins {
   const val kotlinAndroid = "kotlin-android"
@@ -121,6 +123,7 @@ object Libs {
   const val webKit = "androidx.webkit:webkit:$webKitVersion"
   const val doraemonKitDebug = "com.didichuxing.doraemonkit:dokitx:$doraemonKitVersion"
   const val doraemonKitRelease = "com.didichuxing.doraemonkit:dokitx-no-op:$doraemonKitVersion"
+  const val accompanist = "dev.chrisbanes.accompanist:accompanist-insets:$accompanistVersion"
 
   const val protobufPlugin = "com.google.protobuf:protobuf-gradle-plugin:$protobufVersion"
   const val arouterPlugin = "com.alibaba:arouter-register:$arouterRegisterVersion"
@@ -146,6 +149,16 @@ object Libs {
   val coroutines = arrayOf(
     "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion",
     "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
+  )
+  val compose = arrayOf(
+    "androidx.activity:activity-compose:1.3.0-alpha03",
+    "androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha02",
+    "androidx.compose.foundation:foundation:$composeVersion",
+    "androidx.compose.foundation:foundation-layout:$composeVersion",
+    "androidx.compose.material:material:$composeVersion",
+    "androidx.compose.ui:ui:$composeVersion",
+    "androidx.compose.ui:ui-tooling:$composeVersion",
+    "androidx.compose.ui:ui-util:$composeVersion"
   )
   val lifecycle = arrayOf(
     "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion",

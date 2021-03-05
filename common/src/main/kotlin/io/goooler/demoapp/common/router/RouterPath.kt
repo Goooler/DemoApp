@@ -1,6 +1,7 @@
 package io.goooler.demoapp.common.router
 
 object RouterPath {
+  const val COMPOSE = "/compose/"
   const val LOGIN = "/login/"
   const val MAIN = "/main/"
   const val MAP = "/map/"

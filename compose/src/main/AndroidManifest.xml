@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+  package="io.goooler.demoapp.compose">
+
+  <application>
+
+    <activity
+      android:name="io.goooler.demoapp.compose.ComposeActivity"
+      android:exported="true"
+      android:theme="@style/Theme.AndroidComposeDemo.NoActionBar" />
+
+  </application>
+
+</manifest>

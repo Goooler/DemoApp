@@ -27,6 +27,11 @@ object RouterManager {
     }
   }
 
+  fun goCompose() {
+    buildPostcard(RouterPath.COMPOSE)
+      .navigation()
+  }
+
   fun goLogin(isReLogin: Boolean) {
     val action = if (isReLogin) RE_LOGIN else null
     buildPostcard(RouterPath.LOGIN)
