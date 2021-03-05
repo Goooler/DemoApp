@@ -59,7 +59,7 @@ private const val bintrayPublishVersion = "1.0.0"
 private const val browserVersion = "1.3.0"
 private const val webKitVersion = "1.4.0"
 private const val doraemonKitVersion = "3.3.5"
-private const val dependencyUpdateVersion = "0.36.0"
+private const val dependencyUpdateVersion = "0.38.0"
 private const val kotlinterVersion = "3.3.0"
 
 object Plugins {
