@@ -59,7 +59,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:onClick="@{listener}"
-        android:text="DataStore Query"
+        android:text="Compose"
         android:textAllCaps="false" />
 
       <Button
@@ -96,15 +96,6 @@
         android:layout_marginTop="5dp"
         android:onClick="@{listener}"
         android:text="Audio Player"
-        android:textAllCaps="false" />
-
-      <Button
-        android:id="@+id/bt_8"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:onClick="@{listener}"
-        android:text="Compose"
         android:textAllCaps="false" />
 
     </LinearLayout>

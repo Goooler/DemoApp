@@ -15,7 +15,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.onCompletion
@@ -32,14 +31,6 @@ class MainHomeViewModel @Inject constructor(private val repository: MainCommonRe
 
   fun initData() {
     requestWithCr()
-  }
-
-  fun getRepoListFromDs() {
-    viewModelScope.launch {
-      repository.getRepoListFromDs().collectLatest {
-        it.firstOrNull()?.name?.showToast()
-      }
-    }
   }
 
   fun startCountDown(countDownTime: Int = 30, callback: (CountDownState) -> Unit) {
@@ -98,7 +89,6 @@ class MainHomeViewModel @Inject constructor(private val repository: MainCommonRe
         }
 
         putRepoListIntoDb(google, microsoft, apple, facebook, twitter)
-        repository.putRepoListIntoDs(google.await())
       } catch (e: Exception) {
         title.postValue(e.message)
         R.string.common_request_failed.showToast()

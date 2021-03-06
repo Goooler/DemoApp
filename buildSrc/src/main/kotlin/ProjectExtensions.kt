@@ -1,3 +1,5 @@
+@file:Suppress("UnstableApiUsage")
+
 import com.android.build.api.dsl.VariantDimension
 import com.android.build.gradle.BaseExtension
 import com.android.build.gradle.LibraryExtension
@@ -233,9 +235,7 @@ fun Project.setupApp(
       }
     }
     compileOptions.isCoreLibraryDesugaringEnabled = true
-    dependencies.run {
-      add("coreLibraryDesugaring", Libs.desugar)
-    }
+    dependencies.add("coreLibraryDesugaring", Libs.desugar)
     block()
   }
 }
@@ -275,7 +275,6 @@ private fun Project.setupCommon(module: Module? = null): BaseExtension {
         // utils
         *Libs.hilt,
         *Libs.room,
-        *Libs.dataStore,
         *Libs.rx,
         *Libs.moshi,
         Libs.collection,

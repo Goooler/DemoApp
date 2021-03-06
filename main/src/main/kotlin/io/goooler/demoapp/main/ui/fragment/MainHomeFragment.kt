@@ -35,12 +35,11 @@ class MainHomeFragment :
     when (it) {
       binding.bt1 -> RouterManager.goWeb("bilibili.com")
       binding.bt2 -> RouterManager.goMap()
-      binding.bt3 -> vm.getRepoListFromDs()
+      binding.bt3 -> RouterManager.goCompose()
       binding.bt4 -> countdown()
       binding.bt5 -> RouterManager.goWidget()
       binding.bt6 -> FullScreenDialogFragment.show(childFragmentManager)
       binding.bt7 -> RouterManager.goAudioPlay()
-      binding.bt8 -> RouterManager.goCompose()
     }
   }
 
