@@ -36,7 +36,7 @@
           app:layout_scrollFlags="scroll|enterAlwaysCollapsed">
 
           <ImageView
-            binding_src_url="@{vm.imageUrl}"
+            binding_src_url="@{@string/main_coil_icon}"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:src="@drawable/common_ic_pic_placeholder"

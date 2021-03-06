@@ -13,6 +13,8 @@
       level="WARNING" />
     <inspection_tool class="AndroidLintUselessLeaf" enabled="false" enabled_by_default="false"
       level="WARNING" />
+    <inspection_tool class="AndroidLintExtraTranslation" enabled="false" enabled_by_default="false"
+      level="WARNING" />
     <inspection_tool class="ConstantConditions" enabled="true" enabled_by_default="true"
       level="WARNING">
       <option name="SUGGEST_NULLABLE_ANNOTATIONS" value="false" />

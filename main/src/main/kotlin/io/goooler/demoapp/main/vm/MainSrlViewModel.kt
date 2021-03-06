@@ -3,7 +3,6 @@ package io.goooler.demoapp.main.vm
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.goooler.demoapp.base.util.MutableBooleanLiveData
 import io.goooler.demoapp.base.util.MutableListLiveData
-import io.goooler.demoapp.base.util.MutableStringLiveData
 import io.goooler.demoapp.common.base.BaseRxViewModel
 import io.goooler.demoapp.common.type.CommonConstants
 import io.goooler.demoapp.common.util.toast
@@ -18,17 +17,12 @@ class MainSrlViewModel @Inject constructor(private val repository: MainCommonRep
   private val _listData = mutableListOf<MainCommonVhModel>()
   private var page = 1
 
-  val imageUrl = MutableStringLiveData()
   val listData = MutableListLiveData<MainCommonVhModel>()
   val isLoadMoreFinish = MutableBooleanLiveData()
   val isRefreshFinish = MutableBooleanLiveData()
   val isNoMore = MutableBooleanLiveData()
   val isEnableRefresh = MutableBooleanLiveData(true)
   val isEnableLoadMore = MutableBooleanLiveData(true)
-
-  init {
-    imageUrl.value = "https://raw.githubusercontent.com/coil-kt/coil/master/logo.svg"
-  }
 
   fun refresh() {
     page = 1

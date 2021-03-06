@@ -25,11 +25,7 @@ class MainActivity : BaseThemeActivity<MainActivityBinding>(R.layout.main_activi
     CommonFragmentStateAdapter(supportFragmentManager, lifecycle)
   }
 
-  private val titles = listOf(
-    "home",
-    "smartRefresh",
-    "paging"
-  )
+  private val titles = listOf("home", "smartRefresh", "paging")
 
   private val fragments = listOf(
     MainHomeFragment.newInstance(),
