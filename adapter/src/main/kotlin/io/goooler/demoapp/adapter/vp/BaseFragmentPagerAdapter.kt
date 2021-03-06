@@ -14,12 +14,12 @@ import androidx.viewpager.widget.PagerAdapter
 abstract class BaseFragmentPagerAdapter(
   fragmentManager: FragmentManager,
   behavior: Int = BEHAVIOR_SET_USER_VISIBLE_HINT
-) : FragmentStatePagerAdapter(fragmentManager, behavior) {
+) : FragmentStatePagerAdapter(fragmentManager, behavior), IFragmentAdapter {
 
   private val fragmentList = mutableListOf<Fragment>()
   private val titleList = mutableListOf<String>()
 
-  open fun setData(fragments: List<Fragment>? = null, titles: List<String>? = null) {
+  override fun setData(fragments: List<Fragment>?, titles: List<String>?) {
     fragments?.let {
       fragmentList.clear()
       fragmentList.addAll(it)
