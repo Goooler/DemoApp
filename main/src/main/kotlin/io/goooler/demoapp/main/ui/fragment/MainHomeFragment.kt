@@ -45,7 +45,7 @@ class MainHomeFragment :
 
   private fun countdown() {
     if (vm.countdownJob?.isActive != true) {
-      vm.startCountDown {}
+      vm.startCountDown()
     } else {
       vm.countdownJob?.cancel(
         CancellationException(MainHomeViewModel.CANCEL_MANUALLY)

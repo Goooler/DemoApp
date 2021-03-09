@@ -33,7 +33,7 @@ class MainHomeViewModel @Inject constructor(private val repository: MainCommonRe
     requestWithCr()
   }
 
-  fun startCountDown(countDownTime: Int = 30, callback: (CountDownState) -> Unit) {
+  fun startCountDown(countDownTime: Int = 30, callback: (CountDownState) -> Unit = {}) {
     countdownJob = viewModelScope.launch {
       flow {
         (countDownTime downTo 0).forEach {
