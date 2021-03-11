@@ -142,7 +142,6 @@ fun Project.setupBase(module: Module? = null, block: BaseExtension.() -> Unit = 
         versionNameSuffix = "_${it.tag}"
       }
     }
-    sourceSets["main"].java.srcDirs("src/main/kotlin")
     compileOptions {
       incremental = true
       setDefaultJavaVersion(javaVersion)
@@ -206,6 +205,7 @@ fun Project.setupApp(
           "**/*.proto",
           "**/*.bin",
           "**/*.java",
+          "**/*.properties",
           "**/*.version",
           "**/*.*_module",
           "*.txt",
