@@ -1,5 +1,7 @@
 package io.goooler.demoapp.common.util
 
+import android.webkit.CookieManager
+import com.blankj.utilcode.util.CleanUtils
 import com.blankj.utilcode.util.SPUtils
 import io.goooler.demoapp.base.util.isNotNullOrEmpty
 
@@ -34,6 +36,17 @@ object AppUserInfoManager {
   fun resetUserInfo() {
     info = null
     spUtil.put(SP_USER_INFO_KEY, "")
+  }
+
+  fun cleanAllCache() {
+    CleanUtils.cleanInternalCache()
+    CleanUtils.cleanExternalCache()
+  }
+
+  fun logout() {
+    resetUserInfo()
+    cleanAllCache()
+    CookieManager.getInstance().removeAllCookies(null)
   }
 
   class UserInfoBean(
