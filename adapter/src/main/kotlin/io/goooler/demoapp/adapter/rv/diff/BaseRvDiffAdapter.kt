@@ -25,7 +25,9 @@ import java.util.Collections
  * @see IRvAdapter
  */
 abstract class BaseRvDiffAdapter<M : IDiffVhModelType>(callback: DiffCallBack<M> = DiffCallBack()) :
-  ListAdapter<M, BindingViewHolder>(callback), IRvAdapter<M>, IRvAdapterMutable<M> {
+  ListAdapter<M, BindingViewHolder>(callback),
+  IRvAdapter<M>,
+  IRvAdapterMutable<M> {
 
   private val helper by lazy(LazyThreadSafetyMode.NONE) { RvAdapterHelper(this) }
 

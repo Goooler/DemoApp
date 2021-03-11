@@ -1,5 +1,6 @@
 package io.goooler.demoapp.adapter.rv.core
 
+import android.annotation.SuppressLint
 import android.view.ViewGroup
 import androidx.annotation.IntRange
 import androidx.annotation.LayoutRes
@@ -18,6 +19,7 @@ import java.util.Collections
  * @see RvAdapterHelper
  * @see IRvAdapter
  */
+@SuppressLint("NotifyDataSetChanged")
 abstract class BaseRvAdapter<M : IVhModelType> :
   RecyclerView.Adapter<BindingViewHolder>(),
   IRvAdapter<M>,
