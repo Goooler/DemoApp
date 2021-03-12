@@ -2,6 +2,7 @@
 
 package io.goooler.demoapp.common.util
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
@@ -16,14 +17,19 @@ import coil.decode.ImageDecoderDecoder
 import coil.decode.SvgDecoder
 import coil.load
 import coil.request.CachePolicy
+import coil.request.ImageRequest
 import coil.size.Scale
 import coil.transform.CircleCropTransformation
 import coil.transform.RoundedCornersTransformation
 
+@SuppressLint("StaticFieldLeak")
 object ImageLoader {
 
+  private lateinit var mContext: Context
+
   fun init(context: Context) {
-    val imageLoader = coil.ImageLoader.Builder(context)
+    mContext = context.applicationContext
+    val imageLoader = coil.ImageLoader.Builder(mContext)
       .crossfade(true)
       .componentRegistry {
         val gifDecoder = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) ImageDecoderDecoder()
@@ -271,6 +277,18 @@ object ImageLoader {
       memoryCachePolicy(CachePolicy.DISABLED)
       diskCachePolicy(CachePolicy.DISABLED)
     }
+  }
+
+  suspend fun getDrawable(
+    uri: String?,
+    context: Context? = null,
+    builder: ImageRequest.Builder.() -> Unit = {}
+  ): Drawable? {
+    val request = ImageRequest.Builder(context ?: mContext)
+      .data(uri)
+      .apply(builder)
+      .build()
+    return Coil.execute(request).drawable
   }
 }
 
