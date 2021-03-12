@@ -4,26 +4,23 @@
 package io.goooler.demoapp.base.util
 
 import android.app.Activity
+import android.content.ContextWrapper
 import android.graphics.Color
 import android.graphics.Point
-import android.os.Build
 import android.os.Bundle
 import android.os.Looper
-import android.text.Editable
-import android.text.Html
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.Spanned
-import android.text.TextWatcher
 import android.text.style.ClickableSpan
 import android.view.View
 import android.webkit.URLUtil
-import android.widget.EditText
 import androidx.annotation.ColorInt
 import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
-import androidx.annotation.UiThread
+import androidx.annotation.MainThread
 import androidx.core.os.bundleOf
+import androidx.core.text.parseAsHtml
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ObservableField
 import androidx.databinding.ViewDataBinding
@@ -31,8 +28,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.commit
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.coroutineScope
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.Dispatchers
@@ -63,7 +63,7 @@ typealias MutableStringLiveData = MutableLiveData<String?>
 
 typealias MutableListLiveData<T> = MutableLiveData<List<T>>
 
-typealias ObservableString = ObservableField<String>
+typealias ObservableString = ObservableField<String?>
 
 typealias ObservableList<T> = ObservableField<List<T>>
 
@@ -89,19 +89,13 @@ fun <T> MutableLiveData<T>.asLiveData(): LiveData<T> = this
 
 // ---------------------CharSequence-------------------------------//
 
-fun String.fromHtml(): Spanned {
-  return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-    Html.fromHtml(this, Html.FROM_HTML_MODE_LEGACY)
-  } else {
-    Html.fromHtml(this)
-  }
-}
+fun String.fromHtml(): Spanned = parseAsHtml()
 
 fun String.toMimeType(): String = URLConnection.getFileNameMap().getContentTypeFor(this) ?: this
 
 fun String.onlyDigits(): String = replace(Regex("\\D*"), "")
 
-fun String.removeAllSpecialCharacters(): String = replace("[^a-zA-Z]+".toRegex(), "")
+fun String.removeAllSpecialCharacters(): String = replace(Regex("[^a-zA-Z]+"), "")
 
 fun CharSequence?.isNotNullOrEmpty(): Boolean = isNullOrEmpty().not()
 
@@ -132,8 +126,7 @@ fun String.safeSubstring(startIndex: Int, endIndex: Int): String {
 }
 
 fun String?.safeToBoolean(default: Boolean = false): Boolean {
-  if (this == null) return default
-  return try {
+  return if (this == null) default else try {
     toBoolean()
   } catch (e: Throwable) {
     e.printStackTrace()
@@ -142,8 +135,7 @@ fun String?.safeToBoolean(default: Boolean = false): Boolean {
 }
 
 fun String?.safeToInt(default: Int = 0): Int {
-  if (this == null) return default
-  return try {
+  return if (this == null) default else try {
     toInt()
   } catch (e: Throwable) {
     e.printStackTrace()
@@ -152,8 +144,7 @@ fun String?.safeToInt(default: Int = 0): Int {
 }
 
 fun String?.safeToLong(default: Long = 0L): Long {
-  if (this == null) return default
-  return try {
+  return if (this == null) default else try {
     toLong()
   } catch (e: Throwable) {
     e.printStackTrace()
@@ -162,8 +153,7 @@ fun String?.safeToLong(default: Long = 0L): Long {
 }
 
 fun String?.safeToFloat(default: Float = 0f): Float {
-  if (this == null) return default
-  return try {
+  return if (this == null) default else try {
     toFloat()
   } catch (e: Throwable) {
     e.printStackTrace()
@@ -172,8 +162,7 @@ fun String?.safeToFloat(default: Float = 0f): Float {
 }
 
 fun String?.safeToDouble(default: Double = 0.0): Double {
-  if (this == null) return default
-  return try {
+  return if (this == null) default else try {
     toDouble()
   } catch (e: Throwable) {
     e.printStackTrace()
@@ -193,7 +182,7 @@ fun String?.safeToColor(@ColorInt default: Int = 0): Int {
 
 fun String?.isNetworkUrl(): Boolean = URLUtil.isNetworkUrl(this)
 
-fun String?.isUri(): Boolean = URLUtil.isValidUrl(this)
+fun String?.isValidUrl(): Boolean = URLUtil.isValidUrl(this)
 
 /**
  * 验证手机号格式是否正确
@@ -325,32 +314,15 @@ fun File.notExists(): Boolean = exists().not()
 
 // ---------------------View-------------------------------//
 
-@UiThread
-fun EditText.onTextChanged(listener: (String) -> Unit) {
-  this.addTextChangedListener(
-    object : TextWatcher {
-
-      override fun afterTextChanged(s: Editable?) {
-        listener(s.toString())
-      }
-
-      override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) =
-        Unit
-
-      override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) = Unit
-    }
-  )
-}
-
 // ---------------------Fragment-------------------------------//
 
-@UiThread
+@MainThread
 fun <T : Fragment> T.putArguments(bundle: Bundle): T {
   arguments = bundle
   return this
 }
 
-@UiThread
+@MainThread
 fun <T : Fragment> T.putArguments(vararg pairs: Pair<String, Any?>): T =
   putArguments(bundleOf(*pairs))
 
@@ -360,7 +332,7 @@ fun <T : Fragment> T.putArguments(vararg pairs: Pair<String, Any?>): T =
  * @param isAddToBackStack  将要添加的 fragment 是否要添加到返回栈，默认不添加
  * @param tag               fragment 的 tag
  */
-@UiThread
+@MainThread
 fun FragmentManager.addFragment(
   fragment: Fragment,
   @IdRes containerViewId: Int = android.R.id.content,
@@ -380,7 +352,7 @@ fun FragmentManager.addFragment(
  * @param isAddToBackStack  将要替换的 fragment 是否要添加到返回栈，默认添加
  * @param tag               fragment 的 tag
  */
-@UiThread
+@MainThread
 fun FragmentManager.replaceFragment(
   fragment: Fragment,
   @IdRes containerViewId: Int = android.R.id.content,
@@ -394,7 +366,7 @@ fun FragmentManager.replaceFragment(
   }
 }
 
-@UiThread
+@MainThread
 fun Fragment.addFragment(
   fragment: Fragment,
   @IdRes containerViewId: Int = android.R.id.content,
@@ -404,7 +376,7 @@ fun Fragment.addFragment(
   childFragmentManager.addFragment(fragment, containerViewId, isAddToBackStack, tag)
 }
 
-@UiThread
+@MainThread
 fun Fragment.replaceFragment(
   fragment: Fragment,
   @IdRes containerViewId: Int = android.R.id.content,
@@ -414,9 +386,27 @@ fun Fragment.replaceFragment(
   childFragmentManager.addFragment(fragment, containerViewId, isAddToBackStack, tag)
 }
 
+val View.attachedFragment: Fragment?
+  get() = try {
+    FragmentManager.findFragment(this)
+  } catch (_: Exception) {
+    null
+  }
+
+val View.lifecycle: Lifecycle?
+  get() {
+    val baseContext = when (context) {
+      is ContextWrapper -> (context as ContextWrapper).baseContext
+      else -> context
+    }
+    return attachedFragment?.lifecycle ?: (baseContext as? FragmentActivity)?.lifecycle
+  }
+
+val View.lifecycleScope: LifecycleCoroutineScope? get() = lifecycle?.coroutineScope
+
 // ---------------------Activity-------------------------------//
 
-@UiThread
+@MainThread
 fun FragmentActivity.addFragment(
   fragment: Fragment,
   @IdRes containerViewId: Int = android.R.id.content,
@@ -426,7 +416,7 @@ fun FragmentActivity.addFragment(
   supportFragmentManager.addFragment(fragment, containerViewId, isAddToBackStack, tag)
 }
 
-@UiThread
+@MainThread
 fun FragmentActivity.replaceFragment(
   fragment: Fragment,
   @IdRes containerViewId: Int = android.R.id.content,
@@ -436,7 +426,7 @@ fun FragmentActivity.replaceFragment(
   supportFragmentManager.addFragment(fragment, containerViewId, isAddToBackStack, tag)
 }
 
-@UiThread
+@MainThread
 inline fun <reified T : ViewDataBinding> Activity.binding(@LayoutRes resId: Int): Lazy<T> =
   lazy(LazyThreadSafetyMode.NONE) { DataBindingUtil.setContentView(this, resId) }
 
@@ -458,16 +448,12 @@ fun Activity.getScreenWidth(): Int {
  * 条件为真时执行
  */
 inline fun Boolean.trueRun(block: () -> Unit) {
-  if (this) {
-    block()
-  }
+  if (this) block()
 }
 
 /**
  * 条件为假时执行
  */
 inline fun Boolean.falseRun(block: () -> Unit) {
-  if (this.not()) {
-    block()
-  }
+  if (this.not()) block()
 }

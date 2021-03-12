@@ -6,7 +6,6 @@ package io.goooler.demoapp.common.util
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
-import android.view.View
 import android.webkit.URLUtil
 import androidx.activity.ComponentActivity
 import androidx.annotation.AnyThread
@@ -20,12 +19,7 @@ import androidx.annotation.StringRes
 import androidx.annotation.UiThread
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.coroutineScope
 import androidx.viewbinding.ViewBinding
 import com.blankj.utilcode.util.AdaptScreenUtils
 import com.blankj.utilcode.util.ColorUtils
@@ -36,7 +30,6 @@ import com.blankj.utilcode.util.SizeUtils
 import com.blankj.utilcode.util.StringUtils
 import com.blankj.utilcode.util.TimeUtils
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
-import dagger.hilt.android.internal.managers.ViewComponentManager
 import io.goooler.demoapp.base.core.BaseActivity
 import io.goooler.demoapp.base.core.BaseApplication
 import io.goooler.demoapp.base.core.BaseFragment
@@ -290,22 +283,3 @@ inline fun <reified T : ViewBinding> LayoutInflater.inflateBinding(): T {
   val method = T::class.java.getMethod("inflate", LayoutInflater::class.java)
   return method.invoke(null, this) as T
 }
-
-val View.attachedFragment: Fragment?
-  get() = try {
-    FragmentManager.findFragment(this)
-  } catch (_: Exception) {
-    null
-  }
-
-val View.lifecycle: Lifecycle?
-  get() {
-    val baseContext = when (context) {
-      is ViewComponentManager.FragmentContextWrapper ->
-        (context as ViewComponentManager.FragmentContextWrapper).baseContext
-      else -> context
-    }
-    return attachedFragment?.lifecycle ?: (baseContext as? FragmentActivity)?.lifecycle
-  }
-
-val View.lifecycleScope: LifecycleCoroutineScope? get() = lifecycle?.coroutineScope
