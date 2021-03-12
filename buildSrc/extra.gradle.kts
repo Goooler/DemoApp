@@ -4,12 +4,12 @@ import java.util.concurrent.TimeUnit
 rootProject.extra.run {
   set("androidGradlePlugin", "com.android.tools.build:gradle:7.0.0-alpha09")
   set("kotlinPlugin", "org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.31")
-  set("aliyunMaven", "https://maven.aliyun.com/repository/public")
 }
 
 repositories {
   google()
-  jcenter()
+  mavenCentral()
+  maven("https://maven.aliyun.com/repository/public")
   maven("https://jitpack.io")
 }
 
