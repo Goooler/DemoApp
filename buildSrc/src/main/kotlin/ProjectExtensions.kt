@@ -38,16 +38,14 @@ val apiHosts = mapOf(
 )
 
 // app
-const val globalVersionName = "1.0"
-const val globalVersionCode = 20210107
 const val appPackageName = "io.goooler.demoapp"
 const val appName = "Demo"
 const val extraScriptPath = "buildSrc/extra.gradle.kts"
 
-val localLibs = mapOf(
-  "dir" to "libs",
-  "include" to arrayOf("*.jar", "*.aar")
-)
+val gitCommitCount: String get() = "git describe --tags".exec()
+val gitCommitDescribe: Int get() = "git rev-list HEAD --count".exec().toInt()
+
+fun String.exec(): String = String(Runtime.getRuntime().exec(this).inputStream.readBytes()).trim()
 
 fun ScriptHandlerScope.classpaths(vararg names: Any) {
   dependencies {
@@ -133,8 +131,8 @@ fun Project.setupBase(module: Module? = null, block: BaseExtension.() -> Unit = 
     defaultConfig {
       minSdkVersion(globalMinSdk)
       targetSdkVersion(globalTargetSdk)
-      versionCode = globalVersionCode
-      versionName = globalVersionName
+      versionCode = gitCommitDescribe
+      versionName = gitCommitCount
       vectorDrawables.useSupportLibrary = true
       ndk { abiFilters.addAll(ndkLibs) }
       module?.let {
@@ -259,7 +257,7 @@ private fun Project.setupCommon(module: Module? = null): BaseExtension {
       }
       implementations(
         // local
-        fileTree(localLibs),
+        fileTree(mapOf("dir" to "libs", "include" to arrayOf("*.jar", "*.aar"))),
         project(Module.Base.moduleName),
 
         // router
