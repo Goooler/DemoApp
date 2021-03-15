@@ -40,7 +40,7 @@ val apiHosts = mapOf(
 // app
 const val appPackageName = "io.goooler.demoapp"
 const val appName = "Demo"
-const val extraScriptPath = "buildSrc/extra.gradle.kts"
+const val extraScriptPath = "gradle/extra.gradle.kts"
 
 val gitCommitCount: String get() = "git describe --tags".exec()
 val gitCommitDescribe: Int get() = "git rev-list HEAD --count".exec().toInt()
