@@ -48,7 +48,7 @@ abstract class BaseRetrofitHelper {
       .cache(cache)
       .connectTimeout(20L, TimeUnit.SECONDS)
       .dispatcher(dispatcher)
-      .addInterceptor(StatusInterceptor.create(statusListener))
+      .addInterceptor(StatusInterceptor(statusListener))
       .addInterceptor(RetryInterceptor)
       .addInterceptor()
       .build()

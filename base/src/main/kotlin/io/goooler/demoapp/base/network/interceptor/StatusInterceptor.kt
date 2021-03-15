@@ -3,7 +3,7 @@ package io.goooler.demoapp.base.network.interceptor
 import okhttp3.Interceptor
 import okhttp3.Response
 
-class StatusInterceptor private constructor(private val listener: StatusListener) : Interceptor {
+class StatusInterceptor(private val listener: StatusListener) : Interceptor {
 
   override fun intercept(chain: Interceptor.Chain): Response {
     return chain.proceed(chain.request()).also {
@@ -19,9 +19,5 @@ class StatusInterceptor private constructor(private val listener: StatusListener
     fun onAuthFailed()
     fun onForbidden() {}
     fun onNotFound() {}
-  }
-
-  companion object {
-    fun create(listener: StatusListener) = StatusInterceptor(listener)
   }
 }
