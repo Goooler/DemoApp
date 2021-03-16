@@ -7,13 +7,8 @@
       <option name="url" value="https://dl.google.com/dl/android/maven2/" />
     </remote-repository>
     <remote-repository>
-      <option name="id" value="MavenCenter" />
-      <option name="name" value="MavenCenter" />
-      <option name="url" value="https://repo.maven.apache.org/maven2/" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="Central" />
-      <option name="name" value="Central" />
+      <option name="id" value="MavenCentral" />
+      <option name="name" value="MavenCentral" />
       <option name="url" value="https://repo1.maven.org/maven2/" />
     </remote-repository>
     <remote-repository>
