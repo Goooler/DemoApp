@@ -139,7 +139,7 @@ internal class RvAdapterHelper<M : IVhModelType>(private val adapter: IRvAdapter
    */
   private fun setFullSpan(holder: RecyclerView.ViewHolder, item: M) {
     (holder.itemView.layoutParams as? StaggeredGridLayoutManager.LayoutParams)?.let {
-      it.isFullSpan = item is ISpanSize && item.spanSize == SPAN_SIZE_FULL
+      it.isFullSpan = (item as? ISpanSize)?.spanSize == SPAN_SIZE_FULL
     }
   }
 }

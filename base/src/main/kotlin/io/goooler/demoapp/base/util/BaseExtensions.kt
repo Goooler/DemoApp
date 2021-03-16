@@ -395,10 +395,7 @@ val View.attachedFragment: Fragment?
 
 val View.lifecycle: Lifecycle?
   get() {
-    val baseContext = when (context) {
-      is ContextWrapper -> (context as ContextWrapper).baseContext
-      else -> context
-    }
+    val baseContext = (context as? ContextWrapper)?.baseContext ?: context
     return attachedFragment?.lifecycle ?: (baseContext as? FragmentActivity)?.lifecycle
   }
 
