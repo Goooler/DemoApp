@@ -97,7 +97,7 @@ fun String.isStableVersion(): Boolean {
   return stableKeyword || Regex("^[0-9,.v-]+(-r)?$").matches(this)
 }
 
-fun PluginAware.applyPlugins(vararg names: String, block: () -> Unit = {}) {
+inline fun PluginAware.applyPlugins(vararg names: String, block: () -> Unit = {}) {
   apply {
     for (name in names) {
       plugin(name)
@@ -119,7 +119,7 @@ fun VariantDimension.putBuildConfigIntField(name: String, value: Int) {
   buildConfigField("Integer", name, value.toString())
 }
 
-fun BaseExtension.kotlinOptions(block: KotlinJvmOptions.() -> Unit) {
+inline fun BaseExtension.kotlinOptions(block: KotlinJvmOptions.() -> Unit) {
   (this as ExtensionAware).extensions.getByName<KotlinJvmOptions>("kotlinOptions").block()
 }
 
@@ -161,14 +161,12 @@ fun Project.setupBase(module: Module? = null, block: BaseExtension.() -> Unit = 
   }
 }
 
-fun Project.setupModule(
+fun Project.setupLib(
   module: Module? = null,
   block: LibraryExtension.() -> Unit = {}
 ): LibraryExtension {
   applyPlugins(Plugins.androidLibrary)
-  return (setupCommon(module) as LibraryExtension).apply {
-    block()
-  }
+  return (setupCommon(module) as LibraryExtension).apply(block)
 }
 
 fun Project.setupApp(

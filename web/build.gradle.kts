@@ -1,4 +1,4 @@
-setupModule(Module.Web)
+setupLib(Module.Web)
 
 dependencies {
   implementations(

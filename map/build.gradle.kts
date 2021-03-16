@@ -1,4 +1,4 @@
-setupModule(Module.Map) {
+setupLib(Module.Map) {
   buildTypes {
     getByName("release") {
       resValue("string", "amap_key", ApiKey.AmapRelease.key)

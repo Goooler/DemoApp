@@ -1,4 +1,4 @@
-setupModule(Module.Main)
+setupLib(Module.Main)
 
 dependencies {
   implementations(

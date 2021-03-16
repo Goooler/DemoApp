@@ -1,4 +1,4 @@
-setupModule(Module.Common) {
+setupLib(Module.Common) {
   productFlavors.all {
     putBuildConfigIntField(BuildConfigField.VersionCode.tag, gitCommitDescribe)
     putBuildConfigStringField(BuildConfigField.VersionName.tag, gitCommitCount)

@@ -1,4 +1,4 @@
-setupModule(Module.Compose) {
+setupLib(Module.Compose) {
   buildFeatures {
     compose = true
   }
