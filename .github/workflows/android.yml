@@ -1,4 +1,4 @@
-name: Build Apk
+name: CI
 
 on:
   push:
@@ -6,7 +6,24 @@ on:
       - kotlin
 
 jobs:
+  check:
+    name: Check
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v2
+      - uses: gradle/wrapper-validation-action@v1
+      - uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - uses: actions/cache@v2
+        with:
+          path: ~/.gradle/caches
+          key: gradle-${{ runner.os }}-${{ hashFiles('**/**.gradle.kts', '**/gradle/wrapper/gradle-wrapper.properties', '**/buildSrc/src/main/kotlin/**.kt') }}
+      - name: Check style
+        run: ./gradlew lintKotlin
   build:
+    name: Build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -14,5 +31,9 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
+      - uses: actions/cache@v2
+        with:
+          path: ~/.gradle/caches
+          key: gradle-${{ runner.os }}-${{ hashFiles('**/**.gradle.kts', '**/gradle/wrapper/gradle-wrapper.properties', '**/buildSrc/src/main/kotlin/**.kt') }}
       - name: Build
         run: ./gradlew --parallel app:assembleOnlineRelease
