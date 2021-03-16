@@ -36,7 +36,7 @@ private const val lubanVersion = "1.1.8"
 private const val mmkvVersion = "1.2.7"
 private const val coroutinesVersion = "1.4.3"
 private const val desugarVersion = "1.1.5"
-private const val objectBoxVersion = "2.9.0"
+private const val objectBoxVersion = "2.9.1"
 private const val protocVersion = "3.15.4"
 private const val tbsVersion = "43938"
 private const val baseRvHelperVersion = "3.0.4"
@@ -62,7 +62,7 @@ private const val doraemonKitVersion = "3.3.5"
 private const val dependencyUpdateVersion = "0.38.0"
 private const val kotlinterVersion = "3.3.0"
 private const val accompanistVersion = "0.6.2"
-const val composeVersion = "1.0.0-beta01"
+const val composeVersion = "1.0.0-beta02"
 
 object Plugins {
   const val kotlinAndroid = "kotlin-android"
@@ -151,7 +151,7 @@ object Libs {
     "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
   )
   val compose = arrayOf(
-    "androidx.activity:activity-compose:1.3.0-alpha03",
+    "androidx.activity:activity-compose:1.3.0-alpha04",
     "androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha02",
     "androidx.compose.foundation:foundation:$composeVersion",
     "androidx.compose.foundation:foundation-layout:$composeVersion",
