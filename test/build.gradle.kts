@@ -12,6 +12,7 @@ dependencies {
     Libs.mmkv,
     *Libs.objectBox
   )
+  kapts(Libs.objectBoxKapt)
   testImplementations(
     "junit:junit:4.13.2",
     "org.robolectric:robolectric:4.5.1"
