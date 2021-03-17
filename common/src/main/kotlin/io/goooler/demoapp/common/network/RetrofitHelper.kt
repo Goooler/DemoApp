@@ -28,7 +28,7 @@ object RetrofitHelper : BaseRetrofitHelper() {
   override val converterFactory: Converter.Factory = MoshiConverterFactory.create(JsonUtil.moshi)
 
   override val statusListener: StatusInterceptor.StatusListener = StatusInterceptor.StatusListener {
-    AppUserInfoManager.resetUserInfo()
+    AppUserInfoManager.logout()
     RouterManager.goLogin(true)
   }
 

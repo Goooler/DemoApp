@@ -22,7 +22,7 @@ object AppUserInfoManager {
     private set
 
   init {
-    info = spUtil.getString(SP_USER_INFO_KEY).fromJson<UserInfoBean>()
+    info = spUtil.getString(SP_USER_INFO_KEY).fromJson()
   }
 
   val haveLogin: Boolean get() = token.isNotNullOrEmpty() && userId.isNotNullOrEmpty()

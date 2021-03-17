@@ -1,7 +1,7 @@
 package io.goooler.demoapp.common.router
 
 import android.content.Intent
-import android.net.Uri
+import androidx.core.net.toUri
 import com.alibaba.android.arouter.facade.Postcard
 import com.alibaba.android.arouter.launcher.ARouter
 
@@ -13,17 +13,8 @@ object RouterManager {
   const val USE_CHROME = "useChrome"
 
   fun go(url: String) {
-    val uri = Uri.parse(url)
-    if (uri.scheme == "demo") {
-      val paths = uri.path?.split("/")
-      when (paths?.firstOrNull()) {
-        RouterPath.MAIN -> {
-        }
-        RouterPath.WEB -> {
-        }
-        else -> {
-        }
-      }
+    url.toUri().path?.let {
+      buildPostcard(it).navigation()
     }
   }
 
@@ -68,8 +59,5 @@ object RouterManager {
       .navigation()
   }
 
-  private fun buildPostcard(path: String): Postcard {
-    return ARouter.getInstance()
-      .build(path)
-  }
+  private fun buildPostcard(path: String): Postcard = ARouter.getInstance().build(path)
 }
