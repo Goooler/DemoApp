@@ -29,7 +29,6 @@ private const val globalTargetSdk = 30
 private const val globalBuildTool = "30.0.3"
 private const val globalMinSdk = 23
 private val javaVersion = JavaVersion.VERSION_1_8
-private val ndkLibs = setOf("arm64-v8a")
 
 const val cdnPrefix = "https://raw.githubusercontent.com/"
 val apiHosts = mapOf(
@@ -99,9 +98,7 @@ fun String.isStableVersion(): Boolean {
 
 inline fun PluginAware.applyPlugins(vararg names: String, block: () -> Unit = {}) {
   apply {
-    for (name in names) {
-      plugin(name)
-    }
+    names.forEach { plugin(it) }
   }
   block()
 }
@@ -134,7 +131,7 @@ fun Project.setupBase(module: Module? = null, block: BaseExtension.() -> Unit = 
       versionCode = gitCommitDescribe
       versionName = gitCommitCount
       vectorDrawables.useSupportLibrary = true
-      ndk { abiFilters.addAll(ndkLibs) }
+      ndk { abiFilters += setOf("arm64-v8a") }
       module?.let {
         resourcePrefix = "${it.tag}_"
         versionNameSuffix = "_${it.tag}"
@@ -156,6 +153,10 @@ fun Project.setupBase(module: Module? = null, block: BaseExtension.() -> Unit = 
     lintOptions {
       isAbortOnError = true
       isCheckReleaseBuilds = true
+    }
+    dependencies {
+      // local
+      implementations(fileTree(mapOf("dir" to "libs", "include" to arrayOf("*.jar", "*.aar"))))
     }
     block()
   }
@@ -254,8 +255,6 @@ private fun Project.setupCommon(module: Module? = null): BaseExtension {
         implementations(project(Module.Common.moduleName))
       }
       implementations(
-        // local
-        fileTree(mapOf("dir" to "libs", "include" to arrayOf("*.jar", "*.aar"))),
         project(Module.Base.moduleName),
 
         // router
