@@ -22,11 +22,11 @@ abstract class BaseFragmentPagerAdapter(
   override fun setData(fragments: List<Fragment>?, titles: List<String>?) {
     fragments?.let {
       fragmentList.clear()
-      fragmentList.addAll(it)
+      fragmentList += it
     }
     titles?.let {
       titleList.clear()
-      titleList.addAll(it)
+      titleList += it
     }
     notifyDataSetChanged()
   }

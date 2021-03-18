@@ -42,7 +42,7 @@ class MainSrlViewModel @Inject constructor(private val repository: MainCommonRep
         it.map { bean -> MainCommonVhModel.Repo(bean.owner?.avatarUrl, bean.name) }
       }
       .doOnNext {
-        _listData.addAll(it)
+        _listData += it
         if (it.size < CommonConstants.DEFAULT_PAGE_SIZE) {
           isEnableLoadMore.postValue(false)
           isNoMore.postValue(true)

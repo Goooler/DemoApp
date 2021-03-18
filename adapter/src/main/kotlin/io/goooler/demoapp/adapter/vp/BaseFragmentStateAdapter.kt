@@ -17,7 +17,7 @@ abstract class BaseFragmentStateAdapter(fragmentManager: FragmentManager, lifecy
   override fun setData(fragments: List<Fragment>?, titles: List<String>?) {
     fragments?.let {
       fragmentList.clear()
-      fragmentList.addAll(it)
+      fragmentList += it
     }
     notifyDataSetChanged()
   }
