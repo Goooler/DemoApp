@@ -2,6 +2,7 @@ package io.goooler.demoapp.common.network
 
 import android.annotation.SuppressLint
 import android.content.Context
+import com.chuckerteam.chucker.api.ChuckerInterceptor
 import io.goooler.demoapp.base.core.BaseApplication
 import io.goooler.demoapp.base.network.BaseRetrofitHelper
 import io.goooler.demoapp.base.network.interceptor.StatusInterceptor
@@ -40,6 +41,7 @@ object RetrofitHelper : BaseRetrofitHelper() {
   override fun OkHttpClient.Builder.addInterceptor(): OkHttpClient.Builder {
     addInterceptor(HeaderInterceptor)
     addInterceptor(BrotliInterceptor)
+    addInterceptor(ChuckerInterceptor.Builder(context).build())
     addNetworkInterceptor(HttpLogInterceptor())
     return this
   }
