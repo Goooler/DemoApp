@@ -1,4 +1,6 @@
-setupLib(Module.Web)
+setupLib(Module.Web) {
+  buildFeatures.buildConfig = true
+}
 
 dependencies {
   implementations(

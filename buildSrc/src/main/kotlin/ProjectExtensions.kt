@@ -137,6 +137,7 @@ fun Project.setupBase(module: Module? = null, block: BaseExtension.() -> Unit = 
         versionNameSuffix = "_${it.tag}"
       }
     }
+    buildFeatures.buildConfig = false
     compileOptions {
       incremental = true
       setDefaultJavaVersion(javaVersion)

@@ -1,4 +1,5 @@
 setupLib(Module.Common) {
+  buildFeatures.buildConfig = true
   productFlavors.all {
     putBuildConfigIntField(BuildConfigField.VersionCode.tag, gitCommitDescribe)
     putBuildConfigStringField(BuildConfigField.VersionName.tag, gitCommitCount)
