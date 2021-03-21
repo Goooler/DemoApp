@@ -10,7 +10,8 @@ dependencies {
     Libs.fastjson,
     *Libs.gson,
     Libs.mmkv,
-    *Libs.objectBox
+    *Libs.objectBox,
+    Libs.okHttpLogInterceptor
   )
   kapts(Libs.objectBoxKapt)
   testImplementations(

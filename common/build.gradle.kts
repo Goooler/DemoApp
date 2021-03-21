@@ -12,7 +12,6 @@ dependencies {
   implementations(
     // network
     *Libs.coil,
-    Libs.okHttpLogInterceptor,
     Libs.okHttpBrotliInterceptor
   )
   debugImplementations(

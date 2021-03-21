@@ -8,7 +8,6 @@ import io.goooler.demoapp.base.network.BaseRetrofitHelper
 import io.goooler.demoapp.base.network.interceptor.StatusInterceptor
 import io.goooler.demoapp.common.BuildConfig
 import io.goooler.demoapp.common.network.interceptor.HeaderInterceptor
-import io.goooler.demoapp.common.network.interceptor.HttpLogInterceptor
 import io.goooler.demoapp.common.router.RouterManager
 import io.goooler.demoapp.common.util.AppUserInfoManager
 import io.goooler.demoapp.common.util.JsonUtil
@@ -42,7 +41,6 @@ object RetrofitHelper : BaseRetrofitHelper() {
     addInterceptor(HeaderInterceptor)
     addInterceptor(BrotliInterceptor)
     addInterceptor(ChuckerInterceptor.Builder(context).build())
-    addNetworkInterceptor(HttpLogInterceptor())
     return this
   }
 }

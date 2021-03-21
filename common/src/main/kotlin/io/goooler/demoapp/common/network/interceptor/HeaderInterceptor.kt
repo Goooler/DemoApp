@@ -8,9 +8,9 @@ object HeaderInterceptor : Interceptor {
 
   override fun intercept(chain: Interceptor.Chain): Response {
     val builder = chain.request().newBuilder()
-      .addHeader("versionName", BuildConfig.VERSION_NAME)
-      .addHeader("versionCode", BuildConfig.VERSION_CODE.toString())
-      .addHeader("debug", BuildConfig.DEBUG.toString())
+      .header("versionName", BuildConfig.VERSION_NAME)
+      .header("versionCode", BuildConfig.VERSION_CODE.toString())
+      .header("debug", BuildConfig.DEBUG.toString())
     return chain.proceed(builder.build())
   }
 }
