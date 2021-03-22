@@ -1,5 +1,6 @@
 package io.goooler.demoapp.common
 
+import android.webkit.WebView
 import com.alibaba.android.arouter.launcher.ARouter
 import com.didichuxing.doraemonkit.DoraemonKit
 import com.scwang.smart.refresh.footer.ClassicsFooter
@@ -18,6 +19,7 @@ abstract class CommonApplication : BaseApplication() {
     CrashHandler.init()
     initArouter()
     initImageLoader()
+    initWebView()
     initSmartRefresh()
     initDoKit()
   }
@@ -36,6 +38,10 @@ abstract class CommonApplication : BaseApplication() {
 
   private fun initImageLoader() {
     ImageLoader.init(this)
+  }
+
+  private fun initWebView() {
+    WebView.setWebContentsDebuggingEnabled(BuildConfig.DEBUG)
   }
 
   private fun initSmartRefresh() {
