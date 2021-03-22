@@ -16,6 +16,7 @@ import coil.decode.ImageDecoderDecoder
 import coil.decode.SvgDecoder
 import coil.loadAny
 import coil.request.CachePolicy
+import coil.request.Disposable
 import coil.request.ImageRequest
 import coil.size.Scale
 import coil.transform.CircleCropTransformation
@@ -52,11 +53,9 @@ object ImageLoader {
     data: Any?,
     @DrawableRes placeholderId: Int,
     useCache: Boolean = true
-  ) {
-    imageView.loadAny(data) {
-      placeholder(placeholderId)
-      if (useCache.not()) withoutCache()
-    }
+  ): Disposable = imageView.loadAny(data) {
+    placeholder(placeholderId)
+    if (useCache.not()) withoutCache()
   }
 
   /**
@@ -73,12 +72,10 @@ object ImageLoader {
     placeholderDrawable: Drawable? = null,
     errorDrawable: Drawable? = null,
     useCache: Boolean = true
-  ) {
-    imageView.loadAny(data) {
-      placeholder(placeholderDrawable)
-      error(errorDrawable)
-      if (useCache.not()) withoutCache()
-    }
+  ): Disposable = imageView.loadAny(data) {
+    placeholder(placeholderDrawable)
+    error(errorDrawable)
+    if (useCache.not()) withoutCache()
   }
 
   /**
@@ -93,12 +90,10 @@ object ImageLoader {
     data: Any?,
     @DrawableRes placeholderId: Int,
     useCache: Boolean = true
-  ) {
-    imageView.loadAny(data) {
-      placeholder(placeholderId)
-      scale(Scale.FILL)
-      if (useCache.not()) withoutCache()
-    }
+  ): Disposable = imageView.loadAny(data) {
+    placeholder(placeholderId)
+    scale(Scale.FILL)
+    if (useCache.not()) withoutCache()
   }
 
   /**
@@ -115,13 +110,11 @@ object ImageLoader {
     placeholderDrawable: Drawable? = null,
     errorDrawable: Drawable? = null,
     useCache: Boolean = true
-  ) {
-    imageView.loadAny(data) {
-      placeholder(placeholderDrawable)
-      error(errorDrawable)
-      scale(Scale.FILL)
-      if (useCache.not()) withoutCache()
-    }
+  ): Disposable = imageView.loadAny(data) {
+    placeholder(placeholderDrawable)
+    error(errorDrawable)
+    scale(Scale.FILL)
+    if (useCache.not()) withoutCache()
   }
 
   /**
@@ -136,12 +129,10 @@ object ImageLoader {
     data: Any?,
     @DrawableRes placeholderId: Int,
     useCache: Boolean = true
-  ) {
-    imageView.loadAny(data) {
-      placeholder(placeholderId)
-      transformations(CircleCropTransformation())
-      if (useCache.not()) withoutCache()
-    }
+  ): Disposable = imageView.loadAny(data) {
+    placeholder(placeholderId)
+    transformations(CircleCropTransformation())
+    if (useCache.not()) withoutCache()
   }
 
   /**
@@ -158,13 +149,11 @@ object ImageLoader {
     placeholderDrawable: Drawable? = null,
     errorDrawable: Drawable? = null,
     useCache: Boolean = true
-  ) {
-    imageView.loadAny(data) {
-      placeholder(placeholderDrawable)
-      error(errorDrawable)
-      transformations(CircleCropTransformation())
-      if (useCache.not()) withoutCache()
-    }
+  ): Disposable = imageView.loadAny(data) {
+    placeholder(placeholderDrawable)
+    error(errorDrawable)
+    transformations(CircleCropTransformation())
+    if (useCache.not()) withoutCache()
   }
 
   /**
@@ -181,13 +170,11 @@ object ImageLoader {
     @Px radius: Int,
     @DrawableRes placeholderId: Int,
     useCache: Boolean = true
-  ) {
+  ): Disposable = imageView.loadAny(data) {
     val radiusF = radius.toFloat()
-    imageView.loadAny(data) {
-      placeholder(placeholderId)
-      transformations(RoundedCornersTransformation(radiusF, radiusF, radiusF, radiusF))
-      if (useCache.not()) withoutCache()
-    }
+    placeholder(placeholderId)
+    transformations(RoundedCornersTransformation(radiusF, radiusF, radiusF, radiusF))
+    if (useCache.not()) withoutCache()
   }
 
   /**
@@ -206,14 +193,12 @@ object ImageLoader {
     placeholderDrawable: Drawable? = null,
     errorDrawable: Drawable? = null,
     useCache: Boolean = true
-  ) {
+  ): Disposable = imageView.loadAny(data) {
     val radiusF = radius.toFloat()
-    imageView.loadAny(data) {
-      placeholder(placeholderDrawable)
-      error(errorDrawable)
-      transformations(RoundedCornersTransformation(radiusF, radiusF, radiusF, radiusF))
-      if (useCache.not()) withoutCache()
-    }
+    placeholder(placeholderDrawable)
+    error(errorDrawable)
+    transformations(RoundedCornersTransformation(radiusF, radiusF, radiusF, radiusF))
+    if (useCache.not()) withoutCache()
   }
 
   suspend fun getDrawable(
