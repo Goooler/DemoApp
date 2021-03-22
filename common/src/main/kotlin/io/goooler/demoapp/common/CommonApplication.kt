@@ -14,6 +14,7 @@ abstract class CommonApplication : BaseApplication() {
 
   override fun initRight() {
     super.initRight()
+    app = this
     CrashHandler.init()
     initArouter()
     initImageLoader()
@@ -52,5 +53,10 @@ abstract class CommonApplication : BaseApplication() {
       )
       ClassicsFooter(context)
     }
+  }
+
+  companion object {
+    lateinit var app: CommonApplication
+      private set
   }
 }

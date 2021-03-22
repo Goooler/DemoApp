@@ -31,11 +31,11 @@ import com.blankj.utilcode.util.StringUtils
 import com.blankj.utilcode.util.TimeUtils
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import io.goooler.demoapp.base.core.BaseActivity
-import io.goooler.demoapp.base.core.BaseApplication
 import io.goooler.demoapp.base.core.BaseFragment
 import io.goooler.demoapp.base.core.BaseViewModel
 import io.goooler.demoapp.base.util.ToastUtil
 import io.goooler.demoapp.common.BuildConfig
+import io.goooler.demoapp.common.CommonApplication
 import io.goooler.demoapp.common.network.HttpResponse
 import io.goooler.demoapp.common.type.SpKeys
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -67,12 +67,12 @@ fun Throwable.toast() {
 
 @AnyThread
 fun @receiver:StringRes Int.showToast() {
-  ToastUtil.show(BaseApplication.app, this)
+  ToastUtil.show(CommonApplication.app, this)
 }
 
 @AnyThread
 fun String.showToast() {
-  ToastUtil.show(BaseApplication.app, this)
+  ToastUtil.show(CommonApplication.app, this)
 }
 
 fun HttpResponse<*>.checkStatusAndEntry() = status && entry != null

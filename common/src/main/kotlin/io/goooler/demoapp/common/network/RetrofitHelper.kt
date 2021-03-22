@@ -3,10 +3,10 @@ package io.goooler.demoapp.common.network
 import android.annotation.SuppressLint
 import android.content.Context
 import com.chuckerteam.chucker.api.ChuckerInterceptor
-import io.goooler.demoapp.base.core.BaseApplication
 import io.goooler.demoapp.base.network.BaseRetrofitHelper
 import io.goooler.demoapp.base.network.interceptor.StatusInterceptor
 import io.goooler.demoapp.common.BuildConfig
+import io.goooler.demoapp.common.CommonApplication
 import io.goooler.demoapp.common.network.interceptor.HeaderInterceptor
 import io.goooler.demoapp.common.router.RouterManager
 import io.goooler.demoapp.common.util.AppUserInfoManager
@@ -23,7 +23,7 @@ object RetrofitHelper : BaseRetrofitHelper() {
 
   override val baseUrl: String = BuildConfig.API_HOST
 
-  override val context: Context = BaseApplication.app
+  override val context: Context = CommonApplication.app
 
   override val converterFactory: Converter.Factory = MoshiConverterFactory.create(JsonUtil.moshi)
 

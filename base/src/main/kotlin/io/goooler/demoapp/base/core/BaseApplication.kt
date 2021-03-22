@@ -26,7 +26,6 @@ abstract class BaseApplication : Application() {
    */
   @MainThread
   protected open fun initRight() {
-    app = this
     initWebView()
   }
 
@@ -48,10 +47,5 @@ abstract class BaseApplication : Application() {
         WebView.setDataDirectorySuffix(processName)
       }
     }
-  }
-
-  companion object {
-    lateinit var app: BaseApplication
-      private set
   }
 }
