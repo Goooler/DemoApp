@@ -4,7 +4,6 @@ package io.goooler.demoapp.common.util
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.widget.ImageView
@@ -15,7 +14,7 @@ import coil.Coil
 import coil.decode.GifDecoder
 import coil.decode.ImageDecoderDecoder
 import coil.decode.SvgDecoder
-import coil.load
+import coil.loadAny
 import coil.request.CachePolicy
 import coil.request.ImageRequest
 import coil.size.Scale
@@ -45,15 +44,15 @@ object ImageLoader {
    * load image
    *
    * @param imageView     the image view
-   * @param url           the url
+   * @param data          the data
    * @param placeholderId the placeholder id
    */
   fun load(
     imageView: ImageView,
-    url: String?,
+    data: Any?,
     @DrawableRes placeholderId: Int
   ) {
-    imageView.load(url) {
+    imageView.loadAny(data) {
       placeholder(placeholderId)
     }
   }
@@ -62,54 +61,17 @@ object ImageLoader {
    * load image
    *
    * @param imageView           the image view
-   * @param url                 the url
+   * @param data                the data
    * @param placeholderDrawable the placeholder drawable
    * @param errorDrawable       the error Drawable
    */
   fun load(
     imageView: ImageView,
-    url: String?,
+    data: Any?,
     placeholderDrawable: Drawable? = null,
     errorDrawable: Drawable? = null
   ) {
-    imageView.load(url) {
-      placeholder(placeholderDrawable)
-      error(errorDrawable)
-    }
-  }
-
-  /**
-   * load image
-   *
-   * @param imageView     the image view
-   * @param bitmap        the url
-   * @param placeholderId the placeholder id
-   */
-  fun load(
-    imageView: ImageView,
-    bitmap: Bitmap?,
-    @DrawableRes placeholderId: Int
-  ) {
-    imageView.load(bitmap) {
-      placeholder(placeholderId)
-    }
-  }
-
-  /**
-   * load image
-   *
-   * @param imageView           the image view
-   * @param bitmap              the url
-   * @param placeholderDrawable the placeholder drawable
-   * @param errorDrawable       the error Drawable
-   */
-  fun load(
-    imageView: ImageView,
-    bitmap: Bitmap?,
-    placeholderDrawable: Drawable? = null,
-    errorDrawable: Drawable? = null
-  ) {
-    imageView.load(bitmap) {
+    imageView.loadAny(data) {
       placeholder(placeholderDrawable)
       error(errorDrawable)
     }
@@ -119,15 +81,15 @@ object ImageLoader {
    * Load image with centerCrop.
    *
    * @param imageView     the image view
-   * @param url           the url
+   * @param data          the data
    * @param placeholderId the placeholder id
    */
   fun loadCenterCrop(
     imageView: ImageView,
-    url: String?,
+    data: Any?,
     @DrawableRes placeholderId: Int
   ) {
-    imageView.load(url) {
+    imageView.loadAny(data) {
       placeholder(placeholderId)
       scale(Scale.FILL)
     }
@@ -137,17 +99,17 @@ object ImageLoader {
    * Load image with centerCrop.
    *
    * @param imageView           the image view
-   * @param url                 the url
+   * @param data                the data
    * @param placeholderDrawable the placeholder drawable
    * @param errorDrawable       the error Drawable
    */
   fun loadCenterCrop(
     imageView: ImageView,
-    url: String?,
+    data: Any?,
     placeholderDrawable: Drawable? = null,
     errorDrawable: Drawable? = null
   ) {
-    imageView.load(url) {
+    imageView.loadAny(data) {
       placeholder(placeholderDrawable)
       error(errorDrawable)
       scale(Scale.FILL)
@@ -158,15 +120,15 @@ object ImageLoader {
    * Load image with circleCrop.
    *
    * @param imageView     the image view
-   * @param url           the url
+   * @param data          the data
    * @param placeholderId the placeholder id
    */
   fun loadCircleCrop(
     imageView: ImageView,
-    url: String?,
+    data: Any?,
     @DrawableRes placeholderId: Int
   ) {
-    imageView.load(url) {
+    imageView.loadAny(data) {
       placeholder(placeholderId)
       transformations(CircleCropTransformation())
     }
@@ -176,17 +138,17 @@ object ImageLoader {
    * Load image with circleCrop.
    *
    * @param imageView           the image view
-   * @param url                 the url
+   * @param data                the data
    * @param placeholderDrawable the placeholder drawable
    * @param errorDrawable       the error Drawable
    */
   fun loadCircleCrop(
     imageView: ImageView,
-    url: String?,
+    data: Any?,
     placeholderDrawable: Drawable? = null,
     errorDrawable: Drawable? = null
   ) {
-    imageView.load(url) {
+    imageView.loadAny(data) {
       placeholder(placeholderDrawable)
       error(errorDrawable)
       transformations(CircleCropTransformation())
@@ -197,18 +159,18 @@ object ImageLoader {
    * Load image with roundedCorner.
    *
    * @param imageView      the image view
-   * @param url            the url
-   * @param radius the rounding radius
+   * @param data           the data
+   * @param radius         the rounding radius
    * @param placeholderId  the placeholder id
    */
   fun loadRoundedCorner(
     imageView: ImageView,
-    url: String?,
+    data: Any?,
     @Px radius: Int,
     @DrawableRes placeholderId: Int
   ) {
     val radiusF = radius.toFloat()
-    imageView.load(url) {
+    imageView.loadAny(data) {
       placeholder(placeholderId)
       transformations(RoundedCornersTransformation(radiusF, radiusF, radiusF, radiusF))
     }
@@ -218,20 +180,20 @@ object ImageLoader {
    * Load image with roundedCorner.
    *
    * @param imageView           the image view
-   * @param url                 the url
-   * @param radius      the rounding radius
+   * @param data                the data
+   * @param radius              the rounding radius
    * @param placeholderDrawable the placeholder drawable
    * @param errorDrawable       the error Drawable
    */
   fun loadRoundedCorner(
     imageView: ImageView,
-    url: String?,
+    data: Any?,
     @Px radius: Int,
     placeholderDrawable: Drawable? = null,
     errorDrawable: Drawable? = null
   ) {
     val radiusF = radius.toFloat()
-    imageView.load(url) {
+    imageView.loadAny(data) {
       placeholder(placeholderDrawable)
       error(errorDrawable)
       transformations(RoundedCornersTransformation(radiusF, radiusF, radiusF, radiusF))
@@ -242,15 +204,15 @@ object ImageLoader {
    * Load image without cache.
    *
    * @param imageView     the image view
-   * @param url           the url
+   * @param data          the data
    * @param placeholderId the placeholder id
    */
   fun loadWithoutCache(
     imageView: ImageView,
-    url: String?,
+    data: Any?,
     @DrawableRes placeholderId: Int
   ) {
-    imageView.load(url) {
+    imageView.loadAny(data) {
       placeholder(placeholderId)
       memoryCachePolicy(CachePolicy.DISABLED)
       diskCachePolicy(CachePolicy.DISABLED)
@@ -261,17 +223,17 @@ object ImageLoader {
    * Load image without cache.
    *
    * @param imageView           the image view
-   * @param url                 the url
+   * @param data                the data
    * @param placeholderDrawable the placeholder drawable
    * @param errorDrawable       the error drawable
    */
   fun loadWithoutCache(
     imageView: ImageView,
-    url: String?,
+    data: Any?,
     placeholderDrawable: Drawable? = null,
     errorDrawable: Drawable? = null
   ) {
-    imageView.load(url) {
+    imageView.loadAny(data) {
       placeholder(placeholderDrawable)
       error(errorDrawable)
       memoryCachePolicy(CachePolicy.DISABLED)
@@ -295,8 +257,8 @@ object ImageLoader {
 // ------------------------BindingAdapter--------------------------//
 
 @BindingAdapter("binding_src_url")
-fun ImageView.load(url: String?) {
-  ImageLoader.load(this, url)
+fun ImageView.load(data: Any?) {
+  ImageLoader.load(this, data)
 }
 
 @BindingAdapter(
@@ -304,10 +266,10 @@ fun ImageView.load(url: String?) {
   "binding_src_placeholder"
 )
 fun ImageView.load(
-  url: String?,
+  data: Any?,
   placeholderDrawable: Drawable?
 ) {
-  ImageLoader.load(this, url, placeholderDrawable)
+  ImageLoader.load(this, data, placeholderDrawable)
 }
 
 @BindingAdapter(
@@ -316,16 +278,16 @@ fun ImageView.load(
   "binding_src_error"
 )
 fun ImageView.load(
-  url: String?,
+  data: Any?,
   placeholderDrawable: Drawable?,
   errorDrawable: Drawable?
 ) {
-  ImageLoader.load(this, url, placeholderDrawable, errorDrawable)
+  ImageLoader.load(this, data, placeholderDrawable, errorDrawable)
 }
 
 @BindingAdapter("binding_src_url_circle")
-fun ImageView.loadCircleCrop(url: String?) {
-  ImageLoader.loadCircleCrop(this, url)
+fun ImageView.loadCircleCrop(data: Any?) {
+  ImageLoader.loadCircleCrop(this, data)
 }
 
 @BindingAdapter(
@@ -333,10 +295,10 @@ fun ImageView.loadCircleCrop(url: String?) {
   "binding_src_placeholder"
 )
 fun ImageView.loadCircleCrop(
-  url: String?,
+  data: Any?,
   placeholderDrawable: Drawable?,
 ) {
-  ImageLoader.loadCircleCrop(this, url, placeholderDrawable)
+  ImageLoader.loadCircleCrop(this, data, placeholderDrawable)
 }
 
 @BindingAdapter(
@@ -344,10 +306,10 @@ fun ImageView.loadCircleCrop(
   "binding_src_placeholder"
 )
 fun ImageView.loadCenterCrop(
-  url: String?,
+  data: Any?,
   placeholderDrawable: Drawable?
 ) {
-  ImageLoader.loadCenterCrop(this, url, placeholderDrawable)
+  ImageLoader.loadCenterCrop(this, data, placeholderDrawable)
 }
 
 @BindingAdapter(
@@ -356,11 +318,11 @@ fun ImageView.loadCenterCrop(
   "binding_src_error"
 )
 fun ImageView.loadCenterCrop(
-  url: String?,
+  data: Any?,
   placeholderDrawable: Drawable?,
   errorDrawable: Drawable?
 ) {
-  ImageLoader.loadCenterCrop(this, url, placeholderDrawable, errorDrawable)
+  ImageLoader.loadCenterCrop(this, data, placeholderDrawable, errorDrawable)
 }
 
 @BindingAdapter(
@@ -368,10 +330,10 @@ fun ImageView.loadCenterCrop(
   "binding_src_cornerRadius"
 )
 fun ImageView.loadRoundedCorner(
-  url: String?,
+  data: Any?,
   @Px radius: Float
 ) {
-  ImageLoader.loadRoundedCorner(this, url, radius.toInt())
+  ImageLoader.loadRoundedCorner(this, data, radius.toInt())
 }
 
 @BindingAdapter(
@@ -380,11 +342,11 @@ fun ImageView.loadRoundedCorner(
   "binding_src_placeholder"
 )
 fun ImageView.loadRoundedCorner(
-  url: String?,
+  data: Any?,
   @Px radius: Float,
   placeholderDrawable: Drawable?
 ) {
-  ImageLoader.loadRoundedCorner(this, url, radius.toInt(), placeholderDrawable)
+  ImageLoader.loadRoundedCorner(this, data, radius.toInt(), placeholderDrawable)
 }
 
 @BindingAdapter(
@@ -394,10 +356,10 @@ fun ImageView.loadRoundedCorner(
   "binding_src_error"
 )
 fun ImageView.loadRoundedCorner(
-  url: String?,
+  data: Any?,
   @Px radius: Float,
   placeholderDrawable: Drawable?,
   errorDrawable: Drawable?
 ) {
-  ImageLoader.loadRoundedCorner(this, url, radius.toInt(), placeholderDrawable, errorDrawable)
+  ImageLoader.loadRoundedCorner(this, data, radius.toInt(), placeholderDrawable, errorDrawable)
 }
