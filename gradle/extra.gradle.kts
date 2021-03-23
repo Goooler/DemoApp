@@ -3,7 +3,7 @@ import java.util.concurrent.TimeUnit
 
 rootProject.extra.run {
   set("androidGradlePlugin", "com.android.tools.build:gradle:7.0.0-alpha10")
-  set("kotlinPlugin", "org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.31")
+  set("kotlinPlugin", "org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.32")
 }
 
 repositories {
