@@ -226,14 +226,14 @@ object ImageLoader {
 
 // ------------------------BindingAdapter--------------------------//
 
-@BindingAdapter("binding_src_url")
+@BindingAdapter("binding_iv_src")
 fun ImageView.load(data: Any?) {
   ImageLoader.load(this, data)
 }
 
 @BindingAdapter(
-  "binding_src_url",
-  "binding_src_placeholder"
+  "binding_iv_src",
+  "binding_iv_placeholder"
 )
 fun ImageView.load(
   data: Any?,
@@ -243,9 +243,9 @@ fun ImageView.load(
 }
 
 @BindingAdapter(
-  "binding_src_url",
-  "binding_src_placeholder",
-  "binding_src_error"
+  "binding_iv_src",
+  "binding_iv_placeholder",
+  "binding_iv_error"
 )
 fun ImageView.load(
   data: Any?,
@@ -255,14 +255,14 @@ fun ImageView.load(
   ImageLoader.load(this, data, placeholderDrawable, errorDrawable)
 }
 
-@BindingAdapter("binding_src_url_circle")
+@BindingAdapter("binding_iv_src_circle")
 fun ImageView.loadCircleCrop(data: Any?) {
   ImageLoader.loadCircleCrop(this, data)
 }
 
 @BindingAdapter(
-  "binding_src_url_circle",
-  "binding_src_placeholder"
+  "binding_iv_src_circle",
+  "binding_iv_placeholder"
 )
 fun ImageView.loadCircleCrop(
   data: Any?,
@@ -272,8 +272,8 @@ fun ImageView.loadCircleCrop(
 }
 
 @BindingAdapter(
-  "binding_src_url_center_crop",
-  "binding_src_placeholder"
+  "binding_iv_src_centerCrop",
+  "binding_iv_placeholder"
 )
 fun ImageView.loadCenterCrop(
   data: Any?,
@@ -283,9 +283,9 @@ fun ImageView.loadCenterCrop(
 }
 
 @BindingAdapter(
-  "binding_src_url_center_crop",
-  "binding_src_placeholder",
-  "binding_src_error"
+  "binding_iv_src_centerCrop",
+  "binding_iv_placeholder",
+  "binding_iv_error"
 )
 fun ImageView.loadCenterCrop(
   data: Any?,
@@ -296,8 +296,8 @@ fun ImageView.loadCenterCrop(
 }
 
 @BindingAdapter(
-  "binding_src_url",
-  "binding_src_cornerRadius"
+  "binding_iv_src",
+  "binding_iv_cornerRadius"
 )
 fun ImageView.loadRoundedCorner(
   data: Any?,
@@ -307,9 +307,9 @@ fun ImageView.loadRoundedCorner(
 }
 
 @BindingAdapter(
-  "binding_src_url",
-  "binding_src_cornerRadius",
-  "binding_src_placeholder"
+  "binding_iv_src",
+  "binding_iv_cornerRadius",
+  "binding_iv_placeholder"
 )
 fun ImageView.loadRoundedCorner(
   data: Any?,
@@ -320,10 +320,10 @@ fun ImageView.loadRoundedCorner(
 }
 
 @BindingAdapter(
-  "binding_src_url",
-  "binding_src_cornerRadius",
-  "binding_src_placeholder",
-  "binding_src_error"
+  "binding_iv_src",
+  "binding_iv_cornerRadius",
+  "binding_iv_placeholder",
+  "binding_iv_error"
 )
 fun ImageView.loadRoundedCorner(
   data: Any?,

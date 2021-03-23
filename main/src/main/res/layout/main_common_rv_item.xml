@@ -27,7 +27,7 @@
 
     <ImageView
       android:id="@+id/iv_logo"
-      binding_src_url="@{model.logoUrl}"
+      binding_iv_src="@{model.logoUrl}"
       android:layout_width="100dp"
       android:layout_height="100dp"
       android:src="@drawable/common_ic_youtube"

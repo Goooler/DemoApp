@@ -6,19 +6,14 @@ import android.graphics.Color
 import android.graphics.Outline
 import android.graphics.Paint
 import android.graphics.Typeface
-import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
-import android.net.Uri
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewOutlineProvider
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.ColorInt
-import androidx.annotation.DrawableRes
 import androidx.annotation.Px
 import androidx.databinding.BindingAdapter
-import java.io.File
 
 // ------------------------View --------------------------//
 
@@ -256,28 +251,6 @@ fun View.bindingBgShapeOvalStroke(
 @BindingAdapter("binding_bg_solidOvalColor")
 fun View.bindingBgShapeOval(@ColorInt solidOvalColor: Int) {
   setBgShapeGradual(shapeType = GradientDrawable.OVAL, solidColor = solidOvalColor)
-}
-
-// ------------------------ImageView--------------------------//
-
-@BindingAdapter("binding_src_file")
-fun ImageView.bindingFileToImage(file: File) {
-  setImageURI(Uri.fromFile(file))
-}
-
-@BindingAdapter("binding_src_filePath")
-fun ImageView.bindingFileToImageFromPath(path: String) {
-  setImageURI(Uri.parse(path))
-}
-
-@BindingAdapter("binding_img_res")
-fun ImageView.bindingImageResource(@DrawableRes res: Int) {
-  setImageResource(res)
-}
-
-@BindingAdapter("binding_src_drawable")
-fun ImageView.bindingImageDrawable(drawable: Drawable) {
-  setImageDrawable(drawable)
 }
 
 // ------------------------TextView--------------------------//
