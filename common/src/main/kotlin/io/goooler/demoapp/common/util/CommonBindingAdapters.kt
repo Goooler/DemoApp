@@ -5,6 +5,7 @@ package io.goooler.demoapp.common.util
 import androidx.annotation.ColorInt
 import androidx.core.view.forEach
 import androidx.databinding.BindingAdapter
+import com.scwang.smart.refresh.classics.ClassicsAbstract
 import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
@@ -38,50 +39,38 @@ fun SmartRefreshLayout.bindingNoMoreData(haveNoMore: Boolean) {
 
 @BindingAdapter("binding_srl_headerEmpty")
 fun SmartRefreshLayout.bindingHeaderEmpty(isEmpty: Boolean) {
-  (refreshHeader as? ClassicsHeader)?.forEach {
+  (refreshHeader as? ClassicsAbstract<*>)?.forEach {
     it.alpha = if (isEmpty) 0f else 1f
   }
 }
 
 @BindingAdapter("binding_srl_footerEmpty")
 fun SmartRefreshLayout.bindingFooterEmpty(isEmpty: Boolean) {
-  (refreshFooter as? ClassicsFooter)?.forEach {
+  (refreshFooter as? ClassicsAbstract<*>)?.forEach {
     it.alpha = if (isEmpty) 0f else 1f
   }
 }
 
 @BindingAdapter("binding_srl_headerPrimaryColor")
 fun SmartRefreshLayout.bindingHeaderPrimaryColor(@ColorInt color: Int) {
-  if (refreshHeader == null) {
-    setRefreshHeader(ClassicsHeader(context).apply { setPrimaryColor(color) })
-  } else {
-    (refreshHeader as? ClassicsHeader)?.setPrimaryColor(color)
-  }
+  (refreshHeader as? ClassicsAbstract<*>)?.setPrimaryColor(color)
+    ?: setRefreshHeader(ClassicsHeader(context).apply { setPrimaryColor(color) })
 }
 
 @BindingAdapter("binding_srl_footerPrimaryColor")
 fun SmartRefreshLayout.bindingFooterPrimaryColor(@ColorInt color: Int) {
-  if (refreshFooter == null) {
-    setRefreshFooter(ClassicsFooter(context).apply { setPrimaryColor(color) })
-  } else {
-    (refreshFooter as? ClassicsFooter)?.setPrimaryColor(color)
-  }
+  (refreshFooter as? ClassicsAbstract<*>)?.setPrimaryColor(color)
+    ?: setRefreshFooter(ClassicsFooter(context).apply { setPrimaryColor(color) })
 }
 
 @BindingAdapter("binding_srl_headerAccentColor")
 fun SmartRefreshLayout.bindingHeaderAccentColor(@ColorInt color: Int) {
-  if (refreshHeader == null) {
-    setRefreshHeader(ClassicsHeader(context).apply { setAccentColor(color) })
-  } else {
-    (refreshHeader as? ClassicsHeader)?.setAccentColor(color)
-  }
+  (refreshHeader as? ClassicsAbstract<*>)?.setAccentColor(color)
+    ?: setRefreshHeader(ClassicsHeader(context).apply { setAccentColor(color) })
 }
 
 @BindingAdapter("binding_srl_footerAccentColor")
 fun SmartRefreshLayout.bindingFooterAccentColor(@ColorInt color: Int) {
-  if (refreshFooter == null) {
-    setRefreshFooter(ClassicsFooter(context).apply { setAccentColor(color) })
-  } else {
-    (refreshFooter as? ClassicsFooter)?.setAccentColor(color)
-  }
+  (refreshFooter as? ClassicsAbstract<*>)?.setAccentColor(color)
+    ?: setRefreshFooter(ClassicsFooter(context).apply { setAccentColor(color) })
 }
