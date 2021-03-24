@@ -1,4 +1,4 @@
-@file:Suppress("unused", "DEPRECATION")
+@file:Suppress("unused")
 @file:JvmName("BaseExtensionUtil")
 
 package io.goooler.demoapp.base.util
@@ -6,7 +6,6 @@ package io.goooler.demoapp.base.util
 import android.app.Activity
 import android.content.ContextWrapper
 import android.graphics.Color
-import android.graphics.Point
 import android.os.Bundle
 import android.os.Looper
 import android.text.Spannable
@@ -427,18 +426,6 @@ fun FragmentActivity.replaceFragment(
 @MainThread
 inline fun <reified T : ViewDataBinding> Activity.binding(@LayoutRes resId: Int): Lazy<T> =
   lazy(LazyThreadSafetyMode.NONE) { DataBindingUtil.setContentView(this, resId) }
-
-fun Activity.getScreenHeight(): Int {
-  val size = Point()
-  windowManager.defaultDisplay.getSize(size)
-  return size.y
-}
-
-fun Activity.getScreenWidth(): Int {
-  val size = Point()
-  windowManager.defaultDisplay.getSize(size)
-  return size.x
-}
 
 // ---------------------Other-------------------------------//
 
