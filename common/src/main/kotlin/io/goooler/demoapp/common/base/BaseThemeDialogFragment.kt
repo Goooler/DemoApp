@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.ContentView
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import io.goooler.demoapp.base.core.BaseDialogFragment
 
-abstract class BaseThemeDialogFragment<VB : ViewDataBinding>(@LayoutRes private val layoutId: Int) :
+abstract class BaseThemeDialogFragment<VB : ViewDataBinding>
+@ContentView constructor(@LayoutRes private val layoutId: Int) :
   BaseDialogFragment(),
   ITheme {
 

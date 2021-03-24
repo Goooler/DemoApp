@@ -11,8 +11,8 @@ import com.blankj.utilcode.util.BarUtils
 import com.blankj.utilcode.util.ScreenUtils
 import io.goooler.demoapp.base.core.BaseActivity
 
-@Suppress("MemberVisibilityCanBePrivate")
-abstract class BaseThemeActivity<VB : ViewDataBinding> @ContentView constructor(@LayoutRes private val layoutId: Int) :
+abstract class BaseThemeActivity<VB : ViewDataBinding>
+@ContentView constructor(@LayoutRes private val layoutId: Int) :
   BaseActivity(),
   ITheme {
 
