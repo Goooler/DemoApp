@@ -201,32 +201,26 @@ fun <T> Observable<T>.subscribeAndObserve(): Observable<T> =
 
 // ---------------------Res-------------------------------//
 
-fun @receiver:DrawableRes Int.getDrawable(): Drawable? {
-  return try {
-    ResourceUtils.getDrawable(this)
-  } catch (e: Exception) {
-    e.printStackTrace()
-    null
-  }
+fun @receiver:DrawableRes Int.getDrawable(): Drawable? = try {
+  ResourceUtils.getDrawable(this)
+} catch (e: Exception) {
+  e.printStackTrace()
+  null
 }
 
 @ColorInt
-fun @receiver:ColorRes Int.getColor(): Int {
-  return try {
-    ColorUtils.getColor(this)
-  } catch (e: Exception) {
-    e.printStackTrace()
-    -1
-  }
+fun @receiver:ColorRes Int.getColor(): Int = try {
+  ColorUtils.getColor(this)
+} catch (e: Exception) {
+  e.printStackTrace()
+  -1
 }
 
-fun @receiver:StringRes Int.getString(): String? {
-  return try {
-    StringUtils.getString(this)
-  } catch (e: Exception) {
-    e.printStackTrace()
-    null
-  }
+fun @receiver:StringRes Int.getString(): String? = try {
+  StringUtils.getString(this)
+} catch (e: Exception) {
+  e.printStackTrace()
+  null
 }
 
 fun @receiver:StringRes Int.formatString(vararg args: Any): String =
