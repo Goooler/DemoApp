@@ -41,6 +41,7 @@ import io.goooler.demoapp.common.type.SpKeys
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
+import io.reactivex.rxjava3.schedulers.Schedulers
 import java.math.BigDecimal
 import java.util.Calendar
 import java.util.Date
@@ -183,10 +184,20 @@ fun Number.formatMoney(isYuan: Boolean = false, trans2W: Boolean = false, scale:
 
 // ---------------------Rx-------------------------------//
 
+fun <T> Single<T>.subscribeOnIoThread(): Single<T> = subscribeOn(Schedulers.io())
+
 fun <T> Single<T>.observeOnMainThread(): Single<T> = observeOn(AndroidSchedulers.mainThread())
+
+fun <T> Single<T>.subscribeAndObserve(): Single<T> =
+  subscribeOnIoThread().observeOnMainThread()
+
+fun <T> Observable<T>.subscribeOnIoThread(): Observable<T> = subscribeOn(Schedulers.io())
 
 fun <T> Observable<T>.observeOnMainThread(): Observable<T> =
   observeOn(AndroidSchedulers.mainThread())
+
+fun <T> Observable<T>.subscribeAndObserve(): Observable<T> =
+  subscribeOnIoThread().observeOnMainThread()
 
 // ---------------------Res-------------------------------//
 
