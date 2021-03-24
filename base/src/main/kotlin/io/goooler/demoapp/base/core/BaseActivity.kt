@@ -27,10 +27,9 @@ abstract class BaseActivity : AppCompatActivity() {
   }
 
   override fun startService(service: Intent): ComponentName? {
-    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
       super.startForegroundService(service)
-    } else {
+    else
       super.startService(service)
-    }
   }
 }

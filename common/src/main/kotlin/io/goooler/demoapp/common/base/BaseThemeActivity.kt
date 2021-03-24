@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.blankj.utilcode.util.AdaptScreenUtils
 import com.blankj.utilcode.util.BarUtils
+import com.blankj.utilcode.util.ScreenUtils
 import io.goooler.demoapp.base.core.BaseActivity
 
 @Suppress("MemberVisibilityCanBePrivate")
@@ -17,7 +18,12 @@ abstract class BaseThemeActivity<VB : ViewDataBinding> @ContentView constructor(
 
   protected lateinit var binding: VB
 
-  override fun getResources(): Resources = AdaptScreenUtils.adaptWidth(super.getResources(), 360)
+  override fun getResources(): Resources {
+    return if (ScreenUtils.isPortrait())
+      AdaptScreenUtils.adaptWidth(super.getResources(), 360)
+    else
+      AdaptScreenUtils.adaptHeight(super.getResources(), 640)
+  }
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)

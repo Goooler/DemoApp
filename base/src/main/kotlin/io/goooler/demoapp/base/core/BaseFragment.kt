@@ -30,10 +30,9 @@ abstract class BaseFragment : Fragment() {
   }
 
   protected fun startService(service: Intent): ComponentName? {
-    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
       activity?.startForegroundService(service)
-    } else {
+    else
       activity?.startService(service)
-    }
   }
 }

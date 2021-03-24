@@ -45,18 +45,13 @@ abstract class CommonApplication : BaseApplication() {
   }
 
   private fun initSmartRefresh() {
+    val colors = intArrayOf(android.R.color.transparent, android.R.color.darker_gray)
     SmartRefreshLayout.setDefaultRefreshHeaderCreator { context, refreshLayout ->
-      refreshLayout.setPrimaryColorsId(
-        android.R.color.transparent,
-        android.R.color.darker_gray
-      )
+      refreshLayout.setPrimaryColorsId(*colors)
       ClassicsHeader(context)
     }
     SmartRefreshLayout.setDefaultRefreshFooterCreator { context, refreshLayout ->
-      refreshLayout.setPrimaryColorsId(
-        android.R.color.transparent,
-        android.R.color.darker_gray
-      )
+      refreshLayout.setPrimaryColorsId(*colors)
       ClassicsFooter(context)
     }
   }
