@@ -35,6 +35,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.coroutineScope
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.CoroutineStart
+import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.async
@@ -300,12 +301,12 @@ fun paramMapOf(vararg pairs: Pair<String, Any>): HashMap<String, Any> =
 fun <T> CoroutineScope.defaultAsync(
   start: CoroutineStart = CoroutineStart.DEFAULT,
   block: suspend CoroutineScope.() -> T
-) = async(SupervisorJob(), start, block)
+): Deferred<T> = async(SupervisorJob(), start, block)
 
-suspend fun <T> withIoContext(block: suspend CoroutineScope.() -> T) =
+suspend fun <T> withIoContext(block: suspend CoroutineScope.() -> T): T =
   withContext(Dispatchers.IO, block)
 
-suspend fun <T> withDefaultContext(block: suspend CoroutineScope.() -> T) =
+suspend fun <T> withDefaultContext(block: suspend CoroutineScope.() -> T): T =
   withContext(Dispatchers.Default, block)
 
 // ---------------------File-------------------------------//
@@ -386,20 +387,20 @@ fun Fragment.replaceFragment(
   childFragmentManager.addFragment(fragment, containerViewId, isAddToBackStack, tag)
 }
 
-val View.attachedFragment: Fragment?
+inline val View.attachedFragment: Fragment?
   get() = try {
     FragmentManager.findFragment(this)
   } catch (_: Exception) {
     null
   }
 
-val View.lifecycle: Lifecycle?
+inline val View.lifecycle: Lifecycle?
   get() {
     val baseContext = (context as? ContextWrapper)?.baseContext ?: context
     return attachedFragment?.lifecycle ?: (baseContext as? FragmentActivity)?.lifecycle
   }
 
-val View.lifecycleScope: LifecycleCoroutineScope? get() = lifecycle?.coroutineScope
+inline val View.lifecycleScope: LifecycleCoroutineScope? get() = lifecycle?.coroutineScope
 
 // ---------------------Activity-------------------------------//
 

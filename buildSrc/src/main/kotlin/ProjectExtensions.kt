@@ -41,8 +41,8 @@ const val appPackageName = "io.goooler.demoapp"
 const val appName = "Demo"
 const val extraScriptPath = "gradle/extra.gradle.kts"
 
-val gitCommitCount: String get() = "git describe --tags".exec()
-val gitCommitDescribe: Int get() = "git rev-list HEAD --count".exec().toInt()
+inline val gitCommitCount: String get() = "git describe --tags".exec()
+inline val gitCommitDescribe: Int get() = "git rev-list HEAD --count".exec().toInt()
 
 fun String.exec(): String = String(Runtime.getRuntime().exec(this).inputStream.readBytes()).trim()
 
@@ -89,7 +89,7 @@ fun DependencyHandler.testImplementations(vararg names: Any): Array<Dependency?>
     add("testImplementation", it)
   }.toTypedArray()
 
-val Module.moduleName: String get() = ":${tag}"
+inline val Module.moduleName: String get() = ":${tag}"
 
 fun String.isStableVersion(): Boolean {
   val stableKeyword = listOf("RELEASE", "FINAL", "GA").any { toUpperCase(Locale.ROOT).contains(it) }

@@ -25,7 +25,7 @@ object AppUserInfoManager {
     info = spUtil.getString(SP_USER_INFO_KEY).fromJson()
   }
 
-  val haveLogin: Boolean get() = token.isNotNullOrEmpty() && userId.isNotNullOrEmpty()
+  inline val haveLogin: Boolean get() = token.isNotNullOrEmpty() && userId.isNotNullOrEmpty()
 
   @Synchronized
   fun saveUserInfo(bean: UserInfoBean) {
