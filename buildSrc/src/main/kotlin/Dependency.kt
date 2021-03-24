@@ -58,7 +58,7 @@ private const val webKitVersion = "1.4.0"
 private const val doraemonKitVersion = "3.3.5"
 private const val chuckerVersion = "3.4.0"
 private const val dependencyUpdateVersion = "0.38.0"
-private const val kotlinterVersion = "3.3.0"
+private const val kotlinterVersion = "3.4.0"
 private const val accompanistVersion = "0.6.2"
 const val composeVersion = "1.0.0-beta02"
 
