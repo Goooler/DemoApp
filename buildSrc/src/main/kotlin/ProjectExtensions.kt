@@ -24,12 +24,6 @@ import java.util.Date
 import java.util.Locale
 import java.util.Properties
 
-// sdk
-private const val globalTargetSdk = 30
-private const val globalBuildTool = "30.0.3"
-private const val globalMinSdk = 23
-private val javaVersion = JavaVersion.VERSION_1_8
-
 const val cdnPrefix = "https://raw.githubusercontent.com/"
 val apiHosts = mapOf(
   Flavor.Daily.flavor to "https://api.github.com/",
@@ -96,11 +90,10 @@ fun String.isStableVersion(): Boolean {
   return stableKeyword || Regex("^[0-9,.v-]+(-r)?$").matches(this)
 }
 
-inline fun PluginAware.applyPlugins(vararg names: String, block: () -> Unit = {}) {
+fun PluginAware.applyPlugins(vararg names: String) {
   apply {
     names.forEach { plugin(it) }
   }
-  block()
 }
 
 fun ExtensionAware.getExtra(name: String): Any {
@@ -120,14 +113,17 @@ inline fun BaseExtension.kotlinOptions(block: KotlinJvmOptions.() -> Unit) {
   (this as ExtensionAware).extensions.getByName<KotlinJvmOptions>("kotlinOptions").block()
 }
 
-fun Project.setupBase(module: Module? = null, block: BaseExtension.() -> Unit = {}): BaseExtension {
+inline fun <reified T : BaseExtension> Project.setupBase(
+  module: Module? = null,
+  crossinline block: T.() -> Unit = {}
+) {
   applyPlugins(Plugins.kotlinAndroid, Plugins.kotlinKapt)
-  return extensions.getByName<BaseExtension>("android").apply {
-    compileSdkVersion(globalTargetSdk)
-    buildToolsVersion = globalBuildTool
+  extensions.configure<BaseExtension>("android") {
+    compileSdkVersion(30)
+    buildToolsVersion = "30.0.3"
     defaultConfig {
-      minSdkVersion(globalMinSdk)
-      targetSdkVersion(globalTargetSdk)
+      minSdkVersion(23)
+      targetSdkVersion(30)
       versionCode = gitCommitDescribe
       versionName = gitCommitCount
       vectorDrawables.useSupportLibrary = true
@@ -140,12 +136,9 @@ fun Project.setupBase(module: Module? = null, block: BaseExtension.() -> Unit = 
     buildFeatures.buildConfig = false
     compileOptions {
       incremental = true
-      setDefaultJavaVersion(javaVersion)
-      sourceCompatibility = javaVersion
-      targetCompatibility = javaVersion
     }
     kotlinOptions {
-      jvmTarget = javaVersion.toString()
+      jvmTarget = JavaVersion.VERSION_1_8.toString()
       useIR = true
       freeCompilerArgs = listOf(
         "-Xjvm-default=compatibility"
@@ -159,25 +152,25 @@ fun Project.setupBase(module: Module? = null, block: BaseExtension.() -> Unit = 
       // local
       implementations(fileTree(mapOf("dir" to "libs", "include" to arrayOf("*.jar", "*.aar"))))
     }
-    block()
+    (this as T).block()
   }
 }
 
 fun Project.setupLib(
   module: Module? = null,
   block: LibraryExtension.() -> Unit = {}
-): LibraryExtension {
+) {
   applyPlugins(Plugins.androidLibrary)
-  return (setupCommon(module) as LibraryExtension).apply(block)
+  setupCommon(module, block)
 }
 
 fun Project.setupApp(
   appPackageName: String,
   appName: String,
   block: BaseAppModuleExtension.() -> Unit = {}
-): BaseAppModuleExtension {
+) {
   applyPlugins(Plugins.androidApplication)
-  return (setupCommon() as BaseAppModuleExtension).apply {
+  setupCommon<BaseAppModuleExtension> {
     defaultConfig {
       applicationId = appPackageName
       addManifestPlaceholders(
@@ -238,49 +231,51 @@ fun Project.setupApp(
   }
 }
 
-private fun Project.setupCommon(module: Module? = null): BaseExtension {
-  return setupBase(module) {
-    flavorDimensions("channel")
-    productFlavors {
-      create(Flavor.Daily.flavor)
-      create(Flavor.Online.flavor)
-    }
-    extensions.getByName<KaptExtension>("kapt").arguments {
-      arg("AROUTER_MODULE_NAME", project.name)
-      arg("room.schemaLocation", "$projectDir/build")
-      arg("room.incremental", "true")
-      arg("room.expandProjection", "true")
-    }
-    dependencies {
-      if (module != Module.Common) {
-        implementations(project(Module.Common.moduleName))
-      }
-      implementations(
-        project(Module.Base.moduleName),
-
-        // router
-        Libs.arouter,
-
-        // UI
-        Libs.constraintLayout,
-        Libs.cardView,
-        Libs.material,
-        *Libs.smartRefreshLayout,
-        Libs.photoView,
-
-        // utils
-        *Libs.hilt,
-        *Libs.room,
-        *Libs.rx,
-        *Libs.moshi,
-        Libs.collection,
-        Libs.utils,
-        Libs.permissionX
-      )
-      kapts(Libs.arouterKapt, Libs.moshiKapt, Libs.roomKapt, *Libs.hiltKapt)
-    }
-    applyPlugins(Plugins.kotlinParcelize, Plugins.arouter, Plugins.hilt)
+private inline fun <reified T : BaseExtension> Project.setupCommon(
+  module: Module? = null,
+  crossinline block: T.() -> Unit = {}
+) = setupBase<T>(module) {
+  flavorDimensions("channel")
+  productFlavors {
+    create(Flavor.Daily.flavor)
+    create(Flavor.Online.flavor)
   }
+  extensions.getByName<KaptExtension>("kapt").arguments {
+    arg("AROUTER_MODULE_NAME", project.name)
+    arg("room.schemaLocation", "$projectDir/build")
+    arg("room.incremental", "true")
+    arg("room.expandProjection", "true")
+  }
+  dependencies {
+    if (module != Module.Common) {
+      implementations(project(Module.Common.moduleName))
+    }
+    implementations(
+      project(Module.Base.moduleName),
+
+      // router
+      Libs.arouter,
+
+      // UI
+      Libs.constraintLayout,
+      Libs.cardView,
+      Libs.material,
+      *Libs.smartRefreshLayout,
+      Libs.photoView,
+
+      // utils
+      *Libs.hilt,
+      *Libs.room,
+      *Libs.rx,
+      *Libs.moshi,
+      Libs.collection,
+      Libs.utils,
+      Libs.permissionX
+    )
+    kapts(Libs.arouterKapt, Libs.moshiKapt, Libs.roomKapt, *Libs.hiltKapt)
+  }
+  applyPlugins(Plugins.kotlinParcelize, Plugins.arouter, Plugins.hilt)
+  block()
 }
 
 private fun Project.findPropertyString(key: String): String = property(key).toString()

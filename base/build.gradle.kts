@@ -1,6 +1,8 @@
-applyPlugins(Plugins.androidLibrary) {
-  setupBase()
-}
+import com.android.build.gradle.LibraryExtension
+
+applyPlugins(Plugins.androidLibrary)
+
+setupBase<LibraryExtension>()
 
 dependencies {
   apis(
