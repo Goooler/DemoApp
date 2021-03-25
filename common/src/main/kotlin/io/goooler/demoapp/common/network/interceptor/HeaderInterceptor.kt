@@ -7,10 +7,11 @@ import okhttp3.Response
 object HeaderInterceptor : Interceptor {
 
   override fun intercept(chain: Interceptor.Chain): Response {
-    val builder = chain.request().newBuilder()
+    val request = chain.request().newBuilder()
       .header("versionName", BuildConfig.VERSION_NAME)
       .header("versionCode", BuildConfig.VERSION_CODE.toString())
       .header("debug", BuildConfig.DEBUG.toString())
-    return chain.proceed(builder.build())
+      .build()
+    return chain.proceed(request)
   }
 }
