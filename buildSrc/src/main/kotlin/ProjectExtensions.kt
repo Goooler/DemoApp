@@ -35,8 +35,8 @@ const val appPackageName = "io.goooler.demoapp"
 const val appName = "Demo"
 const val extraScriptPath = "gradle/extra.gradle.kts"
 
-inline val gitCommitCount: String get() = "git describe --tags".exec()
-inline val gitCommitDescribe: Int get() = "git rev-list HEAD --count".exec().toInt()
+val gitCommitCount: String by lazy { "git describe --tags".exec() }
+val gitCommitDescribe: Int by lazy { "git rev-list HEAD --count".exec().toInt() }
 
 fun String.exec(): String = String(Runtime.getRuntime().exec(this).inputStream.readBytes()).trim()
 
