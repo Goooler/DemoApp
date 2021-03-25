@@ -42,46 +42,28 @@ fun String.exec(): String = String(Runtime.getRuntime().exec(this).inputStream.r
 
 fun ScriptHandlerScope.classpaths(vararg names: Any) {
   dependencies {
-    for (name in names) {
-      add("classpath", name)
-    }
+    names.forEach { add("classpath", it) }
   }
 }
 
-fun DependencyHandler.apis(vararg names: Any): Array<Dependency?> =
-  names.map {
-    add("api", it)
-  }.toTypedArray()
+fun DependencyHandler.apis(vararg names: Any): Array<Dependency?> = config("api", *names)
 
 fun DependencyHandler.implementations(vararg names: Any): Array<Dependency?> =
-  names.map {
-    add("implementation", it)
-  }.toTypedArray()
+  config("implementation", *names)
 
 fun DependencyHandler.debugImplementations(vararg names: Any): Array<Dependency?> =
-  names.map {
-    add("debugImplementation", it)
-  }.toTypedArray()
+  config("debugImplementation", *names)
 
 fun DependencyHandler.releaseImplementations(vararg names: Any): Array<Dependency?> =
-  names.map {
-    add("releaseImplementation", it)
-  }.toTypedArray()
+  config("releaseImplementation", *names)
 
-fun DependencyHandler.kapts(vararg names: Any): Array<Dependency?> =
-  names.map {
-    add("kapt", it)
-  }.toTypedArray()
+fun DependencyHandler.kapts(vararg names: Any): Array<Dependency?> = config("kapt", *names)
 
 fun DependencyHandler.androidTestImplementations(vararg names: Any): Array<Dependency?> =
-  names.map {
-    add("androidTestImplementation", it)
-  }.toTypedArray()
+  config("androidTestImplementation", *names)
 
 fun DependencyHandler.testImplementations(vararg names: Any): Array<Dependency?> =
-  names.map {
-    add("testImplementation", it)
-  }.toTypedArray()
+  config("testImplementation", *names)
 
 inline val Module.moduleName: String get() = ":${tag}"
 
@@ -117,6 +99,12 @@ inline fun <reified T : BaseExtension> Project.setupBase(
   module: Module? = null,
   crossinline block: T.() -> Unit = {}
 ) {
+  when (T::class) {
+    LibraryExtension::class -> Plugins.androidLibrary
+    BaseAppModuleExtension::class -> Plugins.androidApplication
+    else -> null
+  }?.let { applyPlugins(it) }
+
   applyPlugins(Plugins.kotlinAndroid, Plugins.kotlinKapt)
   extensions.configure<BaseExtension>("android") {
     compileSdkVersion(30)
@@ -160,7 +148,6 @@ fun Project.setupLib(
   module: Module? = null,
   block: LibraryExtension.() -> Unit = {}
 ) {
-  applyPlugins(Plugins.androidLibrary)
   setupCommon(module, block)
 }
 
@@ -169,7 +156,6 @@ fun Project.setupApp(
   appName: String,
   block: BaseAppModuleExtension.() -> Unit = {}
 ) {
-  applyPlugins(Plugins.androidApplication)
   setupCommon<BaseAppModuleExtension> {
     defaultConfig {
       applicationId = appPackageName
@@ -277,6 +263,9 @@ private inline fun <reified T : BaseExtension> Project.setupCommon(
   applyPlugins(Plugins.kotlinParcelize, Plugins.arouter, Plugins.hilt)
   block()
 }
+
+private fun DependencyHandler.config(operation: String, vararg names: Any): Array<Dependency?> =
+  names.map { add(operation, it) }.toTypedArray()
 
 private fun Project.findPropertyString(key: String): String = property(key).toString()
 
