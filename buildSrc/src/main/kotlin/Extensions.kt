@@ -110,7 +110,7 @@ inline fun <reified T : BaseExtension> Project.setupBase(
     compileSdkVersion(30)
     buildToolsVersion = "30.0.3"
     defaultConfig {
-      minSdkVersion(23)
+      minSdkVersion(21)
       targetSdkVersion(30)
       versionCode = gitCommitDescribe
       versionName = gitCommitCount
