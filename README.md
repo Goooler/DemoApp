@@ -62,6 +62,7 @@
 
 - [x] [GradleVersionsPlugin](https://github.com/ben-manes/gradle-versions-plugin/releases)
 - [x] [KotlinterGradle](https://github.com/jeremymailen/kotlinter-gradle/releases)
+- [x] [Detekt](https://github.com/detekt/detekt/releases)
 
 
 

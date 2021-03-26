@@ -59,6 +59,7 @@ private const val doraemonKitVersion = "3.3.5"
 private const val chuckerVersion = "3.4.0"
 private const val dependencyUpdateVersion = "0.38.0"
 private const val kotlinterVersion = "3.4.0"
+private const val detektVersino = "1.16.0"
 private const val accompanistVersion = "0.6.2"
 const val composeVersion = "1.0.0-beta02"
 
@@ -73,6 +74,7 @@ object Plugins {
   const val protobuf = "com.google.protobuf"
   const val dependencyUpdate = "com.github.ben-manes.versions"
   const val kotlinter = "org.jmailen.kotlinter"
+  const val detekt = "io.gitlab.arturbosch.detekt"
 }
 
 object Libs {
@@ -129,6 +131,7 @@ object Libs {
   const val kotlinterPlugin = "org.jmailen.gradle:kotlinter-gradle:$kotlinterVersion"
   const val dependencyUpdatesPlugin =
     "com.github.ben-manes:gradle-versions-plugin:$dependencyUpdateVersion"
+  const val detektPlugin = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:$detektVersino"
 
   const val objectBoxKapt = "io.objectbox:objectbox-processor:$objectBoxVersion"
   const val roomKapt = "androidx.room:room-compiler:$roomVersion"
