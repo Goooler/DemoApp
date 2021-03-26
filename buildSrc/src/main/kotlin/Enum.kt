@@ -41,8 +41,5 @@ enum class ApiKey(val key: String) {
 }
 
 enum class GradleTask(val task: String) {
-  Clean("clean"),
-  DependencyUpdate("dependencyUpdates"),
-  LintKotlin("lintKotlin"),
-  FormatKotlin("formatKotlin")
+  Clean("clean")
 }
