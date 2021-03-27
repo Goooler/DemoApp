@@ -10,7 +10,7 @@ import io.goooler.demoapp.common.network.BaseResponse
 
 @JsonClass(generateAdapter = true)
 @Entity(tableName = "main_repo_list")
-class MainRepoListBean : BaseResponse {
+class MainRepoListBean : BaseResponse() {
 
   @PrimaryKey
   var id: Long = 0

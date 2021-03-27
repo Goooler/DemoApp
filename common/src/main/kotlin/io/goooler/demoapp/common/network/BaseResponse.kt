@@ -3,12 +3,11 @@ package io.goooler.demoapp.common.network
 import androidx.annotation.Keep
 
 @Keep
-interface BaseResponse
+open class BaseResponse {
+  var status: Boolean = false
+  var message: String? = null
+  var code: Int = 0
+  var count: Int = 0
+}
 
-class HttpResponse<T>(
-  val status: Boolean,
-  val message: String?,
-  val code: Int,
-  val count: Int,
-  val entry: T? = null
-) : BaseResponse
+class HttpResponse<T>(val entry: T?) : BaseResponse()
