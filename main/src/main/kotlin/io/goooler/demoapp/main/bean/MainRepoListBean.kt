@@ -9,7 +9,7 @@ import com.squareup.moshi.JsonClass
 import io.goooler.demoapp.common.network.BaseResponse
 
 @JsonClass(generateAdapter = true)
-@Entity(tableName = "main_repo_list")
+@Entity(tableName = "main_repo_list", ignoredColumns = ["status", "message", "code", "count"])
 class MainRepoListBean : BaseResponse() {
 
   @PrimaryKey
