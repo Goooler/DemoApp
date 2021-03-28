@@ -159,9 +159,8 @@ fun Project.setupApp(
   setupCommon<BaseAppModuleExtension> {
     defaultConfig {
       applicationId = appPackageName
-      addManifestPlaceholders(
-        mapOf("appName" to appName)
-      )
+      manifestPlaceholders += mapOf("appName" to appName)
+      resourceConfigurations += setOf("en", "zh-rCN", "xxhdpi")
     }
     signingConfigs {
       create("sign") {
