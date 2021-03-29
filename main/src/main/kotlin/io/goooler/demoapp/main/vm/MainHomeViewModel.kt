@@ -67,11 +67,8 @@ class MainHomeViewModel @Inject constructor(private val repository: MainCommonRe
       try {
         val google = defaultAsync { repository.getRepoListFromDb("google") }
         val microsoft = defaultAsync { repository.getRepoListFromDb("microsoft") }
-        val apple = defaultAsync { repository.getRepoListFromDb("apple") }
-        val facebook = defaultAsync { repository.getRepoListFromDb("facebook") }
-        val twitter = defaultAsync { repository.getRepoListFromDb("twitter") }
 
-        processList(google, microsoft, apple, facebook, twitter).collect {
+        processList(google, microsoft).collect {
           title.postValue(it)
         }
       } catch (_: Exception) {
@@ -80,15 +77,12 @@ class MainHomeViewModel @Inject constructor(private val repository: MainCommonRe
       try {
         val google = defaultAsync { repository.getRepoListWithCr("google") }
         val microsoft = defaultAsync { repository.getRepoListWithCr("microsoft") }
-        val apple = defaultAsync { repository.getRepoListWithCr("apple") }
-        val facebook = defaultAsync { repository.getRepoListWithCr("facebook") }
-        val twitter = defaultAsync { repository.getRepoListWithCr("twitter") }
 
-        processList(google, microsoft, apple, facebook, twitter).collect {
+        processList(google, microsoft).collect {
           title.postValue(it)
         }
 
-        putRepoListIntoDb(google, microsoft, apple, facebook, twitter)
+        putRepoListIntoDb(google, microsoft)
       } catch (e: Exception) {
         title.postValue(e.message)
         R.string.common_request_failed.showToast()
@@ -102,7 +96,7 @@ class MainHomeViewModel @Inject constructor(private val repository: MainCommonRe
   private fun processList(vararg lists: Deferred<List<MainRepoListBean>>) = flow {
     StringBuilder().run {
       lists.forEach {
-        append(it.await().firstOrNull()?.name).append("\n")
+        append(it.await().lastOrNull()?.name).append("\n")
       }
       emit(toString())
     }
@@ -121,16 +115,10 @@ class MainHomeViewModel @Inject constructor(private val repository: MainCommonRe
     Observable.zip(
       repository.getRepoListWithRx("google"),
       repository.getRepoListWithRx("microsoft"),
-      repository.getRepoListWithRx("apple"),
-      repository.getRepoListWithRx("facebook"),
-      repository.getRepoListWithRx("twitter"),
-      { t1, t2, t3, t4, t5 ->
+      { t1, t2 ->
         """
-        ${t1.firstOrNull()?.owner?.avatarUrl}
-        ${t2.firstOrNull()?.owner?.avatarUrl}
-        ${t3.firstOrNull()?.owner?.avatarUrl}
-        ${t4.firstOrNull()?.owner?.avatarUrl}
-        ${t5.firstOrNull()?.owner?.avatarUrl}
+        ${t1.lastOrNull()?.owner?.avatarUrl}
+        ${t2.lastOrNull()?.owner?.avatarUrl}
         """.trimIndent()
       }
     )
