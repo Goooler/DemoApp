@@ -3,7 +3,7 @@
 import com.android.build.api.dsl.VariantDimension
 import com.android.build.gradle.BaseExtension
 import com.android.build.gradle.LibraryExtension
-import com.android.build.gradle.internal.api.BaseVariantOutputImpl
+import com.android.build.gradle.internal.api.ApkVariantOutputImpl
 import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
 import org.gradle.api.InvalidUserDataException
 import org.gradle.api.JavaVersion
@@ -15,12 +15,9 @@ import org.gradle.api.plugins.PluginAware
 import org.gradle.kotlin.dsl.ScriptHandlerScope
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.get
-import org.gradle.kotlin.dsl.getByName
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmOptions
 import org.jetbrains.kotlin.gradle.plugin.KaptExtension
 import java.io.File
-import java.text.SimpleDateFormat
-import java.util.Date
 import java.util.Locale
 import java.util.Properties
 
@@ -40,11 +37,8 @@ val gitCommitDescribe: Int by lazy { "git rev-list HEAD --count".exec().toInt() 
 
 fun String.exec(): String = String(Runtime.getRuntime().exec(this).inputStream.readBytes()).trim()
 
-fun ScriptHandlerScope.classpaths(vararg names: Any) {
-  dependencies {
-    names.forEach { add("classpath", it) }
-  }
-}
+fun ScriptHandlerScope.classpaths(vararg names: Any): Array<Dependency?> =
+  dependencies.config("classpath", *names)
 
 fun DependencyHandler.apis(vararg names: Any): Array<Dependency?> = config("api", *names)
 
@@ -91,8 +85,8 @@ fun VariantDimension.putBuildConfigIntField(name: String, value: Int) {
   buildConfigField("Integer", name, value.toString())
 }
 
-inline fun BaseExtension.kotlinOptions(block: KotlinJvmOptions.() -> Unit) {
-  (this as ExtensionAware).extensions.getByName<KotlinJvmOptions>("kotlinOptions").block()
+inline fun BaseExtension.kotlinOptions(crossinline block: KotlinJvmOptions.() -> Unit) {
+  (this as ExtensionAware).extensions.configure<KotlinJvmOptions>("kotlinOptions") { block() }
 }
 
 inline fun <reified T : BaseExtension> Project.setupBase(
@@ -108,23 +102,21 @@ inline fun <reified T : BaseExtension> Project.setupBase(
   applyPlugins(Plugins.kotlinAndroid, Plugins.kotlinKapt)
   extensions.configure<BaseExtension>("android") {
     compileSdkVersion(30)
-    buildToolsVersion = "30.0.3"
+    buildToolsVersion("30.0.3")
     defaultConfig {
       minSdkVersion(21)
       targetSdkVersion(30)
       versionCode = gitCommitDescribe
       versionName = gitCommitCount
       vectorDrawables.useSupportLibrary = true
-      ndk { abiFilters += setOf("arm64-v8a") }
+      ndk.abiFilters += setOf("arm64-v8a")
       module?.let {
         resourcePrefix = "${it.tag}_"
         versionNameSuffix = "_${it.tag}"
       }
     }
     buildFeatures.buildConfig = false
-    compileOptions {
-      incremental = true
-    }
+    compileOptions.incremental = true
     kotlinOptions {
       jvmTarget = JavaVersion.VERSION_1_8.toString()
       useIR = true
@@ -162,16 +154,14 @@ fun Project.setupApp(
       manifestPlaceholders += mapOf("appName" to appName)
       resourceConfigurations += setOf("en", "zh-rCN", "xxhdpi")
     }
-    signingConfigs {
-      create("sign") {
-        keyAlias = getSignProperty("keyAlias")
-        keyPassword = getSignProperty("keyPassword")
-        storeFile = File(rootDir.path, getSignProperty("storeFile"))
-        storePassword = getSignProperty("storePassword")
-      }
+    signingConfigs.create("sign") {
+      keyAlias = getSignProperty("keyAlias")
+      keyPassword = getSignProperty("keyPassword")
+      storeFile = File(rootDir.path, getSignProperty("storeFile"))
+      storePassword = getSignProperty("storePassword")
     }
     buildTypes {
-      getByName("release") {
+      named("release") {
         resValue("string", "app_name", appName)
         signingConfig = signingConfigs["sign"]
         isMinifyEnabled = true
@@ -194,7 +184,7 @@ fun Project.setupApp(
           "google/**"
         )
       }
-      getByName("debug") {
+      named("debug") {
         resValue("string", "app_name", "${appName}.debug")
         signingConfig = signingConfigs["sign"]
         applicationIdSuffix = ".debug"
@@ -206,7 +196,7 @@ fun Project.setupApp(
     }
     applicationVariants.all {
       outputs.all {
-        (this as BaseVariantOutputImpl).outputFileName =
+        (this as? ApkVariantOutputImpl)?.outputFileName =
           "../../../../${appName}_${versionName}_${versionCode}_${flavorName}_${buildType.name}.apk"
       }
     }
@@ -225,11 +215,13 @@ private inline fun <reified T : BaseExtension> Project.setupCommon(
     create(Flavor.Daily.flavor)
     create(Flavor.Online.flavor)
   }
-  extensions.getByName<KaptExtension>("kapt").arguments {
-    arg("AROUTER_MODULE_NAME", project.name)
-    arg("room.schemaLocation", "$projectDir/build")
-    arg("room.incremental", "true")
-    arg("room.expandProjection", "true")
+  extensions.configure<KaptExtension>("kapt") {
+    arguments {
+      arg("AROUTER_MODULE_NAME", project.name)
+      arg("room.schemaLocation", "$projectDir/build")
+      arg("room.incremental", "true")
+      arg("room.expandProjection", "true")
+    }
   }
   dependencies {
     if (module != Module.Common) {
@@ -271,13 +263,6 @@ private fun Project.findPropertyString(key: String): String = property(key).toSt
 private fun Project.getSignProperty(
   key: String,
   path: String = "gradle/keystore.properties"
-): String {
-  return Properties().apply {
-    rootProject.file(path).inputStream().use(::load)
-  }.getProperty(key)
-}
-
-/**
- * versionCode 限长 10 位
- */
-private val buildTime: Int = SimpleDateFormat("yyMMddHHmm", Locale.CHINESE).format(Date()).toInt()
+): String = Properties().apply {
+  rootProject.file(path).inputStream().use(::load)
+}.getProperty(key)
