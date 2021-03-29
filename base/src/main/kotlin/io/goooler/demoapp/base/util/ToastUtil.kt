@@ -16,7 +16,7 @@ import java.lang.ref.WeakReference
 @SuppressLint("WrongThread", "ShowToast")
 object ToastUtil {
 
-  private val handler by lazy { Handler(Looper.getMainLooper()) }
+  private val handler = Handler(Looper.getMainLooper())
   private var toast: WeakReference<Toast?>? = null
 
   @AnyThread
