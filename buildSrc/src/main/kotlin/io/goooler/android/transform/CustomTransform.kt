@@ -18,6 +18,8 @@ object CustomTransform : Transform() {
 
   override fun isIncremental(): Boolean = true
 
+  override fun isCacheable(): Boolean = true
+
   override fun transform(transformInvocation: TransformInvocation) {
     val output = transformInvocation.outputProvider
     transformInvocation.inputs.forEach { input ->
