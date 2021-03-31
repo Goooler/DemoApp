@@ -75,6 +75,7 @@ object Plugins {
   const val dependencyUpdate = "com.github.ben-manes.versions"
   const val kotlinter = "org.jmailen.kotlinter"
   const val detekt = "io.gitlab.arturbosch.detekt"
+  const val picCompress = "io.goooler.android.plugin.pic-compress"
 }
 
 object Libs {
