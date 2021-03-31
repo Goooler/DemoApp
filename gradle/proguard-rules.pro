@@ -9,6 +9,7 @@
 -printmapping mapping.txt
 -keepattributes *Annotation*,SourceFile,LineNumberTable,Signature
 -renamesourcefileattribute SourceFile
+-dontwarn java.util.concurrent.Flow*
 -keep class **.R$* {*;}
 -keepclasseswithmembernames class * {
     native <methods>;
