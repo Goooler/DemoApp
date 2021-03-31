@@ -1,10 +1,6 @@
 setupLib(Module.Compose) {
-  buildFeatures {
-    compose = true
-  }
-  composeOptions {
-    kotlinCompilerExtensionVersion = composeVersion
-  }
+  buildFeatures.compose = true
+  composeOptions.kotlinCompilerExtensionVersion = composeVersion
   kotlinOptions {
     freeCompilerArgs = freeCompilerArgs + listOf(
       "-Xallow-jvm-ir-dependencies",

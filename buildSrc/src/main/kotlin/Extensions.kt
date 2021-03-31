@@ -18,6 +18,7 @@ import org.gradle.kotlin.dsl.get
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmOptions
 import org.jetbrains.kotlin.gradle.plugin.KaptExtension
 import java.io.File
+import java.nio.charset.Charset
 import java.util.Locale
 import java.util.Properties
 
@@ -35,7 +36,8 @@ const val extraScriptPath = "gradle/extra.gradle.kts"
 val gitCommitCount: String by lazy { "git describe --tags".exec() }
 val gitCommitDescribe: Int by lazy { "git rev-list HEAD --count".exec().toInt() }
 
-fun String.exec(): String = String(Runtime.getRuntime().exec(this).inputStream.readBytes()).trim()
+fun String.exec(): String =
+  Runtime.getRuntime().exec(this).inputStream.readBytes().toString(Charset.defaultCharset()).trim()
 
 fun ScriptHandlerScope.classpaths(vararg names: Any): Array<Dependency?> =
   dependencies.config("classpath", *names)
@@ -85,8 +87,8 @@ fun VariantDimension.putBuildConfigIntField(name: String, value: Int) {
   buildConfigField("Integer", name, value.toString())
 }
 
-inline fun BaseExtension.kotlinOptions(crossinline block: KotlinJvmOptions.() -> Unit) {
-  (this as ExtensionAware).extensions.configure<KotlinJvmOptions>("kotlinOptions") { block() }
+fun BaseExtension.kotlinOptions(block: KotlinJvmOptions.() -> Unit) {
+  (this as ExtensionAware).extensions.configure("kotlinOptions", block)
 }
 
 inline fun <reified T : BaseExtension> Project.setupBase(
