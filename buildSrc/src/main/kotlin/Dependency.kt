@@ -76,6 +76,7 @@ object Plugins {
   const val kotlinter = "org.jmailen.kotlinter"
   const val detekt = "io.gitlab.arturbosch.detekt"
   const val picCompress = "io.goooler.android.plugin.pic-compress"
+  const val customTrans = "io.goooler.android.plugin.custom-trans"
 }
 
 object Libs {

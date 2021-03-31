@@ -29,6 +29,7 @@ allprojects {
     plugin(Plugins.kotlinter)
     plugin(Plugins.detekt)
     plugin(Plugins.picCompress)
+    plugin(Plugins.customTrans)
   }
   configure<KotlinterExtension> {
     indentSize = 2
