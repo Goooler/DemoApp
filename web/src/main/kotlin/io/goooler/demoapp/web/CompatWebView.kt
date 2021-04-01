@@ -6,6 +6,7 @@ import android.content.ContextWrapper
 import android.net.Uri
 import android.net.http.SslError
 import android.util.AttributeSet
+import android.view.ViewGroup
 import android.webkit.SslErrorHandler
 import android.webkit.URLUtil
 import android.webkit.ValueCallback
@@ -30,6 +31,8 @@ open class CompatWebView(context: Context, attrs: AttributeSet? = null) : WebVie
 
   open fun onDestroy() {
     stopLoading()
+    (parent as? ViewGroup)?.removeView(this)
+    removeAllViews()
     destroy()
   }
 
