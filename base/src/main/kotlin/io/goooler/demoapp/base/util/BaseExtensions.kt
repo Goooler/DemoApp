@@ -406,7 +406,8 @@ inline val View.attachedActivity: Activity?
 
 inline val View.lifecycle: Lifecycle?
   get() {
-    return attachedFragment?.lifecycle ?: (attachedActivity as? FragmentActivity)?.lifecycle
+    return attachedFragment?.viewLifecycleOwner?.lifecycle
+      ?: (attachedActivity as? FragmentActivity)?.lifecycle
   }
 
 inline val View.lifecycleScope: LifecycleCoroutineScope? get() = lifecycle?.coroutineScope

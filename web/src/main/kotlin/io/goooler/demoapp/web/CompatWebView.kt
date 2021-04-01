@@ -114,7 +114,7 @@ open class CompatWebView(context: Context, attrs: AttributeSet? = null) : WebVie
       null
     }
     if (fragment != null) {
-      fragment.lifecycle.addObserver(lifecycleObserver)
+      fragment.viewLifecycleOwner.lifecycle.addObserver(lifecycleObserver)
     } else {
       var baseContext: Context? = context
       while (baseContext is ContextWrapper) {
