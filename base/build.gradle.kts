@@ -5,7 +5,7 @@ setupBase<LibraryExtension>()
 dependencies {
   apis(
     // architecture
-    *Libs.coroutines,
+    Libs.coroutines,
     *Libs.lifecycle,
     Libs.core,
     Libs.annotation,

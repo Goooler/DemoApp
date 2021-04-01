@@ -80,6 +80,7 @@ object Plugins {
 }
 
 object Libs {
+  const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
   const val core = "androidx.core:core-ktx:$coreVersion"
   const val desugar = "com.android.tools:desugar_jdk_libs:$desugarVersion"
   const val appCompat = "androidx.appcompat:appcompat:$appCompatVersion"
@@ -142,11 +143,6 @@ object Libs {
   val hiltKapt = arrayOf(
     "com.google.dagger:hilt-android-compiler:$hiltVersion",
     "androidx.hilt:hilt-compiler:$hiltVmVersion"
-  )
-
-  val coroutines = arrayOf(
-    "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion",
-    "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
   )
   val compose = arrayOf(
     "androidx.activity:activity-compose:1.3.0-alpha04",
