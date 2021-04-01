@@ -18,9 +18,10 @@ import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
+import androidx.webkit.WebSettingsCompat
 import androidx.webkit.WebViewClientCompat
 
-@Suppress("SetJavaScriptEnabled")
+@Suppress("SetJavaScriptEnabled", "RequiresFeature")
 open class CompatWebView(context: Context, attrs: AttributeSet? = null) : WebView(context, attrs) {
 
   var onEventListener: OnEventListener? = null
@@ -63,6 +64,8 @@ open class CompatWebView(context: Context, attrs: AttributeSet? = null) : WebVie
       domStorageEnabled = true
       // 设置默认字体大小
       defaultFontSize = 18
+      // 关闭安全浏览
+      WebSettingsCompat.setSafeBrowsingEnabled(this, false)
     }
     webViewClient = object : WebViewClientCompat() {
       override fun onReceivedSslError(view: WebView, handler: SslErrorHandler, error: SslError) {
