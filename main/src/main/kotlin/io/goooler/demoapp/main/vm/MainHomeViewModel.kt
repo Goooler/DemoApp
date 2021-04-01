@@ -9,7 +9,7 @@ import io.goooler.demoapp.common.util.showToast
 import io.goooler.demoapp.main.R
 import io.goooler.demoapp.main.bean.MainRepoListBean
 import io.goooler.demoapp.main.repository.MainCommonRepository
-import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.core.Single
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -112,7 +112,7 @@ class MainHomeViewModel @Inject constructor(private val repository: MainCommonRe
    * RxJava 请求处理
    */
   private fun requestWithRx() {
-    Observable.zip(
+    Single.zip(
       repository.getRepoListWithRx("google"),
       repository.getRepoListWithRx("microsoft"),
       { t1, t2 ->

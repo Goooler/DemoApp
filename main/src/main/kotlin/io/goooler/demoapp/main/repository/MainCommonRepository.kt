@@ -5,7 +5,7 @@ import io.goooler.demoapp.common.type.CommonConstants
 import io.goooler.demoapp.main.api.MainCommonApi
 import io.goooler.demoapp.main.bean.MainRepoListBean
 import io.goooler.demoapp.main.db.MainCommonDao
-import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
 
 class MainCommonRepository @Inject constructor(
@@ -29,7 +29,7 @@ class MainCommonRepository @Inject constructor(
     user: String,
     page: Int = 1,
     pageSize: Int = CommonConstants.DEFAULT_PAGE_SIZE
-  ): Observable<List<MainRepoListBean>> = api.getRepoListWithRx(user, page, pageSize)
+  ): Single<List<MainRepoListBean>> = api.getRepoListWithRx(user, page, pageSize)
 
   suspend fun getRepoListFromDb(ownerName: String): List<MainRepoListBean> =
     dao.getRepoList(ownerName)

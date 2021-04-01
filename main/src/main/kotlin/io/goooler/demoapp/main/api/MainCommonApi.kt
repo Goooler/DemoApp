@@ -3,7 +3,7 @@ package io.goooler.demoapp.main.api
 import io.goooler.demoapp.base.util.ParamMap
 import io.goooler.demoapp.common.type.CommonConstants
 import io.goooler.demoapp.main.bean.MainRepoListBean
-import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -16,7 +16,7 @@ interface MainCommonApi {
     @Path("user") user: String,
     @Query(CommonConstants.RequestFields.PAGE) page: Int,
     @Query(CommonConstants.RequestFields.PER_PAGE) pageSize: Int
-  ): Observable<List<MainRepoListBean>>
+  ): Single<List<MainRepoListBean>>
 
   @GET("users/{user}/repos")
   suspend fun getRepoListWithCr(
