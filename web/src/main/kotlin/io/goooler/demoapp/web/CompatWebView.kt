@@ -1,6 +1,8 @@
 package io.goooler.demoapp.web
 
+import android.app.Activity
 import android.content.Context
+import android.content.ContextWrapper
 import android.net.Uri
 import android.net.http.SslError
 import android.util.AttributeSet
@@ -108,7 +110,12 @@ open class CompatWebView(context: Context, attrs: AttributeSet? = null) : WebVie
     if (fragment != null) {
       fragment.lifecycle.addObserver(lifecycleObserver)
     } else {
-      (context as? FragmentActivity)?.lifecycle?.addObserver(lifecycleObserver)
+      var baseContext: Context? = context
+      while (baseContext is ContextWrapper) {
+        if (baseContext is Activity) break
+        baseContext = baseContext.baseContext
+      }
+      (baseContext as? FragmentActivity)?.lifecycle?.addObserver(lifecycleObserver)
     }
   }
 

@@ -4,6 +4,7 @@
 package io.goooler.demoapp.base.util
 
 import android.app.Activity
+import android.content.Context
 import android.content.ContextWrapper
 import android.graphics.Color
 import android.os.Bundle
@@ -393,10 +394,19 @@ inline val View.attachedFragment: Fragment?
     null
   }
 
+inline val View.attachedActivity: Activity?
+  get() {
+    var baseContext: Context? = context
+    while (baseContext is ContextWrapper) {
+      if (baseContext is Activity) break
+      baseContext = baseContext.baseContext
+    }
+    return baseContext as? Activity
+  }
+
 inline val View.lifecycle: Lifecycle?
   get() {
-    val baseContext = (context as? ContextWrapper)?.baseContext ?: context
-    return attachedFragment?.lifecycle ?: (baseContext as? FragmentActivity)?.lifecycle
+    return attachedFragment?.lifecycle ?: (attachedActivity as? FragmentActivity)?.lifecycle
   }
 
 inline val View.lifecycleScope: LifecycleCoroutineScope? get() = lifecycle?.coroutineScope
