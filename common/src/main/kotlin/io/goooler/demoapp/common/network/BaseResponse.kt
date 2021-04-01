@@ -3,7 +3,7 @@ package io.goooler.demoapp.common.network
 import androidx.annotation.Keep
 
 @Keep
-open class BaseResponse {
+abstract class BaseResponse {
   var status: Boolean = false
   var message: String? = null
   var code: Int = 0
