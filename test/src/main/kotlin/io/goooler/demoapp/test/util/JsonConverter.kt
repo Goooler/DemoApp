@@ -45,6 +45,8 @@ interface JsonConverter {
 
   interface FastJsonUtil : JsonConverter {
 
+    fun <T> fromJson(json: String, typeRef: TypeReference<T>): T?
+
     companion object : FastJsonUtil {
       override fun <T> fromJson(json: String, classOfT: Class<T>): T? = try {
         JSONObject.parseObject(json, classOfT)
@@ -60,7 +62,7 @@ interface JsonConverter {
         null
       }
 
-      fun <T> fromJson(json: String, typeRef: TypeReference<T>): T? = try {
+      override fun <T> fromJson(json: String, typeRef: TypeReference<T>): T? = try {
         JSONObject.parseObject(json, typeRef)
       } catch (e: Exception) {
         e.printStackTrace()
