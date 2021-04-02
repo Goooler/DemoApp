@@ -33,9 +33,7 @@ abstract class BaseThemeActivity<VB : ViewDataBinding>
     BarUtils.transparentStatusBar(this)
   }
 
-  override fun showLoading() {
-  }
+  override fun showLoading() {}
 
-  override fun hideLoading() {
-  }
+  override fun hideLoading() {}
 }

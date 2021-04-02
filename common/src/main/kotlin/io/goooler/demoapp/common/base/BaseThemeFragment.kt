@@ -17,11 +17,9 @@ abstract class BaseThemeFragment<VB : ViewDataBinding>
 
   protected lateinit var binding: VB
 
-  override fun showLoading() {
-  }
+  override fun showLoading() {}
 
-  override fun hideLoading() {
-  }
+  override fun hideLoading() {}
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)

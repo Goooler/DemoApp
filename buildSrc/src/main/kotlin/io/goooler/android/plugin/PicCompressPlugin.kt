@@ -5,6 +5,5 @@ import org.gradle.api.Project
 
 class PicCompressPlugin : Plugin<Project> {
 
-  override fun apply(target: Project) {
-  }
+  override fun apply(target: Project) {}
 }

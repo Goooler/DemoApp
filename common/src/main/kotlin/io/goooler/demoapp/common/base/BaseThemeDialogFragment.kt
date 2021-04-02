@@ -25,11 +25,9 @@ abstract class BaseThemeDialogFragment<VB : ViewDataBinding>
 
   protected open fun initOnce() {}
 
-  override fun showLoading() {
-  }
+  override fun showLoading() {}
 
-  override fun hideLoading() {
-  }
+  override fun hideLoading() {}
 
   override fun onCreateView(
     inflater: LayoutInflater,
