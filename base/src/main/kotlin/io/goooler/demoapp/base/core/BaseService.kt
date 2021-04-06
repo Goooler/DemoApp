@@ -8,7 +8,7 @@ import android.content.Intent
 import android.os.Build
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
-import androidx.core.content.ContextCompat
+import androidx.core.content.getSystemService
 
 abstract class BaseService : Service() {
 
@@ -33,8 +33,7 @@ abstract class BaseService : Service() {
         channelName,
         NotificationManager.IMPORTANCE_MIN
       )
-      ContextCompat.getSystemService(this, NotificationManager::class.java)
-        ?.createNotificationChannel(channel)
+      getSystemService<NotificationManager>()?.createNotificationChannel(channel)
       startForeground(channelId, notification)
     }
   }
