@@ -2,7 +2,6 @@
 
 package io.goooler.demoapp.common.util
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.os.Build
@@ -22,18 +21,21 @@ import coil.size.Scale
 import coil.transform.CircleCropTransformation
 import coil.transform.RoundedCornersTransformation
 
-@SuppressLint("StaticFieldLeak")
 object ImageLoader {
 
-  private lateinit var mContext: Context
-
+  /**
+   * init ImageLoader
+   *
+   * @param context should be the application's context
+   */
   fun init(context: Context) {
-    mContext = context.applicationContext
-    val imageLoader = coil.ImageLoader.Builder(mContext)
+    val imageLoader = coil.ImageLoader.Builder(context.applicationContext)
       .crossfade(true)
       .componentRegistry {
-        val gifDecoder = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) ImageDecoderDecoder()
-        else GifDecoder()
+        val gifDecoder = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P)
+          ImageDecoderDecoder()
+        else
+          GifDecoder()
         add(gifDecoder)
         add(SvgDecoder(context))
       }
@@ -47,6 +49,7 @@ object ImageLoader {
    * @param imageView     the image view
    * @param data          the data
    * @param placeholderId the placeholder id
+   * @param useCache      if use the cache
    */
   fun load(
     imageView: ImageView,
@@ -55,7 +58,7 @@ object ImageLoader {
     useCache: Boolean = true
   ): Disposable = imageView.loadAny(data) {
     placeholder(placeholderId)
-    if (useCache.not()) withoutCache()
+    loadWithCache(useCache)
   }
 
   /**
@@ -65,6 +68,7 @@ object ImageLoader {
    * @param data                the data
    * @param placeholderDrawable the placeholder drawable
    * @param errorDrawable       the error Drawable
+   * @param useCache            if use the cache
    */
   fun load(
     imageView: ImageView,
@@ -75,7 +79,7 @@ object ImageLoader {
   ): Disposable = imageView.loadAny(data) {
     placeholder(placeholderDrawable)
     error(errorDrawable)
-    if (useCache.not()) withoutCache()
+    loadWithCache(useCache)
   }
 
   /**
@@ -84,6 +88,7 @@ object ImageLoader {
    * @param imageView     the image view
    * @param data          the data
    * @param placeholderId the placeholder id
+   * @param useCache      if use the cache
    */
   fun loadCenterCrop(
     imageView: ImageView,
@@ -93,7 +98,7 @@ object ImageLoader {
   ): Disposable = imageView.loadAny(data) {
     placeholder(placeholderId)
     scale(Scale.FILL)
-    if (useCache.not()) withoutCache()
+    loadWithCache(useCache)
   }
 
   /**
@@ -103,6 +108,7 @@ object ImageLoader {
    * @param data                the data
    * @param placeholderDrawable the placeholder drawable
    * @param errorDrawable       the error Drawable
+   * @param useCache            if use the cache
    */
   fun loadCenterCrop(
     imageView: ImageView,
@@ -114,7 +120,7 @@ object ImageLoader {
     placeholder(placeholderDrawable)
     error(errorDrawable)
     scale(Scale.FILL)
-    if (useCache.not()) withoutCache()
+    loadWithCache(useCache)
   }
 
   /**
@@ -123,6 +129,7 @@ object ImageLoader {
    * @param imageView     the image view
    * @param data          the data
    * @param placeholderId the placeholder id
+   * @param useCache      if use the cache
    */
   fun loadCircleCrop(
     imageView: ImageView,
@@ -132,7 +139,7 @@ object ImageLoader {
   ): Disposable = imageView.loadAny(data) {
     placeholder(placeholderId)
     transformations(CircleCropTransformation())
-    if (useCache.not()) withoutCache()
+    loadWithCache(useCache)
   }
 
   /**
@@ -142,6 +149,7 @@ object ImageLoader {
    * @param data                the data
    * @param placeholderDrawable the placeholder drawable
    * @param errorDrawable       the error Drawable
+   * @param useCache            if use the cache
    */
   fun loadCircleCrop(
     imageView: ImageView,
@@ -153,7 +161,7 @@ object ImageLoader {
     placeholder(placeholderDrawable)
     error(errorDrawable)
     transformations(CircleCropTransformation())
-    if (useCache.not()) withoutCache()
+    loadWithCache(useCache)
   }
 
   /**
@@ -163,6 +171,7 @@ object ImageLoader {
    * @param data           the data
    * @param radius         the rounding radius
    * @param placeholderId  the placeholder id
+   * @param useCache       if use the cache
    */
   fun loadRoundedCorner(
     imageView: ImageView,
@@ -174,7 +183,7 @@ object ImageLoader {
     val radiusF = radius.toFloat()
     placeholder(placeholderId)
     transformations(RoundedCornersTransformation(radiusF, radiusF, radiusF, radiusF))
-    if (useCache.not()) withoutCache()
+    loadWithCache(useCache)
   }
 
   /**
@@ -185,6 +194,7 @@ object ImageLoader {
    * @param radius              the rounding radius
    * @param placeholderDrawable the placeholder drawable
    * @param errorDrawable       the error Drawable
+   * @param useCache            if use the cache
    */
   fun loadRoundedCorner(
     imageView: ImageView,
@@ -198,28 +208,41 @@ object ImageLoader {
     placeholder(placeholderDrawable)
     error(errorDrawable)
     transformations(RoundedCornersTransformation(radiusF, radiusF, radiusF, radiusF))
-    if (useCache.not()) withoutCache()
+    loadWithCache(useCache)
   }
 
+  /**
+   * get drawable directly
+   *
+   * @param data     the data
+   * @param context  the context
+   * @param useCache if use the cache
+   * @param builder  additional request params
+   */
   suspend fun getDrawable(
-    uri: String?,
-    context: Context? = null,
+    data: Any?,
+    context: Context,
     useCache: Boolean = true,
     builder: ImageRequest.Builder.() -> Unit = {}
   ): Drawable? {
-    val request = ImageRequest.Builder(context ?: mContext)
-      .data(uri)
-      .apply {
-        if (useCache.not()) withoutCache()
-        builder()
-      }
+    val request = ImageRequest.Builder(context)
+      .data(data)
+      .loadWithCache(useCache)
+      .apply(builder)
       .build()
     return Coil.execute(request).drawable
   }
 
-  private fun ImageRequest.Builder.withoutCache(): ImageRequest.Builder {
-    memoryCachePolicy(CachePolicy.DISABLED)
-    diskCachePolicy(CachePolicy.DISABLED)
+  /**
+   * load image with or without cache
+   * @param useCache if enable use cache
+   */
+  private fun ImageRequest.Builder.loadWithCache(useCache: Boolean): ImageRequest.Builder {
+    if (useCache.not()) {
+      memoryCachePolicy(CachePolicy.DISABLED)
+      diskCachePolicy(CachePolicy.DISABLED)
+      networkCachePolicy(CachePolicy.DISABLED)
+    }
     return this
   }
 }
