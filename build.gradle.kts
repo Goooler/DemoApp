@@ -23,14 +23,14 @@ buildscript {
 }
 
 allprojects {
-  apply {
-    from("${rootDir.path}/$extraScriptPath")
-    plugin(Plugins.dependencyUpdate)
-    plugin(Plugins.kotlinter)
-    plugin(Plugins.detekt)
-    plugin(Plugins.picCompress)
-    plugin(Plugins.customTrans)
-  }
+  apply("${rootDir.path}/$extraScriptPath")
+  applyPlugins(
+    Plugins.dependencyUpdate,
+    Plugins.kotlinter,
+    Plugins.detekt,
+    Plugins.picCompress,
+    Plugins.customTrans
+  )
   configure<KotlinterExtension> {
     indentSize = 2
     reporters = arrayOf(ReporterType.html.name)
