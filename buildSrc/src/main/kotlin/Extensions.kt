@@ -117,6 +117,7 @@ inline fun <reified T : BaseExtension> Project.setupBase(
         versionNameSuffix = "_${it.tag}"
       }
     }
+    sourceSets["main"].java.srcDirs("src/main/kotlin")
     buildFeatures.buildConfig = false
     compileOptions.incremental = true
     kotlinOptions {
