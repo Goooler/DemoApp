@@ -252,7 +252,7 @@ private inline fun <reified T : BaseExtension> Project.setupCommon(
       Libs.utils,
       Libs.permissionX
     )
-    kapts(Libs.arouterKapt, Libs.moshiKapt, Libs.roomKapt, *Libs.hiltKapt)
+    kapts(Libs.arouterApt, Libs.moshiApt, Libs.roomApt, *Libs.hiltApt)
   }
   applyPlugins(Plugins.kotlinParcelize, Plugins.arouter, Plugins.hilt)
   block()

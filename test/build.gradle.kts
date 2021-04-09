@@ -13,7 +13,7 @@ dependencies {
     *Libs.objectBox,
     Libs.okHttpLogInterceptor
   )
-  kapts(Libs.objectBoxKapt)
+  kapts(Libs.objectBoxApt)
   testImplementations(
     "junit:junit:4.13.2",
     "org.robolectric:robolectric:4.5.1"
