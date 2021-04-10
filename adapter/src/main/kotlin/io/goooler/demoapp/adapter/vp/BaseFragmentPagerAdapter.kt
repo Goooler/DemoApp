@@ -56,4 +56,3 @@ fun getFragmentStatePagerAdapter(
 ): Lazy<BaseFragmentPagerAdapter> = lazy(LazyThreadSafetyMode.NONE) {
   object : BaseFragmentPagerAdapter(fragmentManager, behavior) {}
 }
-
