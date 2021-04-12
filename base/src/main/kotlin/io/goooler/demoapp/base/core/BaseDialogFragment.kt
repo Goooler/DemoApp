@@ -1,7 +1,7 @@
 package io.goooler.demoapp.base.core
 
-import android.view.KeyEvent
 import androidx.fragment.app.DialogFragment
+import io.goooler.demoapp.base.core.IFragment.Companion.dispatchBackPress
 
 @Suppress("MemberVisibilityCanBePrivate")
 abstract class BaseDialogFragment : DialogFragment(), IFragment {
@@ -19,14 +19,7 @@ abstract class BaseDialogFragment : DialogFragment(), IFragment {
 
   override fun onResume() {
     super.onResume()
-    view?.run {
-      isFocusableInTouchMode = true
-      requestFocus()
-      setOnKeyListener { _, keyCode, event ->
-        val flag = keyCode == KeyEvent.KEYCODE_BACK && event.action == KeyEvent.ACTION_UP
-        if (flag) onBackPressed() else false
-      }
-    }
+    view?.dispatchBackPress(::onBackPressed)
   }
 
   override fun dismiss() {
