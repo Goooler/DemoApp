@@ -1,0 +1,25 @@
+import java.nio.charset.StandardCharsets
+import java.util.concurrent.TimeUnit
+
+ext {
+  androidGradlePlugin = "com.android.tools.build:gradle:4.2.0-rc01"
+  kotlinPlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.32"
+}
+
+repositories {
+  google()
+  mavenCentral()
+  maven { url "https://maven.aliyun.com/repository/public" }
+  maven { url "https://jitpack.io" }
+}
+
+configurations.all {
+  resolutionStrategy {
+    cacheChangingModulesFor(0, TimeUnit.SECONDS)
+    cacheDynamicVersionsFor(0, TimeUnit.SECONDS)
+  }
+}
+
+tasks.withType(JavaCompile) {
+  options.encoding = StandardCharsets.UTF_8
+}
