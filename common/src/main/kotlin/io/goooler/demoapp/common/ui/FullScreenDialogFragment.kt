@@ -1,10 +1,6 @@
 package io.goooler.demoapp.common.ui
 
 import android.os.Bundle
-import android.view.KeyEvent
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
 import io.goooler.demoapp.common.R
 import io.goooler.demoapp.common.base.BaseThemeDialogFragment
@@ -24,25 +20,9 @@ class FullScreenDialogFragment :
     }
   }
 
-  override fun onCreateView(
-    inflater: LayoutInflater,
-    container: ViewGroup?,
-    savedInstanceState: Bundle?
-  ): View {
-    dialog?.run {
-      setCanceledOnTouchOutside(isCancelable)
-      setCancelable(isCancelable)
-      setOnKeyListener { _, keyCode, _ ->
-        when (keyCode) {
-          KeyEvent.KEYCODE_BACK -> true
-          else -> false
-        }
-      }
-    }
-    return super.onCreateView(inflater, container, savedInstanceState)
+  override fun onBackPressed(): Boolean {
+    return true
   }
-
-  override fun isCancelable(): Boolean = false
 
   companion object {
     fun show(manager: FragmentManager) = FullScreenDialogFragment().show(manager, null)
