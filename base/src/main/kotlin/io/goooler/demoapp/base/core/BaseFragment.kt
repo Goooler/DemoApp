@@ -6,14 +6,14 @@ import android.os.Build
 import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 
-abstract class BaseFragment : Fragment() {
+abstract class BaseFragment : Fragment(), IFragment {
 
-  protected open fun onBackPressed(): Boolean {
+  override fun onBackPressed(): Boolean {
     activity?.onBackPressed()
     return true
   }
 
-  protected fun finish() {
+  override fun finish() {
     activity?.finish()
   }
 
@@ -35,4 +35,11 @@ abstract class BaseFragment : Fragment() {
     else
       activity?.startService(service)
   }
+}
+
+interface IFragment {
+
+  fun onBackPressed(): Boolean
+
+  fun finish()
 }
