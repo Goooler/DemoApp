@@ -1,8 +1,5 @@
 package io.goooler.demoapp.base.core
 
-import android.content.ComponentName
-import android.content.Intent
-import android.os.Build
 import android.view.KeyEvent
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -22,13 +19,6 @@ abstract class BaseFragment : Fragment(), IFragment {
   override fun onResume() {
     super.onResume()
     view?.dispatchBackPress(::onBackPressed)
-  }
-
-  protected fun startService(service: Intent): ComponentName? {
-    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
-      activity?.startForegroundService(service)
-    else
-      activity?.startService(service)
   }
 }
 
