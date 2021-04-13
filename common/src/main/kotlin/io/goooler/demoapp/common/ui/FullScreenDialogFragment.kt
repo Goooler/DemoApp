@@ -20,6 +20,8 @@ class FullScreenDialogFragment :
     }
   }
 
+  override fun isCancelable(): Boolean = false
+
   override fun onBackPressed(): Boolean {
     return true
   }

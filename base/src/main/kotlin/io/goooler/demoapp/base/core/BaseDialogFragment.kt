@@ -19,6 +19,10 @@ abstract class BaseDialogFragment : DialogFragment(), IFragment {
 
   override fun onResume() {
     super.onResume()
+    dialog?.run {
+      setCanceledOnTouchOutside(isCancelable)
+      setCancelable(isCancelable)
+    }
     view?.dispatchBackPress(::onBackPressed)
   }
 
