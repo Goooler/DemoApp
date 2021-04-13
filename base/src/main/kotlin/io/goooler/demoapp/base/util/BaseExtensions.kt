@@ -13,7 +13,6 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Looper
 import android.text.Spannable
-import android.text.SpannableString
 import android.text.Spanned
 import android.text.style.ClickableSpan
 import android.view.View
@@ -103,18 +102,14 @@ fun String.removeAllSpecialCharacters(): String = replace(Regex("[^a-zA-Z]+"), "
 
 fun CharSequence?.isNotNullOrEmpty(): Boolean = isNullOrEmpty().not()
 
-fun SpannableString.withClickableSpan(
-  clickablePart: String,
-  onClickListener: () -> Unit
-): SpannableString {
+fun Spannable.withClickableSpan(clickablePart: String, onClickListener: () -> Unit): Spannable {
   val clickableSpan = object : ClickableSpan() {
     override fun onClick(widget: View) = onClickListener()
   }
-  val clickablePartStart = indexOf(clickablePart)
   setSpan(
     clickableSpan,
-    clickablePartStart,
-    clickablePartStart + clickablePart.length,
+    indexOf(clickablePart),
+    indexOf(clickablePart) + clickablePart.length,
     Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
   )
   return this
