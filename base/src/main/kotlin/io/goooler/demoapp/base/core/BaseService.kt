@@ -3,14 +3,12 @@ package io.goooler.demoapp.base.core
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
-import android.app.Service
-import android.content.Intent
 import android.os.Build
-import android.os.IBinder
 import androidx.core.app.NotificationCompat
 import androidx.core.content.getSystemService
+import androidx.lifecycle.LifecycleService
 
-abstract class BaseService : Service() {
+abstract class BaseService : LifecycleService() {
 
   /**
    * 必须不为 0
@@ -37,8 +35,6 @@ abstract class BaseService : Service() {
       startForeground(channelId, notification)
     }
   }
-
-  override fun onBind(intent: Intent?): IBinder? = null
 
   protected open fun createNormalNotification(content: String?): Notification {
     return NotificationCompat.Builder(this, channelId.toString()).also {

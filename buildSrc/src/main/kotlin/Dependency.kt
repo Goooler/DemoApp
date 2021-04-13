@@ -112,7 +112,7 @@ object Libs {
   val lifecycle = arrayOf(
     "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion",
     "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion",
-    "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion",
+    "androidx.lifecycle:lifecycle-service:$lifecycleVersion",
     "androidx.lifecycle:lifecycle-common-java8:$lifecycleVersion"
   )
   val room = arrayOf(
