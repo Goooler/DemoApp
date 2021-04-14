@@ -4,6 +4,7 @@ import androidx.lifecycle.LifecycleOwner
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.disposables.Disposable
 
+@Suppress("MemberVisibilityCanBePrivate")
 abstract class BaseRxViewModel : BaseThemeViewModel() {
 
   private val compositeDisposable = CompositeDisposable()
@@ -12,7 +13,11 @@ abstract class BaseRxViewModel : BaseThemeViewModel() {
     compositeDisposable.clear()
   }
 
-  protected fun Disposable.autoDispose() {
-    compositeDisposable.add(this)
+  fun addDisposable(disposable: Disposable) {
+    compositeDisposable.add(disposable)
+  }
+
+  fun Disposable.autoDispose() {
+    addDisposable(this)
   }
 }
