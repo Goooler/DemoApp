@@ -38,7 +38,7 @@ object RetrofitHelper : BaseRetrofitHelper() {
 
   override fun OkHttpClient.Builder.addInterceptor(): OkHttpClient.Builder {
     addInterceptor(HeaderInterceptor)
-    addInterceptor(ChuckerInterceptor.Builder(context).build())
+    addNetworkInterceptor(ChuckerInterceptor.Builder(context).build())
     return this
   }
 }
