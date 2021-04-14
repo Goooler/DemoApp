@@ -13,8 +13,8 @@ import io.goooler.demoapp.common.util.debugRun
 
 abstract class CommonApplication : BaseApplication() {
 
-  override fun initRight() {
-    super.initRight()
+  override fun initImmediately() {
+    super.initImmediately()
     app = this
     CrashHandler.init()
     initArouter()

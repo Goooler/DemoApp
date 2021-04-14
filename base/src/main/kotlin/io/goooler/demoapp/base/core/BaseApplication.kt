@@ -7,17 +7,18 @@ import android.webkit.WebView
 import androidx.annotation.CallSuper
 import androidx.annotation.MainThread
 import androidx.annotation.WorkerThread
-import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-abstract class BaseApplication : Application() {
+abstract class BaseApplication : Application(), CoroutineScope by MainScope() {
 
   @CallSuper
   override fun onCreate() {
     super.onCreate()
-    initRight()
-    GlobalScope.launch {
+    initImmediately()
+    launch {
       delay(2000)
       initLater()
     }
@@ -28,7 +29,7 @@ abstract class BaseApplication : Application() {
    */
   @MainThread
   @CallSuper
-  protected open fun initRight() {
+  protected open fun initImmediately() {
     initWebView()
   }
 
