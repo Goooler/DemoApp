@@ -2,6 +2,5 @@
 <resources>
 
   <string name="main_music_01_url">http://yd-pull-l.cztv.com/channels/fm93_128k.m3u8</string>
-  <string name="main_coil_icon">https://raw.githubusercontent.com/coil-kt/coil/master/logo.svg</string>
 
 </resources>
