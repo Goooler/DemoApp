@@ -12,8 +12,7 @@ private const val objectBoxVersion = "2.9.1"
 private const val protocVersion = "3.15.4"
 private const val coilVersion = "1.2.0"
 private const val roomVersion = "2.2.6"
-private const val hiltVersion = "2.34-beta"
-private const val hiltVmVersion = "1.0.0-alpha03"
+private const val hiltVersion = "2.34.1-beta"
 private const val dataStoreVersion = "1.0.0-alpha07"
 private const val doraemonKitVersion = "3.3.5"
 private const val chuckerVersion = "3.4.0"
@@ -69,7 +68,6 @@ object Libs {
   const val utils = "com.blankj:utilcodex:1.30.6"
   const val okHttp = "com.squareup.okhttp3:okhttp:$okHttpVersion"
   const val okHttpLogInterceptor = "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
-  const val okHttpBrotliInterceptor = "com.squareup.okhttp3:okhttp-brotli:$okHttpVersion"
   const val retrofit = "com.squareup.retrofit2:retrofit:$retrofitVersion"
   const val paging = "androidx.paging:paging-runtime:3.0.0-beta03"
   const val viewPager2 = "androidx.viewpager2:viewpager2:1.0.0"
@@ -96,7 +94,7 @@ object Libs {
   const val moshiApt = "com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion"
   val hiltApt = arrayOf(
     "com.google.dagger:hilt-android-compiler:$hiltVersion",
-    "androidx.hilt:hilt-compiler:$hiltVmVersion"
+    "androidx.hilt:hilt-compiler:1.0.0-beta01"
   )
 
   val compose = arrayOf(
@@ -121,7 +119,7 @@ object Libs {
   )
   val hilt = arrayOf(
     "com.google.dagger:hilt-android:$hiltVersion",
-    "androidx.hilt:hilt-lifecycle-viewmodel:$hiltVmVersion"
+    "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03"
   )
   val dataStore = arrayOf(
     "androidx.datastore:datastore-preferences:$dataStoreVersion",

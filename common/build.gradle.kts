@@ -12,8 +12,7 @@ setupLib(Module.Common) {
 dependencies {
   implementations(
     // network
-    *Libs.coil,
-    Libs.okHttpBrotliInterceptor
+    *Libs.coil
   )
   debugImplementations(
     Libs.leakCanary,
