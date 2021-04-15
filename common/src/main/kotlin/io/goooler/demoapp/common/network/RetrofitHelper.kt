@@ -4,10 +4,11 @@ import android.annotation.SuppressLint
 import android.content.Context
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import io.goooler.demoapp.base.network.BaseRetrofitHelper
-import io.goooler.demoapp.base.network.interceptor.StatusInterceptor
+import io.goooler.demoapp.base.network.BaseRetrofitHelper.StatusListener
 import io.goooler.demoapp.common.BuildConfig
 import io.goooler.demoapp.common.CommonApplication
 import io.goooler.demoapp.common.network.interceptor.HeaderInterceptor
+import io.goooler.demoapp.common.network.interceptor.RetryInterceptor
 import io.goooler.demoapp.common.router.RouterManager
 import io.goooler.demoapp.common.util.AppUserInfoManager
 import io.goooler.demoapp.common.util.JsonUtil
@@ -26,18 +27,19 @@ object RetrofitHelper : BaseRetrofitHelper() {
 
   override val converterFactory: Converter.Factory = MoshiConverterFactory.create(JsonUtil.moshi)
 
-  override val statusListener: StatusInterceptor.StatusListener = StatusInterceptor.StatusListener {
+  override val statusListener: StatusListener = StatusListener {
     AppUserInfoManager.logout()
     RouterManager.goLogin(true)
   }
 
-  override fun Retrofit.Builder.addCallAdapterFactory(): Retrofit.Builder {
+  override fun Retrofit.Builder.addCallAdapterFactories(): Retrofit.Builder {
     addCallAdapterFactory(RxJava3CallAdapterFactory.create())
     return this
   }
 
-  override fun OkHttpClient.Builder.addInterceptor(): OkHttpClient.Builder {
+  override fun OkHttpClient.Builder.addInterceptors(): OkHttpClient.Builder {
     addInterceptor(HeaderInterceptor)
+    addInterceptor(RetryInterceptor)
     addNetworkInterceptor(ChuckerInterceptor.Builder(context).build())
     return this
   }

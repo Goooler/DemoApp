@@ -1,4 +1,4 @@
-package io.goooler.demoapp.base.network.interceptor
+package io.goooler.demoapp.common.network.interceptor
 
 import okhttp3.Interceptor
 import okhttp3.Response
