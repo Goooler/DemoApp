@@ -1,4 +1,3 @@
-import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 import io.gitlab.arturbosch.detekt.Detekt
 import io.gitlab.arturbosch.detekt.extensions.DetektExtension
 import org.jmailen.gradle.kotlinter.KotlinterExtension
@@ -17,15 +16,13 @@ buildscript {
     Libs.hiltPlugin,
     Libs.arouterPlugin,
     Libs.kotlinterPlugin,
-    Libs.detektPlugin,
-    Libs.dependencyUpdatesPlugin
+    Libs.detektPlugin
   )
 }
 
 allprojects {
   apply("${rootDir.path}/$extraScriptPath")
   applyPlugins(
-    Plugins.dependencyUpdate,
     Plugins.kotlinter,
     Plugins.detekt,
     Plugins.picCompress,
@@ -43,11 +40,6 @@ allprojects {
 }
 
 tasks {
-  withType<DependencyUpdatesTask> {
-    rejectVersionIf {
-      candidate.version.isStableVersion().not()
-    }
-  }
   withType<Detekt> {
     jvmTarget = JavaVersion.VERSION_1_8.toString()
   }

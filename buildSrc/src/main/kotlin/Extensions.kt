@@ -19,7 +19,6 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinJvmOptions
 import org.jetbrains.kotlin.gradle.plugin.KaptExtension
 import java.io.File
 import java.nio.charset.Charset
-import java.util.Locale
 import java.util.Properties
 
 const val cdnPrefix = "https://raw.githubusercontent.com/"
@@ -62,11 +61,6 @@ fun DependencyHandler.testImplementations(vararg names: Any): Array<Dependency?>
   config("testImplementation", *names)
 
 inline val Module.moduleName: String get() = ":${tag}"
-
-fun String.isStableVersion(): Boolean {
-  val stableKeyword = listOf("RELEASE", "FINAL", "GA").any { toUpperCase(Locale.ROOT).contains(it) }
-  return stableKeyword || Regex("^[0-9,.v-]+(-r)?$").matches(this)
-}
 
 fun PluginAware.applyPlugins(vararg names: String) {
   apply {
