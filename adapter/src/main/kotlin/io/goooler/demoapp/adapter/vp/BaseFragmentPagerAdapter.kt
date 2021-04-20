@@ -44,17 +44,5 @@ abstract class BaseFragmentPagerAdapter(
 /**
  * 懒加载基类
  */
-abstract class BaseLazyFragmentPagerAdapter(fragmentManager: FragmentManager) :
+open class CommonFragmentPagerAdapter(fragmentManager: FragmentManager) :
   BaseFragmentPagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT)
-
-/**
- * 通用 adapter
- */
-class CommonFragmentPagerAdapter(fragmentManager: FragmentManager) :
-  BaseFragmentPagerAdapter(fragmentManager)
-
-/**
- * 通用 lazy adapter
- */
-class CommonLazyFragmentPagerAdapter(fragmentManager: FragmentManager) :
-  BaseLazyFragmentPagerAdapter(fragmentManager)

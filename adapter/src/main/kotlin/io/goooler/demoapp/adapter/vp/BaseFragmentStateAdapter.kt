@@ -33,5 +33,5 @@ abstract class BaseFragmentStateAdapter(fragmentManager: FragmentManager, lifecy
 /**
  * 通用 adapter
  */
-class CommonFragmentStateAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
+open class CommonFragmentStateAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
   BaseFragmentStateAdapter(fragmentManager, lifecycle)
