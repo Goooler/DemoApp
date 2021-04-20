@@ -7,11 +7,13 @@ import android.content.pm.ActivityInfo
 import android.os.Build
 import android.os.Bundle
 import android.view.WindowManager
+import androidx.annotation.CallSuper
 import androidx.appcompat.app.AppCompatActivity
 
 @SuppressLint("SourceLockedOrientationActivity")
 abstract class BaseActivity : AppCompatActivity() {
 
+  @CallSuper
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     // 首次安装立即打开，后续切后台没有杀死 app 的情况下会触发反复进入 launcherActivity 的 bug
