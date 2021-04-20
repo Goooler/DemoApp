@@ -4,7 +4,6 @@ package io.goooler.demoapp.adapter.vp
 
 import androidx.annotation.IntRange
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.PagerAdapter
@@ -42,17 +41,20 @@ abstract class BaseFragmentPagerAdapter(
   override fun getItemPosition(any: Any): Int = PagerAdapter.POSITION_NONE
 }
 
-fun FragmentActivity.getFragmentStatePagerAdapter(
-  behavior: Int = FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
-): Lazy<BaseFragmentPagerAdapter> = getFragmentStatePagerAdapter(supportFragmentManager, behavior)
+/**
+ * 懒加载基类
+ */
+abstract class BaseLazyFragmentPagerAdapter(fragmentManager: FragmentManager) :
+  BaseFragmentPagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT)
 
-fun Fragment.getFragmentStatePagerAdapter(
-  behavior: Int = FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
-): Lazy<BaseFragmentPagerAdapter> = getFragmentStatePagerAdapter(childFragmentManager, behavior)
+/**
+ * 通用 adapter
+ */
+class CommonFragmentPagerAdapter(fragmentManager: FragmentManager) :
+  BaseFragmentPagerAdapter(fragmentManager)
 
-fun getFragmentStatePagerAdapter(
-  fragmentManager: FragmentManager,
-  behavior: Int = FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
-): Lazy<BaseFragmentPagerAdapter> = lazy(LazyThreadSafetyMode.NONE) {
-  object : BaseFragmentPagerAdapter(fragmentManager, behavior) {}
-}
+/**
+ * 通用 lazy adapter
+ */
+class CommonLazyFragmentPagerAdapter(fragmentManager: FragmentManager) :
+  BaseLazyFragmentPagerAdapter(fragmentManager)

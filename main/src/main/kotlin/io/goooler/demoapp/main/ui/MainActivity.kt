@@ -7,7 +7,8 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.google.android.material.tabs.TabLayoutMediator
 import com.permissionx.guolindev.PermissionX
 import dagger.hilt.android.AndroidEntryPoint
-import io.goooler.demoapp.adapter.vp.getFragmentStateAdapter
+import io.goooler.demoapp.adapter.vp.CommonFragmentStateAdapter
+import io.goooler.demoapp.base.util.unsafeLazy
 import io.goooler.demoapp.common.base.BaseThemeActivity
 import io.goooler.demoapp.common.router.RouterPath
 import io.goooler.demoapp.main.R
@@ -20,7 +21,9 @@ import io.goooler.demoapp.main.ui.fragment.MainSrlFragment
 @Route(path = RouterPath.MAIN)
 class MainActivity : BaseThemeActivity<MainActivityBinding>(R.layout.main_activity) {
 
-  private val pagerAdapter by getFragmentStateAdapter()
+  private val pagerAdapter by unsafeLazy {
+    CommonFragmentStateAdapter(supportFragmentManager, lifecycle)
+  }
 
   private val titles = listOf("home", "smartRefresh", "paging")
 
@@ -32,7 +35,7 @@ class MainActivity : BaseThemeActivity<MainActivityBinding>(R.layout.main_activi
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    with(binding) {
+    binding.run {
       viewPager.offscreenPageLimit = fragments.size
       viewPager.adapter = pagerAdapter
       TabLayoutMediator(tabLayout, viewPager) { tab, position ->

@@ -2,7 +2,6 @@ package io.goooler.demoapp.adapter.vp
 
 import androidx.annotation.IntRange
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -31,15 +30,8 @@ abstract class BaseFragmentStateAdapter(fragmentManager: FragmentManager, lifecy
   override fun getItemCount(): Int = fragmentList.size
 }
 
-fun FragmentActivity.getFragmentStateAdapter(): Lazy<BaseFragmentStateAdapter> =
-  getFragmentStateAdapter(supportFragmentManager, lifecycle)
-
-fun Fragment.getFragmentStateAdapter(): Lazy<BaseFragmentStateAdapter> =
-  getFragmentStateAdapter(childFragmentManager, lifecycle)
-
-fun getFragmentStateAdapter(
-  fragmentManager: FragmentManager,
-  lifecycle: Lifecycle
-): Lazy<BaseFragmentStateAdapter> = lazy(LazyThreadSafetyMode.NONE) {
-  object : BaseFragmentStateAdapter(fragmentManager, lifecycle) {}
-}
+/**
+ * 通用 adapter
+ */
+class CommonFragmentStateAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
+  BaseFragmentStateAdapter(fragmentManager, lifecycle)
