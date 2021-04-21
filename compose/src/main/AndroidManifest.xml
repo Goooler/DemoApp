@@ -7,7 +7,7 @@
     <activity
       android:name="io.goooler.demoapp.compose.ComposeActivity"
       android:exported="true"
-      android:theme="@style/Theme.AndroidComposeDemo.NoActionBar" />
+      android:theme="@style/compose_theme.NoActionBar" />
 
   </application>
 

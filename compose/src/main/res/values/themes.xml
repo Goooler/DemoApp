@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
   <!-- Base application theme. -->
-  <style name="Theme.AndroidComposeDemo" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+  <style name="compose_theme" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
     <!-- Primary brand color. -->
     <item name="colorPrimary">@color/md_purple_500</item>
     <item name="colorPrimaryVariant">@color/md_purple_700</item>
@@ -14,12 +14,12 @@
     <!-- Customize your theme here. -->
   </style>
 
-  <style name="Theme.AndroidComposeDemo.NoActionBar">
+  <style name="compose_theme.NoActionBar">
     <item name="windowActionBar">false</item>
     <item name="windowNoTitle">true</item>
   </style>
 
-  <style name="Theme.AndroidComposeDemo.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+  <style name="compose_theme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-  <style name="Theme.AndroidComposeDemo.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+  <style name="compose_theme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
