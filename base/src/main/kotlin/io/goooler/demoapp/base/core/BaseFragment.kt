@@ -3,7 +3,6 @@ package io.goooler.demoapp.base.core
 import android.view.KeyEvent
 import android.view.View
 import androidx.fragment.app.Fragment
-import io.goooler.demoapp.base.core.IFragment.Companion.dispatchBackPress
 
 abstract class BaseFragment : Fragment(), IFragment {
 
@@ -18,7 +17,7 @@ abstract class BaseFragment : Fragment(), IFragment {
 
   override fun onResume() {
     super.onResume()
-    view?.dispatchBackPress(::onBackPressed)
+    view?.dispatchBackPress()
   }
 }
 
@@ -28,15 +27,12 @@ interface IFragment {
 
   fun finish()
 
-  companion object {
-
-    fun View.dispatchBackPress(block: () -> Boolean) {
-      isFocusableInTouchMode = true
-      requestFocus()
-      setOnKeyListener { _, keyCode, event ->
-        val flag = keyCode == KeyEvent.KEYCODE_BACK && event.action == KeyEvent.ACTION_UP
-        if (flag) block() else false
-      }
+  fun View.dispatchBackPress() {
+    isFocusableInTouchMode = true
+    requestFocus()
+    setOnKeyListener { _, keyCode, event ->
+      val flag = keyCode == KeyEvent.KEYCODE_BACK && event.action == KeyEvent.ACTION_UP
+      if (flag) onBackPressed() else false
     }
   }
 }

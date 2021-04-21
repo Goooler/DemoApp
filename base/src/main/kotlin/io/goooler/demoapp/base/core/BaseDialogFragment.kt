@@ -1,7 +1,6 @@
 package io.goooler.demoapp.base.core
 
 import androidx.fragment.app.DialogFragment
-import io.goooler.demoapp.base.core.IFragment.Companion.dispatchBackPress
 
 @Suppress("MemberVisibilityCanBePrivate")
 abstract class BaseDialogFragment : DialogFragment(), IFragment {
@@ -23,7 +22,7 @@ abstract class BaseDialogFragment : DialogFragment(), IFragment {
       setCanceledOnTouchOutside(isCancelable)
       setCancelable(isCancelable)
     }
-    view?.dispatchBackPress(::onBackPressed)
+    view?.dispatchBackPress()
   }
 
   override fun dismiss() {
