@@ -29,7 +29,7 @@ class WebActivity : BaseThemeActivity<WebActivityBinding>(R.layout.web_activity)
           .launchUrl(this, url.toUri())
         finish()
       } else {
-        webFragment = WebFragment.newInstance(url).also {
+        webFragment = WebFragment(url).also {
           it.onEventListener = listener
           addFragment(it, R.id.fragment_container)
         }

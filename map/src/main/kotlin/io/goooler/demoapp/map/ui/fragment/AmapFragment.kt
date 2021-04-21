@@ -41,8 +41,4 @@ class AmapFragment : BaseThemeFragment<MapAmapFragmentBinding>(R.layout.map_amap
 
     override fun deactivate() {}
   }
-
-  companion object {
-    fun newInstance(): AmapFragment = AmapFragment()
-  }
 }

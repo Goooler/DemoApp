@@ -100,7 +100,7 @@ class WebFragment : BaseThemeFragment<WebFragmentBinding>(R.layout.web_fragment)
   companion object {
     private const val URL = "url"
 
-    fun newInstance(url: String): WebFragment = WebFragment().putArguments(
+    operator fun invoke(url: String): WebFragment = WebFragment().putArguments(
       URL to url
     )
   }

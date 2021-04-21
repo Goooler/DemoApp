@@ -88,7 +88,5 @@ class MainHomeFragment :
 
   companion object {
     private const val SHORTCUT_ID = "audioPlayShortcutId"
-
-    fun newInstance(): MainHomeFragment = MainHomeFragment()
   }
 }

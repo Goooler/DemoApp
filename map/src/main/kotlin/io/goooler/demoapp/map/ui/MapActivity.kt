@@ -15,6 +15,6 @@ class MapActivity : BaseThemeActivity<MapActivityBinding>(R.layout.map_activity)
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 
-    addFragment(AmapFragment.newInstance(), R.id.fragment_container)
+    addFragment(AmapFragment(), R.id.fragment_container)
   }
 }

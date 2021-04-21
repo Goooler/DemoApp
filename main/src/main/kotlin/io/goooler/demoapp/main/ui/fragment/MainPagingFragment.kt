@@ -92,8 +92,4 @@ class MainPagingFragment :
       vm.removeItem(item)
     }
   }
-
-  companion object {
-    fun newInstance(): MainPagingFragment = MainPagingFragment()
-  }
 }

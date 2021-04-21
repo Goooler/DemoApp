@@ -50,8 +50,4 @@ class MainSrlFragment : BaseThemeLazyFragment<MainSrlFragmentBinding>(R.layout.m
       vm.loadMore()
     }
   }
-
-  companion object {
-    fun newInstance(): MainSrlFragment = MainSrlFragment()
-  }
 }

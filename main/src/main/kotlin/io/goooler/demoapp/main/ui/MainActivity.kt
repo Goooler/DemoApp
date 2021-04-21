@@ -28,9 +28,9 @@ class MainActivity : BaseThemeActivity<MainActivityBinding>(R.layout.main_activi
   private val titles = listOf("home", "smartRefresh", "paging")
 
   private val fragments = listOf(
-    MainHomeFragment.newInstance(),
-    MainSrlFragment.newInstance(),
-    MainPagingFragment.newInstance()
+    MainHomeFragment(),
+    MainSrlFragment(),
+    MainPagingFragment()
   )
 
   override fun onCreate(savedInstanceState: Bundle?) {
