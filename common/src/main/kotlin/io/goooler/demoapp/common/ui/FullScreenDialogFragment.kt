@@ -22,9 +22,7 @@ class FullScreenDialogFragment :
 
   override fun isCancelable(): Boolean = false
 
-  override fun onBackPressed(): Boolean {
-    return true
-  }
+  override fun onBackPressed(): Boolean = true
 
   companion object {
     fun show(manager: FragmentManager) = FullScreenDialogFragment().show(manager, null)
