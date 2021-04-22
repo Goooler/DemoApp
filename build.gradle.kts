@@ -43,7 +43,7 @@ tasks {
   withType<Detekt> {
     jvmTarget = JavaVersion.VERSION_1_8.toString()
   }
-  create(GradleTask.Clean.task, Delete::class) {
+  create<Delete>(GradleTask.Clean.task) {
     delete(rootProject.buildDir)
   }
 }
