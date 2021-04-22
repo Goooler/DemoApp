@@ -29,9 +29,7 @@ class MainPagingFragment :
 
   private val initData by unsafeLazy {
     lifecycleScope.launch {
-      vm.listData.collectLatest {
-        rvAdapter.submitData(it)
-      }
+      vm.listData.collectLatest(rvAdapter::submitData)
     }
   }
 

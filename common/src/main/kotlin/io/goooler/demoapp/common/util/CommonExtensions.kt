@@ -80,9 +80,7 @@ fun HttpResponse<*>.checkStatusAndEntry() = status && entry != null
 
 fun HttpResponse<*>.checkStatusAndEntryWithToast(): Boolean {
   return checkStatusAndEntry().also {
-    if (it.not()) {
-      message?.showToast()
-    }
+    if (it.not()) message?.showToast()
   }
 }
 

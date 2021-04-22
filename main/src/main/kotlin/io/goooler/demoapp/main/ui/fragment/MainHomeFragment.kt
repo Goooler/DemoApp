@@ -27,7 +27,7 @@ class MainHomeFragment :
 
   private val vm: MainHomeViewModel by getViewModel()
 
-  private val initData by unsafeLazy { vm.initData() }
+  private val initData by unsafeLazy(vm::initData)
 
   override fun onFragmentResume() {
     initData

@@ -53,9 +53,7 @@ class MainHomeViewModel @Inject constructor(private val repository: MainCommonRe
           }
           callback(state)
         }
-        .collect {
-          title.value = it
-        }
+        .collect(title::setValue)
     }
   }
 
@@ -68,9 +66,7 @@ class MainHomeViewModel @Inject constructor(private val repository: MainCommonRe
         val google = defaultAsync { repository.getRepoListFromDb("google") }
         val microsoft = defaultAsync { repository.getRepoListFromDb("microsoft") }
 
-        processList(google, microsoft).collect {
-          title.postValue(it)
-        }
+        processList(google, microsoft).collect(title::postValue)
       } catch (_: Exception) {
       }
 
@@ -78,9 +74,7 @@ class MainHomeViewModel @Inject constructor(private val repository: MainCommonRe
         val google = defaultAsync { repository.getRepoListWithCr("google") }
         val microsoft = defaultAsync { repository.getRepoListWithCr("microsoft") }
 
-        processList(google, microsoft).collect {
-          title.postValue(it)
-        }
+        processList(google, microsoft).collect(title::postValue)
 
         putRepoListIntoDb(google, microsoft)
       } catch (e: Exception) {
@@ -115,22 +109,19 @@ class MainHomeViewModel @Inject constructor(private val repository: MainCommonRe
     Single.zip(
       repository.getRepoListWithRx("google"),
       repository.getRepoListWithRx("microsoft"),
-      { t1, t2 ->
+      { google, microsoft ->
         """
-        ${t1.lastOrNull()?.owner?.avatarUrl}
-        ${t2.lastOrNull()?.owner?.avatarUrl}
+        ${google.lastOrNull()?.owner?.avatarUrl}
+        ${microsoft.lastOrNull()?.owner?.avatarUrl}
         """.trimIndent()
       }
     )
       .subscribe(
-        {
-          title.postValue(it)
-        },
-        {
-          title.postValue(it.message)
-          R.string.common_request_failed.showToast()
-        }
-      )
+        title::postValue
+      ) {
+        title.postValue(it.message)
+        R.string.common_request_failed.showToast()
+      }
       .autoDispose()
   }
 

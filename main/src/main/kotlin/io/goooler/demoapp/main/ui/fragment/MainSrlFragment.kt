@@ -21,9 +21,7 @@ class MainSrlFragment : BaseThemeLazyFragment<MainSrlFragmentBinding>(R.layout.m
     MainSrlRvAdapter(listener)
   }
 
-  private val initData by unsafeLazy {
-    binding.smartRefresh.autoRefresh()
-  }
+  private val initData by unsafeLazy(binding.smartRefresh::autoRefresh)
 
   override fun onFragmentResume() {
     initData
