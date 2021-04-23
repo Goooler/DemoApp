@@ -32,7 +32,7 @@ const val appPackageName = "io.goooler.demoapp"
 const val appName = "Demo"
 const val extraScriptPath = "gradle/extra.gradle"
 
-val gitCommitCount: String by lazy("git describe --tags"::exec)
+val gitCommitCount: String by lazy { "git describe --tags".exec() }
 val gitCommitDescribe: Int by lazy { "git rev-list HEAD --count".exec().toInt() }
 
 fun String.exec(): String =
