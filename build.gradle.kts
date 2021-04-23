@@ -40,7 +40,7 @@ allprojects {
 }
 
 tasks {
-  withType<Detekt> {
+  withType<Detekt>().configureEach {
     jvmTarget = JavaVersion.VERSION_1_8.toString()
   }
   create<Delete>(GradleTask.Clean.task) {

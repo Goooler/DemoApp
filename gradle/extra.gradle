@@ -20,6 +20,6 @@ configurations.all {
   }
 }
 
-tasks.withType(JavaCompile) {
+tasks.withType(JavaCompile).configureEach {
   options.encoding = StandardCharsets.UTF_8
 }
