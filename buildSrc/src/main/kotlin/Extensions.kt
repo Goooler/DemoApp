@@ -13,6 +13,7 @@ import org.gradle.api.artifacts.dsl.DependencyHandler
 import org.gradle.api.plugins.ExtensionAware
 import org.gradle.api.plugins.PluginAware
 import org.gradle.kotlin.dsl.ScriptHandlerScope
+import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.get
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmOptions
@@ -84,6 +85,8 @@ fun VariantDimension.putBuildConfigIntField(name: String, value: Int) {
 fun BaseExtension.kotlinOptions(block: KotlinJvmOptions.() -> Unit) {
   (this as ExtensionAware).extensions.configure("kotlinOptions", block)
 }
+
+fun Project.kapt(block: KaptExtension.() -> Unit) = configure(block)
 
 inline fun <reified T : BaseExtension> Project.setupBase(
   module: Module? = null,
@@ -212,7 +215,7 @@ private inline fun <reified T : BaseExtension> Project.setupCommon(
     create(Flavor.Daily.flavor)
     create(Flavor.Online.flavor)
   }
-  extensions.configure<KaptExtension>("kapt") {
+  kapt {
     arguments {
       arg("AROUTER_MODULE_NAME", project.name)
       arg("room.schemaLocation", "$projectDir/build")
