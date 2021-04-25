@@ -239,22 +239,6 @@ fun Boolean?.orFalse(): Boolean = this ?: false
 
 // ---------------------Collections-------------------------------//
 
-inline fun <E> MutableCollection<E>.removeIfMatch(predicate: (e: E) -> Boolean): Boolean {
-  var removed = false
-  val each = iterator()
-  while (each.hasNext()) {
-    if (predicate(each.next())) {
-      each.remove()
-      removed = true
-    }
-  }
-  return removed
-}
-
-fun <E> MutableList<E>.remove() {
-  removeAt(0)
-}
-
 fun <T> Collection<T>?.isNotNullOrEmpty(): Boolean = isNullOrEmpty().not()
 
 /**

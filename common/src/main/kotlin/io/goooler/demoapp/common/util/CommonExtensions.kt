@@ -57,9 +57,7 @@ inline var isFirstRun: Boolean
   set(value) = SpHelper.getInstance().put(SpKeys.FirstRun.key, value)
 
 inline fun debugRun(debug: () -> Unit) {
-  if (isDebug) {
-    debug()
-  }
+  if (isDebug) debug()
 }
 
 fun Throwable.toast() {
