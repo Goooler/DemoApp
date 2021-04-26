@@ -6,7 +6,6 @@ import com.android.build.gradle.LibraryExtension
 import com.android.build.gradle.internal.api.ApkVariantOutputImpl
 import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
 import org.gradle.api.InvalidUserDataException
-import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 import org.gradle.api.artifacts.Dependency
 import org.gradle.api.artifacts.dsl.DependencyHandler
@@ -118,8 +117,6 @@ inline fun <reified T : BaseExtension> Project.setupBase(
     buildFeatures.buildConfig = false
     compileOptions.incremental = true
     kotlinOptions {
-      jvmTarget = JavaVersion.VERSION_1_8.toString()
-      useIR = true
       freeCompilerArgs = listOf(
         "-Xjvm-default=compatibility"
       )
