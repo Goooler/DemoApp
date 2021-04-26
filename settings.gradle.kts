@@ -2,7 +2,7 @@ include(
   ":app",
   ":base",
   ":common",
-  ":compose",
+  //":compose",
   ":login",
   ":main",
   ":map",
