@@ -46,6 +46,7 @@ import java.io.File
 import java.math.BigDecimal
 import java.net.URLConnection
 import java.util.Collections
+import java.util.UUID
 
 // ---------------------Types-------------------------------//
 
@@ -79,6 +80,8 @@ typealias FloatList = List<Float>
 typealias DoubleList = List<Double>
 
 // ---------------------Any-------------------------------//
+
+inline val randomUUID: String get() = UUID.randomUUID().toString()
 
 inline val currentTimeMillis: Long get() = System.currentTimeMillis()
 
@@ -253,6 +256,11 @@ fun <T> Collection<T>?.isSingle(): Boolean = this != null && size == 1
 fun <T> Collection<T>?.isMultiple(minSize: Int = 2): Boolean {
   val min = if (minSize < 2) 2 else minSize
   return this != null && size >= min
+}
+
+fun <T> List<T>.safeSubList(fromIndex: Int, toIndex: Int): List<T> {
+  val endIndex = if (toIndex > size) size else toIndex
+  return subList(fromIndex, endIndex)
 }
 
 /**
