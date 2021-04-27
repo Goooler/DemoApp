@@ -118,7 +118,7 @@ inline fun <reified T : BaseExtension> Project.setupBase(
     compileOptions.incremental = true
     kotlinOptions {
       freeCompilerArgs = listOf(
-        "-Xjvm-default=compatibility"
+        "-Xjvm-default=all-compatibility"
       )
     }
     lintOptions {
