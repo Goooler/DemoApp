@@ -2,7 +2,6 @@
 
 package io.goooler.demoapp.base.util
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Handler
 import android.os.Looper
@@ -10,10 +9,8 @@ import android.widget.Toast
 import androidx.annotation.AnyThread
 import androidx.annotation.StringRes
 import androidx.annotation.UiThread
-import androidx.annotation.WorkerThread
 import java.lang.ref.WeakReference
 
-@SuppressLint("WrongThread", "ShowToast")
 object ToastUtil {
 
   private val handler = Handler(Looper.getMainLooper())
@@ -32,25 +29,15 @@ object ToastUtil {
   @AnyThread
   fun show(context: Context, text: String) {
     if (Looper.getMainLooper().thread === Thread.currentThread()) {
-      showInMainThread(context, text)
+      showInMain(context, text)
     } else {
-      showInWorkerThread(context, text)
+      handler.post { showInMain(context, text) }
     }
   }
 
-  @WorkerThread
-  fun showInWorkerThread(context: Context, @StringRes strResId: Int) {
-    showInWorkerThread(context, context.getString(strResId))
-  }
-
-  @WorkerThread
-  fun showInWorkerThread(context: Context, text: String) {
-    handler.post { showInMainThread(context, text) }
-  }
-
   @UiThread
-  fun showInMainThread(context: Context, @StringRes strResId: Int) {
-    showInMainThread(context, context.getString(strResId))
+  fun showInMain(context: Context, @StringRes strResId: Int) {
+    showInMain(context, context.getString(strResId))
   }
 
   /**
@@ -58,13 +45,12 @@ object ToastUtil {
    */
   @UiThread
   @Synchronized
-  fun showInMainThread(context: Context, text: String) {
+  fun showInMain(context: Context, text: String) {
     // 把上一条先置空，再显示下一条
     toast?.get()?.cancel()
     toast = null
     Toast.makeText(context, text, Toast.LENGTH_SHORT).also {
-      it.show()
       toast = WeakReference(it)
-    }
+    }.show()
   }
 }
