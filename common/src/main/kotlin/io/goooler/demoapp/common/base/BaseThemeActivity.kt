@@ -11,10 +11,9 @@ import com.blankj.utilcode.util.BarUtils
 import com.blankj.utilcode.util.ScreenUtils
 import io.goooler.demoapp.base.core.BaseActivity
 
-abstract class BaseThemeActivity<VB : ViewDataBinding>
-@ContentView constructor(@LayoutRes private val layoutId: Int) :
-  BaseActivity(),
-  ITheme {
+abstract class BaseThemeActivity<VB : ViewDataBinding> @ContentView constructor(
+  @LayoutRes private val layoutId: Int
+) : BaseActivity(), ITheme {
 
   protected lateinit var binding: VB
 

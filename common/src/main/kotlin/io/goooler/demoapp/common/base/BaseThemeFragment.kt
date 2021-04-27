@@ -11,10 +11,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import io.goooler.demoapp.base.core.BaseFragment
 
-abstract class BaseThemeFragment<VB : ViewDataBinding>
-@ContentView constructor(@LayoutRes private val layoutId: Int) :
-  BaseFragment(),
-  ITheme {
+abstract class BaseThemeFragment<VB : ViewDataBinding> @ContentView constructor(
+  @LayoutRes private val layoutId: Int
+) : BaseFragment(), ITheme {
 
   protected lateinit var binding: VB
 
