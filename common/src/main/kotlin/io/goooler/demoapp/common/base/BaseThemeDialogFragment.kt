@@ -13,21 +13,21 @@ import io.goooler.demoapp.base.core.BaseDialogFragment
 
 abstract class BaseThemeDialogFragment<VB : ViewDataBinding> @ContentView constructor(
   @LayoutRes private val layoutId: Int
-) : BaseDialogFragment(), ITheme {
+) : BaseDialogFragment(), ITheme, IFragmentCommon {
 
   protected lateinit var binding: VB
+
+  override fun showLoading() {}
+
+  override fun hideLoading() {}
+
+  override fun initOnce() {}
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     binding = DataBindingUtil.inflate(layoutInflater, layoutId, null, false)
     initOnce()
   }
-
-  protected open fun initOnce() {}
-
-  override fun showLoading() {}
-
-  override fun hideLoading() {}
 
   override fun onCreateView(
     inflater: LayoutInflater,

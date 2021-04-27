@@ -13,13 +13,15 @@ import io.goooler.demoapp.base.core.BaseFragment
 
 abstract class BaseThemeFragment<VB : ViewDataBinding> @ContentView constructor(
   @LayoutRes private val layoutId: Int
-) : BaseFragment(), ITheme {
+) : BaseFragment(), ITheme, IFragmentCommon {
 
   protected lateinit var binding: VB
 
   override fun showLoading() {}
 
   override fun hideLoading() {}
+
+  override fun initOnce() {}
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -33,11 +35,13 @@ abstract class BaseThemeFragment<VB : ViewDataBinding> @ContentView constructor(
     savedInstanceState: Bundle?
   ): View = binding.root
 
-  protected open fun initOnce() {}
-
   @CallSuper
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     binding.lifecycleOwner = viewLifecycleOwner
   }
+}
+
+interface IFragmentCommon {
+  fun initOnce()
 }
