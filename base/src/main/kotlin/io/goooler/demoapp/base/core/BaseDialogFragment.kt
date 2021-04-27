@@ -1,11 +1,12 @@
 package io.goooler.demoapp.base.core
 
+import android.content.DialogInterface
 import androidx.fragment.app.DialogFragment
 
-@Suppress("MemberVisibilityCanBePrivate")
 abstract class BaseDialogFragment : DialogFragment(), IFragment {
 
-  var dismissListener: OnDismissListener? = null
+  var onDismissListener: DialogInterface.OnDismissListener? = null
+  var onCancelListener: DialogInterface.OnCancelListener? = null
 
   override fun onBackPressed(): Boolean {
     dismiss()
@@ -25,12 +26,13 @@ abstract class BaseDialogFragment : DialogFragment(), IFragment {
     view?.dispatchBackPress()
   }
 
-  override fun dismiss() {
-    dismissListener?.onDismiss()
-    super.dismiss()
+  override fun onDismiss(dialog: DialogInterface) {
+    onDismissListener?.onDismiss(dialog)
+    super.onDismiss(dialog)
   }
 
-  fun interface OnDismissListener {
-    fun onDismiss()
+  override fun onCancel(dialog: DialogInterface) {
+    onCancelListener?.onCancel(dialog)
+    super.onCancel(dialog)
   }
 }
