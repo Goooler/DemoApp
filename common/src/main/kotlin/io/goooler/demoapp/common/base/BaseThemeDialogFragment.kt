@@ -23,12 +23,14 @@ abstract class BaseThemeDialogFragment<VB : ViewDataBinding> @ContentView constr
 
   override fun initOnce() {}
 
+  @CallSuper
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     binding = DataBindingUtil.inflate(layoutInflater, layoutId, null, false)
     initOnce()
   }
 
+  @CallSuper
   override fun onCreateView(
     inflater: LayoutInflater,
     container: ViewGroup?,
