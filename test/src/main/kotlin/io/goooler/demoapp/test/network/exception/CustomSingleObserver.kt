@@ -3,7 +3,8 @@ package io.goooler.demoapp.test.network.exception
 import io.goooler.demoapp.common.network.BaseResponse
 import io.reactivex.rxjava3.observers.DisposableSingleObserver
 
-abstract class CustomSingleObserver<T : BaseResponse> : DisposableSingleObserver<T>(),
+abstract class CustomSingleObserver<T : BaseResponse> :
+  DisposableSingleObserver<T>(),
   CustomObserver<T> {
 
   override fun onSuccess(t: T) {
