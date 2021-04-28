@@ -15,19 +15,22 @@
       android:id="@+id/status_bar"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:background="@color/md_grey_800"
+      android:background="@color/color_3F9FE0"
       app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.tabs.TabLayout
+    <com.flyco.tablayout.SlidingTabLayout
       android:id="@+id/tab_layout"
       android:layout_width="match_parent"
-      android:layout_height="50dp"
-      android:background="@color/md_grey_800"
+      android:layout_height="48dp"
+      android:background="@color/color_3F9FE0"
       app:layout_constraintTop_toBottomOf="@id/status_bar"
-      app:tabTextAppearance="@style/TabTextDisableAllCapsStyle"
-      app:tabTextColor="@color/white" />
+      app:tl_textAllCaps="false"
+      app:tl_textBold="SELECT"
+      app:tl_textSelectColor="@color/color_222222"
+      app:tl_textUnselectColor="@color/white"
+      app:tl_textsize="14sp" />
 
-    <androidx.viewpager2.widget.ViewPager2
+    <androidx.viewpager.widget.ViewPager
       android:id="@+id/view_pager"
       android:layout_width="match_parent"
       android:layout_height="0dp"

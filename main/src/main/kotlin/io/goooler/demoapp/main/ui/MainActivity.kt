@@ -4,10 +4,9 @@ import android.Manifest
 import android.content.Intent
 import android.os.Bundle
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.google.android.material.tabs.TabLayoutMediator
 import com.permissionx.guolindev.PermissionX
 import dagger.hilt.android.AndroidEntryPoint
-import io.goooler.demoapp.adapter.vp.CommonFragmentStateAdapter
+import io.goooler.demoapp.adapter.vp.CommonFragmentPagerAdapter
 import io.goooler.demoapp.base.util.unsafeLazy
 import io.goooler.demoapp.common.base.BaseThemeActivity
 import io.goooler.demoapp.common.router.RouterPath
@@ -22,7 +21,7 @@ import io.goooler.demoapp.main.ui.fragment.MainSrlFragment
 class MainActivity : BaseThemeActivity<MainActivityBinding>(R.layout.main_activity) {
 
   private val pagerAdapter by unsafeLazy {
-    CommonFragmentStateAdapter(supportFragmentManager, lifecycle)
+    CommonFragmentPagerAdapter(supportFragmentManager)
   }
 
   private val titles = listOf("home", "smartRefresh", "paging")
@@ -38,11 +37,10 @@ class MainActivity : BaseThemeActivity<MainActivityBinding>(R.layout.main_activi
     binding.run {
       viewPager.offscreenPageLimit = fragments.size
       viewPager.adapter = pagerAdapter
-      TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-        tab.text = titles[position]
-      }.attach()
+      pagerAdapter.setData(fragments, titles)
+      // setViewPager 必须在 pagerAdapter 设置数据之后
+      tabLayout.setViewPager(viewPager)
     }
-    pagerAdapter.setData(fragments)
 
     requestPermissions()
   }
