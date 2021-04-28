@@ -63,7 +63,7 @@ object Libs {
   const val protobufLite = "com.google.protobuf:protobuf-javalite:$protocVersion"
   const val tbs = "com.tencent.tbs.tbssdk:sdk:43938"
   const val baseRvHelper = "com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.6"
-  const val flycoTabLayout = "com.lzp:FlycoTabLayoutZ:lastversion:1.3.3"
+  const val flycoTabLayout = "com.flyco.tablayout:FlycoTabLayout_Lib:2.2.0"
   const val utils = "com.blankj:utilcodex:1.30.6"
   const val okHttp = "com.squareup.okhttp3:okhttp:$okHttpVersion"
   const val okHttpLogInterceptor = "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
