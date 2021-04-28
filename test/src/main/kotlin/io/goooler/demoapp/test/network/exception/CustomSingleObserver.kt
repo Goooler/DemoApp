@@ -3,11 +3,8 @@ package io.goooler.demoapp.test.network.exception
 import io.goooler.demoapp.common.network.BaseResponse
 import io.reactivex.rxjava3.observers.DisposableSingleObserver
 
-abstract class CustomObserver<T : BaseResponse> : DisposableSingleObserver<T>() {
-
-  abstract fun onCustomSuccess(t: T)
-
-  abstract fun onCustomError(e: ResponseException)
+abstract class CustomSingleObserver<T : BaseResponse> : DisposableSingleObserver<T>(),
+  CustomObserver<T> {
 
   override fun onSuccess(t: T) {
     if (t.status && t.code == 200)
@@ -19,4 +16,11 @@ abstract class CustomObserver<T : BaseResponse> : DisposableSingleObserver<T>() 
   override fun onError(e: Throwable) {
     onCustomError(e.toResponseException())
   }
+}
+
+interface CustomObserver<T> {
+
+  fun onCustomSuccess(t: T)
+
+  fun onCustomError(e: ResponseException)
 }
