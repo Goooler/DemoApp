@@ -196,8 +196,6 @@ fun Project.setupApp(
           "../../../../${appName}_${versionName}_${versionCode}_${flavorName}_${buildType.name}.apk"
       }
     }
-    compileOptions.isCoreLibraryDesugaringEnabled = true
-    dependencies.add("coreLibraryDesugaring", Libs.desugar)
     block()
   }
 }

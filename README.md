@@ -48,7 +48,6 @@
 - [x] [FastJson](https://github.com/alibaba/fastjson)
 - [x] [AndroidUtilCode](https://github.com/Blankj/AndroidUtilCode/releases)
 - [x] [PermissionX](https://github.com/guolindev/PermissionX)
-- [x] [Desugar](https://github.com/google/desugar_jdk_libs)
 - [x] [Gson](https://github.com/google/gson/releases)
 - [x] [Material](https://github.com/material-components/material-components-android/releases)
 - [x] [PhotoView](https://github.com/chrisbanes/PhotoView)
