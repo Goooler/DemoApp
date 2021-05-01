@@ -115,7 +115,6 @@ inline fun <reified T : BaseExtension> Project.setupBase(
     }
     sourceSets["main"].java.srcDirs("src/main/kotlin")
     buildFeatures.buildConfig = false
-    compileOptions.incremental = true
     kotlinOptions {
       freeCompilerArgs = listOf(
         "-Xjvm-default=all-compatibility"
