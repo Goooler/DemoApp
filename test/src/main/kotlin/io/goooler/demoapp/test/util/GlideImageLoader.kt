@@ -1,19 +1,19 @@
-@file:Suppress("unused")
+@file:Suppress("unused", "MemberVisibilityCanBePrivate")
 
 package io.goooler.demoapp.test.util
 
 import android.content.Context
-import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
+import androidx.annotation.FloatRange
 import androidx.annotation.Px
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.BaseRequestOptions
 import jp.wasabeef.glide.transformations.BlurTransformation
 
 object GlideImageLoader {
@@ -27,12 +27,10 @@ object GlideImageLoader {
   fun load(
     imageView: ImageView,
     url: String?,
-    @DrawableRes placeholderId: Int
+    @DrawableRes placeholderId: Int,
+    useCache: Boolean = true
   ) {
-    Glide.with(imageView)
-      .load(url)
-      .placeholder(placeholderId)
-      .into(imageView)
+    imageView.loadBase(url, placeholderId, 0, useCache) {}
   }
 
   /**
@@ -47,54 +45,10 @@ object GlideImageLoader {
     imageView: ImageView,
     url: String?,
     placeholderDrawable: Drawable? = null,
-    errorDrawable: Drawable? = null
+    errorDrawable: Drawable? = null,
+    useCache: Boolean = true
   ) {
-    Glide.with(imageView)
-      .load(url)
-      .placeholder(placeholderDrawable)
-      .error(errorDrawable)
-      .into(imageView)
-  }
-
-  /**
-   * load image
-   *
-   * @param imageView     the image view
-   * @param bitmap        the url
-   * @param placeholderId the placeholder id
-   */
-  fun load(
-    imageView: ImageView,
-    bitmap: Bitmap?,
-    @DrawableRes placeholderId: Int
-  ) {
-    Glide.with(imageView)
-      .load(bitmap)
-      .diskCacheStrategy(DiskCacheStrategy.ALL)
-      .placeholder(placeholderId)
-      .into(imageView)
-  }
-
-  /**
-   * load image
-   *
-   * @param imageView           the image view
-   * @param bitmap              the url
-   * @param placeholderDrawable the placeholder drawable
-   * @param errorDrawable       the error Drawable
-   */
-  fun load(
-    imageView: ImageView,
-    bitmap: Bitmap?,
-    placeholderDrawable: Drawable? = null,
-    errorDrawable: Drawable? = null
-  ) {
-    Glide.with(imageView)
-      .load(bitmap)
-      .diskCacheStrategy(DiskCacheStrategy.ALL)
-      .placeholder(placeholderDrawable)
-      .error(errorDrawable)
-      .into(imageView)
+    imageView.loadBase(url, placeholderDrawable, errorDrawable, useCache) {}
   }
 
   /**
@@ -107,13 +61,10 @@ object GlideImageLoader {
   fun loadCenterCrop(
     imageView: ImageView,
     url: String?,
-    @DrawableRes placeholderId: Int
+    @DrawableRes placeholderId: Int,
+    useCache: Boolean = true
   ) {
-    Glide.with(imageView)
-      .load(url)
-      .placeholder(placeholderId)
-      .centerCrop()
-      .into(imageView)
+    loadCenterCropWithRoundedCorners(imageView, url, 0f, placeholderId, useCache)
   }
 
   /**
@@ -128,14 +79,17 @@ object GlideImageLoader {
     imageView: ImageView,
     url: String?,
     placeholderDrawable: Drawable? = null,
-    errorDrawable: Drawable? = null
+    errorDrawable: Drawable? = null,
+    useCache: Boolean = true
   ) {
-    Glide.with(imageView)
-      .load(url)
-      .placeholder(placeholderDrawable)
-      .error(errorDrawable)
-      .centerCrop()
-      .into(imageView)
+    loadCenterCropWithRoundedCorners(
+      imageView,
+      url,
+      0f,
+      placeholderDrawable,
+      errorDrawable,
+      useCache
+    )
   }
 
   /**
@@ -148,13 +102,12 @@ object GlideImageLoader {
   fun loadCenterInside(
     imageView: ImageView,
     url: String?,
-    @DrawableRes placeholderId: Int
+    @DrawableRes placeholderId: Int,
+    useCache: Boolean = true
   ) {
-    Glide.with(imageView)
-      .load(url)
-      .placeholder(placeholderId)
-      .centerInside()
-      .into(imageView)
+    imageView.loadBase(url, placeholderId, 0, useCache) {
+      centerInside()
+    }
   }
 
   /**
@@ -169,14 +122,12 @@ object GlideImageLoader {
     imageView: ImageView,
     url: String?,
     placeholderDrawable: Drawable? = null,
-    errorDrawable: Drawable? = null
+    errorDrawable: Drawable? = null,
+    useCache: Boolean = true
   ) {
-    Glide.with(imageView)
-      .load(url)
-      .placeholder(placeholderDrawable)
-      .error(errorDrawable)
-      .centerInside()
-      .into(imageView)
+    imageView.loadBase(url, placeholderDrawable, errorDrawable, useCache) {
+      centerInside()
+    }
   }
 
   /**
@@ -189,13 +140,12 @@ object GlideImageLoader {
   fun loadFitCenter(
     imageView: ImageView,
     url: String?,
-    @DrawableRes placeholderId: Int
+    @DrawableRes placeholderId: Int,
+    useCache: Boolean = true
   ) {
-    Glide.with(imageView)
-      .load(url)
-      .placeholder(placeholderId)
-      .fitCenter()
-      .into(imageView)
+    imageView.loadBase(url, placeholderId, 0, useCache) {
+      fitCenter()
+    }
   }
 
   /**
@@ -210,14 +160,12 @@ object GlideImageLoader {
     imageView: ImageView,
     url: String?,
     placeholderDrawable: Drawable? = null,
-    errorDrawable: Drawable? = null
+    errorDrawable: Drawable? = null,
+    useCache: Boolean = true
   ) {
-    Glide.with(imageView)
-      .load(url)
-      .placeholder(placeholderDrawable)
-      .error(errorDrawable)
-      .fitCenter()
-      .into(imageView)
+    imageView.loadBase(url, placeholderDrawable, errorDrawable, useCache) {
+      fitCenter()
+    }
   }
 
   /**
@@ -230,13 +178,12 @@ object GlideImageLoader {
   fun loadCircleCrop(
     imageView: ImageView,
     url: String?,
-    @DrawableRes placeholderId: Int
+    @DrawableRes placeholderId: Int,
+    useCache: Boolean = true
   ) {
-    Glide.with(imageView)
-      .load(url)
-      .placeholder(placeholderId)
-      .circleCrop()
-      .into(imageView)
+    imageView.loadBase(url, placeholderId, 0, useCache) {
+      circleCrop()
+    }
   }
 
   /**
@@ -251,14 +198,12 @@ object GlideImageLoader {
     imageView: ImageView,
     url: String?,
     placeholderDrawable: Drawable? = null,
-    errorDrawable: Drawable? = null
+    errorDrawable: Drawable? = null,
+    useCache: Boolean = true
   ) {
-    Glide.with(imageView)
-      .load(url)
-      .placeholder(placeholderDrawable)
-      .error(errorDrawable)
-      .circleCrop()
-      .into(imageView)
+    imageView.loadBase(url, placeholderDrawable, errorDrawable, useCache) {
+      circleCrop()
+    }
   }
 
   /**
@@ -269,17 +214,16 @@ object GlideImageLoader {
    * @param radius the rounding radius
    * @param placeholderId  the placeholder id
    */
-  fun loadRoundedCorner(
+  fun loadWithRoundedCorners(
     imageView: ImageView,
     url: String?,
-    @Px radius: Int,
-    @DrawableRes placeholderId: Int
+    @Px @FloatRange(from = 0.0) radius: Float,
+    @DrawableRes placeholderId: Int,
+    useCache: Boolean = true
   ) {
-    Glide.with(imageView)
-      .load(url)
-      .placeholder(placeholderId)
-      .apply(RequestOptions.bitmapTransform(RoundedCorners(radius)))
-      .into(imageView)
+    imageView.loadBase(url, placeholderId, 0, useCache) {
+      if (radius > 0) roundedCorners(radius)
+    }
   }
 
   /**
@@ -291,19 +235,17 @@ object GlideImageLoader {
    * @param placeholderDrawable the placeholder drawable
    * @param errorDrawable       the error Drawable
    */
-  fun loadRoundedCorner(
+  fun loadWithRoundedCorners(
     imageView: ImageView,
     url: String?,
-    @Px radius: Int,
+    @Px @FloatRange(from = 0.0) radius: Float,
     placeholderDrawable: Drawable? = null,
-    errorDrawable: Drawable? = null
+    errorDrawable: Drawable? = null,
+    useCache: Boolean = true
   ) {
-    Glide.with(imageView)
-      .load(url)
-      .placeholder(placeholderDrawable)
-      .error(errorDrawable)
-      .apply(RequestOptions.bitmapTransform(RoundedCorners(radius)))
-      .into(imageView)
+    imageView.loadBase(url, placeholderDrawable, errorDrawable, useCache) {
+      if (radius > 0) roundedCorners(radius)
+    }
   }
 
   /**
@@ -314,17 +256,17 @@ object GlideImageLoader {
    * @param radius the rounding radius
    * @param placeholderId  the placeholder id
    */
-  fun loadCenterCropRoundedCorner(
+  fun loadCenterCropWithRoundedCorners(
     imageView: ImageView,
     url: String?,
-    @Px radius: Int,
-    @DrawableRes placeholderId: Int
+    @Px @FloatRange(from = 0.0) radius: Float,
+    @DrawableRes placeholderId: Int,
+    useCache: Boolean = true
   ) {
-    Glide.with(imageView)
-      .load(url)
-      .placeholder(placeholderId)
-      .transform(CenterCrop(), RoundedCorners(radius))
-      .into(imageView)
+    imageView.loadBase(url, placeholderId, 0, useCache) {
+      if (radius > 0) roundedCorners(radius)
+      centerCrop()
+    }
   }
 
   /**
@@ -336,19 +278,18 @@ object GlideImageLoader {
    * @param placeholderDrawable the placeholder drawable
    * @param errorDrawable       the error drawable
    */
-  fun loadCenterCropRoundedCorner(
+  fun loadCenterCropWithRoundedCorners(
     imageView: ImageView,
     url: String?,
-    @Px radius: Int,
+    @Px @FloatRange(from = 0.0) radius: Float,
     placeholderDrawable: Drawable? = null,
-    errorDrawable: Drawable? = null
+    errorDrawable: Drawable? = null,
+    useCache: Boolean = true
   ) {
-    Glide.with(imageView)
-      .load(url)
-      .placeholder(placeholderDrawable)
-      .error(errorDrawable)
-      .transform(CenterCrop(), RoundedCorners(radius))
-      .into(imageView)
+    imageView.loadBase(url, placeholderDrawable, errorDrawable, useCache) {
+      if (radius > 0) roundedCorners(radius)
+      centerCrop()
+    }
   }
 
   /**
@@ -361,15 +302,15 @@ object GlideImageLoader {
   fun loadCenterCropBlur(
     imageView: ImageView,
     url: String?,
-    @Px radius: Int,
+    @Px @FloatRange(from = 0.0) radius: Float,
     sampling: Int,
-    @DrawableRes placeholderId: Int
+    @DrawableRes placeholderId: Int,
+    useCache: Boolean = true
   ) {
-    Glide.with(imageView).load(url)
-      .placeholder(placeholderId)
-      .transform(CenterCrop(), BlurTransformation(radius, sampling))
-      .error(Glide.with(imageView).load(url))
-      .into(imageView)
+    imageView.loadBase(url, placeholderId, 0, useCache) {
+      centerCrop()
+      blur(radius, sampling)
+    }
   }
 
   /**
@@ -383,59 +324,64 @@ object GlideImageLoader {
   fun loadCenterCropBlur(
     imageView: ImageView,
     url: String?,
-    @Px radius: Int,
+    @Px @FloatRange(from = 0.0) radius: Float,
     sampling: Int,
     placeholderDrawable: Drawable? = null,
-    errorDrawable: Drawable? = null
+    errorDrawable: Drawable? = null,
+    useCache: Boolean = true
   ) {
-    Glide.with(imageView).load(url)
-      .placeholder(placeholderDrawable)
-      .transform(CenterCrop(), BlurTransformation(radius, sampling))
-      .error(Glide.with(imageView).load(url).error(errorDrawable))
-      .into(imageView)
+    imageView.loadBase(url, placeholderDrawable, errorDrawable, useCache) {
+      centerCrop()
+      blur(radius, sampling)
+    }
   }
 
-  /**
-   * Load image without cache.
-   *
-   * @param imageView     the image view
-   * @param url           the url
-   * @param placeholderId the placeholder id
-   */
-  fun loadWithoutCache(
-    imageView: ImageView,
+  inline fun ImageView.loadBase(
     url: String?,
-    @DrawableRes placeholderId: Int
+    @DrawableRes placeholderId: Int,
+    @DrawableRes errorId: Int,
+    useCache: Boolean,
+    builder: RequestBuilder<Drawable>.() -> Unit
   ) {
-    Glide.with(imageView)
+    Glide.with(this)
       .load(url)
       .placeholder(placeholderId)
-      .skipMemoryCache(false)
-      .diskCacheStrategy(DiskCacheStrategy.NONE)
-      .into(imageView)
+      .error(errorId)
+      .loadWithCache(useCache)
+      .apply(builder)
+      .into(this)
   }
 
-  /**
-   * Load image without cache.
-   *
-   * @param imageView           the image view
-   * @param url                 the url
-   * @param placeholderDrawable the placeholder drawable
-   * @param errorDrawable       the error drawable
-   */
-  fun loadWithoutCache(
-    imageView: ImageView,
+  inline fun ImageView.loadBase(
     url: String?,
     placeholderDrawable: Drawable? = null,
-    errorDrawable: Drawable? = null
+    errorDrawable: Drawable? = null,
+    useCache: Boolean,
+    builder: RequestBuilder<Drawable>.() -> Unit
   ) {
-    Glide.with(imageView)
+    Glide.with(this)
       .load(url)
       .placeholder(placeholderDrawable)
       .error(errorDrawable)
-      .skipMemoryCache(false)
+      .loadWithCache(useCache)
+      .apply(builder)
+      .into(this)
+  }
+
+  fun <T : BaseRequestOptions<T>> T.loadWithCache(useCache: Boolean = true): T {
+    return if (useCache) this else skipMemoryCache(false)
       .diskCacheStrategy(DiskCacheStrategy.NONE)
-      .into(imageView)
+  }
+
+  fun <T : BaseRequestOptions<T>> T.roundedCorners(@Px @FloatRange(from = 0.0) radius: Float): T {
+    return transform(RoundedCorners(radius.toInt()))
+  }
+
+  fun <T : BaseRequestOptions<T>> T.blur(
+    @Px @FloatRange(from = 0.0) radius: Float,
+    sampling: Int,
+  ): T {
+    return transform(BlurTransformation(radius.toInt(), sampling))
   }
 
   /**
@@ -532,11 +478,11 @@ fun ImageView.loadCenterCrop(
   "binding_src_url",
   "binding_src_cornerRadius"
 )
-fun ImageView.loadRoundedCorner(
+fun ImageView.loadWithRoundedCorners(
   url: String?,
   @Px radius: Float
 ) {
-  GlideImageLoader.loadRoundedCorner(this, url, radius.toInt())
+  GlideImageLoader.loadWithRoundedCorners(this, url, radius)
 }
 
 @BindingAdapter(
@@ -544,12 +490,12 @@ fun ImageView.loadRoundedCorner(
   "binding_src_cornerRadius",
   "binding_src_placeholder"
 )
-fun ImageView.loadRoundedCorner(
+fun ImageView.loadWithRoundedCorners(
   url: String?,
   @Px radius: Float,
   placeholderDrawable: Drawable?
 ) {
-  GlideImageLoader.loadRoundedCorner(this, url, radius.toInt(), placeholderDrawable)
+  GlideImageLoader.loadWithRoundedCorners(this, url, radius, placeholderDrawable)
 }
 
 @BindingAdapter(
@@ -558,16 +504,16 @@ fun ImageView.loadRoundedCorner(
   "binding_src_placeholder",
   "binding_src_error"
 )
-fun ImageView.loadRoundedCorner(
+fun ImageView.loadWithRoundedCorners(
   url: String?,
   @Px radius: Float,
   placeholderDrawable: Drawable?,
   errorDrawable: Drawable?
 ) {
-  GlideImageLoader.loadRoundedCorner(
+  GlideImageLoader.loadWithRoundedCorners(
     this,
     url,
-    radius.toInt(),
+    radius,
     placeholderDrawable,
     errorDrawable
   )
@@ -577,11 +523,11 @@ fun ImageView.loadRoundedCorner(
   "binding_src_url_center_crop",
   "binding_src_cornerRadius"
 )
-fun ImageView.loadCenterCropRoundedCorner(
+fun ImageView.loadCenterCropWithRoundedCorners(
   url: String?,
   @Px radius: Float
 ) {
-  GlideImageLoader.loadCenterCropRoundedCorner(this, url, radius.toInt())
+  GlideImageLoader.loadCenterCropWithRoundedCorners(this, url, radius)
 }
 
 @BindingAdapter(
@@ -589,10 +535,10 @@ fun ImageView.loadCenterCropRoundedCorner(
   "binding_src_cornerRadius",
   "binding_src_placeholder"
 )
-fun ImageView.loadCenterCropRoundedCorner(
+fun ImageView.loadCenterCropWithRoundedCorners(
   url: String?,
   @Px radius: Float,
   placeholderDrawable: Drawable?
 ) {
-  GlideImageLoader.loadCenterCropRoundedCorner(this, url, radius.toInt(), placeholderDrawable)
+  GlideImageLoader.loadCenterCropWithRoundedCorners(this, url, radius, placeholderDrawable)
 }
