@@ -21,7 +21,7 @@ class MainSrlFragment : BaseThemeLazyFragment<MainSrlFragmentBinding>() {
   }
 
   private val initData by unsafeLazy {
-    binding.smartRefresh.autoRefresh()
+    binding.refreshLayout.autoRefresh()
   }
 
   override fun onFragmentResume() {
@@ -31,7 +31,7 @@ class MainSrlFragment : BaseThemeLazyFragment<MainSrlFragmentBinding>() {
   override fun initOnce() {
     binding.let {
       it.vm = vm
-      it.smartRefresh.setOnRefreshLoadMoreListener(listener)
+      it.refreshLayout.setOnRefreshLoadMoreListener(listener)
       it.rvList.adapter = rvAdapter
     }
   }

@@ -41,7 +41,7 @@ class MainPagingFragment : BaseThemeLazyFragment<MainPagingFragmentBinding>() {
         onLoadStatusListener = listener
       }
       it.rvList.adapter = rvAdapter
-      it.smartRefresh.setOnRefreshListener(listener)
+      it.refreshLayout.setOnRefreshListener(listener)
       it.listener = listener
     }
   }
@@ -68,20 +68,20 @@ class MainPagingFragment : BaseThemeLazyFragment<MainPagingFragmentBinding>() {
     }
 
     override fun onNotLoading() {
-      binding.smartRefresh.finishRefreshAndLoadMore()
+      binding.refreshLayout.finishRefreshAndLoadMore()
     }
 
     override fun onNoMoreData() {
-      binding.smartRefresh.finishLoadMoreWithNoMoreData()
+      binding.refreshLayout.finishLoadMoreWithNoMoreData()
     }
 
     override fun onEmpty() {
-      binding.smartRefresh.disableRefreshAndLoadMore()
+      binding.refreshLayout.disableRefreshAndLoadMore()
       binding.layoutEmpty.root.visibility = View.VISIBLE
     }
 
     override fun onError(t: Throwable) {
-      binding.smartRefresh.disableRefreshAndLoadMore()
+      binding.refreshLayout.disableRefreshAndLoadMore()
       binding.layoutError.root.visibility = View.VISIBLE
     }
 

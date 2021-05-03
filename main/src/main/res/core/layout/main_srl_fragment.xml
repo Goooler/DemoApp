@@ -11,7 +11,7 @@
   </data>
 
   <com.scwang.smart.refresh.layout.SmartRefreshLayout
-    android:id="@+id/smart_refresh"
+    android:id="@+id/refresh_layout"
     binding_srl_enableLoadMore="@{vm.isEnableLoadMore}"
     binding_srl_enableRefresh="@{vm.isEnableRefresh}"
     binding_srl_loadMoreFinish="@{vm.isLoadMoreFinish}"
