@@ -91,9 +91,14 @@ fun SmartRefreshLayout.finishRefreshAndLoadMore() {
 }
 
 @UiThread
+fun SmartRefreshLayout.enableRefreshAndLoadMore(enable: Boolean = true) {
+  setEnableRefresh(enable)
+  setEnableLoadMore(enable)
+}
+
+@UiThread
 fun SmartRefreshLayout.disableRefreshAndLoadMore() {
-  setEnableRefresh(false)
-  setEnableLoadMore(false)
+  enableRefreshAndLoadMore(false)
 }
 
 // ---------------------Convert-------------------------------//

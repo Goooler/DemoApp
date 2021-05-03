@@ -50,7 +50,7 @@
         android:id="@+id/rv_list"
         binding_rv_dataList="@{vm.listData}"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:listitem="@layout/main_common_rv_item" />

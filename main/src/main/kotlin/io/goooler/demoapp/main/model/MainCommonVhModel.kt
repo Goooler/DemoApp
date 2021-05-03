@@ -22,4 +22,12 @@ sealed class MainCommonVhModel : IDiffVhModelType, ISpanSize {
       fun onItemClick(item: MainCommonVhModel) {}
     }
   }
+
+  class Empty : MainCommonVhModel() {
+    override val viewType: Int = R.layout.common_empty_layout
+  }
+
+  class Error : MainCommonVhModel() {
+    override val viewType: Int = R.layout.common_error_layout
+  }
 }

@@ -5,7 +5,6 @@ import io.goooler.demoapp.base.util.MutableBooleanLiveData
 import io.goooler.demoapp.base.util.MutableListLiveData
 import io.goooler.demoapp.common.base.BaseRxViewModel
 import io.goooler.demoapp.common.type.CommonConstants
-import io.goooler.demoapp.common.util.toast
 import io.goooler.demoapp.main.model.MainCommonVhModel
 import io.goooler.demoapp.main.repository.MainCommonRepository
 import javax.inject.Inject
@@ -21,8 +20,12 @@ class MainSrlViewModel @Inject constructor(private val repository: MainCommonRep
   val isLoadMoreFinish = MutableBooleanLiveData()
   val isRefreshFinish = MutableBooleanLiveData()
   val isNoMore = MutableBooleanLiveData()
-  val isEnableRefresh = MutableBooleanLiveData(true)
-  val isEnableLoadMore = MutableBooleanLiveData(true)
+  val isEnableRefresh = MutableBooleanLiveData()
+  val isEnableLoadMore = MutableBooleanLiveData()
+
+  init {
+    enableRefreshAndLoadMore(true)
+  }
 
   fun refresh() {
     page = 1
@@ -43,6 +46,9 @@ class MainSrlViewModel @Inject constructor(private val repository: MainCommonRep
       }
       .doOnSuccess {
         _listData += it
+        if (page == 1 && it.isEmpty()) {
+          _listData += listOf(MainCommonVhModel.Empty())
+        }
         if (it.size < CommonConstants.DEFAULT_PAGE_SIZE) {
           isNoMore.postValue(true)
         }
@@ -51,7 +57,10 @@ class MainSrlViewModel @Inject constructor(private val repository: MainCommonRep
         {
           listData.postValue(_listData)
         },
-        Throwable::toast
+        {
+          listData.postValue(listOf(MainCommonVhModel.Error()))
+          enableRefreshAndLoadMore(false)
+        }
       )
       .autoDispose()
   }
@@ -59,5 +68,10 @@ class MainSrlViewModel @Inject constructor(private val repository: MainCommonRep
   private fun finishRefreshAndLoadMore() {
     isRefreshFinish.postValue(true)
     isLoadMoreFinish.postValue(true)
+  }
+
+  private fun enableRefreshAndLoadMore(enable: Boolean) {
+    isEnableRefresh.postValue(enable)
+    isEnableLoadMore.postValue(enable)
   }
 }
