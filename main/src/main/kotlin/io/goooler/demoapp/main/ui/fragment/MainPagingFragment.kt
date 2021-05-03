@@ -81,6 +81,7 @@ class MainPagingFragment : BaseThemeLazyFragment<MainPagingFragmentBinding>() {
     }
 
     override fun onError(t: Throwable) {
+      binding.smartRefresh.disableRefreshAndLoadMore()
       binding.layoutError.root.visibility = View.VISIBLE
     }
 
