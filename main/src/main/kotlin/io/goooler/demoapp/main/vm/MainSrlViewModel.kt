@@ -36,7 +36,7 @@ class MainSrlViewModel @Inject constructor(private val repository: MainCommonRep
   }
 
   private fun fetchListData(page: Int) {
-    repository.getRepoListWithRx("microsoft", page)
+    repository.getRepoListWithRx("goooler", page)
       .doFinally(::finishRefreshAndLoadMore)
       .map {
         it.map { bean -> MainCommonVhModel.Repo(bean.owner?.avatarUrl, bean.name) }
@@ -44,7 +44,6 @@ class MainSrlViewModel @Inject constructor(private val repository: MainCommonRep
       .doOnSuccess {
         _listData += it
         if (it.size < CommonConstants.DEFAULT_PAGE_SIZE) {
-          isEnableLoadMore.postValue(false)
           isNoMore.postValue(true)
         }
       }
