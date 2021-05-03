@@ -6,8 +6,7 @@ import io.goooler.demoapp.common.R
 import io.goooler.demoapp.common.base.BaseThemeDialogFragment
 import io.goooler.demoapp.common.databinding.CommonFullScreenDialogFragmentBinding
 
-class FullScreenDialogFragment :
-  BaseThemeDialogFragment<CommonFullScreenDialogFragmentBinding>(R.layout.common_full_screen_dialog_fragment) {
+class FullScreenDialogFragment : BaseThemeDialogFragment<CommonFullScreenDialogFragmentBinding>() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)

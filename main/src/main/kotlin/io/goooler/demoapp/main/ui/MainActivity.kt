@@ -10,7 +10,6 @@ import io.goooler.demoapp.adapter.vp.CommonFragmentPagerAdapter
 import io.goooler.demoapp.base.util.unsafeLazy
 import io.goooler.demoapp.common.base.BaseThemeActivity
 import io.goooler.demoapp.common.router.RouterPath
-import io.goooler.demoapp.main.R
 import io.goooler.demoapp.main.databinding.MainActivityBinding
 import io.goooler.demoapp.main.ui.fragment.MainHomeFragment
 import io.goooler.demoapp.main.ui.fragment.MainPagingFragment
@@ -18,7 +17,7 @@ import io.goooler.demoapp.main.ui.fragment.MainSrlFragment
 
 @AndroidEntryPoint
 @Route(path = RouterPath.MAIN)
-class MainActivity : BaseThemeActivity<MainActivityBinding>(R.layout.main_activity) {
+class MainActivity : BaseThemeActivity<MainActivityBinding>() {
 
   private val pagerAdapter by unsafeLazy {
     CommonFragmentPagerAdapter(supportFragmentManager)

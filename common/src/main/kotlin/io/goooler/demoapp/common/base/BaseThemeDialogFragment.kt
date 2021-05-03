@@ -5,15 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.CallSuper
-import androidx.annotation.ContentView
-import androidx.annotation.LayoutRes
-import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import io.goooler.demoapp.base.core.BaseDialogFragment
+import io.goooler.demoapp.common.util.inflateBinding
 
-abstract class BaseThemeDialogFragment<VB : ViewDataBinding> @ContentView constructor(
-  @LayoutRes private val layoutId: Int
-) : BaseDialogFragment(), ITheme, IFragmentCommon {
+abstract class BaseThemeDialogFragment<VB : ViewDataBinding> :
+  BaseDialogFragment(),
+  ITheme,
+  IFragmentCommon {
 
   protected lateinit var binding: VB
 
@@ -23,10 +22,11 @@ abstract class BaseThemeDialogFragment<VB : ViewDataBinding> @ContentView constr
 
   override fun initOnce() {}
 
+  @Suppress("UNCHECKED_CAST")
   @CallSuper
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    binding = DataBindingUtil.inflate(layoutInflater, layoutId, null, false)
+    binding = inflateBinding(layoutInflater)
     initOnce()
   }
 

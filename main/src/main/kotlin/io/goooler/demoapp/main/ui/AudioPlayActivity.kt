@@ -12,8 +12,7 @@ import io.goooler.demoapp.main.R
 import io.goooler.demoapp.main.databinding.MainAudioPlayActivityBinding
 
 @Route(path = RouterPath.AUDIO_PLAY)
-class AudioPlayActivity :
-  BaseThemeActivity<MainAudioPlayActivityBinding>(R.layout.main_audio_play_activity) {
+class AudioPlayActivity : BaseThemeActivity<MainAudioPlayActivityBinding>() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)

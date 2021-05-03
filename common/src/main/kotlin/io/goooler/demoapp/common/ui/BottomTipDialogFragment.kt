@@ -9,8 +9,7 @@ import io.goooler.demoapp.common.R
 import io.goooler.demoapp.common.base.BaseThemeDialogFragment
 import io.goooler.demoapp.common.databinding.CommonBottomTipDialogFragmentBinding
 
-class BottomTipDialogFragment :
-  BaseThemeDialogFragment<CommonBottomTipDialogFragmentBinding>(R.layout.common_bottom_tip_dialog_fragment) {
+class BottomTipDialogFragment : BaseThemeDialogFragment<CommonBottomTipDialogFragmentBinding>() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)

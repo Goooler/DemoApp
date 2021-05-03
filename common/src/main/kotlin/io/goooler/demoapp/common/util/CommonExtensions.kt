@@ -19,6 +19,7 @@ import androidx.annotation.StringRes
 import androidx.annotation.UiThread
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
 import com.blankj.utilcode.util.AdaptScreenUtils
@@ -42,6 +43,7 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
+import java.lang.reflect.ParameterizedType
 import java.math.BigDecimal
 import java.util.Calendar
 import java.util.Date
@@ -255,7 +257,7 @@ inline fun <reified T : BaseViewModel> BaseFragment.getViewModel(): Lazy<T> =
 
 inline fun <reified T : ViewDataBinding> Fragment.inflate(crossinline transform: (T) -> Unit = {}): Lazy<T> =
   lazy(LazyThreadSafetyMode.NONE) {
-    layoutInflater.inflateBinding<T>().also {
+    inflateBinding<T>(layoutInflater).also {
       it.lifecycleOwner = viewLifecycleOwner
       transform(it)
     }
@@ -273,14 +275,18 @@ inline fun <reified T : BaseViewModel> BaseActivity.getViewModel(): Lazy<T> =
 
 inline fun <reified T : ViewDataBinding> ComponentActivity.inflate(crossinline transform: (T) -> Unit = {}): Lazy<T> =
   lazy(LazyThreadSafetyMode.NONE) {
-    layoutInflater.inflateBinding<T>().also {
+    inflateBinding<T>(layoutInflater).also {
       setContentView(it.root)
       it.lifecycleOwner = this
       transform(it)
     }
   }
 
-inline fun <reified T : ViewBinding> LayoutInflater.inflateBinding(): T {
-  val method = T::class.java.getMethod("inflate", LayoutInflater::class.java)
-  return method.invoke(null, this) as T
+@Suppress("UNCHECKED_CAST")
+fun <T : ViewBinding> LifecycleOwner.inflateBinding(inflater: LayoutInflater): T {
+  return (javaClass.genericSuperclass as ParameterizedType).actualTypeArguments
+    .filterIsInstance<Class<T>>()
+    .first()
+    .getDeclaredMethod("inflate", LayoutInflater::class.java)
+    .invoke(null, inflater) as T
 }

@@ -12,7 +12,7 @@ import io.goooler.demoapp.base.util.toMimeType
 import io.goooler.demoapp.common.base.BaseThemeFragment
 import io.goooler.demoapp.web.databinding.WebFragmentBinding
 
-class WebFragment : BaseThemeFragment<WebFragmentBinding>(R.layout.web_fragment) {
+class WebFragment : BaseThemeFragment<WebFragmentBinding>() {
 
   private lateinit var headers: Map<String, String>
   private var fileChooserCallback: ValueCallback<Array<Uri>>? = null

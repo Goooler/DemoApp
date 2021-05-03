@@ -4,10 +4,9 @@ import com.amap.api.maps.LocationSource
 import com.amap.api.maps.MapView
 import com.amap.api.maps.model.MyLocationStyle
 import io.goooler.demoapp.common.base.BaseThemeFragment
-import io.goooler.demoapp.map.R
 import io.goooler.demoapp.map.databinding.MapAmapFragmentBinding
 
-class AmapFragment : BaseThemeFragment<MapAmapFragmentBinding>(R.layout.map_amap_fragment) {
+class AmapFragment : BaseThemeFragment<MapAmapFragmentBinding>() {
 
   private lateinit var mapView: MapView
 

@@ -5,15 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.CallSuper
-import androidx.annotation.ContentView
-import androidx.annotation.LayoutRes
-import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import io.goooler.demoapp.base.core.BaseFragment
+import io.goooler.demoapp.common.util.inflateBinding
 
-abstract class BaseThemeFragment<VB : ViewDataBinding> @ContentView constructor(
-  @LayoutRes private val layoutId: Int
-) : BaseFragment(), ITheme, IFragmentCommon {
+abstract class BaseThemeFragment<VB : ViewDataBinding> :
+  BaseFragment(),
+  ITheme,
+  IFragmentCommon {
 
   protected lateinit var binding: VB
 
@@ -26,7 +25,7 @@ abstract class BaseThemeFragment<VB : ViewDataBinding> @ContentView constructor(
   @CallSuper
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    binding = DataBindingUtil.inflate(layoutInflater, layoutId, null, false)
+    binding = inflateBinding(layoutInflater)
     initOnce()
   }
 

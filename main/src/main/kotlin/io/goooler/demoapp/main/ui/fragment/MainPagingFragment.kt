@@ -11,7 +11,6 @@ import io.goooler.demoapp.common.base.BaseThemeLazyFragment
 import io.goooler.demoapp.common.util.disableRefreshAndLoadMore
 import io.goooler.demoapp.common.util.finishRefreshAndLoadMore
 import io.goooler.demoapp.common.util.getViewModel
-import io.goooler.demoapp.main.R
 import io.goooler.demoapp.main.databinding.MainPagingFragmentBinding
 import io.goooler.demoapp.main.model.MainCommonVhModel
 import io.goooler.demoapp.main.ui.adapter.MainPagingRvAdapter
@@ -20,8 +19,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class MainPagingFragment :
-  BaseThemeLazyFragment<MainPagingFragmentBinding>(R.layout.main_paging_fragment) {
+class MainPagingFragment : BaseThemeLazyFragment<MainPagingFragmentBinding>() {
 
   private val vm: MainPagingViewModel by getViewModel()
 

@@ -10,7 +10,7 @@ import io.goooler.demoapp.map.databinding.MapActivityBinding
 import io.goooler.demoapp.map.ui.fragment.AmapFragment
 
 @Route(path = RouterPath.MAP)
-class MapActivity : BaseThemeActivity<MapActivityBinding>(R.layout.map_activity) {
+class MapActivity : BaseThemeActivity<MapActivityBinding>() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)

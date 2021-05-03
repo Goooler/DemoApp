@@ -22,8 +22,7 @@ import io.goooler.demoapp.main.vm.MainHomeViewModel
 import java.util.concurrent.CancellationException
 
 @AndroidEntryPoint
-class MainHomeFragment :
-  BaseThemeLazyFragment<MainHomeFragmentBinding>(R.layout.main_home_fragment) {
+class MainHomeFragment : BaseThemeLazyFragment<MainHomeFragmentBinding>() {
 
   private val vm: MainHomeViewModel by getViewModel()
 
