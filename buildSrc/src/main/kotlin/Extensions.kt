@@ -23,8 +23,8 @@ import java.util.Properties
 
 const val cdnPrefix = "https://raw.githubusercontent.com/"
 val apiHosts = mapOf(
-  Flavor.Daily.flavor to "https://api.github.com/",
-  Flavor.Online.flavor to "https://api.github.com/"
+  Flavor.Daily.name to "https://api.github.com/",
+  Flavor.Online.name to "https://api.github.com/"
 )
 
 // app
@@ -206,8 +206,8 @@ private inline fun <reified T : BaseExtension> Project.setupCommon(
 ) = setupBase<T>(module) {
   flavorDimensions("channel")
   productFlavors {
-    create(Flavor.Daily.flavor)
-    create(Flavor.Online.flavor)
+    create(Flavor.Daily.name)
+    create(Flavor.Online.name)
   }
   kapt {
     arguments {

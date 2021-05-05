@@ -21,9 +21,9 @@ enum class Module(val tag: String, val runAlone: Boolean = false) {
   Test("test")
 }
 
-enum class Flavor(val flavor: String) {
-  Daily("daily"),
-  Online("online")
+enum class Flavor {
+  Daily,
+  Online
 }
 
 enum class BuildConfigField(val tag: String) {
