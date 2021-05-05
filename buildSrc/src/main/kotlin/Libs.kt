@@ -83,7 +83,7 @@ object Libs {
   const val protobufPlugin = "com.google.protobuf:protobuf-gradle-plugin:0.8.15"
   const val arouterPlugin = "com.alibaba:arouter-register:1.0.2"
   const val hiltPlugin = "com.google.dagger:hilt-android-gradle-plugin:$hiltVersion"
-  const val kotlinterPlugin = "org.jmailen.gradle:kotlinter-gradle:3.4.3"
+  const val kotlinterPlugin = "org.jmailen.gradle:kotlinter-gradle:3.4.4"
   const val detektPlugin = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.16.0"
 
   const val objectBoxApt = "io.objectbox:objectbox-processor:$objectBoxVersion"
