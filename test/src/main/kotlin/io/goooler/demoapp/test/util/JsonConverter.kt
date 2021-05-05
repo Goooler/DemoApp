@@ -7,7 +7,7 @@ import com.alibaba.fastjson.TypeReference
 import com.google.gson.Gson
 import java.lang.reflect.Type
 
-interface JsonConverter {
+sealed interface JsonConverter {
 
   fun <T> fromJson(json: String, classOfT: Class<T>): T?
 

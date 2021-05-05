@@ -21,7 +21,7 @@ abstract class BaseFragment : Fragment(), IFragment {
   }
 }
 
-interface IFragment {
+sealed interface IFragment {
 
   fun onBackPressed(): Boolean
 

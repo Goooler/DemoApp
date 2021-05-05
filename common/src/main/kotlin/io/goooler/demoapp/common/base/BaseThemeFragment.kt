@@ -43,6 +43,6 @@ abstract class BaseThemeFragment<VB : ViewDataBinding> :
   }
 }
 
-interface IFragmentCommon {
+sealed interface IFragmentCommon {
   fun initOnce()
 }

@@ -1,6 +1,6 @@
 package io.goooler.demoapp.common.base
 
-internal interface ITheme {
+internal sealed interface ITheme {
 
   fun showLoading()
 
