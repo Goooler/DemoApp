@@ -113,7 +113,6 @@ inline fun <reified T : BaseExtension> Project.setupBase(
         versionNameSuffix = "_${it.tag}"
       }
     }
-    sourceSets["main"].java.srcDirs("src/main/kotlin")
     buildFeatures.buildConfig = false
     kotlinOptions {
       freeCompilerArgs = listOf(
@@ -157,11 +156,10 @@ fun Project.setupApp(
       storePassword = getSignProperty("storePassword")
     }
     buildTypes {
-      named("release") {
+      release {
         resValue("string", "app_name", appName)
         signingConfig = signingConfigs["sign"]
         isMinifyEnabled = true
-        isShrinkResources = true
         proguardFiles("${rootDir.path}/gradle/proguard-rules.pro")
         packagingOptions.resources.excludes += setOf(
           "**/*.proto",
@@ -180,7 +178,7 @@ fun Project.setupApp(
           "google/**"
         )
       }
-      named("debug") {
+      debug {
         resValue("string", "app_name", "${appName}.debug")
         signingConfig = signingConfigs["sign"]
         applicationIdSuffix = ".debug"
@@ -190,6 +188,7 @@ fun Project.setupApp(
         isCrunchPngs = false
       }
     }
+    dependenciesInfo.includeInApk = false
     applicationVariants.all {
       outputs.all {
         (this as? ApkVariantOutputImpl)?.outputFileName =
