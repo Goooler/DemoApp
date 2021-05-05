@@ -102,8 +102,8 @@ inline fun <reified T : BaseExtension> Project.setupBase(
     compileSdkVersion(30)
     buildToolsVersion("30.0.3")
     defaultConfig {
-      minSdkVersion(21)
-      targetSdkVersion(30)
+      minSdk = 21
+      targetSdk = 30
       versionCode = gitCommitDescribe
       versionName = gitCommitCount
       vectorDrawables.useSupportLibrary = true
