@@ -256,7 +256,7 @@ fun Drawable.toBitmap(): Bitmap = ImageUtils.drawable2Bitmap(this)
 
 // ---------------------View-------------------------------//
 
-fun <T> DiffUtil.ItemCallback<T>.asConfig(): AsyncDifferConfig<T> {
+inline fun <reified T> DiffUtil.ItemCallback<T>.asConfig(): AsyncDifferConfig<T> {
   return AsyncDifferConfig.Builder(this)
     .setBackgroundThreadExecutor(Dispatchers.Default.asExecutor())
     .build()
