@@ -3,6 +3,7 @@ package io.goooler.demoapp.adapter.rv.diff
 import android.view.ViewGroup
 import androidx.annotation.IntRange
 import androidx.annotation.LayoutRes
+import androidx.recyclerview.widget.AsyncDifferConfig
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -24,12 +25,16 @@ import java.util.Collections
  * @see RvAdapterHelper
  * @see IRvAdapter
  */
-abstract class BaseRvDiffAdapter<M : IDiffVhModelType>(callback: DiffCallBack<M> = DiffCallBack()) :
-  ListAdapter<M, BindingViewHolder>(callback),
+abstract class BaseRvDiffAdapter<M : IDiffVhModelType> :
+  ListAdapter<M, BindingViewHolder>,
   IRvAdapter<M>,
   IRvAdapterMutable<M> {
 
   private val helper by lazy(LazyThreadSafetyMode.NONE) { RvAdapterHelper(this) }
+
+  constructor(callback: DiffCallBack<M> = DiffCallBack()) : super(callback)
+
+  constructor(config: AsyncDifferConfig<M>) : super(config)
 
   override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
     super.onAttachedToRecyclerView(recyclerView)

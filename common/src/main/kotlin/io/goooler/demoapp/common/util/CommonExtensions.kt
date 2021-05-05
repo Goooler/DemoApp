@@ -21,6 +21,8 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.AsyncDifferConfig
+import androidx.recyclerview.widget.DiffUtil
 import androidx.viewbinding.ViewBinding
 import com.blankj.utilcode.util.AdaptScreenUtils
 import com.blankj.utilcode.util.ColorUtils
@@ -43,6 +45,8 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.asExecutor
 import java.lang.reflect.ParameterizedType
 import java.math.BigDecimal
 import java.util.Calendar
@@ -249,6 +253,14 @@ fun @receiver:Dimension Int.px2pt(): Int = AdaptScreenUtils.px2Pt(this.toFloat()
 fun Bitmap.toDrawable(): Drawable = ImageUtils.bitmap2Drawable(this)
 
 fun Drawable.toBitmap(): Bitmap = ImageUtils.drawable2Bitmap(this)
+
+// ---------------------View-------------------------------//
+
+fun <T> DiffUtil.ItemCallback<T>.asConfig(): AsyncDifferConfig<T> {
+  return AsyncDifferConfig.Builder(this)
+    .setBackgroundThreadExecutor(Dispatchers.Default.asExecutor())
+    .build()
+}
 
 // ---------------------Fragment-------------------------------//
 
