@@ -39,7 +39,7 @@ object Libs {
   const val desugar = "com.android.tools:desugar_jdk_libs:1.1.5"
   const val appCompat = "androidx.appcompat:appcompat:1.2.0"
   const val annotation = "androidx.annotation:annotation:1.2.0"
-  const val activity = "androidx.activity:activity-ktx:1.2.2"
+  const val activity = "androidx.activity:activity-ktx:1.2.3"
   const val fragment = "androidx.fragment:fragment-ktx:1.3.3"
   const val legacySupport = "androidx.legacy:legacy-support-v4:1.0.0"
   const val preference = "androidx.preference:preference:1.1.1"
@@ -58,7 +58,7 @@ object Libs {
   const val arouter = "com.alibaba:arouter-api:$arouterVersion"
   const val luban = "top.zibin:Luban:1.1.8"
   const val leakCanary = "com.squareup.leakcanary:leakcanary-android:2.7"
-  const val mmkv = "com.tencent:mmkv-static:1.2.7"
+  const val mmkv = "com.tencent:mmkv-static:1.2.8"
   const val protoc = "com.google.protobuf:protoc:$protocVersion"
   const val protobufLite = "com.google.protobuf:protobuf-javalite:$protocVersion"
   const val tbs = "com.tencent.tbs.tbssdk:sdk:43938"
@@ -68,7 +68,7 @@ object Libs {
   const val okHttp = "com.squareup.okhttp3:okhttp:$okHttpVersion"
   const val okHttpLogInterceptor = "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
   const val retrofit = "com.squareup.retrofit2:retrofit:$retrofitVersion"
-  const val paging = "androidx.paging:paging-runtime:3.0.0-beta03"
+  const val paging = "androidx.paging:paging-runtime:3.0.0"
   const val viewPager2 = "androidx.viewpager2:viewpager2:1.0.0"
   const val photoView = "com.github.chrisbanes:PhotoView:2.3.0"
   const val permissionX = "com.permissionx.guolindev:permissionx:1.4.0"
@@ -92,7 +92,7 @@ object Libs {
   const val moshiApt = "com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion"
   val hiltApt = arrayOf(
     "com.google.dagger:hilt-android-compiler:$hiltVersion",
-    "androidx.hilt:hilt-compiler:1.0.0-beta01"
+    "androidx.hilt:hilt-compiler:1.0.0"
   )
 
   val compose = arrayOf(
