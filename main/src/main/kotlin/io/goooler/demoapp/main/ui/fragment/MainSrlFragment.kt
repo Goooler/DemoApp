@@ -7,7 +7,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import io.goooler.demoapp.base.util.unsafeLazy
 import io.goooler.demoapp.common.base.BaseThemeLazyFragment
 import io.goooler.demoapp.common.util.enableRefreshAndLoadMore
-import io.goooler.demoapp.common.util.getViewModel
+import io.goooler.demoapp.common.util.getThemeViewModel
 import io.goooler.demoapp.common.util.showToast
 import io.goooler.demoapp.main.R
 import io.goooler.demoapp.main.databinding.MainSrlFragmentBinding
@@ -17,7 +17,7 @@ import io.goooler.demoapp.main.vm.MainSrlViewModel
 @AndroidEntryPoint
 class MainSrlFragment : BaseThemeLazyFragment<MainSrlFragmentBinding>() {
 
-  private val vm: MainSrlViewModel by getViewModel()
+  private val vm: MainSrlViewModel by getThemeViewModel()
 
   private val rvAdapter by unsafeLazy {
     MainSrlRvAdapter(listener)

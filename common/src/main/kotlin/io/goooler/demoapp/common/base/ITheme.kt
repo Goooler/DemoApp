@@ -1,8 +1,12 @@
 package io.goooler.demoapp.common.base
 
-internal sealed interface ITheme {
+import androidx.annotation.MainThread
 
+sealed interface ITheme {
+
+  @MainThread
   fun showLoading()
 
+  @MainThread
   fun hideLoading()
 }

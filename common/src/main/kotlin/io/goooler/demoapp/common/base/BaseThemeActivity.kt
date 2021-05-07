@@ -3,6 +3,7 @@ package io.goooler.demoapp.common.base
 import android.content.res.Resources
 import android.os.Bundle
 import androidx.annotation.CallSuper
+import androidx.annotation.MainThread
 import androidx.databinding.ViewDataBinding
 import com.blankj.utilcode.util.AdaptScreenUtils
 import com.blankj.utilcode.util.BarUtils
@@ -34,7 +35,9 @@ abstract class BaseThemeActivity<VB : ViewDataBinding> :
     BarUtils.transparentStatusBar(this)
   }
 
+  @MainThread
   override fun showLoading() {}
 
+  @MainThread
   override fun hideLoading() {}
 }

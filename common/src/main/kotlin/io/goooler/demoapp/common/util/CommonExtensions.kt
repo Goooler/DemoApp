@@ -38,6 +38,8 @@ import io.goooler.demoapp.base.core.BaseViewModel
 import io.goooler.demoapp.base.util.ToastUtil
 import io.goooler.demoapp.common.BuildConfig
 import io.goooler.demoapp.common.CommonApplication
+import io.goooler.demoapp.common.base.BaseThemeViewModel
+import io.goooler.demoapp.common.base.ITheme
 import io.goooler.demoapp.common.network.HttpResponse
 import io.goooler.demoapp.common.type.SpKeys
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -267,6 +269,17 @@ inline fun <reified T> DiffUtil.ItemCallback<T>.asConfig(): AsyncDifferConfig<T>
 inline fun <reified T, reified VM : BaseViewModel> T.getViewModel(): Lazy<VM>
   where T : LifecycleOwner, T : ViewModelStoreOwner = lazy(LazyThreadSafetyMode.NONE) {
   ViewModelProvider(this).get(VM::class.java).apply(lifecycle::addObserver)
+}
+
+@MainThread
+inline fun <reified T, reified VM : BaseThemeViewModel> T.getThemeViewModel(): Lazy<VM>
+  where T : LifecycleOwner, T : ViewModelStoreOwner, T : ITheme = lazy(LazyThreadSafetyMode.NONE) {
+  ViewModelProvider(this).get(VM::class.java).also {
+    lifecycle.addObserver(it)
+    it.loading.observe(this) { show ->
+      if (show) showLoading() else hideLoading()
+    }
+  }
 }
 
 inline fun <reified T : ViewDataBinding> Fragment.inflate(crossinline transform: (T) -> Unit = {}): Lazy<T> =

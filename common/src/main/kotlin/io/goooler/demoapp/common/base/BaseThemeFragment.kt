@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.CallSuper
+import androidx.annotation.MainThread
 import androidx.databinding.ViewDataBinding
 import io.goooler.demoapp.base.core.BaseFragment
 import io.goooler.demoapp.common.util.inflateBinding
@@ -16,8 +17,10 @@ abstract class BaseThemeFragment<VB : ViewDataBinding> :
 
   protected lateinit var binding: VB
 
+  @MainThread
   override fun showLoading() {}
 
+  @MainThread
   override fun hideLoading() {}
 
   override fun initOnce() {}

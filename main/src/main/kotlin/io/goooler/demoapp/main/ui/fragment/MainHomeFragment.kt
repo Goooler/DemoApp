@@ -14,7 +14,7 @@ import io.goooler.demoapp.base.util.unsafeLazy
 import io.goooler.demoapp.common.base.BaseThemeLazyFragment
 import io.goooler.demoapp.common.router.RouterManager
 import io.goooler.demoapp.common.ui.FullScreenDialogFragment
-import io.goooler.demoapp.common.util.getViewModel
+import io.goooler.demoapp.common.util.getThemeViewModel
 import io.goooler.demoapp.main.R
 import io.goooler.demoapp.main.databinding.MainHomeFragmentBinding
 import io.goooler.demoapp.main.ui.AudioPlayActivity
@@ -24,7 +24,7 @@ import java.util.concurrent.CancellationException
 @AndroidEntryPoint
 class MainHomeFragment : BaseThemeLazyFragment<MainHomeFragmentBinding>() {
 
-  private val vm: MainHomeViewModel by getViewModel()
+  private val vm: MainHomeViewModel by getThemeViewModel()
 
   private val initData by unsafeLazy {
     vm.initData()

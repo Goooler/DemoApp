@@ -1,10 +1,20 @@
 package io.goooler.demoapp.common.base
 
+import androidx.annotation.AnyThread
 import io.goooler.demoapp.base.core.BaseViewModel
+import io.goooler.demoapp.base.util.MutableBooleanLiveData
 
 abstract class BaseThemeViewModel : BaseViewModel(), ITheme {
 
-  override fun showLoading() {}
+  val loading = MutableBooleanLiveData()
 
-  override fun hideLoading() {}
+  @AnyThread
+  override fun showLoading() {
+    loading.postValue(true)
+  }
+
+  @AnyThread
+  override fun hideLoading() {
+    loading.postValue(false)
+  }
 }
