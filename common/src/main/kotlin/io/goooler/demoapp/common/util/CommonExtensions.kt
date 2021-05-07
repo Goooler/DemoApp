@@ -16,7 +16,6 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.MainThread
 import androidx.annotation.Px
 import androidx.annotation.StringRes
-import androidx.annotation.UiThread
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
@@ -89,19 +88,19 @@ fun HttpResponse<*>.checkStatusAndEntryWithToast(): Boolean {
   }
 }
 
-@UiThread
+@MainThread
 fun SmartRefreshLayout.finishRefreshAndLoadMore() {
   finishRefresh()
   finishLoadMore()
 }
 
-@UiThread
+@MainThread
 fun SmartRefreshLayout.enableRefreshAndLoadMore(enable: Boolean = true) {
   setEnableRefresh(enable)
   setEnableLoadMore(enable)
 }
 
-@UiThread
+@MainThread
 fun SmartRefreshLayout.disableRefreshAndLoadMore() {
   enableRefreshAndLoadMore(false)
 }

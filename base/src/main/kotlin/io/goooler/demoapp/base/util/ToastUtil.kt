@@ -7,8 +7,8 @@ import android.os.Handler
 import android.os.Looper
 import android.widget.Toast
 import androidx.annotation.AnyThread
+import androidx.annotation.MainThread
 import androidx.annotation.StringRes
-import androidx.annotation.UiThread
 import java.lang.ref.WeakReference
 
 object ToastUtil {
@@ -35,7 +35,7 @@ object ToastUtil {
     }
   }
 
-  @UiThread
+  @MainThread
   fun showInMain(context: Context, @StringRes strResId: Int) {
     showInMain(context, context.getString(strResId))
   }
@@ -43,7 +43,7 @@ object ToastUtil {
   /**
    * 只在主线程调用，真正实现 toast 的方法
    */
-  @UiThread
+  @MainThread
   @Synchronized
   fun showInMain(context: Context, text: String) {
     // 把上一条先置空，再显示下一条
