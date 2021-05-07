@@ -18,7 +18,9 @@ import androidx.annotation.Px
 import androidx.annotation.StringRes
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
 import androidx.recyclerview.widget.AsyncDifferConfig
@@ -33,7 +35,6 @@ import com.blankj.utilcode.util.SizeUtils
 import com.blankj.utilcode.util.StringUtils
 import com.blankj.utilcode.util.TimeUtils
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
-import io.goooler.demoapp.base.core.BaseViewModel
 import io.goooler.demoapp.base.util.ToastUtil
 import io.goooler.demoapp.common.BuildConfig
 import io.goooler.demoapp.common.CommonApplication
@@ -265,14 +266,15 @@ inline fun <reified T> DiffUtil.ItemCallback<T>.asConfig(): AsyncDifferConfig<T>
 // ---------------------Fragment-------------------------------//
 
 @MainThread
-inline fun <reified T, reified VM : BaseViewModel> T.getViewModel(): Lazy<VM>
-  where T : LifecycleOwner, T : ViewModelStoreOwner = lazy(LazyThreadSafetyMode.NONE) {
+inline fun <reified V, reified VM> V.getViewModel(): Lazy<VM>
+  where V : LifecycleOwner, V : ViewModelStoreOwner,
+        VM : ViewModel, VM : DefaultLifecycleObserver = lazy(LazyThreadSafetyMode.NONE) {
   ViewModelProvider(this).get(VM::class.java).apply(lifecycle::addObserver)
 }
 
 @MainThread
-inline fun <reified T, reified VM : BaseThemeViewModel> T.getThemeViewModel(): Lazy<VM>
-  where T : LifecycleOwner, T : ViewModelStoreOwner, T : ITheme = lazy(LazyThreadSafetyMode.NONE) {
+inline fun <reified V, reified VM : BaseThemeViewModel> V.getThemeViewModel(): Lazy<VM>
+  where V : LifecycleOwner, V : ViewModelStoreOwner, V : ITheme = lazy(LazyThreadSafetyMode.NONE) {
   ViewModelProvider(this).get(VM::class.java).also {
     lifecycle.addObserver(it)
     it.loading.observe(this) { show ->
