@@ -33,10 +33,14 @@ class MainHomeViewModel @Inject constructor(private val repository: MainCommonRe
     requestWithCr()
   }
 
-  fun startCountDown(countDownTime: Int = 30, callback: (CountDownState) -> Unit = {}) {
+  fun startCountDown(
+    countDownTime: Second = Second(30),
+    callback: (CountDownState) -> Unit = {}
+  ) {
+    val timeEnd = Second(0)
     countdownJob = viewModelScope.launch {
       flow {
-        (countDownTime downTo 0).forEach {
+        (countDownTime.value downTo timeEnd.value).forEach {
           delay(1000)
           emit("正在测试中\n${it}s")
         }
@@ -128,6 +132,9 @@ class MainHomeViewModel @Inject constructor(private val repository: MainCommonRe
   enum class CountDownState {
     Start, End, Cancel
   }
+
+  @JvmInline
+  value class Second(val value: Int)
 
   companion object {
     const val CANCEL_MANUALLY = "cancelManually"
