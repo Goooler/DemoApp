@@ -15,6 +15,7 @@ import android.os.Looper
 import android.text.Spannable
 import android.text.Spanned
 import android.text.style.ClickableSpan
+import android.text.style.ForegroundColorSpan
 import android.view.View
 import android.webkit.URLUtil
 import androidx.annotation.ColorInt
@@ -23,6 +24,7 @@ import androidx.annotation.LayoutRes
 import androidx.annotation.MainThread
 import androidx.core.os.bundleOf
 import androidx.core.text.parseAsHtml
+import androidx.core.text.toSpannable
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ObservableField
 import androidx.databinding.ViewDataBinding
@@ -116,6 +118,17 @@ fun Spannable.withClickableSpan(clickablePart: String, onClickListener: () -> Un
     Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
   )
   return this
+}
+
+fun CharSequence.withColorSpan(coloredPart: String, @ColorInt color: Int): Spannable {
+  return toSpannable().also {
+    it.setSpan(
+      ForegroundColorSpan(color),
+      it.length - coloredPart.length,
+      it.length,
+      Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+    )
+  }
 }
 
 /**

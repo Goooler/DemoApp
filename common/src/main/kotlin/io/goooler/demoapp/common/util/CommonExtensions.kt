@@ -21,6 +21,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelStoreOwner
 import androidx.recyclerview.widget.AsyncDifferConfig
 import androidx.recyclerview.widget.DiffUtil
 import androidx.viewbinding.ViewBinding
@@ -33,8 +34,6 @@ import com.blankj.utilcode.util.SizeUtils
 import com.blankj.utilcode.util.StringUtils
 import com.blankj.utilcode.util.TimeUtils
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
-import io.goooler.demoapp.base.core.BaseActivity
-import io.goooler.demoapp.base.core.BaseFragment
 import io.goooler.demoapp.base.core.BaseViewModel
 import io.goooler.demoapp.base.util.ToastUtil
 import io.goooler.demoapp.common.BuildConfig
@@ -265,12 +264,10 @@ inline fun <reified T> DiffUtil.ItemCallback<T>.asConfig(): AsyncDifferConfig<T>
 // ---------------------Fragment-------------------------------//
 
 @MainThread
-inline fun <reified T : BaseViewModel> BaseFragment.getViewModel(): Lazy<T> =
-  lazy(LazyThreadSafetyMode.NONE) {
-    ViewModelProvider(this).get(T::class.java).apply {
-      lifecycle.addObserver(this)
-    }
-  }
+inline fun <reified T, reified VM : BaseViewModel> T.getViewModel(): Lazy<VM>
+  where T : LifecycleOwner, T : ViewModelStoreOwner = lazy(LazyThreadSafetyMode.NONE) {
+  ViewModelProvider(this).get(VM::class.java).apply(lifecycle::addObserver)
+}
 
 inline fun <reified T : ViewDataBinding> Fragment.inflate(crossinline transform: (T) -> Unit = {}): Lazy<T> =
   lazy(LazyThreadSafetyMode.NONE) {
@@ -281,14 +278,6 @@ inline fun <reified T : ViewDataBinding> Fragment.inflate(crossinline transform:
   }
 
 // ---------------------Activity-------------------------------//
-
-@MainThread
-inline fun <reified T : BaseViewModel> BaseActivity.getViewModel(): Lazy<T> =
-  lazy(LazyThreadSafetyMode.NONE) {
-    ViewModelProvider(this).get(T::class.java).apply {
-      lifecycle.addObserver(this)
-    }
-  }
 
 inline fun <reified T : ViewDataBinding> ComponentActivity.inflate(crossinline transform: (T) -> Unit = {}): Lazy<T> =
   lazy(LazyThreadSafetyMode.NONE) {
