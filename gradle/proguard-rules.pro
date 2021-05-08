@@ -18,6 +18,10 @@
     public static **[] values();
     public static ** valueOf(java.lang.String);
 }
+-keepclassmembers class * {
+    void *(**On*Event);
+    void *(**On*Listener);
+}
 
 
 # Serializable
@@ -35,37 +39,15 @@
     java.lang.Object writeReplace();
     java.lang.Object readResolve();
 }
--keepclassmembers class * {
-    void *(**On*Event);
-    void *(**On*Listener);
-}
 
 
-# View
--keep public class * extends android.view.View{
-    *** get*();
-    void set*(***);
-    public <init>(android.content.Context);
-    public <init>(android.content.Context, android.util.AttributeSet);
-    public <init>(android.content.Context, android.util.AttributeSet, int);
-    public <init>(android.content.Context, android.util.AttributeSet, int, int);
-}
+# DataBinding
+-keep public class * extends androidx.databinding.ViewDataBinding {*;}
 
 
 # WebView
--keepclassmembers class fqcn.of.javascript.interface.for.webview {
-   public *;
-}
--keepclassmembers class * extends android.webkit.webViewClient {
-    public void *(android.webkit.WebView, java.lang.String, android.graphics.Bitmap);
-    public boolean *(android.webkit.WebView, java.lang.String);
-}
--keepclassmembers class * extends android.webkit.webViewClient {
-    public void *(android.webkit.webView, jav.lang.String);
-}
--keepclassmembers class com.lieyunwang.finance.activity.InfoNewDetailActivity.InJavaScriptLocalObj{
-    public *;
-}
+-keepclassmembers class * extends android.webkit.WebViewClient {*;}
+-keepclassmembers class * extends android.webkit.WebChromeClient.WebChromeClient {*;}
 
 
 # Arouter
@@ -74,10 +56,6 @@
 -keep class * implements com.alibaba.android.arouter.facade.template.ISyringe{*;}
 -keep interface * implements com.alibaba.android.arouter.facade.template.IProvider
 -keep class * implements com.alibaba.android.arouter.facade.template.IProvider
-
-
-# PhotoView
--keep class uk.co.senab.photoview.** { *; }
 
 
 # Glide
@@ -106,14 +84,15 @@
   @com.google.gson.annotations.SerializedName <fields>;
 }
 
+
 # Amap
--keep   class com.amap.api.maps.**{*;}
--keep   class com.autonavi.**{*;}
--keep   class com.amap.api.trace.**{*;}
+-keep class com.amap.api.maps.**{*;}
+-keep class com.autonavi.**{*;}
+-keep class com.amap.api.trace.**{*;}
 -keep class com.amap.api.location.**{*;}
 -keep class com.amap.api.fence.**{*;}
 -keep class com.autonavi.aps.amapapi.model.**{*;}
--keep   class com.amap.api.services.**{*;}
+-keep class com.amap.api.services.**{*;}
 -keep class com.amap.api.maps2d.**{*;}
 -keep class com.amap.api.mapcore2d.**{*;}
 -keep class com.amap.api.navi.**{*;}
