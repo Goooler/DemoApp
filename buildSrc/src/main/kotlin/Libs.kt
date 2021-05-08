@@ -16,7 +16,8 @@ private const val hiltVersion = "2.35.1"
 private const val dataStoreVersion = "1.0.0-alpha07"
 private const val doraemonKitVersion = "3.3.5"
 private const val chuckerVersion = "3.4.0"
-const val composeVersion = "1.0.0-beta03"
+private const val accompanistVersion = "0.6.2"
+const val composeVersion = "1.0.0-beta05"
 
 object Plugins {
   const val kotlinAndroid = "kotlin-android"
@@ -78,7 +79,6 @@ object Libs {
   const val doraemonKitRelease = "com.didichuxing.doraemonkit:dokitx-no-op:$doraemonKitVersion"
   const val chuckerDebug = "com.github.chuckerteam.chucker:library:$chuckerVersion"
   const val chuckerRelease = "com.github.chuckerteam.chucker:library-no-op:$chuckerVersion"
-  const val accompanist = "dev.chrisbanes.accompanist:accompanist-insets:0.6.2"
 
   const val protobufPlugin = "com.google.protobuf:protobuf-gradle-plugin:0.8.15"
   const val arouterPlugin = "com.alibaba:arouter-register:1.0.2"
@@ -96,14 +96,21 @@ object Libs {
   )
 
   val compose = arrayOf(
-    "androidx.activity:activity-compose:1.3.0-alpha04",
-    "androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha02",
+    "androidx.activity:activity-compose:1.3.0-alpha07",
+    "androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha04",
     "androidx.compose.foundation:foundation:$composeVersion",
     "androidx.compose.foundation:foundation-layout:$composeVersion",
     "androidx.compose.material:material:$composeVersion",
     "androidx.compose.ui:ui:$composeVersion",
     "androidx.compose.ui:ui-tooling:$composeVersion",
     "androidx.compose.ui:ui-util:$composeVersion"
+  )
+  val accompanist = arrayOf(
+    "com.google.accompanist:accompanist-coil:$accompanistVersion",
+    "com.google.accompanist:accompanist-insets:$accompanistVersion",
+    "com.google.accompanist:accompanist-appcompat-theme:$accompanistVersion",
+    "com.google.accompanist:accompanist-systemuicontroller:$accompanistVersion",
+    "com.google.accompanist:accompanist-pager:$accompanistVersion"
   )
   val lifecycle = arrayOf(
     "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion",

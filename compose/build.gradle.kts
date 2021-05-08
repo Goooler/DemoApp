@@ -4,5 +4,5 @@ setupLib(Module.Compose) {
 }
 
 dependencies {
-  implementations(*Libs.compose, Libs.accompanist)
+  implementations(*Libs.compose, *Libs.accompanist)
 }
