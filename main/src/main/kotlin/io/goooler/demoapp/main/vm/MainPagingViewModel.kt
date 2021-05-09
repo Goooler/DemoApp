@@ -32,8 +32,8 @@ class MainPagingViewModel @Inject constructor(private val repository: MainCommon
         source.filter { it !in removed }
       }
 
-  fun removeItem(item: MainCommonVhModel) {
-    removeItemsSet.add(item)
+  fun removeItem(vararg item: MainCommonVhModel) {
+    removeItemsSet += item
     removedItemsFlow.value = removeItemsSet.toList()
   }
 

@@ -114,7 +114,7 @@ internal class RvAdapterHelper<M : IVhModelType>(private val adapter: IRvAdapter
     if (model is IVhModelWrapper<*>) {
       model.asList().forEach { findLeaf(it as M, list) }
     } else {
-      list.add(model)
+      list += model
     }
   }
 
