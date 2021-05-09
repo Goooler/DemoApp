@@ -107,7 +107,7 @@ inline fun <reified T : BaseExtension> Project.setupBase(
       versionCode = gitCommitDescribe
       versionName = gitCommitCount
       vectorDrawables.useSupportLibrary = true
-      ndk.abiFilters += setOf("arm64-v8a")
+      ndk.abiFilters += setOf("armeabi-v7a")
       module?.let {
         resourcePrefix = "${it.tag}_"
         versionNameSuffix = "_${it.tag}"
