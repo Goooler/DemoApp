@@ -21,7 +21,7 @@ import javax.inject.Inject
 class MainPagingViewModel @Inject constructor(private val repository: MainCommonRepository) :
   BaseThemeViewModel() {
   private val removedItemsFlow = MutableStateFlow(emptyList<MainCommonVhModel>())
-  private val removeItemsSet = mutableSetOf<MainCommonVhModel>()
+  private val removedItemsSet = mutableSetOf<MainCommonVhModel>()
 
   val listData: Flow<PagingData<MainCommonVhModel>> =
     Pager(PagingConfig(CommonConstants.DEFAULT_PAGE_SIZE)) {
@@ -33,8 +33,8 @@ class MainPagingViewModel @Inject constructor(private val repository: MainCommon
       }
 
   fun removeItem(vararg item: MainCommonVhModel) {
-    removeItemsSet += item
-    removedItemsFlow.value = removeItemsSet.toList()
+    removedItemsSet += item
+    removedItemsFlow.value = removedItemsSet.toList()
   }
 
   private inner class DataSource : BasePagingSource<MainCommonVhModel>() {
