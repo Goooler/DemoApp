@@ -13,6 +13,7 @@ import android.webkit.ValueCallback
 import android.webkit.WebChromeClient
 import android.webkit.WebSettings
 import android.webkit.WebView
+import androidx.annotation.IntRange
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.findFragment
@@ -149,7 +150,7 @@ open class CompatWebView(context: Context, attrs: AttributeSet? = null) : WebVie
       fileChooserParams: WebChromeClient.FileChooserParams
     ): Boolean
 
-    fun onProgressChanged(i: Int)
+    fun onProgressChanged(@IntRange(from = 0) i: Int)
 
     fun loadFinish()
   }

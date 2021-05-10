@@ -4,6 +4,8 @@ import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.os.Build
+import androidx.annotation.DrawableRes
+import androidx.annotation.IntRange
 import androidx.core.app.NotificationCompat
 import androidx.core.content.getSystemService
 import androidx.lifecycle.LifecycleService
@@ -13,12 +15,16 @@ abstract class BaseService : LifecycleService() {
   /**
    * 必须不为 0
    */
+  @IntRange(from = 1)
   protected open val channelId: Int = 1
 
   protected open val contentTitle: String = ""
 
   protected open val channelName: String get() = getString(applicationInfo.labelRes)
 
+  /**
+   * @[DrawableRes]
+   */
   protected open val smallIcon: Int get() = applicationInfo.icon
 
   protected open val notification: Notification get() = createNormalNotification(contentTitle)

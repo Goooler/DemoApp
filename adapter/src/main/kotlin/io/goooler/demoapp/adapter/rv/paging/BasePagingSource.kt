@@ -1,5 +1,6 @@
 package io.goooler.demoapp.adapter.rv.paging
 
+import androidx.annotation.IntRange
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import io.goooler.demoapp.adapter.rv.diff.IDiffVhModelType
@@ -26,7 +27,7 @@ abstract class BasePagingSource<T : IDiffVhModelType> : PagingSource<Int, T>() {
     LoadResult.Error(e)
   }
 
-  abstract suspend fun fetchListData(page: Int): List<T>
+  abstract suspend fun fetchListData(@IntRange(from = 1) page: Int): List<T>
 
   override fun getRefreshKey(state: PagingState<Int, T>): Int? = null
 }

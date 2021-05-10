@@ -2,6 +2,7 @@
 
 package io.goooler.demoapp.adapter.rv.core
 
+import androidx.annotation.IntRange
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 
@@ -17,7 +18,7 @@ interface IRvAdapterMutable<M : IVhModelType> {
    */
   fun refreshItems(items: List<M>)
 
-  fun removeItem(index: Int)
+  fun removeItem(@IntRange(from = 0) index: Int)
 
   fun removeItem(item: M)
 }

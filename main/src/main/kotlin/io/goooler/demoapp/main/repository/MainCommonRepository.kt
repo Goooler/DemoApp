@@ -1,5 +1,6 @@
 package io.goooler.demoapp.main.repository
 
+import androidx.annotation.IntRange
 import io.goooler.demoapp.base.util.paramMapOf
 import io.goooler.demoapp.common.type.CommonConstants
 import io.goooler.demoapp.main.api.MainCommonApi
@@ -15,8 +16,8 @@ class MainCommonRepository @Inject constructor(
 
   suspend fun getRepoListWithCr(
     user: String,
-    page: Int = 1,
-    pageSize: Int = CommonConstants.DEFAULT_PAGE_SIZE
+    @IntRange(from = 1) page: Int = 1,
+    @IntRange(from = 1) pageSize: Int = CommonConstants.DEFAULT_PAGE_SIZE
   ): List<MainRepoListBean> {
     val params = paramMapOf(
       "page" to page,
@@ -27,8 +28,8 @@ class MainCommonRepository @Inject constructor(
 
   fun getRepoListWithRx(
     user: String,
-    page: Int = 1,
-    pageSize: Int = CommonConstants.DEFAULT_PAGE_SIZE
+    @IntRange(from = 1) page: Int = 1,
+    @IntRange(from = 1) pageSize: Int = CommonConstants.DEFAULT_PAGE_SIZE
   ): Single<List<MainRepoListBean>> = api.getRepoListWithRx(user, page, pageSize)
 
   suspend fun getRepoListFromDb(ownerName: String): List<MainRepoListBean> =
