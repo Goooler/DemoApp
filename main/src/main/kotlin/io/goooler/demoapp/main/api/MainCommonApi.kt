@@ -1,7 +1,6 @@
 package io.goooler.demoapp.main.api
 
 import io.goooler.demoapp.base.util.ParamMap
-import io.goooler.demoapp.common.type.CommonConstants
 import io.goooler.demoapp.main.bean.MainRepoListBean
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
@@ -14,8 +13,8 @@ interface MainCommonApi {
   @GET("users/{user}/repos")
   fun getRepoListWithRx(
     @Path("user") user: String,
-    @Query(CommonConstants.RequestFields.PAGE) page: Int,
-    @Query(CommonConstants.RequestFields.PER_PAGE) pageSize: Int
+    @Query("page") page: Int,
+    @Query("per_page") pageSize: Int
   ): Single<List<MainRepoListBean>>
 
   @GET("users/{user}/repos")

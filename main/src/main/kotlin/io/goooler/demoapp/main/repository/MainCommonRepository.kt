@@ -19,8 +19,8 @@ class MainCommonRepository @Inject constructor(
     pageSize: Int = CommonConstants.DEFAULT_PAGE_SIZE
   ): List<MainRepoListBean> {
     val params = paramMapOf(
-      CommonConstants.RequestFields.PAGE to page,
-      CommonConstants.RequestFields.PER_PAGE to pageSize
+      "page" to page,
+      "per_page" to pageSize
     )
     return api.getRepoListWithCr(user, params)
   }
