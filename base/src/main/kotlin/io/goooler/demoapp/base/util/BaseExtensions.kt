@@ -22,6 +22,7 @@ import androidx.annotation.ColorInt
 import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
 import androidx.annotation.MainThread
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.core.text.parseAsHtml
 import androidx.core.text.toSpannable
@@ -32,11 +33,15 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.commit
+import androidx.fragment.app.findFragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleCoroutineScope
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewTreeLifecycleOwner
 import androidx.lifecycle.coroutineScope
+import androidx.lifecycle.findViewTreeLifecycleOwner
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.Deferred
@@ -399,7 +404,7 @@ fun Fragment.startService(service: Intent): ComponentName? {
 
 inline val View.attachedFragment: Fragment?
   get() = try {
-    FragmentManager.findFragment(this)
+    findFragment()
   } catch (_: Exception) {
     null
   }
@@ -414,6 +419,10 @@ inline val View.attachedActivity: Activity?
     return baseContext as? Activity
   }
 
+/**
+ * 这里不使用 [findViewTreeLifecycleOwner] 方法是因为 [AppCompatActivity] 中没有实现
+ * [ViewTreeLifecycleOwner.set] 方法，在 activity 中的 view 会获取不到 [LifecycleOwner]
+ */
 inline val View.lifecycle: Lifecycle?
   get() {
     return attachedFragment?.viewLifecycleOwner?.lifecycle
