@@ -422,6 +422,8 @@ inline val View.attachedActivity: Activity?
 /**
  * 这里不使用 [findViewTreeLifecycleOwner] 方法是因为 [AppCompatActivity] 中没有实现
  * [ViewTreeLifecycleOwner.set] 方法，在 activity 中的 view 会获取不到 [LifecycleOwner]
+ *
+ * todo 等升级 AppCompat 1.3.0 之后使用 [findViewTreeLifecycleOwner] 代替内部实现
  */
 inline val View.lifecycle: Lifecycle?
   get() {

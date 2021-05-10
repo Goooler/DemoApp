@@ -19,6 +19,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.findFragment
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.findViewTreeLifecycleOwner
 import androidx.webkit.WebSettingsCompat
 import androidx.webkit.WebViewClientCompat
 
@@ -108,6 +109,9 @@ open class CompatWebView(context: Context, attrs: AttributeSet? = null) : WebVie
     }
   }
 
+  /**
+   * todo 等升级 AppCompat 1.3.0 之后使用 [findViewTreeLifecycleOwner] 代替内部实现
+   */
   private fun attachToLifecycle() {
     val fragment: Fragment? = try {
       findFragment()
