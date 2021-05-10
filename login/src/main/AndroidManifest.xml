@@ -11,8 +11,8 @@
 
     <activity
       android:name=".ui.SplashActivity"
-      android:launchMode="singleTop"
       android:exported="true"
+      android:launchMode="singleTop"
       android:theme="@style/login_splash_theme">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
