@@ -6,7 +6,6 @@ import android.content.Context
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.widget.ImageView
-import androidx.annotation.DrawableRes
 import androidx.annotation.FloatRange
 import androidx.annotation.Px
 import androidx.databinding.BindingAdapter
@@ -48,21 +47,6 @@ object ImageLoader {
   /**
    * load image
    *
-   * @param imageView     the image view
-   * @param data          the data
-   * @param placeholderId the placeholder id
-   * @param useCache      if use the cache
-   */
-  fun load(
-    imageView: ImageView,
-    data: Any?,
-    @DrawableRes placeholderId: Int,
-    useCache: Boolean = true
-  ): Disposable = imageView.loadBase(data, placeholderId, 0, useCache)
-
-  /**
-   * load image
-   *
    * @param imageView           the image view
    * @param data                the data
    * @param placeholderDrawable the placeholder drawable
@@ -80,23 +64,6 @@ object ImageLoader {
   /**
    * Load image with centerCrop.
    *
-   * @param imageView     the image view
-   * @param data          the data
-   * @param placeholderId the placeholder id
-   * @param useCache      if use the cache
-   */
-  fun loadCenterCrop(
-    imageView: ImageView,
-    data: Any?,
-    @DrawableRes placeholderId: Int,
-    useCache: Boolean = true
-  ): Disposable = imageView.loadBase(data, placeholderId, 0, useCache) {
-    scale(Scale.FIT)
-  }
-
-  /**
-   * Load image with centerCrop.
-   *
    * @param imageView           the image view
    * @param data                the data
    * @param placeholderDrawable the placeholder drawable
@@ -116,23 +83,6 @@ object ImageLoader {
   /**
    * Load image with circleCrop.
    *
-   * @param imageView     the image view
-   * @param data          the data
-   * @param placeholderId the placeholder id
-   * @param useCache      if use the cache
-   */
-  fun loadCircleCrop(
-    imageView: ImageView,
-    data: Any?,
-    @DrawableRes placeholderId: Int,
-    useCache: Boolean = true
-  ): Disposable = imageView.loadBase(data, placeholderId, 0, useCache) {
-    transformations(CircleCropTransformation())
-  }
-
-  /**
-   * Load image with circleCrop.
-   *
    * @param imageView           the image view
    * @param data                the data
    * @param placeholderDrawable the placeholder drawable
@@ -147,25 +97,6 @@ object ImageLoader {
     useCache: Boolean = true
   ): Disposable = imageView.loadBase(data, placeholderDrawable, errorDrawable, useCache) {
     transformations(CircleCropTransformation())
-  }
-
-  /**
-   * Load image with roundedCorner.
-   *
-   * @param imageView      the image view
-   * @param data           the data
-   * @param radius         the rounding radius
-   * @param placeholderId  the placeholder id
-   * @param useCache       if use the cache
-   */
-  fun loadWithRoundedCorners(
-    imageView: ImageView,
-    data: Any?,
-    @Px @FloatRange(from = 0.0) radius: Float,
-    @DrawableRes placeholderId: Int,
-    useCache: Boolean = true
-  ): Disposable = imageView.loadBase(data, placeholderId, 0, useCache) {
-    transformations(RoundedCornersTransformation(radius, radius, radius, radius))
   }
 
   /**
@@ -187,26 +118,6 @@ object ImageLoader {
     errorDrawable: Drawable? = null,
     useCache: Boolean = true
   ): Disposable = imageView.loadBase(data, placeholderDrawable, errorDrawable, useCache) {
-    transformations(RoundedCornersTransformation(radius, radius, radius, radius))
-  }
-
-  /**
-   * Load image with roundedCorner.
-   *
-   * @param imageView      the image view
-   * @param data           the data
-   * @param radius         the rounding radius
-   * @param placeholderId  the placeholder id
-   * @param useCache       if use the cache
-   */
-  fun loadCenterCropWithRoundedCorners(
-    imageView: ImageView,
-    data: Any?,
-    @Px @FloatRange(from = 0.0) radius: Float,
-    @DrawableRes placeholderId: Int,
-    useCache: Boolean = true
-  ): Disposable = imageView.loadBase(data, placeholderId, 0, useCache) {
-    scale(Scale.FIT)
     transformations(RoundedCornersTransformation(radius, radius, radius, radius))
   }
 
@@ -266,19 +177,6 @@ object ImageLoader {
       networkCachePolicy(CachePolicy.DISABLED)
     }
     return this
-  }
-
-  inline fun ImageView.loadBase(
-    data: Any?,
-    @DrawableRes placeholderId: Int,
-    @DrawableRes errorId: Int,
-    useCache: Boolean,
-    builder: ImageRequest.Builder.() -> Unit = {}
-  ): Disposable = loadAny(data) {
-    placeholder(placeholderId)
-    error(errorId)
-    loadWithCache(useCache)
-    builder()
   }
 
   inline fun ImageView.loadBase(
