@@ -7,7 +7,7 @@ import android.graphics.drawable.Drawable
 import android.os.Build
 import android.widget.ImageView
 import androidx.annotation.FloatRange
-import androidx.annotation.Px
+import androidx.annotation.IntRange
 import androidx.databinding.BindingAdapter
 import coil.Coil
 import coil.decode.GifDecoder
@@ -23,11 +23,6 @@ import coil.transform.RoundedCornersTransformation
 
 object ImageLoader {
 
-  /**
-   * init ImageLoader
-   *
-   * @param context should be the application's context
-   */
   fun init(context: Context) {
     val application = context.applicationContext
     val imageLoader = coil.ImageLoader.Builder(application)
@@ -44,114 +39,38 @@ object ImageLoader {
     Coil.setImageLoader(imageLoader)
   }
 
-  /**
-   * load image
-   *
-   * @param imageView           the image view
-   * @param data                the data
-   * @param placeholderDrawable the placeholder drawable
-   * @param errorDrawable       the error Drawable
-   * @param useCache            if use the cache
-   */
   fun load(
     imageView: ImageView,
     data: Any?,
     placeholderDrawable: Drawable? = null,
     errorDrawable: Drawable? = null,
+    @IntRange(from = 0) cornerRadius: Int = 0,
     useCache: Boolean = true
-  ): Disposable = imageView.loadBase(data, placeholderDrawable, errorDrawable, useCache)
+  ): Disposable =
+    imageView.loadBase(data, placeholderDrawable, errorDrawable, cornerRadius, useCache)
 
-  /**
-   * Load image with centerCrop.
-   *
-   * @param imageView           the image view
-   * @param data                the data
-   * @param placeholderDrawable the placeholder drawable
-   * @param errorDrawable       the error Drawable
-   * @param useCache            if use the cache
-   */
-  fun loadCenterCrop(
-    imageView: ImageView,
-    data: Any?,
-    placeholderDrawable: Drawable? = null,
-    errorDrawable: Drawable? = null,
-    useCache: Boolean = true
-  ): Disposable = imageView.loadBase(data, placeholderDrawable, errorDrawable, useCache) {
-    scale(Scale.FIT)
-  }
-
-  /**
-   * Load image with circleCrop.
-   *
-   * @param imageView           the image view
-   * @param data                the data
-   * @param placeholderDrawable the placeholder drawable
-   * @param errorDrawable       the error Drawable
-   * @param useCache            if use the cache
-   */
   fun loadCircleCrop(
     imageView: ImageView,
     data: Any?,
     placeholderDrawable: Drawable? = null,
     errorDrawable: Drawable? = null,
     useCache: Boolean = true
-  ): Disposable = imageView.loadBase(data, placeholderDrawable, errorDrawable, useCache) {
+  ): Disposable = imageView.loadBase(data, placeholderDrawable, errorDrawable, 0, useCache) {
     transformations(CircleCropTransformation())
   }
 
-  /**
-   * Load image with roundedCorner.
-   *
-   * @param imageView           the image view
-   * @param data                the data
-   * @param radius              the rounding radius
-   * @param placeholderDrawable the placeholder drawable
-   * @param errorDrawable       the error Drawable
-   * @param useCache            if use the cache
-   */
-  @Suppress("MemberVisibilityCanBePrivate")
-  fun loadWithRoundedCorners(
+  fun loadCenterCrop(
     imageView: ImageView,
     data: Any?,
-    @Px @FloatRange(from = 0.0) radius: Float,
     placeholderDrawable: Drawable? = null,
     errorDrawable: Drawable? = null,
+    @IntRange(from = 0) cornerRadius: Int = 0,
     useCache: Boolean = true
-  ): Disposable = imageView.loadBase(data, placeholderDrawable, errorDrawable, useCache) {
-    transformations(RoundedCornersTransformation(radius, radius, radius, radius))
-  }
+  ): Disposable =
+    imageView.loadBase(data, placeholderDrawable, errorDrawable, cornerRadius, useCache) {
+      scale(Scale.FIT)
+    }
 
-  /**
-   * Load image with roundedCorner.
-   *
-   * @param imageView           the image view
-   * @param data                the data
-   * @param radius              the rounding radius
-   * @param placeholderDrawable the placeholder drawable
-   * @param errorDrawable       the error Drawable
-   * @param useCache            if use the cache
-   */
-  @Suppress("MemberVisibilityCanBePrivate")
-  fun loadCenterCropWithRoundedCorners(
-    imageView: ImageView,
-    data: Any?,
-    @Px @FloatRange(from = 0.0) radius: Float,
-    placeholderDrawable: Drawable? = null,
-    errorDrawable: Drawable? = null,
-    useCache: Boolean = true
-  ): Disposable = imageView.loadBase(data, placeholderDrawable, errorDrawable, useCache) {
-    scale(Scale.FIT)
-    transformations(RoundedCornersTransformation(radius, radius, radius, radius))
-  }
-
-  /**
-   * get drawable directly
-   *
-   * @param data     the data
-   * @param context  the context
-   * @param useCache if use the cache
-   * @param builder  additional request params
-   */
   suspend fun getDrawable(
     data: Any?,
     context: Context,
@@ -166,10 +85,6 @@ object ImageLoader {
     return Coil.execute(request).drawable
   }
 
-  /**
-   * load image with or without cache
-   * @param useCache if enable use cache
-   */
   fun ImageRequest.Builder.loadWithCache(useCache: Boolean): ImageRequest.Builder {
     if (useCache.not()) {
       memoryCachePolicy(CachePolicy.DISABLED)
@@ -181,13 +96,15 @@ object ImageLoader {
 
   inline fun ImageView.loadBase(
     data: Any?,
-    placeholderDrawable: Drawable? = null,
-    errorDrawable: Drawable? = null,
+    placeholderDrawable: Drawable?,
+    errorDrawable: Drawable?,
+    @IntRange(from = 0) cornerRadius: Int,
     useCache: Boolean,
     builder: ImageRequest.Builder.() -> Unit = {}
   ): Disposable = loadAny(data) {
     placeholder(placeholderDrawable)
     error(errorDrawable)
+    if (cornerRadius > 0) transformations(RoundedCornersTransformation(cornerRadius.toFloat()))
     loadWithCache(useCache)
     builder()
   }
@@ -198,6 +115,17 @@ object ImageLoader {
 @BindingAdapter("binding_iv_src")
 fun ImageView.load(data: Any?) {
   ImageLoader.load(this, data)
+}
+
+@BindingAdapter(
+  "binding_iv_src",
+  "binding_iv_cornerRadius"
+)
+fun ImageView.load(
+  data: Any?,
+  @FloatRange(from = 0.0) cornerRadius: Float
+) {
+  ImageLoader.load(this, data, cornerRadius = cornerRadius.toInt())
 }
 
 @BindingAdapter(
@@ -222,6 +150,38 @@ fun ImageView.load(
   errorDrawable: Drawable?
 ) {
   ImageLoader.load(this, data, placeholderDrawable, errorDrawable)
+}
+
+@BindingAdapter(
+  "binding_iv_src",
+  "binding_iv_placeholder",
+  "binding_iv_error",
+  "binding_iv_cornerRadius"
+)
+fun ImageView.load(
+  data: Any?,
+  placeholderDrawable: Drawable?,
+  errorDrawable: Drawable?,
+  @FloatRange(from = 0.0) cornerRadius: Float
+) {
+  ImageLoader.load(this, data, placeholderDrawable, errorDrawable, cornerRadius.toInt())
+}
+
+@BindingAdapter(
+  "binding_iv_src",
+  "binding_iv_placeholder",
+  "binding_iv_error",
+  "binding_iv_cornerRadius",
+  "binding_iv_useCache"
+)
+fun ImageView.load(
+  data: Any?,
+  placeholderDrawable: Drawable?,
+  errorDrawable: Drawable?,
+  @FloatRange(from = 0.0) cornerRadius: Float,
+  useCache: Boolean
+) {
+  ImageLoader.load(this, data, placeholderDrawable, errorDrawable, cornerRadius.toInt(), useCache)
 }
 
 @BindingAdapter("binding_iv_src_circle")
@@ -254,12 +214,44 @@ fun ImageView.loadCircleCrop(
 }
 
 @BindingAdapter(
+  "binding_iv_src_circle",
+  "binding_iv_placeholder",
+  "binding_iv_error",
+  "binding_iv_useCache"
+)
+fun ImageView.loadCircleCrop(
+  data: Any?,
+  placeholderDrawable: Drawable?,
+  errorDrawable: Drawable?,
+  useCache: Boolean
+) {
+  ImageLoader.loadCircleCrop(
+    this,
+    data,
+    placeholderDrawable,
+    errorDrawable,
+    useCache
+  )
+}
+
+@BindingAdapter(
   "binding_iv_src_centerCrop"
 )
 fun ImageView.loadCenterCrop(
   data: Any?
 ) {
   ImageLoader.loadCenterCrop(this, data)
+}
+
+@BindingAdapter(
+  "binding_iv_src_centerCrop",
+  "binding_iv_cornerRadius"
+)
+fun ImageView.loadCenterCrop(
+  data: Any?,
+  @FloatRange(from = 0.0) cornerRadius: Float
+) {
+  ImageLoader.loadCenterCrop(this, data, cornerRadius = cornerRadius.toInt())
 }
 
 @BindingAdapter(
@@ -287,85 +279,40 @@ fun ImageView.loadCenterCrop(
 }
 
 @BindingAdapter(
-  "binding_iv_src",
+  "binding_iv_src_centerCrop",
+  "binding_iv_placeholder",
+  "binding_iv_error",
   "binding_iv_cornerRadius"
 )
-fun ImageView.loadWithRoundedCorners(
+fun ImageView.loadCenterCrop(
   data: Any?,
-  @Px @FloatRange(from = 0.0) radius: Float
-) {
-  ImageLoader.loadWithRoundedCorners(this, data, radius)
-}
-
-@BindingAdapter(
-  "binding_iv_src",
-  "binding_iv_cornerRadius",
-  "binding_iv_placeholder"
-)
-fun ImageView.loadWithRoundedCorners(
-  data: Any?,
-  @Px @FloatRange(from = 0.0) radius: Float,
-  placeholderDrawable: Drawable?
-) {
-  ImageLoader.loadWithRoundedCorners(this, data, radius, placeholderDrawable)
-}
-
-@BindingAdapter(
-  "binding_iv_src",
-  "binding_iv_cornerRadius",
-  "binding_iv_placeholder",
-  "binding_iv_error"
-)
-fun ImageView.loadWithRoundedCorners(
-  data: Any?,
-  @Px @FloatRange(from = 0.0) radius: Float,
   placeholderDrawable: Drawable?,
-  errorDrawable: Drawable?
+  errorDrawable: Drawable?,
+  @FloatRange(from = 0.0) cornerRadius: Float
 ) {
-  ImageLoader.loadWithRoundedCorners(this, data, radius, placeholderDrawable, errorDrawable)
+  ImageLoader.loadCenterCrop(this, data, placeholderDrawable, errorDrawable, cornerRadius.toInt())
 }
 
 @BindingAdapter(
   "binding_iv_src_centerCrop",
-  "binding_iv_cornerRadius"
-)
-fun ImageView.loadCenterCropWithRoundedCorners(
-  data: Any?,
-  @Px @FloatRange(from = 0.0) radius: Float
-) {
-  ImageLoader.loadCenterCropWithRoundedCorners(this, data, radius)
-}
-
-@BindingAdapter(
-  "binding_iv_src_centerCrop",
-  "binding_iv_cornerRadius",
-  "binding_iv_placeholder"
-)
-fun ImageView.loadCenterCropWithRoundedCorners(
-  data: Any?,
-  @Px @FloatRange(from = 0.0) radius: Float,
-  placeholderDrawable: Drawable?
-) {
-  ImageLoader.loadCenterCropWithRoundedCorners(this, data, radius, placeholderDrawable)
-}
-
-@BindingAdapter(
-  "binding_iv_src_centerCrop",
-  "binding_iv_cornerRadius",
   "binding_iv_placeholder",
-  "binding_iv_error"
+  "binding_iv_error",
+  "binding_iv_cornerRadius",
+  "binding_iv_useCache"
 )
-fun ImageView.loadCenterCropWithRoundedCorners(
+fun ImageView.loadCenterCrop(
   data: Any?,
-  @Px @FloatRange(from = 0.0) radius: Float,
   placeholderDrawable: Drawable?,
-  errorDrawable: Drawable?
+  errorDrawable: Drawable?,
+  @FloatRange(from = 0.0) cornerRadius: Float,
+  useCache: Boolean
 ) {
-  ImageLoader.loadCenterCropWithRoundedCorners(
+  ImageLoader.loadCenterCrop(
     this,
     data,
-    radius,
     placeholderDrawable,
-    errorDrawable
+    errorDrawable,
+    cornerRadius.toInt(),
+    useCache
   )
 }
