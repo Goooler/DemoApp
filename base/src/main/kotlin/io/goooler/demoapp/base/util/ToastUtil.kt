@@ -1,4 +1,4 @@
-@file:Suppress("unused")
+@file:Suppress("unused", "WrongThread")
 
 package io.goooler.demoapp.base.util
 
