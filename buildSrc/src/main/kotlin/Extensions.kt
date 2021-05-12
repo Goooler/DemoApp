@@ -211,9 +211,7 @@ private inline fun <reified T : BaseExtension> Project.setupCommon(
   kapt {
     arguments {
       arg("AROUTER_MODULE_NAME", project.name)
-      arg("room.schemaLocation", "$projectDir/build")
       arg("room.incremental", "true")
-      arg("room.expandProjection", "true")
     }
   }
   dependencies {
