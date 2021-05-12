@@ -9,11 +9,8 @@ dependencies {
     *Libs.glide,
     Libs.fastjson,
     *Libs.gson,
-    Libs.mmkv,
-    *Libs.objectBox,
     Libs.okHttpLogInterceptor
   )
-  kapts(Libs.objectBoxApt)
   testImplementations(
     "junit:junit:4.13.2",
     "org.robolectric:robolectric:4.5.1"
