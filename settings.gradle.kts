@@ -5,7 +5,7 @@ include(
   //":compose",
   ":login",
   ":main",
-  ":map",
+  //":map",
   ":web",
   ":adapter",
   ":widget",

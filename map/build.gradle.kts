@@ -1,9 +1,9 @@
 setupLib(Module.Map) {
   buildTypes {
-    getByName("release") {
+    release {
       resValue("string", "amap_key", ApiKey.AmapRelease.key)
     }
-    getByName("debug") {
+    debug {
       resValue("string", "amap_key", ApiKey.AmapDebug.key)
     }
   }
