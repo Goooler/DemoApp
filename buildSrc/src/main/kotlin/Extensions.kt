@@ -154,6 +154,8 @@ fun Project.setupApp(
       keyPassword = getSignProperty("keyPassword")
       storeFile = File(rootDir.path, getSignProperty("storeFile"))
       storePassword = getSignProperty("storePassword")
+      enableV3Signing = true
+      enableV4Signing = true
     }
     buildTypes {
       release {
