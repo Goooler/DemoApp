@@ -1,4 +1,4 @@
-@file:Suppress("DEPRECATION", "unused")
+@file:Suppress("unused")
 
 package io.goooler.demoapp.adapter.vp
 
@@ -11,9 +11,9 @@ import androidx.viewpager.widget.PagerAdapter
 /**
  * 继承自 [FragmentStatePagerAdapter]，会销毁 fragment
  */
-abstract class BaseFragmentPagerAdapter(
+open class CommonFragmentStatePagerAdapter(
   fragmentManager: FragmentManager,
-  behavior: Int = BEHAVIOR_SET_USER_VISIBLE_HINT
+  behavior: Int = BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
 ) : FragmentStatePagerAdapter(fragmentManager, behavior), IFragmentAdapter {
 
   private val fragmentList = mutableListOf<Fragment>()
@@ -40,9 +40,3 @@ abstract class BaseFragmentPagerAdapter(
 
   override fun getItemPosition(any: Any): Int = PagerAdapter.POSITION_NONE
 }
-
-/**
- * 懒加载基类
- */
-open class CommonFragmentPagerAdapter(fragmentManager: FragmentManager) :
-  BaseFragmentPagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT)

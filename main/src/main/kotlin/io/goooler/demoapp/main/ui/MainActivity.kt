@@ -6,7 +6,7 @@ import android.os.Bundle
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.permissionx.guolindev.PermissionX
 import dagger.hilt.android.AndroidEntryPoint
-import io.goooler.demoapp.adapter.vp.CommonFragmentPagerAdapter
+import io.goooler.demoapp.adapter.vp.CommonFragmentStatePagerAdapter
 import io.goooler.demoapp.base.util.unsafeLazy
 import io.goooler.demoapp.common.base.BaseThemeActivity
 import io.goooler.demoapp.common.router.RouterPath
@@ -20,7 +20,7 @@ import io.goooler.demoapp.main.ui.fragment.MainSrlFragment
 class MainActivity : BaseThemeActivity<MainActivityBinding>() {
 
   private val pagerAdapter by unsafeLazy {
-    CommonFragmentPagerAdapter(supportFragmentManager)
+    CommonFragmentStatePagerAdapter(supportFragmentManager)
   }
 
   private val titles = listOf("home", "smartRefresh", "paging")
