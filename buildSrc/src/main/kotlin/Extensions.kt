@@ -222,6 +222,7 @@ private inline fun <reified T : BaseExtension> Project.setupCommon(
     }
     implementations(
       project(Module.Base.moduleName),
+      project(Module.Adapter.moduleName),
 
       // router
       Libs.arouter,

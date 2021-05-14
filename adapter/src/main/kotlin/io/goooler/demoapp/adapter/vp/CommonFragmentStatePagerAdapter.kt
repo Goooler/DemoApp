@@ -7,9 +7,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.PagerAdapter
+import androidx.viewpager.widget.ViewPager
 
 /**
- * 继承自 [FragmentStatePagerAdapter]，会销毁 fragment
+ * [ViewPager] 使用
+ * 可在 [Fragment.onResume] 中实现懒加载
  */
 open class CommonFragmentStatePagerAdapter(
   fragmentManager: FragmentManager,
@@ -20,6 +22,7 @@ open class CommonFragmentStatePagerAdapter(
   private val titleList = mutableListOf<String>()
 
   override fun setData(fragments: List<Fragment>?, titles: List<String>?) {
+
     fragments?.let {
       fragmentList.clear()
       fragmentList += it

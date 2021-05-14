@@ -5,9 +5,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.widget.ViewPager2
 
 /**
- * ViewPager2 的 [FragmentStateAdapter] 默认就可在 Fragment#onResume 中实现懒加载
+ * [ViewPager2] 使用
+ * 可在 [Fragment.onResume] 中实现懒加载
  */
 open class CommonFragmentStateAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
   FragmentStateAdapter(fragmentManager, lifecycle), IFragmentAdapter {

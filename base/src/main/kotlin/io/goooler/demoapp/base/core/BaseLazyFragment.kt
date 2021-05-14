@@ -1,12 +1,18 @@
-@file:Suppress("KDocUnresolvedReference")
+@file:Suppress("KDocUnresolvedReference", "DEPRECATION")
 
 package io.goooler.demoapp.base.core
 
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentStatePagerAdapter
+import androidx.fragment.app.FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
+import androidx.viewpager.widget.ViewPager
+
 /**
- * Fragment 实现懒加载的基类，在 ViewPager 中使用
- * AndroidX 中懒加载使用新方法，
- * 1. ViewPager 使用 [androidx.fragment.app.FragmentStatePagerAdapter] 时传入 BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
- * 2. ViewPager2 使用 [androidx.viewpager2.adapter.FragmentStateAdapter] 默认就支持
+ * Fragment 实现懒加载的基类，配合 [ViewPager] 或 [ViewPager2] 使用
+ * 这里实现的是最新的懒加载方案，只需要在 [Fragment.onResume] 中分发事件即可
+ *
+ * 1. [ViewPager] 使用 [FragmentStatePagerAdapter] 时传入 [BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT]
+ * 2. [ViewPager2] 使用 [FragmentStateAdapter] 默认就支持
  */
 @Suppress("unused")
 abstract class BaseLazyFragment : BaseFragment(), ILazyFragment {
