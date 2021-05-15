@@ -52,7 +52,8 @@
 - [x] [Material](https://github.com/material-components/material-components-android/releases)
 - [x] [PhotoView](https://github.com/chrisbanes/PhotoView)
 - [x] [SmartRefreshLayout](https://github.com/scwang90/SmartRefreshLayout/releases)
-- [ ] [FlycoTabLayout](https://github.com/li504799868/FlycoTabLayoutZ)
+- [x] [FlycoTabLayout](https://github.com/li504799868/FlycoTabLayoutZ)
+- [ ] [ProtoBuf](https://github.com/protocolbuffers/protobuf/releases)
 
 
 
@@ -60,14 +61,9 @@
 
 - [x] [GradleVersionsPlugin](https://github.com/ben-manes/gradle-versions-plugin/releases)
 - [x] [KotlinterGradle](https://github.com/jeremymailen/kotlinter-gradle/releases)
-- [x] [Detekt](https://github.com/detekt/detekt/releases)
+- [ ] [Detekt](https://github.com/detekt/detekt/releases)
 
-## 其他次要三方库
 
-- [ ] [ProtoBuf](https://github.com/protocolbuffers/protobuf/releases)
-- [x] [MMKV](https://github.com/Tencent/MMKV/releases)
-- [x] [ObjectBox](https://github.com/objectbox/objectbox-java/releases)
-- [x] [Amap
 
 ## android.os.Build.VERSION_CODES 对照表
 

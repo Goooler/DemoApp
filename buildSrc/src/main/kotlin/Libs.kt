@@ -35,7 +35,7 @@ object Plugins {
 }
 
 object Libs {
-  const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.3"
+  const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0"
   const val core = "androidx.core:core-ktx:1.3.2"
   const val desugar = "com.android.tools:desugar_jdk_libs:1.1.5"
   const val appCompat = "androidx.appcompat:appcompat:1.2.0"
@@ -84,7 +84,7 @@ object Libs {
   const val arouterPlugin = "com.alibaba:arouter-register:1.0.2"
   const val hiltPlugin = "com.google.dagger:hilt-android-gradle-plugin:$hiltVersion"
   const val kotlinterPlugin = "org.jmailen.gradle:kotlinter-gradle:3.4.4"
-  const val detektPlugin = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.16.0"
+  const val detektPlugin = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.17.0"
 
   const val objectBoxApt = "io.objectbox:objectbox-processor:$objectBoxVersion"
   const val roomApt = "androidx.room:room-compiler:$roomVersion"
