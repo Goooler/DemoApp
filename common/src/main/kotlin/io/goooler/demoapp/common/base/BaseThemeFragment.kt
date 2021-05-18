@@ -23,6 +23,7 @@ abstract class BaseThemeFragment<VB : ViewDataBinding> :
   @MainThread
   override fun hideLoading() {}
 
+  @MainThread
   override fun initOnce() {}
 
   @CallSuper

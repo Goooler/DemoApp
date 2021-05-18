@@ -2,6 +2,7 @@ package io.goooler.demoapp.base.core
 
 import android.view.KeyEvent
 import android.view.View
+import androidx.annotation.CallSuper
 import androidx.fragment.app.Fragment
 
 abstract class BaseFragment : Fragment(), IFragment {
@@ -15,6 +16,7 @@ abstract class BaseFragment : Fragment(), IFragment {
     activity?.finish()
   }
 
+  @CallSuper
   override fun onResume() {
     super.onResume()
     view?.dispatchBackPress()

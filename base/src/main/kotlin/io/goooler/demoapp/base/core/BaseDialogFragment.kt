@@ -1,6 +1,7 @@
 package io.goooler.demoapp.base.core
 
 import android.content.DialogInterface
+import androidx.annotation.CallSuper
 import androidx.fragment.app.DialogFragment
 
 abstract class BaseDialogFragment : DialogFragment(), IFragment {
@@ -17,6 +18,7 @@ abstract class BaseDialogFragment : DialogFragment(), IFragment {
     activity?.finish()
   }
 
+  @CallSuper
   override fun onResume() {
     super.onResume()
     dialog?.run {
@@ -26,11 +28,13 @@ abstract class BaseDialogFragment : DialogFragment(), IFragment {
     view?.dispatchBackPress()
   }
 
+  @CallSuper
   override fun onDismiss(dialog: DialogInterface) {
     onDismissListener?.onDismiss(dialog)
     super.onDismiss(dialog)
   }
 
+  @CallSuper
   override fun onCancel(dialog: DialogInterface) {
     onCancelListener?.onCancel(dialog)
     super.onCancel(dialog)

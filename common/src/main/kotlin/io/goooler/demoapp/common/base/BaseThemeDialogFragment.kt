@@ -23,6 +23,7 @@ abstract class BaseThemeDialogFragment<VB : ViewDataBinding> :
   @MainThread
   override fun hideLoading() {}
 
+  @MainThread
   override fun initOnce() {}
 
   @Suppress("UNCHECKED_CAST")

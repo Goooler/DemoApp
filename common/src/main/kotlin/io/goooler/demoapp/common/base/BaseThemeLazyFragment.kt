@@ -1,5 +1,6 @@
 package io.goooler.demoapp.common.base
 
+import androidx.annotation.CallSuper
 import androidx.databinding.ViewDataBinding
 import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.widget.ViewPager2
@@ -15,11 +16,13 @@ abstract class BaseThemeLazyFragment<VB : ViewDataBinding> :
   BaseThemeFragment<VB>(),
   ILazyFragment {
 
+  @CallSuper
   override fun onResume() {
     super.onResume()
     onFragmentResume()
   }
 
+  @CallSuper
   override fun onPause() {
     super.onPause()
     onFragmentPause()

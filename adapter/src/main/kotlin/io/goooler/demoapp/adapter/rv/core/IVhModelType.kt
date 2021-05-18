@@ -13,7 +13,7 @@ interface IVhModelType {
 
   /**
    * Get the viewType. You can treat layout ID as viewType.
-   * @[LayoutRes]
    */
+  @get:LayoutRes
   val viewType: Int
 }

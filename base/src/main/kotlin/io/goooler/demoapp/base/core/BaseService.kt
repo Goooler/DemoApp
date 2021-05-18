@@ -4,6 +4,7 @@ import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.os.Build
+import androidx.annotation.CallSuper
 import androidx.annotation.DrawableRes
 import androidx.annotation.IntRange
 import androidx.core.app.NotificationCompat
@@ -22,13 +23,13 @@ abstract class BaseService : LifecycleService() {
 
   protected open val channelName: String get() = getString(applicationInfo.labelRes)
 
-  /**
-   * @[DrawableRes]
-   */
-  protected open val smallIcon: Int get() = applicationInfo.icon
+  @get:DrawableRes
+  protected open val smallIcon: Int
+    get() = applicationInfo.icon
 
   protected open val notification: Notification get() = createNormalNotification(contentTitle)
 
+  @CallSuper
   override fun onCreate() {
     super.onCreate()
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

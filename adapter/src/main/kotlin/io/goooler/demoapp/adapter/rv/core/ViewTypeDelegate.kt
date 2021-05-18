@@ -16,9 +16,8 @@ interface ViewTypeDelegate<DB : ViewDataBinding, M : IVhModelType> {
 
   /**
    * The delegate takes effect when this.getViewType() == model.getViewType().
-   *
-   * @[LayoutRes]
    */
+  @get:LayoutRes
   val viewType: Int
 
   /**
