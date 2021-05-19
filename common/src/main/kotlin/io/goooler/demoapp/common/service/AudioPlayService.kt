@@ -16,7 +16,7 @@ class AudioPlayService : BaseService() {
   private var lastStreamUrl = ""
   private var audioManager: AudioManager? = null
 
-  override val contentTitle: String = "正在播放音频"
+  override val contentTitle: String get() = "正在播放音频"
 
   override fun onCreate() {
     super.onCreate()
