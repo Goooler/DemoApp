@@ -2,8 +2,8 @@ import java.nio.charset.StandardCharsets
 import java.util.concurrent.TimeUnit
 
 rootProject.extra.run {
-  set("androidGradlePlugin", "com.android.tools.build:gradle:7.0.0-alpha15")
-  set("kotlinPlugin", "org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.32")
+  set("androidGradlePlugin", "com.android.tools.build:gradle:4.2.1")
+  set("kotlinPlugin", "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.0")
 }
 
 repositories {
