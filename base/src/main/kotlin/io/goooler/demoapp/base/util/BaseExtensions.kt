@@ -22,7 +22,6 @@ import androidx.annotation.ColorInt
 import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
 import androidx.annotation.MainThread
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.core.text.parseAsHtml
 import androidx.core.text.toSpannable
@@ -36,10 +35,8 @@ import androidx.fragment.app.commit
 import androidx.fragment.app.findFragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleCoroutineScope
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewTreeLifecycleOwner
 import androidx.lifecycle.coroutineScope
 import androidx.lifecycle.findViewTreeLifecycleOwner
 import kotlinx.coroutines.CoroutineScope
@@ -419,17 +416,7 @@ inline val View.attachedActivity: Activity?
     return baseContext as? Activity
   }
 
-/**
- * 这里不使用 [findViewTreeLifecycleOwner] 方法是因为 [AppCompatActivity] 中没有实现
- * [ViewTreeLifecycleOwner.set] 方法，在 activity 中的 view 会获取不到 [LifecycleOwner]
- *
- * todo 等升级 AppCompat 1.3.0 之后使用 [findViewTreeLifecycleOwner] 代替内部实现
- */
-inline val View.lifecycle: Lifecycle?
-  get() {
-    return attachedFragment?.viewLifecycleOwner?.lifecycle
-      ?: (attachedActivity as? FragmentActivity)?.lifecycle
-  }
+inline val View.lifecycle: Lifecycle? get() = findViewTreeLifecycleOwner()?.lifecycle
 
 inline val View.lifecycleScope: LifecycleCoroutineScope? get() = lifecycle?.coroutineScope
 

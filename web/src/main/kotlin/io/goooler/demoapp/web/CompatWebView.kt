@@ -1,8 +1,6 @@
 package io.goooler.demoapp.web
 
-import android.app.Activity
 import android.content.Context
-import android.content.ContextWrapper
 import android.net.Uri
 import android.net.http.SslError
 import android.util.AttributeSet
@@ -14,9 +12,6 @@ import android.webkit.WebChromeClient
 import android.webkit.WebSettings
 import android.webkit.WebView
 import androidx.annotation.IntRange
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.findFragment
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.findViewTreeLifecycleOwner
@@ -41,7 +36,7 @@ open class CompatWebView(context: Context, attrs: AttributeSet? = null) : WebVie
 
   override fun onAttachedToWindow() {
     super.onAttachedToWindow()
-    attachToLifecycle()
+    findViewTreeLifecycleOwner()?.lifecycle?.addObserver(lifecycleObserver)
   }
 
   private fun initWebViewSettings() {
@@ -106,27 +101,6 @@ open class CompatWebView(context: Context, attrs: AttributeSet? = null) : WebVie
         return onEventListener?.onShowFileChooser(filePathCallback, fileChooserParams)
           ?: super.onShowFileChooser(view, filePathCallback, fileChooserParams)
       }
-    }
-  }
-
-  /**
-   * todo 等升级 AppCompat 1.3.0 之后使用 [findViewTreeLifecycleOwner] 代替内部实现
-   */
-  private fun attachToLifecycle() {
-    val fragment: Fragment? = try {
-      findFragment()
-    } catch (_: Exception) {
-      null
-    }
-    if (fragment != null) {
-      fragment.viewLifecycleOwner.lifecycle.addObserver(lifecycleObserver)
-    } else {
-      var baseContext: Context? = context
-      while (baseContext is ContextWrapper) {
-        if (baseContext is Activity) break
-        baseContext = baseContext.baseContext
-      }
-      (baseContext as? FragmentActivity)?.lifecycle?.addObserver(lifecycleObserver)
     }
   }
 
