@@ -36,8 +36,8 @@ const val extraScriptPath = "gradle/extra.gradle"
 val gitCommitCount: String by lazy { "git describe --tags".exec() }
 val gitCommitDescribe: Int by lazy { "git rev-list HEAD --count".exec().toInt() }
 
-fun String.exec(): String =
-  Runtime.getRuntime().exec(this).inputStream.readBytes().toString(Charset.defaultCharset()).trim()
+fun String.exec(): String = Runtime.getRuntime().exec(this).inputStream.readBytes()
+  .toString(Charset.defaultCharset()).trim()
 
 fun ScriptHandlerScope.classpaths(vararg names: Any): Array<Dependency?> =
   dependencies.config("classpath", *names)
@@ -101,7 +101,7 @@ inline fun <reified T : BaseExtension> Project.setupBase(
   applyPlugins(Plugins.kotlinAndroid, Plugins.kotlinKapt)
   extensions.configure<BaseExtension>("android") {
     compileSdkVersion(30)
-    buildToolsVersion("30.0.3")
+    buildToolsVersion = "30.0.3"
     defaultConfig {
       minSdk = 21
       targetSdk = 30
