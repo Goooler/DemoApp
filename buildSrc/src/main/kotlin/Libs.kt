@@ -36,12 +36,12 @@ object Plugins {
 
 object Libs {
   const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0"
-  const val core = "androidx.core:core-ktx:1.3.2"
+  const val core = "androidx.core:core-ktx:1.5.0"
   const val desugar = "com.android.tools:desugar_jdk_libs:1.1.5"
-  const val appCompat = "androidx.appcompat:appcompat:1.2.0"
+  const val appCompat = "androidx.appcompat:appcompat:1.3.0"
   const val annotation = "androidx.annotation:annotation:1.2.0"
   const val activity = "androidx.activity:activity-ktx:1.2.3"
-  const val fragment = "androidx.fragment:fragment-ktx:1.3.3"
+  const val fragment = "androidx.fragment:fragment-ktx:1.3.4"
   const val legacySupport = "androidx.legacy:legacy-support-v4:1.0.0"
   const val preference = "androidx.preference:preference:1.1.1"
   const val palette = "androidx.palette:palette-ktx:1.0.0"
