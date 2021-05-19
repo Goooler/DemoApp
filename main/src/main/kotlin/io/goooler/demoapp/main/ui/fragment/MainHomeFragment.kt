@@ -3,13 +3,12 @@ package io.goooler.demoapp.main.ui.fragment
 import android.annotation.TargetApi
 import android.content.Context
 import android.content.Intent
-import android.content.pm.ShortcutInfo
-import android.content.pm.ShortcutManager
-import android.graphics.drawable.Icon
 import android.os.Build
 import android.view.View
-import androidx.core.content.getSystemService
+import androidx.core.content.pm.ShortcutInfoCompat
+import androidx.core.graphics.drawable.IconCompat
 import dagger.hilt.android.AndroidEntryPoint
+import io.goooler.demoapp.base.util.addDynamicShortcutCompat
 import io.goooler.demoapp.base.util.unsafeLazy
 import io.goooler.demoapp.common.base.BaseThemeLazyFragment
 import io.goooler.demoapp.common.router.RouterManager
@@ -66,25 +65,15 @@ class MainHomeFragment : BaseThemeLazyFragment<MainHomeFragmentBinding>() {
 
   @TargetApi(Build.VERSION_CODES.N_MR1)
   private fun createShortcut(context: Context) {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
-      context.getSystemService<ShortcutManager>()?.let { sm ->
-        if (sm.dynamicShortcuts.any { it.id == SHORTCUT_ID }) {
-          return
-        }
-        val intent = Intent(context, AudioPlayActivity::class.java)
-          .setAction(Intent.ACTION_VIEW)
-        val shortcut = ShortcutInfo.Builder(context, SHORTCUT_ID)
-          .setShortLabel("Start audio play")
-          .setLongLabel("Start audio play")
-          .setIcon(Icon.createWithResource(context, R.drawable.common_ic_kt_red))
-          .setIntent(intent)
-          .build()
-        try {
-          sm.addDynamicShortcuts(listOf(shortcut))
-        } catch (_: Exception) {
-        }
-      }
-    }
+    val intent = Intent(context, AudioPlayActivity::class.java)
+      .setAction(Intent.ACTION_VIEW)
+    val shortcut = ShortcutInfoCompat.Builder(context, SHORTCUT_ID)
+      .setShortLabel("Start audio play")
+      .setLongLabel("Start audio play")
+      .setIcon(IconCompat.createWithResource(context, R.drawable.common_ic_kt_red))
+      .setIntent(intent)
+      .build()
+    context.addDynamicShortcutCompat(SHORTCUT_ID, shortcut)
   }
 
   companion object {

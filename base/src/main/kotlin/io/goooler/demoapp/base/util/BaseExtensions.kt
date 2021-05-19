@@ -22,6 +22,8 @@ import androidx.annotation.ColorInt
 import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
 import androidx.annotation.MainThread
+import androidx.core.content.pm.ShortcutInfoCompat
+import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.os.bundleOf
 import androidx.core.text.parseAsHtml
 import androidx.core.text.toSpannable
@@ -419,6 +421,20 @@ inline val View.attachedActivity: Activity?
 inline val View.lifecycle: Lifecycle? get() = findViewTreeLifecycleOwner()?.lifecycle
 
 inline val View.lifecycleScope: LifecycleCoroutineScope? get() = lifecycle?.coroutineScope
+
+// ---------------------Context-------------------------------//
+
+fun Context.addDynamicShortcutCompat(id: String, shortcut: ShortcutInfoCompat) {
+  if (
+    Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1 &&
+    ShortcutManagerCompat.getDynamicShortcuts(this).any { it.id == id }.not()
+  ) {
+    try {
+      ShortcutManagerCompat.addDynamicShortcuts(this, mutableListOf(shortcut))
+    } catch (_: Exception) {
+    }
+  }
+}
 
 // ---------------------Activity-------------------------------//
 
