@@ -7,6 +7,7 @@ import io.goooler.demoapp.common.base.BaseRxViewModel
 import io.goooler.demoapp.common.type.CommonConstants
 import io.goooler.demoapp.main.model.MainCommonVhModel
 import io.goooler.demoapp.main.repository.MainCommonRepository
+import java.util.Collections
 import javax.inject.Inject
 
 @HiltViewModel
@@ -36,6 +37,16 @@ class MainSrlViewModel @Inject constructor(private val repository: MainCommonRep
   fun loadMore() {
     page++
     fetchListData(page)
+  }
+
+  fun swapItems(fromPosition: Int, toPosition: Int) {
+    Collections.swap(_listData, fromPosition, toPosition)
+    listData.value = _listData
+  }
+
+  fun deleteItem(position: Int) {
+    _listData.removeAt(position)
+    listData.value = _listData
   }
 
   private fun fetchListData(page: Int) {

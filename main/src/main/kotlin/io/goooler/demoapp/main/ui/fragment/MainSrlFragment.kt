@@ -1,9 +1,11 @@
 package io.goooler.demoapp.main.ui.fragment
 
 import android.view.View
+import androidx.recyclerview.widget.ItemTouchHelper
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 import dagger.hilt.android.AndroidEntryPoint
+import io.goooler.demoapp.adapter.rv.core.ItemTouchHelperCallback
 import io.goooler.demoapp.base.util.unsafeLazy
 import io.goooler.demoapp.common.base.BaseThemeLazyFragment
 import io.goooler.demoapp.common.util.enableRefreshAndLoadMore
@@ -37,11 +39,14 @@ class MainSrlFragment : BaseThemeLazyFragment<MainSrlFragmentBinding>() {
       it.refreshLayout.setOnRefreshLoadMoreListener(listener)
       it.rvList.adapter = rvAdapter
     }
+    ItemTouchHelper(ItemTouchHelperCallback(listener, itemViewSwipeEnabled = true))
+      .attachToRecyclerView(binding.rvList)
   }
 
   private val listener = object :
     MainSrlRvAdapter.OnEventListener,
     OnRefreshLoadMoreListener,
+    ItemTouchHelperCallback.ItemChangeListener,
     View.OnClickListener {
     override fun onContentClick(content: String) {
       content.showToast()
@@ -53,6 +58,14 @@ class MainSrlFragment : BaseThemeLazyFragment<MainSrlFragmentBinding>() {
 
     override fun onLoadMore(refreshLayout: RefreshLayout) {
       vm.loadMore()
+    }
+
+    override fun onItemMove(fromPosition: Int, toPosition: Int) {
+      vm.swapItems(fromPosition, toPosition)
+    }
+
+    override fun onItemDismiss(position: Int) {
+      vm.deleteItem(position)
     }
 
     override fun onClick(v: View) {
