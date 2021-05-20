@@ -122,7 +122,7 @@ inline fun <reified T : BaseExtension> Project.setupBase(
     kotlinOptions {
       jvmTarget = JavaVersion.VERSION_11.toString()
       freeCompilerArgs = listOf(
-        "-Xjvm-default=all-compatibility"
+        "-Xjvm-default=all"
       )
     }
     lintOptions {
