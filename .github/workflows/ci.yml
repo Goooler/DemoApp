@@ -25,7 +25,7 @@ jobs:
           path: ~/.gradle/caches
           key: gradle-${{ runner.os }}-${{ hashFiles('**/**.gradle.kts', '**/gradle/wrapper/gradle-wrapper.properties', '**/buildSrc/src/main/kotlin/**.kt') }}
       - name: Check style
-        run: ./gradlew lintKotlin
+        run: chmod +x ./gradlew & ./gradlew lintKotlin
   build:
     name: Build
     runs-on: ubuntu-latest
@@ -41,4 +41,4 @@ jobs:
           path: ~/.gradle/caches
           key: gradle-${{ runner.os }}-${{ hashFiles('**/**.gradle.kts', '**/gradle/wrapper/gradle-wrapper.properties', '**/buildSrc/src/main/kotlin/**.kt') }}
       - name: Build
-        run: ./gradlew --parallel app:assembleOnlineRelease
+        run: chmod +x ./gradlew & ./gradlew --parallel app:assembleOnlineRelease
