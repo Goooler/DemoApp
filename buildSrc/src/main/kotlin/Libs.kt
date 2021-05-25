@@ -12,7 +12,7 @@ private const val objectBoxVersion = "2.9.1"
 private const val protocVersion = "3.15.4"
 private const val coilVersion = "1.2.1"
 private const val roomVersion = "2.3.0"
-private const val hiltVersion = "2.35.1"
+private const val hiltVersion = "2.36"
 private const val dataStoreVersion = "1.0.0-alpha07"
 private const val doraemonKitVersion = "3.3.5"
 private const val chuckerVersion = "3.4.0"
@@ -142,7 +142,7 @@ object Libs {
     "com.scwang.smart:refresh-footer-classics:$smartRefreshLayoutVersion"
   )
   val gson = arrayOf(
-    "com.google.code.gson:gson:2.8.6",
+    "com.google.code.gson:gson:2.8.7",
     "com.squareup.retrofit2:converter-gson:$retrofitVersion"
   )
   val moshi = arrayOf(
