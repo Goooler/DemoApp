@@ -39,7 +39,3 @@ enum class ApiKey(val key: String) {
   AmapDebug("419ff22368500a49f0d894ac80d08725"),
   AmapRelease("ab0ee784fe95f3de2af3db07e11c37ed")
 }
-
-enum class GradleTask(val task: String) {
-  Clean("clean")
-}

@@ -5,7 +5,6 @@ import com.android.build.gradle.BaseExtension
 import com.android.build.gradle.LibraryExtension
 import com.android.build.gradle.internal.api.ApkVariantOutputImpl
 import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
-import org.gradle.api.InvalidUserDataException
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 import org.gradle.api.artifacts.Dependency
@@ -67,11 +66,6 @@ fun PluginAware.applyPlugins(vararg names: String) {
   apply {
     names.forEach(::plugin)
   }
-}
-
-fun ExtensionAware.getExtra(name: String): Any {
-  return extensions.extraProperties[name]
-    ?: throw InvalidUserDataException("ExtraProperty $name is null")
 }
 
 fun VariantDimension.putBuildConfigStringField(name: String, value: String?) {

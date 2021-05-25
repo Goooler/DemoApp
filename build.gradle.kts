@@ -11,8 +11,8 @@ buildscript {
     gradlePluginPortal()
   }
   classpaths(
-    rootProject.getExtra("androidGradlePlugin"),
-    rootProject.getExtra("kotlinPlugin"),
+    rootProject.extra["androidGradlePlugin"].toString(),
+    rootProject.extra["kotlinPlugin"].toString(),
     Libs.hiltPlugin,
     Libs.arouterPlugin,
     Libs.kotlinterPlugin,
@@ -43,7 +43,7 @@ tasks {
   withType<Detekt>().configureEach {
     jvmTarget = JavaVersion.VERSION_1_8.toString()
   }
-  create<Delete>(GradleTask.Clean.task) {
+  create<Delete>("clean") {
     delete(rootProject.buildDir)
   }
 }
