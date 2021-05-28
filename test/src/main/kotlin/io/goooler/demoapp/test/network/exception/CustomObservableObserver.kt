@@ -8,7 +8,7 @@ abstract class CustomObservableObserver<T : BaseResponse> :
   CustomObserver<T> {
 
   override fun onNext(t: T) {
-    if (t.status && t.code == 200)
+    if (t.code == 200)
       onCustomSuccess(t)
     else
       onCustomError((t.message ?: t.code.toString()).toResponseException())

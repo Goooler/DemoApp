@@ -40,7 +40,6 @@ import io.goooler.demoapp.common.BuildConfig
 import io.goooler.demoapp.common.CommonApplication
 import io.goooler.demoapp.common.base.BaseThemeViewModel
 import io.goooler.demoapp.common.base.ITheme
-import io.goooler.demoapp.common.network.HttpResponse
 import io.goooler.demoapp.common.type.SpKeys
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
@@ -79,14 +78,6 @@ fun @receiver:StringRes Int.showToast() {
 @AnyThread
 fun String.showToast() {
   ToastUtil.show(CommonApplication.app, this)
-}
-
-fun HttpResponse<*>.checkStatusAndEntry() = status && entry != null
-
-fun HttpResponse<*>.checkStatusAndEntryWithToast(): Boolean {
-  return checkStatusAndEntry().also {
-    if (it.not()) message?.showToast()
-  }
 }
 
 @MainThread
