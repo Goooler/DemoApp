@@ -1,3 +1,5 @@
+@file:Suppress("MemberVisibilityCanBePrivate")
+
 package io.goooler.demoapp.base.core
 
 import android.content.DialogInterface

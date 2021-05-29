@@ -1,4 +1,4 @@
-@file:Suppress("unused")
+@file:Suppress("unused", "DEPRECATION", "MemberVisibilityCanBePrivate")
 
 package io.goooler.demoapp.base.util
 
@@ -7,7 +7,6 @@ import android.media.AudioManager
 import android.os.Build
 import androidx.core.content.getSystemService
 
-@Suppress("DEPRECATION")
 object AudioUtil {
 
   /**
