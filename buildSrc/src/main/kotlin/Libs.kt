@@ -86,11 +86,11 @@ object Libs {
   const val kotlinterPlugin = "org.jmailen.gradle:kotlinter-gradle:3.4.4"
   const val detektPlugin = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.17.1"
 
-  const val objectBoxApt = "io.objectbox:objectbox-processor:$objectBoxVersion"
-  const val roomApt = "androidx.room:room-compiler:$roomVersion"
-  const val arouterApt = "com.alibaba:arouter-compiler:$arouterVersion"
-  const val moshiApt = "com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion"
-  val hiltApt = arrayOf(
+  const val objectBoxCompiler = "io.objectbox:objectbox-processor:$objectBoxVersion"
+  const val roomCompiler = "androidx.room:room-compiler:$roomVersion"
+  const val arouterCompiler = "com.alibaba:arouter-compiler:$arouterVersion"
+  const val moshiCompiler = "com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion"
+  val hiltCompiler = arrayOf(
     "com.google.dagger:hilt-android-compiler:$hiltVersion",
     "androidx.hilt:hilt-compiler:1.0.0"
   )

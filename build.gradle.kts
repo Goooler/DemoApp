@@ -11,7 +11,7 @@ buildscript {
     gradlePluginPortal()
   }
   classpaths(
-    rootProject.extra["androidGradlePlugin"].toString(),
+    rootProject.extra["androidPlugin"].toString(),
     rootProject.extra["kotlinPlugin"].toString(),
     Libs.hiltPlugin,
     Libs.arouterPlugin,
