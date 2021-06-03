@@ -48,7 +48,7 @@ object Libs {
   const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.0.4"
   const val coordinatorLayout = "androidx.coordinatorlayout:coordinatorlayout:1.1.0"
   const val material = "com.google.android.material:material:1.3.0"
-  const val recyclerView = "androidx.recyclerview:recyclerview:1.2.0"
+  const val recyclerView = "androidx.recyclerview:recyclerview:1.2.1"
   const val workManager = "androidx.work:work-runtime-ktx:2.4.0"
   const val flexBox = "com.google.android:flexbox:2.0.1"
   const val cardView = "androidx.cardview:cardview:1.0.0"
@@ -165,7 +165,7 @@ object Libs {
     "io.objectbox:objectbox-kotlin:$objectBoxVersion"
   )
   val rx = arrayOf(
-    "io.reactivex.rxjava3:rxjava:3.0.12",
+    "io.reactivex.rxjava3:rxjava:3.0.13",
     "io.reactivex.rxjava3:rxandroid:3.0.0",
     "com.squareup.retrofit2:adapter-rxjava3:$retrofitVersion"
   )
