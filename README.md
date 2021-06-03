@@ -40,7 +40,7 @@
 - [x] [Retrofit](https://github.com/square/retrofit/releases)
 - [x] [Moshi](https://github.com/square/moshi/releases)
 - [x] [LeakCanary](https://github.com/square/leakcanary/releases)
-- [x] [DoraemonKit](https://github.com/didi/DoraemonKit/releases)
+- [ ] [DoraemonKit](https://github.com/didi/DoraemonKit/releases)
 - [x] [Chucker](https://github.com/ChuckerTeam/chucker/releases)
 - [x] [Coil](https://github.com/coil-kt/coil/releases)
 - [x] [Glide](https://github.com/bumptech/glide/releases)

@@ -16,11 +16,9 @@ dependencies {
   )
   debugImplementations(
     Libs.leakCanary,
-    Libs.doraemonKitDebug,
     Libs.chuckerDebug
   )
   releaseImplementations(
-    Libs.doraemonKitRelease,
     Libs.chuckerRelease
   )
 }

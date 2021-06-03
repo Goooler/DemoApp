@@ -2,7 +2,6 @@ package io.goooler.demoapp.common
 
 import android.webkit.WebView
 import com.alibaba.android.arouter.launcher.ARouter
-import com.didichuxing.doraemonkit.DoraemonKit
 import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
@@ -21,7 +20,6 @@ abstract class CommonApplication : BaseApplication() {
     initImageLoader()
     initWebView()
     initSmartRefresh()
-    initDoKit()
   }
 
   private fun initArouter() {
@@ -30,10 +28,6 @@ abstract class CommonApplication : BaseApplication() {
       ARouter.openDebug()
     }
     ARouter.init(this)
-  }
-
-  private fun initDoKit() {
-    DoraemonKit.install(this, BuildConfig.DORAEMON_KIT_KEY)
   }
 
   private fun initImageLoader() {
