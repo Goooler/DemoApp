@@ -6,7 +6,6 @@ enum class Module(val tag: String, val runAlone: Boolean = false) {
   Common("common"),
 
   //---------------------biz-------------------------------//
-  Compose("compose"),
   Login("login"),
   Main("main"),
   Map("map"),

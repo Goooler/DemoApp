@@ -44,7 +44,6 @@ class MainHomeFragment : BaseThemeLazyFragment<MainHomeFragmentBinding>() {
     when (it) {
       binding.bt1 -> RouterManager.goWeb("bilibili.com")
       binding.bt2 -> RouterManager.goMap()
-      binding.bt3 -> RouterManager.goCompose()
       binding.bt4 -> countdown()
       binding.bt5 -> RouterManager.goWidget()
       binding.bt6 -> FullScreenDialogFragment.show(childFragmentManager)

@@ -13,8 +13,6 @@ private const val roomVersion = "2.3.0"
 private const val hiltVersion = "2.36"
 private const val doraemonKitVersion = "3.3.5"
 private const val chuckerVersion = "3.4.0"
-private const val accompanistVersion = "0.6.2"
-const val composeVersion = "1.0.0-beta05"
 
 object Plugins {
   const val kotlinAndroid = "kotlin-android"
@@ -75,24 +73,6 @@ object Libs {
   val hiltCompiler = arrayOf(
     "com.google.dagger:hilt-android-compiler:$hiltVersion",
     "androidx.hilt:hilt-compiler:1.0.0"
-  )
-
-  val compose = arrayOf(
-    "androidx.activity:activity-compose:1.3.0-alpha07",
-    "androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha04",
-    "androidx.compose.foundation:foundation:$composeVersion",
-    "androidx.compose.foundation:foundation-layout:$composeVersion",
-    "androidx.compose.material:material:$composeVersion",
-    "androidx.compose.ui:ui:$composeVersion",
-    "androidx.compose.ui:ui-tooling:$composeVersion",
-    "androidx.compose.ui:ui-util:$composeVersion"
-  )
-  val accompanist = arrayOf(
-    "com.google.accompanist:accompanist-coil:$accompanistVersion",
-    "com.google.accompanist:accompanist-insets:$accompanistVersion",
-    "com.google.accompanist:accompanist-appcompat-theme:$accompanistVersion",
-    "com.google.accompanist:accompanist-systemuicontroller:$accompanistVersion",
-    "com.google.accompanist:accompanist-pager:$accompanistVersion"
   )
   val lifecycle = arrayOf(
     "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion",

@@ -15,7 +15,7 @@
 - [ ] [DataStore](https://developer.android.com/jetpack/androidx/releases/datastore)
 - [x] [Hilt](https://developer.android.com/jetpack/androidx/releases/hilt)
 - [ ] [WorkManager](https://developer.android.com/jetpack/androidx/releases/work)
-- [x] [Compose](https://developer.android.com/jetpack/androidx/releases/compose)
+- [ ] [Compose](https://developer.android.com/jetpack/androidx/releases/compose)
 - [x] [ConstraintLayout](https://developer.android.com/jetpack/androidx/releases/constraintlayout)
 - [ ] [MotionLayout](https://developer.android.com/training/constraint-layout/motionlayout)
 - [x] [CoordinatorLayout](https://developer.android.com/jetpack/androidx/releases/coordinatorlayout)
