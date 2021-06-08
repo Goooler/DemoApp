@@ -1,7 +1,5 @@
 import io.gitlab.arturbosch.detekt.Detekt
 import io.gitlab.arturbosch.detekt.extensions.DetektExtension
-import org.jmailen.gradle.kotlinter.KotlinterExtension
-import org.jmailen.gradle.kotlinter.support.ReporterType
 
 buildscript {
   apply(extraScriptPath)
@@ -28,10 +26,6 @@ allprojects {
     Plugins.picCompress,
     Plugins.customTrans
   )
-  configure<KotlinterExtension> {
-    indentSize = 2
-    reporters = arrayOf(ReporterType.html.name)
-  }
   configure<DetektExtension> {
     parallel = true
     buildUponDefaultConfig = true
