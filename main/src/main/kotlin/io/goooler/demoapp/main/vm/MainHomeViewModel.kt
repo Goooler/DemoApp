@@ -10,7 +10,6 @@ import io.goooler.demoapp.main.R
 import io.goooler.demoapp.main.bean.MainRepoListBean
 import io.goooler.demoapp.main.repository.MainCommonRepository
 import io.reactivex.rxjava3.core.Single
-import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -61,16 +60,13 @@ class MainHomeViewModel @Inject constructor(private val repository: MainCommonRe
     }
   }
 
-  /**
-   * 协程请求处理
-   */
   private fun requestWithCr() {
     viewModelScope.launch(Dispatchers.IO) {
       try {
         val google = defaultAsync { repository.getRepoListFromDb("google") }
         val microsoft = defaultAsync { repository.getRepoListFromDb("microsoft") }
 
-        processList(google, microsoft).collect(title::postValue)
+        processList(google.await(), microsoft.await()).collect(title::postValue)
       } catch (_: Exception) {
       }
 
@@ -78,9 +74,9 @@ class MainHomeViewModel @Inject constructor(private val repository: MainCommonRe
         val google = defaultAsync { repository.getRepoListWithCr("google") }
         val microsoft = defaultAsync { repository.getRepoListWithCr("microsoft") }
 
-        processList(google, microsoft).collect(title::postValue)
+        processList(google.await(), microsoft.await()).collect(title::postValue)
 
-        putRepoListIntoDb(google, microsoft)
+        putRepoListIntoDb(google.await(), microsoft.await())
       } catch (e: Exception) {
         title.postValue(e.message)
         R.string.common_request_failed.showToast()
@@ -88,27 +84,21 @@ class MainHomeViewModel @Inject constructor(private val repository: MainCommonRe
     }
   }
 
-  /**
-   * flow 处理事件
-   */
-  private fun processList(vararg lists: Deferred<List<MainRepoListBean>>) = flow {
+  private suspend fun processList(vararg lists: List<MainRepoListBean>) = flow {
     StringBuilder().run {
       lists.forEach {
-        append(it.await().lastOrNull()?.name).append("\n")
+        append(it.lastOrNull()?.name).append("\n")
       }
       emit(toString())
     }
   }
 
-  private suspend fun putRepoListIntoDb(vararg lists: Deferred<List<MainRepoListBean>>) {
+  private suspend fun putRepoListIntoDb(vararg lists: List<MainRepoListBean>) {
     lists.forEach {
-      repository.putRepoListIntoDb(it.await())
+      repository.putRepoListIntoDb(it)
     }
   }
 
-  /**
-   * RxJava 请求处理
-   */
   private fun requestWithRx() {
     Single.zip(
       repository.getRepoListWithRx("google"),
