@@ -11,7 +11,6 @@ private const val protocVersion = "3.15.4"
 private const val coilVersion = "1.2.2"
 private const val roomVersion = "2.3.0"
 private const val hiltVersion = "2.37"
-private const val doraemonKitVersion = "3.3.5"
 private const val chuckerVersion = "3.4.0"
 
 object Plugins {
@@ -57,8 +56,6 @@ object Libs {
   const val permissionX = "com.permissionx.guolindev:permissionx:1.4.0"
   const val browser = "androidx.browser:browser:1.3.0"
   const val webKit = "androidx.webkit:webkit:1.4.0"
-  const val doraemonKitDebug = "com.didichuxing.doraemonkit:dokitx:$doraemonKitVersion"
-  const val doraemonKitRelease = "com.didichuxing.doraemonkit:dokitx-no-op:$doraemonKitVersion"
   const val chuckerDebug = "com.github.chuckerteam.chucker:library:$chuckerVersion"
   const val chuckerRelease = "com.github.chuckerteam.chucker:library-no-op:$chuckerVersion"
 
@@ -116,11 +113,5 @@ object Libs {
     "io.reactivex.rxjava3:rxjava:3.0.13",
     "io.reactivex.rxjava3:rxandroid:3.0.0",
     "com.squareup.retrofit2:adapter-rxjava3:$retrofitVersion"
-  )
-  val amap = arrayOf(
-    //"com.amap.api:map2d:latest.integration",
-    "com.amap.api:navi-3dmap:latest.integration",
-    "com.amap.api:search:latest.integration",
-    "com.amap.api:location:latest.integration"
   )
 }
