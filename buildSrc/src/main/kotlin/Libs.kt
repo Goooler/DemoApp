@@ -61,7 +61,7 @@ object Libs {
 
   const val arouterPlugin = "com.alibaba:arouter-register:1.0.2"
   const val hiltPlugin = "com.google.dagger:hilt-android-gradle-plugin:$hiltVersion"
-  const val kotlinterPlugin = "org.jmailen.gradle:kotlinter-gradle:3.4.4"
+  const val kotlinterPlugin = "org.jmailen.gradle:kotlinter-gradle:3.4.5"
   const val detektPlugin = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.17.1"
 
   const val roomCompiler = "androidx.room:room-compiler:$roomVersion"
