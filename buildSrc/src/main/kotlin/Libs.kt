@@ -22,7 +22,6 @@ object Plugins {
   const val hilt = "dagger.hilt.android.plugin"
   const val arouter = "com.alibaba.arouter"
   const val kotlinter = "org.jmailen.kotlinter"
-  const val detekt = "io.gitlab.arturbosch.detekt"
   const val picCompress = "io.goooler.android.plugin.pic-compress"
   const val customTrans = "io.goooler.android.plugin.custom-trans"
 }
@@ -62,7 +61,6 @@ object Libs {
   const val arouterPlugin = "com.alibaba:arouter-register:1.0.2"
   const val hiltPlugin = "com.google.dagger:hilt-android-gradle-plugin:$hiltVersion"
   const val kotlinterPlugin = "org.jmailen.gradle:kotlinter-gradle:3.4.5"
-  const val detektPlugin = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.17.1"
 
   const val roomCompiler = "androidx.room:room-compiler:$roomVersion"
   const val arouterCompiler = "com.alibaba:arouter-compiler:$arouterVersion"
