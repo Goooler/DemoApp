@@ -126,6 +126,14 @@ inline fun <reified T : BaseExtension> Project.setupBase(
     dependencies {
       // local
       implementations(fileTree(mapOf("dir" to "libs", "include" to arrayOf("*.jar", "*.aar"))))
+      testImplementations(
+        "junit:junit:4.13.2",
+        "org.robolectric:robolectric:4.5.1"
+      )
+      androidTestImplementations(
+        "androidx.test.ext:junit:1.1.2",
+        "androidx.test.espresso:espresso-core:3.3.0"
+      )
     }
     (this as T).block()
   }
