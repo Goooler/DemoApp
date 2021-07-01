@@ -11,7 +11,7 @@ private const val protocVersion = "3.15.4"
 private const val coilVersion = "1.2.2"
 private const val roomVersion = "2.3.0"
 private const val hiltVersion = "2.37"
-private const val chuckerVersion = "3.4.0"
+private const val chuckerVersion = "3.5.0"
 
 object Plugins {
   const val kotlinAndroid = "kotlin-android"
@@ -28,14 +28,14 @@ object Plugins {
 
 object Libs {
   const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0"
-  const val core = "androidx.core:core-ktx:1.5.0"
+  const val core = "androidx.core:core-ktx:1.6.0"
   const val appCompat = "androidx.appcompat:appcompat:1.3.0"
   const val annotation = "androidx.annotation:annotation:1.2.0"
   const val activity = "androidx.activity:activity-ktx:1.2.3"
   const val fragment = "androidx.fragment:fragment-ktx:1.3.5"
   const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.0.4"
   const val coordinatorLayout = "androidx.coordinatorlayout:coordinatorlayout:1.1.0"
-  const val material = "com.google.android.material:material:1.3.0"
+  const val material = "com.google.android.material:material:1.4.0"
   const val recyclerView = "androidx.recyclerview:recyclerview:1.2.1"
   const val cardView = "androidx.cardview:cardview:1.0.0"
   const val collection = "androidx.collection:collection-ktx:1.1.0"
@@ -68,6 +68,15 @@ object Libs {
   val hiltCompiler = arrayOf(
     "com.google.dagger:hilt-android-compiler:$hiltVersion",
     "androidx.hilt:hilt-compiler:1.0.0"
+  )
+
+  val tests = arrayOf(
+    "junit:junit:4.13.2",
+    "org.robolectric:robolectric:4.6.1"
+  )
+  val androidTests = arrayOf(
+    "androidx.test.ext:junit:1.1.3",
+    "androidx.test.espresso:espresso-core:3.4.0"
   )
   val lifecycle = arrayOf(
     "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion",
