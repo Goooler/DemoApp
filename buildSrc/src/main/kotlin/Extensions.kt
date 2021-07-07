@@ -31,6 +31,7 @@ val apiHosts = mapOf(
 const val appPackageName = "io.goooler.demoapp"
 const val appName = "Demo"
 const val extraScriptPath = "gradle/extra.gradle"
+val javaVersion = JavaVersion.VERSION_11
 
 val gitCommitCount: String by lazy { "git describe --tags".exec() }
 val gitCommitDescribe: Int by lazy { "git rev-list HEAD --count".exec().toInt() }
@@ -109,16 +110,32 @@ inline fun <reified T : BaseExtension> Project.setupBase(
       }
     }
     buildFeatures.buildConfig = false
-    compileOptions {
-      sourceCompatibility = JavaVersion.VERSION_11
-      targetCompatibility = JavaVersion.VERSION_11
-    }
+    compileOptions.setDefaultJavaVersion(javaVersion)
     kotlinOptions {
-      jvmTarget = JavaVersion.VERSION_11.toString()
+      jvmTarget = javaVersion.toString()
       freeCompilerArgs = listOf(
         "-Xjvm-default=all"
       )
     }
+    packagingOptions.resources.excludes += setOf(
+      "**/*.proto",
+      "**/*.bin",
+      "**/*.java",
+      "**/*.properties",
+      "**/*.version",
+      "**/*.*_module",
+      "*.txt",
+      "META-INF/services/**",
+      "META-INF/com/**",
+      "META-INF/licenses/**",
+      "META-INF/AL2.0",
+      "META-INF/LGPL2.1",
+      "com/**",
+      "kotlin/**",
+      "kotlinx/**",
+      "okhttp3/**",
+      "google/**"
+    )
     lintOptions {
       isAbortOnError = true
       isCheckReleaseBuilds = true
@@ -164,25 +181,6 @@ fun Project.setupApp(
         signingConfig = signingConfigs["sign"]
         isMinifyEnabled = true
         proguardFiles("${rootDir.path}/gradle/proguard-rules.pro")
-        packagingOptions.resources.excludes += setOf(
-          "**/*.proto",
-          "**/*.bin",
-          "**/*.java",
-          "**/*.properties",
-          "**/*.version",
-          "**/*.*_module",
-          "*.txt",
-          "META-INF/services/**",
-          "META-INF/com/**",
-          "META-INF/licenses/**",
-          "META-INF/AL2.0",
-          "META-INF/LGPL2.1",
-          "com/**",
-          "kotlin/**",
-          "kotlinx/**",
-          "okhttp3/**",
-          "google/**"
-        )
       }
       debug {
         resValue("string", "app_name", "${appName}.debug")
