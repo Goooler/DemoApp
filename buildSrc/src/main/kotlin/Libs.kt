@@ -8,10 +8,10 @@ private const val moshiVersion = "1.12.0"
 private const val smartRefreshLayoutVersion = "2.0.3"
 private const val glideVersion = "4.12.0"
 private const val protocVersion = "3.15.4"
-private const val coilVersion = "1.2.2"
+private const val coilVersion = "1.3.0"
 private const val roomVersion = "2.3.0"
 private const val hiltVersion = "2.37"
-private const val chuckerVersion = "3.5.0"
+private const val chuckerVersion = "3.5.1"
 
 object Plugins {
   const val kotlinAndroid = "kotlin-android"
@@ -27,7 +27,7 @@ object Plugins {
 }
 
 object Libs {
-  const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0"
+  const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.1"
   const val core = "androidx.core:core-ktx:1.6.0"
   const val appCompat = "androidx.appcompat:appcompat:1.3.0"
   const val annotation = "androidx.annotation:annotation:1.2.0"
