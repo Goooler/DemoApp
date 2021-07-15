@@ -95,11 +95,11 @@ inline fun <reified T : BaseExtension> Project.setupBase(
 
   applyPlugins(Plugins.kotlinAndroid, Plugins.kotlinKapt)
   extensions.configure<BaseExtension>("android") {
-    compileSdkVersion(30)
-    buildToolsVersion = "30.0.3"
+    compileSdkVersion(31)
+    buildToolsVersion = "31.0.0"
     defaultConfig {
       minSdk = 21
-      targetSdk = 30
+      targetSdk = 31
       versionCode = gitCommitDescribe
       versionName = gitCommitCount
       vectorDrawables.useSupportLibrary = true
