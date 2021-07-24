@@ -9,7 +9,7 @@ private const val smartRefreshLayoutVersion = "2.0.3"
 private const val glideVersion = "4.12.0"
 private const val coilVersion = "1.3.0"
 private const val roomVersion = "2.3.0"
-private const val hiltVersion = "2.37"
+private const val hiltVersion = "2.38.1"
 private const val chuckerVersion = "3.5.1"
 
 object Plugins {
@@ -62,10 +62,7 @@ object Libs {
   const val roomCompiler = "androidx.room:room-compiler:$roomVersion"
   const val arouterCompiler = "com.alibaba:arouter-compiler:$arouterVersion"
   const val moshiCompiler = "com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion"
-  val hiltCompiler = arrayOf(
-    "com.google.dagger:hilt-android-compiler:$hiltVersion",
-    "androidx.hilt:hilt-compiler:1.0.0"
-  )
+  const val hiltCompiler = "com.google.dagger:hilt-android-compiler:$hiltVersion"
 
   val tests = arrayOf(
     "junit:junit:4.13.2",
