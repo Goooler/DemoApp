@@ -2,7 +2,7 @@ import java.nio.charset.StandardCharsets
 import java.util.concurrent.TimeUnit
 
 ext {
-  androidPlugin = "com.android.tools.build:gradle:7.0.0-rc01"
+  androidPlugin = "com.android.tools.build:gradle:7.0.0"
   kotlinPlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.21"
 }
 
