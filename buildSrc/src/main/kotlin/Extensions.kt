@@ -100,8 +100,6 @@ inline fun <reified T : BaseExtension> Project.setupBase(
     defaultConfig {
       minSdk = 21
       targetSdk = 31
-      versionCode = gitCommitDescribe
-      versionName = gitCommitCount
       vectorDrawables.useSupportLibrary = true
       ndk.abiFilters += setOf("armeabi-v7a")
       module?.let {
@@ -164,6 +162,8 @@ fun Project.setupApp(
   setupCommon<BaseAppModuleExtension> {
     defaultConfig {
       applicationId = appPackageName
+      versionCode = gitCommitDescribe
+      versionName = gitCommitCount
       manifestPlaceholders += mapOf("appName" to appName)
       resourceConfigurations += setOf("en", "zh-rCN", "xxhdpi")
     }
@@ -253,8 +253,6 @@ private inline fun <reified T : BaseExtension> Project.setupCommon(
 
 private fun DependencyHandler.config(operation: String, vararg names: Any): Array<Dependency?> =
   names.map { add(operation, it) }.toTypedArray()
-
-private fun Project.findPropertyString(key: String): String = property(key).toString()
 
 private fun Project.getSignProperty(
   key: String,
