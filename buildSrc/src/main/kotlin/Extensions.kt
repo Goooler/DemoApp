@@ -170,7 +170,7 @@ fun Project.setupApp(
     signingConfigs.create("sign") {
       keyAlias = getSignProperty("keyAlias")
       keyPassword = getSignProperty("keyPassword")
-      storeFile = File(rootDir.path, getSignProperty("storeFile"))
+      storeFile = File(rootDir, getSignProperty("storeFile"))
       storePassword = getSignProperty("storePassword")
       enableV3Signing = true
       enableV4Signing = true
@@ -180,7 +180,7 @@ fun Project.setupApp(
         resValue("string", "app_name", appName)
         signingConfig = signingConfigs["sign"]
         isMinifyEnabled = true
-        proguardFiles("${rootDir.path}/gradle/proguard-rules.pro")
+        proguardFiles("$rootDir/gradle/proguard-rules.pro")
       }
       debug {
         resValue("string", "app_name", "${appName}.debug")

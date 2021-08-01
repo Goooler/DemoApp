@@ -15,7 +15,7 @@ buildscript {
 }
 
 allprojects {
-  apply("${rootDir.path}/$extraScriptPath")
+  apply("$rootDir/$extraScriptPath")
   applyPlugins(
     Plugins.kotlinter,
     Plugins.picCompress,
