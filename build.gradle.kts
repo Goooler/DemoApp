@@ -27,4 +27,7 @@ tasks {
   create<Delete>("clean") {
     delete(rootProject.buildDir)
   }
+  wrapper {
+    distributionType = Wrapper.DistributionType.ALL
+  }
 }
