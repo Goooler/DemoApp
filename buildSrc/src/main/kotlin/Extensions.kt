@@ -174,7 +174,7 @@ fun Project.setupApp(
       manifestPlaceholders += mapOf("appName" to appName)
       resourceConfigurations += setOf("en", "zh-rCN", "xxhdpi")
     }
-    signingConfigs.create("sign") {
+    signingConfigs.create("release") {
       keyAlias = getSignProperty("keyAlias")
       keyPassword = getSignProperty("keyPassword")
       storeFile = File(rootDir, getSignProperty("storeFile"))
@@ -185,13 +185,13 @@ fun Project.setupApp(
     buildTypes {
       release {
         resValue("string", "app_name", appName)
-        signingConfig = signingConfigs["sign"]
+        signingConfig = signingConfigs["release"]
         isMinifyEnabled = true
         proguardFiles("$rootDir/gradle/proguard-rules.pro")
       }
       debug {
         resValue("string", "app_name", "${appName}.debug")
-        signingConfig = signingConfigs["sign"]
+        signingConfig = signingConfigs["release"]
         applicationIdSuffix = ".debug"
         versionNameSuffix = ".debug"
         isJniDebuggable = true
