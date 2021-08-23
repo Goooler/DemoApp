@@ -1,5 +1,6 @@
 @file:Suppress("unused")
 @file:JvmName("BaseExtensionUtil")
+@file:OptIn(ExperimentalContracts::class)
 
 package io.goooler.demoapp.base.util
 
@@ -20,6 +21,7 @@ import android.view.View
 import android.webkit.URLUtil
 import androidx.annotation.ColorInt
 import androidx.annotation.IdRes
+import androidx.annotation.IntRange
 import androidx.annotation.LayoutRes
 import androidx.annotation.MainThread
 import androidx.core.content.pm.ShortcutInfoCompat
@@ -53,6 +55,8 @@ import java.math.BigDecimal
 import java.net.URLConnection
 import java.util.Collections
 import java.util.UUID
+import kotlin.contracts.ExperimentalContracts
+import kotlin.contracts.contract
 
 // ---------------------Types-------------------------------//
 
@@ -109,7 +113,13 @@ fun String.onlyDigits(): String = replace(Regex("\\D*"), "")
 
 fun String.removeAllSpecialCharacters(): String = replace(Regex("[^a-zA-Z]+"), "")
 
-fun CharSequence?.isNotNullOrEmpty(): Boolean = isNullOrEmpty().not()
+@OptIn(ExperimentalContracts::class)
+fun CharSequence?.isNotNullOrEmpty(): Boolean {
+  contract {
+    returns(true) implies (this@isNotNullOrEmpty != null)
+  }
+  return this.isNullOrEmpty().not()
+}
 
 fun Spannable.withClickableSpan(clickablePart: String, onClickListener: () -> Unit): Spannable {
   val clickableSpan = object : ClickableSpan() {
@@ -259,18 +269,34 @@ fun Boolean?.orFalse(): Boolean = this ?: false
 
 // ---------------------Collections-------------------------------//
 
-fun <T> Collection<T>?.isNotNullOrEmpty(): Boolean = isNullOrEmpty().not()
+@OptIn(ExperimentalContracts::class)
+fun <T> Collection<T>?.isNotNullOrEmpty(): Boolean {
+  contract {
+    returns(true) implies (this@isNotNullOrEmpty != null)
+  }
+  return this.isNullOrEmpty().not()
+}
 
 /**
  * 判断集合内是否仅有一个元素
  */
-fun <T> Collection<T>?.isSingle(): Boolean = this != null && size == 1
+@OptIn(ExperimentalContracts::class)
+fun <T> Collection<T>?.isSingle(): Boolean {
+  contract {
+    returns(true) implies (this@isSingle != null)
+  }
+  return this != null && size == 1
+}
 
 /**
  * 判断集合内是否有多个元素
  * @param minSize 最小为 2
  */
-fun <T> Collection<T>?.isMultiple(minSize: Int = 2): Boolean {
+@OptIn(ExperimentalContracts::class)
+fun <T> Collection<T>?.isMultiple(@IntRange(from = 2) minSize: Int = 2): Boolean {
+  contract {
+    returns(true) implies (this@isMultiple != null)
+  }
   val min = if (minSize < 2) 2 else minSize
   return this != null && size >= min
 }

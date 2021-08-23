@@ -114,6 +114,7 @@ inline fun <reified T : BaseExtension> Project.setupBase(
       freeCompilerArgs = listOf(
         // https://kotlinlang.org/docs/compiler-reference.html#progressive
         "-progressive",
+        "-Xopt-in=kotlin.RequiresOptIn",
         // Generate native Java 8 default interface methods.
         "-Xjvm-default=all",
         // Generate smaller bytecode by not generating runtime not-null assertions.
