@@ -57,7 +57,7 @@ object Libs {
 
   const val arouterPlugin = "com.alibaba:arouter-register:1.0.2"
   const val hiltPlugin = "com.google.dagger:hilt-android-gradle-plugin:$hiltVersion"
-  const val kotlinterPlugin = "org.jmailen.gradle:kotlinter-gradle:3.5.0"
+  const val kotlinterPlugin = "org.jmailen.gradle:kotlinter-gradle:3.5.1"
 
   const val roomCompiler = "androidx.room:room-compiler:$roomVersion"
   const val arouterCompiler = "com.alibaba:arouter-compiler:$arouterVersion"
@@ -92,7 +92,7 @@ object Libs {
     "com.scwang.smart:refresh-footer-classics:$smartRefreshLayoutVersion"
   )
   val gson = arrayOf(
-    "com.google.code.gson:gson:2.8.7",
+    "com.google.code.gson:gson:2.8.8",
     "com.squareup.retrofit2:converter-gson:$retrofitVersion"
   )
   val moshi = arrayOf(
