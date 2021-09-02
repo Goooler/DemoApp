@@ -26,7 +26,7 @@ object Plugins {
 }
 
 object Libs {
-  const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.1"
+  const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2"
   const val core = "androidx.core:core-ktx:1.6.0"
   const val appCompat = "androidx.appcompat:appcompat:1.3.1"
   const val annotation = "androidx.annotation:annotation:1.2.0"
@@ -57,7 +57,7 @@ object Libs {
 
   const val arouterPlugin = "com.alibaba:arouter-register:1.0.2"
   const val hiltPlugin = "com.google.dagger:hilt-android-gradle-plugin:$hiltVersion"
-  const val kotlinterPlugin = "org.jmailen.gradle:kotlinter-gradle:3.5.1"
+  const val kotlinterPlugin = "org.jmailen.gradle:kotlinter-gradle:3.6.0"
 
   const val roomCompiler = "androidx.room:room-compiler:$roomVersion"
   const val arouterCompiler = "com.alibaba:arouter-compiler:$arouterVersion"
@@ -111,7 +111,7 @@ object Libs {
     "com.github.Commit451.coil-transformations:transformations:1.0.0"
   )
   val rx = arrayOf(
-    "io.reactivex.rxjava3:rxjava:3.1.0",
+    "io.reactivex.rxjava3:rxjava:3.1.1",
     "io.reactivex.rxjava3:rxandroid:3.0.0",
     "com.squareup.retrofit2:adapter-rxjava3:$retrofitVersion"
   )
