@@ -2,7 +2,6 @@ package io.goooler.demoapp.common.base
 
 import android.content.res.Resources
 import android.os.Bundle
-import androidx.annotation.CallSuper
 import androidx.annotation.MainThread
 import androidx.databinding.ViewDataBinding
 import com.blankj.utilcode.util.AdaptScreenUtils
@@ -17,7 +16,6 @@ abstract class BaseThemeActivity<VB : ViewDataBinding> :
 
   protected lateinit var binding: VB
 
-  @CallSuper
   override fun getResources(): Resources {
     return if (ScreenUtils.isPortrait())
       AdaptScreenUtils.adaptWidth(super.getResources(), 360)
@@ -25,7 +23,6 @@ abstract class BaseThemeActivity<VB : ViewDataBinding> :
       AdaptScreenUtils.adaptHeight(super.getResources(), 640)
   }
 
-  @CallSuper
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     binding = (inflateBinding(layoutInflater) as VB).also {

@@ -1,6 +1,5 @@
 package io.goooler.demoapp.common.base
 
-import androidx.annotation.CallSuper
 import androidx.annotation.MainThread
 import androidx.lifecycle.LifecycleOwner
 import io.reactivex.rxjava3.disposables.CompositeDisposable
@@ -11,7 +10,6 @@ abstract class BaseRxViewModel : BaseThemeViewModel() {
 
   private val compositeDisposable = CompositeDisposable()
 
-  @CallSuper
   @MainThread
   override fun onDestroy(owner: LifecycleOwner) {
     compositeDisposable.clear()

@@ -2,7 +2,6 @@
 
 package io.goooler.demoapp.base.core
 
-import androidx.annotation.CallSuper
 import androidx.annotation.MainThread
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentStatePagerAdapter
@@ -19,13 +18,11 @@ import androidx.viewpager.widget.ViewPager
 @Suppress("unused")
 abstract class BaseLazyFragment : BaseFragment(), ILazyFragment {
 
-  @CallSuper
   override fun onResume() {
     super.onResume()
     onFragmentResume()
   }
 
-  @CallSuper
   override fun onPause() {
     super.onPause()
     onFragmentPause()

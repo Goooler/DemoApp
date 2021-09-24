@@ -2,7 +2,6 @@ package io.goooler.demoapp.base.core
 
 import android.app.Notification
 import android.app.NotificationManager
-import androidx.annotation.CallSuper
 import androidx.annotation.DrawableRes
 import androidx.annotation.IntRange
 import androidx.core.app.NotificationChannelCompat
@@ -41,7 +40,6 @@ abstract class BaseService : LifecycleService() {
       channelId.toString(), @Suppress("InlinedApi") NotificationManager.IMPORTANCE_MIN
     ).setName(channelName).build()
 
-  @CallSuper
   override fun onCreate() {
     super.onCreate()
     NotificationManagerCompat.from(this).createNotificationChannel(channel)
