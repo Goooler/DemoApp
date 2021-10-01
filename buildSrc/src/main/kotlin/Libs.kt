@@ -1,15 +1,15 @@
 @file:Suppress("SpellCheckingInspection")
 
 private const val lifecycleVersion = "2.3.1"
-private const val okHttpVersion = "4.9.1"
+private const val okHttpVersion = "4.9.2"
 private const val retrofitVersion = "2.9.0"
 private const val arouterVersion = "1.5.2"
 private const val moshiVersion = "1.12.0"
 private const val smartRefreshLayoutVersion = "2.0.3"
 private const val glideVersion = "4.12.0"
-private const val coilVersion = "1.3.2"
+private const val coilVersion = "1.4.0"
 private const val roomVersion = "2.3.0"
-private const val hiltVersion = "2.38.1"
+private const val hiltVersion = "2.39.1"
 private const val chuckerVersion = "3.5.2"
 
 object Plugins {
@@ -32,7 +32,7 @@ object Libs {
   const val annotation = "androidx.annotation:annotation:1.2.0"
   const val activity = "androidx.activity:activity-ktx:1.3.1"
   const val fragment = "androidx.fragment:fragment-ktx:1.3.6"
-  const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.0"
+  const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.1"
   const val coordinatorLayout = "androidx.coordinatorlayout:coordinatorlayout:1.1.0"
   const val material = "com.google.android.material:material:1.4.0"
   const val recyclerView = "androidx.recyclerview:recyclerview:1.2.1"
