@@ -111,7 +111,7 @@ object Libs {
     "com.github.Commit451.coil-transformations:transformations:1.0.0"
   )
   val rx = arrayOf(
-    "io.reactivex.rxjava3:rxjava:3.1.1",
+    "io.reactivex.rxjava3:rxjava:3.1.2",
     "io.reactivex.rxjava3:rxandroid:3.0.0",
     "com.squareup.retrofit2:adapter-rxjava3:$retrofitVersion"
   )
