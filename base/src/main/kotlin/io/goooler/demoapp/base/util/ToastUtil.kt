@@ -28,7 +28,7 @@ object ToastUtil {
    */
   @AnyThread
   fun show(context: Context, text: String) {
-    if (Looper.getMainLooper().thread === Thread.currentThread()) {
+    if (Looper.getMainLooper() == Looper.myLooper()) {
       showInMain(context, text)
     } else {
       handler.post { showInMain(context, text) }

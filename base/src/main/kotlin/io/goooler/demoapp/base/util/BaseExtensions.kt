@@ -43,13 +43,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.coroutineScope
 import androidx.lifecycle.findViewTreeLifecycleOwner
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.CoroutineStart
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.async
-import kotlinx.coroutines.withContext
 import java.io.File
 import java.math.BigDecimal
 import java.net.URLConnection
@@ -57,6 +50,13 @@ import java.util.Collections
 import java.util.UUID
 import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.contract
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.CoroutineStart
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.async
+import kotlinx.coroutines.withContext
 
 // ---------------------Types-------------------------------//
 
@@ -97,7 +97,7 @@ inline val currentTimeMillis: Long get() = System.currentTimeMillis()
 
 inline val currentThreadName: String get() = Thread.currentThread().name
 
-inline val isMainThread: Boolean get() = Looper.getMainLooper().thread === Thread.currentThread()
+inline val isMainThread: Boolean get() = Looper.getMainLooper() == Looper.myLooper()
 
 fun <T> unsafeLazy(initializer: () -> T): Lazy<T> = lazy(LazyThreadSafetyMode.NONE, initializer)
 
