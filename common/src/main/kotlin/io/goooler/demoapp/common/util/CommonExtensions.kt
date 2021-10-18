@@ -45,13 +45,13 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.asExecutor
 import java.lang.reflect.ParameterizedType
 import java.math.BigDecimal
 import java.util.Calendar
 import java.util.Date
 import kotlin.math.absoluteValue
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.asExecutor
 
 typealias DimensionUtil = SizeUtils
 typealias SpHelper = SPUtils

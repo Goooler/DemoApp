@@ -5,6 +5,9 @@ import com.android.build.gradle.BaseExtension
 import com.android.build.gradle.LibraryExtension
 import com.android.build.gradle.internal.api.ApkVariantOutputImpl
 import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
+import java.io.File
+import java.nio.charset.Charset
+import java.util.Properties
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 import org.gradle.api.artifacts.Dependency
@@ -17,9 +20,6 @@ import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.get
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmOptions
 import org.jetbrains.kotlin.gradle.plugin.KaptExtension
-import java.io.File
-import java.nio.charset.Charset
-import java.util.Properties
 
 const val cdnPrefix = "https://raw.githubusercontent.com/"
 val apiHosts = mapOf(

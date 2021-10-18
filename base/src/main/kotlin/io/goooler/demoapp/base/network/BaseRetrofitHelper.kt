@@ -1,14 +1,14 @@
 package io.goooler.demoapp.base.network
 
 import android.content.Context
+import java.io.File
+import java.util.concurrent.TimeUnit
 import okhttp3.Cache
 import okhttp3.Dispatcher
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Converter
 import retrofit2.Retrofit
-import java.io.File
-import java.util.concurrent.TimeUnit
 
 @Suppress("unused")
 abstract class BaseRetrofitHelper {

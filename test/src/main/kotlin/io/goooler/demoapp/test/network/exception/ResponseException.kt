@@ -1,7 +1,7 @@
 package io.goooler.demoapp.test.network.exception
 
-import retrofit2.HttpException
 import java.io.IOException
+import retrofit2.HttpException
 
 class ResponseException(message: String?, throwable: Throwable?) : Exception(message, throwable)
 

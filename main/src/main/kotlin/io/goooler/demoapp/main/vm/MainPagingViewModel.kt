@@ -12,10 +12,10 @@ import io.goooler.demoapp.common.base.BaseThemeViewModel
 import io.goooler.demoapp.common.type.CommonConstants
 import io.goooler.demoapp.main.model.MainCommonVhModel
 import io.goooler.demoapp.main.repository.MainCommonRepository
+import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
-import javax.inject.Inject
 
 @HiltViewModel
 class MainPagingViewModel @Inject constructor(private val repository: MainCommonRepository) :
