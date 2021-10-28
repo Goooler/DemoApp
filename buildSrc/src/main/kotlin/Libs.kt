@@ -1,6 +1,6 @@
 @file:Suppress("SpellCheckingInspection")
 
-private const val lifecycleVersion = "2.3.1"
+private const val lifecycleVersion = "2.4.0"
 private const val okHttpVersion = "4.9.2"
 private const val retrofitVersion = "2.9.0"
 private const val arouterVersion = "1.5.2"
@@ -9,7 +9,7 @@ private const val smartRefreshLayoutVersion = "2.0.3"
 private const val glideVersion = "4.12.0"
 private const val coilVersion = "1.4.0"
 private const val roomVersion = "2.3.0"
-private const val hiltVersion = "2.39.1"
+private const val hiltVersion = "2.40"
 private const val chuckerVersion = "3.5.2"
 
 object Plugins {
@@ -27,10 +27,10 @@ object Plugins {
 
 object Libs {
   const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2"
-  const val core = "androidx.core:core-ktx:1.6.0"
+  const val core = "androidx.core:core-ktx:1.7.0"
   const val appCompat = "androidx.appcompat:appcompat:1.3.1"
   const val annotation = "androidx.annotation:annotation:1.2.0"
-  const val activity = "androidx.activity:activity-ktx:1.3.1"
+  const val activity = "androidx.activity:activity-ktx:1.4.0"
   const val fragment = "androidx.fragment:fragment-ktx:1.3.6"
   const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.1"
   const val coordinatorLayout = "androidx.coordinatorlayout:coordinatorlayout:1.1.0"
@@ -75,8 +75,7 @@ object Libs {
   val lifecycle = arrayOf(
     "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion",
     "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion",
-    "androidx.lifecycle:lifecycle-service:$lifecycleVersion",
-    "androidx.lifecycle:lifecycle-common-java8:$lifecycleVersion"
+    "androidx.lifecycle:lifecycle-service:$lifecycleVersion"
   )
   val room = arrayOf(
     "androidx.room:room-runtime:$roomVersion",
@@ -92,7 +91,7 @@ object Libs {
     "com.scwang.smart:refresh-footer-classics:$smartRefreshLayoutVersion"
   )
   val gson = arrayOf(
-    "com.google.code.gson:gson:2.8.8",
+    "com.google.code.gson:gson:2.8.9",
     "com.squareup.retrofit2:converter-gson:$retrofitVersion"
   )
   val moshi = arrayOf(
