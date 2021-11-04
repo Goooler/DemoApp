@@ -69,6 +69,7 @@
 
 | versionName     | versionCode   | name | year |
 | ------------------------- | ---- | ---- | ---- |
+| Build.VERSION_CODES.S     | 31   | 12.0 | 2021 |
 | Build.VERSION_CODES.R     | 30   | 11.0 | 2020 |
 | Build.VERSION_CODES.Q     | 29   | 10.0 | 2019 |
 | Build.VERSION_CODES.P     | 28   | 9.0 | 2018 |
