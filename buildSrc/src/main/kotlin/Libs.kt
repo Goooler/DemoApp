@@ -9,7 +9,7 @@ private const val smartRefreshLayoutVersion = "2.0.3"
 private const val glideVersion = "4.12.0"
 private const val coilVersion = "1.4.0"
 private const val roomVersion = "2.3.0"
-private const val hiltVersion = "2.40"
+private const val hiltVersion = "2.40.1"
 private const val chuckerVersion = "3.5.2"
 
 object Plugins {
@@ -32,7 +32,7 @@ object Libs {
   const val annotation = "androidx.annotation:annotation:1.3.0"
   const val activity = "androidx.activity:activity-ktx:1.4.0"
   const val fragment = "androidx.fragment:fragment-ktx:1.3.6"
-  const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.1"
+  const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.2"
   const val coordinatorLayout = "androidx.coordinatorlayout:coordinatorlayout:1.1.0"
   const val material = "com.google.android.material:material:1.4.0"
   const val recyclerView = "androidx.recyclerview:recyclerview:1.2.1"
@@ -66,7 +66,7 @@ object Libs {
 
   val tests = arrayOf(
     "junit:junit:4.13.2",
-    "org.robolectric:robolectric:4.6.1"
+    "org.robolectric:robolectric:4.7"
   )
   val androidTests = arrayOf(
     "androidx.test.ext:junit:1.1.3",
