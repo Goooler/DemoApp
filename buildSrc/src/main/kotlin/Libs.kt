@@ -1,7 +1,7 @@
 @file:Suppress("SpellCheckingInspection")
 
 private const val lifecycleVersion = "2.4.0"
-private const val okHttpVersion = "4.9.2"
+private const val okHttpVersion = "4.9.3"
 private const val retrofitVersion = "2.9.0"
 private const val arouterVersion = "1.5.2"
 private const val moshiVersion = "1.12.0"
@@ -28,10 +28,10 @@ object Plugins {
 object Libs {
   const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2"
   const val core = "androidx.core:core-ktx:1.7.0"
-  const val appCompat = "androidx.appcompat:appcompat:1.3.1"
+  const val appCompat = "androidx.appcompat:appcompat:1.4.0"
   const val annotation = "androidx.annotation:annotation:1.3.0"
   const val activity = "androidx.activity:activity-ktx:1.4.0"
-  const val fragment = "androidx.fragment:fragment-ktx:1.3.6"
+  const val fragment = "androidx.fragment:fragment-ktx:1.4.0"
   const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.2"
   const val coordinatorLayout = "androidx.coordinatorlayout:coordinatorlayout:1.1.0"
   const val material = "com.google.android.material:material:1.4.0"
@@ -46,10 +46,10 @@ object Libs {
   const val okHttp = "com.squareup.okhttp3:okhttp:$okHttpVersion"
   const val okHttpLogInterceptor = "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
   const val retrofit = "com.squareup.retrofit2:retrofit:$retrofitVersion"
-  const val paging = "androidx.paging:paging-runtime:3.0.1"
+  const val paging = "androidx.paging:paging-runtime:3.1.0"
   const val viewPager2 = "androidx.viewpager2:viewpager2:1.0.0"
   const val photoView = "com.github.chrisbanes:PhotoView:2.3.0"
-  const val permissionX = "com.permissionx.guolindev:permissionx:1.4.0"
+  const val permissionX = "com.guolindev.permissionx:permissionx:1.6.1"
   const val browser = "androidx.browser:browser:1.4.0"
   const val webKit = "androidx.webkit:webkit:1.4.0"
   const val chuckerDebug = "com.github.chuckerteam.chucker:library:$chuckerVersion"
@@ -66,7 +66,7 @@ object Libs {
 
   val tests = arrayOf(
     "junit:junit:4.13.2",
-    "org.robolectric:robolectric:4.7"
+    "org.robolectric:robolectric:4.7.2"
   )
   val androidTests = arrayOf(
     "androidx.test.ext:junit:1.1.3",
@@ -110,7 +110,7 @@ object Libs {
     "com.github.Commit451.coil-transformations:transformations:1.0.0"
   )
   val rx = arrayOf(
-    "io.reactivex.rxjava3:rxjava:3.1.2",
+    "io.reactivex.rxjava3:rxjava:3.1.3",
     "io.reactivex.rxjava3:rxandroid:3.0.0",
     "com.squareup.retrofit2:adapter-rxjava3:$retrofitVersion"
   )
