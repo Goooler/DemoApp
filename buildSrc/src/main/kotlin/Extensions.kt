@@ -96,12 +96,11 @@ inline fun <reified T : BaseExtension> Project.setupBase(
   applyPlugins(Plugins.kotlinAndroid, Plugins.kotlinKapt)
   extensions.configure<BaseExtension>("android") {
     compileSdkVersion(31)
-    buildToolsVersion = "31.0.0"
     defaultConfig {
       minSdk = 21
       targetSdk = 31
       vectorDrawables.useSupportLibrary = true
-      ndk.abiFilters += setOf("armeabi-v7a")
+      ndk.abiFilters += setOf("arm64-v8a")
       module?.let {
         resourcePrefix = "${it.tag}_"
         versionNameSuffix = "_${it.tag}"
@@ -158,57 +157,53 @@ inline fun <reified T : BaseExtension> Project.setupBase(
 fun Project.setupLib(
   module: Module? = null,
   block: LibraryExtension.() -> Unit = {}
-) {
-  setupCommon(module, block)
-}
+) = setupCommon(module, block)
 
 fun Project.setupApp(
   appPackageName: String,
   appName: String,
   block: BaseAppModuleExtension.() -> Unit = {}
-) {
-  setupCommon<BaseAppModuleExtension> {
-    defaultConfig {
-      applicationId = appPackageName
-      versionCode = gitCommitDescribe
-      versionName = gitCommitCount
-      manifestPlaceholders += mapOf("appName" to appName)
-      resourceConfigurations += setOf("en", "zh-rCN", "xxhdpi")
-    }
-    signingConfigs.create("release") {
-      keyAlias = getSignProperty("keyAlias")
-      keyPassword = getSignProperty("keyPassword")
-      storeFile = File(rootDir, getSignProperty("storeFile"))
-      storePassword = getSignProperty("storePassword")
-      enableV3Signing = true
-      enableV4Signing = true
-    }
-    buildTypes {
-      release {
-        resValue("string", "app_name", appName)
-        signingConfig = signingConfigs["release"]
-        isMinifyEnabled = true
-        proguardFiles("$rootDir/gradle/proguard-rules.pro")
-      }
-      debug {
-        resValue("string", "app_name", "${appName}.debug")
-        signingConfig = signingConfigs["release"]
-        applicationIdSuffix = ".debug"
-        versionNameSuffix = ".debug"
-        isJniDebuggable = true
-        isRenderscriptDebuggable = true
-        isCrunchPngs = false
-      }
-    }
-    dependenciesInfo.includeInApk = false
-    applicationVariants.all {
-      outputs.all {
-        (this as? ApkVariantOutputImpl)?.outputFileName =
-          "../../../../${appName}_${versionName}_${versionCode}_${flavorName}_${buildType.name}.apk"
-      }
-    }
-    block()
+) = setupCommon<BaseAppModuleExtension> {
+  defaultConfig {
+    applicationId = appPackageName
+    versionCode = gitCommitDescribe
+    versionName = gitCommitCount
+    manifestPlaceholders += mapOf("appName" to appName)
+    resourceConfigurations += setOf("en", "zh-rCN", "xxhdpi")
   }
+  signingConfigs.create("release") {
+    keyAlias = getSignProperty("keyAlias")
+    keyPassword = getSignProperty("keyPassword")
+    storeFile = File(rootDir, getSignProperty("storeFile"))
+    storePassword = getSignProperty("storePassword")
+    enableV3Signing = true
+    enableV4Signing = true
+  }
+  buildTypes {
+    release {
+      resValue("string", "app_name", appName)
+      signingConfig = signingConfigs["release"]
+      isMinifyEnabled = true
+      proguardFiles("$rootDir/gradle/proguard-rules.pro")
+    }
+    debug {
+      resValue("string", "app_name", "${appName}.debug")
+      signingConfig = signingConfigs["release"]
+      applicationIdSuffix = ".debug"
+      versionNameSuffix = ".debug"
+      isJniDebuggable = true
+      isRenderscriptDebuggable = true
+      isCrunchPngs = false
+    }
+  }
+  dependenciesInfo.includeInApk = false
+  applicationVariants.all {
+    outputs.all {
+      (this as? ApkVariantOutputImpl)?.outputFileName =
+        "../../../../${appName}_${versionName}_${versionCode}_${flavorName}_${buildType.name}.apk"
+    }
+  }
+  block()
 }
 
 private inline fun <reified T : BaseExtension> Project.setupCommon(
