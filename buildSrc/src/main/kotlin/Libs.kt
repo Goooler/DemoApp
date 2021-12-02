@@ -4,11 +4,11 @@ private const val lifecycleVersion = "2.4.0"
 private const val okHttpVersion = "4.9.3"
 private const val retrofitVersion = "2.9.0"
 private const val arouterVersion = "1.5.2"
-private const val moshiVersion = "1.12.0"
+private const val moshiVersion = "1.13.0"
 private const val smartRefreshLayoutVersion = "2.0.3"
 private const val glideVersion = "4.12.0"
 private const val coilVersion = "1.4.0"
-private const val roomVersion = "2.4.0-beta02"
+private const val roomVersion = "2.4.0-rc01"
 private const val hiltVersion = "2.40.1"
 private const val chuckerVersion = "3.5.2"
 
@@ -37,12 +37,12 @@ object Libs {
   const val material = "com.google.android.material:material:1.4.0"
   const val recyclerView = "androidx.recyclerview:recyclerview:1.2.1"
   const val cardView = "androidx.cardview:cardview:1.0.0"
-  const val collection = "androidx.collection:collection-ktx:1.1.0"
+  const val collection = "androidx.collection:collection-ktx:1.2.0"
   const val fastjson = "com.alibaba:fastjson:1.1.72.android"
   const val arouter = "com.alibaba:arouter-api:$arouterVersion"
   const val leakCanary = "com.squareup.leakcanary:leakcanary-android:2.7"
   const val flycoTabLayout = "com.flyco.tablayout:FlycoTabLayout_Lib:2.2.0"
-  const val utils = "com.blankj:utilcodex:1.30.6"
+  const val utils = "com.blankj:utilcodex:1.31.0"
   const val okHttp = "com.squareup.okhttp3:okhttp:$okHttpVersion"
   const val okHttpLogInterceptor = "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
   const val retrofit = "com.squareup.retrofit2:retrofit:$retrofitVersion"
@@ -66,7 +66,7 @@ object Libs {
 
   val tests = arrayOf(
     "junit:junit:4.13.2",
-    "org.robolectric:robolectric:4.7.2"
+    "org.robolectric:robolectric:4.7.3"
   )
   val androidTests = arrayOf(
     "androidx.test.ext:junit:1.1.3",
