@@ -10,14 +10,14 @@ buildscript {
     rootProject.extra["kotlinPlugin"].toString(),
     Libs.hiltPlugin,
     Libs.arouterPlugin,
-    Libs.kotlinterPlugin
+    Libs.ktlintPlugin
   )
 }
 
 allprojects {
   apply("$rootDir/$extraScriptPath")
   applyPlugins(
-    Plugins.kotlinter,
+    Plugins.ktlint,
     Plugins.picCompress,
     Plugins.customTrans
   )
