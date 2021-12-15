@@ -109,14 +109,12 @@ class MainHomeViewModel @Inject constructor(private val repository: MainCommonRe
         ${microsoft.lastOrNull()?.owner?.avatarUrl}
         """.trimIndent()
       }
-    )
-      .subscribe(
-        title::postValue
-      ) {
-        title.postValue(it.message)
-        R.string.common_request_failed.showToast()
-      }
-      .autoDispose()
+    ).subscribe(
+      title::postValue
+    ) {
+      title.postValue(it.message)
+      R.string.common_request_failed.showToast()
+    }.autoDispose()
   }
 
   enum class CountDownState {

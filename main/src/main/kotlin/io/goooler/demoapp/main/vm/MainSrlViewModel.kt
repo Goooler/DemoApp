@@ -51,7 +51,10 @@ class MainSrlViewModel @Inject constructor(private val repository: MainCommonRep
 
   private fun fetchListData(page: Int) {
     repository.getRepoListWithRx("goooler", page)
-      .doFinally(::finishRefreshAndLoadMore)
+      .doFinally {
+        isRefreshFinish.postValue(true)
+        isLoadMoreFinish.postValue(true)
+      }
       .map {
         it.map { bean -> MainCommonVhModel.Repo(bean.owner?.avatarUrl, bean.name) }
       }
@@ -74,11 +77,6 @@ class MainSrlViewModel @Inject constructor(private val repository: MainCommonRep
         }
       )
       .autoDispose()
-  }
-
-  private fun finishRefreshAndLoadMore() {
-    isRefreshFinish.postValue(true)
-    isLoadMoreFinish.postValue(true)
   }
 
   private fun enableRefreshAndLoadMore(enable: Boolean) {

@@ -260,13 +260,13 @@ inline fun <reified T> DiffUtil.ItemCallback<T>.asConfig(): AsyncDifferConfig<T>
 inline fun <reified V, reified VM> V.getViewModel(): Lazy<VM>
   where V : LifecycleOwner, V : ViewModelStoreOwner,
         VM : ViewModel, VM : DefaultLifecycleObserver = lazy(LazyThreadSafetyMode.NONE) {
-  ViewModelProvider(this).get(VM::class.java).apply(lifecycle::addObserver)
+  ViewModelProvider(this)[VM::class.java].apply(lifecycle::addObserver)
 }
 
 @MainThread
 inline fun <reified V, reified VM : BaseThemeViewModel> V.getThemeViewModel(): Lazy<VM>
   where V : LifecycleOwner, V : ViewModelStoreOwner, V : ITheme = lazy(LazyThreadSafetyMode.NONE) {
-  ViewModelProvider(this).get(VM::class.java).also {
+  ViewModelProvider(this)[VM::class.java].also {
     lifecycle.addObserver(it)
     it.loading.observe(this) { show ->
       if (show) showLoading() else hideLoading()
