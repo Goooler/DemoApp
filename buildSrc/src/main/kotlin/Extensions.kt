@@ -106,6 +106,9 @@ inline fun <reified T : BaseExtension> Project.setupBase(
         versionNameSuffix = "_${it.tag}"
       }
     }
+    sourceSets.configureEach {
+      java.srcDirs("src/$name/kotlin")
+    }
     buildFeatures.buildConfig = false
     compileOptions.setDefaultJavaVersion(javaVersion)
     kotlinOptions {
