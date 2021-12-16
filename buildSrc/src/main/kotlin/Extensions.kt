@@ -95,10 +95,10 @@ inline fun <reified T : BaseExtension> Project.setupBase(
 
   applyPlugins(Plugins.kotlinAndroid, Plugins.kotlinKapt)
   extensions.configure<BaseExtension>("android") {
-    compileSdkVersion(31)
+    compileSdkVersion(32)
     defaultConfig {
       minSdk = 21
-      targetSdk = 31
+      targetSdk = 32
       vectorDrawables.useSupportLibrary = true
       ndk.abiFilters += setOf("arm64-v8a")
       module?.let {
