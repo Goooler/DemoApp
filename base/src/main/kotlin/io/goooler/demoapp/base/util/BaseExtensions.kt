@@ -5,10 +5,8 @@
 package io.goooler.demoapp.base.util
 
 import android.app.Activity
-import android.content.ComponentName
 import android.content.Context
 import android.content.ContextWrapper
-import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -418,13 +416,6 @@ fun Fragment.replaceFragment(
   tag: String? = null
 ) {
   childFragmentManager.addFragment(fragment, containerViewId, isAddToBackStack, tag)
-}
-
-fun Fragment.startService(service: Intent): ComponentName? {
-  return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
-    activity?.startForegroundService(service)
-  else
-    activity?.startService(service)
 }
 
 inline val View.attachedFragment: Fragment?

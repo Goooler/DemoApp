@@ -1,10 +1,8 @@
 package io.goooler.demoapp.base.core
 
 import android.annotation.SuppressLint
-import android.content.ComponentName
 import android.content.Intent
 import android.content.pm.ActivityInfo
-import android.os.Build
 import android.os.Bundle
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
@@ -24,12 +22,5 @@ abstract class BaseActivity : AppCompatActivity() {
       setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
     }
     requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
-  }
-
-  override fun startService(service: Intent): ComponentName? {
-    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
-      super.startForegroundService(service)
-    else
-      super.startService(service)
   }
 }
