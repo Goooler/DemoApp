@@ -8,7 +8,7 @@ private const val moshiVersion = "1.13.0"
 private const val smartRefreshLayoutVersion = "2.0.3"
 private const val glideVersion = "4.12.0"
 private const val coilVersion = "1.4.0"
-private const val roomVersion = "2.4.0-rc01"
+private const val roomVersion = "2.4.0"
 private const val hiltVersion = "2.40.1"
 private const val chuckerVersion = "3.5.2"
 
