@@ -7,10 +7,12 @@ package io.goooler.demoapp.base.util
 import android.app.Activity
 import android.content.Context
 import android.content.ContextWrapper
+import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.os.Looper
+import android.os.Parcelable
 import android.text.Spannable
 import android.text.Spanned
 import android.text.style.ClickableSpan
@@ -42,6 +44,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.coroutineScope
 import androidx.lifecycle.findViewTreeLifecycleOwner
 import java.io.File
+import java.io.Serializable
 import java.math.BigDecimal
 import java.net.URLConnection
 import java.util.Collections
@@ -58,6 +61,20 @@ import kotlinx.coroutines.withContext
 
 // ---------------------Types-------------------------------//
 
+typealias BooleanLiveData = LiveData<Boolean>
+
+typealias IntLiveData = LiveData<Int>
+
+typealias LongLiveData = LiveData<Long>
+
+typealias DoubleLiveData = LiveData<Double>
+
+typealias FloatLiveData = LiveData<Float>
+
+typealias StringLiveData = LiveData<String>
+
+typealias ListLiveData<T> = LiveData<List<T>>
+
 typealias MutableBooleanLiveData = MutableLiveData<Boolean>
 
 typealias MutableIntLiveData = MutableLiveData<Int>
@@ -68,9 +85,6 @@ typealias MutableDoubleLiveData = MutableLiveData<Double>
 
 typealias MutableFloatLiveData = MutableLiveData<Float>
 
-/**
- * 可以双向绑定，暂时定为可空
- */
 typealias MutableStringLiveData = MutableLiveData<String?>
 
 typealias MutableListLiveData<T> = MutableLiveData<List<T>>
@@ -80,12 +94,6 @@ typealias ObservableString = ObservableField<String?>
 typealias ObservableList<T> = ObservableField<List<T>>
 
 typealias ParamMap = HashMap<String, Any>
-
-typealias IntList = List<Int>
-
-typealias FloatList = List<Float>
-
-typealias DoubleList = List<Double>
 
 // ---------------------Any-------------------------------//
 
@@ -345,6 +353,22 @@ suspend fun <T> withDefaultContext(block: suspend CoroutineScope.() -> T): T =
 fun File.notExists(): Boolean = exists().not()
 
 // ---------------------View-------------------------------//
+
+// ---------------------Intent-------------------------------//
+
+fun Intent.getStringExtra(name: String, defaultValue: String): String =
+  getStringExtra(name) ?: defaultValue
+
+fun Intent.getCharSequenceExtra(name: String, defaultValue: CharSequence): CharSequence =
+  getCharSequenceExtra(name) ?: defaultValue
+
+fun <T : Parcelable> Intent.getParcelableExtra(name: String, defaultValue: T): T =
+  getParcelableExtra(name) ?: defaultValue
+
+fun <T : Parcelable> Intent.getSerializableExtra(
+  name: String,
+  defaultValue: Serializable
+): Serializable = getSerializableExtra(name) ?: defaultValue
 
 // ---------------------Fragment-------------------------------//
 
