@@ -8,6 +8,7 @@ object HeaderInterceptor : Interceptor {
 
   override fun intercept(chain: Interceptor.Chain): Response {
     val request = chain.request().newBuilder()
+      .header("flavor", BuildConfig.FLAVOR)
       .header("versionName", BuildConfig.VERSION_NAME)
       .header("versionCode", BuildConfig.VERSION_CODE.toString())
       .header("debug", BuildConfig.DEBUG.toString())
