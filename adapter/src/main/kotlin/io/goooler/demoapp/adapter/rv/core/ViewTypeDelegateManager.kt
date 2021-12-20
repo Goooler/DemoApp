@@ -1,7 +1,8 @@
 package io.goooler.demoapp.adapter.rv.core
 
-import android.util.SparseArray
 import androidx.annotation.LayoutRes
+import androidx.collection.SparseArrayCompat
+import androidx.collection.set
 import androidx.databinding.ViewDataBinding
 
 /**
@@ -16,7 +17,7 @@ import androidx.databinding.ViewDataBinding
  */
 class ViewTypeDelegateManager<M : IVhModelType> {
 
-  private val mIVDs = SparseArray<ViewTypeDelegate<ViewDataBinding, M>>()
+  private val mIVDs = SparseArrayCompat<ViewTypeDelegate<ViewDataBinding, M>>()
 
   /**
    * When creating viewHolder. if VTD.getViewType() == viewType executes VTD.onCreateVH().
@@ -26,7 +27,7 @@ class ViewTypeDelegateManager<M : IVhModelType> {
    */
   internal fun onCreateVH(binding: ViewDataBinding, @LayoutRes viewType: Int) {
     if (mIVDs.size() == 0) return
-    mIVDs.get(viewType)?.onCreateVH(binding)
+    mIVDs[viewType]?.onCreateVH(binding)
   }
 
   /**
@@ -37,7 +38,7 @@ class ViewTypeDelegateManager<M : IVhModelType> {
    */
   internal fun onBindVH(binding: ViewDataBinding, model: M) {
     if (mIVDs.size() == 0) return
-    mIVDs.get(model.viewType)?.onBindVH(binding, model)
+    mIVDs[model.viewType]?.onBindVH(binding, model)
   }
 
   /**
@@ -47,7 +48,7 @@ class ViewTypeDelegateManager<M : IVhModelType> {
    */
   @Suppress("UNCHECKED_CAST")
   fun <X : ViewDataBinding, Y : M> add(ivd: ViewTypeDelegate<X, Y>) {
-    mIVDs.put(ivd.viewType, ivd as ViewTypeDelegate<ViewDataBinding, M>)
+    mIVDs[ivd.viewType] = ivd as ViewTypeDelegate<ViewDataBinding, M>
   }
 
   /**
