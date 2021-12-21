@@ -1,29 +1,18 @@
-package io.goooler.demoapp.common.base
+package io.goooler.demoapp.common.base.binding
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.MainThread
 import androidx.databinding.ViewDataBinding
-import io.goooler.demoapp.base.core.BaseFragment
+import io.goooler.demoapp.common.base.theme.BaseThemeDialogFragment
 import io.goooler.demoapp.common.util.inflateBinding
 
-abstract class BaseThemeFragment<VB : ViewDataBinding> :
-  BaseFragment(),
-  ITheme,
-  IFragmentCommon {
+abstract class BaseBindingDialogFragment<VB : ViewDataBinding> :
+  BaseThemeDialogFragment(),
+  IBindingFragment<VB> {
 
-  protected lateinit var binding: VB
-
-  @MainThread
-  override fun showLoading() {}
-
-  @MainThread
-  override fun hideLoading() {}
-
-  @MainThread
-  override fun initOnce() {}
+  override lateinit var binding: VB
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -41,8 +30,4 @@ abstract class BaseThemeFragment<VB : ViewDataBinding> :
     super.onViewCreated(view, savedInstanceState)
     binding.lifecycleOwner = viewLifecycleOwner
   }
-}
-
-sealed interface IFragmentCommon {
-  fun initOnce()
 }

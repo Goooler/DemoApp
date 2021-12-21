@@ -3,10 +3,11 @@ package io.goooler.demoapp.common.ui
 import android.os.Bundle
 import androidx.fragment.app.FragmentManager
 import io.goooler.demoapp.common.R
-import io.goooler.demoapp.common.base.BaseThemeDialogFragment
+import io.goooler.demoapp.common.base.binding.BaseBindingDialogFragment
 import io.goooler.demoapp.common.databinding.CommonFullScreenDialogFragmentBinding
 
-class FullScreenDialogFragment : BaseThemeDialogFragment<CommonFullScreenDialogFragmentBinding>() {
+class FullScreenDialogFragment :
+  BaseBindingDialogFragment<CommonFullScreenDialogFragmentBinding>() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)

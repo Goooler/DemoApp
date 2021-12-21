@@ -10,7 +10,7 @@ import androidx.core.graphics.drawable.IconCompat
 import dagger.hilt.android.AndroidEntryPoint
 import io.goooler.demoapp.base.util.addDynamicShortcutCompat
 import io.goooler.demoapp.base.util.unsafeLazy
-import io.goooler.demoapp.common.base.BaseThemeLazyFragment
+import io.goooler.demoapp.common.base.binding.BaseBindingLazyFragment
 import io.goooler.demoapp.common.router.RouterManager
 import io.goooler.demoapp.common.ui.FullScreenDialogFragment
 import io.goooler.demoapp.common.util.getThemeViewModel
@@ -21,7 +21,7 @@ import io.goooler.demoapp.main.vm.MainHomeViewModel
 import java.util.concurrent.CancellationException
 
 @AndroidEntryPoint
-class MainHomeFragment : BaseThemeLazyFragment<MainHomeFragmentBinding>() {
+class MainHomeFragment : BaseBindingLazyFragment<MainHomeFragmentBinding>() {
 
   private val vm: MainHomeViewModel by getThemeViewModel()
 

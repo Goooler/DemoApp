@@ -3,7 +3,7 @@ package io.goooler.demoapp.main.ui
 import android.os.Bundle
 import android.view.View
 import com.alibaba.android.arouter.facade.annotation.Route
-import io.goooler.demoapp.common.base.BaseThemeActivity
+import io.goooler.demoapp.common.base.binding.BaseBindingActivity
 import io.goooler.demoapp.common.router.RouterManager
 import io.goooler.demoapp.common.router.RouterPath
 import io.goooler.demoapp.common.service.AudioPlayService
@@ -12,7 +12,7 @@ import io.goooler.demoapp.main.R
 import io.goooler.demoapp.main.databinding.MainAudioPlayActivityBinding
 
 @Route(path = RouterPath.AUDIO_PLAY)
-class AudioPlayActivity : BaseThemeActivity<MainAudioPlayActivityBinding>() {
+class AudioPlayActivity : BaseBindingActivity<MainAudioPlayActivityBinding>() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)

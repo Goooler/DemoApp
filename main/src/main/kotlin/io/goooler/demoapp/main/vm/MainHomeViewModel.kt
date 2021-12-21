@@ -4,7 +4,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.goooler.demoapp.base.util.MutableStringLiveData
 import io.goooler.demoapp.base.util.defaultAsync
-import io.goooler.demoapp.common.base.BaseRxViewModel
+import io.goooler.demoapp.common.base.theme.BaseRxViewModel
 import io.goooler.demoapp.common.util.showToast
 import io.goooler.demoapp.main.R
 import io.goooler.demoapp.main.bean.MainRepoListBean

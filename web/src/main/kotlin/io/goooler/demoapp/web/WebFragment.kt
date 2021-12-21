@@ -10,10 +10,10 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.IntRange
 import io.goooler.demoapp.base.util.putArguments
 import io.goooler.demoapp.base.util.toMimeType
-import io.goooler.demoapp.common.base.BaseThemeFragment
+import io.goooler.demoapp.common.base.binding.BaseBindingFragment
 import io.goooler.demoapp.web.databinding.WebFragmentBinding
 
-class WebFragment : BaseThemeFragment<WebFragmentBinding>() {
+class WebFragment : BaseBindingFragment<WebFragmentBinding>() {
 
   private lateinit var headers: Map<String, String>
   private var fileChooserCallback: ValueCallback<Array<Uri>>? = null

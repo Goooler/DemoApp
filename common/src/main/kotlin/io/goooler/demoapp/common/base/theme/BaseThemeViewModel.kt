@@ -1,4 +1,4 @@
-package io.goooler.demoapp.common.base
+package io.goooler.demoapp.common.base.theme
 
 import androidx.annotation.AnyThread
 import io.goooler.demoapp.base.core.BaseViewModel

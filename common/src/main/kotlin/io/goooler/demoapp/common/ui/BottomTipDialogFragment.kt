@@ -6,10 +6,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
 import io.goooler.demoapp.base.util.putArguments
 import io.goooler.demoapp.common.R
-import io.goooler.demoapp.common.base.BaseThemeDialogFragment
+import io.goooler.demoapp.common.base.binding.BaseBindingDialogFragment
 import io.goooler.demoapp.common.databinding.CommonBottomTipDialogFragmentBinding
 
-class BottomTipDialogFragment : BaseThemeDialogFragment<CommonBottomTipDialogFragmentBinding>() {
+class BottomTipDialogFragment : BaseBindingDialogFragment<CommonBottomTipDialogFragmentBinding>() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)

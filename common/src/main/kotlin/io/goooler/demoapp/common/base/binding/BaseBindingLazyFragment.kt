@@ -1,4 +1,4 @@
-package io.goooler.demoapp.common.base
+package io.goooler.demoapp.common.base.binding
 
 import androidx.databinding.ViewDataBinding
 import androidx.viewpager.widget.ViewPager
@@ -11,8 +11,8 @@ import io.goooler.demoapp.base.core.ILazyFragment
  * [ViewPager] 搭配 [CommonFragmentStatePagerAdapter] 懒加载
  * [ViewPager2] 搭配 [CommonFragmentStateAdapter] 懒加载
  */
-abstract class BaseThemeLazyFragment<VB : ViewDataBinding> :
-  BaseThemeFragment<VB>(),
+abstract class BaseBindingLazyFragment<VB : ViewDataBinding> :
+  BaseBindingFragment<VB>(),
   ILazyFragment {
 
   override fun onResume() {

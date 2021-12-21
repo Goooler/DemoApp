@@ -7,7 +7,7 @@ import com.scwang.smart.refresh.layout.listener.OnRefreshListener
 import dagger.hilt.android.AndroidEntryPoint
 import io.goooler.demoapp.adapter.rv.paging.BaseRvPagingAdapter
 import io.goooler.demoapp.base.util.unsafeLazy
-import io.goooler.demoapp.common.base.BaseThemeLazyFragment
+import io.goooler.demoapp.common.base.binding.BaseBindingLazyFragment
 import io.goooler.demoapp.common.util.disableRefreshAndLoadMore
 import io.goooler.demoapp.common.util.finishRefreshAndLoadMore
 import io.goooler.demoapp.common.util.getThemeViewModel
@@ -19,7 +19,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class MainPagingFragment : BaseThemeLazyFragment<MainPagingFragmentBinding>() {
+class MainPagingFragment : BaseBindingLazyFragment<MainPagingFragmentBinding>() {
 
   private val vm: MainPagingViewModel by getThemeViewModel()
 

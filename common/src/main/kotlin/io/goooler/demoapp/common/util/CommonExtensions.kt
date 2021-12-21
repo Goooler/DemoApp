@@ -38,8 +38,8 @@ import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import io.goooler.demoapp.base.util.ToastUtil
 import io.goooler.demoapp.common.BuildConfig
 import io.goooler.demoapp.common.CommonApplication
-import io.goooler.demoapp.common.base.BaseThemeViewModel
-import io.goooler.demoapp.common.base.ITheme
+import io.goooler.demoapp.common.base.theme.BaseThemeViewModel
+import io.goooler.demoapp.common.base.theme.ITheme
 import io.goooler.demoapp.common.type.SpKeys
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable

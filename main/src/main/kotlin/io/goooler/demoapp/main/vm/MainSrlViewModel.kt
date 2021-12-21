@@ -3,7 +3,7 @@ package io.goooler.demoapp.main.vm
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.goooler.demoapp.base.util.MutableBooleanLiveData
 import io.goooler.demoapp.base.util.MutableListLiveData
-import io.goooler.demoapp.common.base.BaseRxViewModel
+import io.goooler.demoapp.common.base.theme.BaseRxViewModel
 import io.goooler.demoapp.common.type.CommonConstants
 import io.goooler.demoapp.main.model.MainCommonVhModel
 import io.goooler.demoapp.main.repository.MainCommonRepository

@@ -8,13 +8,13 @@ import androidx.core.net.toUri
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.blankj.utilcode.util.BarUtils
 import io.goooler.demoapp.base.util.addFragment
-import io.goooler.demoapp.common.base.BaseThemeActivity
+import io.goooler.demoapp.common.base.binding.BaseBindingActivity
 import io.goooler.demoapp.common.router.RouterManager
 import io.goooler.demoapp.common.router.RouterPath
 import io.goooler.demoapp.web.databinding.WebActivityBinding
 
 @Route(path = RouterPath.WEB)
-class WebActivity : BaseThemeActivity<WebActivityBinding>() {
+class WebActivity : BaseBindingActivity<WebActivityBinding>() {
 
   private var webFragment: WebFragment? = null
 

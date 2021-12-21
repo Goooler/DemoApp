@@ -1,20 +1,14 @@
-package io.goooler.demoapp.common.base
+package io.goooler.demoapp.common.base.theme
 
 import android.content.res.Resources
 import android.os.Bundle
 import androidx.annotation.MainThread
-import androidx.databinding.ViewDataBinding
 import com.blankj.utilcode.util.AdaptScreenUtils
 import com.blankj.utilcode.util.BarUtils
 import com.blankj.utilcode.util.ScreenUtils
 import io.goooler.demoapp.base.core.BaseActivity
-import io.goooler.demoapp.common.util.inflateBinding
 
-abstract class BaseThemeActivity<VB : ViewDataBinding> :
-  BaseActivity(),
-  ITheme {
-
-  protected lateinit var binding: VB
+abstract class BaseThemeActivity : BaseActivity(), ITheme {
 
   override fun getResources(): Resources {
     return if (ScreenUtils.isPortrait())
@@ -25,16 +19,14 @@ abstract class BaseThemeActivity<VB : ViewDataBinding> :
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    binding = (inflateBinding(layoutInflater) as VB).also {
-      it.lifecycleOwner = this
-      setContentView(it.root)
-    }
     BarUtils.transparentStatusBar(this)
   }
 
   @MainThread
-  override fun showLoading() {}
+  override fun showLoading() {
+  }
 
   @MainThread
-  override fun hideLoading() {}
+  override fun hideLoading() {
+  }
 }

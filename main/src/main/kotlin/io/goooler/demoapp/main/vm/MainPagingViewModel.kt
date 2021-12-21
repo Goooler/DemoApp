@@ -8,7 +8,7 @@ import androidx.paging.cachedIn
 import androidx.paging.filter
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.goooler.demoapp.adapter.rv.paging.BasePagingSource
-import io.goooler.demoapp.common.base.BaseThemeViewModel
+import io.goooler.demoapp.common.base.theme.BaseThemeViewModel
 import io.goooler.demoapp.common.type.CommonConstants
 import io.goooler.demoapp.main.model.MainCommonVhModel
 import io.goooler.demoapp.main.repository.MainCommonRepository
