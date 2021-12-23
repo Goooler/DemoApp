@@ -26,7 +26,7 @@ object Plugins {
 }
 
 object Libs {
-  const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2"
+  const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0"
   const val core = "androidx.core:core-ktx:1.7.0"
   const val appCompat = "androidx.appcompat:appcompat:1.4.0"
   const val annotation = "androidx.annotation:annotation:1.3.0"
