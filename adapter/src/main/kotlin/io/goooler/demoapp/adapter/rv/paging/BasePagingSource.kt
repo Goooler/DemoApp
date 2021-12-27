@@ -11,11 +11,10 @@ abstract class BasePagingSource<T : IDiffVhModelType> : PagingSource<Int, T>() {
     val currentPage = params.key ?: 1
     val fetchedList = fetchListData(currentPage)
     if (fetchedList.isEmpty()) {
-      if (currentPage == 1) {
-        throw PagingSourceException.EmptyDataException()
-      } else {
-        throw PagingSourceException.NoMoreDataException()
-      }
+      throw if (currentPage == 1)
+        PagingSourceException.EmptyDataException
+      else
+        PagingSourceException.NoMoreDataException
     } else {
       LoadResult.Page(
         fetchedList,
