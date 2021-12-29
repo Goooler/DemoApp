@@ -57,7 +57,7 @@ object Libs {
 
   const val arouterPlugin = "com.alibaba:arouter-register:1.0.2"
   const val hiltPlugin = "com.google.dagger:hilt-android-gradle-plugin:$hiltVersion"
-  const val ktlintPlugin = "org.jlleitschuh.gradle:ktlint-gradle:10.2.0"
+  const val ktlintPlugin = "org.jlleitschuh.gradle:ktlint-gradle:10.2.1"
 
   const val roomCompiler = "androidx.room:room-compiler:$roomVersion"
   const val arouterCompiler = "com.alibaba:arouter-compiler:$arouterVersion"
