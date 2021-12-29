@@ -18,12 +18,14 @@ import android.text.Spanned
 import android.text.style.ClickableSpan
 import android.text.style.ForegroundColorSpan
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.webkit.URLUtil
 import androidx.annotation.ColorInt
 import androidx.annotation.IdRes
 import androidx.annotation.IntRange
 import androidx.annotation.LayoutRes
 import androidx.annotation.MainThread
+import androidx.core.content.getSystemService
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.os.bundleOf
@@ -462,6 +464,14 @@ inline val View.attachedActivity: Activity?
 inline val View.lifecycle: Lifecycle? get() = findViewTreeLifecycleOwner()?.lifecycle
 
 inline val View.lifecycleScope: LifecycleCoroutineScope? get() = lifecycle?.coroutineScope
+
+fun View.hideSoftInput() {
+  context.getSystemService<InputMethodManager>()?.hideSoftInputFromWindow(windowToken, 0)
+}
+
+fun View.showSoftInput() {
+  context.getSystemService<InputMethodManager>()?.showSoftInput(this, 0)
+}
 
 // ---------------------Context-------------------------------//
 
