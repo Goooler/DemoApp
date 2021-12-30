@@ -98,7 +98,6 @@ inline fun <reified T : BaseExtension> Project.setupBase(
     compileSdkVersion(32)
     defaultConfig {
       minSdk = 21
-      targetSdk = 32
       vectorDrawables.useSupportLibrary = true
       ndk.abiFilters += setOf("arm64-v8a")
       module?.let {
@@ -169,6 +168,7 @@ fun Project.setupApp(
 ) = setupCommon<BaseAppModuleExtension> {
   defaultConfig {
     applicationId = appPackageName
+    targetSdk = 32
     versionCode = gitCommitDescribe
     versionName = gitCommitCount
     manifestPlaceholders += mapOf("appName" to appName)
