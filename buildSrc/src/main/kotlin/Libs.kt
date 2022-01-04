@@ -40,7 +40,7 @@ object Libs {
   const val collection = "androidx.collection:collection-ktx:1.2.0"
   const val fastjson = "com.alibaba:fastjson:1.1.72.android"
   const val arouter = "com.alibaba:arouter-api:$arouterVersion"
-  const val leakCanary = "com.squareup.leakcanary:leakcanary-android:2.7"
+  const val leakCanary = "com.squareup.leakcanary:leakcanary-android:2.8"
   const val flycoTabLayout = "com.flyco.tablayout:FlycoTabLayout_Lib:2.2.0"
   const val utils = "com.blankj:utilcodex:1.31.0"
   const val okHttp = "com.squareup.okhttp3:okhttp:$okHttpVersion"
