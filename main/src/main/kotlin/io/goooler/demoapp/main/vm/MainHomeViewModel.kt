@@ -2,19 +2,19 @@ package io.goooler.demoapp.main.vm
 
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.goooler.demoapp.base.util.MutableStringLiveData
 import io.goooler.demoapp.base.util.defaultAsync
 import io.goooler.demoapp.common.base.theme.BaseRxViewModel
 import io.goooler.demoapp.common.util.showToast
 import io.goooler.demoapp.main.R
 import io.goooler.demoapp.main.bean.MainRepoListBean
 import io.goooler.demoapp.main.repository.MainCommonRepository
-import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.onCompletion
@@ -25,7 +25,9 @@ import kotlinx.coroutines.launch
 class MainHomeViewModel @Inject constructor(private val repository: MainCommonRepository) :
   BaseRxViewModel() {
 
-  val title = MutableStringLiveData()
+  private val _title = MutableStateFlow("")
+  val title: StateFlow<String> = _title
+
   var countdownJob: Job? = null
 
   fun initData() {
@@ -49,14 +51,14 @@ class MainHomeViewModel @Inject constructor(private val repository: MainCommonRe
         }
         .onCompletion { cause ->
           val state = if (cause == null || cause.message == CANCEL_MANUALLY) {
-            title.postValue("手动结束")
+            _title.emit("手动结束")
             CountDownState.End
           } else {
             CountDownState.Cancel
           }
           callback(state)
         }
-        .collect(title::setValue)
+        .collect(_title::emit)
     }
   }
 
@@ -66,7 +68,7 @@ class MainHomeViewModel @Inject constructor(private val repository: MainCommonRe
         val google = defaultAsync { repository.getRepoListFromDb("google") }
         val microsoft = defaultAsync { repository.getRepoListFromDb("microsoft") }
 
-        processList(google.await(), microsoft.await()).collect(title::postValue)
+        processList(google.await(), microsoft.await()).collect(_title::emit)
       } catch (_: Exception) {
       }
 
@@ -74,22 +76,23 @@ class MainHomeViewModel @Inject constructor(private val repository: MainCommonRe
         val google = defaultAsync { repository.getRepoListWithCr("google") }
         val microsoft = defaultAsync { repository.getRepoListWithCr("microsoft") }
 
-        processList(google.await(), microsoft.await()).collect(title::postValue)
+        processList(google.await(), microsoft.await()).collect(_title::emit)
 
         putRepoListIntoDb(google.await(), microsoft.await())
       } catch (e: Exception) {
-        title.postValue(e.message)
+        e.message?.let {
+          _title.emit(it)
+        }
         R.string.common_request_failed.showToast()
       }
     }
   }
 
-  private suspend fun processList(vararg lists: List<MainRepoListBean>) = flow {
-    StringBuilder().run {
-      lists.forEach {
-        append(it.lastOrNull()?.name).append("\n")
-      }
-      emit(toString())
+  private suspend fun processList(vararg lists: List<MainRepoListBean>): Flow<String> = flow {
+    lists.fold("") { acc, list ->
+      acc + list.lastOrNull()?.name + "\n"
+    }.let {
+      emit(it)
     }
   }
 
@@ -97,24 +100,6 @@ class MainHomeViewModel @Inject constructor(private val repository: MainCommonRe
     lists.forEach {
       repository.putRepoListIntoDb(it)
     }
-  }
-
-  private fun requestWithRx() {
-    Single.zip(
-      repository.getRepoListWithRx("google"),
-      repository.getRepoListWithRx("microsoft"),
-      { google, microsoft ->
-        """
-        ${google.lastOrNull()?.owner?.avatarUrl}
-        ${microsoft.lastOrNull()?.owner?.avatarUrl}
-        """.trimIndent()
-      }
-    ).subscribe(
-      title::postValue
-    ) {
-      title.postValue(it.message)
-      R.string.common_request_failed.showToast()
-    }.autoDispose()
   }
 
   enum class CountDownState {
