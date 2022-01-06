@@ -8,6 +8,7 @@ import io.goooler.demoapp.common.util.showToast
 import io.goooler.demoapp.main.R
 import io.goooler.demoapp.main.bean.MainRepoListBean
 import io.goooler.demoapp.main.repository.MainCommonRepository
+import java.util.concurrent.CancellationException
 import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -28,13 +29,21 @@ class MainHomeViewModel @Inject constructor(private val repository: MainCommonRe
   private val _title = MutableStateFlow("")
   val title: StateFlow<String> = _title
 
-  var countdownJob: Job? = null
+  private var countdownJob: Job? = null
 
   fun initData() {
     requestWithCr()
   }
 
-  fun startCountDown(
+  fun countDown() {
+    if (countdownJob?.isActive != true) {
+      startCountDown()
+    } else {
+      countdownJob?.cancel(CancellationException(CANCEL_MANUALLY))
+    }
+  }
+
+  private fun startCountDown(
     countDownTime: Second = Second(30),
     callback: (CountDownState) -> Unit = {}
   ) {
@@ -51,7 +60,7 @@ class MainHomeViewModel @Inject constructor(private val repository: MainCommonRe
         }
         .onCompletion { cause ->
           val state = if (cause == null || cause.message == CANCEL_MANUALLY) {
-            _title.emit("手动结束")
+            _title.emit("倒计时结束")
             CountDownState.End
           } else {
             CountDownState.Cancel

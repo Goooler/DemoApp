@@ -18,7 +18,6 @@ import io.goooler.demoapp.main.R
 import io.goooler.demoapp.main.databinding.MainHomeFragmentBinding
 import io.goooler.demoapp.main.ui.AudioPlayActivity
 import io.goooler.demoapp.main.vm.MainHomeViewModel
-import java.util.concurrent.CancellationException
 
 @AndroidEntryPoint
 class MainHomeFragment : BaseBindingLazyFragment<MainHomeFragmentBinding>() {
@@ -44,21 +43,11 @@ class MainHomeFragment : BaseBindingLazyFragment<MainHomeFragmentBinding>() {
     when (it) {
       binding.bt1 -> RouterManager.goWeb("bilibili.com")
       binding.bt2 -> RouterManager.goMap()
-      binding.bt4 -> countdown()
+      binding.bt4 -> vm.countDown()
       binding.bt5 -> RouterManager.goWidget()
       binding.bt6 -> FullScreenDialogFragment.show(childFragmentManager)
       binding.bt7 -> RouterManager.goAudioPlay()
       binding.bt8 -> createShortcut(requireContext())
-    }
-  }
-
-  private fun countdown() {
-    if (vm.countdownJob?.isActive != true) {
-      vm.startCountDown()
-    } else {
-      vm.countdownJob?.cancel(
-        CancellationException(MainHomeViewModel.CANCEL_MANUALLY)
-      )
     }
   }
 
