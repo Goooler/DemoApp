@@ -106,8 +106,7 @@ object Libs {
   val coil = arrayOf(
     "io.coil-kt:coil:$coilVersion",
     "io.coil-kt:coil-gif:$coilVersion",
-    "io.coil-kt:coil-svg:$coilVersion",
-    "com.github.Commit451.coil-transformations:transformations:1.0.0"
+    "io.coil-kt:coil-svg:$coilVersion"
   )
   val rx = arrayOf(
     "io.reactivex.rxjava3:rxjava:3.1.3",
