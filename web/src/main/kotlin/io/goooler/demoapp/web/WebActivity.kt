@@ -38,9 +38,7 @@ class WebActivity : BaseBindingActivity<WebActivityBinding>() {
   }
 
   override fun onBackPressed() {
-    if (webFragment?.canGoBack == true) {
-      webFragment?.goBack()
-    } else {
+    if (webFragment?.goBack() == false) {
       super.onBackPressed()
     }
   }
