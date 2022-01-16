@@ -6,7 +6,6 @@ import android.net.http.SslError
 import android.util.AttributeSet
 import android.view.ViewGroup
 import android.webkit.SslErrorHandler
-import android.webkit.URLUtil
 import android.webkit.ValueCallback
 import android.webkit.WebChromeClient
 import android.webkit.WebSettings
@@ -70,14 +69,7 @@ open class CompatWebView(context: Context, attrs: AttributeSet? = null) : WebVie
       }
 
       override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
-        return if (URLUtil.isValidUrl(url)) {
-          if (URLUtil.isNetworkUrl(url)) {
-            false
-          } else {
-            onEventListener?.onInterceptUri(Uri.parse(url))
-            true
-          }
-        } else false
+        return onEventListener?.onInterceptUrl(url) ?: false
       }
 
       override fun onPageFinished(view: WebView, url: String) {
@@ -119,7 +111,7 @@ open class CompatWebView(context: Context, attrs: AttributeSet? = null) : WebVie
   }
 
   interface OnEventListener {
-    fun onInterceptUri(uri: Uri)
+    fun onInterceptUrl(url: String): Boolean
 
     fun onReceivedTitle(title: String)
 
