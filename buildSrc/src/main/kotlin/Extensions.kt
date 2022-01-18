@@ -30,7 +30,7 @@ val apiHosts = mapOf(
 // app
 const val appPackageName = "io.goooler.demoapp"
 const val appName = "Demo"
-const val extraScriptPath = "gradle/extra.gradle"
+const val extraScriptPath = "gradle/extra.gradle.kts"
 val javaVersion = JavaVersion.VERSION_11
 
 val gitCommitCount: String by lazy { "git describe --tags".exec() }
