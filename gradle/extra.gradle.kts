@@ -18,15 +18,7 @@ configurations.all {
       requested.name.startsWith("kotlin-stdlib") -> {
         useTarget("${requested.group}:${requested.name.replace("jre", "jdk")}:${kotlinVersion}")
       }
-      requested.name.startsWith("kotlinx-coroutines") -> {
-        useTarget("${requested.group}:${requested.name}:1.6.0")
-      }
-      else -> when (requested.group) {
-        "org.jetbrains.kotlin" -> useVersion(kotlinVersion)
-        "com.android.support" -> {
-          if ("multidex" !in requested.name) useVersion("28.0.0")
-        }
-      }
+      requested.group == "org.jetbrains.kotlin" -> useVersion(kotlinVersion)
     }
   }
 }

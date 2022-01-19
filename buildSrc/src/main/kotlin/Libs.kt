@@ -1,6 +1,5 @@
 @file:Suppress("SpellCheckingInspection")
 
-private const val lifecycleVersion = "2.4.0"
 private const val okHttpVersion = "4.9.3"
 private const val retrofitVersion = "2.9.0"
 private const val arouterVersion = "1.5.2"
@@ -11,6 +10,15 @@ private const val coilVersion = "1.4.0"
 private const val roomVersion = "2.4.1"
 private const val hiltVersion = "2.40.1"
 private const val chuckerVersion = "3.5.2"
+
+const val appCompatVersion = "1.4.1"
+const val coreVersion = "1.7.0"
+const val activityVersion = "1.4.0"
+const val collectionVersion = "1.2.0"
+const val fragmentVersion = "1.4.0"
+const val lifecycleVersion = "2.4.0"
+const val supportVersion = "28.0.0"
+const val coroutinesVersion = "1.6.0"
 
 object Plugins {
   const val kotlinAndroid = "kotlin-android"
@@ -26,18 +34,18 @@ object Plugins {
 }
 
 object Libs {
-  const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0"
-  const val core = "androidx.core:core-ktx:1.7.0"
-  const val appCompat = "androidx.appcompat:appcompat:1.4.1"
+  const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
+  const val core = "androidx.core:core-ktx:$coreVersion"
+  const val appCompat = "androidx.appcompat:appcompat:$appCompatVersion"
   const val annotation = "androidx.annotation:annotation:1.3.0"
-  const val activity = "androidx.activity:activity-ktx:1.4.0"
-  const val fragment = "androidx.fragment:fragment-ktx:1.4.0"
+  const val activity = "androidx.activity:activity-ktx:$activityVersion"
+  const val fragment = "androidx.fragment:fragment-ktx:$fragmentVersion"
   const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.3"
   const val coordinatorLayout = "androidx.coordinatorlayout:coordinatorlayout:1.2.0"
   const val material = "com.google.android.material:material:1.5.0"
   const val recyclerView = "androidx.recyclerview:recyclerview:1.2.1"
   const val cardView = "androidx.cardview:cardview:1.0.0"
-  const val collection = "androidx.collection:collection-ktx:1.2.0"
+  const val collection = "androidx.collection:collection-ktx:$collectionVersion"
   const val fastjson = "com.alibaba:fastjson:1.1.72.android"
   const val arouter = "com.alibaba:arouter-api:$arouterVersion"
   const val leakCanary = "com.squareup.leakcanary:leakcanary-android:2.8.1"
