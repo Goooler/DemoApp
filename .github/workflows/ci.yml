@@ -82,4 +82,4 @@ jobs:
           path: ~/.gradle/caches
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle/wrapper/gradle-wrapper.properties', '**/buildSrc/src/main/kotlin/**.kt') }}
       - name: Build
-        run: ./gradlew --parallel app:assembleRelease
+        run: ./gradlew app:assemble
