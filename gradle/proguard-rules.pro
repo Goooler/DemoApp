@@ -48,24 +48,8 @@
 # Kotlin
 -dontwarn kotlin.**
 
-# Javax Extras
--dontwarn com.uber.javaxextras.**
-
 # Some unsafe classfactory stuff
 -keep class sun.misc.Unsafe { *; }
-
-# CheckerFramework/EP
--dontwarn org.checkerframework.**
--dontwarn afu.org.checkerframework.**
--dontwarn com.google.errorprone.annotations.**
-
-# Tikxml
-# The name of @Xml types is used to look up the generated adapter.
--keepnames @com.tickaroo.tikxml.annotation.Xml class *
--keep class **$$TypeAdapter
-
-# DataBinding
--keep public class * extends androidx.databinding.ViewDataBinding {*;}
 
 # Ensure the custom, fast service loader implementation is removed. R8 will fold these for us
 -assumenosideeffects class kotlinx.coroutines.internal.MainDispatcherLoader {
@@ -96,3 +80,5 @@
 -keep interface * implements com.alibaba.android.arouter.facade.template.IProvider
 -keep class * implements com.alibaba.android.arouter.facade.template.IProvider
 
+# DataBinding
+-keep public class * extends androidx.databinding.ViewDataBinding {*;}
