@@ -1,0 +1,28 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  release:
+    name: Github Release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-java@v2
+        with:
+          distribution: 'zulu'
+          java-version: 11
+      - uses: actions/cache@v2
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle/wrapper/gradle-wrapper.properties', '**/buildSrc/src/main/kotlin/**.kt') }}
+      - name: Build APK
+        run: ./gradlew app:assembleOnlineRelease
+      - name: Create Release
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "app/build/*.apk"
+          token: ${{ secrets.GITHUB_TOKEN }}
