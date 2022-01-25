@@ -81,4 +81,6 @@
 -keep class * implements com.alibaba.android.arouter.facade.template.IProvider
 
 # DataBinding
--keep public class * extends androidx.databinding.ViewDataBinding {*;}
+-keep public class * extends androidx.databinding.ViewDataBinding {
+  * inflate(android.view.LayoutInflater);
+}
