@@ -2,6 +2,8 @@ name: CI
 
 on:
   push:
+    tags:
+      - *
     branches:
       - kotlin
   pull_request:
@@ -81,9 +83,41 @@ jobs:
         with:
           path: ~/.gradle/caches
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle/wrapper/gradle-wrapper.properties', '**/buildSrc/src/main/kotlin/**.kt') }}
-      - name: Build APK
+      - name: Build
         run: ./gradlew app:assemble
-      - name: Upload APK
-        uses: actions/upload-artifact@v2
+
+  release:
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/')
+    needs: build
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-java@v2
         with:
-          path: app/build/Demo_*_online_release.apk
+          distribution: 'zulu'
+          java-version: 11
+      - uses: actions/cache@v2
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle/wrapper/gradle-wrapper.properties', '**/buildSrc/src/main/kotlin/**.kt') }}
+      - name: Build APK
+        run: ./gradlew app:assembleOnlineRelease
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: ${{ github.ref }}
+          draft: true
+          prerelease: false
+      - name: Upload APK
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: app/build/*online_release.apk
+          asset_name: DemoApp_${{ secrets.GITHUB_TOKEN }}_release.apk
+          asset_content_type: application/vnd.android.package-archive
