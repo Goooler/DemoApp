@@ -1,99 +1,87 @@
--verbose
+# This is a configuration file for ProGuard.
+# http://proguard.sourceforge.net/index.html#manual/usage.html
 -allowaccessmodification
+-dontpreverify
 -dontusemixedcaseclassnames
 -dontskipnonpubliclibraryclasses
--optimizations !code/simplification/arithmetic,!field/*,!class/merging/*
--dump class_files.txt
--printseeds seeds.txt
--printusage unused.txt
--printmapping mapping.txt
--keepattributes *Annotation*,SourceFile,LineNumberTable,Signature
--renamesourcefileattribute SourceFile
--dontwarn java.util.concurrent.Flow*
--keep class **.R$* {*;}
+-verbose
+
+# For native methods, see http://proguard.sourceforge.net/manual/examples.html#native
 -keepclasseswithmembernames class * {
     native <methods>;
 }
+
+# For enumeration classes, see http://proguard.sourceforge.net/manual/examples.html#enumerations
 -keepclassmembers enum * {
     public static **[] values();
     public static ** valueOf(java.lang.String);
 }
--keepclassmembers class * {
-    void *(**On*Event);
-    void *(**On*Listener);
+
+-keepclassmembers class * implements android.os.Parcelable {
+  public static final android.os.Parcelable$Creator CREATOR;
 }
 
-
-# Serializable
--keep class * implements android.os.Parcelable {
-    public static final android.os.Parcelable$Creator *;
-}
--keepclassmembers class * implements java.io.Serializable {
-    static final long serialVersionUID;
-    private static final java.io.ObjectStreamField[] serialPersistentFields;
-    !static !transient <fields>;
-    !private <fields>;
-    !private <methods>;
-    private void writeObject(java.io.ObjectOutputStream);
-    private void readObject(java.io.ObjectInputStream);
-    java.lang.Object writeReplace();
-    java.lang.Object readResolve();
+# Assume isInEditMode() always return false in release builds so they can be pruned
+-assumevalues public class * extends android.view.View {
+  boolean isInEditMode() return false;
 }
 
+-keepclassmembers class **.R$* {
+    public static <fields>;
+}
+
+-keepattributes Signature,InnerClasses,EnclosingMethod,*Annotation*
+
+# Retrofit
+# This is to keep parameters on retrofit2.http-annotated methods while still allowing removal of unused ones
+-keep,allowobfuscation @interface retrofit2.http.**
+-keepclassmembers,allowshrinking,allowobfuscation interface * {
+    @retrofit2.http.** <methods>;
+}
+
+# Okio
+-dontwarn okio.**
+
+# Kotlin
+-dontwarn kotlin.**
+
+# Javax Extras
+-dontwarn com.uber.javaxextras.**
+
+# Some unsafe classfactory stuff
+-keep class sun.misc.Unsafe { *; }
+
+# CheckerFramework/EP
+-dontwarn org.checkerframework.**
+-dontwarn afu.org.checkerframework.**
+-dontwarn com.google.errorprone.annotations.**
+
+# Tikxml
+# The name of @Xml types is used to look up the generated adapter.
+-keepnames @com.tickaroo.tikxml.annotation.Xml class *
+-keep class **$$TypeAdapter
 
 # DataBinding
 -keep public class * extends androidx.databinding.ViewDataBinding {*;}
 
-
-# WebView
--keepclassmembers class * extends android.webkit.WebViewClient {*;}
--keepclassmembers class * extends android.webkit.WebChromeClient.WebChromeClient {*;}
-
-
-# Arouter
--keep public class com.alibaba.android.arouter.routes.**{*;}
--keep public class com.alibaba.android.arouter.facade.**{*;}
--keep class * implements com.alibaba.android.arouter.facade.template.ISyringe{*;}
--keep interface * implements com.alibaba.android.arouter.facade.template.IProvider
--keep class * implements com.alibaba.android.arouter.facade.template.IProvider
-
-
-# Glide
--keep public class * implements com.bumptech.glide.module.GlideModule
--keep class * extends com.bumptech.glide.module.AppGlideModule {
- <init>(...);
+# Ensure the custom, fast service loader implementation is removed. R8 will fold these for us
+-assumenosideeffects class kotlinx.coroutines.internal.MainDispatcherLoader {
+    boolean FAST_SERVICE_LOADER_ENABLED return false;
 }
--keep public enum com.bumptech.glide.load.ImageHeaderParser$** {
-  **[] $VALUES;
-  public *;
+-assumenosideeffects class kotlinx.coroutines.internal.FastServiceLoader {
+    boolean ANDROID_DETECTED return true;
 }
--keep class com.bumptech.glide.load.data.ParcelFileDescriptorRewinder$InternalRewinder {
-  *** rewind();
-}
+-checkdiscard class kotlinx.coroutines.internal.FastServiceLoader
 
+# Check that qualifier annotations have been discarded.
+-checkdiscard @javax.inject.Qualifier class *
 
-# Gson
--dontwarn sun.misc.**
--keep class com.google.gson.stream.** { *; }
--keep class com.google.gson.examples.android.model.** { <fields>; }
--keep class * extends com.google.gson.TypeAdapter
--keep class * implements com.google.gson.TypeAdapterFactory
--keep class * implements com.google.gson.JsonSerializer
--keep class * implements com.google.gson.JsonDeserializer
--keepclassmembers,allowobfuscation class * {
-  @com.google.gson.annotations.SerializedName <fields>;
-}
+# Coroutines debug agent bits
+-dontwarn java.lang.instrument.ClassFileTransformer
+-dontwarn sun.misc.SignalHandler
 
+# From OkHttp but gated appropriately
+-dontwarn org.conscrypt.ConscryptHostnameVerifier
 
-# Amap
--keep class com.amap.api.maps.**{*;}
--keep class com.autonavi.**{*;}
--keep class com.amap.api.trace.**{*;}
--keep class com.amap.api.location.**{*;}
--keep class com.amap.api.fence.**{*;}
--keep class com.autonavi.aps.amapapi.model.**{*;}
--keep class com.amap.api.services.**{*;}
--keep class com.amap.api.maps2d.**{*;}
--keep class com.amap.api.mapcore2d.**{*;}
--keep class com.amap.api.navi.**{*;}
--keep class com.autonavi.**{*;}
+# ZoneRulesProvider _does_ exist!
+-dontwarn java.time.zone.ZoneRulesProvider
