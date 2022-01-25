@@ -87,6 +87,7 @@ jobs:
         run: ./gradlew app:assemble
 
   release:
+    name: Release
     runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/tags/')
     needs: build
