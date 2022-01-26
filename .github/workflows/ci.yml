@@ -83,3 +83,6 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle/wrapper/gradle-wrapper.properties', '**/buildSrc/src/main/kotlin/**.kt') }}
       - name: Build
         run: ./gradlew app:assemble
+      - uses: actions/upload-artifact@v2
+        with:
+          path: app/build/*.apk
