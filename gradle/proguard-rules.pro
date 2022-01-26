@@ -84,3 +84,5 @@
 -keep public class * extends androidx.databinding.ViewDataBinding {
   * inflate(android.view.LayoutInflater);
 }
+
+-keep,allowshrinking class * extends io.goooler.demoapp.common.base.binding.BaseBindingActivity
