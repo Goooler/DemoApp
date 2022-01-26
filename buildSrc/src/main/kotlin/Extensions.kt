@@ -1,5 +1,6 @@
 @file:Suppress("UnstableApiUsage")
 
+import com.android.build.api.dsl.CommonExtension
 import com.android.build.api.dsl.VariantDimension
 import com.android.build.gradle.BaseExtension
 import com.android.build.gradle.LibraryExtension
@@ -144,9 +145,8 @@ inline fun <reified T : BaseExtension> Project.setupBase(
       "okhttp3/**",
       "google/**"
     )
-    lintOptions {
-      isAbortOnError = true
-      isCheckReleaseBuilds = true
+    (this as CommonExtension<*, *, *, *>).lint {
+      abortOnError = true
     }
     dependencies {
       implementations(fileTree(mapOf("dir" to "libs", "include" to arrayOf("*.jar", "*.aar"))))
