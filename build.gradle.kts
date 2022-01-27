@@ -39,7 +39,8 @@ allprojects {
             useVersion(supportVersion)
         }
         else -> when {
-          requested.name.startsWith("kotlinx-coroutines") -> useVersion(coroutinesVersion)
+          requested.name.startsWith("kotlinx-coroutines") ->
+            useVersion(coroutinesVersion)
         }
       }
     }

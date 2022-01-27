@@ -19,6 +19,7 @@ configurations.all {
         useTarget("${requested.group}:${requested.name.replace("jre", "jdk")}:${kotlinVersion}")
       }
       requested.group == "org.jetbrains.kotlin" -> useVersion(kotlinVersion)
+      requested.name == "javapoet" -> useVersion("1.13.0")
     }
   }
 }
