@@ -11,6 +11,7 @@ class PermissionHelper private constructor(
 ) {
   private val permissions = mutableListOf<String>()
   private var grantedPermissionCount = 0
+  private var onRawResultsCallback: ((Map<String, Boolean>) -> Unit)? = null
   private var onAllPermissionsGrantedCallback: (() -> Unit)? = null
 
   private lateinit var requestPermissionsLauncher: ActivityResultLauncher<Array<String>>
@@ -23,6 +24,10 @@ class PermissionHelper private constructor(
     this.permissions.addAll(permissions)
   }
 
+  fun onRawResults(callback: ((Map<String, Boolean>) -> Unit)? = null) {
+    onRawResultsCallback = callback
+  }
+
   fun onAllPermissionsGranted(callback: (() -> Unit)? = null) = apply {
     onAllPermissionsGrantedCallback = callback
   }
@@ -33,11 +38,13 @@ class PermissionHelper private constructor(
     requestPermissionsLauncher = launcher.registerForActivityResult(
       ActivityResultContracts.RequestMultiplePermissions()
     ) {
-      for (entry in it.entries) {
-        if (entry.value) grantedPermissionCount++
-      }
-      if (grantedPermissionCount != 0 && grantedPermissionCount == it.size) {
-        onAllPermissionsGrantedCallback?.invoke()
+      onRawResultsCallback?.invoke(it) ?: run {
+        for (entry in it.entries) {
+          if (entry.value) grantedPermissionCount++
+        }
+        if (grantedPermissionCount != 0 && grantedPermissionCount == it.size) {
+          onAllPermissionsGrantedCallback?.invoke()
+        }
       }
     }
     requestPermissionsLauncher.launch(permissions.toTypedArray())
