@@ -30,10 +30,10 @@ class PermissionHelper private constructor(
   fun request() {
     val launcher = activity ?: fragment
       ?: throw IllegalArgumentException("activity or fragment must not be null")
-    requestPermissionsLauncher = (launcher).registerForActivityResult(
+    requestPermissionsLauncher = launcher.registerForActivityResult(
       ActivityResultContracts.RequestMultiplePermissions()
     ) {
-      it.entries.forEach { entry ->
+      for (entry in it.entries) {
         if (entry.value) grantedPermissionCount++
       }
       if (grantedPermissionCount != 0 && grantedPermissionCount == it.size) {
