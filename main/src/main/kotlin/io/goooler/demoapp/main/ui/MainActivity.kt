@@ -3,7 +3,6 @@ package io.goooler.demoapp.main.ui
 import android.Manifest
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.result.contract.ActivityResultContracts
 import com.alibaba.android.arouter.facade.annotation.Route
 import dagger.hilt.android.AndroidEntryPoint
 import io.goooler.demoapp.adapter.vp.CommonFragmentStatePagerAdapter
@@ -27,14 +26,6 @@ class MainActivity : BaseBindingActivity<MainActivityBinding>() {
 
   private val titles = listOf("home", "smartRefresh", "paging")
 
-  private val requestPermissionsLauncher = registerForActivityResult(
-    ActivityResultContracts.RequestMultiplePermissions()
-  ) {
-    it.entries.forEach { entry ->
-      if (!entry.value) "${entry.key} has not been granted".showToast()
-    }
-  }
-
   private val fragments = listOf(
     MainHomeFragment(),
     MainSrlFragment(),
@@ -52,14 +43,15 @@ class MainActivity : BaseBindingActivity<MainActivityBinding>() {
     }
 
     PermissionHelper.with(this)
-
-    requestPermissionsLauncher.launch(
-      arrayOf(
+      .permissions(
         Manifest.permission.READ_EXTERNAL_STORAGE,
         Manifest.permission.CAMERA,
         Manifest.permission.ACCESS_COARSE_LOCATION
       )
-    )
+      .onAllPermissionsGranted {
+        "allPermissionsGranted".showToast()
+      }
+      .request()
   }
 
   /**
