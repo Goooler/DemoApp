@@ -15,6 +15,7 @@ import io.goooler.demoapp.main.databinding.MainActivityBinding
 import io.goooler.demoapp.main.ui.fragment.MainHomeFragment
 import io.goooler.demoapp.main.ui.fragment.MainPagingFragment
 import io.goooler.demoapp.main.ui.fragment.MainSrlFragment
+import io.goooler.demoapp.main.util.PermissionHelper
 
 @AndroidEntryPoint
 @Route(path = RouterPath.MAIN)
@@ -49,6 +50,8 @@ class MainActivity : BaseBindingActivity<MainActivityBinding>() {
       // setViewPager 必须在 pagerAdapter 设置数据之后
       tabLayout.setViewPager(viewPager)
     }
+
+    PermissionHelper.with(this)
 
     requestPermissionsLauncher.launch(
       arrayOf(
