@@ -10,9 +10,11 @@ class PermissionHelper private constructor(
   private val fragment: Fragment?
 ) {
   private val permissions = mutableListOf<String>()
-  private var grantedPermissionCount = 0
+
   private var onRawResultsCallback: ((Map<String, Boolean>) -> Unit)? = null
   private var onAllPermissionsGrantedCallback: (() -> Unit)? = null
+  private var onGrantedCallback: ((List<String>) -> Unit)? = null
+  private var onDeniedCallback: ((List<String>) -> Unit)? = null
 
   private lateinit var requestPermissionsLauncher: ActivityResultLauncher<Array<String>>
 
@@ -24,7 +26,7 @@ class PermissionHelper private constructor(
     this.permissions.addAll(permissions)
   }
 
-  fun onRawResults(callback: ((Map<String, Boolean>) -> Unit)? = null) {
+  fun onRawResults(callback: ((Map<String, Boolean>) -> Unit)? = null) = apply {
     onRawResultsCallback = callback
   }
 
@@ -32,7 +34,18 @@ class PermissionHelper private constructor(
     onAllPermissionsGrantedCallback = callback
   }
 
+  fun onGranted(callback: ((List<String>) -> Unit)? = null) = apply {
+    onGrantedCallback = callback
+  }
+
+  fun onDenied(callback: ((List<String>) -> Unit)? = null) = apply {
+    onDeniedCallback = callback
+  }
+
   fun request() {
+    val grantedPermissions = mutableListOf<String>()
+    val deniedPermissions = mutableListOf<String>()
+
     val launcher = activity ?: fragment
       ?: throw IllegalArgumentException("activity or fragment must not be null")
     requestPermissionsLauncher = launcher.registerForActivityResult(
@@ -40,9 +53,12 @@ class PermissionHelper private constructor(
     ) {
       onRawResultsCallback?.invoke(it) ?: run {
         for (entry in it.entries) {
-          if (entry.value) grantedPermissionCount++
+          val list = if (entry.value) grantedPermissions else deniedPermissions
+          list.add(entry.key)
         }
-        if (grantedPermissionCount != 0 && grantedPermissionCount == it.size) {
+        onGrantedCallback?.invoke(grantedPermissions)
+        onDeniedCallback?.invoke(deniedPermissions)
+        if (grantedPermissions.isNotEmpty() && grantedPermissions.size == it.size) {
           onAllPermissionsGrantedCallback?.invoke()
         }
       }
