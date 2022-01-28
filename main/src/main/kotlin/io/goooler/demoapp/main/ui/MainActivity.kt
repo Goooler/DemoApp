@@ -3,13 +3,14 @@ package io.goooler.demoapp.main.ui
 import android.Manifest
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.result.contract.ActivityResultContracts
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.permissionx.guolindev.PermissionX
 import dagger.hilt.android.AndroidEntryPoint
 import io.goooler.demoapp.adapter.vp.CommonFragmentStatePagerAdapter
 import io.goooler.demoapp.base.util.unsafeLazy
 import io.goooler.demoapp.common.base.binding.BaseBindingActivity
 import io.goooler.demoapp.common.router.RouterPath
+import io.goooler.demoapp.common.util.showToast
 import io.goooler.demoapp.main.databinding.MainActivityBinding
 import io.goooler.demoapp.main.ui.fragment.MainHomeFragment
 import io.goooler.demoapp.main.ui.fragment.MainPagingFragment
@@ -24,6 +25,14 @@ class MainActivity : BaseBindingActivity<MainActivityBinding>() {
   }
 
   private val titles = listOf("home", "smartRefresh", "paging")
+
+  private val requestPermissionsLauncher = registerForActivityResult(
+    ActivityResultContracts.RequestMultiplePermissions()
+  ) {
+    it.entries.forEach { entry ->
+      if (!entry.value) "${entry.key} has not been granted".showToast()
+    }
+  }
 
   private val fragments = listOf(
     MainHomeFragment(),
@@ -41,7 +50,13 @@ class MainActivity : BaseBindingActivity<MainActivityBinding>() {
       tabLayout.setViewPager(viewPager)
     }
 
-    requestPermissions()
+    requestPermissionsLauncher.launch(
+      arrayOf(
+        Manifest.permission.READ_EXTERNAL_STORAGE,
+        Manifest.permission.CAMERA,
+        Manifest.permission.ACCESS_COARSE_LOCATION
+      )
+    )
   }
 
   /**
@@ -56,30 +71,5 @@ class MainActivity : BaseBindingActivity<MainActivityBinding>() {
     } else {
       super.onBackPressed()
     }
-  }
-
-  private fun requestPermissions() {
-    PermissionX.init(this)
-      .permissions(
-        Manifest.permission.READ_EXTERNAL_STORAGE,
-        Manifest.permission.CAMERA,
-        Manifest.permission.ACCESS_COARSE_LOCATION
-      ).onExplainRequestReason { scope, deniedList ->
-        scope.showRequestReasonDialog(
-          deniedList,
-          "Core fundamental are based on these permissions",
-          "OK",
-          "Cancel"
-        )
-      }
-      .onForwardToSettings { scope, deniedList ->
-        scope.showForwardToSettingsDialog(
-          deniedList,
-          "You need to allow necessary permissions in Settings manually",
-          "OK",
-          "Cancel"
-        )
-      }
-      .request { _, _, _ -> }
   }
 }
