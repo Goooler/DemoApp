@@ -250,8 +250,7 @@ private inline fun <reified T : BaseExtension> Project.setupCommon(
       *Libs.rx,
       *Libs.moshi,
       Libs.collection,
-      Libs.utils,
-      Libs.permissionX
+      Libs.utils
     )
     kapts(Libs.arouterCompiler, Libs.moshiCompiler, Libs.roomCompiler, Libs.hiltCompiler)
   }

@@ -57,7 +57,6 @@ object Libs {
   const val paging = "androidx.paging:paging-runtime:3.1.0"
   const val viewPager2 = "androidx.viewpager2:viewpager2:1.0.0"
   const val photoView = "com.github.chrisbanes:PhotoView:2.3.0"
-  const val permissionX = "com.guolindev.permissionx:permissionx:1.6.1"
   const val browser = "androidx.browser:browser:1.4.0"
   const val webKit = "androidx.webkit:webkit:1.4.0"
   const val chuckerDebug = "com.github.chuckerteam.chucker:library:$chuckerVersion"
