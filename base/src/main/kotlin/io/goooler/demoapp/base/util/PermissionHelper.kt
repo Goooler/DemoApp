@@ -1,4 +1,4 @@
-package io.goooler.demoapp.main.util
+package io.goooler.demoapp.base.util
 
 import androidx.activity.ComponentActivity
 import androidx.activity.result.ActivityResultLauncher

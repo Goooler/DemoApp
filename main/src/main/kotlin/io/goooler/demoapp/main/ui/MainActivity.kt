@@ -6,6 +6,7 @@ import android.os.Bundle
 import com.alibaba.android.arouter.facade.annotation.Route
 import dagger.hilt.android.AndroidEntryPoint
 import io.goooler.demoapp.adapter.vp.CommonFragmentStatePagerAdapter
+import io.goooler.demoapp.base.util.PermissionHelper
 import io.goooler.demoapp.base.util.unsafeLazy
 import io.goooler.demoapp.common.base.binding.BaseBindingActivity
 import io.goooler.demoapp.common.router.RouterPath
@@ -14,7 +15,6 @@ import io.goooler.demoapp.main.databinding.MainActivityBinding
 import io.goooler.demoapp.main.ui.fragment.MainHomeFragment
 import io.goooler.demoapp.main.ui.fragment.MainPagingFragment
 import io.goooler.demoapp.main.ui.fragment.MainSrlFragment
-import io.goooler.demoapp.main.util.PermissionHelper
 
 @AndroidEntryPoint
 @Route(path = RouterPath.MAIN)
