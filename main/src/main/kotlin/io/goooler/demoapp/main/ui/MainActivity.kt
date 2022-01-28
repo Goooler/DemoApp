@@ -9,7 +9,7 @@ import io.goooler.demoapp.adapter.vp.CommonFragmentStatePagerAdapter
 import io.goooler.demoapp.base.util.unsafeLazy
 import io.goooler.demoapp.common.base.binding.BaseBindingActivity
 import io.goooler.demoapp.common.router.RouterPath
-import io.goooler.demoapp.common.util.showToast
+import io.goooler.demoapp.common.util.log
 import io.goooler.demoapp.main.databinding.MainActivityBinding
 import io.goooler.demoapp.main.ui.fragment.MainHomeFragment
 import io.goooler.demoapp.main.ui.fragment.MainPagingFragment
@@ -48,8 +48,11 @@ class MainActivity : BaseBindingActivity<MainActivityBinding>() {
         Manifest.permission.CAMERA,
         Manifest.permission.ACCESS_COARSE_LOCATION
       )
-      .onAllPermissionsGranted {
-        "allPermissionsGranted".showToast()
+      .onGranted { permissions ->
+        permissions.forEach { it.log() }
+      }
+      .onDenied { permissions ->
+        permissions.forEach { it.log() }
       }
       .request()
   }
