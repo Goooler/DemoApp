@@ -3,8 +3,12 @@ package io.goooler.demoapp.main.util
 import androidx.activity.ComponentActivity
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.Fragment
 
-class PermissionHelper(private val activity: ComponentActivity) {
+class PermissionHelper private constructor(
+  private val activity: ComponentActivity?,
+  private val fragment: Fragment?
+) {
   private val permissions = mutableListOf<String>()
   private var grantedPermissionCount = 0
   private var onAllPermissionsGrantedCallback: (() -> Unit)? = null
@@ -24,7 +28,9 @@ class PermissionHelper(private val activity: ComponentActivity) {
   }
 
   fun request() {
-    requestPermissionsLauncher = activity.registerForActivityResult(
+    val launcher = activity ?: fragment
+      ?: throw IllegalArgumentException("activity or fragment must not be null")
+    requestPermissionsLauncher = (launcher).registerForActivityResult(
       ActivityResultContracts.RequestMultiplePermissions()
     ) {
       it.entries.forEach { entry ->
@@ -39,6 +45,9 @@ class PermissionHelper(private val activity: ComponentActivity) {
 
   companion object {
     fun with(activity: ComponentActivity): PermissionHelper =
-      PermissionHelper(activity)
+      PermissionHelper(activity, null)
+
+    fun with(fragment: Fragment): PermissionHelper =
+      PermissionHelper(null, fragment)
   }
 }
