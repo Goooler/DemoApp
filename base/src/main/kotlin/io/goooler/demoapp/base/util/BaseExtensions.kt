@@ -445,11 +445,7 @@ fun Fragment.replaceFragment(
 }
 
 inline val View.attachedFragment: Fragment?
-  get() = try {
-    findFragment()
-  } catch (_: Exception) {
-    null
-  }
+  get() = runCatching { findFragment<Fragment>() }.getOrNull()
 
 inline val View.attachedActivity: Activity?
   get() {
