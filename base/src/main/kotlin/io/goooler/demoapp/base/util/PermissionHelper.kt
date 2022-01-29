@@ -1,7 +1,6 @@
 package io.goooler.demoapp.base.util
 
 import androidx.activity.ComponentActivity
-import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 
@@ -15,8 +14,6 @@ class PermissionHelper private constructor(
   private var onAllPermissionsGrantedCallback: (() -> Unit)? = null
   private var onGrantedCallback: ((List<String>) -> Unit)? = null
   private var onDeniedCallback: ((List<String>) -> Unit)? = null
-
-  private lateinit var requestPermissionsLauncher: ActivityResultLauncher<Array<String>>
 
   fun permissions(vararg permissions: String) = apply {
     this.permissions.addAll(permissions)
@@ -48,7 +45,7 @@ class PermissionHelper private constructor(
 
     val launcher = activity ?: fragment
       ?: throw IllegalArgumentException("activity or fragment must not be null")
-    requestPermissionsLauncher = launcher.registerForActivityResult(
+    launcher.registerForActivityResult(
       ActivityResultContracts.RequestMultiplePermissions()
     ) {
       onRawResultsCallback?.invoke(it) ?: run {
@@ -62,8 +59,7 @@ class PermissionHelper private constructor(
           onAllPermissionsGrantedCallback?.invoke()
         }
       }
-    }
-    requestPermissionsLauncher.launch(permissions.toTypedArray())
+    }.launch(permissions.toTypedArray())
   }
 
   companion object {
