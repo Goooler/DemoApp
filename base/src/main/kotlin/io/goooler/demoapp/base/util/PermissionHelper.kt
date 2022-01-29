@@ -11,7 +11,7 @@ class PermissionHelper private constructor(
   private val permissions = mutableListOf<String>()
 
   private var onRawResultsCallback: ((Map<String, Boolean>) -> Unit)? = null
-  private var onAllPermissionsGrantedCallback: (() -> Unit)? = null
+  private var onAllGrantedCallback: (() -> Unit)? = null
   private var onGrantedCallback: ((List<String>) -> Unit)? = null
   private var onDeniedCallback: ((List<String>) -> Unit)? = null
 
@@ -27,8 +27,8 @@ class PermissionHelper private constructor(
     onRawResultsCallback = callback
   }
 
-  fun onAllPermissionsGranted(callback: (() -> Unit)? = null) = apply {
-    onAllPermissionsGrantedCallback = callback
+  fun onAllGranted(callback: (() -> Unit)? = null) = apply {
+    onAllGrantedCallback = callback
   }
 
   fun onGranted(callback: ((List<String>) -> Unit)? = null) = apply {
@@ -56,7 +56,7 @@ class PermissionHelper private constructor(
         onGrantedCallback?.invoke(grantedPermissions)
         onDeniedCallback?.invoke(deniedPermissions)
         if (grantedPermissions.isNotEmpty() && grantedPermissions.size == it.size) {
-          onAllPermissionsGrantedCallback?.invoke()
+          onAllGrantedCallback?.invoke()
         }
       }
     }.launch(permissions.toTypedArray())
