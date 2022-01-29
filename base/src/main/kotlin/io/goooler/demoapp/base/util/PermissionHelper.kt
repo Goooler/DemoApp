@@ -16,11 +16,11 @@ class PermissionHelper private constructor(
   private var onDeniedCallback: ((List<String>) -> Unit)? = null
 
   fun permissions(vararg permissions: String) = apply {
-    this.permissions.addAll(permissions)
+    this.permissions += permissions
   }
 
   fun permissions(permissions: List<String>) = apply {
-    this.permissions.addAll(permissions)
+    this.permissions += permissions
   }
 
   fun onRawResults(callback: ((Map<String, Boolean>) -> Unit)? = null) = apply {
@@ -51,7 +51,7 @@ class PermissionHelper private constructor(
       onRawResultsCallback?.invoke(it) ?: run {
         for (entry in it.entries) {
           val list = if (entry.value) grantedPermissions else deniedPermissions
-          list.add(entry.key)
+          list += entry.key
         }
         onGrantedCallback?.invoke(grantedPermissions)
         onDeniedCallback?.invoke(deniedPermissions)
