@@ -30,10 +30,9 @@ enum class Flavor {
   Online
 }
 
-enum class BuildConfigField(val tag: String) {
-  VersionCode("VERSION_CODE"),
-  VersionName("VERSION_NAME"),
-  CdnPrefix("CDN_PREFIX"),
-  ApiHost("API_HOST"),
-  DoraemonKitKey("DORAEMON_KIT_KEY")
+enum class BuildConfigField(val key: String, val value: Any) {
+  VersionCode("VERSION_CODE", appVersionCode),
+  VersionName("VERSION_NAME", appVersionName),
+  CdnPrefix("CDN_PREFIX", "https://raw.githubusercontent.com/"),
+  ApiHost("API_HOST", "https://api.github.com/")
 }

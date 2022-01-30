@@ -73,12 +73,12 @@ fun PluginAware.applyPlugins(vararg names: String) {
   }
 }
 
-fun VariantDimension.putBuildConfigStringField(name: String, value: String?) {
-  buildConfigField("String", name, "\"$value\"")
-}
-
-fun VariantDimension.putBuildConfigIntField(name: String, value: Int) {
-  buildConfigField("Integer", name, value.toString())
+fun VariantDimension.buildConfigField(field: BuildConfigField) {
+  if (field.value is Int) {
+    buildConfigField("Integer", field.key, field.value.toString())
+  } else if (field.value is String) {
+    buildConfigField("String", field.key, "\"${field.value}\"")
+  }
 }
 
 fun BaseExtension.kotlinOptions(block: KotlinJvmOptions.() -> Unit) {
