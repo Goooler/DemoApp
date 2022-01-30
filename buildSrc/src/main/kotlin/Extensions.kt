@@ -1,5 +1,3 @@
-@file:Suppress("UnstableApiUsage")
-
 import com.android.build.api.dsl.CommonExtension
 import com.android.build.api.dsl.VariantDimension
 import com.android.build.gradle.BaseExtension
@@ -23,11 +21,6 @@ import org.gradle.kotlin.dsl.get
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmOptions
 import org.jetbrains.kotlin.gradle.plugin.KaptExtension
 
-const val cdnPrefix = "https://raw.githubusercontent.com/"
-val apiHosts = mapOf(
-  Flavor.Daily.name to "https://api.github.com/",
-  Flavor.Online.name to "https://api.github.com/"
-)
 const val extraScriptPath = "gradle/extra.gradle.kts"
 val javaVersion = JavaVersion.VERSION_11
 const val appVersionName = "1.5.0"
