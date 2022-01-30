@@ -49,7 +49,13 @@ allprojects {
 
 tasks {
   create<Delete>("clean") {
-    delete(rootProject.buildDir)
+    val customFileTypes = fileTree(
+      mapOf(
+        "dir" to "$rootDir/gradle",
+        "include" to arrayOf("*.log", "*.txt")
+      )
+    )
+    delete(rootProject.buildDir, customFileTypes)
   }
   wrapper {
     distributionType = Wrapper.DistributionType.ALL
