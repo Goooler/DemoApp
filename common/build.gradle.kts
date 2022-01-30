@@ -5,7 +5,6 @@ setupLib(LibModule.Common) {
     putBuildConfigStringField(BuildConfigField.VersionName.tag, appVersionName)
     putBuildConfigStringField(BuildConfigField.CdnPrefix.tag, cdnPrefix)
     putBuildConfigStringField(BuildConfigField.ApiHost.tag, apiHosts[name])
-    putBuildConfigStringField(BuildConfigField.DoraemonKitKey.tag, ApiKey.DoraemonKit.key)
   }
 }
 
