@@ -98,7 +98,6 @@ inline fun <reified T : BaseExtension> Project.setupBase(
       vectorDrawables.useSupportLibrary = true
       ndk.abiFilters += setOf("arm64-v8a")
       testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-      versionNameSuffix = "_${module.tag}"
     }
     sourceSets.configureEach {
       java.srcDirs("src/$name/kotlin")
@@ -187,7 +186,6 @@ fun Project.setupApp(
       resValue("string", "app_name", "${module.appName}.debug")
       signingConfig = signingConfigs["release"]
       applicationIdSuffix = ".debug"
-      versionNameSuffix = ".debug"
       isJniDebuggable = true
       isRenderscriptDebuggable = true
       isCrunchPngs = false
