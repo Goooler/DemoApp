@@ -19,8 +19,7 @@ enum class LibModule(override val tag: String) : Module {
   Adapter("adapter")
 }
 
-enum class AppModule(override val tag: String, val appName: String, val packageName: String) :
-  Module {
+enum class AppModule(override val tag: String, val appName: String, val appId: String) : Module {
   App("app", "Demo", "io.goooler.demoapp"),
   Test("app", "Test", "io.goooler.test")
 }

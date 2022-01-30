@@ -161,7 +161,7 @@ fun Project.setupApp(
   block: BaseAppModuleExtension.() -> Unit = {}
 ) = setupCommon<BaseAppModuleExtension>(module) {
   defaultConfig {
-    applicationId = module.packageName
+    applicationId = module.appId
     targetSdk = 32
     versionCode = appVersionCode
     versionName = appVersionName
