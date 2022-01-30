@@ -88,7 +88,7 @@ fun BaseExtension.kotlinOptions(block: KotlinJvmOptions.() -> Unit) {
 fun Project.kapt(block: KaptExtension.() -> Unit) = configure(block)
 
 inline fun <reified T : BaseExtension> Project.setupBase(
-  module: Module? = null,
+  module: Module,
   crossinline block: T.() -> Unit = {}
 ) {
   when (T::class) {
@@ -104,7 +104,7 @@ inline fun <reified T : BaseExtension> Project.setupBase(
       minSdk = 21
       vectorDrawables.useSupportLibrary = true
       ndk.abiFilters += setOf("arm64-v8a")
-      module?.let {
+      module.let {
         resourcePrefix = "${it.tag}_"
         versionNameSuffix = "_${it.tag}"
       }
@@ -160,14 +160,14 @@ inline fun <reified T : BaseExtension> Project.setupBase(
 }
 
 fun Project.setupLib(
-  module: Module? = null,
+  module: LibModule,
   block: LibraryExtension.() -> Unit = {}
 ) = setupCommon(module, block)
 
 fun Project.setupApp(
   module: AppModule,
   block: BaseAppModuleExtension.() -> Unit = {}
-) = setupCommon<BaseAppModuleExtension> {
+) = setupCommon<BaseAppModuleExtension>(module) {
   defaultConfig {
     applicationId = module.packageName
     targetSdk = 32
@@ -213,7 +213,7 @@ fun Project.setupApp(
 }
 
 private inline fun <reified T : BaseExtension> Project.setupCommon(
-  module: Module? = null,
+  module: Module,
   crossinline block: T.() -> Unit = {}
 ) = setupBase<T>(module) {
   flavorDimensions("channel")
