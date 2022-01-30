@@ -5,7 +5,6 @@ import com.android.build.gradle.LibraryExtension
 import com.android.build.gradle.internal.api.ApkVariantOutputImpl
 import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
 import java.io.File
-import java.util.Locale
 import java.util.Properties
 import kotlin.math.pow
 import org.gradle.api.JavaVersion
@@ -199,7 +198,7 @@ fun Project.setupApp(
     outputs.all {
       (this as? ApkVariantOutputImpl)?.outputFileName =
         "../../../../${module.appName}_${versionName}_${versionCode}_" +
-          "${flavorName.toLowerCase(Locale.ROOT)}_${buildType.name}.apk"
+          "${flavorName}_${buildType.name}.apk"
     }
   }
   block()
