@@ -5,6 +5,5 @@ object RouterPath {
   const val MAIN = "/main/"
   const val MAP = "/map/"
   const val WEB = "/web/"
-  const val WIDGET = "/widget/"
   const val AUDIO_PLAY = "/audioPlay/"
 }

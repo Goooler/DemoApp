@@ -6,6 +6,5 @@ include(
   ":main",
   ":web",
   ":adapter",
-  ":widget",
   ":test"
 )

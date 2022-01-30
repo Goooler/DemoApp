@@ -31,11 +31,6 @@ object RouterManager {
       .navigation()
   }
 
-  fun goWidget() {
-    buildPostcard(RouterPath.WIDGET)
-      .navigation()
-  }
-
   fun goMap() {
     buildPostcard(RouterPath.MAP)
       .navigation()

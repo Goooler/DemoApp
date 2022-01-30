@@ -44,7 +44,6 @@ class MainHomeFragment : BaseBindingLazyFragment<MainHomeFragmentBinding>() {
       binding.bt1 -> RouterManager.goWeb("bilibili.com")
       binding.bt2 -> RouterManager.goMap()
       binding.bt4 -> vm.countDown()
-      binding.bt5 -> RouterManager.goWidget()
       binding.bt6 -> FullScreenDialogFragment.show(childFragmentManager)
       binding.bt7 -> RouterManager.goAudioPlay()
       binding.bt8 -> createShortcut(requireContext())

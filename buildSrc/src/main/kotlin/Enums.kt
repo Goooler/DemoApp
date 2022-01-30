@@ -13,7 +13,6 @@ enum class Module(val tag: String, val runAlone: Boolean = false) {
 
   //---------------------func-------------------------------//
   Adapter("adapter"),
-  Widget("widget"),
 
   //---------------------app-------------------------------//
   App("app"),
