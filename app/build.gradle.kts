@@ -7,4 +7,5 @@ dependencies {
     project(LibModule.Main.moduleName),
     project(LibModule.Web.moduleName)
   )
+  debugImplementations(Libs.leakCanary)
 }

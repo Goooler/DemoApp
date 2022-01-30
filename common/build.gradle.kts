@@ -24,15 +24,7 @@ dependencies {
     Libs.collection,
     Libs.utils
   )
-  implementations(
-    // network
-    *Libs.coil
-  )
-  debugImplementations(
-    Libs.leakCanary,
-    Libs.chuckerDebug
-  )
-  releaseImplementations(
-    Libs.chuckerRelease
-  )
+  implementations(*Libs.coil)
+  debugImplementations(Libs.chuckerDebug)
+  releaseImplementations(Libs.chuckerRelease)
 }
