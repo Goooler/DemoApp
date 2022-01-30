@@ -1,5 +1,6 @@
 @file:Suppress("SpellCheckingInspection")
 
+// TODO: Make Module sealed
 interface Module {
   val tag: String
 }
