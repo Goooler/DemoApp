@@ -7,9 +7,9 @@ import com.android.build.gradle.LibraryExtension
 import com.android.build.gradle.internal.api.ApkVariantOutputImpl
 import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
 import java.io.File
-import java.nio.charset.Charset
 import java.util.Locale
 import java.util.Properties
+import kotlin.math.pow
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 import org.gradle.api.artifacts.Dependency
@@ -34,12 +34,18 @@ const val appPackageName = "io.goooler.demoapp"
 const val appName = "Demo"
 const val extraScriptPath = "gradle/extra.gradle.kts"
 val javaVersion = JavaVersion.VERSION_11
+const val appVersionName = "1.5.0"
 
-val gitCommitCount: String by lazy { "git describe --tags".exec() }
-val gitCommitDescribe: Int by lazy { "git rev-list HEAD --count".exec().toInt() }
-
-fun String.exec(): String = Runtime.getRuntime().exec(this).inputStream.readBytes()
-  .toString(Charset.defaultCharset()).trim()
+val appVersionCode: Int
+  get() = appVersionName
+    .takeWhile { it.isDigit() || it == '.' }
+    .split('.')
+    .map { it.toInt() }
+    .reversed()
+    .sumByIndexed { index, unit ->
+      // 1.2.3 -> 102030
+      (unit * 10.0.pow(2 * index + 1)).toInt()
+    }
 
 fun ScriptHandlerScope.classpaths(vararg names: Any): Array<Dependency?> =
   dependencies.config("classpath", *names)
@@ -170,8 +176,8 @@ fun Project.setupApp(
   defaultConfig {
     applicationId = appPackageName
     targetSdk = 32
-    versionCode = gitCommitDescribe
-    versionName = gitCommitCount
+    versionCode = appVersionCode
+    versionName = appVersionName
     manifestPlaceholders += mapOf("appName" to appName)
     resourceConfigurations += setOf("en", "zh-rCN", "xxhdpi")
   }
@@ -267,3 +273,12 @@ private fun Project.getSignProperty(
 ): String = Properties().apply {
   rootProject.file(path).inputStream().use(::load)
 }.getProperty(key)
+
+private inline fun <T> List<T>.sumByIndexed(selector: (Int, T) -> Int): Int {
+  var index = 0
+  var sum = 0
+  for (element in this) {
+    sum += selector(index++, element)
+  }
+  return sum
+}
