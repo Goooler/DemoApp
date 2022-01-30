@@ -210,8 +210,8 @@ private inline fun <reified T : BaseExtension> Project.setupCommon(
 ) = setupBase<T>(module) {
   flavorDimensions("channel")
   productFlavors {
-    create(Flavor.Daily.name)
-    create(Flavor.Online.name)
+    create("daily")
+    create("online")
   }
   kapt {
     arguments {

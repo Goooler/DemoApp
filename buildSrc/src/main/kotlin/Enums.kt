@@ -24,11 +24,6 @@ enum class AppModule(override val tag: String, val appName: String, val appId: S
   Test("app", "Test", "io.goooler.test")
 }
 
-enum class Flavor {
-  Daily,
-  Online
-}
-
 enum class BuildConfigField(val key: String, val value: Any) {
   VersionCode("VERSION_CODE", appVersionCode),
   VersionName("VERSION_NAME", appVersionName),
