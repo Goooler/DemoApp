@@ -21,8 +21,8 @@ enum class LibModule(override val tag: String) : Module {
 
 enum class AppModule(override val tag: String, val appName: String, val packageName: String) :
   Module {
-  App("app", "io.goooler.demoapp", "Demo"),
-  Test("app", "io.goooler.test", "Test")
+  App("app", "Demo", "io.goooler.demoapp"),
+  Test("app", "Test", "io.goooler.test")
 }
 
 enum class Flavor {
