@@ -181,6 +181,7 @@ fun Project.setupApp(
       resValue("string", "app_name", module.appName)
       signingConfig = signingConfigs["release"]
       isMinifyEnabled = true
+      isShrinkResources = true
       proguardFiles("$rootDir/gradle/proguard-rules.pro")
     }
     debug {
