@@ -1,4 +1,4 @@
-setupLib(Module.Common) {
+setupLib(LibModule.Common) {
   buildFeatures.buildConfig = true
   productFlavors.all {
     putBuildConfigIntField(BuildConfigField.VersionCode.tag, appVersionCode)

@@ -1,6 +1,10 @@
 @file:Suppress("SpellCheckingInspection")
 
-enum class Module(val tag: String, val runAlone: Boolean = false) {
+interface Module {
+  val tag: String
+}
+
+enum class LibModule(override val tag: String, val runAlone: Boolean = false) : Module {
   //---------------------base-------------------------------//
   Base("base"),
   Common("common"),
@@ -8,15 +12,10 @@ enum class Module(val tag: String, val runAlone: Boolean = false) {
   //---------------------biz-------------------------------//
   Login("login"),
   Main("main"),
-  Map("map"),
   Web("web"),
 
   //---------------------func-------------------------------//
   Adapter("adapter"),
-
-  //---------------------app-------------------------------//
-  App("app"),
-  Test("test")
 }
 
 enum class Flavor {

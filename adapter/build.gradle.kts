@@ -1,6 +1,6 @@
 import com.android.build.gradle.LibraryExtension
 
-setupBase<LibraryExtension>(Module.Adapter)
+setupBase<LibraryExtension>(LibModule.Adapter)
 
 dependencies {
   apis(

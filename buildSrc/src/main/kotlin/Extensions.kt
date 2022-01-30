@@ -233,12 +233,12 @@ private inline fun <reified T : BaseExtension> Project.setupCommon(
     }
   }
   dependencies {
-    if (module != Module.Common) {
-      implementations(project(Module.Common.moduleName))
+    if (module != LibModule.Common) {
+      implementations(project(LibModule.Common.moduleName))
     }
     implementations(
-      project(Module.Base.moduleName),
-      project(Module.Adapter.moduleName),
+      project(LibModule.Base.moduleName),
+      project(LibModule.Adapter.moduleName),
 
       // router
       Libs.arouter,
