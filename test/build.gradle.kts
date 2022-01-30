@@ -1,8 +1,4 @@
-setupApp(AppModule.Test) {
-  defaultConfig {
-    testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-  }
-}
+setupApp(AppModule.Test)
 
 dependencies {
   implementations(

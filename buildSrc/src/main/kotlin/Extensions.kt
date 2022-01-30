@@ -92,15 +92,14 @@ inline fun <reified T : BaseExtension> Project.setupBase(
 
   applyPlugins(Plugins.kotlinAndroid, Plugins.kotlinKapt)
   extensions.configure<BaseExtension>("android") {
+    resourcePrefix = "${module.tag}_"
     compileSdkVersion(32)
     defaultConfig {
       minSdk = 21
       vectorDrawables.useSupportLibrary = true
       ndk.abiFilters += setOf("arm64-v8a")
-      module.let {
-        resourcePrefix = "${it.tag}_"
-        versionNameSuffix = "_${it.tag}"
-      }
+      testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+      versionNameSuffix = "_${module.tag}"
     }
     sourceSets.configureEach {
       java.srcDirs("src/$name/kotlin")
