@@ -28,10 +28,6 @@ val apiHosts = mapOf(
   Flavor.Daily.name to "https://api.github.com/",
   Flavor.Online.name to "https://api.github.com/"
 )
-
-// app
-const val appPackageName = "io.goooler.demoapp"
-const val appName = "Demo"
 const val extraScriptPath = "gradle/extra.gradle.kts"
 val javaVersion = JavaVersion.VERSION_11
 const val appVersionName = "1.5.0"
@@ -169,16 +165,15 @@ fun Project.setupLib(
 ) = setupCommon(module, block)
 
 fun Project.setupApp(
-  appPackageName: String,
-  appName: String,
+  module: AppModule,
   block: BaseAppModuleExtension.() -> Unit = {}
 ) = setupCommon<BaseAppModuleExtension> {
   defaultConfig {
-    applicationId = appPackageName
+    applicationId = module.packageName
     targetSdk = 32
     versionCode = appVersionCode
     versionName = appVersionName
-    manifestPlaceholders += mapOf("appName" to appName)
+    manifestPlaceholders += mapOf("appName" to module.appName)
     resourceConfigurations += setOf("en", "zh-rCN", "xxhdpi")
   }
   signingConfigs.create("release") {
@@ -191,13 +186,13 @@ fun Project.setupApp(
   }
   buildTypes {
     release {
-      resValue("string", "app_name", appName)
+      resValue("string", "app_name", module.appName)
       signingConfig = signingConfigs["release"]
       isMinifyEnabled = true
       proguardFiles("$rootDir/gradle/proguard-rules.pro")
     }
     debug {
-      resValue("string", "app_name", "${appName}.debug")
+      resValue("string", "app_name", "${module.appName}.debug")
       signingConfig = signingConfigs["release"]
       applicationIdSuffix = ".debug"
       versionNameSuffix = ".debug"
@@ -210,7 +205,7 @@ fun Project.setupApp(
   applicationVariants.all {
     outputs.all {
       (this as? ApkVariantOutputImpl)?.outputFileName =
-        "../../../../${appName}_${versionName}_${versionCode}_" +
+        "../../../../${module.appName}_${versionName}_${versionCode}_" +
           "${flavorName.toLowerCase(Locale.ROOT)}_${buildType.name}.apk"
     }
   }

@@ -1,4 +1,4 @@
-setupApp("$appPackageName.test", "test") {
+setupApp(AppModule.Test) {
   defaultConfig {
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
   }

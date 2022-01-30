@@ -1,4 +1,4 @@
-setupApp(appPackageName, appName)
+setupApp(AppModule.App)
 
 dependencies {
   implementations(
