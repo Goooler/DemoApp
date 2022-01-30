@@ -16,7 +16,7 @@ enum class LibModule(override val tag: String) : Module {
   Web("web"),
 
   //---------------------func-------------------------------//
-  Adapter("adapter"),
+  Adapter("adapter")
 }
 
 enum class AppModule(override val tag: String, val appName: String, val packageName: String) :
