@@ -1,6 +1,4 @@
-setupLib(Module.Main) {
-  defaultConfig.testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-
+setupLib(LibModule.Main) {
   sourceSets["main"].res.srcDirs(
     "src/main/res/core",
     "src/main/res/other"

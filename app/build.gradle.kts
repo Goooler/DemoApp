@@ -1,11 +1,11 @@
-setupApp(appPackageName, appName)
+setupApp(AppModule.App)
 
 dependencies {
   implementations(
     // projects
-    project(Module.Login.moduleName),
-    project(Module.Main.moduleName),
-    // project(Module.Map.moduleName),
-    project(Module.Web.moduleName)
+    project(LibModule.Login.moduleName),
+    project(LibModule.Main.moduleName),
+    project(LibModule.Web.moduleName)
   )
+  debugImplementations(Libs.leakCanary)
 }

@@ -1,5 +1,3 @@
-@file:Suppress("UnstableApiUsage")
-
 import com.android.build.api.dsl.CommonExtension
 import com.android.build.api.dsl.VariantDimension
 import com.android.build.gradle.BaseExtension
@@ -7,7 +5,6 @@ import com.android.build.gradle.LibraryExtension
 import com.android.build.gradle.internal.api.ApkVariantOutputImpl
 import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
 import java.io.File
-import java.util.Locale
 import java.util.Properties
 import kotlin.math.pow
 import org.gradle.api.JavaVersion
@@ -23,15 +20,6 @@ import org.gradle.kotlin.dsl.get
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmOptions
 import org.jetbrains.kotlin.gradle.plugin.KaptExtension
 
-const val cdnPrefix = "https://raw.githubusercontent.com/"
-val apiHosts = mapOf(
-  Flavor.Daily.name to "https://api.github.com/",
-  Flavor.Online.name to "https://api.github.com/"
-)
-
-// app
-const val appPackageName = "io.goooler.demoapp"
-const val appName = "Demo"
 const val extraScriptPath = "gradle/extra.gradle.kts"
 val javaVersion = JavaVersion.VERSION_11
 const val appVersionName = "1.5.0"
@@ -77,12 +65,12 @@ fun PluginAware.applyPlugins(vararg names: String) {
   }
 }
 
-fun VariantDimension.putBuildConfigStringField(name: String, value: String?) {
-  buildConfigField("String", name, "\"$value\"")
-}
-
-fun VariantDimension.putBuildConfigIntField(name: String, value: Int) {
-  buildConfigField("Integer", name, value.toString())
+fun VariantDimension.buildConfigField(field: BuildConfigField) {
+  if (field.value is Int) {
+    buildConfigField("Integer", field.key, field.value.toString())
+  } else if (field.value is String) {
+    buildConfigField("String", field.key, "\"${field.value}\"")
+  }
 }
 
 fun BaseExtension.kotlinOptions(block: KotlinJvmOptions.() -> Unit) {
@@ -92,7 +80,7 @@ fun BaseExtension.kotlinOptions(block: KotlinJvmOptions.() -> Unit) {
 fun Project.kapt(block: KaptExtension.() -> Unit) = configure(block)
 
 inline fun <reified T : BaseExtension> Project.setupBase(
-  module: Module? = null,
+  module: Module,
   crossinline block: T.() -> Unit = {}
 ) {
   when (T::class) {
@@ -103,15 +91,13 @@ inline fun <reified T : BaseExtension> Project.setupBase(
 
   applyPlugins(Plugins.kotlinAndroid, Plugins.kotlinKapt)
   extensions.configure<BaseExtension>("android") {
+    resourcePrefix = "${module.tag}_"
     compileSdkVersion(32)
     defaultConfig {
       minSdk = 21
       vectorDrawables.useSupportLibrary = true
       ndk.abiFilters += setOf("arm64-v8a")
-      module?.let {
-        resourcePrefix = "${it.tag}_"
-        versionNameSuffix = "_${it.tag}"
-      }
+      testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     sourceSets.configureEach {
       java.srcDirs("src/$name/kotlin")
@@ -164,21 +150,20 @@ inline fun <reified T : BaseExtension> Project.setupBase(
 }
 
 fun Project.setupLib(
-  module: Module? = null,
+  module: LibModule,
   block: LibraryExtension.() -> Unit = {}
 ) = setupCommon(module, block)
 
 fun Project.setupApp(
-  appPackageName: String,
-  appName: String,
+  module: AppModule,
   block: BaseAppModuleExtension.() -> Unit = {}
-) = setupCommon<BaseAppModuleExtension> {
+) = setupCommon<BaseAppModuleExtension>(module) {
   defaultConfig {
-    applicationId = appPackageName
+    applicationId = module.appId
     targetSdk = 32
     versionCode = appVersionCode
     versionName = appVersionName
-    manifestPlaceholders += mapOf("appName" to appName)
+    manifestPlaceholders += mapOf("appName" to module.appName)
     resourceConfigurations += setOf("en", "zh-rCN", "xxhdpi")
   }
   signingConfigs.create("release") {
@@ -191,16 +176,16 @@ fun Project.setupApp(
   }
   buildTypes {
     release {
-      resValue("string", "app_name", appName)
+      resValue("string", "app_name", module.appName)
       signingConfig = signingConfigs["release"]
       isMinifyEnabled = true
+      isShrinkResources = true
       proguardFiles("$rootDir/gradle/proguard-rules.pro")
     }
     debug {
-      resValue("string", "app_name", "${appName}.debug")
+      resValue("string", "app_name", "${module.appName}.debug")
       signingConfig = signingConfigs["release"]
       applicationIdSuffix = ".debug"
-      versionNameSuffix = ".debug"
       isJniDebuggable = true
       isRenderscriptDebuggable = true
       isCrunchPngs = false
@@ -209,22 +194,21 @@ fun Project.setupApp(
   dependenciesInfo.includeInApk = false
   applicationVariants.all {
     outputs.all {
-      (this as? ApkVariantOutputImpl)?.outputFileName =
-        "../../../../${appName}_${versionName}_${versionCode}_" +
-          "${flavorName.toLowerCase(Locale.ROOT)}_${buildType.name}.apk"
+      (this as? ApkVariantOutputImpl)?.outputFileName = "../../../../" +
+        "${module.appName}_${versionName}_${versionCode}_${flavorName}_${buildType.name}.apk"
     }
   }
   block()
 }
 
 private inline fun <reified T : BaseExtension> Project.setupCommon(
-  module: Module? = null,
+  module: Module,
   crossinline block: T.() -> Unit = {}
 ) = setupBase<T>(module) {
   flavorDimensions("channel")
   productFlavors {
-    create(Flavor.Daily.name)
-    create(Flavor.Online.name)
+    create("daily")
+    create("online")
   }
   kapt {
     arguments {
@@ -233,30 +217,14 @@ private inline fun <reified T : BaseExtension> Project.setupCommon(
     }
   }
   dependencies {
-    if (module != Module.Common) {
-      implementations(project(Module.Common.moduleName))
+    if (module != LibModule.Common) {
+      implementations(project(LibModule.Common.moduleName))
     }
     implementations(
-      project(Module.Base.moduleName),
-      project(Module.Adapter.moduleName),
-
-      // router
       Libs.arouter,
-
-      // UI
-      Libs.constraintLayout,
-      Libs.cardView,
-      Libs.material,
-      *Libs.smartRefreshLayout,
-      Libs.photoView,
-
-      // utils
       *Libs.hilt,
       *Libs.room,
-      *Libs.rx,
-      *Libs.moshi,
-      Libs.collection,
-      Libs.utils
+      *Libs.moshi
     )
     kapts(Libs.arouterCompiler, Libs.moshiCompiler, Libs.roomCompiler, Libs.hiltCompiler)
   }

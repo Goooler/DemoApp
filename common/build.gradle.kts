@@ -1,24 +1,30 @@
-setupLib(Module.Common) {
+setupLib(LibModule.Common) {
   buildFeatures.buildConfig = true
   productFlavors.all {
-    putBuildConfigIntField(BuildConfigField.VersionCode.tag, appVersionCode)
-    putBuildConfigStringField(BuildConfigField.VersionName.tag, appVersionName)
-    putBuildConfigStringField(BuildConfigField.CdnPrefix.tag, cdnPrefix)
-    putBuildConfigStringField(BuildConfigField.ApiHost.tag, apiHosts[name])
-    putBuildConfigStringField(BuildConfigField.DoraemonKitKey.tag, ApiKey.DoraemonKit.key)
+    buildConfigField(BuildConfigField.VersionCode)
+    buildConfigField(BuildConfigField.VersionName)
+    buildConfigField(BuildConfigField.CdnPrefix)
+    buildConfigField(BuildConfigField.ApiHost)
   }
 }
 
 dependencies {
-  implementations(
-    // network
-    *Libs.coil
+  apis(
+    // project
+    project(LibModule.Base.moduleName),
+    project(LibModule.Adapter.moduleName),
+    // UI
+    Libs.constraintLayout,
+    Libs.cardView,
+    Libs.material,
+    *Libs.smartRefreshLayout,
+    Libs.photoView,
+    // other
+    *Libs.rx,
+    Libs.collection,
+    Libs.utils
   )
-  debugImplementations(
-    Libs.leakCanary,
-    Libs.chuckerDebug
-  )
-  releaseImplementations(
-    Libs.chuckerRelease
-  )
+  implementations(*Libs.coil)
+  debugImplementations(Libs.chuckerDebug)
+  releaseImplementations(Libs.chuckerRelease)
 }

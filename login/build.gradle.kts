@@ -1,1 +1,1 @@
-setupLib(Module.Login)
+setupLib(LibModule.Login)

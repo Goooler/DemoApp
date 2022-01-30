@@ -1,4 +1,4 @@
-setupLib(Module.Web) {
+setupLib(LibModule.Web) {
   buildFeatures.buildConfig = true
 }
 
