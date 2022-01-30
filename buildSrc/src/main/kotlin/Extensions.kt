@@ -221,26 +221,10 @@ private inline fun <reified T : BaseExtension> Project.setupCommon(
       implementations(project(LibModule.Common.moduleName))
     }
     implementations(
-      project(LibModule.Base.moduleName),
-      project(LibModule.Adapter.moduleName),
-
-      // router
       Libs.arouter,
-
-      // UI
-      Libs.constraintLayout,
-      Libs.cardView,
-      Libs.material,
-      *Libs.smartRefreshLayout,
-      Libs.photoView,
-
-      // utils
       *Libs.hilt,
       *Libs.room,
-      *Libs.rx,
-      *Libs.moshi,
-      Libs.collection,
-      Libs.utils
+      *Libs.moshi
     )
     kapts(Libs.arouterCompiler, Libs.moshiCompiler, Libs.roomCompiler, Libs.hiltCompiler)
   }

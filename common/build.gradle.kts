@@ -9,6 +9,21 @@ setupLib(LibModule.Common) {
 }
 
 dependencies {
+  apis(
+    // project
+    project(LibModule.Base.moduleName),
+    project(LibModule.Adapter.moduleName),
+    // UI
+    Libs.constraintLayout,
+    Libs.cardView,
+    Libs.material,
+    *Libs.smartRefreshLayout,
+    Libs.photoView,
+    // other
+    *Libs.rx,
+    Libs.collection,
+    Libs.utils
+  )
   implementations(
     // network
     *Libs.coil
