@@ -4,12 +4,13 @@ import android.Manifest
 import android.content.Intent
 import android.os.Bundle
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.permissionx.guolindev.PermissionX
 import dagger.hilt.android.AndroidEntryPoint
 import io.goooler.demoapp.adapter.vp.CommonFragmentStatePagerAdapter
+import io.goooler.demoapp.base.util.PermissionHelper
 import io.goooler.demoapp.base.util.unsafeLazy
 import io.goooler.demoapp.common.base.binding.BaseBindingActivity
 import io.goooler.demoapp.common.router.RouterPath
+import io.goooler.demoapp.common.util.log
 import io.goooler.demoapp.main.databinding.MainActivityBinding
 import io.goooler.demoapp.main.ui.fragment.MainHomeFragment
 import io.goooler.demoapp.main.ui.fragment.MainPagingFragment
@@ -41,7 +42,19 @@ class MainActivity : BaseBindingActivity<MainActivityBinding>() {
       tabLayout.setViewPager(viewPager)
     }
 
-    requestPermissions()
+    PermissionHelper.with(this)
+      .permissions(
+        Manifest.permission.READ_EXTERNAL_STORAGE,
+        Manifest.permission.CAMERA,
+        Manifest.permission.ACCESS_COARSE_LOCATION
+      )
+      .onGranted { permissions ->
+        permissions.forEach { it.log() }
+      }
+      .onDenied { permissions ->
+        permissions.forEach { it.log() }
+      }
+      .request()
   }
 
   /**
@@ -56,30 +69,5 @@ class MainActivity : BaseBindingActivity<MainActivityBinding>() {
     } else {
       super.onBackPressed()
     }
-  }
-
-  private fun requestPermissions() {
-    PermissionX.init(this)
-      .permissions(
-        Manifest.permission.READ_EXTERNAL_STORAGE,
-        Manifest.permission.CAMERA,
-        Manifest.permission.ACCESS_COARSE_LOCATION
-      ).onExplainRequestReason { scope, deniedList ->
-        scope.showRequestReasonDialog(
-          deniedList,
-          "Core fundamental are based on these permissions",
-          "OK",
-          "Cancel"
-        )
-      }
-      .onForwardToSettings { scope, deniedList ->
-        scope.showForwardToSettingsDialog(
-          deniedList,
-          "You need to allow necessary permissions in Settings manually",
-          "OK",
-          "Cancel"
-        )
-      }
-      .request { _, _, _ -> }
   }
 }
