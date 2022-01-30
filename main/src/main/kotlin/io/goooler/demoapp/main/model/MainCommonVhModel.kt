@@ -24,10 +24,10 @@ sealed class MainCommonVhModel : IDiffVhModelType, ISpanSize {
   }
 
   class Empty : MainCommonVhModel() {
-    override val viewType: Int = R.layout.common_empty_layout
+    override val viewType: Int = io.goooler.demoapp.common.R.layout.common_empty_layout
   }
 
   class Error : MainCommonVhModel() {
-    override val viewType: Int = R.layout.common_error_layout
+    override val viewType: Int = io.goooler.demoapp.common.R.layout.common_error_layout
   }
 }

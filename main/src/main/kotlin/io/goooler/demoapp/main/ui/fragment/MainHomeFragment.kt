@@ -14,7 +14,6 @@ import io.goooler.demoapp.common.base.binding.BaseBindingLazyFragment
 import io.goooler.demoapp.common.router.RouterManager
 import io.goooler.demoapp.common.ui.FullScreenDialogFragment
 import io.goooler.demoapp.common.util.getThemeViewModel
-import io.goooler.demoapp.main.R
 import io.goooler.demoapp.main.databinding.MainHomeFragmentBinding
 import io.goooler.demoapp.main.ui.AudioPlayActivity
 import io.goooler.demoapp.main.vm.MainHomeViewModel
@@ -57,7 +56,12 @@ class MainHomeFragment : BaseBindingLazyFragment<MainHomeFragmentBinding>() {
     val shortcut = ShortcutInfoCompat.Builder(context, SHORTCUT_ID)
       .setShortLabel("Start audio play")
       .setLongLabel("Start audio play")
-      .setIcon(IconCompat.createWithResource(context, R.drawable.common_ic_kt_red))
+      .setIcon(
+        IconCompat.createWithResource(
+          context,
+          io.goooler.demoapp.common.R.drawable.common_ic_kt_red
+        )
+      )
       .setIntent(intent)
       .build()
     context.addDynamicShortcutCompat(SHORTCUT_ID, shortcut)
