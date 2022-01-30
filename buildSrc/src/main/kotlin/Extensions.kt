@@ -194,9 +194,8 @@ fun Project.setupApp(
   dependenciesInfo.includeInApk = false
   applicationVariants.all {
     outputs.all {
-      (this as? ApkVariantOutputImpl)?.outputFileName =
-        "../../../../${module.appName}_${versionName}_${versionCode}_" +
-          "${flavorName}_${buildType.name}.apk"
+      (this as? ApkVariantOutputImpl)?.outputFileName = "../../../../" +
+        "${module.appName}_${versionName}_${versionCode}_${flavorName}_${buildType.name}.apk"
     }
   }
   block()
