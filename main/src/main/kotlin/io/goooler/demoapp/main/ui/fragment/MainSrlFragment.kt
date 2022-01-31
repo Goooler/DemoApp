@@ -11,7 +11,6 @@ import io.goooler.demoapp.common.base.binding.BaseBindingLazyFragment
 import io.goooler.demoapp.common.util.enableRefreshAndLoadMore
 import io.goooler.demoapp.common.util.getThemeViewModel
 import io.goooler.demoapp.common.util.showToast
-import io.goooler.demoapp.main.R
 import io.goooler.demoapp.main.databinding.MainSrlFragmentBinding
 import io.goooler.demoapp.main.ui.adapter.MainSrlRvAdapter
 import io.goooler.demoapp.main.vm.MainSrlViewModel
@@ -70,7 +69,7 @@ class MainSrlFragment : BaseBindingLazyFragment<MainSrlFragmentBinding>() {
 
     override fun onClick(v: View) {
       when (v.id) {
-        R.id.iv_error, R.id.tv_tip -> {
+        io.goooler.demoapp.common.R.id.iv_error, io.goooler.demoapp.common.R.id.tv_tip -> {
           binding.refreshLayout.enableRefreshAndLoadMore()
           binding.refreshLayout.autoRefresh()
         }

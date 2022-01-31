@@ -5,7 +5,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.goooler.demoapp.base.util.defaultAsync
 import io.goooler.demoapp.common.base.theme.BaseRxViewModel
 import io.goooler.demoapp.common.util.showToast
-import io.goooler.demoapp.main.R
 import io.goooler.demoapp.main.bean.MainRepoListBean
 import io.goooler.demoapp.main.repository.MainCommonRepository
 import java.util.concurrent.CancellationException
@@ -92,7 +91,7 @@ class MainHomeViewModel @Inject constructor(private val repository: MainCommonRe
         e.message?.let {
           _title.emit(it)
         }
-        R.string.common_request_failed.showToast()
+        io.goooler.demoapp.common.R.string.common_request_failed.showToast()
       }
     }
   }
