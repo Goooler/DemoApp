@@ -1,4 +1,6 @@
-setupLib(LibModule.Common) {
+import com.android.build.gradle.LibraryExtension
+
+setupCommon<LibraryExtension>(LibModule.Common) {
   buildFeatures.buildConfig = true
   productFlavors.all {
     buildConfigField(BuildConfigField.VersionCode)
