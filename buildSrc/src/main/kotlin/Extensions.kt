@@ -57,7 +57,7 @@ fun DependencyHandler.androidTestImplementations(vararg names: Any): Array<Depen
 fun DependencyHandler.testImplementations(vararg names: Any): Array<Dependency?> =
   config("testImplementation", *names)
 
-inline val Module.moduleName: String get() = ":${tag}"
+fun Project.project(module: Module): Project = project(":${module.tag}")
 
 fun PluginAware.applyPlugins(vararg names: String) {
   apply {
@@ -152,7 +152,10 @@ inline fun <reified T : BaseExtension> Project.setupBase(
 fun Project.setupLib(
   module: LibModule,
   block: LibraryExtension.() -> Unit = {}
-) = setupCommon(module, block)
+) = setupCommon<LibraryExtension>(module) {
+  dependencies.implementations(project(LibModule.Common))
+  block()
+}
 
 fun Project.setupApp(
   module: AppModule,
@@ -163,7 +166,6 @@ fun Project.setupApp(
     targetSdk = 32
     versionCode = appVersionCode
     versionName = appVersionName
-    manifestPlaceholders += mapOf("appName" to module.appName)
     resourceConfigurations += setOf("en", "zh-rCN", "xxhdpi")
   }
   signingConfigs.create("release") {
@@ -198,10 +200,11 @@ fun Project.setupApp(
         "${module.appName}_${versionName}_${versionCode}_${flavorName}_${buildType.name}.apk"
     }
   }
+  dependencies.implementations(project(LibModule.Common))
   block()
 }
 
-private inline fun <reified T : BaseExtension> Project.setupCommon(
+inline fun <reified T : BaseExtension> Project.setupCommon(
   module: Module,
   crossinline block: T.() -> Unit = {}
 ) = setupBase<T>(module) {
@@ -217,9 +220,6 @@ private inline fun <reified T : BaseExtension> Project.setupCommon(
     }
   }
   dependencies {
-    if (module != LibModule.Common) {
-      implementations(project(LibModule.Common.moduleName))
-    }
     implementations(
       Libs.arouter,
       *Libs.hilt,

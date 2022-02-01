@@ -1,4 +1,6 @@
-setupLib(LibModule.Common) {
+import com.android.build.gradle.LibraryExtension
+
+setupCommon<LibraryExtension>(LibModule.Common) {
   buildFeatures.buildConfig = true
   productFlavors.all {
     buildConfigField(BuildConfigField.VersionCode)
@@ -11,8 +13,8 @@ setupLib(LibModule.Common) {
 dependencies {
   apis(
     // project
-    project(LibModule.Base.moduleName),
-    project(LibModule.Adapter.moduleName),
+    project(LibModule.Base),
+    project(LibModule.Adapter),
     // UI
     Libs.constraintLayout,
     Libs.cardView,
