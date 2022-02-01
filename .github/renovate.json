@@ -1,0 +1,16 @@
+{
+  "labels": [
+    "dependencies"
+  ],
+  "regexManagers": [
+    {
+      "fileMatch": [
+        "(^|/)buildSrc/.*"
+      ],
+      "datasourceTemplate": "gradle"
+    }
+  ],
+  "extends": [
+    "config:base"
+  ]
+}
