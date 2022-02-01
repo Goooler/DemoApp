@@ -57,7 +57,7 @@ fun DependencyHandler.androidTestImplementations(vararg names: Any): Array<Depen
 fun DependencyHandler.testImplementations(vararg names: Any): Array<Dependency?> =
   config("testImplementation", *names)
 
-inline val Module.moduleName: String get() = ":${tag}"
+fun Project.project(module: Module): Project = project(":${module.tag}")
 
 fun PluginAware.applyPlugins(vararg names: String) {
   apply {
@@ -218,7 +218,7 @@ private inline fun <reified T : BaseExtension> Project.setupCommon(
   }
   dependencies {
     if (module != LibModule.Common) {
-      implementations(project(LibModule.Common.moduleName))
+      implementations(project(LibModule.Common))
     }
     implementations(
       Libs.arouter,

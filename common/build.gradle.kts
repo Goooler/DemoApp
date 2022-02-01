@@ -11,8 +11,8 @@ setupLib(LibModule.Common) {
 dependencies {
   apis(
     // project
-    project(LibModule.Base.moduleName),
-    project(LibModule.Adapter.moduleName),
+    project(LibModule.Base),
+    project(LibModule.Adapter),
     // UI
     Libs.constraintLayout,
     Libs.cardView,
