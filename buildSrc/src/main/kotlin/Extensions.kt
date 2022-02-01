@@ -166,7 +166,6 @@ fun Project.setupApp(
     targetSdk = 32
     versionCode = appVersionCode
     versionName = appVersionName
-    manifestPlaceholders += mapOf("appName" to module.appName)
     resourceConfigurations += setOf("en", "zh-rCN", "xxhdpi")
   }
   signingConfigs.create("release") {

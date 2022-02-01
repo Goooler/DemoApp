@@ -20,7 +20,7 @@
     <!--7.0 以上行为变更，不可直接 Uri.fromFile()-->
     <provider
       android:name=".provider.CommonProvider"
-      android:authorities="${applicationId}.common.content.CommonProvider"
+      android:authorities="${applicationId}.CommonProvider"
       android:exported="false"
       android:grantUriPermissions="true">
       <meta-data
