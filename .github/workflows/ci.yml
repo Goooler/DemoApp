@@ -27,6 +27,8 @@ jobs:
         uses: gradle/wrapper-validation-action@v1
       - name: Check style
         run: ./gradlew ktlintCheck
+      - name: Validate renovate config
+        uses: rinchsan/renovate-config-validator@v0.0.10
 
   unit-tests:
     name: Unit tests
