@@ -16,11 +16,7 @@ buildscript {
 
 allprojects {
   apply("$rootDir/$extraScriptPath")
-  applyPlugins(
-    Plugins.ktlint,
-    Plugins.picCompress,
-    Plugins.customTrans
-  )
+  applyPlugins(Plugins.ktlint)
 
   configurations.all {
     resolutionStrategy.eachDependency {

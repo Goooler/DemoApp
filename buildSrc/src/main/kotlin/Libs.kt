@@ -29,8 +29,6 @@ object Plugins {
   const val hilt = "dagger.hilt.android.plugin"
   const val arouter = "com.alibaba.arouter"
   const val ktlint = "org.jlleitschuh.gradle.ktlint"
-  const val picCompress = "io.goooler.android.plugin.pic-compress"
-  const val customTrans = "io.goooler.android.plugin.custom-trans"
 }
 
 object Libs {
