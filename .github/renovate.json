@@ -7,7 +7,7 @@
       "fileMatch": [
         "(^|/)buildSrc/.*"
       ],
-      "datasourceTemplate": "gradle"
+      "datasourceTemplate": "maven"
     }
   ],
   "extends": [
