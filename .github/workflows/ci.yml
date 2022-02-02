@@ -4,7 +4,25 @@ on:
   push:
     branches:
       - kotlin
+    paths-ignore:
+      - '.idea/**'
+      - '.gitattributes'
+      - '.gitignore'
+      - '.gitmodules'
+      - '**.md'
+      - 'LICENSE'
+      - 'NOTICE'
+      - '.github/**.json'
   pull_request:
+    paths-ignore:
+      - '.idea/**'
+      - '.gitattributes'
+      - '.gitignore'
+      - '.gitmodules'
+      - '**.md'
+      - 'LICENSE'
+      - 'NOTICE'
+      - '.github/**.json'
 
 jobs:
   check:
