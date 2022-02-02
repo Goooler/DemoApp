@@ -1,0 +1,16 @@
+name: CI
+
+on:
+  pull_request:
+    paths:
+      - '.github/**.json'
+
+jobs:
+  check:
+    name: Validation
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v2
+      - name: Validate renovate config
+        uses: rinchsan/renovate-config-validator@v0.0.10
