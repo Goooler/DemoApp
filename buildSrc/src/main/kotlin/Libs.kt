@@ -4,7 +4,7 @@ private const val okHttpVersion = "4.9.3"
 private const val retrofitVersion = "2.9.0"
 private const val arouterVersion = "1.5.2"
 private const val moshiVersion = "1.13.0"
-private const val smartRefreshLayoutVersion = "2.0.3"
+private const val srlVersion = "2.0.3"
 private const val glideVersion = "4.12.0"
 private const val coilVersion = "1.4.0"
 private const val roomVersion = "2.4.1"
@@ -91,9 +91,9 @@ object Libs {
     "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03"
   )
   val smartRefreshLayout = arrayOf(
-    "com.scwang.smart:refresh-layout-kernel:$smartRefreshLayoutVersion",
-    "com.scwang.smart:refresh-header-classics:$smartRefreshLayoutVersion",
-    "com.scwang.smart:refresh-footer-classics:$smartRefreshLayoutVersion"
+    "com.scwang.smart:refresh-layout-kernel:$srlVersion",
+    "com.scwang.smart:refresh-header-classics:$srlVersion",
+    "com.scwang.smart:refresh-footer-classics:$srlVersion"
   )
   val gson = arrayOf(
     "com.google.code.gson:gson:2.8.9",
