@@ -23,7 +23,6 @@ import org.jetbrains.kotlin.gradle.plugin.KaptExtension
 const val extraScriptPath = "gradle/extra.gradle.kts"
 val javaVersion = JavaVersion.VERSION_11
 const val appVersionName = "1.5.0"
-
 val appVersionCode: Int
   get() = appVersionName
     .takeWhile { it.isDigit() || it == '.' }
@@ -57,12 +56,8 @@ fun DependencyHandler.androidTestImplementations(vararg names: Any): Array<Depen
 fun DependencyHandler.testImplementations(vararg names: Any): Array<Dependency?> =
   config("testImplementation", *names)
 
-fun Project.project(module: Module): Project = project(":${module.tag}")
-
 fun PluginAware.applyPlugins(vararg names: String) {
-  apply {
-    names.forEach(::plugin)
-  }
+  apply { names.forEach(::plugin) }
 }
 
 fun VariantDimension.buildConfigField(field: BuildConfigField) {
@@ -73,24 +68,26 @@ fun VariantDimension.buildConfigField(field: BuildConfigField) {
   }
 }
 
-fun BaseExtension.kotlinOptions(block: KotlinJvmOptions.() -> Unit) {
-  (this as ExtensionAware).extensions.configure("kotlinOptions", block)
+fun Project.project(module: Module): Project = project(":${module.tag}")
+
+fun Project.kapt(block: KaptExtension.() -> Unit) {
+  configure(block)
 }
 
-fun Project.kapt(block: KaptExtension.() -> Unit) = configure(block)
+fun BaseExtension.kotlinOptions(block: KotlinJvmOptions.() -> Unit) {
+  (this as ExtensionAware).extensions.configure(block)
+}
 
 inline fun <reified T : BaseExtension> Project.setupBase(
-  module: Module,
-  crossinline block: T.() -> Unit = {}
+  module: Module, crossinline block: T.() -> Unit = {}
 ) {
-  when (T::class) {
+  val androidPlugin = when (T::class) {
     LibraryExtension::class -> Plugins.androidLibrary
     BaseAppModuleExtension::class -> Plugins.androidApplication
-    else -> null
-  }?.let { applyPlugins(it) }
-
-  applyPlugins(Plugins.kotlinAndroid, Plugins.kotlinKapt)
-  extensions.configure<BaseExtension>("android") {
+    else -> ""
+  }
+  applyPlugins(androidPlugin, Plugins.kotlinAndroid, Plugins.kotlinKapt)
+  extensions.configure<BaseExtension> {
     resourcePrefix = "${module.tag}_"
     compileSdkVersion(32)
     defaultConfig {
@@ -149,17 +146,37 @@ inline fun <reified T : BaseExtension> Project.setupBase(
   }
 }
 
+inline fun <reified T : BaseExtension> Project.setupCommon(
+  module: Module, crossinline block: T.() -> Unit = {}
+) = setupBase<T>(module) {
+  flavorDimensions("channel")
+  productFlavors {
+    create("daily")
+    create("online")
+  }
+  dependencies {
+    implementations(Libs.arouter, *Libs.hilt, *Libs.room, *Libs.moshi)
+    kapts(Libs.arouterCompiler, Libs.moshiCompiler, Libs.roomCompiler, Libs.hiltCompiler)
+  }
+  applyPlugins(Plugins.kotlinParcelize, Plugins.arouter, Plugins.hilt)
+  kapt {
+    arguments {
+      arg("AROUTER_MODULE_NAME", project.name)
+      arg("room.incremental", "true")
+    }
+  }
+  block()
+}
+
 fun Project.setupLib(
-  module: LibModule,
-  block: LibraryExtension.() -> Unit = {}
+  module: LibModule, block: LibraryExtension.() -> Unit = {}
 ) = setupCommon<LibraryExtension>(module) {
   dependencies.implementations(project(LibModule.Common))
   block()
 }
 
 fun Project.setupApp(
-  module: AppModule,
-  block: BaseAppModuleExtension.() -> Unit = {}
+  module: AppModule, block: BaseAppModuleExtension.() -> Unit = {}
 ) = setupCommon<BaseAppModuleExtension>(module) {
   defaultConfig {
     applicationId = module.appId
@@ -204,40 +221,11 @@ fun Project.setupApp(
   block()
 }
 
-inline fun <reified T : BaseExtension> Project.setupCommon(
-  module: Module,
-  crossinline block: T.() -> Unit = {}
-) = setupBase<T>(module) {
-  flavorDimensions("channel")
-  productFlavors {
-    create("daily")
-    create("online")
-  }
-  kapt {
-    arguments {
-      arg("AROUTER_MODULE_NAME", project.name)
-      arg("room.incremental", "true")
-    }
-  }
-  dependencies {
-    implementations(
-      Libs.arouter,
-      *Libs.hilt,
-      *Libs.room,
-      *Libs.moshi
-    )
-    kapts(Libs.arouterCompiler, Libs.moshiCompiler, Libs.roomCompiler, Libs.hiltCompiler)
-  }
-  applyPlugins(Plugins.kotlinParcelize, Plugins.arouter, Plugins.hilt)
-  block()
-}
-
 private fun DependencyHandler.config(operation: String, vararg names: Any): Array<Dependency?> =
   names.map { add(operation, it) }.toTypedArray()
 
 private fun Project.getSignProperty(
-  key: String,
-  path: String = "gradle/keystore.properties"
+  key: String, path: String = "gradle/keystore.properties"
 ): String = Properties().apply {
   rootProject.file(path).inputStream().use(::load)
 }.getProperty(key)
