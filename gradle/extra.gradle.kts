@@ -1,7 +1,7 @@
 val kotlinVersion = "1.6.10"
 
 rootProject.extra.run {
-  set("androidPlugin", "com.android.tools.build:gradle:7.1.0")
+  set("androidPlugin", "com.android.tools.build:gradle:7.1.1")
   set("kotlinPlugin", "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
 }
 
