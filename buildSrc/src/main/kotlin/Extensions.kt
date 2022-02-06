@@ -205,7 +205,6 @@ fun Project.setupApp(
     debug {
       resValue("string", "app_name", "${module.appName}.debug")
       signingConfig = signingConfigs["release"]
-      applicationIdSuffix = ".debug"
       isJniDebuggable = true
       isRenderscriptDebuggable = true
       isCrunchPngs = false
