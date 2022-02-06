@@ -90,6 +90,7 @@ inline fun <reified T : BaseExtension> Project.setupBase(
   applyPlugins(androidPlugin, Plugins.kotlinAndroid, Plugins.kotlinKapt)
   extensions.configure<BaseExtension> {
     resourcePrefix = "${module.tag}_"
+    namespace = module.id
     compileSdkVersion(32)
     defaultConfig {
       minSdk = 21
@@ -180,7 +181,7 @@ fun Project.setupApp(
   module: AppModule, block: BaseAppModuleExtension.() -> Unit = {}
 ) = setupCommon<BaseAppModuleExtension>(module) {
   defaultConfig {
-    applicationId = module.appId
+    applicationId = module.id
     targetSdk = 32
     versionCode = appVersionCode
     versionName = appVersionName
@@ -205,7 +206,6 @@ fun Project.setupApp(
     debug {
       resValue("string", "app_name", "${module.appName}.debug")
       signingConfig = signingConfigs["release"]
-      applicationIdSuffix = ".debug"
       isJniDebuggable = true
       isRenderscriptDebuggable = true
       isCrunchPngs = false

@@ -3,25 +3,27 @@
 // TODO: Make Module sealed
 interface Module {
   val tag: String
+  val id: String
 }
 
-enum class LibModule(override val tag: String) : Module {
+enum class LibModule(override val tag: String, override val id: String) : Module {
   //---------------------base-------------------------------//
-  Base("base"),
-  Common("common"),
+  Base("base", "io.goooler.demoapp.base"),
+  Common("common", "io.goooler.demoapp.common"),
 
   //---------------------biz-------------------------------//
-  Login("login"),
-  Main("main"),
-  Web("web"),
+  Login("login", "io.goooler.demoapp.login"),
+  Main("main", "io.goooler.demoapp.main"),
+  Web("web", "io.goooler.demoapp.web"),
 
   //---------------------func-------------------------------//
-  Adapter("adapter")
+  Adapter("adapter", "io.goooler.demoapp.adapter")
 }
 
-enum class AppModule(override val tag: String, val appName: String, val appId: String) : Module {
-  App("app", "Demo", "io.goooler.demoapp"),
-  Test("app", "Test", "io.goooler.demoapp.test")
+enum class AppModule(override val tag: String, override val id: String, val appName: String) :
+  Module {
+  App("app", "io.goooler.demoapp", "Demo"),
+  Test("app", "io.goooler.demoapp.test", "Test")
 }
 
 enum class BuildConfigField(val key: String, val value: Any) {
