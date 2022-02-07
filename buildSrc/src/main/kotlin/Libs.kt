@@ -1,6 +1,5 @@
 @file:Suppress("SpellCheckingInspection")
 
-private const val okHttpVersion = "4.9.3"
 private const val retrofitVersion = "2.9.0"
 private const val arouterVersion = "1.5.2"
 private const val moshiVersion = "1.13.0"
@@ -19,6 +18,7 @@ const val fragmentVersion = "1.4.0"
 const val lifecycleVersion = "2.4.0"
 const val supportVersion = "28.0.0"
 const val coroutinesVersion = "1.6.0"
+const val okHttpVersion = "4.9.3"
 
 object Plugins {
   const val kotlinAndroid = "kotlin-android"

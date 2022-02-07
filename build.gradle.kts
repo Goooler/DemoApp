@@ -34,6 +34,7 @@ allprojects {
           if ("multidex" !in requested.name)
             useVersion(supportVersion)
         }
+        "com.squareup.okhttp3" -> useVersion(okHttpVersion)
         else -> when {
           requested.name.startsWith("kotlinx-coroutines") ->
             useVersion(coroutinesVersion)
