@@ -72,6 +72,7 @@ output.json
 # BlueJ files
 *.ctxt
 *.txt
+*.txt1
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp
