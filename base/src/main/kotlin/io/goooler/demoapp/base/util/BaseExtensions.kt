@@ -502,7 +502,7 @@ fun FragmentActivity.replaceFragment(
   isAddToBackStack: Boolean = false,
   tag: String? = null
 ) {
-  supportFragmentManager.addFragment(fragment, containerViewId, isAddToBackStack, tag)
+  supportFragmentManager.replaceFragment(fragment, containerViewId, isAddToBackStack, tag)
 }
 
 @MainThread
