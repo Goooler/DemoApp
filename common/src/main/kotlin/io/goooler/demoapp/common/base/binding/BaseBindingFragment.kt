@@ -11,12 +11,14 @@ import io.goooler.demoapp.common.util.inflateBinding
 abstract class BaseBindingFragment<VB : ViewDataBinding> :
   BaseThemeFragment(),
   IBindingFragment<VB> {
+  private var _binding: VB? = null
 
   override lateinit var binding: VB
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    binding = inflateBinding(layoutInflater)
+    _binding = inflateBinding(layoutInflater)
+    binding = _binding ?: throw IllegalArgumentException("Binding is null in $this")
     initOnce()
   }
 
@@ -29,5 +31,10 @@ abstract class BaseBindingFragment<VB : ViewDataBinding> :
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     binding.lifecycleOwner = viewLifecycleOwner
+  }
+
+  override fun onDestroyView() {
+    _binding = null
+    super.onDestroyView()
   }
 }
