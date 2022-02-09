@@ -42,6 +42,12 @@ allprojects {
       }
     }
   }
+
+  tasks.matching {
+    it.name.contains("transformClassesWithCom.alibaba.arouter")
+  }.configureEach {
+    notCompatibleWithConfigurationCache("https://github.com/alibaba/ARouter/issues/984")
+  }
 }
 
 tasks {
