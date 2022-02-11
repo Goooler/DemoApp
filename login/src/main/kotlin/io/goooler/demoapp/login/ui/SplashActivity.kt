@@ -9,7 +9,7 @@ class SplashActivity : BaseActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    RouterManager.goMain(this)
+    RouterManager.getInstance().goMain(this)
     overridePendingTransition(0, 0)
     finish()
   }

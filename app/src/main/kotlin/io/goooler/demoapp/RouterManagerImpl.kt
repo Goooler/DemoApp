@@ -2,14 +2,15 @@ package io.goooler.demoapp
 
 import android.content.Context
 import android.content.Intent
+import io.goooler.demoapp.common.router.IRouterManager
 import io.goooler.demoapp.common.router.RouterManager
 import io.goooler.demoapp.login.ui.LoginActivity
 import io.goooler.demoapp.main.ui.AudioPlayActivity
 import io.goooler.demoapp.main.ui.MainActivity
 import io.goooler.demoapp.web.WebActivity
 
-object RouterManagerImpl : RouterManager {
-  
+object RouterManagerImpl : IRouterManager {
+
   private const val LOGIN = "/login/"
   private const val MAIN = "/main/"
   private const val WEB = "/web/"
