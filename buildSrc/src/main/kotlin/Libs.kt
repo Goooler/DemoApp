@@ -1,7 +1,6 @@
 @file:Suppress("SpellCheckingInspection")
 
 private const val retrofitVersion = "2.9.0"
-private const val arouterVersion = "1.5.2"
 private const val moshiVersion = "1.13.0"
 private const val srlVersion = "2.0.3"
 private const val glideVersion = "4.13.0"
@@ -27,7 +26,6 @@ object Plugins {
   const val androidLibrary = "com.android.library"
   const val androidApplication = "com.android.application"
   const val hilt = "dagger.hilt.android.plugin"
-  const val arouter = "com.alibaba.arouter"
   const val ktlint = "org.jlleitschuh.gradle.ktlint"
 }
 
@@ -45,7 +43,6 @@ object Libs {
   const val cardView = "androidx.cardview:cardview:1.0.0"
   const val collection = "androidx.collection:collection-ktx:$collectionVersion"
   const val fastjson = "com.alibaba:fastjson:1.1.72.android"
-  const val arouter = "com.alibaba:arouter-api:$arouterVersion"
   const val leakCanary = "com.squareup.leakcanary:leakcanary-android:2.8.1"
   const val flycoTabLayout = "com.flyco.tablayout:FlycoTabLayout_Lib:2.2.0"
   const val utils = "com.blankj:utilcodex:1.31.0"
@@ -60,12 +57,10 @@ object Libs {
   const val chuckerDebug = "com.github.chuckerteam.chucker:library:$chuckerVersion"
   const val chuckerRelease = "com.github.chuckerteam.chucker:library-no-op:$chuckerVersion"
 
-  const val arouterPlugin = "com.alibaba:arouter-register:1.0.2"
   const val hiltPlugin = "com.google.dagger:hilt-android-gradle-plugin:$hiltVersion"
   const val ktlintPlugin = "org.jlleitschuh.gradle:ktlint-gradle:10.2.1"
 
   const val roomCompiler = "androidx.room:room-compiler:$roomVersion"
-  const val arouterCompiler = "com.alibaba:arouter-compiler:$arouterVersion"
   const val moshiCompiler = "com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion"
   const val hiltCompiler = "com.google.dagger:hilt-android-compiler:$hiltVersion"
 

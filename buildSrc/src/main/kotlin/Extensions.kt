@@ -157,13 +157,12 @@ inline fun <reified T : BaseExtension> Project.setupCommon(
     create("online")
   }
   dependencies {
-    implementations(Libs.arouter, *Libs.hilt, *Libs.room, *Libs.moshi)
-    kapts(Libs.arouterCompiler, Libs.moshiCompiler, Libs.roomCompiler, Libs.hiltCompiler)
+    implementations(*Libs.hilt, *Libs.room, *Libs.moshi)
+    kapts(Libs.moshiCompiler, Libs.roomCompiler, Libs.hiltCompiler)
   }
-  applyPlugins(Plugins.kotlinParcelize, Plugins.arouter, Plugins.hilt)
+  applyPlugins(Plugins.kotlinParcelize, Plugins.hilt)
   kapt {
     arguments {
-      arg("AROUTER_MODULE_NAME", project.name)
       arg("room.incremental", "true")
     }
   }
