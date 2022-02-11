@@ -162,6 +162,7 @@ inline fun <reified T : BaseExtension> Project.setupCommon(
   }
   applyPlugins(Plugins.kotlinParcelize, Plugins.hilt)
   kapt {
+    correctErrorTypes = true
     arguments {
       arg("room.incremental", "true")
     }
