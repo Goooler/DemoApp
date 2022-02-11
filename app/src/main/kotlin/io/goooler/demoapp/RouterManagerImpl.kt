@@ -9,6 +9,12 @@ import io.goooler.demoapp.main.ui.MainActivity
 import io.goooler.demoapp.web.WebActivity
 
 object RouterManagerImpl : RouterManager {
+  
+  private const val LOGIN = "/login/"
+  private const val MAIN = "/main/"
+  private const val WEB = "/web/"
+  private const val AUDIO_PLAY = "/audioPlay/"
+
   override fun go(context: Context, url: String) {}
 
   override fun goLogin(context: Context, isReLogin: Boolean) {
