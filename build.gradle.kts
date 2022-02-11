@@ -1,3 +1,5 @@
+import dagger.hilt.android.plugin.HiltExtension
+
 buildscript {
   apply(extraScriptPath)
 
@@ -16,6 +18,12 @@ buildscript {
 allprojects {
   apply("$rootDir/$extraScriptPath")
   applyPlugins(Plugins.ktlint)
+
+  plugins.withId(Plugins.hilt) {
+    configure<HiltExtension> {
+      enableAggregatingTask = true
+    }
+  }
 
   configurations.all {
     resolutionStrategy.eachDependency {
