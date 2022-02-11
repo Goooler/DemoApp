@@ -15,7 +15,9 @@ object RouterManagerImpl : RouterManager {
   private const val WEB = "/web/"
   private const val AUDIO_PLAY = "/audioPlay/"
 
-  override fun go(context: Context, url: String) {}
+  override fun go(context: Context, url: String) {
+    TODO("Not yet implemented")
+  }
 
   override fun goLogin(context: Context, isReLogin: Boolean) {
     Intent(context, LoginActivity::class.java)
