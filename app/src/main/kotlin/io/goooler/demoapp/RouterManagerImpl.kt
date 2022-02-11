@@ -9,7 +9,7 @@ import io.goooler.demoapp.main.ui.MainActivity
 import io.goooler.demoapp.web.WebActivity
 
 object RouterManagerImpl : RouterManager {
-  
+
   private const val LOGIN = "/login/"
   private const val MAIN = "/main/"
   private const val WEB = "/web/"

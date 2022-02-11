@@ -1,7 +1,6 @@
 package io.goooler.demoapp.common.router
 
 import android.content.Context
-import javax.inject.Inject
 
 interface RouterManager {
 
@@ -20,7 +19,6 @@ interface RouterManager {
     const val RE_LOGIN = "reLogin"
     const val USE_CHROME = "useChrome"
 
-    @Inject
     lateinit var impl: RouterManager
 
     override fun go(context: Context, url: String) {
