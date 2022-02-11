@@ -1,18 +1,19 @@
 package io.goooler.demoapp.common.router
 
+import android.content.Context
 import javax.inject.Inject
 
 interface RouterManager {
 
-  fun go(url: String)
+  fun go(context: Context, url: String)
 
-  fun goLogin(isReLogin: Boolean)
+  fun goLogin(context: Context, isReLogin: Boolean)
 
-  fun goMain()
+  fun goMain(context: Context)
 
-  fun goAudioPlay()
+  fun goAudioPlay(context: Context)
 
-  fun goWeb(url: String, useChrome: Boolean = false)
+  fun goWeb(context: Context, url: String, useChrome: Boolean = false)
 
   companion object : RouterManager {
     const val PARAMS = "params"
@@ -22,24 +23,24 @@ interface RouterManager {
     @Inject
     lateinit var impl: RouterManager
 
-    override fun go(url: String) {
-      impl.go(url)
+    override fun go(context: Context, url: String) {
+      impl.go(context, url)
     }
 
-    override fun goLogin(isReLogin: Boolean) {
-      impl.goLogin(isReLogin)
+    override fun goLogin(context: Context, isReLogin: Boolean) {
+      impl.goLogin(context, isReLogin)
     }
 
-    override fun goMain() {
-      impl.goMain()
+    override fun goMain(context: Context) {
+      impl.goMain(context)
     }
 
-    override fun goAudioPlay() {
-      impl.goAudioPlay()
+    override fun goAudioPlay(context: Context) {
+      impl.goAudioPlay(context)
     }
 
-    override fun goWeb(url: String, useChrome: Boolean) {
-      impl.goWeb(url, useChrome)
+    override fun goWeb(context: Context, url: String, useChrome: Boolean) {
+      impl.goWeb(context, url, useChrome)
     }
   }
 }
