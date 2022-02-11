@@ -28,7 +28,7 @@ object RetrofitHelper : BaseRetrofitHelper() {
 
   override val statusListener: StatusListener = StatusListener {
     AppUserInfoManager.logout()
-    RouterManager.getInstance().goLogin(CommonApplication.app, true)
+    RouterManager.goLogin(CommonApplication.app, true)
   }
 
   override fun Retrofit.Builder.addCallAdapterFactories(): Retrofit.Builder {

@@ -4,12 +4,12 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import io.goooler.demoapp.common.router.IRouterManager
+import io.goooler.demoapp.common.router.RouterManager
 
-@Module
+@Module(includes = [RouterManager::class])
 @InstallIn(SingletonComponent::class)
 object AppProviderModule {
 
   @Provides
-  fun provideRouterManagerImpl(): IRouterManager = RouterManagerImpl
+  fun provideRouterManagerImpl(): RouterManager = RouterManagerImpl
 }

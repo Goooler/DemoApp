@@ -33,7 +33,7 @@ class AudioPlayActivity : BaseBindingActivity<MainAudioPlayActivityBinding>() {
         AudioPlayService.stopPlay(this)
       }
       binding.btGoMain -> {
-        RouterManager.getInstance().goMain(this)
+        RouterManager.goMain(this)
       }
     }
   }

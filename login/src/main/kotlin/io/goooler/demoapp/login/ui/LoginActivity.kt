@@ -10,7 +10,7 @@ class LoginActivity : BaseBindingActivity<LoginActivityBinding>() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     if (intent.action != RouterManager.RE_LOGIN) {
-      RouterManager.getInstance().goMain(this)
+      RouterManager.goMain(this)
       finish()
     }
   }
