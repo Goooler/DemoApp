@@ -1,4 +1,5 @@
 import dagger.hilt.android.plugin.HiltExtension
+import org.jlleitschuh.gradle.ktlint.KtlintExtension
 
 buildscript {
   apply(extraScriptPath)
@@ -17,7 +18,11 @@ buildscript {
 
 allprojects {
   apply("$rootDir/$extraScriptPath")
+
   applyPlugins(Plugins.ktlint)
+  configure<KtlintExtension> {
+    version.set(ktlintVersion)
+  }
 
   plugins.withId(Plugins.hilt) {
     configure<HiltExtension> {

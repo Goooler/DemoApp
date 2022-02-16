@@ -18,6 +18,7 @@ const val lifecycleVersion = "2.4.1"
 const val supportVersion = "28.0.0"
 const val coroutinesVersion = "1.6.0"
 const val okHttpVersion = "4.9.3"
+const val ktlintVersion = "0.44.0"
 
 object Plugins {
   const val kotlinAndroid = "kotlin-android"
