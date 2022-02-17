@@ -78,4 +78,7 @@
   * inflate(android.view.LayoutInflater);
 }
 
+# Extra rules for R8 fullMode
 -keep,allowshrinking class * extends io.goooler.demoapp.common.base.binding.BaseBindingActivity
+-keep class io.reactivex.rxjava3.core.Single
+-keep class io.reactivex.rxjava3.core.Observable
