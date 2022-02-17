@@ -6,7 +6,7 @@ private const val srlVersion = "2.0.3"
 private const val glideVersion = "4.13.0"
 private const val coilVersion = "1.4.0"
 private const val roomVersion = "2.4.1"
-private const val hiltVersion = "2.40.5"
+private const val hiltVersion = "2.41"
 private const val chuckerVersion = "3.5.2"
 
 const val appCompatVersion = "1.4.1"
