@@ -23,7 +23,6 @@ const val ktlintVersion = "0.44.0"
 object Plugins {
   const val kotlinAndroid = "kotlin-android"
   const val kotlinKapt = "kotlin-kapt"
-  const val kotlinParcelize = "kotlin-parcelize"
   const val androidLibrary = "com.android.library"
   const val androidApplication = "com.android.application"
   const val hilt = "com.google.dagger.hilt.android"

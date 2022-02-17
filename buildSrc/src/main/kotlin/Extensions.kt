@@ -158,9 +158,9 @@ inline fun <reified T : BaseExtension> Project.setupCommon(
   }
   dependencies {
     implementations(Libs.hilt, *Libs.room, *Libs.moshi)
-    kapts(Libs.moshiCompiler, Libs.roomCompiler, Libs.hiltCompiler)
+    kapts(Libs.hiltCompiler, Libs.roomCompiler, Libs.moshiCompiler)
   }
-  applyPlugins(Plugins.kotlinParcelize, Plugins.hilt)
+  applyPlugins(Plugins.hilt)
   kapt {
     correctErrorTypes = true
     arguments {
