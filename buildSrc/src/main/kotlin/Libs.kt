@@ -57,6 +57,7 @@ object Libs {
   const val webKit = "androidx.webkit:webkit:1.4.0"
   const val chuckerDebug = "com.github.chuckerteam.chucker:library:$chuckerVersion"
   const val chuckerRelease = "com.github.chuckerteam.chucker:library-no-op:$chuckerVersion"
+  const val hilt = "com.google.dagger:hilt-android:$hiltVersion"
 
   const val hiltPlugin = "com.google.dagger:hilt-android-gradle-plugin:$hiltVersion"
   const val ktlintPlugin = "org.jlleitschuh.gradle:ktlint-gradle:10.2.1"
@@ -81,10 +82,6 @@ object Libs {
   val room = arrayOf(
     "androidx.room:room-runtime:$roomVersion",
     "androidx.room:room-ktx:$roomVersion"
-  )
-  val hilt = arrayOf(
-    "com.google.dagger:hilt-android:$hiltVersion",
-    "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03"
   )
   val smartRefreshLayout = arrayOf(
     "com.scwang.smart:refresh-layout-kernel:$srlVersion",
