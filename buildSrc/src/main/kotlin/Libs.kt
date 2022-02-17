@@ -6,7 +6,7 @@ private const val srlVersion = "2.0.3"
 private const val glideVersion = "4.13.0"
 private const val coilVersion = "1.4.0"
 private const val roomVersion = "2.4.1"
-private const val hiltVersion = "2.40.5"
+private const val hiltVersion = "2.41"
 private const val chuckerVersion = "3.5.2"
 
 const val appCompatVersion = "1.4.1"
@@ -26,7 +26,7 @@ object Plugins {
   const val kotlinParcelize = "kotlin-parcelize"
   const val androidLibrary = "com.android.library"
   const val androidApplication = "com.android.application"
-  const val hilt = "dagger.hilt.android.plugin"
+  const val hilt = "com.google.dagger.hilt.android"
   const val ktlint = "org.jlleitschuh.gradle.ktlint"
 }
 
@@ -57,6 +57,7 @@ object Libs {
   const val webKit = "androidx.webkit:webkit:1.4.0"
   const val chuckerDebug = "com.github.chuckerteam.chucker:library:$chuckerVersion"
   const val chuckerRelease = "com.github.chuckerteam.chucker:library-no-op:$chuckerVersion"
+  const val hilt = "com.google.dagger:hilt-android:$hiltVersion"
 
   const val hiltPlugin = "com.google.dagger:hilt-android-gradle-plugin:$hiltVersion"
   const val ktlintPlugin = "org.jlleitschuh.gradle:ktlint-gradle:10.2.1"
@@ -81,10 +82,6 @@ object Libs {
   val room = arrayOf(
     "androidx.room:room-runtime:$roomVersion",
     "androidx.room:room-ktx:$roomVersion"
-  )
-  val hilt = arrayOf(
-    "com.google.dagger:hilt-android:$hiltVersion",
-    "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03"
   )
   val smartRefreshLayout = arrayOf(
     "com.scwang.smart:refresh-layout-kernel:$srlVersion",

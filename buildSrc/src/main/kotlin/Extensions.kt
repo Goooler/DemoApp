@@ -157,7 +157,7 @@ inline fun <reified T : BaseExtension> Project.setupCommon(
     create("online")
   }
   dependencies {
-    implementations(*Libs.hilt, *Libs.room, *Libs.moshi)
+    implementations(Libs.hilt, *Libs.room, *Libs.moshi)
     kapts(Libs.moshiCompiler, Libs.roomCompiler, Libs.hiltCompiler)
   }
   applyPlugins(Plugins.kotlinParcelize, Plugins.hilt)
