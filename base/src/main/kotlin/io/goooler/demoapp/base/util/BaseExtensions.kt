@@ -367,7 +367,7 @@ fun Intent.getCharSequenceExtra(name: String, defaultValue: CharSequence): CharS
 fun <T : Parcelable> Intent.getParcelableExtra(name: String, defaultValue: T): T =
   getParcelableExtra(name) ?: defaultValue
 
-fun <T : Parcelable> Intent.getSerializableExtra(
+fun <T : Serializable> Intent.getSerializableExtra(
   name: String,
   defaultValue: Serializable
 ): Serializable = getSerializableExtra(name) ?: defaultValue

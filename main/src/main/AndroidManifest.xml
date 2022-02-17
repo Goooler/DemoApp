@@ -7,6 +7,8 @@
       android:name=".ui.MainActivity"
       android:launchMode="singleTask" />
 
+    <activity android:name=".ui.AudioPlayActivity" />
+
   </application>
 
 </manifest>

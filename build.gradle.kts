@@ -1,3 +1,6 @@
+import dagger.hilt.android.plugin.HiltExtension
+import org.jlleitschuh.gradle.ktlint.KtlintExtension
+
 buildscript {
   apply(extraScriptPath)
 
@@ -9,14 +12,23 @@ buildscript {
     rootProject.extra["androidPlugin"].toString(),
     rootProject.extra["kotlinPlugin"].toString(),
     Libs.hiltPlugin,
-    Libs.arouterPlugin,
     Libs.ktlintPlugin
   )
 }
 
 allprojects {
   apply("$rootDir/$extraScriptPath")
+
   applyPlugins(Plugins.ktlint)
+  configure<KtlintExtension> {
+    version.set(ktlintVersion)
+  }
+
+  plugins.withId(Plugins.hilt) {
+    configure<HiltExtension> {
+      enableAggregatingTask = true
+    }
+  }
 
   configurations.all {
     resolutionStrategy.eachDependency {
@@ -41,12 +53,6 @@ allprojects {
         }
       }
     }
-  }
-
-  tasks.matching {
-    it.name.contains("transformClassesWithCom.alibaba.arouter")
-  }.configureEach {
-    notCompatibleWithConfigurationCache("https://github.com/alibaba/ARouter/issues/984")
   }
 }
 

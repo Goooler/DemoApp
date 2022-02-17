@@ -1,13 +1,12 @@
 @file:Suppress("SpellCheckingInspection")
 
 private const val retrofitVersion = "2.9.0"
-private const val arouterVersion = "1.5.2"
 private const val moshiVersion = "1.13.0"
 private const val srlVersion = "2.0.3"
 private const val glideVersion = "4.13.0"
 private const val coilVersion = "1.4.0"
 private const val roomVersion = "2.4.1"
-private const val hiltVersion = "2.40.5"
+private const val hiltVersion = "2.41"
 private const val chuckerVersion = "3.5.2"
 
 const val appCompatVersion = "1.4.1"
@@ -19,15 +18,14 @@ const val lifecycleVersion = "2.4.1"
 const val supportVersion = "28.0.0"
 const val coroutinesVersion = "1.6.0"
 const val okHttpVersion = "4.9.3"
+const val ktlintVersion = "0.44.0"
 
 object Plugins {
   const val kotlinAndroid = "kotlin-android"
   const val kotlinKapt = "kotlin-kapt"
-  const val kotlinParcelize = "kotlin-parcelize"
   const val androidLibrary = "com.android.library"
   const val androidApplication = "com.android.application"
-  const val hilt = "dagger.hilt.android.plugin"
-  const val arouter = "com.alibaba.arouter"
+  const val hilt = "com.google.dagger.hilt.android"
   const val ktlint = "org.jlleitschuh.gradle.ktlint"
 }
 
@@ -45,7 +43,6 @@ object Libs {
   const val cardView = "androidx.cardview:cardview:1.0.0"
   const val collection = "androidx.collection:collection-ktx:$collectionVersion"
   const val fastjson = "com.alibaba:fastjson:1.1.72.android"
-  const val arouter = "com.alibaba:arouter-api:$arouterVersion"
   const val leakCanary = "com.squareup.leakcanary:leakcanary-android:2.8.1"
   const val flycoTabLayout = "com.flyco.tablayout:FlycoTabLayout_Lib:2.2.0"
   const val utils = "com.blankj:utilcodex:1.31.0"
@@ -59,13 +56,12 @@ object Libs {
   const val webKit = "androidx.webkit:webkit:1.4.0"
   const val chuckerDebug = "com.github.chuckerteam.chucker:library:$chuckerVersion"
   const val chuckerRelease = "com.github.chuckerteam.chucker:library-no-op:$chuckerVersion"
+  const val hilt = "com.google.dagger:hilt-android:$hiltVersion"
 
-  const val arouterPlugin = "com.alibaba:arouter-register:1.0.2"
   const val hiltPlugin = "com.google.dagger:hilt-android-gradle-plugin:$hiltVersion"
   const val ktlintPlugin = "org.jlleitschuh.gradle:ktlint-gradle:10.2.1"
 
   const val roomCompiler = "androidx.room:room-compiler:$roomVersion"
-  const val arouterCompiler = "com.alibaba:arouter-compiler:$arouterVersion"
   const val moshiCompiler = "com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion"
   const val hiltCompiler = "com.google.dagger:hilt-android-compiler:$hiltVersion"
 
@@ -85,10 +81,6 @@ object Libs {
   val room = arrayOf(
     "androidx.room:room-runtime:$roomVersion",
     "androidx.room:room-ktx:$roomVersion"
-  )
-  val hilt = arrayOf(
-    "com.google.dagger:hilt-android:$hiltVersion",
-    "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03"
   )
   val smartRefreshLayout = arrayOf(
     "com.scwang.smart:refresh-layout-kernel:$srlVersion",
