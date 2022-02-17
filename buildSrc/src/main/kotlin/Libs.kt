@@ -26,7 +26,7 @@ object Plugins {
   const val kotlinParcelize = "kotlin-parcelize"
   const val androidLibrary = "com.android.library"
   const val androidApplication = "com.android.application"
-  const val hilt = "dagger.hilt.android.plugin"
+  const val hilt = "com.google.dagger.hilt.android"
   const val ktlint = "org.jlleitschuh.gradle.ktlint"
 }
 
