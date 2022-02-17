@@ -73,14 +73,17 @@
 # ZoneRulesProvider _does_ exist!
 -dontwarn java.time.zone.ZoneRulesProvider
 
-# Arouter
--keep public class com.alibaba.android.arouter.routes.**{*;}
--keep public class com.alibaba.android.arouter.facade.**{*;}
--keep class * implements com.alibaba.android.arouter.facade.template.ISyringe{*;}
--keep interface * implements com.alibaba.android.arouter.facade.template.IProvider
--keep class * implements com.alibaba.android.arouter.facade.template.IProvider
-
 # DataBinding
 -keep public class * extends androidx.databinding.ViewDataBinding {
   * inflate(android.view.LayoutInflater);
 }
+
+# Extra rules for R8 fullMode
+-keep,allowobfuscation,allowshrinking class io.goooler.demoapp.common.base.binding.BaseBindingActivity
+-keep,allowobfuscation,allowshrinking class * extends io.goooler.demoapp.common.base.binding.BaseBindingActivity
+-keep,allowobfuscation,allowshrinking class io.reactivex.rxjava3.core.Single
+-keep,allowobfuscation,allowshrinking class io.reactivex.rxjava3.core.Observable
+# TODO: Waiting for new retrofit release to remove these rules
+-keep,allowobfuscation,allowshrinking interface retrofit2.Call
+-keep,allowobfuscation,allowshrinking class retrofit2.Response
+-keep,allowobfuscation,allowshrinking class kotlin.coroutines.Continuation
