@@ -32,9 +32,9 @@ abstract class BaseRetrofitHelper {
     }
   }
 
-  fun <T> create(service: Class<T>): T = retrofit.create(service)
+  fun <T : Any> create(service: Class<T>): T = retrofit.create(service)
 
-  inline fun <reified T> create(): T = create(T::class.java)
+  inline fun <reified T : Any> create(): T = create(T::class.java)
 
   protected abstract fun OkHttpClient.Builder.addInterceptors(): OkHttpClient.Builder
 
