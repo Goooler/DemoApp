@@ -27,7 +27,9 @@ abstract class BaseApplication : Application(), CoroutineScope by MainScope() {
    */
   @MainThread
   protected open fun initImmediately() {
-    initWebView()
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+      initWebView()
+    }
   }
 
   /**
@@ -42,11 +44,9 @@ abstract class BaseApplication : Application(), CoroutineScope by MainScope() {
    */
   @TargetApi(Build.VERSION_CODES.P)
   private fun initWebView() {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-      val processName = getProcessName()
-      if (processName != packageName) {
-        WebView.setDataDirectorySuffix(processName)
-      }
+    val processName = getProcessName()
+    if (processName != packageName) {
+      WebView.setDataDirectorySuffix(processName)
     }
   }
 }

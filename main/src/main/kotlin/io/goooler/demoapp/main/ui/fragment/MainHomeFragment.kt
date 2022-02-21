@@ -44,7 +44,9 @@ class MainHomeFragment : BaseBindingLazyFragment<MainHomeFragmentBinding>() {
       binding.bt4 -> vm.countDown()
       binding.bt6 -> FullScreenDialogFragment.show(childFragmentManager)
       binding.bt7 -> RouterManager.goAudioPlay(requireContext())
-      binding.bt8 -> createShortcut(requireContext())
+      binding.bt8 -> if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
+        createShortcut(requireContext())
+      }
     }
   }
 
