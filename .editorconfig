@@ -15,3 +15,6 @@ ij_kotlin_name_count_to_use_star_import_for_members = 999
 [*.java]
 ij_java_imports_layout = ascii
 ij_java_use_single_class_imports = true
+
+[*.md]
+trim_trailing_whitespace = false
