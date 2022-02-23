@@ -22,7 +22,7 @@ jobs:
             ~/.gradle/wrapper
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/**.gradle', '**/**.gradle.kts', '**/gradle/wrapper/gradle-wrapper.properties', '**/buildSrc/src/main/kotlin/**.kt') }}
       - name: Build APK
-        run: ./gradlew app:assembleOnlineRelease
+        run: ./gradlew app:assembleProdRelease
       - name: Create Release
         uses: ncipollo/release-action@v1
         with:

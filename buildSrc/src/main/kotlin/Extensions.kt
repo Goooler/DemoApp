@@ -153,8 +153,8 @@ inline fun <reified T : BaseExtension> Project.setupCommon(
 ) = setupBase<T>(module) {
   flavorDimensions("channel")
   productFlavors {
-    create("daily")
-    create("online")
+    create("dev")
+    create("prod")
   }
   dependencies {
     implementations(Libs.hilt, *Libs.room, *Libs.moshi)
