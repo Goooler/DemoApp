@@ -7,7 +7,7 @@ sealed interface IBinding<VB : ViewDataBinding> {
   val binding: VB
 }
 
-interface IBindingFragment<VB : ViewDataBinding> : IBinding<VB> {
+sealed interface IBindingFragment<VB : ViewDataBinding> : IBinding<VB> {
 
   @MainThread
   fun initOnce() {
