@@ -4,6 +4,7 @@ import android.annotation.TargetApi
 import android.app.Application
 import android.os.Build
 import android.webkit.WebView
+import androidx.annotation.CallSuper
 import androidx.annotation.MainThread
 import androidx.annotation.WorkerThread
 import kotlinx.coroutines.CoroutineScope
@@ -26,6 +27,7 @@ abstract class BaseApplication : Application(), CoroutineScope by MainScope() {
    * 立即初始化
    */
   @MainThread
+  @CallSuper
   protected open fun initImmediately() {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
       initWebView()

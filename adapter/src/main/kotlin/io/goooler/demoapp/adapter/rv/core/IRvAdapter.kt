@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.IntRange
 import androidx.annotation.LayoutRes
-import androidx.annotation.MainThread
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
@@ -18,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView
  * @version 1.0.0
  * @since 1.0.0
  */
-@MainThread
 interface IRvAdapter<M : IVhModelType> {
 
   /**

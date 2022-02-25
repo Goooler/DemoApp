@@ -374,13 +374,11 @@ fun <T : Serializable> Intent.getSerializableExtra(
 
 // ---------------------Fragment-------------------------------//
 
-@MainThread
 fun <T : Fragment> T.putArguments(bundle: Bundle): T {
   arguments = bundle
   return this
 }
 
-@MainThread
 fun <T : Fragment> T.putArguments(vararg pairs: Pair<String, Any?>): T =
   putArguments(bundleOf(*pairs))
 
