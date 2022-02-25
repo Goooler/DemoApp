@@ -7,7 +7,7 @@ import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 import dagger.hilt.android.AndroidEntryPoint
 import io.goooler.demoapp.adapter.rv.core.ItemTouchHelperCallback
 import io.goooler.demoapp.base.util.unsafeLazy
-import io.goooler.demoapp.common.base.binding.BaseBindingLazyFragment
+import io.goooler.demoapp.common.base.binding.BaseBindingFragment
 import io.goooler.demoapp.common.util.enableRefreshAndLoadMore
 import io.goooler.demoapp.common.util.getThemeViewModel
 import io.goooler.demoapp.common.util.showToast
@@ -16,7 +16,7 @@ import io.goooler.demoapp.main.ui.adapter.MainSrlRvAdapter
 import io.goooler.demoapp.main.vm.MainSrlViewModel
 
 @AndroidEntryPoint
-class MainSrlFragment : BaseBindingLazyFragment<MainSrlFragmentBinding>() {
+class MainSrlFragment : BaseBindingFragment<MainSrlFragmentBinding>() {
 
   private val vm: MainSrlViewModel by getThemeViewModel()
 
@@ -28,10 +28,6 @@ class MainSrlFragment : BaseBindingLazyFragment<MainSrlFragmentBinding>() {
     binding.refreshLayout.autoRefresh()
   }
 
-  override fun onFragmentResume() {
-    initData
-  }
-
   override fun initOnce() {
     binding.let {
       it.vm = vm
@@ -40,6 +36,11 @@ class MainSrlFragment : BaseBindingLazyFragment<MainSrlFragmentBinding>() {
     }
     ItemTouchHelper(ItemTouchHelperCallback(listener, itemViewSwipeEnabled = true))
       .attachToRecyclerView(binding.rvList)
+  }
+
+  override fun onResume() {
+    super.onResume()
+    initData
   }
 
   private val listener = object :

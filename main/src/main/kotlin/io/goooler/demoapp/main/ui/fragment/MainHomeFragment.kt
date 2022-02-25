@@ -10,7 +10,7 @@ import androidx.core.graphics.drawable.IconCompat
 import dagger.hilt.android.AndroidEntryPoint
 import io.goooler.demoapp.base.util.addDynamicShortcutCompat
 import io.goooler.demoapp.base.util.unsafeLazy
-import io.goooler.demoapp.common.base.binding.BaseBindingLazyFragment
+import io.goooler.demoapp.common.base.binding.BaseBindingFragment
 import io.goooler.demoapp.common.router.RouterManager
 import io.goooler.demoapp.common.ui.FullScreenDialogFragment
 import io.goooler.demoapp.common.util.getThemeViewModel
@@ -19,7 +19,7 @@ import io.goooler.demoapp.main.ui.AudioPlayActivity
 import io.goooler.demoapp.main.vm.MainHomeViewModel
 
 @AndroidEntryPoint
-class MainHomeFragment : BaseBindingLazyFragment<MainHomeFragmentBinding>() {
+class MainHomeFragment : BaseBindingFragment<MainHomeFragmentBinding>() {
 
   private val vm: MainHomeViewModel by getThemeViewModel()
 
@@ -27,15 +27,16 @@ class MainHomeFragment : BaseBindingLazyFragment<MainHomeFragmentBinding>() {
     vm.initData()
   }
 
-  override fun onFragmentResume() {
-    initData
-  }
-
   override fun initOnce() {
     binding.let {
       it.vm = vm
       it.listener = listener
     }
+  }
+
+  override fun onResume() {
+    super.onResume()
+    initData
   }
 
   private val listener = View.OnClickListener {

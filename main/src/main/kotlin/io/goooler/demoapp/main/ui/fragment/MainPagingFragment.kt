@@ -7,7 +7,7 @@ import com.scwang.smart.refresh.layout.listener.OnRefreshListener
 import dagger.hilt.android.AndroidEntryPoint
 import io.goooler.demoapp.adapter.rv.paging.BaseRvPagingAdapter
 import io.goooler.demoapp.base.util.unsafeLazy
-import io.goooler.demoapp.common.base.binding.BaseBindingLazyFragment
+import io.goooler.demoapp.common.base.binding.BaseBindingFragment
 import io.goooler.demoapp.common.util.disableRefreshAndLoadMore
 import io.goooler.demoapp.common.util.finishRefreshAndLoadMore
 import io.goooler.demoapp.common.util.getThemeViewModel
@@ -19,7 +19,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class MainPagingFragment : BaseBindingLazyFragment<MainPagingFragmentBinding>() {
+class MainPagingFragment : BaseBindingFragment<MainPagingFragmentBinding>() {
 
   private val vm: MainPagingViewModel by getThemeViewModel()
 
@@ -31,10 +31,6 @@ class MainPagingFragment : BaseBindingLazyFragment<MainPagingFragmentBinding>() 
     }
   }
 
-  override fun onFragmentResume() {
-    initData
-  }
-
   override fun initOnce() {
     binding.let {
       rvAdapter = MainPagingRvAdapter(listener).apply {
@@ -44,6 +40,11 @@ class MainPagingFragment : BaseBindingLazyFragment<MainPagingFragmentBinding>() 
       it.refreshLayout.setOnRefreshListener(listener)
       it.listener = listener
     }
+  }
+
+  override fun onResume() {
+    super.onResume()
+    initData
   }
 
   private val listener = object :
