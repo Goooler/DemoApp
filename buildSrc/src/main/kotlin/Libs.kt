@@ -3,9 +3,9 @@
 private const val retrofitVersion = "2.9.0"
 private const val moshiVersion = "1.13.0"
 private const val srlVersion = "2.0.3"
-private const val glideVersion = "4.13.0"
+private const val glideVersion = "4.13.1"
 private const val coilVersion = "1.4.0"
-private const val roomVersion = "2.4.1"
+private const val roomVersion = "2.4.2"
 private const val hiltVersion = "2.41"
 private const val chuckerVersion = "3.5.2"
 
@@ -88,7 +88,7 @@ object Libs {
     "com.scwang.smart:refresh-footer-classics:$srlVersion"
   )
   val gson = arrayOf(
-    "com.google.code.gson:gson:2.8.9",
+    "com.google.code.gson:gson:2.9.0",
     "com.squareup.retrofit2:converter-gson:$retrofitVersion"
   )
   val moshi = arrayOf(
