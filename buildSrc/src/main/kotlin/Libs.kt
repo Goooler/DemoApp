@@ -65,8 +65,7 @@ object Libs {
   const val moshiCompiler = "com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion"
   const val hiltCompiler = "com.google.dagger:hilt-android-compiler:$hiltVersion"
 
-  val tests = arrayOf(
-    "junit:junit:4.13.2",
+  val robolectric = arrayOf(
     "org.robolectric:robolectric:4.7.3"
   )
   val androidTests = arrayOf(

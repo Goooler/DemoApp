@@ -17,6 +17,7 @@ import org.gradle.kotlin.dsl.ScriptHandlerScope
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.get
+import org.gradle.kotlin.dsl.kotlin
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmOptions
 import org.jetbrains.kotlin.gradle.plugin.KaptExtension
 
@@ -144,7 +145,7 @@ inline fun <reified T : BaseExtension> Project.setupBase(
     }
     dependencies {
       implementations(fileTree(mapOf("dir" to "libs", "include" to arrayOf("*.jar", "*.aar"))))
-      testImplementations(*Libs.tests)
+      testImplementations(*Libs.robolectric, kotlin("test-junit5"))
       androidTestImplementations(*Libs.androidTests)
     }
     (this as T).block()

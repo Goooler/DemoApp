@@ -5,49 +5,49 @@ import io.goooler.demoapp.base.util.secondOrNull
 import io.goooler.demoapp.common.util.JsonUtil
 import io.goooler.demoapp.common.util.fromJson
 import io.goooler.demoapp.common.util.toJson
+import kotlin.test.assertEquals
 import org.intellij.lang.annotations.Language
-import org.junit.Assert.assertTrue
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 class JsonUtilTest {
   @Test
   fun `JsonUtil fromJson(String)`() {
-    assertTrue(JsonUtil.fromJson<Repo>(firstStr) == firstBean)
-    assertTrue(JsonUtil.fromJson<Repo>(secondStr) == secondBean)
+    assertEquals(JsonUtil.fromJson<Repo>(firstStr), firstBean)
+    assertEquals(JsonUtil.fromJson<Repo>(secondStr), secondBean)
   }
 
   @Test
   fun `JsonUtil fromJson(String, Class, Class)`() {
     val list: List<Repo> = JsonUtil.fromJson(strArray, List::class.java, Repo::class.java)
       ?: throw Exception("Parse json error")
-    assertTrue(list.firstOrNull() == firstBean)
-    assertTrue(list.secondOrNull() == secondBean)
+    assertEquals(list.firstOrNull(), firstBean)
+    assertEquals(list.secondOrNull(), secondBean)
   }
 
   @Test
   fun `JsonUtil toJson(T)`() {
-    assertTrue(JsonUtil.toJson(firstBean) == firstStr)
-    assertTrue(JsonUtil.toJson(secondBean) == secondStr)
+    assertEquals(JsonUtil.toJson(firstBean), firstStr)
+    assertEquals(JsonUtil.toJson(secondBean), secondStr)
   }
 
   @Test
   fun `String fromJson()`() {
-    assertTrue(firstStr.fromJson<Repo>() == firstBean)
-    assertTrue(secondStr.fromJson<Repo>() == secondBean)
+    assertEquals(firstStr.fromJson<Repo>(), firstBean)
+    assertEquals(secondStr.fromJson<Repo>(), secondBean)
   }
 
   @Test
   fun `String fromJson(Class, Class)`() {
     val list: List<Repo> = strArray.fromJson(List::class.java, Repo::class.java)
       ?: throw Exception("Parse json error")
-    assertTrue(list.first() == firstBean)
-    assertTrue(list[1] == secondBean)
+    assertEquals(list.first(), firstBean)
+    assertEquals(list[1], secondBean)
   }
 
   @Test
   fun `Any toJson(T)`() {
-    assertTrue(firstBean.toJson() == firstStr)
-    assertTrue(secondBean.toJson() == secondStr)
+    assertEquals(firstBean.toJson(), firstStr)
+    assertEquals(secondBean.toJson(), secondStr)
   }
 
   @JsonClass(generateAdapter = true)
