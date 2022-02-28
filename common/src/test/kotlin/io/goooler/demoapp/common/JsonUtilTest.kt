@@ -4,47 +4,48 @@ import com.squareup.moshi.JsonClass
 import io.goooler.demoapp.common.util.JsonUtil
 import io.goooler.demoapp.common.util.fromJson
 import io.goooler.demoapp.common.util.toJson
+import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class JsonUtilTest {
   @Test
   fun `JsonUtil fromJson(String)`() {
-    assert(JsonUtil.fromJson<Repo>(firstStr) == firstBean)
-    assert(JsonUtil.fromJson<Repo>(secondStr) == secondBean)
+    assertTrue(JsonUtil.fromJson<Repo>(firstStr) == firstBean)
+    assertTrue(JsonUtil.fromJson<Repo>(secondStr) == secondBean)
   }
 
   @Test
   fun `JsonUtil fromJson(String, Class, Class)`() {
     val array: Array<Repo> = JsonUtil.fromJson(strArray, Array::class.java, Repo::class.java)
       ?: throw Exception("Parse json error")
-    assert(array.first() == firstBean)
-    assert(array[1] == secondBean)
+    assertTrue(array.first() == firstBean)
+    assertTrue(array[1] == secondBean)
   }
 
   @Test
   fun `JsonUtil toJson(T)`() {
-    assert(JsonUtil.toJson(firstBean) == firstStr)
-    assert(JsonUtil.toJson(secondBean) == secondStr)
+    assertTrue(JsonUtil.toJson(firstBean) == firstStr)
+    assertTrue(JsonUtil.toJson(secondBean) == secondStr)
   }
 
   @Test
   fun `String fromJson()`() {
-    assert(firstStr.fromJson<Repo>() == firstBean)
-    assert(secondStr.fromJson<Repo>() == secondBean)
+    assertTrue(firstStr.fromJson<Repo>() == firstBean)
+    assertTrue(secondStr.fromJson<Repo>() == secondBean)
   }
 
   @Test
   fun `String fromJson(Class, Class)`() {
     val array: Array<Repo> = strArray.fromJson(Array::class.java, Repo::class.java)
       ?: throw Exception("Parse json error")
-    assert(array.first() == firstBean)
-    assert(array[1] == secondBean)
+    assertTrue(array.first() == firstBean)
+    assertTrue(array[1] == secondBean)
   }
 
   @Test
   fun `Any? toJson(T)`() {
-    assert(firstBean.toJson() == firstStr)
-    assert(secondBean.toJson() == secondStr)
+    assertTrue(firstBean.toJson() == firstStr)
+    assertTrue(secondBean.toJson() == secondStr)
   }
 
   @JsonClass(generateAdapter = true)
