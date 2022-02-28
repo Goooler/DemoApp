@@ -4,6 +4,7 @@ import com.squareup.moshi.JsonClass
 import io.goooler.demoapp.common.util.JsonUtil
 import io.goooler.demoapp.common.util.fromJson
 import io.goooler.demoapp.common.util.toJson
+import org.intellij.lang.annotations.Language
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
@@ -63,6 +64,7 @@ class JsonUtilTest {
   }
 
   companion object {
+    @Language("JSON")
     private val firstStr = """
       {
         "id": 126987864,
@@ -73,6 +75,7 @@ class JsonUtilTest {
       }
     """.trimIndent()
 
+    @Language("JSON")
     private val secondStr = """
       {
         "id": 374913489,
@@ -84,6 +87,7 @@ class JsonUtilTest {
     """.trimIndent()
 
     // https://api.github.com/users/goooler/repos?&page=1&per_page=2
+    @Language("JSON")
     private val strArray = "[$firstStr,$secondStr]"
 
     private val firstBean = Repo(126987864, "1024_hosts", Repo.Owner("Goooler"))
