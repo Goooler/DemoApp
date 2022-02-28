@@ -63,7 +63,7 @@ jobs:
             ~/.gradle/wrapper
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/**.gradle', '**/**.gradle.kts', '**/gradle/wrapper/gradle-wrapper.properties', '**/buildSrc/src/main/kotlin/**.kt') }}
       - name: Unit tests
-        run: ./gradlew testDebugUnitTest
+        run: ./gradlew test
 
   instrumentation-tests:
     name: Instrumentation tests
