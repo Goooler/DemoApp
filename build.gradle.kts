@@ -54,6 +54,10 @@ allprojects {
       }
     }
   }
+
+  tasks.withType<Test> {
+    useJUnitPlatform()
+  }
 }
 
 tasks {
@@ -65,9 +69,6 @@ tasks {
       )
     )
     delete(rootProject.buildDir, customFileTypes)
-  }
-  withType<Test> {
-    useJUnitPlatform()
   }
   wrapper {
     distributionType = Wrapper.DistributionType.ALL
