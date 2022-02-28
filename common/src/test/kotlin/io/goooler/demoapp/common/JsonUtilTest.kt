@@ -8,13 +8,13 @@ import org.junit.Test
 
 class JsonUtilTest {
   @Test
-  fun `jsonUtil's fromJson(String)`() {
+  fun `JsonUtil fromJson(String)`() {
     assert(JsonUtil.fromJson<Repo>(firstStr) == firstBean)
     assert(JsonUtil.fromJson<Repo>(secondStr) == secondBean)
   }
 
   @Test
-  fun `jsonUtil's fromJson(String, Class, Class)`() {
+  fun `JsonUtil fromJson(String, Class, Class)`() {
     val array: Array<Repo> = JsonUtil.fromJson(strArray, Array::class.java, Repo::class.java)
       ?: throw Exception("Parse json error")
     assert(array.first() == firstBean)
@@ -22,19 +22,19 @@ class JsonUtilTest {
   }
 
   @Test
-  fun `jsonUtil's toJson(T)`() {
+  fun `JsonUtil toJson(T)`() {
     assert(JsonUtil.toJson(firstBean) == firstStr)
     assert(JsonUtil.toJson(secondBean) == secondStr)
   }
 
   @Test
-  fun `string's fromJson()`() {
+  fun `String fromJson()`() {
     assert(firstStr.fromJson<Repo>() == firstBean)
     assert(secondStr.fromJson<Repo>() == secondBean)
   }
 
   @Test
-  fun `string's fromJson(Class, Class)`() {
+  fun `String fromJson(Class, Class)`() {
     val array: Array<Repo> = strArray.fromJson(Array::class.java, Repo::class.java)
       ?: throw Exception("Parse json error")
     assert(array.first() == firstBean)
@@ -42,7 +42,7 @@ class JsonUtilTest {
   }
 
   @Test
-  fun `any's toJson(T)`() {
+  fun `Any? toJson(T)`() {
     assert(firstBean.toJson() == firstStr)
     assert(secondBean.toJson() == secondStr)
   }
