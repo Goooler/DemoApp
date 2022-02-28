@@ -57,6 +57,9 @@ fun DependencyHandler.androidTestImplementations(vararg names: Any): Array<Depen
 fun DependencyHandler.testImplementations(vararg names: Any): Array<Dependency?> =
   config("testImplementation", *names)
 
+fun DependencyHandler.kaptTests(vararg names: Any): Array<Dependency?> =
+  config("kaptTest", *names)
+
 fun PluginAware.applyPlugins(vararg names: String) {
   apply { names.forEach(::plugin) }
 }

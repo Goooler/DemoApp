@@ -10,10 +10,10 @@ import okhttp3.OkHttpClient
 import retrofit2.Converter
 import retrofit2.Retrofit
 
-@Suppress("unused")
 abstract class BaseRetrofitHelper {
 
-  private val retrofit by lazy {
+  @PublishedApi
+  internal val retrofit by lazy {
     Retrofit.Builder()
       .baseUrl(baseUrl)
       .client(buildOkHttpClient())
@@ -32,9 +32,7 @@ abstract class BaseRetrofitHelper {
     }
   }
 
-  fun <T : Any> create(service: Class<T>): T = retrofit.create(service)
-
-  inline fun <reified T : Any> create(): T = create(T::class.java)
+  inline fun <reified T : Any> create(): T = retrofit.create(T::class.java)
 
   protected abstract fun OkHttpClient.Builder.addInterceptors(): OkHttpClient.Builder
 
