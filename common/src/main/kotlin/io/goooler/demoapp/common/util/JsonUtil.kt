@@ -17,7 +17,7 @@ object JsonUtil {
     null
   }
 
-  fun <T> fromJson(
+  inline fun <reified T> fromJson(
     @Language("JSON") string: String,
     rawType: Class<*>,
     vararg typeArguments: Class<*>

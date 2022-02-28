@@ -1,6 +1,7 @@
 package io.goooler.demoapp.common
 
 import com.squareup.moshi.JsonClass
+import io.goooler.demoapp.base.util.secondOrNull
 import io.goooler.demoapp.common.util.JsonUtil
 import io.goooler.demoapp.common.util.fromJson
 import io.goooler.demoapp.common.util.toJson
@@ -17,10 +18,10 @@ class JsonUtilTest {
 
   @Test
   fun `JsonUtil fromJson(String, Class, Class)`() {
-    val array: List<Repo> = JsonUtil.fromJson(strArray, List::class.java, Repo::class.java)
+    val list: List<Repo> = JsonUtil.fromJson(strArray, List::class.java, Repo::class.java)
       ?: throw Exception("Parse json error")
-    assertTrue(array.first() == firstBean)
-    assertTrue(array[1] == secondBean)
+    assertTrue(list.firstOrNull() == firstBean)
+    assertTrue(list.secondOrNull() == secondBean)
   }
 
   @Test
@@ -37,14 +38,14 @@ class JsonUtilTest {
 
   @Test
   fun `String fromJson(Class, Class)`() {
-    val array: List<Repo> = strArray.fromJson(List::class.java, Repo::class.java)
+    val list: List<Repo> = strArray.fromJson(List::class.java, Repo::class.java)
       ?: throw Exception("Parse json error")
-    assertTrue(array.first() == firstBean)
-    assertTrue(array[1] == secondBean)
+    assertTrue(list.first() == firstBean)
+    assertTrue(list[1] == secondBean)
   }
 
   @Test
-  fun `Any? toJson(T)`() {
+  fun `Any toJson(T)`() {
     assertTrue(firstBean.toJson() == firstStr)
     assertTrue(secondBean.toJson() == secondStr)
   }
