@@ -58,7 +58,8 @@ inline fun <reified T : BaseExtension> Project.setupBase(
     compileOptions.setDefaultJavaVersion(javaVersion)
     (this as ExtensionAware).extensions.configure<KotlinJvmOptions> {
       jvmTarget = javaVersion.toString()
-      freeCompilerArgs = listOf(
+      // https://youtrack.jetbrains.com/issue/KT-41985
+      freeCompilerArgs += listOf(
         "-progressive",
         "-opt-in=kotlin.RequiresOptIn",
         "-Xjvm-default=all"
