@@ -6,8 +6,8 @@ import io.goooler.demoapp.common.util.JsonUtil
 import io.goooler.demoapp.common.util.fromJson
 import io.goooler.demoapp.common.util.toJson
 import org.intellij.lang.annotations.Language
-import org.junit.Assert.assertTrue
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Test
 
 class JsonUtilTest {
   @Test
