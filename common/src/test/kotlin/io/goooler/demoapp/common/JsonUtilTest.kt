@@ -17,7 +17,7 @@ class JsonUtilTest {
 
   @Test
   fun `JsonUtil fromJson(String, Class, Class)`() {
-    val array: Array<Repo> = JsonUtil.fromJson(strArray, Array::class.java, Repo::class.java)
+    val array: List<Repo> = JsonUtil.fromJson(strArray, List::class.java, Repo::class.java)
       ?: throw Exception("Parse json error")
     assertTrue(array.first() == firstBean)
     assertTrue(array[1] == secondBean)
@@ -37,7 +37,7 @@ class JsonUtilTest {
 
   @Test
   fun `String fromJson(Class, Class)`() {
-    val array: Array<Repo> = strArray.fromJson(Array::class.java, Repo::class.java)
+    val array: List<Repo> = strArray.fromJson(List::class.java, Repo::class.java)
       ?: throw Exception("Parse json error")
     assertTrue(array.first() == firstBean)
     assertTrue(array[1] == secondBean)
@@ -66,24 +66,12 @@ class JsonUtilTest {
   companion object {
     @Language("JSON")
     private val firstStr = """
-      {
-        "id": 126987864,
-        "name": "1024_hosts",
-        "owner": {
-          "login": "Goooler"
-        }
-      }
+      {"id":126987864,"name":"1024_hosts","owner":{"login":"Goooler"}}
     """.trimIndent()
 
     @Language("JSON")
     private val secondStr = """
-      {
-        "id": 374913489,
-        "name": "AndroidUiDemo",
-        "owner": {
-          "login": "Goooler"
-        }
-      }
+      {"id":374913489,"name":"AndroidUiDemo","owner":{"login":"Goooler"}}
     """.trimIndent()
 
     // https://api.github.com/users/goooler/repos?&page=1&per_page=2

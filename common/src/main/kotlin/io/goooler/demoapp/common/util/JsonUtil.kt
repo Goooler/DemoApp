@@ -37,7 +37,7 @@ object JsonUtil {
   }
 }
 
-inline fun <reified T> String.fromJson(): T? = JsonUtil.fromJson(this, T::class.java)
+inline fun <reified T> String.fromJson(): T? = JsonUtil.fromJson(this)
 
 inline fun <reified T> String.fromJson(rawType: Class<*>, vararg typeArguments: Class<*>): T? =
   JsonUtil.fromJson(this, rawType, *typeArguments)
