@@ -2,6 +2,8 @@ package io.goooler.demoapp.common
 
 import com.squareup.moshi.JsonClass
 import io.goooler.demoapp.common.util.JsonUtil
+import io.goooler.demoapp.common.util.fromJson
+import io.goooler.demoapp.common.util.toJson
 import org.junit.Test
 
 class JsonUtilTest {
@@ -9,6 +11,40 @@ class JsonUtilTest {
   fun `jsonUtil's fromJson(String)`() {
     assert(JsonUtil.fromJson<Repo>(firstStr) == firstBean)
     assert(JsonUtil.fromJson<Repo>(secondStr) == secondBean)
+  }
+
+  @Test
+  fun `jsonUtil's fromJson(String, Class, Class)`() {
+    val array: Array<Repo> = JsonUtil.fromJson(strArray, Array::class.java, Repo::class.java)
+      ?: throw Exception("Parse json error")
+    assert(array.first() == firstBean)
+    assert(array[1] == secondBean)
+  }
+
+  @Test
+  fun `jsonUtil's toJson(T)`() {
+    assert(JsonUtil.toJson(firstBean) == firstStr)
+    assert(JsonUtil.toJson(secondBean) == secondStr)
+  }
+
+  @Test
+  fun `string's fromJson()`() {
+    assert(firstStr.fromJson<Repo>() == firstBean)
+    assert(secondStr.fromJson<Repo>() == secondBean)
+  }
+
+  @Test
+  fun `string's fromJson(Class, Class)`() {
+    val array: Array<Repo> = strArray.fromJson(Array::class.java, Repo::class.java)
+      ?: throw Exception("Parse json error")
+    assert(array.first() == firstBean)
+    assert(array[1] == secondBean)
+  }
+
+  @Test
+  fun `any's toJson(T)`() {
+    assert(firstBean.toJson() == firstStr)
+    assert(secondBean.toJson() == secondStr)
   }
 
   @JsonClass(generateAdapter = true)
@@ -22,9 +58,7 @@ class JsonUtilTest {
       false
     }
 
-    override fun hashCode(): Int {
-      return id.hashCode()
-    }
+    override fun hashCode(): Int = id.hashCode()
   }
 
   companion object {
@@ -53,6 +87,5 @@ class JsonUtilTest {
 
     private val firstBean = Repo(126987864, "1024_hosts", Repo.Owner("Goooler"))
     private val secondBean = Repo(374913489, "AndroidUiDemo", Repo.Owner("Goooler"))
-    private val beanArray = arrayOf(firstBean, secondBean)
   }
 }

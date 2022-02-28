@@ -9,26 +9,26 @@ object JsonUtil {
   @PublishedApi
   internal val moshi: Moshi = Moshi.Builder().build()
 
-  inline fun <reified T> fromJson(json: String): T? = try {
-    moshi.adapter(T::class.java).fromJson(json)
+  inline fun <reified T> fromJson(string: String): T? = try {
+    moshi.adapter(T::class.java).fromJson(string)
   } catch (e: Exception) {
     e.printStackTrace()
     null
   }
 
-  inline fun <reified T> fromJson(
-    json: String,
+  fun <T> fromJson(
+    string: String,
     rawType: Class<*>,
     vararg typeArguments: Class<*>
   ): T? = try {
-    moshi.adapter<T>(Types.newParameterizedType(rawType, *typeArguments)).fromJson(json)
+    moshi.adapter<T>(Types.newParameterizedType(rawType, *typeArguments)).fromJson(string)
   } catch (e: Exception) {
     e.printStackTrace()
     null
   }
 
-  inline fun <reified T> toJson(o: T?): String? = try {
-    moshi.adapter(T::class.java).toJson(o)
+  inline fun <reified T> toJson(value: T?): String? = try {
+    moshi.adapter(T::class.java).toJson(value)
   } catch (e: Exception) {
     e.printStackTrace()
     null
