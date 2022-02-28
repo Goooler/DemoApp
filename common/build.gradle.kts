@@ -29,4 +29,6 @@ dependencies {
   implementations(*Libs.coil)
   debugImplementations(Libs.chuckerDebug)
   releaseImplementations(Libs.chuckerRelease)
+
+  kaptTests(Libs.moshiCompiler)
 }
