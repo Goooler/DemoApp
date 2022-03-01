@@ -35,16 +35,12 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: 17
-      - uses: actions/cache@v2
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/**.gradle', '**/**.gradle.kts', '**/gradle/wrapper/gradle-wrapper.properties', '**/buildSrc/src/main/kotlin/**.kt') }}
       - name: Validate Gradle Wrapper
         uses: gradle/wrapper-validation-action@v1
       - name: Check style
-        run: ./gradlew ktlintCheck
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: ktlintCheck
 
   unit-tests:
     name: Unit tests
@@ -56,14 +52,10 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: 17
-      - uses: actions/cache@v2
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/**.gradle', '**/**.gradle.kts', '**/gradle/wrapper/gradle-wrapper.properties', '**/buildSrc/src/main/kotlin/**.kt') }}
       - name: Unit tests
-        run: ./gradlew test
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: test
 
   instrumentation-tests:
     name: Instrumentation tests
@@ -79,12 +71,8 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: 17
-      - uses: actions/cache@v2
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/**.gradle', '**/**.gradle.kts', '**/gradle/wrapper/gradle-wrapper.properties', '**/buildSrc/src/main/kotlin/**.kt') }}
+      - name: Gradle cache
+        uses: gradle/gradle-build-action@v2
       - name: AVD cache
         uses: actions/cache@v2
         id: avd-cache
@@ -123,14 +111,10 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: 17
-      - uses: actions/cache@v2
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/**.gradle', '**/**.gradle.kts', '**/gradle/wrapper/gradle-wrapper.properties', '**/buildSrc/src/main/kotlin/**.kt') }}
       - name: Build
-        run: ./gradlew app:assemble
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: app:assemble
       - uses: actions/upload-artifact@v2
         if: matrix.os == 'ubuntu-latest'
         with:

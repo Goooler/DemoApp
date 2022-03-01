@@ -15,14 +15,10 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: 17
-      - uses: actions/cache@v2
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/**.gradle', '**/**.gradle.kts', '**/gradle/wrapper/gradle-wrapper.properties', '**/buildSrc/src/main/kotlin/**.kt') }}
       - name: Build APK
-        run: ./gradlew app:assembleProdRelease
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: app:assembleProdRelease
       - name: Create Release
         uses: ncipollo/release-action@v1
         with:
