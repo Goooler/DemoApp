@@ -162,9 +162,9 @@ inline fun <reified T : BaseExtension> Project.setupCommon(
   }
   dependencies {
     implementations(Libs.hilt, *Libs.room, *Libs.moshi)
-    kapts(Libs.hiltCompiler, Libs.roomCompiler, Libs.moshiCompiler)
+    kapts(Libs.hiltCompiler, Libs.roomCompiler)
   }
-  applyPlugins(Plugins.hilt)
+  applyPlugins(Plugins.hilt, Plugins.moshiX)
   kapt {
     correctErrorTypes = true
     arguments {

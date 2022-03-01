@@ -27,6 +27,7 @@ object Plugins {
   const val androidApplication = "com.android.application"
   const val hilt = "com.google.dagger.hilt.android"
   const val ktlint = "org.jlleitschuh.gradle.ktlint"
+  const val moshiX = "dev.zacsweers.moshix"
 }
 
 object Libs {
@@ -60,9 +61,9 @@ object Libs {
 
   const val hiltPlugin = "com.google.dagger:hilt-android-gradle-plugin:$hiltVersion"
   const val ktlintPlugin = "org.jlleitschuh.gradle:ktlint-gradle:10.2.1"
+  const val moshiX = "dev.zacsweers.moshix:dev.zacsweers.moshix.gradle.plugin:0.17.0"
 
   const val roomCompiler = "androidx.room:room-compiler:$roomVersion"
-  const val moshiCompiler = "com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion"
   const val hiltCompiler = "com.google.dagger:hilt-android-compiler:$hiltVersion"
 
   val robolectric = arrayOf(

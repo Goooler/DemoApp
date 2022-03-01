@@ -12,7 +12,8 @@ buildscript {
     rootProject.extra["androidPlugin"].toString(),
     rootProject.extra["kotlinPlugin"].toString(),
     Libs.hiltPlugin,
-    Libs.ktlintPlugin
+    Libs.ktlintPlugin,
+    Libs.moshiX
   )
 }
 
