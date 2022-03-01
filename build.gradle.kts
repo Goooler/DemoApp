@@ -1,5 +1,6 @@
 import dagger.hilt.android.plugin.HiltExtension
 import org.jlleitschuh.gradle.ktlint.KtlintExtension
+import dev.zacsweers.moshix.ir.gradle.MoshiPluginExtension
 
 buildscript {
   apply(extraScriptPath)
@@ -12,8 +13,14 @@ buildscript {
     rootProject.extra["androidPlugin"].toString(),
     rootProject.extra["kotlinPlugin"].toString(),
     Libs.hiltPlugin,
-    Libs.ktlintPlugin
+    Libs.ktlintPlugin,
+    Libs.moshiX
   )
+}
+
+applyPlugins(Plugins.moshiX)
+configure<MoshiPluginExtension> {
+  enableSealed.set(true)
 }
 
 allprojects {
