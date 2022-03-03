@@ -3,9 +3,9 @@ setupApp(AppModule.App)
 dependencies {
   implementations(
     // projects
-    project(LibModule.Login),
-    project(LibModule.Main),
-    project(LibModule.Web)
+    projects.login,
+    projects.main,
+    projects.web,
   )
   debugImplementations(Libs.leakCanary)
 }

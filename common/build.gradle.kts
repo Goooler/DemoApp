@@ -13,8 +13,8 @@ setupCommon<LibraryExtension>(LibModule.Common) {
 dependencies {
   apis(
     // project
-    project(LibModule.Base),
-    project(LibModule.Adapter),
+    projects.base,
+    projects.adapter,
     // UI
     Libs.constraintLayout,
     Libs.cardView,
