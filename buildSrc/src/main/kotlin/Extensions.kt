@@ -73,8 +73,6 @@ fun VariantDimension.buildConfigField(field: BuildConfigField) {
   }
 }
 
-fun Project.project(module: Module): Project = project(":${module.tag}")
-
 fun Project.kapt(block: KaptExtension.() -> Unit) {
   configure(block)
 }
@@ -243,3 +241,5 @@ private inline fun <T> List<T>.sumByIndexed(selector: (Int, T) -> Int): Int {
   }
   return sum
 }
+
+private fun Project.project(module: Module): Project = project(":${module.tag}")
