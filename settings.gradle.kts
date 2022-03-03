@@ -8,3 +8,5 @@ include(
   ":adapter",
   ":test"
 )
+
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
