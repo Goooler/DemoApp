@@ -12,14 +12,10 @@ import org.gradle.api.Project
 import org.gradle.api.artifacts.Dependency
 import org.gradle.api.artifacts.dsl.DependencyHandler
 import org.gradle.api.plugins.ExtensionAware
-import org.gradle.api.plugins.PluginAware
 import org.gradle.kotlin.dsl.ScriptHandlerScope
 import org.gradle.kotlin.dsl.configure
-import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.get
-import org.gradle.kotlin.dsl.kotlin
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmOptions
-import org.jetbrains.kotlin.gradle.plugin.KaptExtension
 
 const val extraScriptPath = "gradle/extra.gradle.kts"
 const val appVersionName = "1.5.0"
@@ -44,27 +40,6 @@ fun DependencyHandler.apis(vararg names: Any): Array<Dependency?> = config("api"
 fun DependencyHandler.implementations(vararg names: Any): Array<Dependency?> =
   config("implementation", *names)
 
-fun DependencyHandler.debugImplementations(vararg names: Any): Array<Dependency?> =
-  config("debugImplementation", *names)
-
-fun DependencyHandler.releaseImplementations(vararg names: Any): Array<Dependency?> =
-  config("releaseImplementation", *names)
-
-fun DependencyHandler.kapts(vararg names: Any): Array<Dependency?> = config("kapt", *names)
-
-fun DependencyHandler.androidTestImplementations(vararg names: Any): Array<Dependency?> =
-  config("androidTestImplementation", *names)
-
-fun DependencyHandler.testImplementations(vararg names: Any): Array<Dependency?> =
-  config("testImplementation", *names)
-
-fun DependencyHandler.kaptTests(vararg names: Any): Array<Dependency?> =
-  config("kaptTest", *names)
-
-fun PluginAware.applyPlugins(vararg names: String) {
-  apply { names.forEach(::plugin) }
-}
-
 fun VariantDimension.buildConfigField(field: BuildConfigField) {
   if (field.value is Int) {
     buildConfigField("Integer", field.key, field.value.toString())
@@ -73,23 +48,9 @@ fun VariantDimension.buildConfigField(field: BuildConfigField) {
   }
 }
 
-fun Project.kapt(block: KaptExtension.() -> Unit) {
-  configure(block)
-}
-
-fun BaseExtension.kotlinOptions(block: KotlinJvmOptions.() -> Unit) {
-  (this as ExtensionAware).extensions.configure(block)
-}
-
 inline fun <reified T : BaseExtension> Project.setupBase(
   module: Module, crossinline block: T.() -> Unit = {}
 ) {
-  val androidPlugin = when (T::class) {
-    LibraryExtension::class -> Plugins.androidLibrary
-    BaseAppModuleExtension::class -> Plugins.androidApplication
-    else -> ""
-  }
-  applyPlugins(androidPlugin, Plugins.kotlinAndroid, Plugins.kotlinKapt)
   extensions.configure<BaseExtension> {
     resourcePrefix = "${module.tag}_"
     namespace = module.id
@@ -105,7 +66,7 @@ inline fun <reified T : BaseExtension> Project.setupBase(
     }
     buildFeatures.buildConfig = false
     compileOptions.setDefaultJavaVersion(javaVersion)
-    kotlinOptions {
+    (this as ExtensionAware).extensions.configure<KotlinJvmOptions> {
       jvmTarget = javaVersion.toString()
       freeCompilerArgs = listOf(
         // https://kotlinlang.org/docs/compiler-reference.html#progressive
@@ -138,13 +99,8 @@ inline fun <reified T : BaseExtension> Project.setupBase(
       "okhttp3/**",
       "google/**"
     )
-    (this as CommonExtension<*, *, *, *>).lint {
+    (this as? CommonExtension<*, *, *, *>)?.lint {
       abortOnError = true
-    }
-    dependencies {
-      implementations(fileTree(mapOf("dir" to "libs", "include" to arrayOf("*.jar", "*.aar"))))
-      testImplementations(*Libs.robolectric, kotlin("test-junit5"))
-      androidTestImplementations(*Libs.androidTests)
     }
     (this as T).block()
   }
@@ -157,17 +113,6 @@ inline fun <reified T : BaseExtension> Project.setupCommon(
   productFlavors {
     create("dev")
     create("prod")
-  }
-  dependencies {
-    implementations(Libs.hilt, *Libs.room, *Libs.moshi)
-    kapts(Libs.hiltCompiler, Libs.roomCompiler)
-  }
-  applyPlugins(Plugins.hilt, Plugins.moshiX)
-  kapt {
-    correctErrorTypes = true
-    arguments {
-      arg("room.incremental", "true")
-    }
   }
   block()
 }

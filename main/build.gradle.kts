@@ -1,3 +1,11 @@
+plugins {
+  id(Plugins.androidLibrary)
+  id(Plugins.kotlinAndroid)
+  id(Plugins.kotlinKapt)
+  id(Plugins.hilt)
+  id(Plugins.moshiX)
+}
+
 setupLib(LibModule.Main) {
   sourceSets["main"].res.srcDirs(
     "src/main/res/core",
@@ -5,9 +13,22 @@ setupLib(LibModule.Main) {
   )
 }
 
+kapt {
+  correctErrorTypes = true
+  arguments {
+    arg("room.incremental", "true")
+  }
+}
+
 dependencies {
-  implementations(
-    Libs.coordinatorLayout,
-    Libs.flycoTabLayout
-  )
+  implementation(Libs.coordinatorLayout)
+  implementation(Libs.flycoTabLayout)
+
+  implementation(Libs.hilt)
+  kapt(Libs.hiltCompiler)
+
+  implementations(*Libs.room)
+  kapt(Libs.roomCompiler)
+
+  implementation(Libs.moshi)
 }

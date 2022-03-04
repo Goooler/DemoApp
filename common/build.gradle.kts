@@ -1,5 +1,12 @@
 import com.android.build.gradle.LibraryExtension
 
+plugins {
+  id(Plugins.androidLibrary)
+  id(Plugins.kotlinAndroid)
+  id(Plugins.kotlinKapt)
+  id(Plugins.moshiX)
+}
+
 setupCommon<LibraryExtension>(LibModule.Common) {
   buildFeatures.buildConfig = true
   productFlavors.all {
@@ -7,6 +14,13 @@ setupCommon<LibraryExtension>(LibModule.Common) {
     buildConfigField(BuildConfigField.VersionName)
     buildConfigField(BuildConfigField.CdnPrefix)
     buildConfigField(BuildConfigField.ApiHost)
+  }
+}
+
+kapt {
+  correctErrorTypes = true
+  arguments {
+    arg("room.incremental", "true")
   }
 }
 
@@ -27,6 +41,15 @@ dependencies {
     Libs.utils
   )
   implementations(*Libs.coil)
-  debugImplementations(Libs.chuckerDebug)
-  releaseImplementations(Libs.chuckerRelease)
+
+  implementation(Libs.moshi)
+  implementation(Libs.retrofitMoshiConverter)
+
+  implementations(*Libs.room)
+  kapt(Libs.roomCompiler)
+
+  debugImplementation(Libs.chuckerDebug)
+  releaseImplementation(Libs.chuckerRelease)
+
+  testImplementation(kotlin("test-junit5"))
 }

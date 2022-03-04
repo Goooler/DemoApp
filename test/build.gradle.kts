@@ -1,3 +1,9 @@
+plugins {
+  id(Plugins.androidApplication)
+  id(Plugins.kotlinAndroid)
+  id(Plugins.kotlinKapt)
+}
+
 setupApp(AppModule.Test)
 
 dependencies {
