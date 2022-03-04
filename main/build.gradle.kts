@@ -2,6 +2,7 @@ plugins {
   id(Plugins.androidLibrary)
   id(Plugins.kotlinAndroid)
   id(Plugins.kotlinKapt)
+  id(Plugins.hilt)
 }
 
 setupLib(LibModule.Main) {
@@ -16,4 +17,7 @@ dependencies {
     Libs.coordinatorLayout,
     Libs.flycoTabLayout
   )
+
+  implementation(Libs.hilt)
+  kapt(Libs.hiltCompiler)
 }

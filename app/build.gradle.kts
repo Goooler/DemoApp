@@ -2,6 +2,7 @@ plugins {
   id(Plugins.androidApplication)
   id(Plugins.kotlinAndroid)
   id(Plugins.kotlinKapt)
+  id(Plugins.hilt)
 }
 
 setupApp(AppModule.App)
@@ -14,4 +15,6 @@ dependencies {
     projects.web,
   )
   debugImplementations(Libs.leakCanary)
+  implementation(Libs.hilt)
+  kapt(Libs.hiltCompiler)
 }
