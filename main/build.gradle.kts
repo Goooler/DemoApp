@@ -21,14 +21,14 @@ kapt {
 }
 
 dependencies {
-  implementation(Libs.coordinatorLayout)
-  implementation(Libs.flycoTabLayout)
+  implementation(libs.androidX.coordinatorLayout)
+  implementation(libs.flycoTabLayout)
 
-  implementation(Libs.hilt)
-  kapt(Libs.hiltCompiler)
+  implementation(libs.androidX.hilt)
+  kapt(libs.androidX.hilt.compiler)
 
-  implementations(*Libs.room)
-  kapt(Libs.roomCompiler)
+  implementation(libs.bundles.room)
+  kapt(libs.androidX.room.compiler)
 
-  implementation(Libs.moshi)
+  implementation(libs.moshi)
 }

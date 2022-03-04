@@ -25,31 +25,28 @@ kapt {
 }
 
 dependencies {
-  apis(
-    // project
-    projects.base,
-    projects.adapter,
-    // UI
-    Libs.constraintLayout,
-    Libs.cardView,
-    Libs.material,
-    *Libs.smartRefreshLayout,
-    Libs.photoView,
-    // other
-    *Libs.rx,
-    Libs.collection,
-    Libs.utils
-  )
-  implementations(*Libs.coil)
+  api(projects.base)
+  api(projects.adapter)
+  api(libs.androidX.constraintLayout)
+  api(libs.androidX.cardView)
+  api(libs.google.material)
+  api(libs.bundles.srl)
+  api(libs.photoView)
+  api(libs.photoView)
+  api(libs.rxJava3.rxJava)
+  api(libs.rxJava3.rxAndroid)
+  api(libs.androidX.collection)
+  api(libs.utils)
 
-  implementation(Libs.moshi)
-  implementation(Libs.retrofitMoshiConverter)
+  implementation(libs.bundles.coil)
+  implementation(libs.moshi)
+  implementation(libs.retrofit.moshiConverter)
 
-  implementations(*Libs.room)
-  kapt(Libs.roomCompiler)
+  implementation(libs.bundles.room)
+  kapt(libs.androidX.room.compiler)
 
-  debugImplementation(Libs.chuckerDebug)
-  releaseImplementation(Libs.chuckerRelease)
+  debugImplementation(libs.chucker.debug)
+  releaseImplementation(libs.chucker.release)
 
   testImplementation(kotlin("test-junit5"))
 }
