@@ -56,7 +56,6 @@ allprojects {
         else -> when {
           requested.name.startsWith("kotlinx-coroutines") ->
             useVersion(coroutinesVersion)
-          requested.name == "javapoet" -> useVersion("1.13.0")
         }
       }
     }

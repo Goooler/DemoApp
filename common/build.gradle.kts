@@ -41,6 +41,7 @@ dependencies {
   implementation(libs.bundles.coil)
   implementation(libs.moshi)
   implementation(libs.retrofit.moshiConverter)
+  implementation(libs.retrofit.rxJava3)
 
   implementation(libs.bundles.room)
   kapt(libs.androidX.room.compiler)
