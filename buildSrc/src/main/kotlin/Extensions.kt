@@ -137,8 +137,6 @@ inline fun <reified T : BaseExtension> Project.setupBase(
     }
     dependencies {
       implementations(fileTree(mapOf("dir" to "libs", "include" to arrayOf("*.jar", "*.aar"))))
-      testImplementations(*Libs.robolectric, kotlin("test-junit5"))
-      androidTestImplementations(*Libs.androidTests)
     }
     (this as T).block()
   }

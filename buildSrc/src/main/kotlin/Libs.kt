@@ -68,9 +68,6 @@ object Libs {
   const val roomCompiler = "androidx.room:room-compiler:$roomVersion"
   const val hiltCompiler = "com.google.dagger:hilt-android-compiler:$hiltVersion"
 
-  val robolectric = arrayOf(
-    "org.robolectric:robolectric:4.7.3"
-  )
   val androidTests = arrayOf(
     "androidx.test.ext:junit:1.1.3",
     "androidx.test.espresso:espresso-core:3.4.0"

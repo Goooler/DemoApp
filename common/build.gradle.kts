@@ -45,4 +45,6 @@ dependencies {
   kapt(Libs.roomCompiler)
   debugImplementations(Libs.chuckerDebug)
   releaseImplementations(Libs.chuckerRelease)
+
+  testImplementation(kotlin("test-junit5"))
 }
