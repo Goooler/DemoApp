@@ -132,11 +132,8 @@ inline fun <reified T : BaseExtension> Project.setupBase(
       "okhttp3/**",
       "google/**"
     )
-    (this as CommonExtension<*, *, *, *>).lint {
+    (this as? CommonExtension<*, *, *, *>)?.lint {
       abortOnError = true
-    }
-    dependencies {
-      implementations(fileTree(mapOf("dir" to "libs", "include" to arrayOf("*.jar", "*.aar"))))
     }
     (this as T).block()
   }

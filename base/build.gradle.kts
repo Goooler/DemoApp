@@ -10,6 +10,7 @@ setupBase<LibraryExtension>(LibModule.Base)
 
 dependencies {
   apis(
+    fileTree(mapOf("dir" to "libs", "include" to arrayOf("*.jar", "*.aar"))),
     // architecture
     Libs.coroutines,
     *Libs.lifecycle,
