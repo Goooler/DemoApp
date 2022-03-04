@@ -26,7 +26,7 @@ allprojects {
 
   apply(plugin = Plugins.ktlint)
   configure<KtlintExtension> {
-    version.set(ktlintVersion)
+    version.set(rootProject.libs.versions.ktlint.get())
   }
 
   plugins.withId(Plugins.hilt) {
@@ -39,23 +39,23 @@ allprojects {
     resolutionStrategy.eachDependency {
       when (requested.group) {
         "org.jetbrains.kotlin" -> useVersion(libs.versions.kotlin.get())
-        "androidx.appcompat" -> useVersion(appCompatVersion)
-        "androidx.activity" -> useVersion(activityVersion)
-        "androidx.collection" -> useVersion(collectionVersion)
-        "androidx.core" -> useVersion(coreVersion)
-        "androidx.fragment" -> useVersion(fragmentVersion)
+        "androidx.appcompat" -> useVersion(libs.versions.androidX.appCompat.get())
+        "androidx.activity" -> useVersion(libs.versions.androidX.activity.get())
+        "androidx.collection" -> useVersion(libs.versions.androidX.collection.get())
+        "androidx.core" -> useVersion(libs.versions.androidX.core.get())
+        "androidx.fragment" -> useVersion(libs.versions.androidX.fragment.get())
         "androidx.lifecycle" -> {
           if (requested.name != "lifecycle-extensions")
-            useVersion(lifecycleVersion)
+            useVersion(libs.versions.androidX.lifecycle.get())
         }
         "com.android.support" -> {
           if ("multidex" !in requested.name)
-            useVersion(supportVersion)
+            useVersion(libs.versions.support.get())
         }
-        "com.squareup.okhttp3" -> useVersion(okHttpVersion)
+        "com.squareup.okhttp3" -> useVersion(libs.versions.square.okHttp.get())
         else -> when {
           requested.name.startsWith("kotlinx-coroutines") ->
-            useVersion(coroutinesVersion)
+            useVersion(libs.versions.coroutines.get())
         }
       }
     }
