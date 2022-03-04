@@ -13,6 +13,13 @@ setupLib(LibModule.Main) {
   )
 }
 
+kapt {
+  correctErrorTypes = true
+  arguments {
+    arg("room.incremental", "true")
+  }
+}
+
 dependencies {
   implementations(
     Libs.coordinatorLayout,
@@ -21,6 +28,9 @@ dependencies {
 
   implementation(Libs.hilt)
   kapt(Libs.hiltCompiler)
+
+  implementations(*Libs.room)
+  kapt(Libs.roomCompiler)
 
   implementation(Libs.moshi)
 }

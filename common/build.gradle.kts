@@ -17,6 +17,13 @@ setupCommon<LibraryExtension>(LibModule.Common) {
   }
 }
 
+kapt {
+  correctErrorTypes = true
+  arguments {
+    arg("room.incremental", "true")
+  }
+}
+
 dependencies {
   apis(
     // project
@@ -33,7 +40,9 @@ dependencies {
     Libs.collection,
     Libs.utils
   )
-  implementations(*Libs.coil, *Libs.room, Libs.moshi, Libs.retrofitMoshiConverter)
+  implementations(*Libs.coil, Libs.moshi, Libs.retrofitMoshiConverter)
+  implementations(*Libs.room)
+  kapt(Libs.roomCompiler)
   debugImplementations(Libs.chuckerDebug)
   releaseImplementations(Libs.chuckerRelease)
 }

@@ -152,15 +152,6 @@ inline fun <reified T : BaseExtension> Project.setupCommon(
     create("dev")
     create("prod")
   }
-  dependencies {
-    kapts(Libs.roomCompiler)
-  }
-  kapt {
-    correctErrorTypes = true
-    arguments {
-      arg("room.incremental", "true")
-    }
-  }
   block()
 }
 
