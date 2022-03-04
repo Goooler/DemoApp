@@ -50,6 +50,8 @@ object Libs {
   const val okHttp = "com.squareup.okhttp3:okhttp:$okHttpVersion"
   const val okHttpLogInterceptor = "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
   const val retrofit = "com.squareup.retrofit2:retrofit:$retrofitVersion"
+  const val retrofitMoshiConverter = "com.squareup.retrofit2:converter-moshi:$retrofitVersion"
+  const val moshi = "com.squareup.moshi:moshi:$moshiVersion"
   const val paging = "androidx.paging:paging-runtime:3.1.0"
   const val viewPager2 = "androidx.viewpager2:viewpager2:1.0.0"
   const val photoView = "com.github.chrisbanes:PhotoView:2.3.0"
@@ -90,10 +92,6 @@ object Libs {
   val gson = arrayOf(
     "com.google.code.gson:gson:2.9.0",
     "com.squareup.retrofit2:converter-gson:$retrofitVersion"
-  )
-  val moshi = arrayOf(
-    "com.squareup.moshi:moshi:$moshiVersion",
-    "com.squareup.retrofit2:converter-moshi:$retrofitVersion"
   )
   val glide = arrayOf(
     "com.github.bumptech.glide:glide:$glideVersion",

@@ -4,6 +4,7 @@ plugins {
   id(Plugins.androidLibrary)
   id(Plugins.kotlinAndroid)
   id(Plugins.kotlinKapt)
+  id(Plugins.moshiX)
 }
 
 setupCommon<LibraryExtension>(LibModule.Common) {
@@ -32,7 +33,7 @@ dependencies {
     Libs.collection,
     Libs.utils
   )
-  implementations(*Libs.coil)
+  implementations(*Libs.coil, *Libs.room, Libs.moshi, Libs.retrofitMoshiConverter)
   debugImplementations(Libs.chuckerDebug)
   releaseImplementations(Libs.chuckerRelease)
 }

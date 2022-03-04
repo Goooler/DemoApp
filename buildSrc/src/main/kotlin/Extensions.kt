@@ -153,10 +153,8 @@ inline fun <reified T : BaseExtension> Project.setupCommon(
     create("prod")
   }
   dependencies {
-    implementations(*Libs.room, *Libs.moshi)
     kapts(Libs.roomCompiler)
   }
-  applyPlugins(Plugins.moshiX)
   kapt {
     correctErrorTypes = true
     arguments {

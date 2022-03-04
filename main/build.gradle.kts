@@ -3,6 +3,7 @@ plugins {
   id(Plugins.kotlinAndroid)
   id(Plugins.kotlinKapt)
   id(Plugins.hilt)
+  id(Plugins.moshiX)
 }
 
 setupLib(LibModule.Main) {
@@ -20,4 +21,6 @@ dependencies {
 
   implementation(Libs.hilt)
   kapt(Libs.hiltCompiler)
+
+  implementation(Libs.moshi)
 }
