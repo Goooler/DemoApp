@@ -50,5 +50,5 @@ dependencies {
   debugImplementation(libs.chucker.debug)
   releaseImplementation(libs.chucker.release)
 
-  testImplementation(kotlin("test-junit5"))
+  testImplementation(libs.kotlin.junit5)
 }

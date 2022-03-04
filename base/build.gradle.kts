@@ -10,7 +10,7 @@ setupBase<LibraryExtension>(LibModule.Base)
 
 dependencies {
   api(fileTree(mapOf("dir" to "libs", "include" to arrayOf("*.jar", "*.aar"))))
-  api(libs.coroutines)
+  api(libs.kotlinX.coroutines)
 
   api(libs.androidX.core)
   api(libs.androidX.annotation)
