@@ -14,7 +14,7 @@ dependencies {
     projects.main,
     projects.web,
   )
-  debugImplementations(Libs.leakCanary)
+  debugImplementation(Libs.leakCanary)
   implementation(Libs.hilt)
   kapt(Libs.hiltCompiler)
 }

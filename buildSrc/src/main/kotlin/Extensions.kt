@@ -15,9 +15,7 @@ import org.gradle.api.plugins.ExtensionAware
 import org.gradle.api.plugins.PluginAware
 import org.gradle.kotlin.dsl.ScriptHandlerScope
 import org.gradle.kotlin.dsl.configure
-import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.get
-import org.gradle.kotlin.dsl.kotlin
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmOptions
 import org.jetbrains.kotlin.gradle.plugin.KaptExtension
 
@@ -43,27 +41,6 @@ fun DependencyHandler.apis(vararg names: Any): Array<Dependency?> = config("api"
 
 fun DependencyHandler.implementations(vararg names: Any): Array<Dependency?> =
   config("implementation", *names)
-
-fun DependencyHandler.debugImplementations(vararg names: Any): Array<Dependency?> =
-  config("debugImplementation", *names)
-
-fun DependencyHandler.releaseImplementations(vararg names: Any): Array<Dependency?> =
-  config("releaseImplementation", *names)
-
-fun DependencyHandler.kapts(vararg names: Any): Array<Dependency?> = config("kapt", *names)
-
-fun DependencyHandler.androidTestImplementations(vararg names: Any): Array<Dependency?> =
-  config("androidTestImplementation", *names)
-
-fun DependencyHandler.testImplementations(vararg names: Any): Array<Dependency?> =
-  config("testImplementation", *names)
-
-fun DependencyHandler.kaptTests(vararg names: Any): Array<Dependency?> =
-  config("kaptTest", *names)
-
-fun PluginAware.applyPlugins(vararg names: String) {
-  apply { names.forEach(::plugin) }
-}
 
 fun VariantDimension.buildConfigField(field: BuildConfigField) {
   if (field.value is Int) {

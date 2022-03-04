@@ -13,14 +13,14 @@ buildscript {
     rootProject.extra["kotlinPlugin"].toString(),
     Libs.hiltPlugin,
     Libs.ktlintPlugin,
-    Libs.moshiX
+    Libs.moshiXPlugin
   )
 }
 
 allprojects {
   apply("$rootDir/$extraScriptPath")
 
-  applyPlugins(Plugins.ktlint)
+  apply(plugin = Plugins.ktlint)
   configure<KtlintExtension> {
     version.set(ktlintVersion)
   }

@@ -43,8 +43,8 @@ dependencies {
   implementations(*Libs.coil, Libs.moshi, Libs.retrofitMoshiConverter)
   implementations(*Libs.room)
   kapt(Libs.roomCompiler)
-  debugImplementations(Libs.chuckerDebug)
-  releaseImplementations(Libs.chuckerRelease)
+  debugImplementation(Libs.chuckerDebug)
+  releaseImplementation(Libs.chuckerRelease)
 
   testImplementation(kotlin("test-junit5"))
 }
