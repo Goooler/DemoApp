@@ -89,7 +89,7 @@ inline fun <reified T : BaseExtension> Project.setupBase(
     BaseAppModuleExtension::class -> Plugins.androidApplication
     else -> ""
   }
-  applyPlugins(androidPlugin, Plugins.kotlinAndroid, Plugins.kotlinKapt)
+  applyPlugins(androidPlugin, Plugins.kotlinAndroid)
   extensions.configure<BaseExtension> {
     resourcePrefix = "${module.tag}_"
     namespace = module.id
@@ -153,6 +153,7 @@ inline fun <reified T : BaseExtension> Project.setupBase(
 inline fun <reified T : BaseExtension> Project.setupCommon(
   module: Module, crossinline block: T.() -> Unit = {}
 ) = setupBase<T>(module) {
+  applyPlugins(Plugins.kotlinKapt)
   flavorDimensions("channel")
   productFlavors {
     create("dev")
