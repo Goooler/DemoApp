@@ -11,12 +11,14 @@ setupBase<LibraryExtension>(LibModule.Base)
 dependencies {
   api(fileTree(mapOf("dir" to "libs", "include" to arrayOf("*.jar", "*.aar"))))
   api(libs.coroutines)
-  api(libs.bundles.lifecycle)
+
   api(libs.androidX.core)
   api(libs.androidX.annotation)
   api(libs.androidX.appCompat)
   api(libs.androidX.activity)
   api(libs.androidX.fragment)
-  api(libs.okHttp)
-  api(libs.retrofit)
+  api(libs.bundles.androidX.lifecycle)
+
+  api(libs.square.okHttp)
+  api(libs.square.retrofit)
 }

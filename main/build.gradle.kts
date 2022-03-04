@@ -27,8 +27,8 @@ dependencies {
   implementation(libs.androidX.hilt)
   kapt(libs.androidX.hilt.compiler)
 
-  implementation(libs.bundles.room)
+  implementation(libs.bundles.androidX.room)
   kapt(libs.androidX.room.compiler)
 
-  implementation(libs.moshi)
+  implementation(libs.square.moshi)
 }
