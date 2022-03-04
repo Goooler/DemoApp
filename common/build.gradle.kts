@@ -40,9 +40,14 @@ dependencies {
     Libs.collection,
     Libs.utils
   )
-  implementations(*Libs.coil, Libs.moshi, Libs.retrofitMoshiConverter)
+  implementations(*Libs.coil)
+
+  implementation(Libs.moshi)
+  implementation(Libs.retrofitMoshiConverter)
+
   implementations(*Libs.room)
   kapt(Libs.roomCompiler)
+
   debugImplementation(Libs.chuckerDebug)
   releaseImplementation(Libs.chuckerRelease)
 

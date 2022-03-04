@@ -9,8 +9,6 @@ setupLib(LibModule.Web) {
 }
 
 dependencies {
-  implementations(
-    Libs.browser,
-    Libs.webKit
-  )
+  implementation(Libs.browser)
+  implementation(Libs.webKit)
 }

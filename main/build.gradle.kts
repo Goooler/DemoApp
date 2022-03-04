@@ -21,10 +21,8 @@ kapt {
 }
 
 dependencies {
-  implementations(
-    Libs.coordinatorLayout,
-    Libs.flycoTabLayout
-  )
+  implementation(Libs.coordinatorLayout)
+  implementation(Libs.flycoTabLayout)
 
   implementation(Libs.hilt)
   kapt(Libs.hiltCompiler)

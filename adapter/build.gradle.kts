@@ -9,10 +9,8 @@ plugins {
 setupBase<LibraryExtension>(LibModule.Adapter)
 
 dependencies {
-  apis(
-    Libs.recyclerView,
-    Libs.paging,
-    Libs.viewPager2,
-    Libs.collection
-  )
+  api(Libs.recyclerView)
+  api(Libs.paging)
+  api(Libs.viewPager2)
+  api(Libs.collection)
 }

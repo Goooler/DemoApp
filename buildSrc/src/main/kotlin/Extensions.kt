@@ -50,14 +50,6 @@ fun VariantDimension.buildConfigField(field: BuildConfigField) {
   }
 }
 
-fun Project.kapt(block: KaptExtension.() -> Unit) {
-  configure(block)
-}
-
-fun BaseExtension.kotlinOptions(block: KotlinJvmOptions.() -> Unit) {
-  (this as ExtensionAware).extensions.configure(block)
-}
-
 inline fun <reified T : BaseExtension> Project.setupBase(
   module: Module, crossinline block: T.() -> Unit = {}
 ) {
@@ -76,7 +68,7 @@ inline fun <reified T : BaseExtension> Project.setupBase(
     }
     buildFeatures.buildConfig = false
     compileOptions.setDefaultJavaVersion(javaVersion)
-    kotlinOptions {
+    (this as ExtensionAware).extensions.configure<KotlinJvmOptions> {
       jvmTarget = javaVersion.toString()
       freeCompilerArgs = listOf(
         // https://kotlinlang.org/docs/compiler-reference.html#progressive

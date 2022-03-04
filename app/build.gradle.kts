@@ -8,13 +8,12 @@ plugins {
 setupApp(AppModule.App)
 
 dependencies {
-  implementations(
-    // projects
-    projects.login,
-    projects.main,
-    projects.web,
-  )
-  debugImplementation(Libs.leakCanary)
+  implementation(projects.login)
+  implementation(projects.main)
+  implementation(projects.web)
+
   implementation(Libs.hilt)
   kapt(Libs.hiltCompiler)
+
+  debugImplementation(Libs.leakCanary)
 }
