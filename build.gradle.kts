@@ -38,21 +38,21 @@ allprojects {
   configurations.all {
     resolutionStrategy.eachDependency {
       when (requested.group) {
-        "org.jetbrains.kotlin" -> useVersion(libs.versions.kotlin.get())
-        "androidx.appcompat" -> useVersion(libs.versions.androidX.appCompat.get())
-        "androidx.activity" -> useVersion(libs.versions.androidX.activity.get())
-        "androidx.collection" -> useVersion(libs.versions.androidX.collection.get())
-        "androidx.core" -> useVersion(libs.versions.androidX.core.get())
-        "androidx.fragment" -> useVersion(libs.versions.androidX.fragment.get())
-        "androidx.lifecycle" -> {
-          if (requested.name != "lifecycle-extensions")
-            useVersion(libs.versions.androidX.lifecycle.get())
-        }
         "com.android.support" -> {
           if ("multidex" !in requested.name)
             useVersion(libs.versions.support.get())
         }
-        "com.squareup.okhttp3" -> useVersion(libs.versions.square.okHttp.get())
+        libs.gradlePlugin.kotlin.get().module.group -> useVersion(libs.versions.kotlin.get())
+        libs.androidX.appCompat.get().module.group -> useVersion(libs.versions.androidX.appCompat.get())
+        libs.androidX.activity.get().module.group -> useVersion(libs.versions.androidX.activity.get())
+        libs.androidX.collection.get().module.group -> useVersion(libs.versions.androidX.collection.get())
+        libs.androidX.core.get().module.group -> useVersion(libs.versions.androidX.core.get())
+        libs.androidX.fragment.get().module.group -> useVersion(libs.versions.androidX.fragment.get())
+        libs.androidX.lifecycle.liveData.get().module.group -> {
+          if (requested.name != "lifecycle-extensions")
+            useVersion(libs.versions.androidX.lifecycle.get())
+        }
+        libs.square.okHttp.logInterceptor.get().module.group -> useVersion(libs.versions.square.okHttp.get())
         else -> when {
           requested.name.startsWith("kotlinx-coroutines") ->
             useVersion(libs.versions.coroutines.get())
