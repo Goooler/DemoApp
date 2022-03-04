@@ -39,19 +39,17 @@ allprojects {
     resolutionStrategy.eachDependency {
       when (requested.group) {
         "com.android.support" -> {
-          if ("multidex" !in requested.name)
-            useVersion(libs.versions.support.get())
+          if ("multidex" !in requested.name) useVersion(libs.versions.support.get())
         }
-        libs.gradlePlugin.kotlin.get().module.group -> useVersion(libs.versions.kotlin.get())
         libs.androidX.appCompat.get().module.group -> useVersion(libs.versions.androidX.appCompat.get())
         libs.androidX.activity.get().module.group -> useVersion(libs.versions.androidX.activity.get())
         libs.androidX.collection.get().module.group -> useVersion(libs.versions.androidX.collection.get())
         libs.androidX.core.get().module.group -> useVersion(libs.versions.androidX.core.get())
         libs.androidX.fragment.get().module.group -> useVersion(libs.versions.androidX.fragment.get())
         libs.androidX.lifecycle.liveData.get().module.group -> {
-          if (requested.name != "lifecycle-extensions")
-            useVersion(libs.versions.androidX.lifecycle.get())
+          if (requested.name != "lifecycle-extensions") useVersion(libs.versions.androidX.lifecycle.get())
         }
+        libs.gradlePlugin.kotlin.get().module.group -> useVersion(libs.versions.kotlin.get())
         libs.square.okHttp.logInterceptor.get().module.group -> useVersion(libs.versions.square.okHttp.get())
         else -> when {
           requested.name.startsWith("kotlinx-coroutines") ->
