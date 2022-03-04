@@ -61,6 +61,7 @@ jobs:
     name: Instrumentation tests
     runs-on: macos-latest
     timeout-minutes: 20
+    if: github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'instrumentation-tests')
     strategy:
       fail-fast: true
       matrix:
