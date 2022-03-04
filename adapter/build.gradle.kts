@@ -1,5 +1,10 @@
 import com.android.build.gradle.LibraryExtension
 
+plugins {
+  id(Plugins.androidLibrary)
+  id(Plugins.kotlinAndroid)
+}
+
 setupBase<LibraryExtension>(LibModule.Adapter)
 
 dependencies {

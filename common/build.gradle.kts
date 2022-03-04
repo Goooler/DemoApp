@@ -1,5 +1,10 @@
 import com.android.build.gradle.LibraryExtension
 
+plugins {
+  id(Plugins.androidLibrary)
+  id(Plugins.kotlinAndroid)
+}
+
 setupCommon<LibraryExtension>(LibModule.Common) {
   buildFeatures.buildConfig = true
   productFlavors.all {

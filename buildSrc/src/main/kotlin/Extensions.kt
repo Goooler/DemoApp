@@ -84,12 +84,6 @@ fun BaseExtension.kotlinOptions(block: KotlinJvmOptions.() -> Unit) {
 inline fun <reified T : BaseExtension> Project.setupBase(
   module: Module, crossinline block: T.() -> Unit = {}
 ) {
-  val androidPlugin = when (T::class) {
-    LibraryExtension::class -> Plugins.androidLibrary
-    BaseAppModuleExtension::class -> Plugins.androidApplication
-    else -> ""
-  }
-  applyPlugins(androidPlugin, Plugins.kotlinAndroid)
   extensions.configure<BaseExtension> {
     resourcePrefix = "${module.tag}_"
     namespace = module.id
