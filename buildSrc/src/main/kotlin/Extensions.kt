@@ -147,7 +147,6 @@ inline fun <reified T : BaseExtension> Project.setupBase(
 inline fun <reified T : BaseExtension> Project.setupCommon(
   module: Module, crossinline block: T.() -> Unit = {}
 ) = setupBase<T>(module) {
-  applyPlugins(Plugins.kotlinKapt)
   flavorDimensions("channel")
   productFlavors {
     create("dev")
