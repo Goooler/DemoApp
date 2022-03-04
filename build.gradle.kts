@@ -17,13 +17,6 @@ buildscript {
 }
 
 allprojects {
-  repositories {
-    google()
-    mavenCentral()
-    maven("https://maven.aliyun.com/repository/public")
-    maven("https://jitpack.io")
-  }
-
   apply(plugin = Plugins.ktlint)
   configure<KtlintExtension> {
     version.set(rootProject.libs.versions.ktlint.get())
