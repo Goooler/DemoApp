@@ -7,10 +7,9 @@ plugins {
 setupApp(AppModule.Test)
 
 dependencies {
-  implementations(
-    *Libs.glide,
-    Libs.fastjson,
-    *Libs.gson,
-    Libs.okHttpLogInterceptor
-  )
+  implementation(libs.square.retrofit.gson)
+  implementation(libs.square.okHttp.logInterceptor)
+  implementation(libs.fastjson)
+  implementation(libs.google.gson)
+  implementation(libs.bundles.glide)
 }

@@ -12,12 +12,10 @@ import org.gradle.api.Project
 import org.gradle.api.artifacts.Dependency
 import org.gradle.api.artifacts.dsl.DependencyHandler
 import org.gradle.api.plugins.ExtensionAware
-import org.gradle.kotlin.dsl.ScriptHandlerScope
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.get
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmOptions
 
-const val extraScriptPath = "gradle/extra.gradle.kts"
 const val appVersionName = "1.5.0"
 val appVersionCode = appVersionName.versionCode
 val javaVersion = JavaVersion.VERSION_11
@@ -31,14 +29,6 @@ val String.versionCode: Int
       // 1.2.3 -> 102030
       (unit * 10.0.pow(2 * index + 1)).toInt()
     }
-
-fun ScriptHandlerScope.classpaths(vararg names: Any): Array<Dependency?> =
-  dependencies.config("classpath", *names)
-
-fun DependencyHandler.apis(vararg names: Any): Array<Dependency?> = config("api", *names)
-
-fun DependencyHandler.implementations(vararg names: Any): Array<Dependency?> =
-  config("implementation", *names)
 
 fun VariantDimension.buildConfigField(field: BuildConfigField) {
   if (field.value is Int) {
@@ -120,7 +110,7 @@ inline fun <reified T : BaseExtension> Project.setupCommon(
 fun Project.setupLib(
   module: LibModule, block: LibraryExtension.() -> Unit = {}
 ) = setupCommon<LibraryExtension>(module) {
-  dependencies.implementations(project(LibModule.Common))
+  dependencies.add("implementation", project(LibModule.Common))
   block()
 }
 
@@ -165,7 +155,7 @@ fun Project.setupApp(
         "${module.appName}_${versionName}_${versionCode}_${flavorName}_${buildType.name}.apk"
     }
   }
-  dependencies.implementations(project(LibModule.Common))
+  dependencies.add("implementation", project(LibModule.Common))
   block()
 }
 

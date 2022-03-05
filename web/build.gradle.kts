@@ -9,6 +9,6 @@ setupLib(LibModule.Web) {
 }
 
 dependencies {
-  implementation(Libs.browser)
-  implementation(Libs.webKit)
+  implementation(libs.androidX.browser)
+  implementation(libs.androidX.webKit)
 }

@@ -2,27 +2,24 @@ import dagger.hilt.android.plugin.HiltExtension
 import org.jlleitschuh.gradle.ktlint.KtlintExtension
 
 buildscript {
-  apply(extraScriptPath)
-
   repositories {
     google()
     gradlePluginPortal()
   }
-  classpaths(
-    rootProject.extra["androidPlugin"].toString(),
-    rootProject.extra["kotlinPlugin"].toString(),
-    Libs.hiltPlugin,
-    Libs.ktlintPlugin,
-    Libs.moshiXPlugin
-  )
+
+  dependencies {
+    classpath(libs.gradlePlugin.android)
+    classpath(libs.gradlePlugin.kotlin)
+    classpath(libs.gradlePlugin.hilt)
+    classpath(libs.gradlePlugin.ktlint)
+    classpath(libs.gradlePlugin.moshiX)
+  }
 }
 
 allprojects {
-  apply("$rootDir/$extraScriptPath")
-
   apply(plugin = Plugins.ktlint)
   configure<KtlintExtension> {
-    version.set(ktlintVersion)
+    version.set(rootProject.libs.versions.ktlint.get())
   }
 
   plugins.withId(Plugins.hilt) {
@@ -34,23 +31,22 @@ allprojects {
   configurations.all {
     resolutionStrategy.eachDependency {
       when (requested.group) {
-        "androidx.appcompat" -> useVersion(appCompatVersion)
-        "androidx.activity" -> useVersion(activityVersion)
-        "androidx.collection" -> useVersion(collectionVersion)
-        "androidx.core" -> useVersion(coreVersion)
-        "androidx.fragment" -> useVersion(fragmentVersion)
-        "androidx.lifecycle" -> {
-          if (requested.name != "lifecycle-extensions")
-            useVersion(lifecycleVersion)
-        }
         "com.android.support" -> {
-          if ("multidex" !in requested.name)
-            useVersion(supportVersion)
+          if ("multidex" !in requested.name) useVersion(libs.versions.support.get())
         }
-        "com.squareup.okhttp3" -> useVersion(okHttpVersion)
+        libs.androidX.appCompat.get().module.group -> useVersion(libs.versions.androidX.appCompat.get())
+        libs.androidX.activity.get().module.group -> useVersion(libs.versions.androidX.activity.get())
+        libs.androidX.collection.get().module.group -> useVersion(libs.versions.androidX.collection.get())
+        libs.androidX.core.get().module.group -> useVersion(libs.versions.androidX.core.get())
+        libs.androidX.fragment.get().module.group -> useVersion(libs.versions.androidX.fragment.get())
+        libs.androidX.lifecycle.liveData.get().module.group -> {
+          if (requested.name != "lifecycle-extensions") useVersion(libs.versions.androidX.lifecycle.get())
+        }
+        libs.gradlePlugin.kotlin.get().module.group -> useVersion(libs.versions.kotlin.get())
+        libs.square.okHttp.logInterceptor.get().module.group -> useVersion(libs.versions.square.okHttp.get())
         else -> when {
           requested.name.startsWith("kotlinx-coroutines") ->
-            useVersion(coroutinesVersion)
+            useVersion(libs.versions.coroutines.get())
         }
       }
     }

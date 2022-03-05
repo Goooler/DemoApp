@@ -12,8 +12,8 @@ dependencies {
   implementation(projects.main)
   implementation(projects.web)
 
-  implementation(Libs.hilt)
-  kapt(Libs.hiltCompiler)
+  implementation(libs.androidX.hilt)
+  kapt(libs.androidX.hilt.compiler)
 
-  debugImplementation(Libs.leakCanary)
+  debugImplementation(libs.square.leakCanary)
 }

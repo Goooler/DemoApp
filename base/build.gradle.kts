@@ -9,21 +9,16 @@ plugins {
 setupBase<LibraryExtension>(LibModule.Base)
 
 dependencies {
-  apis(
-    fileTree(mapOf("dir" to "libs", "include" to arrayOf("*.jar", "*.aar"))),
-    // architecture
-    Libs.coroutines,
-    *Libs.lifecycle,
-    Libs.core,
-    Libs.annotation,
+  api(fileTree(mapOf("dir" to "libs", "include" to arrayOf("*.jar", "*.aar"))))
+  api(libs.kotlinX.coroutines)
 
-    // UI
-    Libs.appCompat,
-    Libs.activity,
-    Libs.fragment,
+  api(libs.androidX.core)
+  api(libs.androidX.annotation)
+  api(libs.androidX.appCompat)
+  api(libs.androidX.activity)
+  api(libs.androidX.fragment)
+  api(libs.bundles.androidX.lifecycle)
 
-    // network
-    Libs.okHttp,
-    Libs.retrofit
-  )
+  api(libs.square.okHttp)
+  api(libs.square.retrofit)
 }
