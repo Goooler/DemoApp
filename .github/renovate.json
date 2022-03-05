@@ -4,5 +4,8 @@
   ],
   "extends": [
     "config:base"
+  ],
+  "ignoreDeps": [
+    "com.alibaba:fastjson"
   ]
 }
