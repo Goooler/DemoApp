@@ -1,9 +1,9 @@
 plugins {
-  id(Plugins.androidLibrary)
-  id(Plugins.kotlinAndroid)
-  id(Plugins.kotlinKapt)
-  id(Plugins.hilt)
-  id(Plugins.moshiX)
+  id(libs.plugins.android.library.get().pluginId)
+  id(libs.plugins.kotlin.android.get().pluginId)
+  id(libs.plugins.kotlin.kapt.get().pluginId)
+  alias(libs.plugins.hilt)
+  alias(libs.plugins.moshiX)
 }
 
 setupLib(LibModule.Main) {

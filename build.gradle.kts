@@ -1,28 +1,22 @@
 import dagger.hilt.android.plugin.HiltExtension
 import org.jlleitschuh.gradle.ktlint.KtlintExtension
 
-buildscript {
-  repositories {
-    google()
-    gradlePluginPortal()
-  }
-
-  dependencies {
-    classpath(libs.gradlePlugin.android)
-    classpath(libs.gradlePlugin.kotlin)
-    classpath(libs.gradlePlugin.hilt)
-    classpath(libs.gradlePlugin.ktlint)
-    classpath(libs.gradlePlugin.moshiX)
-  }
+plugins {
+  id(libs.plugins.android.application.get().pluginId) apply false
+  id(libs.plugins.android.library.get().pluginId) apply false
+  id(libs.plugins.kotlin.android.get().pluginId) apply false
+  alias(libs.plugins.hilt) apply false
+  alias(libs.plugins.ktlint) apply false
+  alias(libs.plugins.moshiX) apply false
 }
 
 allprojects {
-  apply(plugin = Plugins.ktlint)
+  apply(plugin = rootProject.libs.plugins.ktlint.get().pluginId)
   configure<KtlintExtension> {
     version.set(rootProject.libs.versions.ktlint.get())
   }
 
-  plugins.withId(Plugins.hilt) {
+  plugins.withId(rootProject.libs.plugins.hilt.get().pluginId) {
     configure<HiltExtension> {
       enableAggregatingTask = true
     }

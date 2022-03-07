@@ -1,7 +1,7 @@
 plugins {
-  id(Plugins.androidLibrary)
-  id(Plugins.kotlinAndroid)
-  id(Plugins.kotlinKapt)
+  id(libs.plugins.android.library.get().pluginId)
+  id(libs.plugins.kotlin.android.get().pluginId)
+  id(libs.plugins.kotlin.kapt.get().pluginId)
 }
 
 setupLib(LibModule.Web) {
