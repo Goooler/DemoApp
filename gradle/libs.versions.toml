@@ -1,4 +1,5 @@
 [versions]
+agp = "7.1.2"
 androidX-activity = "1.4.0"
 androidX-appCompat = "1.4.1"
 androidX-collection = "1.2.0"
@@ -17,13 +18,24 @@ square-okHttp = "4.9.3"
 square-retrofit = "2.9.0"
 srl = "2.0.3"
 support = "28.0.0"
+moshiX = "0.17.0"
+ktlintGradle = "10.2.1"
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+android-library = { id = "com.android.library", version.ref = "agp" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "androidX-hilt" }
+ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlintGradle" }
+moshiX = { id = "dev.zacsweers.moshix", version.ref = "moshiX" }
 
 [libraries]
-gradlePlugin-android = "com.android.tools.build:gradle:7.1.2"
+gradlePlugin-android = { module = "com.android.tools.build:gradle", version.ref = "agp" }
 gradlePlugin-hilt = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "androidX-hilt" }
 gradlePlugin-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
-gradlePlugin-ktlint = "org.jlleitschuh.gradle:ktlint-gradle:10.2.1"
-gradlePlugin-moshiX = "dev.zacsweers.moshix:dev.zacsweers.moshix.gradle.plugin:0.17.0"
+gradlePlugin-ktlint = { module = "org.jlleitschuh.gradle:ktlint-gradle", version.ref = "ktlintGradle" }
+gradlePlugin-moshiX = { module = "dev.zacsweers.moshix:dev.zacsweers.moshix.gradle.plugin", version.ref = "moshiX" }
 
 kotlinX-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
 kotlin-junit5 = { module = "org.jetbrains.kotlin:kotlin-test-junit5", version.ref = "kotlin" }
