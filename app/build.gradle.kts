@@ -2,7 +2,7 @@ plugins {
   id(libs.plugins.android.application.get().pluginId)
   id(libs.plugins.kotlin.android.get().pluginId)
   id(libs.plugins.kotlin.kapt.get().pluginId)
-  id(libs.plugins.hilt.get().pluginId)
+  alias(libs.plugins.hilt)
 }
 
 setupApp(AppModule.App)
