@@ -17,12 +17,12 @@ buildscript {
 }
 
 allprojects {
-  apply(plugin = Plugins.ktlint)
+  apply(plugin = rootProject.libs.plugins.ktlint.get().pluginId)
   configure<KtlintExtension> {
     version.set(rootProject.libs.versions.ktlint.get())
   }
 
-  plugins.withId(Plugins.hilt) {
+  plugins.withId(rootProject.libs.plugins.hilt.get().pluginId) {
     configure<HiltExtension> {
       enableAggregatingTask = true
     }
