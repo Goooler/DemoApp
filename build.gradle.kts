@@ -1,19 +1,13 @@
 import dagger.hilt.android.plugin.HiltExtension
 import org.jlleitschuh.gradle.ktlint.KtlintExtension
 
-buildscript {
-  repositories {
-    google()
-    gradlePluginPortal()
-  }
-
-  dependencies {
-    classpath(libs.gradlePlugin.android)
-    classpath(libs.gradlePlugin.kotlin)
-    classpath(libs.gradlePlugin.hilt)
-    classpath(libs.gradlePlugin.ktlint)
-    classpath(libs.gradlePlugin.moshiX)
-  }
+plugins {
+  id(libs.plugins.android.application.get().pluginId) apply false
+  id(libs.plugins.android.library.get().pluginId) apply false
+  id(libs.plugins.kotlin.android.get().pluginId) apply false
+  alias(libs.plugins.hilt) apply false
+  alias(libs.plugins.ktlint) apply false
+  alias(libs.plugins.moshiX) apply false
 }
 
 allprojects {
