@@ -3,7 +3,7 @@ name: CI
 on:
   push:
     branches:
-      - kotlin
+      - trunk
     paths-ignore:
       - '.idea/**'
       - '.gitattributes'
