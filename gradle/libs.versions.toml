@@ -32,10 +32,7 @@ moshiX = { id = "dev.zacsweers.moshix", version.ref = "moshiX" }
 
 [libraries]
 gradlePlugin-android = { module = "com.android.tools.build:gradle", version.ref = "agp" }
-gradlePlugin-hilt = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "androidX-hilt" }
 gradlePlugin-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
-gradlePlugin-ktlint = { module = "org.jlleitschuh.gradle:ktlint-gradle", version.ref = "ktlintGradle" }
-gradlePlugin-moshiX = { module = "dev.zacsweers.moshix:dev.zacsweers.moshix.gradle.plugin", version.ref = "moshiX" }
 
 kotlinX-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
 kotlin-junit5 = { module = "org.jetbrains.kotlin:kotlin-test-junit5", version.ref = "kotlin" }
