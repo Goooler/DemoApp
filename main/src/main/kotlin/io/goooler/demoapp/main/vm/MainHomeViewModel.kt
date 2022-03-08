@@ -45,12 +45,12 @@ class MainHomeViewModel @Inject constructor(private val repository: MainCommonRe
   }
 
   private fun startCountDown(
-    countDownTime: Duration = 30.seconds,
+    timeout: Duration = 30.seconds,
     callback: (CountDownState) -> Unit = {}
   ) {
     countdownJob = viewModelScope.launch {
       flow {
-        (countDownTime.inWholeSeconds downTo Duration.ZERO.inWholeSeconds).forEach {
+        (timeout.inWholeSeconds downTo Duration.ZERO.inWholeSeconds).forEach {
           delay(1000)
           emit("正在测试中\n${it}s")
         }
