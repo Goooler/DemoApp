@@ -9,6 +9,8 @@ import io.goooler.demoapp.main.bean.MainRepoListBean
 import io.goooler.demoapp.main.repository.MainCommonRepository
 import java.util.concurrent.CancellationException
 import javax.inject.Inject
+import kotlin.time.Duration
+import kotlin.time.Duration.Companion.seconds
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -43,13 +45,12 @@ class MainHomeViewModel @Inject constructor(private val repository: MainCommonRe
   }
 
   private fun startCountDown(
-    countDownTime: Second = Second(30),
+    countDownTime: Duration = 30.seconds,
     callback: (CountDownState) -> Unit = {}
   ) {
-    val timeEnd = Second(0)
     countdownJob = viewModelScope.launch {
       flow {
-        (countDownTime.value downTo timeEnd.value).forEach {
+        (countDownTime.inWholeSeconds downTo Duration.ZERO.inWholeSeconds).forEach {
           delay(1000)
           emit("正在测试中\n${it}s")
         }
@@ -113,9 +114,6 @@ class MainHomeViewModel @Inject constructor(private val repository: MainCommonRe
   enum class CountDownState {
     Start, End, Cancel
   }
-
-  @JvmInline
-  value class Second(val value: Int)
 
   companion object {
     const val CANCEL_MANUALLY = "cancelManually"
