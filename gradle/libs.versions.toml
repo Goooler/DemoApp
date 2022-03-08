@@ -14,8 +14,6 @@ coroutines = "1.6.0"
 glide = "4.13.1"
 kotlin = "1.6.10"
 ktlint = "0.44.0"
-ktlintGradle = "10.2.1"
-moshiX = "0.17.0"
 square-okHttp = "4.9.3"
 square-retrofit = "2.9.0"
 srl = "2.0.3"
@@ -27,8 +25,8 @@ android-library = { id = "com.android.library", version.ref = "agp" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "androidX-hilt" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
-ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlintGradle" }
-moshiX = { id = "dev.zacsweers.moshix", version.ref = "moshiX" }
+ktlint = { id = "org.jlleitschuh.gradle.ktlint", version = "10.2.1" }
+moshiX = { id = "dev.zacsweers.moshix", version = "0.17.0" }
 
 [libraries]
 gradlePlugin-android = { module = "com.android.tools.build:gradle", version.ref = "agp" }
