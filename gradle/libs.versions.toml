@@ -50,7 +50,7 @@ androidX-hilt-compiler = { module = "com.google.dagger:hilt-android-compiler", v
 androidX-lifecycle-liveData = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "androidX-lifecycle" }
 androidX-lifecycle-service = { module = "androidx.lifecycle:lifecycle-service", version.ref = "androidX-lifecycle" }
 androidX-lifecycle-viewModel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "androidX-lifecycle" }
-androidX-paging = "androidx.paging:paging-runtime:3.1.0"
+androidX-paging = "androidx.paging:paging-runtime:3.1.1"
 androidX-recyclerView = "androidx.recyclerview:recyclerview:1.2.1"
 androidX-room-compiler = { module = "androidx.room:room-compiler", version.ref = "androidX-room" }
 androidX-room-ktx = { module = "androidx.room:room-ktx", version.ref = "androidX-room" }
