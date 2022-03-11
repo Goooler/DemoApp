@@ -58,16 +58,11 @@ inline fun <reified T : BaseExtension> Project.setupBase(
     compileOptions.setDefaultJavaVersion(javaVersion)
     (this as ExtensionAware).extensions.configure<KotlinJvmOptions> {
       jvmTarget = javaVersion.toString()
-      freeCompilerArgs = listOf(
-        // https://kotlinlang.org/docs/compiler-reference.html#progressive
+      // https://youtrack.jetbrains.com/issue/KT-41985
+      freeCompilerArgs += listOf(
         "-progressive",
-        "-Xopt-in=kotlin.RequiresOptIn",
-        // Generate native Java 8 default interface methods.
-        "-Xjvm-default=all",
-        // Generate smaller bytecode by not generating runtime not-null assertions.
-        "-Xno-call-assertions",
-        "-Xno-param-assertions",
-        "-Xno-receiver-assertions"
+        "-opt-in=kotlin.RequiresOptIn",
+        "-Xjvm-default=all"
       )
     }
     packagingOptions.resources.excludes += setOf(
