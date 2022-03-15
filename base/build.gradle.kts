@@ -21,4 +21,6 @@ dependencies {
 
   api(libs.square.okHttp)
   api(libs.square.retrofit)
+
+  testImplementation(libs.kotlin.junit5)
 }
