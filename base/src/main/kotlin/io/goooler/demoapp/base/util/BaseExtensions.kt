@@ -113,6 +113,13 @@ fun <T> MutableLiveData<T>.asLiveData(): LiveData<T> = this
 
 // ---------------------CharSequence-------------------------------//
 
+operator fun String.times(num: Int): String {
+  val origin = this
+  return buildString {
+    for (i in 1..num) append(origin)
+  }
+}
+
 fun String.fromHtml(): Spanned = parseAsHtml()
 
 fun String.toMimeType(): String = URLConnection.getFileNameMap().getContentTypeFor(this) ?: this
