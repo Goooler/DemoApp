@@ -10,6 +10,7 @@ setupApp(AppModule.App)
 dependencies {
   implementation(projects.login)
   implementation(projects.main)
+  implementation(projects.detail)
   implementation(projects.web)
 
   implementation(libs.androidX.hilt)

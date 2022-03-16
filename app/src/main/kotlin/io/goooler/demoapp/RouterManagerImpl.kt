@@ -3,6 +3,7 @@ package io.goooler.demoapp
 import android.content.Context
 import android.content.Intent
 import io.goooler.demoapp.common.router.RouterManager
+import io.goooler.demoapp.detail.ui.RepoDetailActivity
 import io.goooler.demoapp.login.ui.LoginActivity
 import io.goooler.demoapp.main.ui.AudioPlayActivity
 import io.goooler.demoapp.main.ui.MainActivity
@@ -28,6 +29,11 @@ object RouterManagerImpl : RouterManager {
 
   override fun goMain(context: Context) {
     Intent(context, MainActivity::class.java)
+      .let(context::startActivity)
+  }
+
+  override fun goRepoDetail(context: Context) {
+    Intent(context, RepoDetailActivity::class.java)
       .let(context::startActivity)
   }
 

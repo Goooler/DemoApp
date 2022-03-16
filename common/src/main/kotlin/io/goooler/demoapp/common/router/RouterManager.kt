@@ -10,6 +10,8 @@ interface RouterManager {
 
   fun goMain(context: Context)
 
+  fun goRepoDetail(context: Context)
+
   fun goAudioPlay(context: Context)
 
   fun goWeb(context: Context, url: String, useChrome: Boolean = false)
@@ -31,6 +33,10 @@ interface RouterManager {
 
     override fun goMain(context: Context) {
       impl.goMain(context)
+    }
+
+    override fun goRepoDetail(context: Context) {
+      impl.goRepoDetail(context)
     }
 
     override fun goAudioPlay(context: Context) {
