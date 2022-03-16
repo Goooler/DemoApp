@@ -1,5 +1,6 @@
 package io.goooler.demoapp.detail.vm
 
+import androidx.lifecycle.MutableLiveData
 import io.goooler.demoapp.base.core.BaseViewModel
 import io.goooler.demoapp.common.network.RetrofitHelper
 import io.goooler.demoapp.detail.model.RepoDetailModel
@@ -9,9 +10,11 @@ class DetailViewModel : BaseViewModel() {
 
   private val repository = DetailRepository(RetrofitHelper.create())
 
-  suspend fun getRepoDetail(owner: String, repo: String): RepoDetailModel {
-    return repository.getRepoDetail(owner, repo).let {
-      RepoDetailModel(
+  val repoDetailModel: MutableLiveData<RepoDetailModel> = MutableLiveData()
+
+  suspend fun getRepoDetail(owner: String = "Goooler", repo: String = "DemoApp") {
+    repository.getRepoDetail(owner, repo).let {
+      repoDetailModel.value = RepoDetailModel(
         it.description,
         it.license.name,
         it.starsCount,
