@@ -10,7 +10,7 @@ class DetailViewModel : BaseViewModel() {
 
   private val repository = DetailRepository(RetrofitHelper.create())
 
-  val repoDetailModel: MutableLiveData<RepoDetailModel> = MutableLiveData()
+  val repoDetailModel: MutableLiveData<RepoDetailModel> = MutableLiveData(RepoDetailModel())
 
   suspend fun getRepoDetail(owner: String = "Goooler", repo: String = "DemoApp") {
     repository.getRepoDetail(owner, repo).let {
