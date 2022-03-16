@@ -3,6 +3,7 @@ package io.goooler.demoapp.detail.ui
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -19,11 +20,16 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.lifecycleScope
 import io.goooler.demoapp.base.core.BaseActivity
+import io.goooler.demoapp.common.util.showToast
 import io.goooler.demoapp.detail.model.RepoDetailModel
 import io.goooler.demoapp.detail.vm.DetailViewModel
 import kotlinx.coroutines.launch
@@ -47,6 +53,8 @@ class RepoDetailActivity : BaseActivity() {
 
 @Composable
 fun DetailPage(model: RepoDetailModel) {
+  var isDescExpanded by remember { mutableStateOf(false) }
+
   MaterialTheme {
     Column(modifier = Modifier.padding(8.dp)) {
       Text(
@@ -57,11 +65,17 @@ fun DetailPage(model: RepoDetailModel) {
       Spacer(modifier = Modifier.height(5.dp))
       Text(
         text = model.description,
-        style = MaterialTheme.typography.body1
+        style = MaterialTheme.typography.body1,
+        maxLines = if (isDescExpanded) Int.MAX_VALUE else 2,
+        modifier = Modifier.clickable {
+          isDescExpanded = !isDescExpanded
+        }
       )
       Spacer(modifier = Modifier.height(5.dp))
       Row {
-        Button(onClick = {}) {
+        Button(onClick = {
+          "All ${model.starsCount} stars".showToast()
+        }) {
           Icon(
             Icons.Filled.Star,
             contentDescription = "Star",
@@ -71,7 +85,9 @@ fun DetailPage(model: RepoDetailModel) {
           Text(model.starsCount.toString())
         }
         Spacer(modifier = Modifier.width(20.dp))
-        Button(onClick = {}) {
+        Button(onClick = {
+          "All ${model.forksCount} forks".showToast()
+        }) {
           Icon(
             Icons.Filled.Share,
             contentDescription = "Fork",
