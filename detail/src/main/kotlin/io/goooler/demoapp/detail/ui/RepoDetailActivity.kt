@@ -28,12 +28,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.lifecycleScope
 import io.goooler.demoapp.base.core.BaseActivity
 import io.goooler.demoapp.common.util.showToast
 import io.goooler.demoapp.detail.model.RepoDetailModel
 import io.goooler.demoapp.detail.vm.DetailViewModel
-import kotlinx.coroutines.launch
 
 class RepoDetailActivity : BaseActivity() {
 
@@ -42,9 +40,7 @@ class RepoDetailActivity : BaseActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 
-    lifecycleScope.launch {
-      vm.getRepoDetail()
-    }
+    vm.getRepoDetail()
 
     setContent {
       val model = vm.repoDetailModel.observeAsState().value ?: throw IllegalArgumentException(
