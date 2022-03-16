@@ -113,7 +113,10 @@ fun <T> MutableLiveData<T>.asLiveData(): LiveData<T> = this
 
 // ---------------------CharSequence-------------------------------//
 
-operator fun String.times(num: Int): String {
+operator fun String.times(@IntRange(from = 0) num: Int): String {
+  require(num >= 0) {
+    "Param num should >= 0"
+  }
   val origin = this
   return buildString {
     for (i in 1..num) append(origin)
