@@ -14,6 +14,7 @@ enum class LibModule(override val tag: String, override val id: String) : Module
   //---------------------biz-------------------------------//
   Login("login", "io.goooler.demoapp.login"),
   Main("main", "io.goooler.demoapp.main"),
+  Detail("detail", "io.goooler.demoapp.detail"),
   Web("web", "io.goooler.demoapp.web"),
 
   //---------------------func-------------------------------//
