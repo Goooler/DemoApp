@@ -1,6 +1,7 @@
 package io.goooler.demoapp.detail.model
 
 class RepoDetailModel(
+  val fullName: String = "",
   val description: String = "",
   val license: String = "",
   val starsCount: Int = 0,

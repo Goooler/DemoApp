@@ -15,6 +15,7 @@ class DetailViewModel : BaseViewModel() {
   suspend fun getRepoDetail(owner: String = "Goooler", repo: String = "DemoApp") {
     repository.getRepoDetail(owner, repo).let {
       repoDetailModel.value = RepoDetailModel(
+        it.fullName,
         it.description,
         it.license.name,
         it.starsCount,
