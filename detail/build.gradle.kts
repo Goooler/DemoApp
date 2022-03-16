@@ -1,6 +1,7 @@
 plugins {
   id(libs.plugins.android.library.get().pluginId)
   id(libs.plugins.kotlin.android.get().pluginId)
+  alias(libs.plugins.moshiX)
 }
 
 setupLib(LibModule.Detail) {
@@ -11,4 +12,6 @@ setupLib(LibModule.Detail) {
 dependencies {
   implementation(libs.androidX.activity.compose)
   implementation(libs.bundles.androidX.compose)
+
+  implementation(libs.square.moshi)
 }
