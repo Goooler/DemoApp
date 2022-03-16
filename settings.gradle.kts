@@ -22,6 +22,7 @@ include(
   ":common",
   ":login",
   ":main",
+  ":detail",
   ":web",
   ":adapter",
   ":test"
