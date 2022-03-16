@@ -22,8 +22,8 @@ class DetailViewModel : BaseViewModel() {
       repository.getRepoDetail(fullName).let {
         repoDetail = RepoDetailModel(
           it.fullName,
-          it.description,
-          it.license.name,
+          it.description.orEmpty(),
+          it.license?.name.orEmpty(),
           it.starsCount,
           it.forksCount,
           it.openIssuesCount
