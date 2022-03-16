@@ -48,7 +48,6 @@ inline fun <reified T : BaseExtension> Project.setupBase(
     defaultConfig {
       minSdk = 21
       vectorDrawables.useSupportLibrary = true
-      ndk.abiFilters += setOf("arm64-v8a")
       testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     sourceSets.configureEach {
