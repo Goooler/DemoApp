@@ -29,7 +29,7 @@ allprojects {
           if ("multidex" !in requested.name) useVersion(libs.versions.support.get())
         }
         libs.androidX.appCompat.get().module.group -> useVersion(libs.versions.androidX.appCompat.get())
-        libs.androidX.activity.get().module.group -> useVersion(libs.versions.androidX.activity.get())
+        libs.androidX.activity.compose.get().module.group -> useVersion(libs.versions.androidX.activity.get())
         libs.androidX.collection.get().module.group -> useVersion(libs.versions.androidX.collection.get())
         libs.androidX.core.get().module.group -> useVersion(libs.versions.androidX.core.get())
         libs.androidX.fragment.get().module.group -> useVersion(libs.versions.androidX.fragment.get())
