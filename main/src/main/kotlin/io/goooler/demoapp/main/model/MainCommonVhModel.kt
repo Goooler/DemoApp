@@ -6,7 +6,8 @@ import io.goooler.demoapp.main.R
 
 sealed class MainCommonVhModel : IDiffVhModelType, ISpanSize {
 
-  class Repo(val logoUrl: String?, val content: String?) : MainCommonVhModel() {
+  class Repo(val logoUrl: String?, val content: String?, val fullName: String = "") :
+    MainCommonVhModel() {
 
     override val viewType: Int = R.layout.main_common_rv_item
 
@@ -18,7 +19,7 @@ sealed class MainCommonVhModel : IDiffVhModelType, ISpanSize {
     override fun isContentTheSame(that: IDiffVhModelType): Boolean = true
 
     interface OnEventListener {
-      fun onContentClick(content: String) {}
+      fun onContentClick(fullName: String) {}
       fun onItemClick(item: MainCommonVhModel) {}
     }
   }

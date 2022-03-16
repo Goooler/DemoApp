@@ -40,13 +40,17 @@ class RepoDetailActivity : BaseActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 
-    vm.getRepoDetail()
+    intent.getStringExtra(FULL_NAME)?.let(vm::getRepoDetail)
 
     setContent {
       val model = vm.repoDetailModel.observeAsState().value
         ?: throw IllegalArgumentException("RepoDetailModel has not been initialized")
       DetailPage(model, vm::onFork)
     }
+  }
+
+  companion object {
+    const val FULL_NAME = "fullName"
   }
 }
 
