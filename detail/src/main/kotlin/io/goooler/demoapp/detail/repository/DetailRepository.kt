@@ -5,6 +5,6 @@ import io.goooler.demoapp.detail.bean.RepoDetailBean
 
 class DetailRepository(private val api: DetailApi) {
 
-  suspend fun getRepoDetail(owner: String, repo: String): RepoDetailBean =
-    api.getRepoDetail(owner, repo)
+  suspend fun getRepoDetail(fullName: String): RepoDetailBean =
+    api.getRepoDetail(fullName)
 }

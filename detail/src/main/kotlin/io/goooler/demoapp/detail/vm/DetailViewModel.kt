@@ -17,9 +17,9 @@ class DetailViewModel : BaseViewModel() {
 
   val repoDetailModel: LiveData<RepoDetailModel> = _repoDetailModel
 
-  fun getRepoDetail(owner: String = "Goooler", repo: String = "DemoApp") {
+  fun getRepoDetail() {
     viewModelScope.launch {
-      repository.getRepoDetail(owner, repo).let {
+      repository.getRepoDetail("Goooler/DemoApp").let {
         repoDetail = RepoDetailModel(
           it.fullName,
           it.description,

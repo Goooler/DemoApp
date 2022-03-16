@@ -6,9 +6,8 @@ import retrofit2.http.Path
 
 interface DetailApi {
 
-  @GET("https://api.github.com/repos/{owner}/{repo}")
+  @GET("https://api.github.com/repos/{fullName}")
   suspend fun getRepoDetail(
-    @Path("owner") owner: String,
-    @Path("repo") repo: String
+    @Path("fullName") fullName: String
   ): RepoDetailBean
 }
