@@ -43,9 +43,8 @@ class RepoDetailActivity : BaseActivity() {
     vm.getRepoDetail()
 
     setContent {
-      val model = vm.repoDetailModel.observeAsState().value ?: throw IllegalArgumentException(
-        "RepoDetailModel has not been initialized"
-      )
+      val model = vm.repoDetailModel.observeAsState().value
+        ?: throw IllegalArgumentException("RepoDetailModel has not been initialized")
       DetailPage(model, vm::onFork)
     }
   }
