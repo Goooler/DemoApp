@@ -50,13 +50,13 @@ class RepoDetailActivity : BaseActivity() {
       val model = vm.repoDetailModel.observeAsState().value ?: throw IllegalArgumentException(
         "RepoDetailModel has not been initialized"
       )
-      DetailPage(model)
+      DetailPage(model, vm::onFork)
     }
   }
 }
 
 @Composable
-fun DetailPage(model: RepoDetailModel) {
+fun DetailPage(model: RepoDetailModel, onForkClick: () -> Unit) {
   var isDescExpanded by remember { mutableStateOf(false) }
 
   MaterialTheme {
@@ -89,9 +89,7 @@ fun DetailPage(model: RepoDetailModel) {
           Text(model.starsCount.toString())
         }
         Spacer(modifier = Modifier.width(20.dp))
-        Button(onClick = {
-          "All ${model.forksCount} forks".showToast()
-        }) {
+        Button(onClick = onForkClick) {
           Icon(
             Icons.Filled.Share,
             contentDescription = "Fork",
@@ -117,5 +115,5 @@ fun DetailPagePreview() {
     1,
     2
   )
-  DetailPage(model)
+  DetailPage(model) {}
 }

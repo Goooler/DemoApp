@@ -9,12 +9,12 @@ import io.goooler.demoapp.detail.repository.DetailRepository
 class DetailViewModel : BaseViewModel() {
 
   private val repository = DetailRepository(RetrofitHelper.create())
-
+  private lateinit var _repoDetailModel: RepoDetailModel
   val repoDetailModel: MutableLiveData<RepoDetailModel> = MutableLiveData(RepoDetailModel())
 
   suspend fun getRepoDetail(owner: String = "Goooler", repo: String = "DemoApp") {
     repository.getRepoDetail(owner, repo).let {
-      repoDetailModel.value = RepoDetailModel(
+      _repoDetailModel = RepoDetailModel(
         it.fullName,
         it.description,
         it.license.name,
@@ -23,5 +23,12 @@ class DetailViewModel : BaseViewModel() {
         it.openIssuesCount
       )
     }
+    repoDetailModel.value = _repoDetailModel
+  }
+
+  fun onFork() {
+    _repoDetailModel = _repoDetailModel.copy()
+    _repoDetailModel.forksCount++
+    repoDetailModel.value = _repoDetailModel
   }
 }
