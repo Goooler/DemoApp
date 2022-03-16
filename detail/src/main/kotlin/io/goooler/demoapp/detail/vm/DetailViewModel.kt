@@ -1,5 +1,6 @@
 package io.goooler.demoapp.detail.vm
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import io.goooler.demoapp.base.core.BaseViewModel
@@ -11,13 +12,15 @@ import kotlinx.coroutines.launch
 class DetailViewModel : BaseViewModel() {
 
   private val repository = DetailRepository(RetrofitHelper.create())
-  private lateinit var _repoDetailModel: RepoDetailModel
-  val repoDetailModel: MutableLiveData<RepoDetailModel> = MutableLiveData(RepoDetailModel())
+  private var repoDetail = RepoDetailModel()
+  private val _repoDetailModel = MutableLiveData(repoDetail)
+
+  val repoDetailModel: LiveData<RepoDetailModel> = _repoDetailModel
 
   fun getRepoDetail(owner: String = "Goooler", repo: String = "DemoApp") {
     viewModelScope.launch {
       repository.getRepoDetail(owner, repo).let {
-        _repoDetailModel = RepoDetailModel(
+        repoDetail = RepoDetailModel(
           it.fullName,
           it.description,
           it.license.name,
@@ -26,13 +29,13 @@ class DetailViewModel : BaseViewModel() {
           it.openIssuesCount
         )
       }
-      repoDetailModel.value = _repoDetailModel
+      _repoDetailModel.value = repoDetail
     }
   }
 
   fun onFork() {
-    _repoDetailModel = _repoDetailModel.copy()
-    _repoDetailModel.forksCount++
-    repoDetailModel.value = _repoDetailModel
+    repoDetail = repoDetail.copy()
+    repoDetail.forksCount++
+    _repoDetailModel.value = repoDetail
   }
 }
