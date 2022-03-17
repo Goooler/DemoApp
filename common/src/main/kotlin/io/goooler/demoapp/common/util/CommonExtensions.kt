@@ -3,6 +3,7 @@
 
 package io.goooler.demoapp.common.util
 
+import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
@@ -14,6 +15,7 @@ import androidx.annotation.ColorRes
 import androidx.annotation.Dimension
 import androidx.annotation.DrawableRes
 import androidx.annotation.MainThread
+import androidx.annotation.PluralsRes
 import androidx.annotation.Px
 import androidx.annotation.StringRes
 import androidx.databinding.ViewDataBinding
@@ -217,6 +219,13 @@ fun @receiver:ColorRes Int.getColor(): Int = try {
 
 fun @receiver:StringRes Int.getString(): String? = try {
   StringUtils.getString(this)
+} catch (e: Exception) {
+  e.printStackTrace()
+  null
+}
+
+fun @receiver:PluralsRes Int.getQuantityString(num: Int): String? = try {
+  Resources.getSystem().getQuantityString(this, num, num)
 } catch (e: Exception) {
   e.printStackTrace()
   null
