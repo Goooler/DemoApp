@@ -102,7 +102,8 @@ inline val currentThreadName: String get() = Thread.currentThread().name
 
 inline val isMainThread: Boolean get() = Looper.getMainLooper() == Looper.myLooper()
 
-fun <T> unsafeLazy(initializer: () -> T): Lazy<T> = lazy(LazyThreadSafetyMode.NONE, initializer)
+fun <T : Any> unsafeLazy(initializer: () -> T): Lazy<T> =
+  lazy(LazyThreadSafetyMode.NONE, initializer)
 
 fun <T> MutableLiveData<T>.asLiveData(): LiveData<T> = this
 
