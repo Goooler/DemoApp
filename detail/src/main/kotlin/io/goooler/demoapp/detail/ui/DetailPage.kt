@@ -39,8 +39,10 @@ fun DetailPageWithSwipeRefresh(
   model: RepoDetailModel,
   onForkClick: () -> Unit
 ) {
-  SwipeRefresh(state = rememberSwipeRefreshState(isRefreshing), onRefresh = onRefresh) {
-    DetailPage(model, onForkClick)
+  MaterialTheme {
+    SwipeRefresh(state = rememberSwipeRefreshState(isRefreshing), onRefresh = onRefresh) {
+      DetailPage(model, onForkClick)
+    }
   }
 }
 
@@ -48,53 +50,51 @@ fun DetailPageWithSwipeRefresh(
 fun DetailPage(model: RepoDetailModel, onForkClick: () -> Unit) {
   var isDescExpanded by remember { mutableStateOf(false) }
 
-  MaterialTheme {
-    Column(
-      modifier = Modifier
-        .padding(8.dp)
-        .fillMaxSize()
-        .verticalScroll(rememberScrollState())
-    ) {
-      Text(
-        text = model.fullName,
-        style = MaterialTheme.typography.h5,
-        maxLines = 1
-      )
-      Spacer(modifier = Modifier.height(5.dp))
-      Text(
-        text = model.description,
-        style = MaterialTheme.typography.body1,
-        maxLines = if (isDescExpanded) Int.MAX_VALUE else 2,
-        modifier = Modifier.clickable {
-          isDescExpanded = !isDescExpanded
-        }
-      )
-      Spacer(modifier = Modifier.height(5.dp))
-      Row {
-        Button(onClick = {
-          "All ${model.starsCount} stars".showToast()
-        }) {
-          Icon(
-            Icons.Filled.Star,
-            contentDescription = "Star",
-            modifier = Modifier.size(ButtonDefaults.IconSize)
-          )
-          Spacer(Modifier.size(ButtonDefaults.IconSpacing))
-          Text(model.starsCount.toString())
-        }
-        Spacer(modifier = Modifier.width(20.dp))
-        Button(onClick = onForkClick) {
-          Icon(
-            Icons.Filled.Share,
-            contentDescription = "Fork",
-            modifier = Modifier.size(ButtonDefaults.IconSize)
-          )
-          Spacer(Modifier.size(ButtonDefaults.IconSpacing))
-          Text(model.forksCount.toString())
-        }
+  Column(
+    modifier = Modifier
+      .padding(8.dp)
+      .fillMaxSize()
+      .verticalScroll(rememberScrollState())
+  ) {
+    Text(
+      text = model.fullName,
+      style = MaterialTheme.typography.h5,
+      maxLines = 1
+    )
+    Spacer(modifier = Modifier.height(5.dp))
+    Text(
+      text = model.description,
+      style = MaterialTheme.typography.body1,
+      maxLines = if (isDescExpanded) Int.MAX_VALUE else 2,
+      modifier = Modifier.clickable {
+        isDescExpanded = !isDescExpanded
       }
-      Spacer(modifier = Modifier.height(5.dp))
+    )
+    Spacer(modifier = Modifier.height(5.dp))
+    Row {
+      Button(onClick = {
+        "All ${model.starsCount} stars".showToast()
+      }) {
+        Icon(
+          Icons.Filled.Star,
+          contentDescription = "Star",
+          modifier = Modifier.size(ButtonDefaults.IconSize)
+        )
+        Spacer(Modifier.size(ButtonDefaults.IconSpacing))
+        Text(model.starsCount.toString())
+      }
+      Spacer(modifier = Modifier.width(20.dp))
+      Button(onClick = onForkClick) {
+        Icon(
+          Icons.Filled.Share,
+          contentDescription = "Fork",
+          modifier = Modifier.size(ButtonDefaults.IconSize)
+        )
+        Spacer(Modifier.size(ButtonDefaults.IconSpacing))
+        Text(model.forksCount.toString())
+      }
     }
+    Spacer(modifier = Modifier.height(5.dp))
   }
 }
 
