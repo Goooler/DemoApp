@@ -32,7 +32,6 @@ import androidx.core.os.bundleOf
 import androidx.core.text.parseAsHtml
 import androidx.core.text.toSpannable
 import androidx.databinding.DataBindingUtil
-import androidx.databinding.ObservableField
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -91,10 +90,6 @@ typealias MutableStringLiveData = MutableLiveData<String?>
 
 typealias MutableListLiveData<T> = MutableLiveData<List<T>>
 
-typealias ObservableString = ObservableField<String?>
-
-typealias ObservableList<T> = ObservableField<List<T>>
-
 typealias ParamMap = HashMap<String, Any>
 
 // ---------------------Any-------------------------------//
@@ -107,7 +102,8 @@ inline val currentThreadName: String get() = Thread.currentThread().name
 
 inline val isMainThread: Boolean get() = Looper.getMainLooper() == Looper.myLooper()
 
-fun <T> unsafeLazy(initializer: () -> T): Lazy<T> = lazy(LazyThreadSafetyMode.NONE, initializer)
+fun <T : Any> unsafeLazy(initializer: () -> T): Lazy<T> =
+  lazy(LazyThreadSafetyMode.NONE, initializer)
 
 fun <T> MutableLiveData<T>.asLiveData(): LiveData<T> = this
 
