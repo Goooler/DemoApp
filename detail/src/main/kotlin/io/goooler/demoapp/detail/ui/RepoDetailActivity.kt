@@ -17,13 +17,13 @@ class RepoDetailActivity : BaseActivity() {
 
     intent.getStringExtra(FULL_NAME)?.let {
       vm.fullName = it
+      vm.refresh()
     }
 
     setContent {
       val model = vm.repoDetailModel.observeAsState().value
         ?: throw IllegalArgumentException("RepoDetailModel has not been initialized")
-      // Auto refresh
-      val isRefreshing by vm.isRefreshing.observeAsState(true)
+      val isRefreshing by vm.isRefreshing.observeAsState(false)
       DetailPageWithSwipeRefresh(isRefreshing, vm::refresh, model, vm::fork)
     }
   }
