@@ -28,6 +28,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import io.goooler.demoapp.base.core.BaseActivity
 import io.goooler.demoapp.common.util.showToast
 import io.goooler.demoapp.detail.model.RepoDetailModel
@@ -45,12 +47,25 @@ class RepoDetailActivity : BaseActivity() {
     setContent {
       val model = vm.repoDetailModel.observeAsState().value
         ?: throw IllegalArgumentException("RepoDetailModel has not been initialized")
-      DetailPage(model, vm::onFork)
+      val isRefreshing by vm.isRefreshing.observeAsState(false)
+      DetailPageWithSwipeRefresh(isRefreshing, vm::refresh, model, vm::fork)
     }
   }
 
   companion object {
     const val FULL_NAME = "fullName"
+  }
+}
+
+@Composable
+fun DetailPageWithSwipeRefresh(
+  isRefreshing: Boolean,
+  onRefresh: () -> Unit,
+  model: RepoDetailModel,
+  onForkClick: () -> Unit
+) {
+  SwipeRefresh(state = rememberSwipeRefreshState(isRefreshing), onRefresh = onRefresh) {
+    DetailPage(model, onForkClick)
   }
 }
 
