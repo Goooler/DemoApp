@@ -1,8 +1,8 @@
-package io.goooler.demoapp.test.util
+package io.goooler.demoapp.obsolete.util
 
 import io.goooler.demoapp.common.network.HttpResponse
-import io.goooler.demoapp.test.network.exception.ResponseException
-import io.goooler.demoapp.test.network.exception.toResponseException
+import io.goooler.demoapp.obsolete.network.exception.ResponseException
+import io.goooler.demoapp.obsolete.network.exception.toResponseException
 
 @Throws(ResponseException::class)
 fun <T> HttpResponse<T>.checkCodeWithException(): T? {

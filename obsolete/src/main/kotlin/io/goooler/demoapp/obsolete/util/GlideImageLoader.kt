@@ -1,6 +1,6 @@
 @file:Suppress("unused", "MemberVisibilityCanBePrivate")
 
-package io.goooler.demoapp.test.util
+package io.goooler.demoapp.obsolete.util
 
 import android.content.Context
 import android.graphics.drawable.Drawable

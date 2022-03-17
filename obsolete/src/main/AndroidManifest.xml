@@ -3,7 +3,7 @@
   xmlns:tools="http://schemas.android.com/tools">
 
   <application
-    android:name=".TestApplication"
+    android:name=".ObsoleteApplication"
     android:allowBackup="true"
     android:hardwareAccelerated="true"
     android:icon="@drawable/common_ic_kt_red"

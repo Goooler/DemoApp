@@ -4,9 +4,10 @@ plugins {
   id(libs.plugins.kotlin.kapt.get().pluginId)
 }
 
-setupApp(AppModule.Test)
+setupApp(AppModule.Obsolete)
 
 dependencies {
+  implementation(libs.square.okHttp)
   implementation(libs.square.retrofit.gson)
   implementation(libs.square.okHttp.logInterceptor)
   implementation(libs.fastjson)

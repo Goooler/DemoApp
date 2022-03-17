@@ -1,4 +1,4 @@
-package io.goooler.demoapp.test.util
+package io.goooler.demoapp.obsolete.util
 
 fun <T> unionIterable(one: Iterable<T>, two: Iterable<T>): Iterable<T> = one union two
 

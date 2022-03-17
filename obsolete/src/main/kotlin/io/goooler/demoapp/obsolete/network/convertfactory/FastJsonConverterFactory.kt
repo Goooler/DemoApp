@@ -1,4 +1,4 @@
-package io.goooler.demoapp.test.network.convertfactory
+package io.goooler.demoapp.obsolete.network.convertfactory
 
 import com.alibaba.fastjson.JSON
 import com.alibaba.fastjson.serializer.SerializeConfig
