@@ -9,6 +9,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Icon
@@ -51,6 +53,7 @@ fun DetailPage(model: RepoDetailModel, onForkClick: () -> Unit) {
       modifier = Modifier
         .padding(8.dp)
         .fillMaxSize()
+        .verticalScroll(rememberScrollState())
     ) {
       Text(
         text = model.fullName,
