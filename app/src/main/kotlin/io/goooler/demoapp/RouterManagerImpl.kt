@@ -32,8 +32,9 @@ object RouterManagerImpl : RouterManager {
       .let(context::startActivity)
   }
 
-  override fun goRepoDetail(context: Context) {
+  override fun goRepoDetail(context: Context, fullName: String) {
     Intent(context, RepoDetailActivity::class.java)
+      .putExtra(RepoDetailActivity.FULL_NAME, fullName)
       .let(context::startActivity)
   }
 

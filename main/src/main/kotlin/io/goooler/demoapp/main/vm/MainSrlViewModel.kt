@@ -56,7 +56,9 @@ class MainSrlViewModel @Inject constructor(private val repository: MainCommonRep
         isLoadMoreFinish.postValue(true)
       }
       .map {
-        it.map { bean -> MainCommonVhModel.Repo(bean.owner?.avatarUrl, bean.name) }
+        it.map { bean ->
+          MainCommonVhModel.Repo(bean.owner?.avatarUrl, bean.name, bean.fullName)
+        }
       }
       .doOnSuccess {
         _listData += it

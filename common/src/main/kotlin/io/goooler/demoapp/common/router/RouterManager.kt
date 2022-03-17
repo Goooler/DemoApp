@@ -10,7 +10,7 @@ interface RouterManager {
 
   fun goMain(context: Context)
 
-  fun goRepoDetail(context: Context)
+  fun goRepoDetail(context: Context, fullName: String)
 
   fun goAudioPlay(context: Context)
 
@@ -35,8 +35,8 @@ interface RouterManager {
       impl.goMain(context)
     }
 
-    override fun goRepoDetail(context: Context) {
-      impl.goRepoDetail(context)
+    override fun goRepoDetail(context: Context, fullName: String) {
+      impl.goRepoDetail(context, fullName)
     }
 
     override fun goAudioPlay(context: Context) {

@@ -48,8 +48,8 @@ class MainSrlFragment : BaseBindingFragment<MainSrlFragmentBinding>() {
     OnRefreshLoadMoreListener,
     ItemTouchHelperCallback.ItemChangeListener,
     View.OnClickListener {
-    override fun onContentClick(content: String) {
-      RouterManager.goRepoDetail(requireContext())
+    override fun onContentClick(fullName: String) {
+      RouterManager.goRepoDetail(requireContext(), fullName)
     }
 
     override fun onRefresh(refreshLayout: RefreshLayout) {

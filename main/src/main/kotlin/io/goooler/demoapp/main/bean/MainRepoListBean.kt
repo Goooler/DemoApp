@@ -27,6 +27,9 @@ class MainRepoListBean : BaseResponse() {
   @ColumnInfo
   var description: String? = null
 
+  @Json(name = "full_name")
+  var fullName: String = ""
+
   @Embedded
   var owner: OwnerBean? = null
 

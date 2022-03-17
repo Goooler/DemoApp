@@ -39,7 +39,7 @@
       android:layout_width="0dp"
       android:layout_height="match_parent"
       android:layout_margin="10dp"
-      android:onClick="@{()->listener.onContentClick(model.content)}"
+      android:onClick="@{()->listener.onContentClick(model.fullName)}"
       android:paddingTop="10dp"
       android:paddingBottom="10dp"
       android:text="@{model.content}"

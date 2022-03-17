@@ -2,23 +2,33 @@ package io.goooler.demoapp.detail.ui
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.activity.viewModels
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import io.goooler.demoapp.base.core.BaseActivity
+import io.goooler.demoapp.detail.vm.DetailViewModel
 
 class RepoDetailActivity : BaseActivity() {
 
+  private val vm: DetailViewModel by viewModels()
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
+
+    intent.getStringExtra(FULL_NAME)?.let {
+      vm.fullName = it
+      vm.refresh()
+    }
+
     setContent {
-      HelloScreen()
+      val model = vm.repoDetailModel.observeAsState().value
+        ?: throw IllegalArgumentException("RepoDetailModel has not been initialized")
+      val isRefreshing by vm.isRefreshing.observeAsState(false)
+      DetailPageWithSwipeRefresh(isRefreshing, vm::refresh, model, vm::fork)
     }
   }
-}
 
-@Preview
-@Composable
-fun HelloScreen() {
-  Text(text = "Hello Compose")
+  companion object {
+    const val FULL_NAME = "fullName"
+  }
 }
