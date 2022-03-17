@@ -14,6 +14,7 @@ chucker = "3.5.2"
 coil = "1.4.0"
 coroutines = "1.6.0"
 glide = "4.13.1"
+junit5Android = "1.3.0"
 kotlin = "1.6.10"
 ktlint = "0.44.0"
 square-okHttp = "4.9.3"
@@ -24,6 +25,7 @@ support = "28.0.0"
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
+androidJunit5 = "de.mannodermaus.android-junit5:1.8.2.0"
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "androidX-hilt" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
@@ -69,6 +71,7 @@ androidX-room-ktx = { module = "androidx.room:room-ktx", version.ref = "androidX
 androidX-room-runtime = { module = "androidx.room:room-runtime", version.ref = "androidX-room" }
 androidX-viewPager2 = "androidx.viewpager2:viewpager2:1.0.0"
 androidX-webKit = "androidx.webkit:webkit:1.4.0"
+androidX-test-runner = "androidx.test:runner:1.4.0"
 
 square-leakCanary = "com.squareup.leakcanary:leakcanary-android:2.8.1"
 square-moshi = "com.squareup.moshi:moshi:1.13.0"
@@ -101,6 +104,8 @@ srl-footer = { module = "com.scwang.smart:refresh-footer-classics", version.ref 
 srl-header = { module = "com.scwang.smart:refresh-header-classics", version.ref = "srl" }
 srl-kernel = { module = "com.scwang.smart:refresh-layout-kernel", version.ref = "srl" }
 utils = "com.blankj:utilcodex:1.31.0"
+junit5Android-core = { module = "de.mannodermaus.junit5:android-test-core", version.ref = "junit5Android" }
+junit5Android-runner = { module = "de.mannodermaus.junit5:android-test-runner", version.ref = "junit5Android" }
 
 [bundles]
 androidX-compose = [

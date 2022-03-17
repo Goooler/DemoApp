@@ -5,6 +5,7 @@ plugins {
   id(libs.plugins.kotlin.android.get().pluginId)
   id(libs.plugins.kotlin.kapt.get().pluginId)
   alias(libs.plugins.moshiX)
+  alias(libs.plugins.androidJunit5)
 }
 
 setupCommon<LibraryExtension>(LibModule.Common) {
@@ -51,4 +52,8 @@ dependencies {
   releaseImplementation(libs.chucker.release)
 
   testImplementation(libs.kotlin.junit5)
+  androidTestImplementation(libs.kotlin.junit5)
+  androidTestImplementation(libs.androidX.test.runner)
+  androidTestImplementation(libs.junit5Android.core)
+  androidTestRuntimeOnly(libs.junit5Android.runner)
 }

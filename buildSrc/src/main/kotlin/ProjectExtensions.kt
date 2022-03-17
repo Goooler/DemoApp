@@ -49,6 +49,7 @@ inline fun <reified T : BaseExtension> Project.setupBase(
       minSdk = 21
       vectorDrawables.useSupportLibrary = true
       testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+      testInstrumentationRunnerArguments["runnerBuilder"] = "de.mannodermaus.junit5.AndroidJUnit5Builder"
     }
     sourceSets.configureEach {
       java.srcDirs("src/$name/kotlin")
