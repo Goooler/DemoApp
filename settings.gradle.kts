@@ -25,7 +25,7 @@ include(
   ":detail",
   ":web",
   ":adapter",
-  ":Obsolete"
+  ":obsolete"
 )
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
