@@ -19,7 +19,7 @@ abstract class CustomSingleObserver<T : BaseResponse> :
   }
 }
 
-sealed interface CustomObserver<T> {
+sealed interface CustomObserver<T : Any> {
 
   fun onCustomSuccess(t: T)
 

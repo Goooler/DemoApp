@@ -14,7 +14,7 @@ abstract class CustomObservableObserver<T : BaseResponse> :
       onCustomError((t.message ?: t.code.toString()).toResponseException())
   }
 
-  override fun onError(e: Throwable?) {
+  override fun onError(e: Throwable) {
     onCustomError(e.toResponseException())
   }
 

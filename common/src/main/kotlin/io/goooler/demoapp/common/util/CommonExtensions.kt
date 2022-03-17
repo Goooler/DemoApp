@@ -183,19 +183,19 @@ fun Number.formatMoney(isYuan: Boolean = false, trans2W: Boolean = false, scale:
 
 // ---------------------Rx-------------------------------//
 
-fun <T> Single<T>.subscribeOnIoThread(): Single<T> = subscribeOn(Schedulers.io())
+fun <T : Any> Single<T>.subscribeOnIoThread(): Single<T> = subscribeOn(Schedulers.io())
 
-fun <T> Single<T>.observeOnMainThread(): Single<T> = observeOn(AndroidSchedulers.mainThread())
+fun <T : Any> Single<T>.observeOnMainThread(): Single<T> = observeOn(AndroidSchedulers.mainThread())
 
-fun <T> Single<T>.subscribeAndObserve(): Single<T> =
+fun <T : Any> Single<T>.subscribeAndObserve(): Single<T> =
   subscribeOnIoThread().observeOnMainThread()
 
-fun <T> Observable<T>.subscribeOnIoThread(): Observable<T> = subscribeOn(Schedulers.io())
+fun <T : Any> Observable<T>.subscribeOnIoThread(): Observable<T> = subscribeOn(Schedulers.io())
 
-fun <T> Observable<T>.observeOnMainThread(): Observable<T> =
+fun <T : Any> Observable<T>.observeOnMainThread(): Observable<T> =
   observeOn(AndroidSchedulers.mainThread())
 
-fun <T> Observable<T>.subscribeAndObserve(): Observable<T> =
+fun <T : Any> Observable<T>.subscribeAndObserve(): Observable<T> =
   subscribeOnIoThread().observeOnMainThread()
 
 // ---------------------Res-------------------------------//
