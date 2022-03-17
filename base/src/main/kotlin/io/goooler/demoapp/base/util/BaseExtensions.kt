@@ -32,7 +32,6 @@ import androidx.core.os.bundleOf
 import androidx.core.text.parseAsHtml
 import androidx.core.text.toSpannable
 import androidx.databinding.DataBindingUtil
-import androidx.databinding.ObservableField
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -90,10 +89,6 @@ typealias MutableFloatLiveData = MutableLiveData<Float>
 typealias MutableStringLiveData = MutableLiveData<String?>
 
 typealias MutableListLiveData<T> = MutableLiveData<List<T>>
-
-typealias ObservableString = ObservableField<String?>
-
-typealias ObservableList<T> = ObservableField<List<T>>
 
 typealias ParamMap = HashMap<String, Any>
 
