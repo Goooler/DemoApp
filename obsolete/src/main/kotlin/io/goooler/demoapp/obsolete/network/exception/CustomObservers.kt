@@ -1,4 +1,4 @@
-package io.goooler.demoapp.test.network.exception
+package io.goooler.demoapp.obsolete.network.exception
 
 import io.goooler.demoapp.common.network.BaseResponse
 import io.reactivex.rxjava3.observers.DisposableObserver

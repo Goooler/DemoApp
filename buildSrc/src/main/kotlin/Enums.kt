@@ -24,7 +24,7 @@ enum class LibModule(override val tag: String, override val id: String) : Module
 enum class AppModule(override val tag: String, override val id: String, val appName: String) :
   Module {
   App("app", "io.goooler.demoapp", "Demo"),
-  Test("app", "io.goooler.demoapp.test", "Test")
+  Obsolete("app", "io.goooler.demoapp.obsolete", "Test")
 }
 
 enum class BuildConfigField(val key: String, val value: Any) {

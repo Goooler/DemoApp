@@ -1,4 +1,4 @@
-package io.goooler.demoapp.test.network.exception
+package io.goooler.demoapp.obsolete.network.exception
 
 import java.io.IOException
 import retrofit2.HttpException

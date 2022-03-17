@@ -1,4 +1,4 @@
-package io.goooler.demoapp.test.network.interceptor
+package io.goooler.demoapp.obsolete.network.interceptor
 
 import io.goooler.demoapp.common.util.LogUtil
 import okhttp3.logging.HttpLoggingInterceptor
