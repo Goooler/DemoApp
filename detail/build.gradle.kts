@@ -12,6 +12,7 @@ setupLib(LibModule.Detail) {
 dependencies {
   implementation(libs.androidX.activity.compose)
   implementation(libs.bundles.androidX.compose)
+  implementation(libs.bundles.accompanist)
 
   implementation(libs.square.moshi)
 }
