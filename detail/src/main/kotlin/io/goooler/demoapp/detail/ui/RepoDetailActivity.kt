@@ -42,7 +42,10 @@ class RepoDetailActivity : BaseActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 
-    intent.getStringExtra(FULL_NAME)?.let(vm::getRepoDetail)
+    intent.getStringExtra(FULL_NAME)?.let {
+      vm.fullName = it
+      vm.refresh()
+    }
 
     setContent {
       val model = vm.repoDetailModel.observeAsState().value

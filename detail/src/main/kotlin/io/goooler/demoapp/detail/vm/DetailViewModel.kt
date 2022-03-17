@@ -15,17 +15,13 @@ class DetailViewModel : BaseViewModel() {
   private val repository = DetailRepository(RetrofitHelper.create())
   private var repoDetail = RepoDetailModel()
   private val _repoDetailModel = MutableLiveData(repoDetail)
-  private lateinit var fullName: String
 
+  lateinit var fullName: String
   val repoDetailModel: LiveData<RepoDetailModel> = _repoDetailModel
   val isRefreshing: MutableBooleanLiveData = MutableBooleanLiveData()
 
-  fun getRepoDetail(fullName: String) {
-    this.fullName = fullName
-    refresh()
-  }
-
   fun refresh() {
+    isRefreshing.value = true
     viewModelScope.launch {
       repository.getRepoDetail(fullName).let {
         repoDetail = RepoDetailModel(
@@ -38,6 +34,7 @@ class DetailViewModel : BaseViewModel() {
         )
       }
       _repoDetailModel.value = repoDetail
+      isRefreshing.value = false
     }
   }
 
