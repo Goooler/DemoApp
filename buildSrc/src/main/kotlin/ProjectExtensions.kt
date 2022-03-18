@@ -51,6 +51,7 @@ inline fun <reified T : BaseExtension> Project.setupBase(
       testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
       testInstrumentationRunnerArguments["runnerBuilder"] = "de.mannodermaus.junit5.AndroidJUnit5Builder"
     }
+    testOptions.unitTests.isIncludeAndroidResources = true
     sourceSets.configureEach {
       java.srcDirs("src/$name/kotlin")
     }
