@@ -1,5 +1,6 @@
 package io.goooler.demoapp.common
 
+import io.goooler.demoapp.common.test.R
 import io.goooler.demoapp.common.util.getQuantityString
 import kotlin.test.assertEquals
 import org.junit.jupiter.api.Test
