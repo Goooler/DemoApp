@@ -29,7 +29,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
+import io.goooler.demoapp.common.util.getQuantityString
 import io.goooler.demoapp.common.util.showToast
+import io.goooler.demoapp.detail.R
 import io.goooler.demoapp.detail.model.RepoDetailModel
 
 @Composable
@@ -73,7 +75,7 @@ fun DetailPage(model: RepoDetailModel, onForkClick: () -> Unit) {
     Spacer(modifier = Modifier.height(5.dp))
     Row {
       Button(onClick = {
-        "All ${model.starsCount} stars".showToast()
+        R.plurals.detail_star_count_tip.getQuantityString(model.starsCount)?.showToast()
       }) {
         Icon(
           Icons.Filled.Star,
