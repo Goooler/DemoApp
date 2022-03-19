@@ -225,7 +225,7 @@ fun @receiver:StringRes Int.getString(): String? = try {
 }
 
 fun @receiver:PluralsRes Int.getQuantityString(num: Int): String? = try {
-  Resources.getSystem().getQuantityString(this, num, num)
+  CommonApplication.app.resources.getQuantityString(this, num, num)
 } catch (e: Exception) {
   e.printStackTrace()
   null
