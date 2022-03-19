@@ -7,12 +7,14 @@ import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import io.goooler.demoapp.base.core.BaseApplication
 import io.goooler.demoapp.common.util.CrashHandler
 import io.goooler.demoapp.common.util.ImageLoader
+import java.util.Locale
 
 abstract class CommonApplication : BaseApplication() {
 
   override fun initImmediately() {
     super.initImmediately()
     app = this
+    resources.configuration.setLocale(Locale.ENGLISH)
     CrashHandler.init()
     initImageLoader()
     initWebView()

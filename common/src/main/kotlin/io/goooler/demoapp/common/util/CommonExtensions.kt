@@ -3,7 +3,6 @@
 
 package io.goooler.demoapp.common.util
 
-import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
@@ -225,7 +224,7 @@ fun @receiver:StringRes Int.getString(): String? = try {
 }
 
 fun @receiver:PluralsRes Int.getQuantityString(num: Int): String? = try {
-  Resources.getSystem().getQuantityString(this, num, num)
+  CommonApplication.app.resources.getQuantityString(this, num, num)
 } catch (e: Exception) {
   e.printStackTrace()
   null
