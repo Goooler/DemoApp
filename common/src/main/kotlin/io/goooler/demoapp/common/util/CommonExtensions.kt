@@ -3,7 +3,6 @@
 
 package io.goooler.demoapp.common.util
 
-import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
