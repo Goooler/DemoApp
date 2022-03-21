@@ -13,6 +13,7 @@ dependencyResolutionManagement {
     mavenCentral()
     maven("https://maven.aliyun.com/repository/public")
     maven("https://jitpack.io")
+    maven("https://oss.sonatype.org/content/repositories/snapshots")
   }
 }
 
