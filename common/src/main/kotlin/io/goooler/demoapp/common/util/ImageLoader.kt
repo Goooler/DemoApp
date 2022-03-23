@@ -15,7 +15,6 @@ import coil.decode.ImageDecoderDecoder
 import coil.decode.SvgDecoder
 import coil.loadAny
 import coil.request.CachePolicy
-import coil.request.Disposable
 import coil.request.ImageRequest
 import coil.size.Scale
 import coil.transform.CircleCropTransformation
@@ -46,8 +45,9 @@ object ImageLoader {
     errorDrawable: Drawable? = null,
     @IntRange(from = 0) cornerRadius: Int = 0,
     useCache: Boolean = true
-  ): Disposable =
+  ) {
     imageView.loadBase(data, placeholderDrawable, errorDrawable, cornerRadius, useCache)
+  }
 
   fun loadCircleCrop(
     imageView: ImageView,
@@ -55,8 +55,10 @@ object ImageLoader {
     placeholderDrawable: Drawable? = null,
     errorDrawable: Drawable? = null,
     useCache: Boolean = true
-  ): Disposable = imageView.loadBase(data, placeholderDrawable, errorDrawable, 0, useCache) {
-    transformations(CircleCropTransformation())
+  ) {
+    imageView.loadBase(data, placeholderDrawable, errorDrawable, 0, useCache) {
+      transformations(CircleCropTransformation())
+    }
   }
 
   fun loadCenterCrop(
@@ -66,10 +68,11 @@ object ImageLoader {
     errorDrawable: Drawable? = null,
     @IntRange(from = 0) cornerRadius: Int = 0,
     useCache: Boolean = true
-  ): Disposable =
+  ) {
     imageView.loadBase(data, placeholderDrawable, errorDrawable, cornerRadius, useCache) {
       scale(Scale.FIT)
     }
+  }
 
   suspend fun getDrawable(
     data: Any?,
@@ -101,12 +104,14 @@ object ImageLoader {
     @IntRange(from = 0) cornerRadius: Int,
     useCache: Boolean,
     builder: ImageRequest.Builder.() -> Unit = {}
-  ): Disposable = loadAny(data) {
-    placeholder(placeholderDrawable)
-    error(errorDrawable)
-    if (cornerRadius > 0) transformations(RoundedCornersTransformation(cornerRadius.toFloat()))
-    loadWithCache(useCache)
-    builder()
+  ) {
+    loadAny(data) {
+      placeholder(placeholderDrawable)
+      error(errorDrawable)
+      if (cornerRadius > 0) transformations(RoundedCornersTransformation(cornerRadius.toFloat()))
+      loadWithCache(useCache)
+      builder()
+    }
   }
 }
 
