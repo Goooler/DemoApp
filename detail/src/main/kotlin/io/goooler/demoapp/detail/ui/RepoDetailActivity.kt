@@ -3,8 +3,8 @@ package io.goooler.demoapp.detail.ui
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import io.goooler.demoapp.base.core.BaseActivity
 import io.goooler.demoapp.detail.vm.DetailViewModel
 
@@ -21,9 +21,8 @@ class RepoDetailActivity : BaseActivity() {
     }
 
     setContent {
-      val model = vm.repoDetailModel.observeAsState().value
-        ?: throw IllegalArgumentException("RepoDetailModel has not been initialized")
-      val isRefreshing by vm.isRefreshing.observeAsState(false)
+      val model by vm.repoDetailModel.collectAsState()
+      val isRefreshing by vm.isRefreshing.collectAsState()
       DetailPageWithSwipeRefresh(isRefreshing, vm::refresh, model, vm::fork)
     }
   }
