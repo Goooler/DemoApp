@@ -1,28 +1,29 @@
 package io.goooler.demoapp.main.vm
 
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.goooler.demoapp.base.util.MutableBooleanLiveData
-import io.goooler.demoapp.base.util.MutableListLiveData
-import io.goooler.demoapp.common.base.theme.BaseRxViewModel
+import io.goooler.demoapp.common.base.theme.BaseThemeViewModel
 import io.goooler.demoapp.common.type.CommonConstants
 import io.goooler.demoapp.main.model.MainCommonVhModel
 import io.goooler.demoapp.main.repository.MainCommonRepository
 import java.util.Collections
 import javax.inject.Inject
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.launch
 
 @HiltViewModel
 class MainSrlViewModel @Inject constructor(private val repository: MainCommonRepository) :
-  BaseRxViewModel() {
+  BaseThemeViewModel() {
 
   private val _listData = mutableListOf<MainCommonVhModel>()
   private var page = 1
 
-  val listData = MutableListLiveData<MainCommonVhModel>()
-  val isLoadMoreFinish = MutableBooleanLiveData()
-  val isRefreshFinish = MutableBooleanLiveData()
-  val isNoMore = MutableBooleanLiveData()
-  val isEnableRefresh = MutableBooleanLiveData()
-  val isEnableLoadMore = MutableBooleanLiveData()
+  val listData: MutableStateFlow<List<MainCommonVhModel>> = MutableStateFlow(_listData)
+  val isLoadMoreFinish = MutableStateFlow(false)
+  val isRefreshFinish = MutableStateFlow(false)
+  val isNoMore = MutableStateFlow(false)
+  val isEnableRefresh = MutableStateFlow(false)
+  val isEnableLoadMore = MutableStateFlow(false)
 
   init {
     enableRefreshAndLoadMore(true)
@@ -50,39 +51,34 @@ class MainSrlViewModel @Inject constructor(private val repository: MainCommonRep
   }
 
   private fun fetchListData(page: Int) {
-    repository.getRepoListWithRx("goooler", page)
-      .doFinally {
-        isRefreshFinish.postValue(true)
-        isLoadMoreFinish.postValue(true)
+    viewModelScope.launch {
+      try {
+        repository.getRepoListWithCr("goooler", page)
+          .map { bean ->
+            MainCommonVhModel.Repo(bean.owner?.avatarUrl, bean.name, bean.fullName)
+          }.let {
+            _listData += it
+            if (page == 1 && it.isEmpty()) {
+              _listData += listOf(MainCommonVhModel.Empty())
+            }
+            if (it.size < CommonConstants.DEFAULT_PAGE_SIZE) {
+              isNoMore.value = true
+            }
+          }.let {
+            listData.value = _listData
+          }
+      } catch (_: Exception) {
+        listData.value = listOf(MainCommonVhModel.Error())
+        enableRefreshAndLoadMore(false)
+      } finally {
+        isRefreshFinish.value = true
+        isLoadMoreFinish.value = true
       }
-      .map {
-        it.map { bean ->
-          MainCommonVhModel.Repo(bean.owner?.avatarUrl, bean.name, bean.fullName)
-        }
-      }
-      .doOnSuccess {
-        _listData += it
-        if (page == 1 && it.isEmpty()) {
-          _listData += listOf(MainCommonVhModel.Empty())
-        }
-        if (it.size < CommonConstants.DEFAULT_PAGE_SIZE) {
-          isNoMore.postValue(true)
-        }
-      }
-      .subscribe(
-        {
-          listData.postValue(_listData)
-        },
-        {
-          listData.postValue(listOf(MainCommonVhModel.Error()))
-          enableRefreshAndLoadMore(false)
-        }
-      )
-      .autoDispose()
+    }
   }
 
   private fun enableRefreshAndLoadMore(enable: Boolean) {
-    isEnableRefresh.postValue(enable)
-    isEnableLoadMore.postValue(enable)
+    isEnableRefresh.value = enable
+    isEnableLoadMore.value = enable
   }
 }
