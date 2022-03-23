@@ -18,7 +18,7 @@ class MainSrlViewModel @Inject constructor(private val repository: MainCommonRep
   private val _listData = mutableListOf<MainCommonVhModel>()
   private var page = 1
 
-  val listData: MutableStateFlow<List<MainCommonVhModel>> = MutableStateFlow(_listData)
+  val listData: MutableStateFlow<List<MainCommonVhModel>> = MutableStateFlow(emptyList())
   val isLoadMoreFinish = MutableStateFlow(false)
   val isRefreshFinish = MutableStateFlow(false)
   val isNoMore = MutableStateFlow(false)
@@ -31,6 +31,7 @@ class MainSrlViewModel @Inject constructor(private val repository: MainCommonRep
 
   fun refresh() {
     page = 1
+    isNoMore.value = false
     _listData.clear()
     fetchListData(page)
   }
@@ -53,6 +54,7 @@ class MainSrlViewModel @Inject constructor(private val repository: MainCommonRep
   private fun fetchListData(page: Int) {
     viewModelScope.launch {
       try {
+        finishRefreshAndLoadMore(false)
         repository.getRepoListWithCr("goooler", page)
           .map { bean ->
             MainCommonVhModel.Repo(bean.owner?.avatarUrl, bean.name, bean.fullName)
@@ -65,16 +67,20 @@ class MainSrlViewModel @Inject constructor(private val repository: MainCommonRep
               isNoMore.value = true
             }
           }.let {
-            listData.value = _listData
+            listData.value = _listData.toList()
           }
       } catch (_: Exception) {
         listData.value = listOf(MainCommonVhModel.Error())
         enableRefreshAndLoadMore(false)
       } finally {
-        isRefreshFinish.value = true
-        isLoadMoreFinish.value = true
+        finishRefreshAndLoadMore(true)
       }
     }
+  }
+
+  private fun finishRefreshAndLoadMore(finish: Boolean) {
+    isRefreshFinish.value = finish
+    isLoadMoreFinish.value = finish
   }
 
   private fun enableRefreshAndLoadMore(enable: Boolean) {
