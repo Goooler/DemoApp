@@ -24,6 +24,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.AsyncDifferConfig
 import androidx.recyclerview.widget.DiffUtil
 import androidx.viewbinding.ViewBinding
@@ -53,6 +54,8 @@ import java.util.Date
 import kotlin.math.absoluteValue
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.asExecutor
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 typealias DimensionUtil = SizeUtils
 typealias SpHelper = SPUtils
@@ -276,8 +279,10 @@ inline fun <reified V, reified VM : BaseThemeViewModel> V.getThemeViewModel(): L
   where V : LifecycleOwner, V : ViewModelStoreOwner, V : ITheme = lazy(LazyThreadSafetyMode.NONE) {
   ViewModelProvider(this)[VM::class.java].also {
     lifecycle.addObserver(it)
-    it.loading.observe(this) { show ->
-      if (show) showLoading() else hideLoading()
+    lifecycleScope.launch {
+      it.loading.collectLatest { show ->
+        if (show) showLoading() else hideLoading()
+      }
     }
   }
 }
