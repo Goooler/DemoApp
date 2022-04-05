@@ -35,7 +35,6 @@ import com.blankj.utilcode.util.StringUtils
 import com.blankj.utilcode.util.TimeUtils
 import com.google.android.material.textfield.TextInputLayout
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
-import io.goooler.demoapp.base.core.BaseViewModel
 import io.goooler.demoapp.base.util.ToastUtil
 import io.goooler.demoapp.common.BuildConfig
 import io.goooler.demoapp.common.CommonApplication
@@ -250,16 +249,9 @@ inline fun <reified T> DiffUtil.ItemCallback<T>.asConfig(): AsyncDifferConfig<T>
 // ---------------------Fragment-------------------------------//
 
 @MainThread
-inline fun <reified V, reified VM : BaseViewModel> V.baseViewModels(): Lazy<VM>
-  where V : LifecycleOwner, V : ViewModelStoreOwner = lazy(LazyThreadSafetyMode.NONE) {
-  ViewModelProvider(this)[VM::class.java].apply(lifecycle::addObserver)
-}
-
-@MainThread
 inline fun <reified V, reified VM : BaseThemeViewModel> V.themeViewModels(): Lazy<VM>
   where V : LifecycleOwner, V : ViewModelStoreOwner, V : ITheme = lazy(LazyThreadSafetyMode.NONE) {
   ViewModelProvider(this)[VM::class.java].also {
-    lifecycle.addObserver(it)
     lifecycleScope.launch {
       it.loading.collectLatest { show ->
         if (show) showLoading() else hideLoading()
