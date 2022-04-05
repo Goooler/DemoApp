@@ -268,13 +268,13 @@ inline fun <reified T> DiffUtil.ItemCallback<T>.asConfig(): AsyncDifferConfig<T>
 // ---------------------Fragment-------------------------------//
 
 @MainThread
-inline fun <reified V, reified VM : BaseViewModel> V.getViewModel(): Lazy<VM>
+inline fun <reified V, reified VM : BaseViewModel> V.baseViewModels(): Lazy<VM>
   where V : LifecycleOwner, V : ViewModelStoreOwner = lazy(LazyThreadSafetyMode.NONE) {
   ViewModelProvider(this)[VM::class.java].apply(lifecycle::addObserver)
 }
 
 @MainThread
-inline fun <reified V, reified VM : BaseThemeViewModel> V.getThemeViewModel(): Lazy<VM>
+inline fun <reified V, reified VM : BaseThemeViewModel> V.themeViewModels(): Lazy<VM>
   where V : LifecycleOwner, V : ViewModelStoreOwner, V : ITheme = lazy(LazyThreadSafetyMode.NONE) {
   ViewModelProvider(this)[VM::class.java].also {
     lifecycle.addObserver(it)

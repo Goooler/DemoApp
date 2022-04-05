@@ -10,7 +10,7 @@ import io.goooler.demoapp.base.util.unsafeLazy
 import io.goooler.demoapp.common.base.binding.BaseBindingFragment
 import io.goooler.demoapp.common.router.RouterManager
 import io.goooler.demoapp.common.util.enableRefreshAndLoadMore
-import io.goooler.demoapp.common.util.getThemeViewModel
+import io.goooler.demoapp.common.util.themeViewModels
 import io.goooler.demoapp.main.databinding.MainSrlFragmentBinding
 import io.goooler.demoapp.main.ui.adapter.MainSrlRvAdapter
 import io.goooler.demoapp.main.vm.MainSrlViewModel
@@ -18,7 +18,7 @@ import io.goooler.demoapp.main.vm.MainSrlViewModel
 @AndroidEntryPoint
 class MainSrlFragment : BaseBindingFragment<MainSrlFragmentBinding>() {
 
-  private val vm: MainSrlViewModel by getThemeViewModel()
+  private val vm: MainSrlViewModel by themeViewModels()
 
   private val rvAdapter by unsafeLazy {
     MainSrlRvAdapter(listener)
