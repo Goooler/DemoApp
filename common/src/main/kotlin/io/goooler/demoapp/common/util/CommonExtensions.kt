@@ -7,6 +7,7 @@ import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.webkit.URLUtil
+import android.widget.TextView
 import androidx.activity.ComponentActivity
 import androidx.annotation.AnyThread
 import androidx.annotation.ColorInt
@@ -17,6 +18,7 @@ import androidx.annotation.MainThread
 import androidx.annotation.PluralsRes
 import androidx.annotation.Px
 import androidx.annotation.StringRes
+import androidx.core.widget.doAfterTextChanged
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.DefaultLifecycleObserver
@@ -35,6 +37,7 @@ import com.blankj.utilcode.util.SPUtils
 import com.blankj.utilcode.util.SizeUtils
 import com.blankj.utilcode.util.StringUtils
 import com.blankj.utilcode.util.TimeUtils
+import com.google.android.material.textfield.TextInputLayout
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import io.goooler.demoapp.base.util.ToastUtil
 import io.goooler.demoapp.common.BuildConfig
@@ -223,15 +226,15 @@ fun @receiver:StringRes Int.getString(): String? = try {
   null
 }
 
+fun @receiver:StringRes Int.getString(vararg formatArgs: Any): String? =
+  getString()?.format(formatArgs)
+
 fun @receiver:PluralsRes Int.getQuantityString(num: Int): String? = try {
   CommonApplication.app.resources.getQuantityString(this, num, num)
 } catch (e: Exception) {
   e.printStackTrace()
   null
 }
-
-fun @receiver:StringRes Int.formatString(vararg args: Any): String =
-  String.format(getString().orEmpty(), args)
 
 @Px
 fun @receiver:Dimension(unit = Dimension.SP) Float.sp2px(): Int = SizeUtils.sp2px(this)
@@ -255,6 +258,10 @@ fun Bitmap.toDrawable(): Drawable = ImageUtils.bitmap2Drawable(this)
 fun Drawable.toBitmap(): Bitmap = ImageUtils.drawable2Bitmap(this)
 
 // ---------------------View-------------------------------//
+
+fun TextView.hideTextInputLayoutErrorOnTextChange(textInputLayout: TextInputLayout) {
+  doAfterTextChanged { textInputLayout.error = null }
+}
 
 inline fun <reified T> DiffUtil.ItemCallback<T>.asConfig(): AsyncDifferConfig<T> {
   return AsyncDifferConfig.Builder(this)
