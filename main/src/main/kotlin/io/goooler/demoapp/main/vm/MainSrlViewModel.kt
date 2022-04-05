@@ -55,7 +55,7 @@ class MainSrlViewModel @Inject constructor(private val repository: MainCommonRep
     viewModelScope.launch {
       try {
         finishRefreshAndLoadMore(false)
-        repository.getRepoListWithCr("goooler", page)
+        repository.getRepoListFromApi("goooler", page)
           .map { bean ->
             MainCommonVhModel.Repo(bean.owner?.avatarUrl, bean.name, bean.fullName)
           }.let {
