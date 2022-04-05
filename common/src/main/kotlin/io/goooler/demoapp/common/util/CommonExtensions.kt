@@ -7,7 +7,7 @@ import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.webkit.URLUtil
-import androidx.activity.ComponentActivity
+import android.widget.TextView
 import androidx.annotation.AnyThread
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
@@ -17,11 +17,8 @@ import androidx.annotation.MainThread
 import androidx.annotation.PluralsRes
 import androidx.annotation.Px
 import androidx.annotation.StringRes
-import androidx.databinding.ViewDataBinding
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.DefaultLifecycleObserver
+import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
 import androidx.lifecycle.lifecycleScope
@@ -36,7 +33,9 @@ import com.blankj.utilcode.util.SPUtils
 import com.blankj.utilcode.util.SizeUtils
 import com.blankj.utilcode.util.StringUtils
 import com.blankj.utilcode.util.TimeUtils
+import com.google.android.material.textfield.TextInputLayout
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
+import io.goooler.demoapp.base.core.BaseViewModel
 import io.goooler.demoapp.base.util.ToastUtil
 import io.goooler.demoapp.common.BuildConfig
 import io.goooler.demoapp.common.CommonApplication
@@ -205,15 +204,15 @@ fun @receiver:StringRes Int.getString(): String? = try {
   null
 }
 
+fun @receiver:StringRes Int.getString(vararg formatArgs: Any): String? =
+  getString()?.format(formatArgs)
+
 fun @receiver:PluralsRes Int.getQuantityString(num: Int): String? = try {
   CommonApplication.app.resources.getQuantityString(this, num, num)
 } catch (e: Exception) {
   e.printStackTrace()
   null
 }
-
-fun @receiver:StringRes Int.formatString(vararg args: Any): String =
-  String.format(getString().orEmpty(), args)
 
 @Px
 fun @receiver:Dimension(unit = Dimension.SP) Float.sp2px(): Int = SizeUtils.sp2px(this)
@@ -238,6 +237,10 @@ fun Drawable.toBitmap(): Bitmap = ImageUtils.drawable2Bitmap(this)
 
 // ---------------------View-------------------------------//
 
+fun TextView.hideTextInputLayoutErrorOnTextChange(textInputLayout: TextInputLayout) {
+  doAfterTextChanged { textInputLayout.error = null }
+}
+
 inline fun <reified T> DiffUtil.ItemCallback<T>.asConfig(): AsyncDifferConfig<T> {
   return AsyncDifferConfig.Builder(this)
     .setBackgroundThreadExecutor(Dispatchers.Default.asExecutor())
@@ -247,14 +250,13 @@ inline fun <reified T> DiffUtil.ItemCallback<T>.asConfig(): AsyncDifferConfig<T>
 // ---------------------Fragment-------------------------------//
 
 @MainThread
-inline fun <reified V, reified VM> V.getViewModel(): Lazy<VM>
-  where V : LifecycleOwner, V : ViewModelStoreOwner,
-        VM : ViewModel, VM : DefaultLifecycleObserver = lazy(LazyThreadSafetyMode.NONE) {
+inline fun <reified V, reified VM : BaseViewModel> V.baseViewModels(): Lazy<VM>
+  where V : LifecycleOwner, V : ViewModelStoreOwner = lazy(LazyThreadSafetyMode.NONE) {
   ViewModelProvider(this)[VM::class.java].apply(lifecycle::addObserver)
 }
 
 @MainThread
-inline fun <reified V, reified VM : BaseThemeViewModel> V.getThemeViewModel(): Lazy<VM>
+inline fun <reified V, reified VM : BaseThemeViewModel> V.themeViewModels(): Lazy<VM>
   where V : LifecycleOwner, V : ViewModelStoreOwner, V : ITheme = lazy(LazyThreadSafetyMode.NONE) {
   ViewModelProvider(this)[VM::class.java].also {
     lifecycle.addObserver(it)
@@ -266,24 +268,7 @@ inline fun <reified V, reified VM : BaseThemeViewModel> V.getThemeViewModel(): L
   }
 }
 
-inline fun <reified T : ViewDataBinding> Fragment.inflate(crossinline transform: (T) -> Unit = {}): Lazy<T> =
-  lazy(LazyThreadSafetyMode.NONE) {
-    inflateBinding<T>(layoutInflater).also {
-      it.lifecycleOwner = viewLifecycleOwner
-      transform(it)
-    }
-  }
-
 // ---------------------Activity-------------------------------//
-
-inline fun <reified T : ViewDataBinding> ComponentActivity.inflate(crossinline transform: (T) -> Unit = {}): Lazy<T> =
-  lazy(LazyThreadSafetyMode.NONE) {
-    inflateBinding<T>(layoutInflater).also {
-      setContentView(it.root)
-      it.lifecycleOwner = this
-      transform(it)
-    }
-  }
 
 @Suppress("UNCHECKED_CAST")
 fun <T : ViewBinding> LifecycleOwner.inflateBinding(inflater: LayoutInflater): T {

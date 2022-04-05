@@ -10,7 +10,7 @@ import io.goooler.demoapp.base.util.unsafeLazy
 import io.goooler.demoapp.common.base.binding.BaseBindingFragment
 import io.goooler.demoapp.common.util.disableRefreshAndLoadMore
 import io.goooler.demoapp.common.util.finishRefreshAndLoadMore
-import io.goooler.demoapp.common.util.getThemeViewModel
+import io.goooler.demoapp.common.util.themeViewModels
 import io.goooler.demoapp.main.databinding.MainPagingFragmentBinding
 import io.goooler.demoapp.main.model.MainCommonVhModel
 import io.goooler.demoapp.main.ui.adapter.MainPagingRvAdapter
@@ -21,7 +21,7 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class MainPagingFragment : BaseBindingFragment<MainPagingFragmentBinding>() {
 
-  private val vm: MainPagingViewModel by getThemeViewModel()
+  private val vm: MainPagingViewModel by themeViewModels()
 
   private lateinit var rvAdapter: MainPagingRvAdapter
 

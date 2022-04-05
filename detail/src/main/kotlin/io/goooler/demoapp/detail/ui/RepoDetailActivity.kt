@@ -2,15 +2,15 @@ package io.goooler.demoapp.detail.ui
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import io.goooler.demoapp.base.core.BaseActivity
+import io.goooler.demoapp.common.util.baseViewModels
 import io.goooler.demoapp.detail.vm.DetailViewModel
 
 class RepoDetailActivity : BaseActivity() {
 
-  private val vm: DetailViewModel by viewModels()
+  private val vm: DetailViewModel by baseViewModels()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
