@@ -8,7 +8,6 @@ import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.webkit.URLUtil
 import android.widget.TextView
-import androidx.activity.ComponentActivity
 import androidx.annotation.AnyThread
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
@@ -19,11 +18,7 @@ import androidx.annotation.PluralsRes
 import androidx.annotation.Px
 import androidx.annotation.StringRes
 import androidx.core.widget.doAfterTextChanged
-import androidx.databinding.ViewDataBinding
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
 import androidx.recyclerview.widget.AsyncDifferConfig
@@ -39,6 +34,7 @@ import com.blankj.utilcode.util.StringUtils
 import com.blankj.utilcode.util.TimeUtils
 import com.google.android.material.textfield.TextInputLayout
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
+import io.goooler.demoapp.base.core.BaseViewModel
 import io.goooler.demoapp.base.util.ToastUtil
 import io.goooler.demoapp.common.BuildConfig
 import io.goooler.demoapp.common.CommonApplication
@@ -272,9 +268,8 @@ inline fun <reified T> DiffUtil.ItemCallback<T>.asConfig(): AsyncDifferConfig<T>
 // ---------------------Fragment-------------------------------//
 
 @MainThread
-inline fun <reified V, reified VM> V.getViewModel(): Lazy<VM>
-  where V : LifecycleOwner, V : ViewModelStoreOwner,
-        VM : ViewModel, VM : DefaultLifecycleObserver = lazy(LazyThreadSafetyMode.NONE) {
+inline fun <reified V, reified VM : BaseViewModel> V.getViewModel(): Lazy<VM>
+  where V : LifecycleOwner, V : ViewModelStoreOwner = lazy(LazyThreadSafetyMode.NONE) {
   ViewModelProvider(this)[VM::class.java].apply(lifecycle::addObserver)
 }
 
@@ -289,24 +284,7 @@ inline fun <reified V, reified VM : BaseThemeViewModel> V.getThemeViewModel(): L
   }
 }
 
-inline fun <reified T : ViewDataBinding> Fragment.inflate(crossinline transform: (T) -> Unit = {}): Lazy<T> =
-  lazy(LazyThreadSafetyMode.NONE) {
-    inflateBinding<T>(layoutInflater).also {
-      it.lifecycleOwner = viewLifecycleOwner
-      transform(it)
-    }
-  }
-
 // ---------------------Activity-------------------------------//
-
-inline fun <reified T : ViewDataBinding> ComponentActivity.inflate(crossinline transform: (T) -> Unit = {}): Lazy<T> =
-  lazy(LazyThreadSafetyMode.NONE) {
-    inflateBinding<T>(layoutInflater).also {
-      setContentView(it.root)
-      it.lifecycleOwner = this
-      transform(it)
-    }
-  }
 
 @Suppress("UNCHECKED_CAST")
 fun <T : ViewBinding> LifecycleOwner.inflateBinding(inflater: LayoutInflater): T {
