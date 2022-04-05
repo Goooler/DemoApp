@@ -9,6 +9,7 @@ import io.goooler.demoapp.adapter.rv.core.IVhModelType
  * @version 1.0.0
  * @since 1.0.0
  */
+@JvmDefaultWithCompatibility
 interface IDiffVhModelType : IVhModelType {
 
   /**

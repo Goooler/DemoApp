@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
  * @version 1.0.0
  * @since 1.0.0
  */
+@JvmDefaultWithCompatibility
 interface ISpanSize {
   /**
    * Get span size. How many lattices does a model occupy.

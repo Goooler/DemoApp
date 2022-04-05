@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
  * @version 1.0.0
  * @since 1.0.0
  */
+@JvmDefaultWithCompatibility
 internal interface IRvAdapter<M : IVhModelType> {
 
   /**
