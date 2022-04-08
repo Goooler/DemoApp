@@ -6,7 +6,6 @@ package io.goooler.demoapp.common.util
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
-import android.webkit.URLUtil
 import android.widget.TextView
 import androidx.annotation.AnyThread
 import androidx.annotation.ColorInt
@@ -30,9 +29,7 @@ import com.blankj.utilcode.util.ColorUtils
 import com.blankj.utilcode.util.ImageUtils
 import com.blankj.utilcode.util.ResourceUtils
 import com.blankj.utilcode.util.SPUtils
-import com.blankj.utilcode.util.SizeUtils
 import com.blankj.utilcode.util.StringUtils
-import com.blankj.utilcode.util.TimeUtils
 import com.google.android.material.textfield.TextInputLayout
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import io.goooler.demoapp.base.util.ToastUtil
@@ -42,16 +39,11 @@ import io.goooler.demoapp.common.base.theme.BaseThemeViewModel
 import io.goooler.demoapp.common.base.theme.ITheme
 import io.goooler.demoapp.common.type.SpKeys
 import java.lang.reflect.ParameterizedType
-import java.math.BigDecimal
-import java.util.Calendar
-import java.util.Date
-import kotlin.math.absoluteValue
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.asExecutor
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-typealias DimensionUtil = SizeUtils
 typealias SpHelper = SPUtils
 
 val isDebug: Boolean = BuildConfig.DEBUG
@@ -93,90 +85,6 @@ fun SmartRefreshLayout.enableRefreshAndLoadMore(enable: Boolean = true) {
 @MainThread
 fun SmartRefreshLayout.disableRefreshAndLoadMore() {
   enableRefreshAndLoadMore(false)
-}
-
-// ---------------------Convert-------------------------------//
-
-/**
- * 拼上图片前缀
- */
-fun String.toLoadUrl(): String {
-  return if (URLUtil.isNetworkUrl(this)) this else BuildConfig.CDN_PREFIX + this
-}
-
-fun Long.toDateString(pattern: String): String = TimeUtils.millis2String(this, pattern)
-
-fun Long.easyTime(): String {
-  val now = System.currentTimeMillis()
-  val t = now - this
-  if (t < 0) {
-    // 未来
-    return toDateString("yyyy-MM-dd HH:mm")
-  }
-  val oneMinute = 1000 * 60
-  val oneHour = oneMinute * 60
-  val oneDay = oneHour * 24
-  val c1 = Calendar.getInstance()
-  val c2 = Calendar.getInstance()
-  c1.time = Date(this)
-  c2.time = Date(now)
-  val day1 = c1.get(Calendar.DAY_OF_WEEK)
-  val day2 = c2.get(Calendar.DAY_OF_WEEK)
-  val isYesterday = t < oneDay * 2 && (day2 - day1 == 1 || day2 - day1 == -6)
-
-  val year1 = c1.get(Calendar.YEAR)
-  val year2 = c2.get(Calendar.YEAR)
-
-  val isSameYear = year1 == year2
-
-  return when {
-    isSameYear.not() -> toDateString("yyyy-MM-dd HH:mm")
-    isYesterday -> toDateString("昨天 HH:mm")
-    t < oneMinute -> "刚刚"
-    t < oneHour -> (t / oneMinute).toString() + "分钟前"
-    t < oneDay -> (t / oneHour).toString() + "小时前"
-    isSameYear -> toDateString("MM-dd HH:mm")
-    else -> toDateString("yyyy-MM-dd HH:mm")
-  }
-}
-
-/**
- * @param isYuan 默认以分为单位，传入元为单位传 true
- * @param trans2W 是否需要在超过一万时转换为 1.2w 的形式，不需要的话传 false
- *
- * 分是 Long 类型、元是 Double 类型
- */
-fun Number.formatMoney(isYuan: Boolean = false, trans2W: Boolean = false, scale: Int = 2): String {
-  val moneyF = if (isYuan) {
-    toDouble()
-  } else {
-    // 分转为元
-    toDouble() / 100
-  }
-  return try {
-    when {
-      trans2W && moneyF / 10000 > 0 -> {
-        BigDecimal.valueOf(moneyF / 10000)
-          .setScale(1, BigDecimal.ROUND_DOWN)
-          .stripTrailingZeros().toPlainString() + "W"
-      }
-
-      else ->
-        BigDecimal.valueOf(moneyF)
-          .setScale(scale, BigDecimal.ROUND_DOWN)
-          .stripTrailingZeros().toPlainString()
-          .let {
-            if (it.toDouble().absoluteValue < 0.000001) {
-              "0"
-            } else {
-              it
-            }
-          }
-    }
-  } catch (e: Exception) {
-    e.printStackTrace()
-    moneyF.toString()
-  }
 }
 
 // ---------------------Res-------------------------------//
