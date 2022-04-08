@@ -20,6 +20,7 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.AsyncDifferConfig
 import androidx.recyclerview.widget.DiffUtil
 import androidx.viewbinding.ViewBinding
@@ -28,23 +29,21 @@ import com.blankj.utilcode.util.ColorUtils
 import com.blankj.utilcode.util.ImageUtils
 import com.blankj.utilcode.util.ResourceUtils
 import com.blankj.utilcode.util.SPUtils
+import com.blankj.utilcode.util.SizeUtils
 import com.blankj.utilcode.util.StringUtils
 import com.google.android.material.textfield.TextInputLayout
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
-import io.goooler.demoapp.base.core.BaseViewModel
 import io.goooler.demoapp.base.util.ToastUtil
 import io.goooler.demoapp.common.BuildConfig
 import io.goooler.demoapp.common.CommonApplication
 import io.goooler.demoapp.common.base.theme.BaseThemeViewModel
 import io.goooler.demoapp.common.base.theme.ITheme
 import io.goooler.demoapp.common.type.SpKeys
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.core.Single
-import io.reactivex.rxjava3.schedulers.Schedulers
 import java.lang.reflect.ParameterizedType
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.asExecutor
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 typealias SpHelper = SPUtils
 
@@ -88,23 +87,6 @@ fun SmartRefreshLayout.enableRefreshAndLoadMore(enable: Boolean = true) {
 fun SmartRefreshLayout.disableRefreshAndLoadMore() {
   enableRefreshAndLoadMore(false)
 }
-
-// ---------------------Rx-------------------------------//
-
-fun <T : Any> Single<T>.subscribeOnIoThread(): Single<T> = subscribeOn(Schedulers.io())
-
-fun <T : Any> Single<T>.observeOnMainThread(): Single<T> = observeOn(AndroidSchedulers.mainThread())
-
-fun <T : Any> Single<T>.subscribeAndObserve(): Single<T> =
-  subscribeOnIoThread().observeOnMainThread()
-
-fun <T : Any> Observable<T>.subscribeOnIoThread(): Observable<T> = subscribeOn(Schedulers.io())
-
-fun <T : Any> Observable<T>.observeOnMainThread(): Observable<T> =
-  observeOn(AndroidSchedulers.mainThread())
-
-fun <T : Any> Observable<T>.subscribeAndObserve(): Observable<T> =
-  subscribeOnIoThread().observeOnMainThread()
 
 // ---------------------Res-------------------------------//
 
@@ -176,18 +158,13 @@ inline fun <reified T> DiffUtil.ItemCallback<T>.asConfig(): AsyncDifferConfig<T>
 // ---------------------Fragment-------------------------------//
 
 @MainThread
-inline fun <reified V, reified VM : BaseViewModel> V.baseViewModels(): Lazy<VM>
-  where V : LifecycleOwner, V : ViewModelStoreOwner = lazy(LazyThreadSafetyMode.NONE) {
-  ViewModelProvider(this)[VM::class.java].apply(lifecycle::addObserver)
-}
-
-@MainThread
 inline fun <reified V, reified VM : BaseThemeViewModel> V.themeViewModels(): Lazy<VM>
   where V : LifecycleOwner, V : ViewModelStoreOwner, V : ITheme = lazy(LazyThreadSafetyMode.NONE) {
   ViewModelProvider(this)[VM::class.java].also {
-    lifecycle.addObserver(it)
-    it.loading.observe(this) { show ->
-      if (show) showLoading() else hideLoading()
+    lifecycleScope.launch {
+      it.loading.collectLatest { show ->
+        if (show) showLoading() else hideLoading()
+      }
     }
   }
 }

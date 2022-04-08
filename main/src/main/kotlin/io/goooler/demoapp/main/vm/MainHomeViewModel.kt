@@ -3,7 +3,7 @@ package io.goooler.demoapp.main.vm
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.goooler.demoapp.base.util.defaultAsync
-import io.goooler.demoapp.common.base.theme.BaseRxViewModel
+import io.goooler.demoapp.common.base.theme.BaseThemeViewModel
 import io.goooler.demoapp.common.util.showToast
 import io.goooler.demoapp.main.bean.MainRepoListBean
 import io.goooler.demoapp.main.repository.MainCommonRepository
@@ -25,7 +25,7 @@ import kotlinx.coroutines.launch
 
 @HiltViewModel
 class MainHomeViewModel @Inject constructor(private val repository: MainCommonRepository) :
-  BaseRxViewModel() {
+  BaseThemeViewModel() {
 
   private val _title = MutableStateFlow("")
   val title: StateFlow<String> = _title
@@ -33,7 +33,7 @@ class MainHomeViewModel @Inject constructor(private val repository: MainCommonRe
   private var countdownJob: Job? = null
 
   fun initData() {
-    requestWithCr()
+    fetchRepoLists()
   }
 
   fun countDown() {
@@ -71,7 +71,7 @@ class MainHomeViewModel @Inject constructor(private val repository: MainCommonRe
     }
   }
 
-  private fun requestWithCr() {
+  private fun fetchRepoLists() {
     viewModelScope.launch(Dispatchers.IO) {
       try {
         val google = defaultAsync { repository.getRepoListFromDb("google") }
@@ -82,8 +82,8 @@ class MainHomeViewModel @Inject constructor(private val repository: MainCommonRe
       }
 
       try {
-        val google = defaultAsync { repository.getRepoListWithCr("google") }
-        val microsoft = defaultAsync { repository.getRepoListWithCr("microsoft") }
+        val google = defaultAsync { repository.getRepoListFromApi("google") }
+        val microsoft = defaultAsync { repository.getRepoListFromApi("microsoft") }
 
         processList(google.await(), microsoft.await()).collect(_title::emit)
 

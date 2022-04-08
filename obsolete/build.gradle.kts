@@ -13,4 +13,6 @@ dependencies {
   implementation(libs.fastjson)
   implementation(libs.google.gson)
   implementation(libs.bundles.glide)
+  implementation(libs.rxJava3.java)
+  implementation(libs.rxJava3.android)
 }

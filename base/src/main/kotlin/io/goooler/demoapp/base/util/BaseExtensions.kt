@@ -43,8 +43,6 @@ import androidx.fragment.app.commit
 import androidx.fragment.app.findFragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleCoroutineScope
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.coroutineScope
 import androidx.lifecycle.findViewTreeLifecycleOwner
 import java.io.File
@@ -66,34 +64,6 @@ import kotlinx.coroutines.withContext
 
 // ---------------------Types-------------------------------//
 
-typealias BooleanLiveData = LiveData<Boolean>
-
-typealias IntLiveData = LiveData<Int>
-
-typealias LongLiveData = LiveData<Long>
-
-typealias DoubleLiveData = LiveData<Double>
-
-typealias FloatLiveData = LiveData<Float>
-
-typealias StringLiveData = LiveData<String>
-
-typealias ListLiveData<T> = LiveData<List<T>>
-
-typealias MutableBooleanLiveData = MutableLiveData<Boolean>
-
-typealias MutableIntLiveData = MutableLiveData<Int>
-
-typealias MutableLongLiveData = MutableLiveData<Long>
-
-typealias MutableDoubleLiveData = MutableLiveData<Double>
-
-typealias MutableFloatLiveData = MutableLiveData<Float>
-
-typealias MutableStringLiveData = MutableLiveData<String?>
-
-typealias MutableListLiveData<T> = MutableLiveData<List<T>>
-
 typealias ParamMap = HashMap<String, Any>
 
 // ---------------------Any-------------------------------//
@@ -108,8 +78,6 @@ inline val isMainThread: Boolean get() = Looper.getMainLooper() == Looper.myLoop
 
 fun <T : Any> unsafeLazy(initializer: () -> T): Lazy<T> =
   lazy(LazyThreadSafetyMode.NONE, initializer)
-
-fun <T> MutableLiveData<T>.asLiveData(): LiveData<T> = this
 
 // ---------------------CharSequence-------------------------------//
 

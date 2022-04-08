@@ -36,8 +36,6 @@ dependencies {
 
   api(libs.androidX.collection)
   api(libs.utils)
-  api(libs.rxJava3.java)
-  api(libs.rxJava3.android)
 
   implementation(libs.bundles.androidX.room)
   kapt(libs.androidX.room.compiler)
@@ -45,7 +43,6 @@ dependencies {
   implementation(libs.bundles.coil)
   implementation(libs.square.moshi)
   implementation(libs.square.retrofit.moshi)
-  implementation(libs.square.retrofit.rxJava3)
 
   debugImplementation(libs.chucker.debug)
   releaseImplementation(libs.chucker.release)

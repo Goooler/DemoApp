@@ -81,8 +81,6 @@
 # Extra rules for R8 fullMode
 -keep,allowobfuscation,allowshrinking class io.goooler.demoapp.common.base.binding.BaseBindingActivity
 -keep,allowobfuscation,allowshrinking class * extends io.goooler.demoapp.common.base.binding.BaseBindingActivity
--keep,allowobfuscation,allowshrinking class io.reactivex.rxjava3.core.Single
--keep,allowobfuscation,allowshrinking class io.reactivex.rxjava3.core.Observable
 # TODO: Waiting for new retrofit release to remove these rules
 -keep,allowobfuscation,allowshrinking interface retrofit2.Call
 -keep,allowobfuscation,allowshrinking class retrofit2.Response
