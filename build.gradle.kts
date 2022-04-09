@@ -44,12 +44,6 @@ allprojects {
     }
   }
 
-  tasks.matching {
-    it.name.contains("AndroidTest")
-  }.configureEach {
-    notCompatibleWithConfigurationCache("writeFilters*AndroidTest tasks can't support CC")
-  }
-
   tasks.withType<Test> {
     useJUnitPlatform()
   }
