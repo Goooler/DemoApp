@@ -17,9 +17,12 @@ import android.text.Spannable
 import android.text.Spanned
 import android.text.style.ClickableSpan
 import android.text.style.ForegroundColorSpan
+import android.view.KeyEvent
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.webkit.URLUtil
+import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.annotation.IdRes
 import androidx.annotation.IntRange
@@ -40,8 +43,6 @@ import androidx.fragment.app.commit
 import androidx.fragment.app.findFragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleCoroutineScope
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.coroutineScope
 import androidx.lifecycle.findViewTreeLifecycleOwner
 import java.io.File
@@ -50,6 +51,7 @@ import java.math.BigDecimal
 import java.net.URLConnection
 import java.util.Collections
 import java.util.UUID
+import java.util.regex.Pattern
 import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.contract
 import kotlinx.coroutines.CoroutineScope
@@ -61,34 +63,6 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
 
 // ---------------------Types-------------------------------//
-
-typealias BooleanLiveData = LiveData<Boolean>
-
-typealias IntLiveData = LiveData<Int>
-
-typealias LongLiveData = LiveData<Long>
-
-typealias DoubleLiveData = LiveData<Double>
-
-typealias FloatLiveData = LiveData<Float>
-
-typealias StringLiveData = LiveData<String>
-
-typealias ListLiveData<T> = LiveData<List<T>>
-
-typealias MutableBooleanLiveData = MutableLiveData<Boolean>
-
-typealias MutableIntLiveData = MutableLiveData<Int>
-
-typealias MutableLongLiveData = MutableLiveData<Long>
-
-typealias MutableDoubleLiveData = MutableLiveData<Double>
-
-typealias MutableFloatLiveData = MutableLiveData<Float>
-
-typealias MutableStringLiveData = MutableLiveData<String?>
-
-typealias MutableListLiveData<T> = MutableLiveData<List<T>>
 
 typealias ParamMap = HashMap<String, Any>
 
@@ -104,8 +78,6 @@ inline val isMainThread: Boolean get() = Looper.getMainLooper() == Looper.myLoop
 
 fun <T : Any> unsafeLazy(initializer: () -> T): Lazy<T> =
   lazy(LazyThreadSafetyMode.NONE, initializer)
-
-fun <T> MutableLiveData<T>.asLiveData(): LiveData<T> = this
 
 // ---------------------CharSequence-------------------------------//
 
@@ -126,6 +98,16 @@ fun String.toMimeType(): String = URLConnection.getFileNameMap().getContentTypeF
 fun String.onlyDigits(): String = replace(Regex("\\D*"), "")
 
 fun String.removeAllSpecialCharacters(): String = replace(Regex("[^a-zA-Z]+"), "")
+
+fun String.isValidFilename(): Boolean {
+  val filenameRegex =
+    Pattern.compile("[\\\\\\/:\\*\\?\"<>\\|\\x01-\\x1F\\x7F]", Pattern.CASE_INSENSITIVE)
+
+  // It's not easy to use regex to detect single/double dot while leaving valid values
+  // (filename.zip) behind...
+  // So we simply use equality to check them
+  return !filenameRegex.matcher(this).find() && "." != this && ".." != this
+}
 
 @OptIn(ExperimentalContracts::class)
 fun CharSequence?.isNotNullOrEmpty(): Boolean {
@@ -343,6 +325,28 @@ fun <K, V> Map<K, V>.toUnmodifiableMap(): Map<K, V> = Collections.unmodifiableMa
 fun paramMapOf(vararg pairs: Pair<String, Any>): HashMap<String, Any> =
   HashMap<String, Any>(pairs.size).apply { putAll(pairs) }
 
+fun <K, V> MutableMap<K, V>.removeFirst(): Map.Entry<K, V> {
+  val iterator = iterator()
+  val element = iterator.next()
+  iterator.remove()
+  return element
+}
+
+fun <K, V> MutableMap<K, V>.removeFirstOrNull(predicate: (Map.Entry<K, V>) -> Boolean): Map.Entry<K, V>? =
+  entries.removeFirstOrNull(predicate)
+
+fun <T> MutableCollection<T>.removeFirstOrNull(predicate: (T) -> Boolean): T? {
+  val iterator = iterator()
+  while (iterator.hasNext()) {
+    val element = iterator.next()
+    if (predicate(element)) {
+      iterator.remove()
+      return element
+    }
+  }
+  return null
+}
+
 // ---------------------Coroutine-------------------------------//
 
 fun <T> CoroutineScope.defaultAsync(
@@ -448,6 +452,8 @@ fun Fragment.replaceFragment(
   childFragmentManager.addFragment(fragment, containerViewId, isAddToBackStack, tag)
 }
 
+// ---------------------View-------------------------------//
+
 inline val View.attachedFragment: Fragment?
   get() = runCatching { findFragment<Fragment>() }.getOrNull()
 
@@ -471,6 +477,29 @@ fun View.hideSoftInput() {
 
 fun View.showSoftInput() {
   context.getSystemService<InputMethodManager>()?.showSoftInput(this, 0)
+}
+
+fun TextView.setOnEditorConfirmActionListener(listener: (TextView) -> Unit) {
+  setOnEditorActionListener { view, actionId, event ->
+    val isConfirmAction = if (event != null) {
+      when (event.keyCode) {
+        KeyEvent.KEYCODE_DPAD_CENTER, KeyEvent.KEYCODE_ENTER,
+        KeyEvent.KEYCODE_NUMPAD_ENTER -> true
+        else -> false
+      } && event.action == KeyEvent.ACTION_DOWN
+    } else {
+      when (actionId) {
+        EditorInfo.IME_NULL, EditorInfo.IME_ACTION_DONE, EditorInfo.IME_ACTION_NEXT -> true
+        else -> false
+      }
+    }
+    if (isConfirmAction) {
+      listener(view)
+      true
+    } else {
+      false
+    }
+  }
 }
 
 // ---------------------Context-------------------------------//

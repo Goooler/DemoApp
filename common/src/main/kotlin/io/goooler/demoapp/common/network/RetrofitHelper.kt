@@ -13,8 +13,6 @@ import io.goooler.demoapp.common.util.AppUserInfoManager
 import io.goooler.demoapp.common.util.JsonUtil
 import okhttp3.OkHttpClient
 import retrofit2.Converter
-import retrofit2.Retrofit
-import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 @SuppressLint("StaticFieldLeak")
@@ -29,11 +27,6 @@ object RetrofitHelper : BaseRetrofitHelper() {
   override val statusListener: StatusListener = StatusListener {
     AppUserInfoManager.logout()
     RouterManager.goLogin(CommonApplication.app, true)
-  }
-
-  override fun Retrofit.Builder.addCallAdapterFactories(): Retrofit.Builder {
-    addCallAdapterFactory(RxJava3CallAdapterFactory.create())
-    return this
   }
 
   override fun OkHttpClient.Builder.addInterceptors(): OkHttpClient.Builder {
