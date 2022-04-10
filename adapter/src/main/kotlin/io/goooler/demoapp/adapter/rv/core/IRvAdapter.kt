@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.IntRange
 import androidx.annotation.LayoutRes
+import androidx.databinding.BindingAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
@@ -17,7 +18,7 @@ import androidx.recyclerview.widget.RecyclerView
  * @version 1.0.0
  * @since 1.0.0
  */
-interface IRvAdapter<M : IVhModelType> {
+sealed interface IRvAdapter<M : IVhModelType> {
 
   /**
    * What to do when creating the viewHolder for all.
@@ -51,4 +52,33 @@ interface IRvAdapter<M : IVhModelType> {
    * Get item by position.
    */
   fun getModel(@IntRange(from = 0) position: Int): M?
+}
+
+interface IRvAdapterMutable<M : IVhModelType> : IRvAdapter<M> {
+
+  /**
+   * Set or Get data list.
+   */
+  var list: List<M>
+
+  /**
+   * Refresh some items.
+   */
+  fun refreshItems(items: List<M>)
+
+  fun removeItem(@IntRange(from = 0) index: Int)
+
+  fun removeItem(item: M)
+}
+
+@BindingAdapter(value = ["binding_rv_dataList"], requireAll = true)
+fun <M : IVhModelType> RecyclerView.setList(list: List<M>?) {
+  @Suppress("UNCHECKED_CAST")
+  (adapter as? IRvAdapterMutable<M>)?.list = list.orEmpty()
+}
+
+@BindingAdapter(value = ["binding_rv_refreshItems"], requireAll = true)
+fun <M : IVhModelType> RecyclerView.refreshItems(items: List<M>?) {
+  @Suppress("UNCHECKED_CAST")
+  (adapter as? IRvAdapterMutable<M>)?.refreshItems(items.orEmpty())
 }

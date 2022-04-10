@@ -27,7 +27,6 @@ import java.util.Collections
  */
 abstract class BaseRvDiffAdapter<M : IDiffVhModelType> :
   ListAdapter<M, BindingViewHolder>,
-  IRvAdapter<M>,
   IRvAdapterMutable<M> {
 
   private val helper by lazy(LazyThreadSafetyMode.NONE) { RvAdapterHelper(this) }
