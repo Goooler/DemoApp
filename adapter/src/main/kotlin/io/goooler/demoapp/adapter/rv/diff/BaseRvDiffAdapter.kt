@@ -8,8 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import io.goooler.demoapp.adapter.rv.core.BindingViewHolder
-import io.goooler.demoapp.adapter.rv.core.IRvAdapter
-import io.goooler.demoapp.adapter.rv.core.IRvAdapterMutable
+import io.goooler.demoapp.adapter.rv.core.IMutableRvAdapter
 import io.goooler.demoapp.adapter.rv.core.RvAdapterHelper
 import java.util.Collections
 
@@ -21,14 +20,10 @@ import java.util.Collections
  * @author feling
  * @version 1.0.0
  * @since 1.0.0
- * @see ListAdapter
- * @see RvAdapterHelper
- * @see IRvAdapter
  */
 abstract class BaseRvDiffAdapter<M : IDiffVhModelType> :
   ListAdapter<M, BindingViewHolder>,
-  IRvAdapter<M>,
-  IRvAdapterMutable<M> {
+  IMutableRvAdapter<M> {
 
   private val helper by lazy(LazyThreadSafetyMode.NONE) { RvAdapterHelper(this) }
 
@@ -60,9 +55,9 @@ abstract class BaseRvDiffAdapter<M : IDiffVhModelType> :
 
   @LayoutRes
   override fun getItemViewType(@IntRange(from = 0) position: Int): Int =
-    getItem(position)?.viewType ?: 0
+    getItem(position).viewType
 
-  override fun getModel(@IntRange(from = 0) position: Int): M = getItem(position)
+  override operator fun get(@IntRange(from = 0) position: Int): M = getItem(position)
 
   override var list: List<M>
     get() = Collections.unmodifiableList(helper.list)

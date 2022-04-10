@@ -13,7 +13,6 @@ import androidx.databinding.ViewDataBinding
  * @author feling
  * @version 1.0.0
  * @since 1.0.0
- * @see ViewTypeDelegate
  */
 class ViewTypeDelegateManager<M : IVhModelType> {
 
@@ -26,7 +25,7 @@ class ViewTypeDelegateManager<M : IVhModelType> {
    * @param viewType viewType
    */
   internal fun onCreateVH(binding: ViewDataBinding, @LayoutRes viewType: Int) {
-    if (mIVDs.size() == 0) return
+    if (mIVDs.isEmpty) return
     mIVDs[viewType]?.onCreateVH(binding)
   }
 
@@ -37,7 +36,7 @@ class ViewTypeDelegateManager<M : IVhModelType> {
    * @param model model
    */
   internal fun onBindVH(binding: ViewDataBinding, model: M) {
-    if (mIVDs.size() == 0) return
+    if (mIVDs.isEmpty) return
     mIVDs[model.viewType]?.onBindVH(binding, model)
   }
 
