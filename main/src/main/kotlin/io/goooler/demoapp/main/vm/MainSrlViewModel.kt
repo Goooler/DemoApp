@@ -66,8 +66,9 @@ class MainSrlViewModel @Inject constructor(private val repository: MainCommonRep
             if (it.size < CommonConstants.DEFAULT_PAGE_SIZE) {
               isNoMore.value = true
             }
+            _listData.toList()
           }.let {
-            listData.value = _listData.toList()
+            listData.value = it
           }
       } catch (_: Exception) {
         listData.value = listOf(MainCommonVhModel.Error())
