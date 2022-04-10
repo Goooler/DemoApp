@@ -59,7 +59,7 @@ abstract class BaseRvDiffAdapter<M : IDiffVhModelType> :
 
   @LayoutRes
   override fun getItemViewType(@IntRange(from = 0) position: Int): Int =
-    getItem(position)?.viewType ?: 0
+    getItem(position).viewType
 
   override fun getModel(@IntRange(from = 0) position: Int): M = getItem(position)
 
