@@ -15,9 +15,6 @@ import java.util.Collections
  * @author feling
  * @version 1.0.0
  * @since 1.0.0
- * @see RecyclerView.Adapter
- * @see RvAdapterHelper
- * @see IRvAdapter
  */
 @SuppressLint("NotifyDataSetChanged")
 abstract class BaseRvAdapter<M : IVhModelType> :

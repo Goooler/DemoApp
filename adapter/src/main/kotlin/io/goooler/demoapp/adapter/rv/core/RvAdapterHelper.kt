@@ -17,8 +17,6 @@ import io.goooler.demoapp.adapter.rv.core.ISpanSize.Companion.SPAN_SIZE_SINGLE
  * @author feling
  * @version 1.0.0
  * @since 1.0.0
- * @see IRvAdapter
- * @see BaseRvAdapter
  */
 internal class RvAdapterHelper<M : IVhModelType>(private val adapter: IRvAdapter<M>) {
 

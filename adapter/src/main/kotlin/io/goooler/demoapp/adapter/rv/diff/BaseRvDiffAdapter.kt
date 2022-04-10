@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import io.goooler.demoapp.adapter.rv.core.BindingViewHolder
 import io.goooler.demoapp.adapter.rv.core.IMutableRvAdapter
-import io.goooler.demoapp.adapter.rv.core.IRvAdapter
 import io.goooler.demoapp.adapter.rv.core.RvAdapterHelper
 import java.util.Collections
 
@@ -21,9 +20,6 @@ import java.util.Collections
  * @author feling
  * @version 1.0.0
  * @since 1.0.0
- * @see ListAdapter
- * @see RvAdapterHelper
- * @see IRvAdapter
  */
 abstract class BaseRvDiffAdapter<M : IDiffVhModelType> :
   ListAdapter<M, BindingViewHolder>,
