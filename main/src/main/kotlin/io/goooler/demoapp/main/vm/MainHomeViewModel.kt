@@ -14,14 +14,13 @@ import kotlin.time.Duration.Companion.seconds
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.onCompletion
-import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 @HiltViewModel
 class MainHomeViewModel @Inject constructor(private val repository: MainCommonRepository) :
@@ -40,44 +39,40 @@ class MainHomeViewModel @Inject constructor(private val repository: MainCommonRe
     if (countdownJob?.isActive != true) {
       startCountDown()
     } else {
-      countdownJob?.cancel(CancellationException(CANCEL_MANUALLY))
+      countdownJob?.cancel(ManualCancellationException)
     }
   }
 
   private fun startCountDown(
-    timeout: Duration = 30.seconds,
-    callback: (CountDownState) -> Unit = {}
+    timeout: Duration = 5.seconds
   ) {
     countdownJob = viewModelScope.launch {
       flow {
         (timeout.inWholeSeconds downTo Duration.ZERO.inWholeSeconds).forEach {
           delay(1000)
-          emit("正在测试中\n${it}s")
+          emit("Timeout \n${it}s")
         }
       }.flowOn(Dispatchers.Default)
-        .onStart {
-          callback(CountDownState.Start)
-        }
         .onCompletion { cause ->
-          val state = if (cause == null || cause.message == CANCEL_MANUALLY) {
-            _title.emit("倒计时结束")
-            CountDownState.End
-          } else {
-            CountDownState.Cancel
+          if (cause == null) {
+            _title.value = "Countdown end"
+          } else if (cause == ManualCancellationException) {
+            _title.value = "Countdown canceled"
           }
-          callback(state)
         }
-        .collect(_title::emit)
+        .collect {
+          _title.value = it
+        }
     }
   }
 
   private fun fetchRepoLists() {
-    viewModelScope.launch(Dispatchers.IO) {
+    viewModelScope.launch {
       try {
         val google = defaultAsync { repository.getRepoListFromDb("google") }
         val microsoft = defaultAsync { repository.getRepoListFromDb("microsoft") }
 
-        processList(google.await(), microsoft.await()).collect(_title::emit)
+        _title.value = processList(google.await(), microsoft.await())
       } catch (_: Exception) {
       }
 
@@ -85,25 +80,24 @@ class MainHomeViewModel @Inject constructor(private val repository: MainCommonRe
         val google = defaultAsync { repository.getRepoListFromApi("google") }
         val microsoft = defaultAsync { repository.getRepoListFromApi("microsoft") }
 
-        processList(google.await(), microsoft.await()).collect(_title::emit)
+        _title.value = processList(google.await(), microsoft.await())
 
         putRepoListIntoDb(google.await(), microsoft.await())
       } catch (e: Exception) {
         e.message?.let {
-          _title.emit(it)
+          _title.value = it
         }
         io.goooler.demoapp.common.R.string.common_request_failed.showToast()
       }
     }
   }
 
-  private suspend fun processList(vararg lists: List<MainRepoListBean>): Flow<String> = flow {
-    lists.fold("") { acc, list ->
-      acc + list.lastOrNull()?.name + "\n"
-    }.let {
-      emit(it)
+  private suspend fun processList(vararg lists: List<MainRepoListBean>): String =
+    withContext(Dispatchers.Default) {
+      lists.fold("") { acc, list ->
+        acc + list.lastOrNull()?.name + "\n"
+      }
     }
-  }
 
   private suspend fun putRepoListIntoDb(vararg lists: List<MainRepoListBean>) {
     lists.forEach {
@@ -111,11 +105,5 @@ class MainHomeViewModel @Inject constructor(private val repository: MainCommonRe
     }
   }
 
-  enum class CountDownState {
-    Start, End, Cancel
-  }
-
-  companion object {
-    const val CANCEL_MANUALLY = "cancelManually"
-  }
+  private object ManualCancellationException : CancellationException("cancelManually")
 }
