@@ -48,8 +48,6 @@ interface IRvAdapter<M : IVhModelType> {
   /**
    * Get item by position.
    */
-  fun getModel(@IntRange(from = 0) position: Int): M?
-
   operator fun get(@IntRange(from = 0) position: Int): M?
 }
 

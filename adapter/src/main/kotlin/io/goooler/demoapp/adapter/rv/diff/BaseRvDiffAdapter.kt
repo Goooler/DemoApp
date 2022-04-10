@@ -57,9 +57,7 @@ abstract class BaseRvDiffAdapter<M : IDiffVhModelType> :
   override fun getItemViewType(@IntRange(from = 0) position: Int): Int =
     getItem(position).viewType
 
-  override fun getModel(@IntRange(from = 0) position: Int): M = getItem(position)
-
-  override operator fun get(@IntRange(from = 0) position: Int): M = getModel(position)
+  override operator fun get(@IntRange(from = 0) position: Int): M = getItem(position)
 
   override var list: List<M>
     get() = Collections.unmodifiableList(helper.list)

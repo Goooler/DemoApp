@@ -46,9 +46,7 @@ abstract class BaseRvAdapter<M : IVhModelType> :
 
   override fun getItemCount(): Int = helper.list.size
 
-  override fun getModel(@IntRange(from = 0) position: Int): M = helper.list[position]
-
-  override operator fun get(@IntRange(from = 0) position: Int): M = getModel(position)
+  override operator fun get(@IntRange(from = 0) position: Int): M = helper.list[position]
 
   override var list: List<M>
     get() = Collections.unmodifiableList(helper.list)
