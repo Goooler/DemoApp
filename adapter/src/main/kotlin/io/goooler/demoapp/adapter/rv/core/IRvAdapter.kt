@@ -54,7 +54,7 @@ sealed interface IRvAdapter<M : IVhModelType> {
   fun getModel(@IntRange(from = 0) position: Int): M?
 }
 
-interface IRvAdapterMutable<M : IVhModelType> : IRvAdapter<M> {
+interface IMutableRvAdapter<M : IVhModelType> : IRvAdapter<M> {
 
   /**
    * Set or Get data list.
@@ -74,11 +74,11 @@ interface IRvAdapterMutable<M : IVhModelType> : IRvAdapter<M> {
 @BindingAdapter(value = ["binding_rv_dataList"], requireAll = true)
 fun <M : IVhModelType> RecyclerView.setList(list: List<M>?) {
   @Suppress("UNCHECKED_CAST")
-  (adapter as? IRvAdapterMutable<M>)?.list = list.orEmpty()
+  (adapter as? IMutableRvAdapter<M>)?.list = list.orEmpty()
 }
 
 @BindingAdapter(value = ["binding_rv_refreshItems"], requireAll = true)
 fun <M : IVhModelType> RecyclerView.refreshItems(items: List<M>?) {
   @Suppress("UNCHECKED_CAST")
-  (adapter as? IRvAdapterMutable<M>)?.refreshItems(items.orEmpty())
+  (adapter as? IMutableRvAdapter<M>)?.refreshItems(items.orEmpty())
 }

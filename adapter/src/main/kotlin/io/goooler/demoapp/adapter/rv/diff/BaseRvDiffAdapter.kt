@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import io.goooler.demoapp.adapter.rv.core.BindingViewHolder
+import io.goooler.demoapp.adapter.rv.core.IMutableRvAdapter
 import io.goooler.demoapp.adapter.rv.core.IRvAdapter
-import io.goooler.demoapp.adapter.rv.core.IRvAdapterMutable
 import io.goooler.demoapp.adapter.rv.core.RvAdapterHelper
 import java.util.Collections
 
@@ -27,7 +27,7 @@ import java.util.Collections
  */
 abstract class BaseRvDiffAdapter<M : IDiffVhModelType> :
   ListAdapter<M, BindingViewHolder>,
-  IRvAdapterMutable<M> {
+  IMutableRvAdapter<M> {
 
   private val helper by lazy(LazyThreadSafetyMode.NONE) { RvAdapterHelper(this) }
 

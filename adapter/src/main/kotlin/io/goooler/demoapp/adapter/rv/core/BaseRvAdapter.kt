@@ -22,7 +22,7 @@ import java.util.Collections
 @SuppressLint("NotifyDataSetChanged")
 abstract class BaseRvAdapter<M : IVhModelType> :
   RecyclerView.Adapter<BindingViewHolder>(),
-  IRvAdapterMutable<M> {
+  IMutableRvAdapter<M> {
 
   private val helper by lazy(LazyThreadSafetyMode.NONE) { RvAdapterHelper(this) }
 
