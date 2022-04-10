@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.RecyclerView
  * @version 1.0.0
  * @since 1.0.0
  */
-sealed interface IRvAdapter<M : IVhModelType> {
+interface IRvAdapter<M : IVhModelType> {
 
   /**
    * What to do when creating the viewHolder for all.
