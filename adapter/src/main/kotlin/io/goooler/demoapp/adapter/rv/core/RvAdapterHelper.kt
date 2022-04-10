@@ -17,8 +17,6 @@ import io.goooler.demoapp.adapter.rv.core.ISpanSize.Companion.SPAN_SIZE_SINGLE
  * @author feling
  * @version 1.0.0
  * @since 1.0.0
- * @see IRvAdapter
- * @see BaseRvAdapter
  */
 internal class RvAdapterHelper<M : IVhModelType>(private val adapter: IRvAdapter<M>) {
 
@@ -65,7 +63,7 @@ internal class RvAdapterHelper<M : IVhModelType>(private val adapter: IRvAdapter
    * Called by RecyclerView to display the data at the specified position.
    */
   fun onBindViewHolder(holder: BindingViewHolder, @IntRange(from = 0) position: Int) {
-    adapter.getModel(position)?.let {
+    adapter[position]?.let {
       setFullSpan(holder, it)
       adapter.onBindVHForAll(holder.binding, it)
       ivdManager.onBindVH(holder.binding, it)
@@ -125,7 +123,7 @@ internal class RvAdapterHelper<M : IVhModelType>(private val adapter: IRvAdapter
     (recyclerView.layoutManager as? GridLayoutManager)?.let {
       it.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
         override fun getSpanSize(position: Int): Int {
-          (adapter.getModel(position) as? ISpanSize)?.spanSize?.let { size ->
+          (adapter[position] as? ISpanSize)?.spanSize?.let { size ->
             return if (size == SPAN_SIZE_FULL) it.spanCount else size
           }
           return SPAN_SIZE_SINGLE

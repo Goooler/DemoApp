@@ -15,15 +15,11 @@ import java.util.Collections
  * @author feling
  * @version 1.0.0
  * @since 1.0.0
- * @see RecyclerView.Adapter
- * @see RvAdapterHelper
- * @see IRvAdapter
  */
 @SuppressLint("NotifyDataSetChanged")
 abstract class BaseRvAdapter<M : IVhModelType> :
   RecyclerView.Adapter<BindingViewHolder>(),
-  IRvAdapter<M>,
-  IRvAdapterMutable<M> {
+  IMutableRvAdapter<M> {
 
   private val helper by lazy(LazyThreadSafetyMode.NONE) { RvAdapterHelper(this) }
 
@@ -50,7 +46,7 @@ abstract class BaseRvAdapter<M : IVhModelType> :
 
   override fun getItemCount(): Int = helper.list.size
 
-  override fun getModel(@IntRange(from = 0) position: Int): M = helper.list[position]
+  override operator fun get(@IntRange(from = 0) position: Int): M = helper.list[position]
 
   override var list: List<M>
     get() = Collections.unmodifiableList(helper.list)

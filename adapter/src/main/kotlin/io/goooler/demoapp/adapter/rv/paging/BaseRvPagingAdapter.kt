@@ -53,7 +53,7 @@ abstract class BaseRvPagingAdapter<M : IDiffVhModelType>(callback: DiffCallBack<
   override fun getItemViewType(@IntRange(from = 0) position: Int): Int =
     getItem(position)?.viewType ?: 0
 
-  override fun getModel(@IntRange(from = 0) position: Int): M? = getItem(position)
+  override operator fun get(@IntRange(from = 0) position: Int): M? = getItem(position)
 
   private fun observeLoadState() {
     addLoadStateListener {
