@@ -43,12 +43,12 @@ class MainSrlViewModel @Inject constructor(private val repository: MainCommonRep
 
   fun swapItems(fromPosition: Int, toPosition: Int) {
     Collections.swap(_listData, fromPosition, toPosition)
-    listData.value = _listData
+    listData.value = _listData.toList()
   }
 
   fun deleteItem(position: Int) {
     _listData.removeAt(position)
-    listData.value = _listData
+    listData.value = _listData.toList()
   }
 
   private fun fetchListData(page: Int) {
@@ -66,8 +66,9 @@ class MainSrlViewModel @Inject constructor(private val repository: MainCommonRep
             if (it.size < CommonConstants.DEFAULT_PAGE_SIZE) {
               isNoMore.value = true
             }
+            _listData.toList()
           }.let {
-            listData.value = _listData.toList()
+            listData.value = it
           }
       } catch (_: Exception) {
         listData.value = listOf(MainCommonVhModel.Error())
