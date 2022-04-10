@@ -55,6 +55,8 @@ abstract class BaseRvPagingAdapter<M : IDiffVhModelType>(callback: DiffCallBack<
 
   override fun getModel(@IntRange(from = 0) position: Int): M? = getItem(position)
 
+  override operator fun get(@IntRange(from = 0) position: Int): M? = getModel(position)
+
   private fun observeLoadState() {
     addLoadStateListener {
       when {
