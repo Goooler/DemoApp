@@ -66,11 +66,6 @@ fun @receiver:StringRes Int.showToast() {
   ToastUtil.show(CommonApplication.app, this)
 }
 
-@AnyThread
-fun String.showToast() {
-  ToastUtil.show(CommonApplication.app, this)
-}
-
 @MainThread
 fun SmartRefreshLayout.finishRefreshAndLoadMore() {
   finishRefresh()
@@ -86,6 +81,19 @@ fun SmartRefreshLayout.enableRefreshAndLoadMore(enable: Boolean = true) {
 @MainThread
 fun SmartRefreshLayout.disableRefreshAndLoadMore() {
   enableRefreshAndLoadMore(false)
+}
+
+// ---------------------String-------------------------------//
+
+@AnyThread
+fun String.showToast() {
+  ToastUtil.show(CommonApplication.app, this)
+}
+
+fun String.isValidPhoneFormat(): Boolean = startsWith("1") && length == 11
+
+fun String.hidePhoneNumber(): String {
+  return replace(Regex("(\\d{3})\\d{4}(\\d{4})"), "$1****$2")
 }
 
 // ---------------------Res-------------------------------//
@@ -155,7 +163,7 @@ inline fun <reified T> DiffUtil.ItemCallback<T>.asConfig(): AsyncDifferConfig<T>
     .build()
 }
 
-// ---------------------Fragment-------------------------------//
+// ---------------------VM & Binding-------------------------------//
 
 @MainThread
 inline fun <reified V, reified VM : BaseThemeViewModel> V.themeViewModels(): Lazy<VM>
@@ -168,8 +176,6 @@ inline fun <reified V, reified VM : BaseThemeViewModel> V.themeViewModels(): Laz
     }
   }
 }
-
-// ---------------------Activity-------------------------------//
 
 @Suppress("UNCHECKED_CAST")
 fun <T : ViewBinding> LifecycleOwner.inflateBinding(inflater: LayoutInflater): T {

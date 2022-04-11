@@ -209,18 +209,6 @@ fun String?.isNetworkUrl(): Boolean = URLUtil.isNetworkUrl(this)
 
 fun String?.isValidUrl(): Boolean = URLUtil.isValidUrl(this)
 
-/**
- * 验证手机号格式是否正确
- */
-fun String.isValidPhoneFormat(): Boolean = startsWith("1") && length == 11
-
-/**
- * 隐藏手机号
- */
-fun String.hidePhone(): String {
-  return replace(Regex("(\\d{3})\\d{4}(\\d{4})"), "$1****$2")
-}
-
 // ---------------------Calculate-------------------------------//
 
 infix fun Double.plus(that: Double): Double {
@@ -541,19 +529,3 @@ fun FragmentActivity.replaceFragment(
 @MainThread
 inline fun <reified T : ViewDataBinding> Activity.binding(@LayoutRes resId: Int): Lazy<T> =
   lazy(LazyThreadSafetyMode.NONE) { DataBindingUtil.setContentView(this, resId) }
-
-// ---------------------Other-------------------------------//
-
-/**
- * 条件为真时执行
- */
-inline fun Boolean.trueRun(block: () -> Unit) {
-  if (this) block()
-}
-
-/**
- * 条件为假时执行
- */
-inline fun Boolean.falseRun(block: () -> Unit) {
-  if (this.not()) block()
-}
