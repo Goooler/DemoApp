@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.RecyclerView
  * @version 1.0.0
  * @since 1.0.0
  */
-interface IRvAdapter<M : IVhModelType> {
+internal interface IRvAdapter<M : IVhModelType> {
 
   /**
    * What to do when creating the viewHolder for all.
@@ -51,7 +51,7 @@ interface IRvAdapter<M : IVhModelType> {
   operator fun get(@IntRange(from = 0) position: Int): M?
 }
 
-interface IMutableRvAdapter<M : IVhModelType> : IRvAdapter<M> {
+internal interface IMutableRvAdapter<M : IVhModelType> : IRvAdapter<M> {
 
   /**
    * Set or Get data list.
