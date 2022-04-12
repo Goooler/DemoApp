@@ -13,7 +13,8 @@ import coil.Coil
 import coil.decode.GifDecoder
 import coil.decode.ImageDecoderDecoder
 import coil.decode.SvgDecoder
-import coil.loadAny
+import coil.imageLoader
+import coil.load
 import coil.request.CachePolicy
 import coil.request.ImageRequest
 import coil.size.Scale
@@ -26,13 +27,13 @@ object ImageLoader {
     val application = context.applicationContext
     val imageLoader = coil.ImageLoader.Builder(application)
       .crossfade(true)
-      .componentRegistry {
+      .components {
         val gifDecoder = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P)
-          ImageDecoderDecoder(application)
+          ImageDecoderDecoder.Factory()
         else
-          GifDecoder()
+          GifDecoder.Factory()
         add(gifDecoder)
-        add(SvgDecoder(application))
+        add(SvgDecoder.Factory())
       }
       .build()
     Coil.setImageLoader(imageLoader)
@@ -85,7 +86,7 @@ object ImageLoader {
       .loadWithCache(useCache)
       .apply(builder)
       .build()
-    return Coil.execute(request).drawable
+    return request.context.imageLoader.execute(request).drawable
   }
 
   fun ImageRequest.Builder.loadWithCache(useCache: Boolean): ImageRequest.Builder {
@@ -105,7 +106,7 @@ object ImageLoader {
     useCache: Boolean,
     builder: ImageRequest.Builder.() -> Unit = {}
   ) {
-    loadAny(data) {
+    load(data, context.imageLoader) {
       placeholder(placeholderDrawable)
       error(errorDrawable)
       if (cornerRadius > 0) transformations(RoundedCornersTransformation(cornerRadius.toFloat()))
