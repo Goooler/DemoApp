@@ -17,15 +17,18 @@ dependencyResolutionManagement {
 }
 
 include(
+  // App
   ":app",
+  ":obsolete",
+  // Common
   ":base",
   ":common",
-  ":login",
-  ":main",
-  ":detail",
-  ":web",
   ":adapter",
-  ":obsolete"
+  // Biz
+  ":biz-login",
+  ":biz-main",
+  ":biz-detail",
+  ":biz-web"
 )
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")

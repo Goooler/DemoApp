@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config xmlns:tools="http://schemas.android.com/tools"
+  tools:ignore="ResourceName">
+  <!--9.0 开始默认不支持 http，需要手动信任-->
+  <base-config
+    cleartextTrafficPermitted="true"
+    tools:ignore="InsecureBaseConfiguration" />
+</network-security-config>

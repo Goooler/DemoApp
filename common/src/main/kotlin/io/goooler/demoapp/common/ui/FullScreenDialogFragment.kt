@@ -11,7 +11,7 @@ class FullScreenDialogFragment :
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setStyle(STYLE_NO_TITLE, R.style.DialogFullScreenTheme)
+    setStyle(STYLE_NO_TITLE, R.style.CommonDialogFullScreenTheme)
   }
 
   override fun initOnce() {
