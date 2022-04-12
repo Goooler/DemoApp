@@ -1,7 +1,5 @@
 import com.android.build.gradle.BaseExtension
-import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
 import dagger.hilt.android.plugin.HiltExtension
-import java.util.Properties
 import org.gradle.kotlin.dsl.get
 import org.jlleitschuh.gradle.ktlint.KtlintExtension
 
@@ -73,11 +71,10 @@ subprojects {
     if (name.startsWith("biz-") || name.startsWith("common")) setupCommon() else setupBase()
   }
   plugins.withId(rootProject.libs.plugins.android.application.get().pluginId) {
-    setupApp()
+    setupCommon()
   }
 }
 
-val appName = "DemoApp"
 val Project.shortName: String get() = name.removePrefix("biz-")
 
 fun Project.setupBase(): BaseExtension {
@@ -127,52 +124,3 @@ fun Project.setupCommon(): BaseExtension = setupBase().apply {
     create("prod")
   }
 }
-
-fun Project.setupApp(): BaseAppModuleExtension = (setupCommon() as BaseAppModuleExtension).apply {
-  defaultConfig {
-    applicationId = namespace
-    targetSdk = 32
-    versionCode = libs.versions.versionCode.get().toInt()
-    versionName = libs.versions.versionName.get()
-    resourceConfigurations += setOf("en", "zh-rCN", "xxhdpi")
-  }
-  signingConfigs.create("release") {
-    keyAlias = getSignProperty("keyAlias")
-    keyPassword = getSignProperty("keyPassword")
-    storeFile = File(rootDir, getSignProperty("storeFile"))
-    storePassword = getSignProperty("storePassword")
-    enableV3Signing = true
-    enableV4Signing = true
-  }
-  buildTypes {
-    release {
-      resValue("string", "app_name", appName)
-      signingConfig = signingConfigs["release"]
-      isMinifyEnabled = true
-      isShrinkResources = true
-      proguardFiles("$rootDir/gradle/proguard-rules.pro")
-    }
-    debug {
-      resValue("string", "app_name", "${appName}.debug")
-      signingConfig = signingConfigs["release"]
-      isJniDebuggable = true
-      isRenderscriptDebuggable = true
-      isCrunchPngs = false
-    }
-  }
-  dependenciesInfo.includeInApk = false
-  applicationVariants.all {
-    outputs.all {
-      (this as? com.android.build.gradle.internal.api.ApkVariantOutputImpl)?.outputFileName =
-        "../../../../" +
-          "${appName}_${versionName}_${versionCode}_${flavorName}_${buildType.name}.apk"
-    }
-  }
-}
-
-fun Project.getSignProperty(
-  key: String, path: String = "gradle/keystore.properties"
-): String = Properties().apply {
-  rootProject.file(path).inputStream().use(::load)
-}.getProperty(key)
-
