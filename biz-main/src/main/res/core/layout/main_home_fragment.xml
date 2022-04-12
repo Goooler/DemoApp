@@ -15,7 +15,7 @@
   <androidx.core.widget.NestedScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/common_white">
 
     <LinearLayout
       android:layout_width="match_parent"
@@ -28,12 +28,12 @@
         android:id="@+id/tv_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/md_teal_800"
+        android:background="@color/common_teal_800"
         android:gravity="center"
         android:minHeight="40dp"
         android:onClick="@{listener}"
         android:text="@{vm.title}"
-        android:textColor="@color/white" />
+        android:textColor="@color/common_white" />
 
       <Button
         android:id="@+id/bt_1"

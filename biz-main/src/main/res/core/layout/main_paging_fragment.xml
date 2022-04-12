@@ -14,7 +14,7 @@
     android:id="@+id/refresh_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/common_white">
 
     <androidx.constraintlayout.widget.ConstraintLayout
       android:layout_width="match_parent"
@@ -35,7 +35,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_margin="10dp"
-        android:backgroundTint="@color/md_red_700"
+        android:backgroundTint="@color/common_red_700"
         android:clickable="true"
         android:focusable="true"
         android:onClick="@{listener}"

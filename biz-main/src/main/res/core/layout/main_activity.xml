@@ -6,7 +6,7 @@
   <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/common_white"
     android:clickable="true"
     android:focusable="true"
     tools:context=".ui.MainActivity">
@@ -27,7 +27,7 @@
       app:tl_textAllCaps="false"
       app:tl_textBold="SELECT"
       app:tl_textSelectColor="@color/color_222222"
-      app:tl_textUnselectColor="@color/white"
+      app:tl_textUnselectColor="@color/common_white"
       app:tl_textsize="14sp" />
 
     <androidx.viewpager.widget.ViewPager

@@ -16,7 +16,7 @@
     <io.goooler.demoapp.base.widget.StatusBarView
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:background="@color/md_grey_800" />
+      android:background="@color/common_grey_800" />
 
     <Button
       android:id="@+id/bt_start"
