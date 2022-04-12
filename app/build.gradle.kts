@@ -34,7 +34,7 @@ android {
       proguardFiles("$rootDir/gradle/proguard-rules.pro")
     }
     debug {
-      resValue("string", "app_name", "${appName}.debug")
+      resValue("string", "app_name", "$appName.debug")
       signingConfig = signingConfigs["release"]
       isJniDebuggable = true
       isRenderscriptDebuggable = true
@@ -55,7 +55,7 @@ android {
     outputs.all {
       (this as? com.android.build.gradle.internal.api.ApkVariantOutputImpl)?.outputFileName =
         "../../../../" +
-          "${appName}_${versionName}_${versionCode}_${flavorName}_${buildType.name}.apk"
+        "${appName}_${versionName}_${versionCode}_${flavorName}_${buildType.name}.apk"
     }
   }
 }
@@ -75,7 +75,8 @@ dependencies {
 }
 
 fun Project.getSignProperty(
-  key: String, path: String = "gradle/keystore.properties"
+  key: String,
+  path: String = "gradle/keystore.properties"
 ): String = Properties().apply {
   rootProject.file(path).inputStream().use(::load)
 }.getProperty(key)

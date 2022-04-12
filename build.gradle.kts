@@ -1,3 +1,4 @@
+import com.android.build.api.dsl.CommonExtension
 import com.android.build.gradle.BaseExtension
 import dagger.hilt.android.plugin.HiltExtension
 import org.gradle.kotlin.dsl.get
@@ -51,6 +52,15 @@ allprojects {
   }
 }
 
+subprojects {
+  plugins.withId(rootProject.libs.plugins.android.library.get().pluginId) {
+    if (name.startsWith("biz-") || name.startsWith("common")) setupCommon() else setupBase()
+  }
+  plugins.withId(rootProject.libs.plugins.android.application.get().pluginId) {
+    setupCommon()
+  }
+}
+
 tasks {
   create<Delete>("clean") {
     val customFileTypes = fileTree(
@@ -63,15 +73,6 @@ tasks {
   }
   wrapper {
     distributionType = Wrapper.DistributionType.ALL
-  }
-}
-
-subprojects {
-  plugins.withId(rootProject.libs.plugins.android.library.get().pluginId) {
-    if (name.startsWith("biz-") || name.startsWith("common")) setupCommon() else setupBase()
-  }
-  plugins.withId(rootProject.libs.plugins.android.application.get().pluginId) {
-    setupCommon()
   }
 }
 
@@ -111,7 +112,7 @@ fun Project.setupBase(): BaseExtension {
       "okhttp3/**",
       "google/**"
     )
-    (this as? com.android.build.api.dsl.CommonExtension<*, *, *, *>)?.lint {
+    (this as? CommonExtension<*, *, *, *>)?.lint {
       abortOnError = true
     }
   }
