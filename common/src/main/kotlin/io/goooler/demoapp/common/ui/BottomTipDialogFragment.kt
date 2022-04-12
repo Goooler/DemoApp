@@ -13,7 +13,7 @@ class BottomTipDialogFragment : BaseBindingDialogFragment<CommonBottomTipDialogF
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setStyle(STYLE_NORMAL, R.style.DialogTransparentTheme)
+    setStyle(STYLE_NORMAL, R.style.CommonDialogTransparentTheme)
   }
 
   override fun initOnce() {
@@ -35,7 +35,7 @@ class BottomTipDialogFragment : BaseBindingDialogFragment<CommonBottomTipDialogF
 
   private fun setStyle() {
     dialog?.window?.run {
-      setWindowAnimations(R.style.DialogBottomAnim)
+      setWindowAnimations(R.style.CommonDialogBottomAnim)
       attributes = attributes?.apply {
         width = ViewGroup.LayoutParams.MATCH_PARENT
         height = ViewGroup.LayoutParams.WRAP_CONTENT
