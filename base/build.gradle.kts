@@ -6,8 +6,8 @@ plugins {
 
 dependencies {
   api(fileTree(mapOf("dir" to "libs", "include" to arrayOf("*.jar", "*.aar"))))
-  api(libs.kotlinX.coroutines)
 
+  api(libs.kotlinX.coroutines)
   api(libs.androidX.core)
   api(libs.androidX.annotation)
   api(libs.androidX.appCompat)

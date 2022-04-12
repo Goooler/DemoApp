@@ -78,23 +78,7 @@ subprojects {
   }
 }
 
-val appVersionName = "1.5.0"
 val appName = "DemoApp"
-val appVersionCode = appVersionName.versionCode
-val javaVersion = JavaVersion.VERSION_11
-
-val String.versionCode: Int
-  get() = takeWhile { it.isDigit() || it == '.' }
-    .split('.')
-    .map { it.toInt() }
-    .reversed()
-    .sumByIndexed { index, unit ->
-      // 1.2.3 -> 102030
-      (unit * 10.0.pow(2 * index + 1)).toInt()
-    }
-
-
-
 val Project.shortName: String get() = name.removePrefix("biz-")
 
 fun Project.setupBase(): BaseExtension {
@@ -158,8 +142,8 @@ fun Project.setupApp(): BaseAppModuleExtension = (setupCommon() as BaseAppModule
   defaultConfig {
     applicationId = namespace
     targetSdk = 32
-    versionCode = appVersionCode
-    versionName = appVersionName
+    versionCode = libs.versions.versionCode.get().toInt()
+    versionName = libs.versions.versionName.get()
     resourceConfigurations += setOf("en", "zh-rCN", "xxhdpi")
   }
   signingConfigs.create("release") {
@@ -202,11 +186,3 @@ fun Project.getSignProperty(
   rootProject.file(path).inputStream().use(::load)
 }.getProperty(key)
 
-fun <T> List<T>.sumByIndexed(selector: (Int, T) -> Int): Int {
-  var index = 0
-  var sum = 0
-  for (element in this) {
-    sum += selector(index++, element)
-  }
-  return sum
-}
