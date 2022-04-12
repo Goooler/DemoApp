@@ -27,11 +27,11 @@ object ImageLoader {
     val imageLoader = coil.ImageLoader.Builder(application)
       .crossfade(true)
       .components {
-        val gifDecoder = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P)
+        val gifDecoderFactory = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P)
           ImageDecoderDecoder.Factory()
         else
           GifDecoder.Factory()
-        add(gifDecoder)
+        add(gifDecoderFactory)
         add(SvgDecoder.Factory())
       }
       .build()
@@ -78,7 +78,7 @@ object ImageLoader {
     useCache: Boolean,
     builder: ImageRequest.Builder.() -> Unit = {}
   ) {
-    load(data, context.imageLoader) {
+    load(data) {
       placeholder(placeholderDrawable)
       error(errorDrawable)
       if (cornerRadius > 0) transformations(RoundedCornersTransformation(cornerRadius.toFloat()))
