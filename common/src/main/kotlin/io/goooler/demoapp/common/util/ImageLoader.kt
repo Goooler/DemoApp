@@ -32,7 +32,7 @@ object ImageLoader {
         else
           GifDecoder.Factory()
         add(gifDecoderFactory)
-        add(SvgDecoder.Factory())
+        add(SvgDecoder.Factory(false))
       }
       .build()
     Coil.setImageLoader(imageLoader)
