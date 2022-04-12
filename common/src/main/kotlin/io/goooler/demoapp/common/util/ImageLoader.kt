@@ -61,20 +61,6 @@ object ImageLoader {
     }
   }
 
-  suspend fun getDrawable(
-    data: Any?,
-    context: Context,
-    useCache: Boolean = true,
-    builder: ImageRequest.Builder.() -> Unit = {}
-  ): Drawable? {
-    val request = ImageRequest.Builder(context)
-      .data(data)
-      .loadWithCache(useCache)
-      .apply(builder)
-      .build()
-    return request.context.imageLoader.execute(request).drawable
-  }
-
   fun ImageRequest.Builder.loadWithCache(useCache: Boolean): ImageRequest.Builder {
     if (useCache.not()) {
       memoryCachePolicy(CachePolicy.DISABLED)
@@ -99,6 +85,20 @@ object ImageLoader {
       loadWithCache(useCache)
       builder()
     }
+  }
+
+  suspend fun getDrawable(
+    data: Any?,
+    context: Context,
+    useCache: Boolean = true,
+    builder: ImageRequest.Builder.() -> Unit = {}
+  ): Drawable? {
+    val request = ImageRequest.Builder(context)
+      .data(data)
+      .loadWithCache(useCache)
+      .apply(builder)
+      .build()
+    return request.context.imageLoader.execute(request).drawable
   }
 }
 
