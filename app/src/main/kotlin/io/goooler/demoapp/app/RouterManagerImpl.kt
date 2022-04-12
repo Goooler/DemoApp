@@ -1,4 +1,4 @@
-package io.goooler.demoapp
+package io.goooler.demoapp.app
 
 import android.content.Context
 import android.content.Intent
