@@ -8,10 +8,10 @@ plugins {
 setupApp(AppModule.App)
 
 dependencies {
-  implementation(projects.login)
-  implementation(projects.main)
-  implementation(projects.detail)
-  implementation(projects.web)
+  implementation(projects.bizLogin)
+  implementation(projects.bizMain)
+  implementation(projects.bizDetail)
+  implementation(projects.bizWeb)
 
   implementation(libs.androidX.hilt)
   kapt(libs.androidX.hilt.compiler)
