@@ -1,4 +1,5 @@
 @file:Suppress("unused", "MemberVisibilityCanBePrivate")
+@file:JvmName("GlideImageLoader")
 
 package io.goooler.demoapp.obsolete.util
 
@@ -16,7 +17,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.BaseRequestOptions
 
 object GlideImageLoader {
-
+  @JvmStatic
   fun load(
     imageView: ImageView,
     url: String?,
@@ -28,6 +29,7 @@ object GlideImageLoader {
     if (cornerRadius > 0) transform(RoundedCorners(cornerRadius))
   }
 
+  @JvmStatic
   fun loadCircleCrop(
     imageView: ImageView,
     url: String?,
@@ -38,6 +40,7 @@ object GlideImageLoader {
     circleCrop()
   }
 
+  @JvmStatic
   fun loadCenterCrop(
     imageView: ImageView,
     url: String?,
@@ -49,6 +52,7 @@ object GlideImageLoader {
     if (cornerRadius > 0) transform(CenterCrop(), RoundedCorners(cornerRadius)) else centerCrop()
   }
 
+  @JvmStatic
   inline fun ImageView.loadBase(
     url: String?,
     placeholderDrawable: Drawable?,
@@ -65,14 +69,17 @@ object GlideImageLoader {
       .into(this)
   }
 
+  @JvmStatic
   fun <T : BaseRequestOptions<T>> T.loadWithCache(useCache: Boolean): T {
     return if (useCache) this else skipMemoryCache(false).diskCacheStrategy(DiskCacheStrategy.NONE)
   }
 
+  @JvmStatic
   fun clearDiskCache(context: Context) {
     Glide.get(context).clearDiskCache()
   }
 
+  @JvmStatic
   fun clearMemory(context: Context) {
     Glide.get(context).clearMemory()
   }
