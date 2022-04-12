@@ -5,9 +5,9 @@ plugins {
   alias(libs.plugins.hilt)
 }
 
-setupApp(AppModule.App)
-
 dependencies {
+  implementation(projects.common)
+
   implementation(projects.bizLogin)
   implementation(projects.bizMain)
   implementation(projects.bizDetail)

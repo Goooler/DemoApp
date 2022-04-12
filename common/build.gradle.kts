@@ -1,5 +1,3 @@
-import com.android.build.gradle.LibraryExtension
-
 plugins {
   id(libs.plugins.android.library.get().pluginId)
   id(libs.plugins.kotlin.android.get().pluginId)
@@ -7,7 +5,7 @@ plugins {
   alias(libs.plugins.moshiX)
 }
 
-setupCommon<LibraryExtension>(LibModule.Common) {
+android {
   buildFeatures.buildConfig = true
   productFlavors.all {
     buildConfigField(BuildConfigField.VersionCode)
@@ -48,4 +46,19 @@ dependencies {
   releaseImplementation(libs.chucker.release)
 
   testImplementation(libs.kotlin.junit5)
+}
+
+enum class BuildConfigField(val key: String, val value: Any) {
+  VersionCode("VERSION_CODE", 1),
+  VersionName("VERSION_NAME", "1.5"),
+  CdnPrefix("CDN_PREFIX", "https://raw.githubusercontent.com/"),
+  ApiHost("API_HOST", "https://api.github.com/")
+}
+
+fun com.android.build.api.dsl.VariantDimension.buildConfigField(field: BuildConfigField) {
+  if (field.value is Int) {
+    buildConfigField("Integer", field.key, field.value.toString())
+  } else if (field.value is String) {
+    buildConfigField("String", field.key, "\"${field.value}\"")
+  }
 }

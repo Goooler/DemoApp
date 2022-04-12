@@ -6,7 +6,7 @@ plugins {
   alias(libs.plugins.moshiX)
 }
 
-setupLib(LibModule.Main) {
+android {
   sourceSets["main"].res.srcDirs(
     "src/main/res/core",
     "src/main/res/other"
@@ -21,6 +21,8 @@ kapt {
 }
 
 dependencies {
+  implementation(projects.common)
+
   implementation(libs.androidX.coordinatorLayout)
   implementation(libs.flycoTabLayout)
 

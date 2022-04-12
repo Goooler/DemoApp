@@ -4,4 +4,6 @@ plugins {
   id(libs.plugins.kotlin.kapt.get().pluginId)
 }
 
-setupLib(LibModule.Login)
+dependencies {
+  implementation(projects.common)
+}

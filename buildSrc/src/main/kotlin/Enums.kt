@@ -27,9 +27,4 @@ enum class AppModule(override val tag: String, override val id: String, val appN
   Obsolete("app", "io.goooler.demoapp.obsolete", "Test")
 }
 
-enum class BuildConfigField(val key: String, val value: Any) {
-  VersionCode("VERSION_CODE", appVersionCode),
-  VersionName("VERSION_NAME", appVersionName),
-  CdnPrefix("CDN_PREFIX", "https://raw.githubusercontent.com/"),
-  ApiHost("API_HOST", "https://api.github.com/")
-}
+
