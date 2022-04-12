@@ -17,7 +17,6 @@ import coil.imageLoader
 import coil.load
 import coil.request.CachePolicy
 import coil.request.ImageRequest
-import coil.size.Scale
 import coil.transform.CircleCropTransformation
 import coil.transform.RoundedCornersTransformation
 
@@ -59,19 +58,6 @@ object ImageLoader {
   ) {
     imageView.loadBase(data, placeholderDrawable, errorDrawable, 0, useCache) {
       transformations(CircleCropTransformation())
-    }
-  }
-
-  fun loadCenterCrop(
-    imageView: ImageView,
-    data: Any?,
-    placeholderDrawable: Drawable? = null,
-    errorDrawable: Drawable? = null,
-    @IntRange(from = 0) cornerRadius: Int = 0,
-    useCache: Boolean = true
-  ) {
-    imageView.loadBase(data, placeholderDrawable, errorDrawable, cornerRadius, useCache) {
-      scale(Scale.FIT)
     }
   }
 
@@ -236,89 +222,6 @@ fun ImageView.loadCircleCrop(
     data,
     placeholderDrawable,
     errorDrawable,
-    useCache
-  )
-}
-
-@BindingAdapter(
-  "binding_iv_src_centerCrop"
-)
-fun ImageView.loadCenterCrop(
-  data: Any?
-) {
-  ImageLoader.loadCenterCrop(this, data)
-}
-
-@BindingAdapter(
-  "binding_iv_src_centerCrop",
-  "binding_iv_cornerRadius"
-)
-fun ImageView.loadCenterCrop(
-  data: Any?,
-  @FloatRange(from = 0.0) cornerRadius: Float
-) {
-  ImageLoader.loadCenterCrop(this, data, cornerRadius = cornerRadius.toInt())
-}
-
-@BindingAdapter(
-  "binding_iv_src_centerCrop",
-  "binding_iv_placeholder"
-)
-fun ImageView.loadCenterCrop(
-  data: Any?,
-  placeholderDrawable: Drawable?
-) {
-  ImageLoader.loadCenterCrop(this, data, placeholderDrawable)
-}
-
-@BindingAdapter(
-  "binding_iv_src_centerCrop",
-  "binding_iv_placeholder",
-  "binding_iv_error"
-)
-fun ImageView.loadCenterCrop(
-  data: Any?,
-  placeholderDrawable: Drawable?,
-  errorDrawable: Drawable?
-) {
-  ImageLoader.loadCenterCrop(this, data, placeholderDrawable, errorDrawable)
-}
-
-@BindingAdapter(
-  "binding_iv_src_centerCrop",
-  "binding_iv_placeholder",
-  "binding_iv_error",
-  "binding_iv_cornerRadius"
-)
-fun ImageView.loadCenterCrop(
-  data: Any?,
-  placeholderDrawable: Drawable?,
-  errorDrawable: Drawable?,
-  @FloatRange(from = 0.0) cornerRadius: Float
-) {
-  ImageLoader.loadCenterCrop(this, data, placeholderDrawable, errorDrawable, cornerRadius.toInt())
-}
-
-@BindingAdapter(
-  "binding_iv_src_centerCrop",
-  "binding_iv_placeholder",
-  "binding_iv_error",
-  "binding_iv_cornerRadius",
-  "binding_iv_useCache"
-)
-fun ImageView.loadCenterCrop(
-  data: Any?,
-  placeholderDrawable: Drawable?,
-  errorDrawable: Drawable?,
-  @FloatRange(from = 0.0) cornerRadius: Float,
-  useCache: Boolean
-) {
-  ImageLoader.loadCenterCrop(
-    this,
-    data,
-    placeholderDrawable,
-    errorDrawable,
-    cornerRadius.toInt(),
     useCache
   )
 }
