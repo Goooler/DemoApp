@@ -1,7 +1,7 @@
 plugins {
-  id(libs.plugins.android.library.get().pluginId)
-  id(libs.plugins.kotlin.android.get().pluginId)
-  id(libs.plugins.kotlin.kapt.get().pluginId)
+  alias(libs.plugins.android.library)
+  alias(libs.plugins.kotlin.android)
+  alias(libs.plugins.kotlin.kapt)
   alias(libs.plugins.moshiX)
 }
 

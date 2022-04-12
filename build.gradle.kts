@@ -2,15 +2,15 @@ import com.android.build.gradle.BaseExtension
 import dagger.hilt.android.plugin.HiltExtension
 import kotlin.math.pow
 import org.gradle.kotlin.dsl.get
-import org.jetbrains.kotlin.gradle.dsl.KotlinJvmOptions
 import org.jlleitschuh.gradle.ktlint.KtlintExtension
 import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
 import java.util.Properties
 
 plugins {
-  id(libs.plugins.android.application.get().pluginId) apply false
-  id(libs.plugins.android.library.get().pluginId) apply false
-  id(libs.plugins.kotlin.android.get().pluginId) apply false
+  alias(libs.plugins.android.application) apply false
+  alias(libs.plugins.android.library) apply false
+  alias(libs.plugins.kotlin.android) apply false
+  alias(libs.plugins.kotlin.kapt) apply false
   alias(libs.plugins.hilt) apply false
   alias(libs.plugins.ktlint) apply false
   alias(libs.plugins.moshiX) apply false
