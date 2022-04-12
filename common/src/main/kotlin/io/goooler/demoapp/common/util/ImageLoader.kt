@@ -104,13 +104,13 @@ object ImageLoader {
 
 // ------------------------BindingAdapter--------------------------//
 
-@BindingAdapter("binding_iv_src")
+@BindingAdapter("binding_iv_data")
 fun ImageView.load(data: Any?) {
   ImageLoader.load(this, data)
 }
 
 @BindingAdapter(
-  "binding_iv_src",
+  "binding_iv_data",
   "binding_iv_cornerRadius"
 )
 fun ImageView.load(
@@ -121,7 +121,7 @@ fun ImageView.load(
 }
 
 @BindingAdapter(
-  "binding_iv_src",
+  "binding_iv_data",
   "binding_iv_placeholder"
 )
 fun ImageView.load(
@@ -132,7 +132,7 @@ fun ImageView.load(
 }
 
 @BindingAdapter(
-  "binding_iv_src",
+  "binding_iv_data",
   "binding_iv_placeholder",
   "binding_iv_error"
 )
@@ -145,7 +145,7 @@ fun ImageView.load(
 }
 
 @BindingAdapter(
-  "binding_iv_src",
+  "binding_iv_data",
   "binding_iv_placeholder",
   "binding_iv_error",
   "binding_iv_cornerRadius"
@@ -160,7 +160,7 @@ fun ImageView.load(
 }
 
 @BindingAdapter(
-  "binding_iv_src",
+  "binding_iv_data",
   "binding_iv_placeholder",
   "binding_iv_error",
   "binding_iv_cornerRadius",
@@ -176,13 +176,13 @@ fun ImageView.load(
   ImageLoader.load(this, data, placeholderDrawable, errorDrawable, cornerRadius.toInt(), useCache)
 }
 
-@BindingAdapter("binding_iv_src_circle")
+@BindingAdapter("binding_iv_data_circle")
 fun ImageView.loadCircleCrop(data: Any?) {
   ImageLoader.loadCircleCrop(this, data)
 }
 
 @BindingAdapter(
-  "binding_iv_src_circle",
+  "binding_iv_data_circle",
   "binding_iv_placeholder"
 )
 fun ImageView.loadCircleCrop(
@@ -193,7 +193,7 @@ fun ImageView.loadCircleCrop(
 }
 
 @BindingAdapter(
-  "binding_iv_src_circle",
+  "binding_iv_data_circle",
   "binding_iv_placeholder",
   "binding_iv_error"
 )
@@ -206,7 +206,7 @@ fun ImageView.loadCircleCrop(
 }
 
 @BindingAdapter(
-  "binding_iv_src_circle",
+  "binding_iv_data_circle",
   "binding_iv_placeholder",
   "binding_iv_error",
   "binding_iv_useCache"
