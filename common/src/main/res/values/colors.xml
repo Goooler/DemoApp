@@ -5,7 +5,10 @@
   <color name="common_transparent">#00000000</color>
   <color name="common_transparent_30">#4d000000</color>
   <color name="common_333333">#333333</color>
-  <color name="color_E62828">#e62828</color>
+  <color name="common_E62828">#e62828</color>
+  <color name="common_222222">#222222</color>
+  <color name="common_999999">#999999</color>
+  <color name="common_3F9FE0">#3F9FE0</color>
 
   <!--reds-->
   <color name="common_red_50">#FFEBEE</color>
@@ -282,10 +285,5 @@
   <color name="common_blue_grey_700">#455A64</color>
   <color name="common_blue_grey_800">#37474F</color>
   <color name="common_blue_grey_900">#263238</color>
-
-
-  <color name="color_222222">#222222</color>
-  <color name="color_999999">#999999</color>
-  <color name="color_3F9FE0">#3F9FE0</color>
 
 </resources>
