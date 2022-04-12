@@ -1,10 +1,9 @@
 import com.android.build.gradle.BaseExtension
+import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
 import dagger.hilt.android.plugin.HiltExtension
-import kotlin.math.pow
+import java.util.Properties
 import org.gradle.kotlin.dsl.get
 import org.jlleitschuh.gradle.ktlint.KtlintExtension
-import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
-import java.util.Properties
 
 plugins {
   alias(libs.plugins.android.application) apply false
@@ -96,15 +95,6 @@ fun Project.setupBase(): BaseExtension {
     }
     buildFeatures.buildConfig = false
     compileOptions.setDefaultJavaVersion(JavaVersion.VERSION_11)
-    /*(this as ExtensionAware).extensions.configure<KotlinJvmOptions> {
-      jvmTarget = JavaVersion.VERSION_11.toString()
-      // https://youtrack.jetbrains.com/issue/KT-41985
-      freeCompilerArgs += listOf(
-        "-progressive",
-        "-opt-in=kotlin.RequiresOptIn",
-        "-Xjvm-default=all"
-      )
-    }*/
     packagingOptions.resources.excludes += setOf(
       "**/*.proto",
       "**/*.bin",

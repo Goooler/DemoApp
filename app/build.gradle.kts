@@ -5,6 +5,16 @@ plugins {
   alias(libs.plugins.hilt)
 }
 
+android.kotlinOptions {
+  jvmTarget = org.gradle.api.JavaVersion.VERSION_11.toString()
+  // https://youtrack.jetbrains.com/issue/KT-41985
+  freeCompilerArgs += listOf(
+    "-progressive",
+    "-opt-in=kotlin.RequiresOptIn",
+    "-Xjvm-default=all"
+  )
+}
+
 dependencies {
   implementation(projects.common)
 
