@@ -27,12 +27,12 @@
 
     <ImageView
       android:id="@+id/iv_logo"
-      binding_iv_src="@{model.logoUrl}"
+      binding_iv_data="@{model.logoUrl}"
       android:layout_width="100dp"
       android:layout_height="100dp"
-      android:src="@drawable/common_ic_youtube"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent" />
+      app:layout_constraintTop_toTopOf="parent"
+      tools:src="@drawable/common_ic_youtube" />
 
     <TextView
       android:id="@+id/tv_content"

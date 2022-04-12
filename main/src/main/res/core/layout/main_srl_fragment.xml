@@ -37,11 +37,13 @@
 
           <ImageView
             binding_iv_cornerRadius="@{@dimen/dp_15}"
-            binding_iv_src_centerCrop="@{@string/main_coil_icon}"
+            binding_iv_data="@{@string/main_coil_bg}"
+            binding_iv_error="@{@drawable/common_ic_pic_placeholder}"
+            binding_iv_placeholder="@{@drawable/common_ic_pic_placeholder}"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:src="@drawable/common_ic_pic_placeholder"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/common_ic_pic_placeholder" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-  <string name="main_coil_icon">https://img1.doubanio.com/view/photo/m/public/p2442032167.webp</string>
+  <string name="main_coil_bg">https://raw.githubusercontent.com/coil-kt/coil/main/logo.svg</string>
 
 </resources>
