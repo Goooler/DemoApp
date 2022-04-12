@@ -7,7 +7,7 @@ import android.graphics.drawable.Drawable
 import android.os.Build
 import android.widget.ImageView
 import androidx.annotation.FloatRange
-import androidx.annotation.IntRange
+import androidx.annotation.Px
 import androidx.databinding.BindingAdapter
 import coil.Coil
 import coil.decode.GifDecoder
@@ -43,10 +43,12 @@ object ImageLoader {
     data: Any?,
     placeholderDrawable: Drawable? = null,
     errorDrawable: Drawable? = null,
-    @IntRange(from = 0) cornerRadius: Int = 0,
+    @Px @FloatRange(from = 0.0) cornerRadius: Float = 0F,
     useCache: Boolean = true
   ) {
-    imageView.loadBase(data, placeholderDrawable, errorDrawable, cornerRadius, useCache)
+    imageView.loadBase(data, placeholderDrawable, errorDrawable, useCache) {
+      if (cornerRadius > 0) transformations(RoundedCornersTransformation(cornerRadius))
+    }
   }
 
   fun loadCircleCrop(
@@ -56,32 +58,21 @@ object ImageLoader {
     errorDrawable: Drawable? = null,
     useCache: Boolean = true
   ) {
-    imageView.loadBase(data, placeholderDrawable, errorDrawable, 0, useCache) {
+    imageView.loadBase(data, placeholderDrawable, errorDrawable, useCache) {
       transformations(CircleCropTransformation())
     }
-  }
-
-  fun ImageRequest.Builder.loadWithCache(useCache: Boolean): ImageRequest.Builder {
-    if (useCache.not()) {
-      memoryCachePolicy(CachePolicy.DISABLED)
-      diskCachePolicy(CachePolicy.DISABLED)
-      networkCachePolicy(CachePolicy.DISABLED)
-    }
-    return this
   }
 
   inline fun ImageView.loadBase(
     data: Any?,
     placeholderDrawable: Drawable?,
     errorDrawable: Drawable?,
-    @IntRange(from = 0) cornerRadius: Int,
     useCache: Boolean,
     builder: ImageRequest.Builder.() -> Unit = {}
   ) {
     load(data) {
       placeholder(placeholderDrawable)
       error(errorDrawable)
-      if (cornerRadius > 0) transformations(RoundedCornersTransformation(cornerRadius.toFloat()))
       loadWithCache(useCache)
       builder()
     }
@@ -100,6 +91,14 @@ object ImageLoader {
       .build()
     return request.context.imageLoader.execute(request).drawable
   }
+
+  fun ImageRequest.Builder.loadWithCache(useCache: Boolean): ImageRequest.Builder = apply {
+    if (useCache.not()) {
+      memoryCachePolicy(CachePolicy.DISABLED)
+      diskCachePolicy(CachePolicy.DISABLED)
+      networkCachePolicy(CachePolicy.DISABLED)
+    }
+  }
 }
 
 // ------------------------BindingAdapter--------------------------//
@@ -115,9 +114,9 @@ fun ImageView.load(data: Any?) {
 )
 fun ImageView.load(
   data: Any?,
-  @FloatRange(from = 0.0) cornerRadius: Float
+  @Px @FloatRange(from = 0.0) cornerRadius: Float
 ) {
-  ImageLoader.load(this, data, cornerRadius = cornerRadius.toInt())
+  ImageLoader.load(this, data, cornerRadius = cornerRadius)
 }
 
 @BindingAdapter(
@@ -154,9 +153,9 @@ fun ImageView.load(
   data: Any?,
   placeholderDrawable: Drawable?,
   errorDrawable: Drawable?,
-  @FloatRange(from = 0.0) cornerRadius: Float
+  @Px @FloatRange(from = 0.0) cornerRadius: Float
 ) {
-  ImageLoader.load(this, data, placeholderDrawable, errorDrawable, cornerRadius.toInt())
+  ImageLoader.load(this, data, placeholderDrawable, errorDrawable, cornerRadius)
 }
 
 @BindingAdapter(
@@ -170,10 +169,10 @@ fun ImageView.load(
   data: Any?,
   placeholderDrawable: Drawable?,
   errorDrawable: Drawable?,
-  @FloatRange(from = 0.0) cornerRadius: Float,
+  @Px @FloatRange(from = 0.0) cornerRadius: Float,
   useCache: Boolean
 ) {
-  ImageLoader.load(this, data, placeholderDrawable, errorDrawable, cornerRadius.toInt(), useCache)
+  ImageLoader.load(this, data, placeholderDrawable, errorDrawable, cornerRadius, useCache)
 }
 
 @BindingAdapter("binding_iv_data_circle")
@@ -217,11 +216,5 @@ fun ImageView.loadCircleCrop(
   errorDrawable: Drawable?,
   useCache: Boolean
 ) {
-  ImageLoader.loadCircleCrop(
-    this,
-    data,
-    placeholderDrawable,
-    errorDrawable,
-    useCache
-  )
+  ImageLoader.loadCircleCrop(this, data, placeholderDrawable, errorDrawable, useCache)
 }
