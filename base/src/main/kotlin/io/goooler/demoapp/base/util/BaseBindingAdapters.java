@@ -6,12 +6,10 @@ import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewOutlineProvider;
 import android.widget.TextView;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.Px;
 import androidx.databinding.BindingAdapter;
 
@@ -201,7 +199,16 @@ public interface BaseBindingAdapters {
     @ColorInt int endColor,
     int angle
   ) {
-    BaseExtensionUtil.setBgShapeGradual(view, GradientDrawable.RECTANGLE, new int[]{startColor, endColor}, angle, null, Color.TRANSPARENT, 0f, 0f);
+    BaseExtensionUtil.setBgShapeGradual(
+      view,
+      GradientDrawable.RECTANGLE,
+      new int[]{startColor, endColor},
+      angle,
+      null,
+      Color.TRANSPARENT,
+      0f,
+      0f
+    );
   }
 
   @BindingAdapter({
@@ -217,7 +224,16 @@ public interface BaseBindingAdapters {
     @ColorInt int endColor,
     int angle
   ) {
-    BaseExtensionUtil.setBgShapeGradual(view, GradientDrawable.RECTANGLE, new int[]{startColor, centerColor, endColor}, angle, null, Color.TRANSPARENT, 0f, 0f);
+    BaseExtensionUtil.setBgShapeGradual(
+      view,
+      GradientDrawable.RECTANGLE,
+      new int[]{startColor, centerColor, endColor},
+      angle,
+      null,
+      Color.TRANSPARENT,
+      0f,
+      0f
+    );
   }
 
   @BindingAdapter({
@@ -226,8 +242,22 @@ public interface BaseBindingAdapters {
     "binding_bg_solidColor",
     "binding_bg_radius"
   })
-  static void bindingBgShapeStroke(@NonNull View view, @Px float stroke, @ColorInt int strokeColor, @ColorInt int solidColor, @Px float radius) {
-    BaseExtensionUtil.setBgShapeGradual(view, GradientDrawable.RECTANGLE, null, 0, solidColor, strokeColor, stroke, radius);
+  static void bindingBgShapeStroke(
+    @NonNull View view,
+    @Px float stroke,
+    @ColorInt int strokeColor,
+    @ColorInt int solidColor,
+    @Px float radius
+  ) {
+    BaseExtensionUtil.setBgShapeGradual(
+      view,
+      GradientDrawable.RECTANGLE,
+      null,
+      0,
+      solidColor,
+      strokeColor,
+      stroke, radius
+    );
   }
 
   @BindingAdapter({
@@ -235,7 +265,16 @@ public interface BaseBindingAdapters {
     "binding_bg_radius"
   })
   static void bindingBgShape(@NonNull View view, @ColorInt int solidColor, @Px float radius) {
-    BaseExtensionUtil.setBgShapeGradual(view, GradientDrawable.RECTANGLE, null, 0, solidColor, Color.TRANSPARENT, 0f, radius);
+    BaseExtensionUtil.setBgShapeGradual(
+      view,
+      GradientDrawable.RECTANGLE,
+      null,
+      0,
+      solidColor,
+      Color.TRANSPARENT,
+      0f,
+      radius
+    );
   }
 
   @BindingAdapter({
@@ -243,13 +282,34 @@ public interface BaseBindingAdapters {
     "binding_bg_strokeColor",
     "binding_bg_solidOvalColor"
   })
-  static void bindingBgShapeOvalStroke(@NonNull View view, @Px float stroke, @ColorInt int strokeColor, @ColorInt int solidOvalColor) {
-    BaseExtensionUtil.setBgShapeGradual(view, GradientDrawable.OVAL, null, 0, solidOvalColor, strokeColor, stroke, 0f);
+  static void bindingBgShapeOvalStroke(
+    @NonNull View view,
+    @Px float stroke,
+    @ColorInt int strokeColor,
+    @ColorInt int solidOvalColor
+  ) {
+    BaseExtensionUtil.setBgShapeGradual(
+      view, GradientDrawable.OVAL,
+      null,
+      0,
+      solidOvalColor,
+      strokeColor,
+      stroke,
+      0f
+    );
   }
 
   @BindingAdapter("binding_bg_solidOvalColor")
   static void bindingBgShapeOval(@NonNull View view, @ColorInt int solidOvalColor) {
-    BaseExtensionUtil.setBgShapeGradual(view, GradientDrawable.OVAL, null, 0, solidOvalColor, Color.TRANSPARENT, 0f, 0f);
+    BaseExtensionUtil.setBgShapeGradual(
+      view, GradientDrawable.OVAL,
+      null,
+      0,
+      solidOvalColor,
+      Color.TRANSPARENT,
+      0f,
+      0f
+    );
   }
 
 // ------------------------TextView--------------------------//
