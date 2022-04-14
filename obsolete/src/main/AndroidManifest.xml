@@ -9,6 +9,7 @@
     android:icon="@drawable/common_ic_kt_red"
     android:label="Obsolete"
     android:supportsRtl="true"
+    android:theme="@style/CommonAppTheme"
     tools:ignore="MipmapIcons">
 
   </application>
