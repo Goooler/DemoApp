@@ -33,10 +33,10 @@ public interface BaseBindingAdapters {
   }
 
   @BindingAdapter("binding_rect_radius")
-  static void bindingRectCornerRadius(@NonNull View view, float radius) {
+  static void bindingRectCornerRadius(@NonNull View view, @Px float radius) {
     view.setOutlineProvider(new ViewOutlineProvider() {
       @Override
-      public void getOutline(@NonNull View view, Outline outline) {
+      public void getOutline(@NonNull View view, @NonNull Outline outline) {
         outline.setRoundRect(0, 0, view.getWidth(), view.getHeight(), radius);
       }
     });
@@ -44,41 +44,41 @@ public interface BaseBindingAdapters {
   }
 
   @BindingAdapter({"binding_width", "binding_height"})
-  static void bindingWidthAndHeight(@NonNull View view, float width, float height) {
+  static void bindingWidthAndHeight(@NonNull View view, @Px float width, @Px float height) {
     view.getLayoutParams().width = (int) width;
     view.getLayoutParams().height = (int) height;
     view.requestLayout();
   }
 
   @BindingAdapter("binding_width")
-  static void bindingWidth(@NonNull View view, float width) {
+  static void bindingWidth(@NonNull View view, @Px float width) {
     view.getLayoutParams().width = (int) width;
     view.requestLayout();
   }
 
   @BindingAdapter("binding_height")
-  static void bindingHeight(@NonNull View view, float height) {
+  static void bindingHeight(@NonNull View view, @Px float height) {
     view.getLayoutParams().height = (int) height;
     view.requestLayout();
   }
 
   @BindingAdapter("binding_marginTop")
-  static void bindingMarginTop(@NonNull View view, float margin) {
+  static void bindingMarginTop(@NonNull View view, @Px float margin) {
     BaseExtensionUtil.marginDirection(view, 1, margin);
   }
 
   @BindingAdapter("binding_marginBottom")
-  static void bindingMarginBottom(@NonNull View view, float margin) {
+  static void bindingMarginBottom(@NonNull View view, @Px float margin) {
     BaseExtensionUtil.marginDirection(view, 3, margin);
   }
 
   @BindingAdapter("binding_marginStart")
-  static void bindingMarginStart(@NonNull View view, float margin) {
+  static void bindingMarginStart(@NonNull View view, @Px float margin) {
     BaseExtensionUtil.marginDirection(view, 0, margin);
   }
 
   @BindingAdapter("binding_marginEnd")
-  static void bindingMarginEnd(@NonNull View view, float margin) {
+  static void bindingMarginEnd(@NonNull View view, @Px float margin) {
     BaseExtensionUtil.marginDirection(view, 2, margin);
   }
 
