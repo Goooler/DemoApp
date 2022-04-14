@@ -1,10 +1,14 @@
+import com.android.build.api.dsl.CommonExtension
+import com.android.build.gradle.BaseExtension
 import dagger.hilt.android.plugin.HiltExtension
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jlleitschuh.gradle.ktlint.KtlintExtension
 
 plugins {
-  id(libs.plugins.android.application.get().pluginId) apply false
-  id(libs.plugins.android.library.get().pluginId) apply false
-  id(libs.plugins.kotlin.android.get().pluginId) apply false
+  alias(libs.plugins.android.application) apply false
+  alias(libs.plugins.android.library) apply false
+  alias(libs.plugins.kotlin.android) apply false
+  alias(libs.plugins.kotlin.kapt) apply false
   alias(libs.plugins.hilt) apply false
   alias(libs.plugins.ktlint) apply false
   alias(libs.plugins.moshiX) apply false
@@ -16,10 +20,20 @@ allprojects {
     version.set(rootProject.libs.versions.ktlint.get())
   }
 
-  plugins.withId(rootProject.libs.plugins.hilt.get().pluginId) {
-    configure<HiltExtension> {
-      enableAggregatingTask = true
+  tasks.withType<KotlinCompile> {
+    kotlinOptions {
+      jvmTarget = JavaVersion.VERSION_11.toString()
+      // https://youtrack.jetbrains.com/issue/KT-41985
+      @Suppress("SuspiciousCollectionReassignment")
+      freeCompilerArgs += listOf(
+        "-progressive",
+        "-opt-in=kotlin.RequiresOptIn",
+        "-Xjvm-default=all"
+      )
     }
+  }
+  tasks.withType<Test> {
+    useJUnitPlatform()
   }
 
   configurations.all {
@@ -33,9 +47,6 @@ allprojects {
         libs.androidX.collection.get().module.group -> useVersion(libs.versions.androidX.collection.get())
         libs.androidX.core.get().module.group -> useVersion(libs.versions.androidX.core.get())
         libs.androidX.fragment.get().module.group -> useVersion(libs.versions.androidX.fragment.get())
-        libs.androidX.lifecycle.liveData.get().module.group -> {
-          if (requested.name != "lifecycle-extensions") useVersion(libs.versions.androidX.lifecycle.get())
-        }
         libs.gradlePlugin.kotlin.get().module.group -> useVersion(libs.versions.kotlin.get())
         libs.square.okHttp.logInterceptor.get().module.group -> useVersion(libs.versions.square.okHttp.get())
         else -> when {
@@ -45,9 +56,19 @@ allprojects {
       }
     }
   }
+}
 
-  tasks.withType<Test> {
-    useJUnitPlatform()
+subprojects {
+  plugins.withId(rootProject.libs.plugins.android.library.get().pluginId) {
+    if (name.startsWith("biz-") || name.startsWith("common")) setupCommon() else setupBase()
+  }
+  plugins.withId(rootProject.libs.plugins.android.application.get().pluginId) {
+    setupCommon()
+  }
+  plugins.withId(rootProject.libs.plugins.hilt.get().pluginId) {
+    configure<HiltExtension> {
+      enableAggregatingTask = true
+    }
   }
 }
 
@@ -63,5 +84,54 @@ tasks {
   }
   wrapper {
     distributionType = Wrapper.DistributionType.ALL
+  }
+}
+
+fun Project.setupBase(): BaseExtension {
+  val shortName = name.removePrefix("biz-")
+  return extensions.getByName<BaseExtension>("android").apply {
+    resourcePrefix = "${shortName}_"
+    namespace = "io.goooler.demoapp.$shortName"
+    compileSdkVersion(32)
+    defaultConfig {
+      minSdk = 21
+      vectorDrawables.useSupportLibrary = true
+      testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+    sourceSets.configureEach {
+      java.srcDirs("src/$name/kotlin")
+    }
+    buildFeatures.buildConfig = false
+    compileOptions.setDefaultJavaVersion(JavaVersion.VERSION_11)
+    packagingOptions.resources.excludes += setOf(
+      "**/*.proto",
+      "**/*.bin",
+      "**/*.java",
+      "**/*.properties",
+      "**/*.version",
+      "**/*.*_module",
+      "*.txt",
+      "com/**",
+      "google/**",
+      "kotlin/**",
+      "kotlinx/**",
+      "okhttp3/**",
+      "META-INF/services/**",
+      "META-INF/com/**",
+      "META-INF/licenses/**",
+      "META-INF/AL2.0",
+      "META-INF/LGPL2.1",
+    )
+    (this as? CommonExtension<*, *, *, *>)?.lint {
+      abortOnError = true
+    }
+  }
+}
+
+fun Project.setupCommon(): BaseExtension = setupBase().apply {
+  flavorDimensions("channel")
+  productFlavors {
+    create("dev")
+    create("prod")
   }
 }

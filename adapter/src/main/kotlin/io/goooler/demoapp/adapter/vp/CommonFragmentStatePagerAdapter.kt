@@ -1,4 +1,4 @@
-@file:Suppress("unused")
+@file:Suppress("unused", "DEPRECATION")
 
 package io.goooler.demoapp.adapter.vp
 
@@ -10,19 +10,18 @@ import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 
 /**
- * [ViewPager] 使用
- * 可在 [Fragment.onResume] 中实现懒加载
+ * Adapter for [ViewPager]
+ * Lazy load in [Fragment.onResume]
  */
 open class CommonFragmentStatePagerAdapter(
   fragmentManager: FragmentManager,
   behavior: Int = BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
-) : FragmentStatePagerAdapter(fragmentManager, behavior), IFragmentAdapter {
+) : FragmentStatePagerAdapter(fragmentManager, behavior) {
 
   private val fragmentList = mutableListOf<Fragment>()
   private val titleList = mutableListOf<String>()
 
-  override fun setData(fragments: List<Fragment>?, titles: List<String>?) {
-
+  fun setData(fragments: List<Fragment>? = null, titles: List<String>? = null) {
     fragments?.let {
       fragmentList.clear()
       fragmentList += it

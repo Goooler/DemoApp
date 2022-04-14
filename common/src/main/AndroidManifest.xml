@@ -15,7 +15,7 @@
   <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
   <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
-  <application android:networkSecurityConfig="@xml/network_security_config">
+  <application android:networkSecurityConfig="@xml/common_network_security_config">
     <!--7.0 以上行为变更，不可直接 Uri.fromFile()-->
     <provider
       android:name=".provider.CommonProvider"
@@ -24,7 +24,7 @@
       android:grantUriPermissions="true">
       <meta-data
         android:name="android.support.FILE_PROVIDER_PATHS"
-        android:resource="@xml/file_path" />
+        android:resource="@xml/common_file_path" />
     </provider>
 
     <service android:name=".service.AudioPlayService" />

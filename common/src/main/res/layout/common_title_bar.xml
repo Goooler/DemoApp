@@ -29,7 +29,7 @@
   <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="45pt"
-    android:background="@{bgColor == 0 ? @color/white : bgColor}">
+    android:background="@{bgColor == 0 ? @color/common_white : bgColor}">
 
     <ImageView
       android:id="@+id/iv_left"
@@ -39,7 +39,7 @@
       android:padding="5pt"
       android:src="@{iconLeft ?? @drawable/common_ic_back}"
       app:layout_constraintStart_toStartOf="parent"
-      app:tint="@color/color_333333"
+      app:tint="@color/common_333333"
       tools:src="@drawable/common_ic_back" />
 
     <TextView
@@ -51,7 +51,7 @@
       android:maxWidth="200pt"
       android:maxLines="1"
       android:text="@{title}"
-      android:textColor="@color/color_333333"
+      android:textColor="@color/common_333333"
       android:textSize="15pt"
       android:textStyle="bold"
       app:layout_constraintEnd_toEndOf="parent"
@@ -66,7 +66,7 @@
       android:padding="5pt"
       android:src="@{iconRight ?? @drawable/common_ic_share}"
       app:layout_constraintEnd_toEndOf="parent"
-      app:tint="@color/color_333333"
+      app:tint="@color/common_333333"
       tools:src="@drawable/common_ic_share" />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
