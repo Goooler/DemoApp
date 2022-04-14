@@ -42,16 +42,6 @@ android {
       isCrunchPngs = false
     }
   }
-  kotlinOptions {
-    jvmTarget = JavaVersion.VERSION_11.toString()
-    // https://youtrack.jetbrains.com/issue/KT-41985
-    @Suppress("SuspiciousCollectionReassignment")
-    freeCompilerArgs += listOf(
-      "-progressive",
-      "-opt-in=kotlin.RequiresOptIn",
-      "-Xjvm-default=all"
-    )
-  }
   dependenciesInfo.includeInApk = false
   applicationVariants.all {
     outputs.all {

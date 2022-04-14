@@ -1,6 +1,7 @@
 import com.android.build.api.dsl.CommonExtension
 import com.android.build.gradle.BaseExtension
 import dagger.hilt.android.plugin.HiltExtension
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jlleitschuh.gradle.ktlint.KtlintExtension
 
 plugins {
@@ -17,6 +18,22 @@ allprojects {
   apply(plugin = rootProject.libs.plugins.ktlint.get().pluginId)
   configure<KtlintExtension> {
     version.set(rootProject.libs.versions.ktlint.get())
+  }
+
+  tasks.withType<KotlinCompile> {
+    kotlinOptions {
+      jvmTarget = JavaVersion.VERSION_11.toString()
+      // https://youtrack.jetbrains.com/issue/KT-41985
+      @Suppress("SuspiciousCollectionReassignment")
+      freeCompilerArgs += listOf(
+        "-progressive",
+        "-opt-in=kotlin.RequiresOptIn",
+        "-Xjvm-default=all"
+      )
+    }
+  }
+  tasks.withType<Test> {
+    useJUnitPlatform()
   }
 
   configurations.all {
@@ -38,10 +55,6 @@ allprojects {
         }
       }
     }
-  }
-
-  tasks.withType<Test> {
-    useJUnitPlatform()
   }
 }
 
