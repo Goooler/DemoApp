@@ -1,7 +1,6 @@
 import com.android.build.api.dsl.CommonExtension
 import com.android.build.gradle.BaseExtension
 import dagger.hilt.android.plugin.HiltExtension
-import org.gradle.kotlin.dsl.get
 import org.jlleitschuh.gradle.ktlint.KtlintExtension
 
 plugins {
@@ -18,12 +17,6 @@ allprojects {
   apply(plugin = rootProject.libs.plugins.ktlint.get().pluginId)
   configure<KtlintExtension> {
     version.set(rootProject.libs.versions.ktlint.get())
-  }
-
-  plugins.withId(rootProject.libs.plugins.hilt.get().pluginId) {
-    configure<HiltExtension> {
-      enableAggregatingTask = true
-    }
   }
 
   configurations.all {
@@ -59,6 +52,11 @@ subprojects {
   plugins.withId(rootProject.libs.plugins.android.application.get().pluginId) {
     setupCommon()
   }
+  plugins.withId(rootProject.libs.plugins.hilt.get().pluginId) {
+    configure<HiltExtension> {
+      enableAggregatingTask = true
+    }
+  }
 }
 
 tasks {
@@ -76,9 +74,8 @@ tasks {
   }
 }
 
-val Project.shortName: String get() = name.removePrefix("biz-")
-
 fun Project.setupBase(): BaseExtension {
+  val shortName = name.removePrefix("biz-")
   return extensions.getByName<BaseExtension>("android").apply {
     resourcePrefix = "${shortName}_"
     namespace = "io.goooler.demoapp.$shortName"
@@ -101,16 +98,16 @@ fun Project.setupBase(): BaseExtension {
       "**/*.version",
       "**/*.*_module",
       "*.txt",
+      "com/**",
+      "google/**",
+      "kotlin/**",
+      "kotlinx/**",
+      "okhttp3/**",
       "META-INF/services/**",
       "META-INF/com/**",
       "META-INF/licenses/**",
       "META-INF/AL2.0",
       "META-INF/LGPL2.1",
-      "com/**",
-      "kotlin/**",
-      "kotlinx/**",
-      "okhttp3/**",
-      "google/**"
     )
     (this as? CommonExtension<*, *, *, *>)?.lint {
       abortOnError = true

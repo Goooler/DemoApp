@@ -5,6 +5,8 @@ plugins {
 }
 
 dependencies {
+  implementation(projects.common)
+
   implementation(libs.square.okHttp)
   implementation(libs.square.retrofit.gson)
   implementation(libs.square.okHttp.logInterceptor)

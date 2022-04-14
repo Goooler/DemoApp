@@ -1,3 +1,4 @@
+import com.android.build.gradle.internal.api.ApkVariantOutputImpl
 import java.util.Properties
 
 plugins {
@@ -44,6 +45,7 @@ android {
   kotlinOptions {
     jvmTarget = JavaVersion.VERSION_11.toString()
     // https://youtrack.jetbrains.com/issue/KT-41985
+    @Suppress("SuspiciousCollectionReassignment")
     freeCompilerArgs += listOf(
       "-progressive",
       "-opt-in=kotlin.RequiresOptIn",
@@ -53,8 +55,7 @@ android {
   dependenciesInfo.includeInApk = false
   applicationVariants.all {
     outputs.all {
-      (this as? com.android.build.gradle.internal.api.ApkVariantOutputImpl)?.outputFileName =
-        "../../../../" +
+      (this as? ApkVariantOutputImpl)?.outputFileName = "../../../../" +
         "${appName}_${versionName}_${versionCode}_${flavorName}_${buildType.name}.apk"
     }
   }
@@ -74,9 +75,6 @@ dependencies {
   debugImplementation(libs.square.leakCanary)
 }
 
-fun Project.getSignProperty(
-  key: String,
-  path: String = "gradle/keystore.properties"
-): String = Properties().apply {
-  rootProject.file(path).inputStream().use(::load)
-}.getProperty(key)
+fun Project.getSignProperty(key: String, path: String = "gradle/keystore.properties"): String {
+  return Properties().apply { rootProject.file(path).inputStream().use(::load) }.getProperty(key)
+}
