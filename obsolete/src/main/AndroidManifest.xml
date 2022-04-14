@@ -7,9 +7,8 @@
     android:allowBackup="true"
     android:hardwareAccelerated="true"
     android:icon="@drawable/common_ic_kt_red"
-    android:label="@string/app_name"
+    android:label="Obsolete"
     android:supportsRtl="true"
-    android:theme="@style/AppTheme"
     tools:ignore="MipmapIcons">
 
   </application>

@@ -1,19 +1,17 @@
-import com.android.build.gradle.LibraryExtension
-
 plugins {
-  id(libs.plugins.android.library.get().pluginId)
-  id(libs.plugins.kotlin.android.get().pluginId)
-  id(libs.plugins.kotlin.kapt.get().pluginId)
+  alias(libs.plugins.android.library)
+  alias(libs.plugins.kotlin.android)
+  alias(libs.plugins.kotlin.kapt)
   alias(libs.plugins.moshiX)
 }
 
-setupCommon<LibraryExtension>(LibModule.Common) {
+android {
   buildFeatures.buildConfig = true
   productFlavors.all {
-    buildConfigField(BuildConfigField.VersionCode)
-    buildConfigField(BuildConfigField.VersionName)
-    buildConfigField(BuildConfigField.CdnPrefix)
-    buildConfigField(BuildConfigField.ApiHost)
+    buildConfigField("Integer", "VERSION_CODE", libs.versions.versionCode.get())
+    buildConfigField("String", "VERSION_NAME", "\"${libs.versions.versionName.get()}\"")
+    buildConfigField("String", "CDN_PREFIX", "\"https://raw.githubusercontent.com/\"")
+    buildConfigField("String", "API_HOST", "\"https://api.github.com/\"")
   }
 }
 

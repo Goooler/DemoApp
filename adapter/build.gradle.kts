@@ -1,12 +1,8 @@
-import com.android.build.gradle.LibraryExtension
-
 plugins {
-  id(libs.plugins.android.library.get().pluginId)
-  id(libs.plugins.kotlin.android.get().pluginId)
-  id(libs.plugins.kotlin.kapt.get().pluginId)
+  alias(libs.plugins.android.library)
+  alias(libs.plugins.kotlin.android)
+  alias(libs.plugins.kotlin.kapt)
 }
-
-setupBase<LibraryExtension>(LibModule.Adapter)
 
 dependencies {
   api(libs.androidX.collection)

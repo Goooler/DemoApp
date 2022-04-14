@@ -1,14 +1,16 @@
 plugins {
-  id(libs.plugins.android.library.get().pluginId)
-  id(libs.plugins.kotlin.android.get().pluginId)
-  id(libs.plugins.kotlin.kapt.get().pluginId)
+  alias(libs.plugins.android.library)
+  alias(libs.plugins.kotlin.android)
+  alias(libs.plugins.kotlin.kapt)
 }
 
-setupLib(LibModule.Web) {
+android {
   buildFeatures.buildConfig = true
 }
 
 dependencies {
+  implementation(projects.common)
+
   implementation(libs.androidX.browser)
   implementation(libs.androidX.webKit)
 }

@@ -1,4 +1,4 @@
-package io.goooler.demoapp
+package io.goooler.demoapp.app
 
 import dagger.hilt.android.HiltAndroidApp
 import io.goooler.demoapp.common.CommonApplication

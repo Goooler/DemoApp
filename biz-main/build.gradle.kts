@@ -1,12 +1,12 @@
 plugins {
-  id(libs.plugins.android.library.get().pluginId)
-  id(libs.plugins.kotlin.android.get().pluginId)
-  id(libs.plugins.kotlin.kapt.get().pluginId)
+  alias(libs.plugins.android.library)
+  alias(libs.plugins.kotlin.android)
+  alias(libs.plugins.kotlin.kapt)
   alias(libs.plugins.hilt)
   alias(libs.plugins.moshiX)
 }
 
-setupLib(LibModule.Main) {
+android {
   sourceSets["main"].res.srcDirs(
     "src/main/res/core",
     "src/main/res/other"
@@ -21,6 +21,8 @@ kapt {
 }
 
 dependencies {
+  implementation(projects.common)
+
   implementation(libs.androidX.coordinatorLayout)
   implementation(libs.flycoTabLayout)
 
