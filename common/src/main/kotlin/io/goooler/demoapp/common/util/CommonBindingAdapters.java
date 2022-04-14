@@ -1,6 +1,7 @@
 package io.goooler.demoapp.common.util;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
 import androidx.databinding.BindingAdapter;
 import com.scwang.smart.refresh.classics.ClassicsAbstract;
 import com.scwang.smart.refresh.footer.ClassicsFooter;
@@ -12,33 +13,33 @@ import com.scwang.smart.refresh.layout.api.RefreshHeader;
 public class CommonBindingAdapters {
 
   @BindingAdapter("binding_srl_refreshFinish")
-  public static void bindingFinishRefresh(SmartRefreshLayout smartRefreshLayout, Boolean isFinish) {
-    if (isFinish) smartRefreshLayout.finishRefresh();
+  public static void bindingFinishRefresh(@NonNull SmartRefreshLayout refreshLayout, boolean isFinish) {
+    if (isFinish) refreshLayout.finishRefresh();
   }
 
   @BindingAdapter("binding_srl_loadMoreFinish")
-  public static void bindingFinishLoadMore(SmartRefreshLayout smartRefreshLayout, Boolean isFinish) {
-    if (isFinish) smartRefreshLayout.finishLoadMore();
+  public static void bindingFinishLoadMore(@NonNull SmartRefreshLayout refreshLayout, boolean isFinish) {
+    if (isFinish) refreshLayout.finishLoadMore();
   }
 
   @BindingAdapter("binding_srl_enableLoadMore")
-  public static void bindingEnableLoadMore(SmartRefreshLayout smartRefreshLayout, Boolean enable) {
-    smartRefreshLayout.setEnableLoadMore(enable);
+  public static void bindingEnableLoadMore(@NonNull SmartRefreshLayout refreshLayout, boolean enable) {
+    refreshLayout.setEnableLoadMore(enable);
   }
 
   @BindingAdapter("binding_srl_enableRefresh")
-  public static void bindingEnableRefresh(SmartRefreshLayout smartRefreshLayout, Boolean enable) {
-    smartRefreshLayout.setEnableRefresh(enable);
+  public static void bindingEnableRefresh(@NonNull SmartRefreshLayout refreshLayout, boolean enable) {
+    refreshLayout.setEnableRefresh(enable);
   }
 
   @BindingAdapter("binding_srl_noMore")
-  public static void bindingNoMoreData(SmartRefreshLayout smartRefreshLayout, Boolean haveNoMore) {
-    smartRefreshLayout.setNoMoreData(haveNoMore);
+  public static void bindingNoMoreData(@NonNull SmartRefreshLayout refreshLayout, boolean haveNoMore) {
+    refreshLayout.setNoMoreData(haveNoMore);
   }
 
   @BindingAdapter("binding_srl_headerEmpty")
-  public static void bindingHeaderEmpty(SmartRefreshLayout smartRefreshLayout, Boolean isEmpty) {
-    RefreshHeader refreshHeader = smartRefreshLayout.getRefreshHeader();
+  public static void bindingHeaderEmpty(@NonNull SmartRefreshLayout refreshLayout, boolean isEmpty) {
+    RefreshHeader refreshHeader = refreshLayout.getRefreshHeader();
     if (refreshHeader instanceof ClassicsAbstract) {
       ClassicsAbstract<?> classicsAbstract = (ClassicsAbstract<?>) refreshHeader;
       int childCount = classicsAbstract.getChildCount();
@@ -49,8 +50,8 @@ public class CommonBindingAdapters {
   }
 
   @BindingAdapter("binding_srl_footerEmpty")
-  public static void bindingFooterEmpty(SmartRefreshLayout smartRefreshLayout, Boolean isEmpty) {
-    RefreshFooter refreshFooter = smartRefreshLayout.getRefreshFooter();
+  public static void bindingFooterEmpty(@NonNull SmartRefreshLayout refreshLayout, boolean isEmpty) {
+    RefreshFooter refreshFooter = refreshLayout.getRefreshFooter();
     if (refreshFooter instanceof ClassicsAbstract) {
       ClassicsAbstract<?> classicsAbstract = (ClassicsAbstract<?>) refreshFooter;
       int childCount = classicsAbstract.getChildCount();
@@ -61,46 +62,46 @@ public class CommonBindingAdapters {
   }
 
   @BindingAdapter("binding_srl_headerPrimaryColor")
-  public static void bindingHeaderPrimaryColor(SmartRefreshLayout smartRefreshLayout, @ColorInt int color) {
-    if (smartRefreshLayout.getRefreshHeader() instanceof ClassicsAbstract) {
-      ((ClassicsAbstract<?>) smartRefreshLayout.getRefreshHeader()).setPrimaryColor(color);
+  public static void bindingHeaderPrimaryColor(@NonNull SmartRefreshLayout refreshLayout, @ColorInt int color) {
+    if (refreshLayout.getRefreshHeader() instanceof ClassicsAbstract) {
+      ((ClassicsAbstract<?>) refreshLayout.getRefreshHeader()).setPrimaryColor(color);
     } else {
-      ClassicsHeader classicsHeader = new ClassicsHeader(smartRefreshLayout.getContext());
+      ClassicsHeader classicsHeader = new ClassicsHeader(refreshLayout.getContext());
       classicsHeader.setPrimaryColor(color);
-      smartRefreshLayout.setRefreshHeader(classicsHeader);
+      refreshLayout.setRefreshHeader(classicsHeader);
     }
   }
 
   @BindingAdapter("binding_srl_footerPrimaryColor")
-  public static void bindingFooterPrimaryColor(SmartRefreshLayout smartRefreshLayout, @ColorInt int color) {
-    if (smartRefreshLayout.getRefreshFooter() instanceof ClassicsAbstract) {
-      ((ClassicsAbstract<?>) smartRefreshLayout.getRefreshFooter()).setPrimaryColor(color);
+  public static void bindingFooterPrimaryColor(@NonNull SmartRefreshLayout refreshLayout, @ColorInt int color) {
+    if (refreshLayout.getRefreshFooter() instanceof ClassicsAbstract) {
+      ((ClassicsAbstract<?>) refreshLayout.getRefreshFooter()).setPrimaryColor(color);
     } else {
-      ClassicsFooter classicsHeader = new ClassicsFooter(smartRefreshLayout.getContext());
+      ClassicsFooter classicsHeader = new ClassicsFooter(refreshLayout.getContext());
       classicsHeader.setPrimaryColor(color);
-      smartRefreshLayout.setRefreshFooter(classicsHeader);
+      refreshLayout.setRefreshFooter(classicsHeader);
     }
   }
 
   @BindingAdapter("binding_srl_headerAccentColor")
-  public static void bindingHeaderAccentColor(SmartRefreshLayout smartRefreshLayout, @ColorInt int color) {
-    if (smartRefreshLayout.getRefreshHeader() instanceof ClassicsAbstract) {
-      ((ClassicsAbstract<?>) smartRefreshLayout.getRefreshHeader()).setAccentColor(color);
+  public static void bindingHeaderAccentColor(@NonNull SmartRefreshLayout refreshLayout, @ColorInt int color) {
+    if (refreshLayout.getRefreshHeader() instanceof ClassicsAbstract) {
+      ((ClassicsAbstract<?>) refreshLayout.getRefreshHeader()).setAccentColor(color);
     } else {
-      ClassicsHeader classicsHeader = new ClassicsHeader(smartRefreshLayout.getContext());
+      ClassicsHeader classicsHeader = new ClassicsHeader(refreshLayout.getContext());
       classicsHeader.setAccentColor(color);
-      smartRefreshLayout.setRefreshHeader(classicsHeader);
+      refreshLayout.setRefreshHeader(classicsHeader);
     }
   }
 
   @BindingAdapter("binding_srl_footerAccentColor")
-  public static void bindingFooterAccentColor(SmartRefreshLayout smartRefreshLayout, @ColorInt int color) {
-    if (smartRefreshLayout.getRefreshFooter() instanceof ClassicsAbstract) {
-      ((ClassicsAbstract<?>) smartRefreshLayout.getRefreshFooter()).setAccentColor(color);
+  public static void bindingFooterAccentColor(@NonNull SmartRefreshLayout refreshLayout, @ColorInt int color) {
+    if (refreshLayout.getRefreshFooter() instanceof ClassicsAbstract) {
+      ((ClassicsAbstract<?>) refreshLayout.getRefreshFooter()).setAccentColor(color);
     } else {
-      ClassicsFooter classicsHeader = new ClassicsFooter(smartRefreshLayout.getContext());
+      ClassicsFooter classicsHeader = new ClassicsFooter(refreshLayout.getContext());
       classicsHeader.setAccentColor(color);
-      smartRefreshLayout.setRefreshFooter(classicsHeader);
+      refreshLayout.setRefreshFooter(classicsHeader);
     }
   }
 }
