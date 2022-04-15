@@ -54,10 +54,10 @@ android {
 dependencies {
   implementation(projects.common)
 
-  implementation(projects.bizLogin)
-  implementation(projects.bizMain)
-  implementation(projects.bizDetail)
-  implementation(projects.bizWeb)
+  implementation(projects.biz.login)
+  implementation(projects.biz.main)
+  implementation(projects.biz.detail)
+  implementation(projects.biz.web)
 
   implementation(libs.androidX.hilt)
   kapt(libs.androidX.hilt.compiler)
