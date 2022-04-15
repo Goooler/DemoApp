@@ -60,7 +60,7 @@ allprojects {
 
 subprojects {
   plugins.withId(rootProject.libs.plugins.android.library.get().pluginId) {
-    if (displayName.startsWith(":biz:") || name.startsWith("common")) setupCommon() else setupBase()
+    if (displayName.contains(":biz:") || name.startsWith("common")) setupCommon() else setupBase()
   }
   plugins.withId(rootProject.libs.plugins.android.application.get().pluginId) {
     setupCommon()
