@@ -25,10 +25,10 @@ include(
   ":common",
   ":adapter",
   // Biz
-  ":biz-login",
-  ":biz-main",
-  ":biz-detail",
-  ":biz-web"
+  ":biz:login",
+  ":biz:main",
+  ":biz:detail",
+  ":biz:web"
 )
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")

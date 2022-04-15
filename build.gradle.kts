@@ -60,7 +60,7 @@ allprojects {
 
 subprojects {
   plugins.withId(rootProject.libs.plugins.android.library.get().pluginId) {
-    if (name.startsWith("biz-") || name.startsWith("common")) setupCommon() else setupBase()
+    if (displayName.contains(":biz:") || name.startsWith("common")) setupCommon() else setupBase()
   }
   plugins.withId(rootProject.libs.plugins.android.application.get().pluginId) {
     setupCommon()
@@ -88,10 +88,9 @@ tasks {
 }
 
 fun Project.setupBase(): BaseExtension {
-  val shortName = name.removePrefix("biz-")
   return extensions.getByName<BaseExtension>("android").apply {
-    resourcePrefix = "${shortName}_"
-    namespace = "io.goooler.demoapp.$shortName"
+    resourcePrefix = "${name}_"
+    namespace = "io.goooler.demoapp.$name"
     compileSdkVersion(32)
     defaultConfig {
       minSdk = 21
