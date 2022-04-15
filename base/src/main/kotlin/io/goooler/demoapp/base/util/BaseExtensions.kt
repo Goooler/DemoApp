@@ -96,7 +96,19 @@ operator fun String.times(@IntRange(from = 0) num: Int): String {
 
 fun String.fromHtml(): Spanned = parseAsHtml()
 
-fun String.toMimeType(): String = URLConnection.getFileNameMap().getContentTypeFor(this) ?: this
+fun String.toMimeType(): String? = URLConnection.getFileNameMap().getContentTypeFor(this)
+
+fun Array<String>.toMimeTypes(): List<String> = buildList {
+  this@toMimeTypes.forEach {
+    it.toMimeType()?.let(::add)
+  }
+}
+
+fun List<String>.toMimeTypes(): List<String> = buildList {
+  this@toMimeTypes.forEach {
+    it.toMimeType()?.let(::add)
+  }
+}
 
 fun String.onlyDigits(): String = replace(Regex("\\D*"), "")
 
