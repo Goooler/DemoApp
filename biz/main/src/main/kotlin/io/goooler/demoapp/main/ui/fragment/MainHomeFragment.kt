@@ -23,9 +23,7 @@ class MainHomeFragment : BaseBindingFragment<MainHomeFragmentBinding>() {
 
   private val vm: MainHomeViewModel by viewModels()
 
-  private val initData by unsafeLazy {
-    vm.initData()
-  }
+  private val initData by unsafeLazy { vm.initData() }
 
   override fun initOnce() {
     binding.let {

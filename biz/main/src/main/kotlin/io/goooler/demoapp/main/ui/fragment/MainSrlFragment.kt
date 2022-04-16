@@ -20,13 +20,9 @@ class MainSrlFragment : BaseBindingFragment<MainSrlFragmentBinding>() {
 
   private val vm: MainSrlViewModel by viewModels()
 
-  private val rvAdapter by unsafeLazy {
-    MainSrlRvAdapter(listener)
-  }
+  private val rvAdapter by unsafeLazy { MainSrlRvAdapter(listener) }
 
-  private val initData by unsafeLazy {
-    binding.refreshLayout.autoRefresh()
-  }
+  private val initData by unsafeLazy { binding.refreshLayout.autoRefresh() }
 
   override fun initOnce() {
     binding.let {
