@@ -37,7 +37,6 @@ import io.goooler.demoapp.base.util.ToastUtil
 import io.goooler.demoapp.common.BuildConfig
 import io.goooler.demoapp.common.CommonApplication
 import io.goooler.demoapp.common.base.theme.BaseThemeViewModel
-import io.goooler.demoapp.common.base.theme.ITheme
 import io.goooler.demoapp.common.type.SpKeys
 import java.lang.reflect.ParameterizedType
 import kotlinx.coroutines.Dispatchers

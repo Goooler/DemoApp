@@ -5,13 +5,12 @@ import android.content.pm.ActivityInfo
 import android.content.res.Resources
 import android.os.Bundle
 import android.view.WindowManager
-import androidx.annotation.MainThread
 import com.blankj.utilcode.util.AdaptScreenUtils
 import com.blankj.utilcode.util.BarUtils
 import com.blankj.utilcode.util.ScreenUtils
 import io.goooler.demoapp.base.core.BaseActivity
 
-abstract class BaseThemeActivity : BaseActivity(), ITheme {
+abstract class BaseThemeActivity : BaseActivity() {
 
   override fun getResources(): Resources {
     return if (ScreenUtils.isPortrait())
@@ -29,13 +28,5 @@ abstract class BaseThemeActivity : BaseActivity(), ITheme {
     @SuppressLint("SourceLockedOrientationActivity")
     requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
     BarUtils.transparentStatusBar(this)
-  }
-
-  @MainThread
-  override fun showLoading() {
-  }
-
-  @MainThread
-  override fun hideLoading() {
   }
 }
