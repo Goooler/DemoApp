@@ -1,7 +1,10 @@
 package io.goooler.demoapp.common.base.theme
 
+import android.annotation.SuppressLint
+import android.content.pm.ActivityInfo
 import android.content.res.Resources
 import android.os.Bundle
+import android.view.WindowManager
 import androidx.annotation.MainThread
 import com.blankj.utilcode.util.AdaptScreenUtils
 import com.blankj.utilcode.util.BarUtils
@@ -19,6 +22,12 @@ abstract class BaseThemeActivity : BaseActivity(), ITheme {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
+    window.run {
+      setBackgroundDrawable(null)
+      setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
+    }
+    @SuppressLint("SourceLockedOrientationActivity")
+    requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
     BarUtils.transparentStatusBar(this)
   }
 
