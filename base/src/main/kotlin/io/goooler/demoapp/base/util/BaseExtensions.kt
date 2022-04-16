@@ -10,6 +10,7 @@ import android.content.ContextWrapper
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
+import android.media.AudioManager
 import android.os.Build
 import android.os.Bundle
 import android.os.Looper
@@ -612,6 +613,29 @@ fun Context.addDynamicShortcutCompat(id: String, shortcut: ShortcutInfoCompat) {
     try {
       ShortcutManagerCompat.addDynamicShortcuts(this, mutableListOf(shortcut))
     } catch (_: Exception) {
+    }
+  }
+}
+
+/**
+ * 取消音频静音
+ */
+fun Context.setMusicUnmute() {
+  setMusicMute(false)
+}
+
+/**
+ * 设置音频静音
+ *
+ * @param mute 是否静音
+ */
+fun Context.setMusicMute(mute: Boolean = true) {
+  getSystemService<AudioManager>()?.let {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+      val direction = if (mute) AudioManager.ADJUST_UNMUTE else AudioManager.ADJUST_MUTE
+      it.adjustStreamVolume(AudioManager.STREAM_MUSIC, direction, 0)
+    } else {
+      it.setStreamMute(AudioManager.STREAM_MUSIC, mute)
     }
   }
 }
