@@ -17,9 +17,7 @@ import io.goooler.demoapp.main.ui.fragment.MainSrlFragment
 @AndroidEntryPoint
 class MainActivity : BaseBindingActivity<MainActivityBinding>() {
 
-  private val pagerAdapter by unsafeLazy {
-    CommonFragmentStatePagerAdapter(supportFragmentManager)
-  }
+  private val pagerAdapter by unsafeLazy { CommonFragmentStatePagerAdapter(supportFragmentManager) }
 
   private val titles = listOf("home", "smartRefresh", "paging")
 

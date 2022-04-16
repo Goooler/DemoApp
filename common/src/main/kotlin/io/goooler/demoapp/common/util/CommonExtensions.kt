@@ -18,9 +18,6 @@ import androidx.annotation.Px
 import androidx.annotation.StringRes
 import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelStoreOwner
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.AsyncDifferConfig
 import androidx.recyclerview.widget.DiffUtil
 import androidx.viewbinding.ViewBinding
@@ -36,14 +33,10 @@ import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import io.goooler.demoapp.base.util.ToastUtil
 import io.goooler.demoapp.common.BuildConfig
 import io.goooler.demoapp.common.CommonApplication
-import io.goooler.demoapp.common.base.theme.BaseThemeViewModel
-import io.goooler.demoapp.common.base.theme.ITheme
 import io.goooler.demoapp.common.type.SpKeys
 import java.lang.reflect.ParameterizedType
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.asExecutor
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 
 typealias SpHelper = SPUtils
 
@@ -164,18 +157,6 @@ inline fun <reified T> DiffUtil.ItemCallback<T>.asConfig(): AsyncDifferConfig<T>
 }
 
 // ---------------------VM & Binding-------------------------------//
-
-@MainThread
-inline fun <reified V, reified VM : BaseThemeViewModel> V.themeViewModels(): Lazy<VM>
-  where V : LifecycleOwner, V : ViewModelStoreOwner, V : ITheme = lazy(LazyThreadSafetyMode.NONE) {
-  ViewModelProvider(this)[VM::class.java].also {
-    lifecycleScope.launch {
-      it.loading.collectLatest { show ->
-        if (show) showLoading() else hideLoading()
-      }
-    }
-  }
-}
 
 @Suppress("UNCHECKED_CAST")
 fun <T : ViewBinding> LifecycleOwner.inflateBinding(inflater: LayoutInflater): T {

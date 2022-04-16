@@ -7,13 +7,13 @@ import android.os.Build
 import android.view.View
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.graphics.drawable.IconCompat
+import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import io.goooler.demoapp.base.util.addDynamicShortcutCompat
 import io.goooler.demoapp.base.util.unsafeLazy
 import io.goooler.demoapp.common.base.binding.BaseBindingFragment
 import io.goooler.demoapp.common.router.RouterManager
 import io.goooler.demoapp.common.ui.FullScreenDialogFragment
-import io.goooler.demoapp.common.util.themeViewModels
 import io.goooler.demoapp.main.databinding.MainHomeFragmentBinding
 import io.goooler.demoapp.main.ui.AudioPlayActivity
 import io.goooler.demoapp.main.vm.MainHomeViewModel
@@ -21,11 +21,9 @@ import io.goooler.demoapp.main.vm.MainHomeViewModel
 @AndroidEntryPoint
 class MainHomeFragment : BaseBindingFragment<MainHomeFragmentBinding>() {
 
-  private val vm: MainHomeViewModel by themeViewModels()
+  private val vm: MainHomeViewModel by viewModels()
 
-  private val initData by unsafeLazy {
-    vm.initData()
-  }
+  private val initData by unsafeLazy { vm.initData() }
 
   override fun initOnce() {
     binding.let {
