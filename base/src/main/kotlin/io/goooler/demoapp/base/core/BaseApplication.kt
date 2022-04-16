@@ -7,7 +7,9 @@ import android.webkit.WebView
 import androidx.annotation.CallSuper
 import androidx.annotation.MainThread
 import androidx.annotation.WorkerThread
+import kotlin.time.Duration.Companion.seconds
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -17,8 +19,8 @@ abstract class BaseApplication : Application(), CoroutineScope by MainScope() {
   override fun onCreate() {
     super.onCreate()
     initImmediately()
-    launch {
-      delay(2000)
+    launch(Dispatchers.IO) {
+      delay(3.seconds.inWholeMilliseconds)
       initLater()
     }
   }
