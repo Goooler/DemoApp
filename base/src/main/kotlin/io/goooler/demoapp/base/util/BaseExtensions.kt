@@ -29,7 +29,6 @@ import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.annotation.IdRes
 import androidx.annotation.IntRange
-import androidx.annotation.LayoutRes
 import androidx.annotation.MainThread
 import androidx.annotation.Px
 import androidx.core.content.getSystemService
@@ -38,8 +37,6 @@ import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.os.bundleOf
 import androidx.core.text.parseAsHtml
 import androidx.core.text.toSpannable
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
@@ -661,7 +658,3 @@ fun FragmentActivity.replaceFragment(
 ) {
   supportFragmentManager.replaceFragment(fragment, containerViewId, isAddToBackStack, tag)
 }
-
-@MainThread
-inline fun <reified T : ViewDataBinding> Activity.binding(@LayoutRes resId: Int): Lazy<T> =
-  lazy(LazyThreadSafetyMode.NONE) { DataBindingUtil.setContentView(this, resId) }
