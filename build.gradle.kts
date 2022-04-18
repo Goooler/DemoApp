@@ -28,6 +28,7 @@ allprojects {
       freeCompilerArgs += listOf(
         "-progressive",
         "-opt-in=kotlin.RequiresOptIn",
+        "-Xcontext-receivers",
         "-Xjvm-default=all"
       )
     }
