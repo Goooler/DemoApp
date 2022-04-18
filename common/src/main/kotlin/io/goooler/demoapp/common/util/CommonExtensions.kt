@@ -30,6 +30,10 @@ import com.blankj.utilcode.util.SizeUtils
 import com.blankj.utilcode.util.StringUtils
 import com.google.android.material.textfield.TextInputLayout
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
+import io.goooler.demoapp.base.core.BaseViewModel
+import io.goooler.demoapp.base.util.Dp
+import io.goooler.demoapp.base.util.Pt
+import io.goooler.demoapp.base.util.Sp
 import io.goooler.demoapp.base.util.ToastUtil
 import io.goooler.demoapp.common.BuildConfig
 import io.goooler.demoapp.common.CommonApplication
@@ -91,6 +95,7 @@ fun String.hidePhoneNumber(): String {
 
 // ---------------------Res-------------------------------//
 
+context(BaseViewModel)
 fun @receiver:DrawableRes Int.getDrawable(): Drawable? = try {
   ResourceUtils.getDrawable(this)
 } catch (e: Exception) {
@@ -98,6 +103,7 @@ fun @receiver:DrawableRes Int.getDrawable(): Drawable? = try {
   null
 }
 
+context(BaseViewModel)
 @ColorInt
 fun @receiver:ColorRes Int.getColor(): Int = try {
   ColorUtils.getColor(this)
@@ -106,6 +112,7 @@ fun @receiver:ColorRes Int.getColor(): Int = try {
   -1
 }
 
+context(BaseViewModel)
 fun @receiver:StringRes Int.getString(): String? = try {
   StringUtils.getString(this)
 } catch (e: Exception) {
@@ -113,9 +120,11 @@ fun @receiver:StringRes Int.getString(): String? = try {
   null
 }
 
+context(BaseViewModel)
 fun @receiver:StringRes Int.getString(vararg formatArgs: Any): String? =
   getString()?.format(formatArgs)
 
+context(BaseViewModel)
 fun @receiver:PluralsRes Int.getQuantityString(num: Int): String? = try {
   CommonApplication.app.resources.getQuantityString(this, num, num)
 } catch (e: Exception) {
@@ -123,25 +132,34 @@ fun @receiver:PluralsRes Int.getQuantityString(num: Int): String? = try {
   null
 }
 
+context(BaseViewModel)
 @Px
-fun @receiver:Dimension(unit = Dimension.SP) Float.sp2px(): Int = SizeUtils.sp2px(this)
+fun @receiver:Sp Float.sp2px(): Int = SizeUtils.sp2px(this)
 
+context(BaseViewModel)
 @Px
-fun @receiver:Dimension(unit = Dimension.DP) Float.dp2px(): Int = SizeUtils.dp2px(this)
+fun @receiver:Dp Float.dp2px(): Int = SizeUtils.dp2px(this)
 
+context(BaseViewModel)
 @Px
-fun Float.pt2px(): Int = AdaptScreenUtils.pt2Px(this)
+fun @receiver:Pt Float.pt2px(): Int = AdaptScreenUtils.pt2Px(this)
 
-@Dimension(unit = Dimension.SP)
+context(BaseViewModel)
+@Sp
 fun @receiver:Dimension Int.px2sp(): Int = SizeUtils.px2sp(this.toFloat())
 
-@Dimension(unit = Dimension.DP)
+context(BaseViewModel)
+@Dp
 fun @receiver:Dimension Int.px2dp(): Int = SizeUtils.px2dp(this.toFloat())
 
+context(BaseViewModel)
+@Pt
 fun @receiver:Dimension Int.px2pt(): Int = AdaptScreenUtils.px2Pt(this.toFloat())
 
+context(BaseViewModel)
 fun Bitmap.toDrawable(): Drawable = ImageUtils.bitmap2Drawable(this)
 
+context(BaseViewModel)
 fun Drawable.toBitmap(): Bitmap = ImageUtils.drawable2Bitmap(this)
 
 // ---------------------View-------------------------------//

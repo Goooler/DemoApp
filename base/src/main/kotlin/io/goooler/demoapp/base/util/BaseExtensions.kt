@@ -29,6 +29,7 @@ import android.view.inputmethod.InputMethodManager
 import android.webkit.URLUtil
 import android.widget.TextView
 import androidx.annotation.ColorInt
+import androidx.annotation.Dimension
 import androidx.annotation.IdRes
 import androidx.annotation.IntRange
 import androidx.annotation.MainThread
@@ -66,6 +67,15 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
 
 // ---------------------Types-------------------------------//
+
+@Dimension(unit = Dimension.DP)
+annotation class Dp
+
+@Dimension(unit = Dimension.SP)
+annotation class Sp
+
+@Dimension(unit = 3)
+annotation class Pt
 
 typealias ParamMap = HashMap<String, Any>
 
