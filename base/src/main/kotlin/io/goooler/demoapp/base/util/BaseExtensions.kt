@@ -5,12 +5,14 @@
 package io.goooler.demoapp.base.util
 
 import android.app.Activity
+import android.content.ContentUris
 import android.content.Context
 import android.content.ContextWrapper
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.media.AudioManager
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Looper
@@ -29,7 +31,6 @@ import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.annotation.IdRes
 import androidx.annotation.IntRange
-import androidx.annotation.LayoutRes
 import androidx.annotation.MainThread
 import androidx.annotation.Px
 import androidx.core.content.getSystemService
@@ -38,8 +39,6 @@ import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.os.bundleOf
 import androidx.core.text.parseAsHtml
 import androidx.core.text.toSpannable
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
@@ -124,6 +123,8 @@ fun String.isValidFilename(): Boolean {
   // So we simply use equality to check them
   return !filenameRegex.matcher(this).find() && "." != this && ".." != this
 }
+
+fun Uri.withAppendedId(id: Long): Uri = ContentUris.withAppendedId(this, id)
 
 @OptIn(ExperimentalContracts::class)
 fun CharSequence?.isNotNullOrEmpty(): Boolean {
@@ -661,7 +662,3 @@ fun FragmentActivity.replaceFragment(
 ) {
   supportFragmentManager.replaceFragment(fragment, containerViewId, isAddToBackStack, tag)
 }
-
-@MainThread
-inline fun <reified T : ViewDataBinding> Activity.binding(@LayoutRes resId: Int): Lazy<T> =
-  lazy(LazyThreadSafetyMode.NONE) { DataBindingUtil.setContentView(this, resId) }
