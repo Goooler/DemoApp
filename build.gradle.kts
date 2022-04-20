@@ -33,6 +33,12 @@ allprojects {
       )
     }
   }
+  tasks.matching {
+    it.name.contains("dokkaHtml") || it.name.contains("signMavenPublication")
+  }.configureEach {
+    notCompatibleWithConfigurationCache("https://github.com/Kotlin/dokka/issues/1217")
+    notCompatibleWithConfigurationCache("https://github.com/vanniktech/gradle-maven-publish-plugin/issues/259")
+  }
   tasks.withType<Test> {
     useJUnitPlatform()
   }
