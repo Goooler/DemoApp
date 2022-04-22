@@ -26,6 +26,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
+import android.webkit.MimeTypeMap
 import android.webkit.URLUtil
 import android.widget.TextView
 import androidx.annotation.ColorInt
@@ -51,7 +52,6 @@ import androidx.lifecycle.findViewTreeLifecycleOwner
 import java.io.File
 import java.io.Serializable
 import java.math.BigDecimal
-import java.net.URLConnection
 import java.util.Collections
 import java.util.UUID
 import java.util.regex.Pattern
@@ -96,19 +96,11 @@ operator fun String.times(@IntRange(from = 0) num: Int): String {
 
 fun String.fromHtml(): Spanned = parseAsHtml()
 
-fun String.toMimeType(): String? = URLConnection.getFileNameMap().getContentTypeFor(this)
+fun String.extension2MimeType(): String? =
+  MimeTypeMap.getSingleton().getMimeTypeFromExtension(lowercase())
 
-fun Array<String>.toMimeTypes(): List<String> = buildList {
-  this@toMimeTypes.forEach {
-    it.toMimeType()?.let(::add)
-  }
-}
-
-fun List<String>.toMimeTypes(): List<String> = buildList {
-  this@toMimeTypes.forEach {
-    it.toMimeType()?.let(::add)
-  }
-}
+fun String.mimeType2Extension(): String? =
+  MimeTypeMap.getSingleton().getExtensionFromMimeType(lowercase())
 
 fun String.onlyDigits(): String = replace(Regex("\\D*"), "")
 
