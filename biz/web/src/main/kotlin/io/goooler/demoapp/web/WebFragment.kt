@@ -9,9 +9,9 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.IntRange
 import androidx.core.net.toUri
+import io.goooler.demoapp.base.util.extension2MimeType
 import io.goooler.demoapp.base.util.isNetworkUrl
 import io.goooler.demoapp.base.util.putArguments
-import io.goooler.demoapp.base.util.toMimeType
 import io.goooler.demoapp.common.base.binding.BaseBindingFragment
 import io.goooler.demoapp.web.databinding.WebFragmentBinding
 
@@ -71,7 +71,7 @@ class WebFragment : BaseBindingFragment<WebFragmentBinding>() {
       fileChooserCallback = filePathCallback
       val canMultiSelect =
         fileChooserParams.mode == WebChromeClient.FileChooserParams.MODE_OPEN_MULTIPLE
-      val mimeType = fileChooserParams.acceptTypes.firstOrNull()?.toMimeType() ?: "*/*"
+      val mimeType = fileChooserParams.acceptTypes.firstOrNull()?.extension2MimeType() ?: "*/*"
       startFileChooser(canMultiSelect, mimeType)
       return true
     }
