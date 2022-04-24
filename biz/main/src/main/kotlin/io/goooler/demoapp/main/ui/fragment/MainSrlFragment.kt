@@ -9,7 +9,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import io.goooler.demoapp.adapter.rv.core.ItemTouchHelperCallback
 import io.goooler.demoapp.base.util.unsafeLazy
 import io.goooler.demoapp.common.base.binding.BaseBindingFragment
-import io.goooler.demoapp.common.router.RouterManager
 import io.goooler.demoapp.common.util.enableRefreshAndLoadMore
 import io.goooler.demoapp.main.databinding.MainSrlFragmentBinding
 import io.goooler.demoapp.main.ui.adapter.MainSrlRvAdapter
@@ -45,7 +44,7 @@ class MainSrlFragment : BaseBindingFragment<MainSrlFragmentBinding>() {
     ItemTouchHelperCallback.ItemChangeListener,
     View.OnClickListener {
     override fun onContentClick(fullName: String) {
-      RouterManager.goRepoDetail(requireContext(), fullName)
+      vm.like(fullName)
     }
 
     override fun onRefresh(refreshLayout: RefreshLayout) {
