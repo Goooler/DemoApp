@@ -65,15 +65,8 @@ abstract class BaseRvDiffAdapter<M : IDiffVhModelType> :
     get() = Collections.unmodifiableList(helper.list)
     set(value) {
       helper.list = value.map {
-        if (it is Parcelable) {
-          val parcel = Parcel.obtain()
-          it.writeToParcel(parcel, 0)
-          parcel.setDataPosition(0)
-          it.javaClass.getDeclaredConstructor(Parcel::class.java).apply {
-            isAccessible = true
-          }.newInstance(parcel)
-        } else
-          it
+        @Suppress("UNCHECKED_CAST")
+        (it as? Parcelable)?.deepClone() as M? ?: it
       }
       submitList(helper.transform(helper.list))
     }
@@ -97,6 +90,19 @@ abstract class BaseRvDiffAdapter<M : IDiffVhModelType> :
   override fun removeItem(item: M) {
     helper.removeItem(item) {
       notifyItemRemoved(it)
+    }
+  }
+
+  private fun <T : Parcelable> T.deepClone(): T? {
+    var parcel: Parcel? = null
+    return try {
+      parcel = Parcel.obtain().also {
+        it.writeParcelable(this, 0)
+        it.setDataPosition(0)
+      }
+      parcel.readParcelable(this::class.java.classLoader)
+    } finally {
+      parcel?.recycle()
     }
   }
 }
