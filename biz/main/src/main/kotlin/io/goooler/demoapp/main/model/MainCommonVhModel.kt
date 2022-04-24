@@ -10,7 +10,7 @@ import kotlinx.parcelize.Parcelize
 sealed class MainCommonVhModel : IDiffVhModelType, ISpanSize {
 
   @Parcelize
-  class Repo(val logoUrl: String?, val content: String?, val fullName: String = "") :
+  class Repo(val logoUrl: String?, val content: String?, val fullName: String) :
     MainCommonVhModel(), Parcelable {
 
     @IgnoredOnParcel
