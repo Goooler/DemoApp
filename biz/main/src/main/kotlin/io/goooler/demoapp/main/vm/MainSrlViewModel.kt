@@ -2,7 +2,6 @@ package io.goooler.demoapp.main.vm
 
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.goooler.demoapp.base.util.deepClone
 import io.goooler.demoapp.common.base.theme.BaseThemeViewModel
 import io.goooler.demoapp.common.type.CommonConstants
 import io.goooler.demoapp.main.model.MainCommonVhModel
@@ -61,7 +60,7 @@ class MainSrlViewModel @Inject constructor(private val repository: MainCommonRep
           it is MainCommonVhModel.Repo && it.fullName == fullName
         }
       ) { model ->
-        (model as MainCommonVhModel.Repo).deepClone()?.also {
+        (model as MainCommonVhModel.Repo).copy().also {
           it.likeCount++
         }
       }
