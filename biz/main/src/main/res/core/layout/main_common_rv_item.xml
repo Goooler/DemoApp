@@ -50,6 +50,31 @@
       app:layout_constraintTop_toTopOf="parent"
       tools:text="这是一段描述性的文字" />
 
+    <ImageView
+      android:id="@+id/iv_share"
+      android:layout_width="30dp"
+      android:layout_height="30dp"
+      android:layout_marginBottom="10dp"
+      android:onClick="@{()->listener.onShareClick(model.fullName)}"
+      android:padding="7dp"
+      android:src="@drawable/common_ic_share"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintStart_toStartOf="@id/tv_content"
+      app:tint="@color/common_white" />
+
+    <TextView
+      android:id="@+id/tv_like_count"
+      android:layout_width="wrap_content"
+      android:layout_height="30dp"
+      android:gravity="center_vertical"
+      android:onClick="@{()->listener.onShareClick(model.fullName)}"
+      android:text="@{model.shareCountStr}"
+      android:textColor="@color/common_white"
+      app:layout_constraintBottom_toBottomOf="@id/iv_share"
+      app:layout_constraintStart_toEndOf="@id/iv_share"
+      app:layout_constraintTop_toTopOf="@id/iv_share"
+      tools:text="666" />
+
   </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

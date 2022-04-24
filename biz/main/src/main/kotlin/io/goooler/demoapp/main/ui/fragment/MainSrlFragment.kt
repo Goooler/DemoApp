@@ -48,6 +48,10 @@ class MainSrlFragment : BaseBindingFragment<MainSrlFragmentBinding>() {
       RouterManager.goRepoDetail(requireContext(), fullName)
     }
 
+    override fun onShareClick(fullName: String) {
+      vm.share(fullName)
+    }
+
     override fun onRefresh(refreshLayout: RefreshLayout) {
       vm.refresh()
     }
