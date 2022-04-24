@@ -64,11 +64,8 @@ abstract class BaseRvDiffAdapter<M : IDiffVhModelType> :
   override var list: List<M>
     get() = Collections.unmodifiableList(helper.list)
     set(value) {
-      helper.list = value.map {
-        @Suppress("UNCHECKED_CAST")
-        (it as? Parcelable)?.deepClone() as M? ?: it
-      }
-      submitList(helper.transform(helper.list))
+      helper.list = value
+      submitList(helper.transform(value))
     }
 
   /**

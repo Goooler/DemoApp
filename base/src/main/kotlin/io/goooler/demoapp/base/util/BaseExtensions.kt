@@ -16,6 +16,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Looper
+import android.os.Parcel
 import android.os.Parcelable
 import android.text.Spannable
 import android.text.Spanned
@@ -81,6 +82,19 @@ inline val isMainThread: Boolean get() = Looper.getMainLooper() == Looper.myLoop
 
 fun <T : Any> unsafeLazy(initializer: () -> T): Lazy<T> =
   lazy(LazyThreadSafetyMode.NONE, initializer)
+
+fun <T : Parcelable> T.deepClone(): T? {
+  var parcel: Parcel? = null
+  return try {
+    parcel = Parcel.obtain().also {
+      it.writeParcelable(this, 0)
+      it.setDataPosition(0)
+    }
+    parcel.readParcelable(this::class.java.classLoader)
+  } finally {
+    parcel?.recycle()
+  }
+}
 
 // ---------------------CharSequence-------------------------------//
 
