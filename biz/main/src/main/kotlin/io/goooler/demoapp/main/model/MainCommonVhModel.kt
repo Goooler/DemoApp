@@ -1,16 +1,22 @@
 package io.goooler.demoapp.main.model
 
+import android.os.Parcelable
 import io.goooler.demoapp.adapter.rv.core.ISpanSize
 import io.goooler.demoapp.adapter.rv.diff.IDiffVhModelType
 import io.goooler.demoapp.main.R
+import kotlinx.parcelize.IgnoredOnParcel
+import kotlinx.parcelize.Parcelize
 
 sealed class MainCommonVhModel : IDiffVhModelType, ISpanSize {
 
+  @Parcelize
   class Repo(val logoUrl: String?, val content: String?, val fullName: String = "") :
-    MainCommonVhModel() {
+    MainCommonVhModel(), Parcelable {
 
+    @IgnoredOnParcel
     override val viewType: Int = R.layout.main_common_rv_item
 
+    @IgnoredOnParcel
     override val spanSize: Int = ISpanSize.SPAN_SIZE_SINGLE
 
     override fun isItemTheSame(that: IDiffVhModelType): Boolean =
