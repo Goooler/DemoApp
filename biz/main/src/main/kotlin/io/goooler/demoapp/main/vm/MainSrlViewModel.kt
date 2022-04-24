@@ -52,7 +52,7 @@ class MainSrlViewModel @Inject constructor(private val repository: MainCommonRep
     listData.value = _listData.toList()
   }
 
-  fun like(fullName: String) {
+  fun share(fullName: String) {
     viewModelScope.launch(Dispatchers.Default) {
       val list = mutableListOf<MainCommonVhModel>()
       _listData.forEach { model ->

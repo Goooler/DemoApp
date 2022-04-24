@@ -30,6 +30,7 @@ sealed class MainCommonVhModel : IDiffVhModelType, ISpanSize {
 
     interface OnEventListener {
       fun onContentClick(fullName: String) {}
+      fun onShareClick(fullName: String) {}
       fun onItemClick(item: MainCommonVhModel) {}
     }
   }
