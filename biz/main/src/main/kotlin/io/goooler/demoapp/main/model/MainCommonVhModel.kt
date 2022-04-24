@@ -10,7 +10,7 @@ sealed class MainCommonVhModel : IDiffVhModelType, ISpanSize {
     val logoUrl: String?,
     val content: String?,
     val fullName: String,
-    var likeCount: Int = 0
+    val likeCount: Int = 0
   ) : MainCommonVhModel() {
 
     val likeCountStr: String get() = likeCount.toString()

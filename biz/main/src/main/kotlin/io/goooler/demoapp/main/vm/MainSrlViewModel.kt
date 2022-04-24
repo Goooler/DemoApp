@@ -56,13 +56,10 @@ class MainSrlViewModel @Inject constructor(private val repository: MainCommonRep
     viewModelScope.launch(Dispatchers.Default) {
       val list = mutableListOf<MainCommonVhModel>()
       _listData.forEach { model ->
-        val each = if (model is MainCommonVhModel.Repo && model.fullName == fullName) {
-          model.copy().also {
-            it.likeCount++
-          }
+        list += if (model is MainCommonVhModel.Repo && model.fullName == fullName) {
+          model.copy(likeCount = model.likeCount + 1)
         } else
           model
-        list += each
       }
       _listData.clear()
       _listData += list
