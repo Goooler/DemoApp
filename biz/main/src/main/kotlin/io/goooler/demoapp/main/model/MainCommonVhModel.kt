@@ -23,8 +23,12 @@ sealed class MainCommonVhModel : IDiffVhModelType, ISpanSize {
     @IgnoredOnParcel
     override val spanSize: Int = ISpanSize.SPAN_SIZE_SINGLE
 
-    override fun isItemTheSame(that: IDiffVhModelType): Boolean =
-      (that as? Repo)?.content == this.content
+    override fun isItemTheSame(that: IDiffVhModelType): Boolean {
+      return if (that is Repo) {
+        that.fullName == this.fullName
+      } else
+        false
+    }
 
     override fun isContentTheSame(that: IDiffVhModelType): Boolean = true
 
