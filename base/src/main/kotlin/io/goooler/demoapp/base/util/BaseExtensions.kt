@@ -83,7 +83,7 @@ inline val isMainThread: Boolean get() = Looper.getMainLooper() == Looper.myLoop
 fun <T : Any> unsafeLazy(initializer: () -> T): Lazy<T> =
   lazy(LazyThreadSafetyMode.NONE, initializer)
 
-fun <T : Parcelable> T.deepClone(): T? {
+fun <T : Parcelable> T.deepCopy(): T? {
   var parcel: Parcel? = null
   return try {
     parcel = Parcel.obtain().also {
