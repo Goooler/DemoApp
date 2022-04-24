@@ -23,9 +23,9 @@ import java.util.Collections
  * @version 1.0.0
  * @since 1.0.0
  */
-abstract class BaseRvDiffAdapter<M> :
+abstract class BaseRvDiffAdapter<M : IDiffVhModelType> :
   ListAdapter<M, BindingViewHolder>,
-  IMutableRvAdapter<M> where M : IDiffVhModelType, M : Parcelable {
+  IMutableRvAdapter<M> {
 
   private val helper by lazy(LazyThreadSafetyMode.NONE) { RvAdapterHelper(this) }
 
@@ -65,12 +65,15 @@ abstract class BaseRvDiffAdapter<M> :
     get() = Collections.unmodifiableList(helper.list)
     set(value) {
       helper.list = value.map {
-        val parcel = Parcel.obtain()
-        it.writeToParcel(parcel, 0)
-        parcel.setDataPosition(0)
-        it.javaClass.getDeclaredConstructor(Parcel::class.java).apply {
-          isAccessible = true
-        }.newInstance(parcel)
+        if (it is Parcelable) {
+          val parcel = Parcel.obtain()
+          it.writeToParcel(parcel, 0)
+          parcel.setDataPosition(0)
+          it.javaClass.getDeclaredConstructor(Parcel::class.java).apply {
+            isAccessible = true
+          }.newInstance(parcel)
+        } else
+          it
       }
       submitList(helper.transform(helper.list))
     }
