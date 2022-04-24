@@ -10,10 +10,13 @@ import kotlinx.parcelize.Parcelize
 sealed class MainCommonVhModel : IDiffVhModelType, ISpanSize {
 
   @Parcelize
-  class Repo(val logoUrl: String?, val content: String?, val fullName: String = "") :
-    MainCommonVhModel(), Parcelable {
-
+  class Repo(
+    val logoUrl: String?,
+    val content: String?,
+    val fullName: String = "",
     var likeCount: Int = 0
+  ) :
+    MainCommonVhModel(), Parcelable {
 
     val likeCountStr: String get() = likeCount.toString()
 
