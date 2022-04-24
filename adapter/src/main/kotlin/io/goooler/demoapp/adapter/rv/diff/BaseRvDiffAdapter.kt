@@ -1,7 +1,5 @@
 package io.goooler.demoapp.adapter.rv.diff
 
-import android.os.Parcel
-import android.os.Parcelable
 import android.view.ViewGroup
 import androidx.annotation.IntRange
 import androidx.annotation.LayoutRes
@@ -64,11 +62,8 @@ abstract class BaseRvDiffAdapter<M : IDiffVhModelType> :
   override var list: List<M>
     get() = Collections.unmodifiableList(helper.list)
     set(value) {
-      helper.list = value.map {
-        @Suppress("UNCHECKED_CAST")
-        (it as? Parcelable)?.deepClone() as M? ?: it
-      }
-      submitList(helper.transform(helper.list))
+      helper.list = value
+      submitList(helper.transform(value))
     }
 
   /**
@@ -90,19 +85,6 @@ abstract class BaseRvDiffAdapter<M : IDiffVhModelType> :
   override fun removeItem(item: M) {
     helper.removeItem(item) {
       notifyItemRemoved(it)
-    }
-  }
-
-  private fun <T : Parcelable> T.deepClone(): T? {
-    var parcel: Parcel? = null
-    return try {
-      parcel = Parcel.obtain().also {
-        it.writeParcelable(this, 0)
-        it.setDataPosition(0)
-      }
-      parcel.readParcelable(this::class.java.classLoader)
-    } finally {
-      parcel?.recycle()
     }
   }
 }
