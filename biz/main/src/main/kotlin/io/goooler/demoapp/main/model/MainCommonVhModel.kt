@@ -13,7 +13,7 @@ sealed class MainCommonVhModel : IDiffVhModelType, ISpanSize {
   class Repo(
     val logoUrl: String?,
     val content: String?,
-    val fullName: String = "",
+    val fullName: String,
     var likeCount: Int = 0
   ) :
     MainCommonVhModel(), Parcelable {
