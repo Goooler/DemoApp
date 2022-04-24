@@ -1,5 +1,6 @@
 package io.goooler.demoapp.adapter.rv.diff
 
+import android.os.Parcel
 import android.os.Parcelable
 import android.view.ViewGroup
 import androidx.annotation.IntRange
@@ -63,8 +64,15 @@ abstract class BaseRvDiffAdapter<M> :
   override var list: List<M>
     get() = Collections.unmodifiableList(helper.list)
     set(value) {
-      helper.list = value
-      submitList(helper.transform(value))
+      helper.list = value.map {
+        val parcel = Parcel.obtain()
+        it.writeToParcel(parcel, 0)
+        parcel.setDataPosition(0)
+        it.javaClass.getDeclaredConstructor(Parcel::class.java).apply {
+          isAccessible = true
+        }.newInstance(parcel)
+      }
+      submitList(helper.transform(helper.list))
     }
 
   /**
