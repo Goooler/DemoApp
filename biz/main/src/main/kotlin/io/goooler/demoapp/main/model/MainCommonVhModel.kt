@@ -25,7 +25,7 @@ sealed class MainCommonVhModel : IDiffVhModelType, ISpanSize {
 
     override fun isItemTheSame(that: IDiffVhModelType): Boolean {
       return if (that is Repo) {
-        that.fullName == this.fullName
+        that.fullName == this.fullName && that.likeCount == this.likeCount
       } else
         false
     }
