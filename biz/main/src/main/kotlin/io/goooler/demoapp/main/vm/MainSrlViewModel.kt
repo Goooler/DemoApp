@@ -2,6 +2,7 @@ package io.goooler.demoapp.main.vm
 
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import io.goooler.demoapp.base.util.deepClone
 import io.goooler.demoapp.common.base.theme.BaseThemeViewModel
 import io.goooler.demoapp.common.type.CommonConstants
 import io.goooler.demoapp.main.model.MainCommonVhModel
@@ -52,12 +53,19 @@ class MainSrlViewModel @Inject constructor(private val repository: MainCommonRep
   }
 
   fun like(fullName: String) {
-    _listData.forEach {
-      if (it is MainCommonVhModel.Repo && it.fullName == fullName) {
-        it.likeCount++
-      }
+    val list = mutableListOf<MainCommonVhModel>()
+    _listData.forEach { model ->
+      val each = if (model is MainCommonVhModel.Repo && model.fullName == fullName) {
+        model.deepClone()?.also {
+          it.likeCount++
+        } ?: model
+      } else
+        model
+      list += each
     }
-    listData.value = _listData.toList()
+    _listData.clear()
+    _listData += list
+    listData.value = list
   }
 
   private fun fetchListData(page: Int) {
