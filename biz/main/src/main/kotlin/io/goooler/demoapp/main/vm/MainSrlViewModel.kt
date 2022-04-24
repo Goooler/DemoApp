@@ -57,7 +57,7 @@ class MainSrlViewModel @Inject constructor(private val repository: MainCommonRep
       val list = mutableListOf<MainCommonVhModel>()
       _listData.forEach { model ->
         list += if (model is MainCommonVhModel.Repo && model.fullName == fullName) {
-          model.copy(likeCount = model.likeCount + 1)
+          model.copy(shareCount = model.shareCount + 1)
         } else
           model
       }

@@ -10,18 +10,18 @@ sealed class MainCommonVhModel : IDiffVhModelType, ISpanSize {
     val logoUrl: String?,
     val content: String?,
     val fullName: String,
-    val likeCount: Int = 0
+    val shareCount: Int = 0
   ) : MainCommonVhModel() {
-
-    val likeCountStr: String get() = likeCount.toString()
 
     override val viewType: Int = R.layout.main_common_rv_item
 
     override val spanSize: Int = ISpanSize.SPAN_SIZE_SINGLE
 
+    val shareCountStr: String get() = shareCount.toString()
+
     override fun isItemTheSame(that: IDiffVhModelType): Boolean {
       return if (that is Repo) {
-        that.fullName == this.fullName && that.likeCount == this.likeCount
+        that.fullName == this.fullName && that.shareCount == this.shareCount
       } else
         false
     }

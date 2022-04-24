@@ -68,7 +68,7 @@
       android:layout_height="30dp"
       android:gravity="center_vertical"
       android:onClick="@{()->listener.onShareClick(model.fullName)}"
-      android:text="@{model.likeCountStr}"
+      android:text="@{model.shareCountStr}"
       android:textColor="@color/common_white"
       app:layout_constraintBottom_toBottomOf="@id/iv_share"
       app:layout_constraintStart_toEndOf="@id/iv_share"
