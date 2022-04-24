@@ -1,5 +1,6 @@
 package io.goooler.demoapp.adapter.rv.diff
 
+import android.os.Parcelable
 import android.view.ViewGroup
 import androidx.annotation.IntRange
 import androidx.annotation.LayoutRes
@@ -21,9 +22,9 @@ import java.util.Collections
  * @version 1.0.0
  * @since 1.0.0
  */
-abstract class BaseRvDiffAdapter<M : IDiffVhModelType> :
+abstract class BaseRvDiffAdapter<M> :
   ListAdapter<M, BindingViewHolder>,
-  IMutableRvAdapter<M> {
+  IMutableRvAdapter<M> where M : IDiffVhModelType, M : Parcelable {
 
   private val helper by lazy(LazyThreadSafetyMode.NONE) { RvAdapterHelper(this) }
 
