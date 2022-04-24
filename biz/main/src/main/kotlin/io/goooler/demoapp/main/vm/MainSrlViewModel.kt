@@ -12,6 +12,7 @@ import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 @HiltViewModel
 class MainSrlViewModel @Inject constructor(private val repository: MainCommonRepository) :
@@ -54,20 +55,16 @@ class MainSrlViewModel @Inject constructor(private val repository: MainCommonRep
   }
 
   fun like(fullName: String) {
-    viewModelScope.launch(Dispatchers.Default) {
-      val list = mutableListOf<MainCommonVhModel>()
-      _listData.forEach { model ->
-        val each = if (model is MainCommonVhModel.Repo && model.fullName == fullName) {
-          model.deepClone()?.also {
-            it.likeCount++
-          } ?: model
-        } else
-          model
-        list += each
+    viewModelScope.launch {
+      refreshListItems(
+        {
+          it is MainCommonVhModel.Repo && it.fullName == fullName
+        }
+      ) { model ->
+        (model as MainCommonVhModel.Repo).deepClone()?.also {
+          it.likeCount++
+        }
       }
-      _listData.clear()
-      _listData += list
-      listData.value = list
     }
   }
 
@@ -97,6 +94,23 @@ class MainSrlViewModel @Inject constructor(private val repository: MainCommonRep
         finishRefreshAndLoadMore(true)
       }
     }
+  }
+
+  private suspend fun refreshListItems(
+    filter: (MainCommonVhModel) -> Boolean,
+    operation: (MainCommonVhModel) -> MainCommonVhModel?
+  ) = withContext(Dispatchers.Default) {
+    val list = mutableListOf<MainCommonVhModel>()
+    _listData.forEach { model ->
+      val each = if (filter(model)) {
+        operation(model) ?: model
+      } else
+        model
+      list += each
+    }
+    _listData.clear()
+    _listData += list
+    listData.value = list
   }
 
   private fun finishRefreshAndLoadMore(finish: Boolean) {
