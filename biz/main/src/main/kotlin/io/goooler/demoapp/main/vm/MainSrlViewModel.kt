@@ -51,6 +51,15 @@ class MainSrlViewModel @Inject constructor(private val repository: MainCommonRep
     listData.value = _listData.toList()
   }
 
+  fun like(fullName: String) {
+    _listData.forEach {
+      if (it is MainCommonVhModel.Repo && it.fullName == fullName) {
+        it.likeCount++
+      }
+    }
+    listData.value = _listData.toList()
+  }
+
   private fun fetchListData(page: Int) {
     viewModelScope.launch {
       try {

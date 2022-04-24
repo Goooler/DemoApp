@@ -50,6 +50,17 @@
       app:layout_constraintTop_toTopOf="parent"
       tools:text="这是一段描述性的文字" />
 
+    <TextView
+      android:layout_marginTop="10dp"
+      android:id="@+id/tv_like_count"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textColor="@color/common_white"
+      android:text="@{model.likeCountStr}"
+      app:layout_constraintStart_toStartOf="@id/tv_content"
+      app:layout_constraintTop_toBottomOf="@id/tv_content"
+      tools:text="666" />
+
   </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

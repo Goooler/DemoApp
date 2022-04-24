@@ -13,6 +13,10 @@ sealed class MainCommonVhModel : IDiffVhModelType, ISpanSize {
   class Repo(val logoUrl: String?, val content: String?, val fullName: String = "") :
     MainCommonVhModel(), Parcelable {
 
+    var likeCount: Int = 0
+
+    val likeCountStr: String get() = likeCount.toString()
+
     @IgnoredOnParcel
     override val viewType: Int = R.layout.main_common_rv_item
 
