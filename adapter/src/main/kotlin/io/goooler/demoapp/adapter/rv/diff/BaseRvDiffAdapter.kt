@@ -63,7 +63,7 @@ abstract class BaseRvDiffAdapter<M : IDiffVhModelType> :
     get() = Collections.unmodifiableList(helper.list)
     set(value) {
       helper.list = value
-      submitList(helper.transform(list))
+      submitList(helper.transform(value))
     }
 
   /**
