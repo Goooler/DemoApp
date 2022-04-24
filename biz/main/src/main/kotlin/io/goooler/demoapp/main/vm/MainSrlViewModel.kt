@@ -9,6 +9,7 @@ import io.goooler.demoapp.main.model.MainCommonVhModel
 import io.goooler.demoapp.main.repository.MainCommonRepository
 import java.util.Collections
 import javax.inject.Inject
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
@@ -53,19 +54,21 @@ class MainSrlViewModel @Inject constructor(private val repository: MainCommonRep
   }
 
   fun like(fullName: String) {
-    val list = mutableListOf<MainCommonVhModel>()
-    _listData.forEach { model ->
-      val each = if (model is MainCommonVhModel.Repo && model.fullName == fullName) {
-        model.deepClone()?.also {
-          it.likeCount++
-        } ?: model
-      } else
-        model
-      list += each
+    viewModelScope.launch(Dispatchers.Default) {
+      val list = mutableListOf<MainCommonVhModel>()
+      _listData.forEach { model ->
+        val each = if (model is MainCommonVhModel.Repo && model.fullName == fullName) {
+          model.deepClone()?.also {
+            it.likeCount++
+          } ?: model
+        } else
+          model
+        list += each
+      }
+      _listData.clear()
+      _listData += list
+      listData.value = list
     }
-    _listData.clear()
-    _listData += list
-    listData.value = list
   }
 
   private fun fetchListData(page: Int) {
