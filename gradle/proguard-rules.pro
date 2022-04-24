@@ -74,8 +74,8 @@
 -dontwarn java.time.zone.ZoneRulesProvider
 
 # DataBinding
--keep public class * extends androidx.databinding.ViewDataBinding {
-  * inflate(android.view.LayoutInflater);
+-keep,allowoptimization public class * extends androidx.databinding.ViewDataBinding {
+  public static * inflate(android.view.LayoutInflater);
 }
 
 # Extra rules for R8 fullMode
