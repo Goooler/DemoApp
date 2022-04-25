@@ -17,16 +17,10 @@ sealed class MainCommonVhModel : IDiffVhModelType, ISpanSize {
 
     override val spanSize: Int = ISpanSize.SPAN_SIZE_SINGLE
 
+    override fun isItemTheSame(that: IDiffVhModelType): Boolean =
+      (that as? Repo)?.fullName == this.fullName
+
     val shareCountStr: String get() = shareCount.toString()
-
-    override fun isItemTheSame(that: IDiffVhModelType): Boolean {
-      return if (that is Repo) {
-        that.fullName == this.fullName && that.shareCount == this.shareCount
-      } else
-        false
-    }
-
-    override fun isContentTheSame(that: IDiffVhModelType): Boolean = true
 
     interface OnEventListener {
       fun onContentClick(fullName: String) {}
