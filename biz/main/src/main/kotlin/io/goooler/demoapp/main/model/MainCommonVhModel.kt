@@ -17,6 +17,9 @@ sealed class MainCommonVhModel : IDiffVhModelType, ISpanSize {
 
     override val spanSize: Int = ISpanSize.SPAN_SIZE_SINGLE
 
+    override fun isItemTheSame(that: IDiffVhModelType): Boolean =
+      (that as? Repo)?.fullName == this.fullName
+
     val shareCountStr: String get() = shareCount.toString()
 
     interface OnEventListener {
