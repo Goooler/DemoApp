@@ -19,12 +19,7 @@ sealed class MainCommonVhModel : IDiffVhModelType, ISpanSize {
 
     val shareCountStr: String get() = shareCount.toString()
 
-    override fun isItemTheSame(that: IDiffVhModelType): Boolean {
-      return if (that is Repo) {
-        that.fullName == this.fullName && that.shareCount == this.shareCount
-      } else
-        false
-    }
+    override fun isItemTheSame(that: IDiffVhModelType): Boolean = this == that
 
     override fun isContentTheSame(that: IDiffVhModelType): Boolean = true
 
