@@ -19,8 +19,6 @@ sealed class MainCommonVhModel : IDiffVhModelType, ISpanSize {
 
     val shareCountStr: String get() = shareCount.toString()
 
-    override fun isContentTheSame(that: IDiffVhModelType): Boolean = true
-
     interface OnEventListener {
       fun onContentClick(fullName: String) {}
       fun onShareClick(fullName: String) {}
