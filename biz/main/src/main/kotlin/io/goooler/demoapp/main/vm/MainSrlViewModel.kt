@@ -77,7 +77,7 @@ class MainSrlViewModel @Inject constructor(private val repository: MainCommonRep
           }.let {
             _listData += it
             if (page == 1 && it.isEmpty()) {
-              _listData += listOf(MainCommonVhModel.Empty())
+              _listData += listOf(MainCommonVhModel.Empty)
             }
             if (it.size < CommonConstants.DEFAULT_PAGE_SIZE) {
               isNoMore.value = true
@@ -87,7 +87,7 @@ class MainSrlViewModel @Inject constructor(private val repository: MainCommonRep
             listData.value = it
           }
       } catch (_: Exception) {
-        listData.value = listOf(MainCommonVhModel.Error())
+        listData.value = listOf(MainCommonVhModel.Error)
         enableRefreshAndLoadMore(false)
       } finally {
         finishRefreshAndLoadMore(true)
