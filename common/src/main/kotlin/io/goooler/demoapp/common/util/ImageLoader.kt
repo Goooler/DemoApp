@@ -8,6 +8,7 @@ import android.os.Build
 import android.widget.ImageView
 import androidx.annotation.FloatRange
 import androidx.annotation.Px
+import androidx.databinding.BindingAdapter
 import coil.Coil
 import coil.decode.GifDecoder
 import coil.decode.ImageDecoderDecoder
@@ -37,7 +38,6 @@ object ImageLoader {
     Coil.setImageLoader(imageLoader)
   }
 
-  @JvmOverloads
   fun load(
     imageView: ImageView,
     data: Any?,
@@ -51,7 +51,6 @@ object ImageLoader {
     }
   }
 
-  @JvmOverloads
   fun loadCircleCrop(
     imageView: ImageView,
     data: Any?,
@@ -102,12 +101,17 @@ object ImageLoader {
   }
 }
 
-// ------------------------Extensions--------------------------//
+// ------------------------BindingAdapter--------------------------//
 
+@BindingAdapter("binding_iv_data")
 fun ImageView.load(data: Any?) {
   ImageLoader.load(this, data)
 }
 
+@BindingAdapter(
+  "binding_iv_data",
+  "binding_iv_cornerRadius"
+)
 fun ImageView.load(
   data: Any?,
   @Px @FloatRange(from = 0.0) cornerRadius: Float
@@ -115,6 +119,10 @@ fun ImageView.load(
   ImageLoader.load(this, data, cornerRadius = cornerRadius)
 }
 
+@BindingAdapter(
+  "binding_iv_data",
+  "binding_iv_placeholder"
+)
 fun ImageView.load(
   data: Any?,
   placeholderDrawable: Drawable?
@@ -122,6 +130,11 @@ fun ImageView.load(
   ImageLoader.load(this, data, placeholderDrawable)
 }
 
+@BindingAdapter(
+  "binding_iv_data",
+  "binding_iv_placeholder",
+  "binding_iv_error"
+)
 fun ImageView.load(
   data: Any?,
   placeholderDrawable: Drawable?,
@@ -130,6 +143,12 @@ fun ImageView.load(
   ImageLoader.load(this, data, placeholderDrawable, errorDrawable)
 }
 
+@BindingAdapter(
+  "binding_iv_data",
+  "binding_iv_placeholder",
+  "binding_iv_error",
+  "binding_iv_cornerRadius"
+)
 fun ImageView.load(
   data: Any?,
   placeholderDrawable: Drawable?,
@@ -139,6 +158,13 @@ fun ImageView.load(
   ImageLoader.load(this, data, placeholderDrawable, errorDrawable, cornerRadius)
 }
 
+@BindingAdapter(
+  "binding_iv_data",
+  "binding_iv_placeholder",
+  "binding_iv_error",
+  "binding_iv_cornerRadius",
+  "binding_iv_useCache"
+)
 fun ImageView.load(
   data: Any?,
   placeholderDrawable: Drawable?,
@@ -149,10 +175,15 @@ fun ImageView.load(
   ImageLoader.load(this, data, placeholderDrawable, errorDrawable, cornerRadius, useCache)
 }
 
+@BindingAdapter("binding_iv_data_circle")
 fun ImageView.loadCircleCrop(data: Any?) {
   ImageLoader.loadCircleCrop(this, data)
 }
 
+@BindingAdapter(
+  "binding_iv_data_circle",
+  "binding_iv_placeholder"
+)
 fun ImageView.loadCircleCrop(
   data: Any?,
   placeholderDrawable: Drawable?
@@ -160,6 +191,11 @@ fun ImageView.loadCircleCrop(
   ImageLoader.loadCircleCrop(this, data, placeholderDrawable)
 }
 
+@BindingAdapter(
+  "binding_iv_data_circle",
+  "binding_iv_placeholder",
+  "binding_iv_error"
+)
 fun ImageView.loadCircleCrop(
   data: Any?,
   placeholderDrawable: Drawable?,
@@ -168,6 +204,12 @@ fun ImageView.loadCircleCrop(
   ImageLoader.loadCircleCrop(this, data, placeholderDrawable, errorDrawable)
 }
 
+@BindingAdapter(
+  "binding_iv_data_circle",
+  "binding_iv_placeholder",
+  "binding_iv_error",
+  "binding_iv_useCache"
+)
 fun ImageView.loadCircleCrop(
   data: Any?,
   placeholderDrawable: Drawable?,
