@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.IntRange
 import androidx.annotation.LayoutRes
+import androidx.databinding.BindingAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
@@ -65,4 +66,16 @@ internal interface IMutableRvAdapter<M : IVhModelType> : IRvAdapter<M> {
   fun removeItem(@IntRange(from = 0) index: Int)
 
   fun removeItem(item: M)
+}
+
+@BindingAdapter(value = ["binding_rv_dataList"], requireAll = true)
+fun <M : IVhModelType> RecyclerView.setList(list: List<M>?) {
+  @Suppress("UNCHECKED_CAST")
+  (adapter as? IMutableRvAdapter<M>)?.list = list.orEmpty()
+}
+
+@BindingAdapter(value = ["binding_rv_refreshItems"], requireAll = true)
+fun <M : IVhModelType> RecyclerView.refreshItems(items: List<M>?) {
+  @Suppress("UNCHECKED_CAST")
+  (adapter as? IMutableRvAdapter<M>)?.refreshItems(items.orEmpty())
 }

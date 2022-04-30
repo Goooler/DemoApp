@@ -7,6 +7,8 @@ plugins {
 }
 
 android {
+  buildFeatures.dataBinding = true
+
   sourceSets["main"].res.srcDirs(
     "src/main/res/core",
     "src/main/res/other"

@@ -6,7 +6,10 @@ plugins {
 }
 
 android {
-  buildFeatures.buildConfig = true
+  buildFeatures {
+    buildConfig = true
+    dataBinding = true
+  }
   productFlavors.all {
     buildConfigField("Integer", "VERSION_CODE", libs.versions.versionCode.get())
     buildConfigField("String", "VERSION_NAME", "\"${libs.versions.versionName.get()}\"")

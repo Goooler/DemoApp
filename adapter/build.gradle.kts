@@ -4,6 +4,10 @@ plugins {
   alias(libs.plugins.kotlin.kapt)
 }
 
+android {
+  buildFeatures.dataBinding = true
+}
+
 dependencies {
   api(libs.androidX.collection)
   api(libs.androidX.paging)
