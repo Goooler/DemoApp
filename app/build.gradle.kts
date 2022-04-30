@@ -26,7 +26,10 @@ android {
     enableV3Signing = true
     enableV4Signing = true
   }
-  buildFeatures.resValues = true
+  buildFeatures {
+    dataBinding = true
+    resValues = true
+  }
   buildTypes {
     release {
       resValue("string", "app_name", appName)

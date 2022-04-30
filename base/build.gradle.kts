@@ -4,6 +4,10 @@ plugins {
   alias(libs.plugins.kotlin.kapt)
 }
 
+android {
+  buildFeatures.dataBinding = true
+}
+
 dependencies {
   api(fileTree(mapOf("dir" to "libs", "include" to arrayOf("*.jar", "*.aar"))))
 
