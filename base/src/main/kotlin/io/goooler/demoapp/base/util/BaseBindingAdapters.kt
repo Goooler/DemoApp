@@ -18,22 +18,22 @@ import androidx.databinding.BindingAdapter
 // ------------------------View --------------------------//
 
 @BindingAdapter("binding_isGone")
-fun View.bindingIsGone(gone: Boolean) {
+internal fun View.bindingIsGone(gone: Boolean) {
   visibility = if (gone) View.GONE else View.VISIBLE
 }
 
 @BindingAdapter("binding_isVisible")
-fun View.bindingIsVisible(show: Boolean) {
+internal fun View.bindingIsVisible(show: Boolean) {
   visibility = if (show) View.VISIBLE else View.INVISIBLE
 }
 
 @BindingAdapter("binding_isSelected")
-fun View.bindingIsSelect(select: Boolean) {
+internal fun View.bindingIsSelect(select: Boolean) {
   isSelected = select
 }
 
 @BindingAdapter("binding_rect_radius")
-fun View.bindingRectCornerRadius(@Px radius: Float) {
+internal fun View.bindingRectCornerRadius(@Px radius: Float) {
   outlineProvider = object : ViewOutlineProvider() {
     override fun getOutline(view: View, outline: Outline) {
       outline.setRoundRect(0, 0, view.width, view.height, radius)
@@ -43,41 +43,41 @@ fun View.bindingRectCornerRadius(@Px radius: Float) {
 }
 
 @BindingAdapter("binding_width", "binding_height")
-fun View.bindingWidthAndHeight(@Px width: Float, @Px height: Float) {
+internal fun View.bindingWidthAndHeight(@Px width: Float, @Px height: Float) {
   layoutParams.width = width.toInt()
   layoutParams.height = height.toInt()
   requestLayout()
 }
 
 @BindingAdapter("binding_width")
-fun View.bindingWidth(@Px width: Float) {
+internal fun View.bindingWidth(@Px width: Float) {
   layoutParams.width = width.toInt()
   requestLayout()
 }
 
 @BindingAdapter("binding_height")
-fun View.bindingHeight(@Px height: Float) {
+internal fun View.bindingHeight(@Px height: Float) {
   layoutParams.height = height.toInt()
   requestLayout()
 }
 
 @BindingAdapter("binding_marginTop")
-fun View.bindingMarginTop(@Px margin: Float) {
+internal fun View.bindingMarginTop(@Px margin: Float) {
   marginDirection(1, margin)
 }
 
 @BindingAdapter("binding_marginBottom")
-fun View.bindingMarginBottom(@Px margin: Float) {
+internal fun View.bindingMarginBottom(@Px margin: Float) {
   marginDirection(3, margin)
 }
 
 @BindingAdapter("binding_marginStart")
-fun View.bindingMarginStart(@Px margin: Float) {
+internal fun View.bindingMarginStart(@Px margin: Float) {
   marginDirection(0, margin)
 }
 
 @BindingAdapter("binding_marginEnd")
-fun View.bindingMarginEnd(@Px margin: Float) {
+internal fun View.bindingMarginEnd(@Px margin: Float) {
   marginDirection(2, margin)
 }
 
@@ -89,7 +89,7 @@ fun View.bindingMarginEnd(@Px margin: Float) {
   "binding_bg_angle",
   "binding_bg_radius"
 )
-fun View.bindingBgShapeGradual(
+internal fun View.bindingBgShapeGradual(
   @ColorInt startColor: Int,
   @ColorInt endColor: Int,
   angle: Int,
@@ -110,7 +110,7 @@ fun View.bindingBgShapeGradual(
   "binding_bg_strokeColor",
   "binding_bg_radius"
 )
-fun View.bindingBgShapeGradual(
+internal fun View.bindingBgShapeGradual(
   @ColorInt startColor: Int,
   @ColorInt endColor: Int,
   angle: Int,
@@ -134,7 +134,7 @@ fun View.bindingBgShapeGradual(
   "binding_bg_angle",
   "binding_bg_radius"
 )
-fun View.bindingBgShapeGradual(
+internal fun View.bindingBgShapeGradual(
   @ColorInt startColor: Int,
   @ColorInt centerColor: Int,
   @ColorInt endColor: Int,
@@ -161,7 +161,7 @@ fun View.bindingBgShapeGradual(
   ],
   requireAll = false
 )
-fun View.bindingBgShapeCorners(
+internal fun View.bindingBgShapeCorners(
   @ColorInt solidColor: Int,
   @Px topLeft: Float,
   @Px topRight: Float,
@@ -176,7 +176,7 @@ fun View.bindingBgShapeCorners(
   "binding_bg_endColor",
   "binding_bg_angle"
 )
-fun View.bindingBgShapeGradual(
+internal fun View.bindingBgShapeGradual(
   @ColorInt startColor: Int,
   @ColorInt endColor: Int,
   angle: Int
@@ -190,7 +190,7 @@ fun View.bindingBgShapeGradual(
   "binding_bg_endColor",
   "binding_bg_angle"
 )
-fun View.bindingBgShapeGradual(
+internal fun View.bindingBgShapeGradual(
   @ColorInt startColor: Int,
   @ColorInt centerColor: Int,
   @ColorInt endColor: Int,
@@ -205,7 +205,7 @@ fun View.bindingBgShapeGradual(
   "binding_bg_solidColor",
   "binding_bg_radius"
 )
-fun View.bindingBgShapeStroke(
+internal fun View.bindingBgShapeStroke(
   @Px stroke: Float,
   @ColorInt strokeColor: Int,
   @ColorInt solidColor: Int,
@@ -223,7 +223,7 @@ fun View.bindingBgShapeStroke(
   "binding_bg_solidColor",
   "binding_bg_radius"
 )
-fun View.bindingBgShape(
+internal fun View.bindingBgShape(
   @ColorInt solidColor: Int,
   @Px radius: Float
 ) {
@@ -235,7 +235,7 @@ fun View.bindingBgShape(
   "binding_bg_strokeColor",
   "binding_bg_solidOvalColor"
 )
-fun View.bindingBgShapeOvalStroke(
+internal fun View.bindingBgShapeOvalStroke(
   @Px stroke: Float,
   @ColorInt strokeColor: Int,
   @ColorInt solidOvalColor: Int
@@ -249,25 +249,25 @@ fun View.bindingBgShapeOvalStroke(
 }
 
 @BindingAdapter("binding_bg_solidOvalColor")
-fun View.bindingBgShapeOval(@ColorInt solidOvalColor: Int) {
+internal fun View.bindingBgShapeOval(@ColorInt solidOvalColor: Int) {
   setBgShapeGradual(shapeType = GradientDrawable.OVAL, solidColor = solidOvalColor)
 }
 
 // ------------------------TextView--------------------------//
 
 @BindingAdapter("binding_font_type")
-fun TextView.bindingImpactTypeface(path: String) {
+internal fun TextView.bindingImpactTypeface(path: String) {
   typeface = Typeface.createFromAsset(context.assets, path)
 }
 
 @BindingAdapter("binding_paint_flag")
-fun TextView.bindingPaintFlag(flag: Int) {
+internal fun TextView.bindingPaintFlag(flag: Int) {
   paint.flags = flag
   paint.isAntiAlias = true
 }
 
 @BindingAdapter("binding_paint_flag_is_thru")
-fun TextView.bindingPaintFlagThru(flag: Boolean) {
+internal fun TextView.bindingPaintFlagThru(flag: Boolean) {
   if (flag) {
     paint.flags = Paint.STRIKE_THRU_TEXT_FLAG
     paint.isAntiAlias = true
