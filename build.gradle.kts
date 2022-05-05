@@ -29,7 +29,9 @@ allprojects {
         "-progressive",
         "-opt-in=kotlin.RequiresOptIn",
         "-Xcontext-receivers",
-        "-Xjvm-default=all"
+        "-Xjvm-default=all",
+        "-P",
+        "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=true"
       )
     }
   }
