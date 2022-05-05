@@ -44,8 +44,7 @@ class DetailViewModel : BaseThemeViewModel() {
   }
 
   fun fork() {
-    repoDetail = repoDetail.copy()
-    repoDetail.forksCount++
+    repoDetail = repoDetail.copy(forksCount = repoDetail.forksCount + 1)
     _repoDetailModel.value = repoDetail
   }
 }

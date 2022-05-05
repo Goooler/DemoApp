@@ -8,6 +8,7 @@ import io.goooler.demoapp.main.model.MainCommonVhModel
 import io.goooler.demoapp.main.repository.MainCommonRepository
 import java.util.Collections
 import javax.inject.Inject
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
@@ -51,6 +52,21 @@ class MainSrlViewModel @Inject constructor(private val repository: MainCommonRep
     listData.value = _listData.toList()
   }
 
+  fun share(fullName: String) {
+    viewModelScope.launch(Dispatchers.Default) {
+      val list = mutableListOf<MainCommonVhModel>()
+      _listData.forEach { model ->
+        list += if (model is MainCommonVhModel.Repo && model.fullName == fullName) {
+          model.copy(shareCount = model.shareCount + 1)
+        } else
+          model
+      }
+      _listData.clear()
+      _listData += list
+      listData.value = list
+    }
+  }
+
   private fun fetchListData(page: Int) {
     viewModelScope.launch {
       try {
@@ -61,7 +77,7 @@ class MainSrlViewModel @Inject constructor(private val repository: MainCommonRep
           }.let {
             _listData += it
             if (page == 1 && it.isEmpty()) {
-              _listData += listOf(MainCommonVhModel.Empty())
+              _listData += listOf(MainCommonVhModel.Empty)
             }
             if (it.size < CommonConstants.DEFAULT_PAGE_SIZE) {
               isNoMore.value = true
@@ -71,7 +87,7 @@ class MainSrlViewModel @Inject constructor(private val repository: MainCommonRep
             listData.value = it
           }
       } catch (_: Exception) {
-        listData.value = listOf(MainCommonVhModel.Error())
+        listData.value = listOf(MainCommonVhModel.Error)
         enableRefreshAndLoadMore(false)
       } finally {
         finishRefreshAndLoadMore(true)

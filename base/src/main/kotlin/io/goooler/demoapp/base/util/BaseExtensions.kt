@@ -10,12 +10,12 @@ import android.content.Context
 import android.content.ContextWrapper
 import android.content.Intent
 import android.graphics.Color
-import android.graphics.drawable.GradientDrawable
 import android.media.AudioManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Looper
+import android.os.Parcel
 import android.os.Parcelable
 import android.text.Spannable
 import android.text.Spanned
@@ -23,9 +23,9 @@ import android.text.style.ClickableSpan
 import android.text.style.ForegroundColorSpan
 import android.view.KeyEvent
 import android.view.View
-import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
+import android.webkit.MimeTypeMap
 import android.webkit.URLUtil
 import android.widget.TextView
 import androidx.annotation.ColorInt
@@ -33,7 +33,6 @@ import androidx.annotation.Dimension
 import androidx.annotation.IdRes
 import androidx.annotation.IntRange
 import androidx.annotation.MainThread
-import androidx.annotation.Px
 import androidx.core.content.getSystemService
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
@@ -52,7 +51,6 @@ import androidx.lifecycle.findViewTreeLifecycleOwner
 import java.io.File
 import java.io.Serializable
 import java.math.BigDecimal
-import java.net.URLConnection
 import java.util.Collections
 import java.util.UUID
 import java.util.regex.Pattern
@@ -92,6 +90,19 @@ inline val isMainThread: Boolean get() = Looper.getMainLooper() == Looper.myLoop
 fun <T : Any> unsafeLazy(initializer: () -> T): Lazy<T> =
   lazy(LazyThreadSafetyMode.NONE, initializer)
 
+fun <T : Parcelable> T.deepCopy(): T? {
+  var parcel: Parcel? = null
+  return try {
+    parcel = Parcel.obtain().also {
+      it.writeParcelable(this, 0)
+      it.setDataPosition(0)
+    }
+    parcel.readParcelable(this::class.java.classLoader)
+  } finally {
+    parcel?.recycle()
+  }
+}
+
 // ---------------------CharSequence-------------------------------//
 
 operator fun String.times(@IntRange(from = 0) num: Int): String {
@@ -106,19 +117,11 @@ operator fun String.times(@IntRange(from = 0) num: Int): String {
 
 fun String.fromHtml(): Spanned = parseAsHtml()
 
-fun String.toMimeType(): String? = URLConnection.getFileNameMap().getContentTypeFor(this)
+fun String.extension2MimeType(): String? =
+  MimeTypeMap.getSingleton().getMimeTypeFromExtension(lowercase())
 
-fun Array<String>.toMimeTypes(): List<String> = buildList {
-  this@toMimeTypes.forEach {
-    it.toMimeType()?.let(::add)
-  }
-}
-
-fun List<String>.toMimeTypes(): List<String> = buildList {
-  this@toMimeTypes.forEach {
-    it.toMimeType()?.let(::add)
-  }
-}
+fun String.mimeType2Extension(): String? =
+  MimeTypeMap.getSingleton().getExtensionFromMimeType(lowercase())
 
 fun String.onlyDigits(): String = replace(Regex("\\D*"), "")
 
@@ -514,103 +517,6 @@ fun TextView.setOnEditorConfirmActionListener(listener: (TextView) -> Unit) {
     } else {
       false
     }
-  }
-}
-
-/**
- * 设置 view 的背景，支持圆形和矩形，渐变色和描边圆角等
- *
- * @param shapeType 背景形状，圆、矩形等
- * @param gradualColors 渐变色数组，和填充色互斥
- * @param angle 渐变色角度
- * @param solidColor 填充色，和渐变色数组互斥
- * @param strokeColor 描边色
- * @param stroke 描边粗细
- * @param radius 圆角大小
- */
-@JvmOverloads
-fun View.setBgShapeGradual(
-  shapeType: Int = GradientDrawable.RECTANGLE,
-  @ColorInt gradualColors: IntArray? = null,
-  angle: Int = 0,
-  @ColorInt solidColor: Int? = null,
-  @ColorInt strokeColor: Int = Color.TRANSPARENT,
-  @Px stroke: Float = 0f,
-  @Px radius: Float = 0f
-) {
-  background = GradientDrawable().apply {
-    shape = shapeType
-    useLevel = false
-    gradientType = GradientDrawable.LINEAR_GRADIENT
-    val remainder = angle % 45
-    val validAngle = if (remainder >= 22.5) {
-      angle % 360 + 45 - remainder
-    } else {
-      angle % 360 - remainder
-    }
-    orientation = when (validAngle) {
-      45 -> GradientDrawable.Orientation.BL_TR
-      90 -> GradientDrawable.Orientation.BOTTOM_TOP
-      135 -> GradientDrawable.Orientation.BR_TL
-      180 -> GradientDrawable.Orientation.RIGHT_LEFT
-      225 -> GradientDrawable.Orientation.TR_BL
-      270 -> GradientDrawable.Orientation.TOP_BOTTOM
-      315 -> GradientDrawable.Orientation.TL_BR
-      else -> GradientDrawable.Orientation.LEFT_RIGHT
-    }
-    if (gradualColors != null && solidColor == null) {
-      colors = gradualColors
-    } else if (gradualColors == null && solidColor != null) {
-      setColor(solidColor)
-    }
-    setStroke(stroke.toInt(), strokeColor)
-    cornerRadius = radius
-  }
-}
-
-/**
- * 设置 view 在矩形某几个角上需要圆角的背景
- *
- * @param solidColor 填充色
- * @param topLeft 左上圆角大小
- * @param topRight 右上圆角大小
- * @param bottomLeft 左下圆角大小
- * @param bottomRight 左下圆角大小
- */
-@JvmOverloads
-fun View.setBgShapeCorners(
-  @ColorInt solidColor: Int = Color.WHITE,
-  @Px topLeft: Float = 0f,
-  @Px topRight: Float = 0f,
-  @Px bottomLeft: Float = 0f,
-  @Px bottomRight: Float = 0f
-) {
-  background = GradientDrawable().apply {
-    shape = GradientDrawable.RECTANGLE
-    setColor(solidColor)
-    cornerRadii = floatArrayOf(
-      topLeft,
-      topLeft,
-      topRight,
-      topRight,
-      bottomRight,
-      bottomRight,
-      bottomLeft,
-      bottomLeft
-    )
-  }
-}
-
-fun View.marginDirection(direction: Int, @Px margin: Float) {
-  if (layoutParams is ViewGroup.MarginLayoutParams) {
-    val p = layoutParams as ViewGroup.MarginLayoutParams
-    when (direction) {
-      0 -> p.marginStart = margin.toInt()
-      1 -> p.topMargin = margin.toInt()
-      2 -> p.marginEnd = margin.toInt()
-      else -> p.bottomMargin = margin.toInt()
-    }
-    layoutParams = p
   }
 }
 

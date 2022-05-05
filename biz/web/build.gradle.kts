@@ -5,7 +5,10 @@ plugins {
 }
 
 android {
-  buildFeatures.buildConfig = true
+  buildFeatures {
+    buildConfig = true
+    dataBinding = true
+  }
 }
 
 dependencies {

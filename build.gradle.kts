@@ -101,7 +101,6 @@ fun Project.setupBase(): BaseExtension {
     sourceSets.configureEach {
       java.srcDirs("src/$name/kotlin")
     }
-    buildFeatures.buildConfig = false
     compileOptions.setDefaultJavaVersion(JavaVersion.VERSION_11)
     packagingOptions.resources.excludes += setOf(
       "**/*.proto",

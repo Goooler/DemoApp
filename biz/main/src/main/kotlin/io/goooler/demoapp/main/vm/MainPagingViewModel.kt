@@ -40,7 +40,7 @@ class MainPagingViewModel @Inject constructor(private val repository: MainCommon
   private inner class DataSource : BasePagingSource<MainCommonVhModel>() {
     override suspend fun fetchListData(page: Int): List<MainCommonVhModel> {
       return repository.getRepoListFromApi("google", page, 30)
-        .map { MainCommonVhModel.Repo(it.owner?.avatarUrl, it.name) }
+        .map { MainCommonVhModel.Repo(it.owner?.avatarUrl, it.name, it.fullName) }
     }
   }
 }
