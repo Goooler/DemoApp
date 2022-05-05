@@ -104,7 +104,7 @@ object ImageLoader {
 // ------------------------BindingAdapter--------------------------//
 
 @BindingAdapter("binding_iv_data")
-fun ImageView.load(data: Any?) {
+internal fun ImageView.load(data: Any?) {
   ImageLoader.load(this, data)
 }
 
@@ -112,7 +112,7 @@ fun ImageView.load(data: Any?) {
   "binding_iv_data",
   "binding_iv_cornerRadius"
 )
-fun ImageView.load(
+internal fun ImageView.load(
   data: Any?,
   @Px @FloatRange(from = 0.0) cornerRadius: Float
 ) {
@@ -123,7 +123,7 @@ fun ImageView.load(
   "binding_iv_data",
   "binding_iv_placeholder"
 )
-fun ImageView.load(
+internal fun ImageView.load(
   data: Any?,
   placeholderDrawable: Drawable?
 ) {
@@ -135,7 +135,7 @@ fun ImageView.load(
   "binding_iv_placeholder",
   "binding_iv_error"
 )
-fun ImageView.load(
+internal fun ImageView.load(
   data: Any?,
   placeholderDrawable: Drawable?,
   errorDrawable: Drawable?
@@ -149,7 +149,7 @@ fun ImageView.load(
   "binding_iv_error",
   "binding_iv_cornerRadius"
 )
-fun ImageView.load(
+internal fun ImageView.load(
   data: Any?,
   placeholderDrawable: Drawable?,
   errorDrawable: Drawable?,
@@ -165,7 +165,7 @@ fun ImageView.load(
   "binding_iv_cornerRadius",
   "binding_iv_useCache"
 )
-fun ImageView.load(
+internal fun ImageView.load(
   data: Any?,
   placeholderDrawable: Drawable?,
   errorDrawable: Drawable?,
@@ -176,7 +176,7 @@ fun ImageView.load(
 }
 
 @BindingAdapter("binding_iv_data_circle")
-fun ImageView.loadCircleCrop(data: Any?) {
+internal fun ImageView.loadCircleCrop(data: Any?) {
   ImageLoader.loadCircleCrop(this, data)
 }
 
@@ -184,7 +184,7 @@ fun ImageView.loadCircleCrop(data: Any?) {
   "binding_iv_data_circle",
   "binding_iv_placeholder"
 )
-fun ImageView.loadCircleCrop(
+internal fun ImageView.loadCircleCrop(
   data: Any?,
   placeholderDrawable: Drawable?
 ) {
@@ -196,7 +196,7 @@ fun ImageView.loadCircleCrop(
   "binding_iv_placeholder",
   "binding_iv_error"
 )
-fun ImageView.loadCircleCrop(
+internal fun ImageView.loadCircleCrop(
   data: Any?,
   placeholderDrawable: Drawable?,
   errorDrawable: Drawable?
@@ -210,7 +210,7 @@ fun ImageView.loadCircleCrop(
   "binding_iv_error",
   "binding_iv_useCache"
 )
-fun ImageView.loadCircleCrop(
+internal fun ImageView.loadCircleCrop(
   data: Any?,
   placeholderDrawable: Drawable?,
   errorDrawable: Drawable?,

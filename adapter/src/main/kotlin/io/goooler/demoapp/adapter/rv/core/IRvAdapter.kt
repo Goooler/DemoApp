@@ -69,13 +69,13 @@ internal interface IMutableRvAdapter<M : IVhModelType> : IRvAdapter<M> {
 }
 
 @BindingAdapter(value = ["binding_rv_dataList"], requireAll = true)
-fun <M : IVhModelType> RecyclerView.setList(list: List<M>?) {
+internal fun <M : IVhModelType> RecyclerView.setList(list: List<M>?) {
   @Suppress("UNCHECKED_CAST")
   (adapter as? IMutableRvAdapter<M>)?.list = list.orEmpty()
 }
 
 @BindingAdapter(value = ["binding_rv_refreshItems"], requireAll = true)
-fun <M : IVhModelType> RecyclerView.refreshItems(items: List<M>?) {
+internal fun <M : IVhModelType> RecyclerView.refreshItems(items: List<M>?) {
   @Suppress("UNCHECKED_CAST")
   (adapter as? IMutableRvAdapter<M>)?.refreshItems(items.orEmpty())
 }

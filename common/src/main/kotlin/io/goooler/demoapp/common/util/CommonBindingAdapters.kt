@@ -13,64 +13,64 @@ import com.scwang.smart.refresh.layout.SmartRefreshLayout
 // ------------------------SmartRefreshLayout--------------------------//
 
 @BindingAdapter("binding_srl_refreshFinish")
-fun SmartRefreshLayout.bindingFinishRefresh(isFinish: Boolean) {
+internal fun SmartRefreshLayout.bindingFinishRefresh(isFinish: Boolean) {
   if (isFinish) finishRefresh()
 }
 
 @BindingAdapter("binding_srl_loadMoreFinish")
-fun SmartRefreshLayout.bindingFinishLoadMore(isFinish: Boolean) {
+internal fun SmartRefreshLayout.bindingFinishLoadMore(isFinish: Boolean) {
   if (isFinish) finishLoadMore()
 }
 
 @BindingAdapter("binding_srl_enableLoadMore")
-fun SmartRefreshLayout.bindingEnableLoadMore(enable: Boolean) {
+internal fun SmartRefreshLayout.bindingEnableLoadMore(enable: Boolean) {
   setEnableLoadMore(enable)
 }
 
 @BindingAdapter("binding_srl_enableRefresh")
-fun SmartRefreshLayout.bindingEnableRefresh(enable: Boolean) {
+internal fun SmartRefreshLayout.bindingEnableRefresh(enable: Boolean) {
   setEnableRefresh(enable)
 }
 
 @BindingAdapter("binding_srl_noMore")
-fun SmartRefreshLayout.bindingNoMoreData(haveNoMore: Boolean) {
+internal fun SmartRefreshLayout.bindingNoMoreData(haveNoMore: Boolean) {
   setNoMoreData(haveNoMore)
 }
 
 @BindingAdapter("binding_srl_headerEmpty")
-fun SmartRefreshLayout.bindingHeaderEmpty(isEmpty: Boolean) {
+internal fun SmartRefreshLayout.bindingHeaderEmpty(isEmpty: Boolean) {
   (refreshHeader as? ClassicsAbstract<*>)?.forEach {
     it.alpha = if (isEmpty) 0f else 1f
   }
 }
 
 @BindingAdapter("binding_srl_footerEmpty")
-fun SmartRefreshLayout.bindingFooterEmpty(isEmpty: Boolean) {
+internal fun SmartRefreshLayout.bindingFooterEmpty(isEmpty: Boolean) {
   (refreshFooter as? ClassicsAbstract<*>)?.forEach {
     it.alpha = if (isEmpty) 0f else 1f
   }
 }
 
 @BindingAdapter("binding_srl_headerPrimaryColor")
-fun SmartRefreshLayout.bindingHeaderPrimaryColor(@ColorInt color: Int) {
+internal fun SmartRefreshLayout.bindingHeaderPrimaryColor(@ColorInt color: Int) {
   (refreshHeader as? ClassicsAbstract<*>)?.setPrimaryColor(color)
     ?: setRefreshHeader(ClassicsHeader(context).apply { setPrimaryColor(color) })
 }
 
 @BindingAdapter("binding_srl_footerPrimaryColor")
-fun SmartRefreshLayout.bindingFooterPrimaryColor(@ColorInt color: Int) {
+internal fun SmartRefreshLayout.bindingFooterPrimaryColor(@ColorInt color: Int) {
   (refreshFooter as? ClassicsAbstract<*>)?.setPrimaryColor(color)
     ?: setRefreshFooter(ClassicsFooter(context).apply { setPrimaryColor(color) })
 }
 
 @BindingAdapter("binding_srl_headerAccentColor")
-fun SmartRefreshLayout.bindingHeaderAccentColor(@ColorInt color: Int) {
+internal fun SmartRefreshLayout.bindingHeaderAccentColor(@ColorInt color: Int) {
   (refreshHeader as? ClassicsAbstract<*>)?.setAccentColor(color)
     ?: setRefreshHeader(ClassicsHeader(context).apply { setAccentColor(color) })
 }
 
 @BindingAdapter("binding_srl_footerAccentColor")
-fun SmartRefreshLayout.bindingFooterAccentColor(@ColorInt color: Int) {
+internal fun SmartRefreshLayout.bindingFooterAccentColor(@ColorInt color: Int) {
   (refreshFooter as? ClassicsAbstract<*>)?.setAccentColor(color)
     ?: setRefreshFooter(ClassicsFooter(context).apply { setAccentColor(color) })
 }
