@@ -120,11 +120,9 @@ fun @receiver:StringRes Int.getString(): String? = try {
   null
 }
 
-context(BaseViewModel)
 fun @receiver:StringRes Int.getString(vararg formatArgs: Any): String? =
   getString()?.format(formatArgs)
 
-context(BaseViewModel)
 fun @receiver:PluralsRes Int.getQuantityString(num: Int): String? = try {
   CommonApplication.app.resources.getQuantityString(this, num, num)
 } catch (e: Exception) {
