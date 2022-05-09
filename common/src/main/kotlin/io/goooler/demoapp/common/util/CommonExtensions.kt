@@ -10,7 +10,6 @@ import android.widget.TextView
 import androidx.annotation.AnyThread
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
-import androidx.annotation.Dimension
 import androidx.annotation.DrawableRes
 import androidx.annotation.MainThread
 import androidx.annotation.PluralsRes
@@ -30,6 +29,9 @@ import com.blankj.utilcode.util.SizeUtils
 import com.blankj.utilcode.util.StringUtils
 import com.google.android.material.textfield.TextInputLayout
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
+import io.goooler.demoapp.base.util.Dp
+import io.goooler.demoapp.base.util.Pt
+import io.goooler.demoapp.base.util.Sp
 import io.goooler.demoapp.base.util.ToastUtil
 import io.goooler.demoapp.common.BuildConfig
 import io.goooler.demoapp.common.CommonApplication
@@ -106,15 +108,10 @@ fun @receiver:ColorRes Int.getColor(): Int = try {
   -1
 }
 
-fun @receiver:StringRes Int.getString(): String? = try {
-  StringUtils.getString(this)
-} catch (e: Exception) {
-  e.printStackTrace()
-  null
-}
+fun @receiver:StringRes Int.getString(): String = StringUtils.getString(this)
 
-fun @receiver:StringRes Int.getString(vararg formatArgs: Any): String? =
-  getString()?.format(formatArgs)
+fun @receiver:StringRes Int.getString(vararg formatArgs: Any): String =
+  StringUtils.getString(this, formatArgs)
 
 fun @receiver:PluralsRes Int.getQuantityString(num: Int): String? = try {
   CommonApplication.app.resources.getQuantityString(this, num, num)
@@ -124,21 +121,22 @@ fun @receiver:PluralsRes Int.getQuantityString(num: Int): String? = try {
 }
 
 @Px
-fun @receiver:Dimension(unit = Dimension.SP) Float.sp2px(): Int = SizeUtils.sp2px(this)
+fun @receiver:Sp Float.sp2px(): Int = SizeUtils.sp2px(this)
 
 @Px
-fun @receiver:Dimension(unit = Dimension.DP) Float.dp2px(): Int = SizeUtils.dp2px(this)
+fun @receiver:Dp Float.dp2px(): Int = SizeUtils.dp2px(this)
 
 @Px
-fun Float.pt2px(): Int = AdaptScreenUtils.pt2Px(this)
+fun @receiver:Pt Float.pt2px(): Int = AdaptScreenUtils.pt2Px(this)
 
-@Dimension(unit = Dimension.SP)
-fun @receiver:Dimension Int.px2sp(): Int = SizeUtils.px2sp(this.toFloat())
+@Sp
+fun @receiver:Px Int.px2sp(): Int = SizeUtils.px2sp(this.toFloat())
 
-@Dimension(unit = Dimension.DP)
-fun @receiver:Dimension Int.px2dp(): Int = SizeUtils.px2dp(this.toFloat())
+@Dp
+fun @receiver:Px Int.px2dp(): Int = SizeUtils.px2dp(this.toFloat())
 
-fun @receiver:Dimension Int.px2pt(): Int = AdaptScreenUtils.px2Pt(this.toFloat())
+@Pt
+fun @receiver:Px Int.px2pt(): Int = AdaptScreenUtils.px2Pt(this.toFloat())
 
 fun Bitmap.toDrawable(): Drawable = ImageUtils.bitmap2Drawable(this)
 

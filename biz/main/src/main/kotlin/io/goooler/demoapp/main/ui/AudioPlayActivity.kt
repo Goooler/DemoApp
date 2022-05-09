@@ -19,9 +19,7 @@ class AudioPlayActivity : BaseBindingActivity<MainAudioPlayActivityBinding>() {
   private val listener = View.OnClickListener {
     when (it) {
       binding.btStart -> {
-        R.string.main_music_01_url.getString()?.let { url ->
-          AudioPlayService.startPlay(this, url)
-        }
+        AudioPlayService.startPlay(this, R.string.main_music_01_url.getString())
       }
       binding.btPause -> {
         AudioPlayService.pausePlay(this)
