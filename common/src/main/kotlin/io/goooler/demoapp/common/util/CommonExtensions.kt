@@ -119,6 +119,7 @@ fun @receiver:StringRes Int.getString(): String? = try {
   null
 }
 
+context(BaseViewModel)
 fun @receiver:StringRes Int.getString(vararg formatArgs: Any): String? = try {
   StringUtils.getString(this, formatArgs)
 } catch (e: Exception) {
