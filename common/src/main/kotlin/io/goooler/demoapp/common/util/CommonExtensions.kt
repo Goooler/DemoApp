@@ -112,20 +112,10 @@ fun @receiver:ColorRes Int.getColor(): Int = try {
 }
 
 context(BaseViewModel)
-fun @receiver:StringRes Int.getString(): String? = try {
-  StringUtils.getString(this)
-} catch (e: Exception) {
-  e.printStackTrace()
-  null
-}
+fun @receiver:StringRes Int.getString(): String = StringUtils.getString(this)
 
 context(BaseViewModel)
-fun @receiver:StringRes Int.getString(vararg formatArgs: Any): String? = try {
-  StringUtils.getString(this, formatArgs)
-} catch (e: Exception) {
-  e.printStackTrace()
-  null
-}
+fun @receiver:StringRes Int.getString(vararg formatArgs: Any): String = StringUtils.getString(this, formatArgs)
 
 fun @receiver:PluralsRes Int.getQuantityString(num: Int): String? = try {
   CommonApplication.app.resources.getQuantityString(this, num, num)
