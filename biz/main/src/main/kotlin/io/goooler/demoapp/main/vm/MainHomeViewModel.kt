@@ -2,8 +2,8 @@ package io.goooler.demoapp.main.vm
 
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import io.goooler.demoapp.base.core.BaseViewModel
 import io.goooler.demoapp.base.util.defaultAsync
-import io.goooler.demoapp.common.base.theme.BaseThemeViewModel
 import io.goooler.demoapp.common.util.showToast
 import io.goooler.demoapp.main.bean.MainRepoListBean
 import io.goooler.demoapp.main.repository.MainCommonRepository
@@ -24,7 +24,7 @@ import kotlinx.coroutines.withContext
 
 @HiltViewModel
 class MainHomeViewModel @Inject constructor(private val repository: MainCommonRepository) :
-  BaseThemeViewModel() {
+  BaseViewModel() {
 
   private val _title = MutableStateFlow("")
   val title: StateFlow<String> = _title

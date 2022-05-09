@@ -2,7 +2,7 @@ package io.goooler.demoapp.main.vm
 
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.goooler.demoapp.common.base.theme.BaseThemeViewModel
+import io.goooler.demoapp.base.core.BaseViewModel
 import io.goooler.demoapp.common.type.CommonConstants
 import io.goooler.demoapp.main.model.MainCommonVhModel
 import io.goooler.demoapp.main.repository.MainCommonRepository
@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 
 @HiltViewModel
 class MainSrlViewModel @Inject constructor(private val repository: MainCommonRepository) :
-  BaseThemeViewModel() {
+  BaseViewModel() {
 
   private val _listData = mutableListOf<MainCommonVhModel>()
   private var page = 1

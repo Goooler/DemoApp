@@ -1,7 +1,7 @@
 package io.goooler.demoapp.detail.vm
 
 import androidx.lifecycle.viewModelScope
-import io.goooler.demoapp.common.base.theme.BaseThemeViewModel
+import io.goooler.demoapp.base.core.BaseViewModel
 import io.goooler.demoapp.common.network.RetrofitHelper
 import io.goooler.demoapp.detail.model.RepoDetailModel
 import io.goooler.demoapp.detail.repository.DetailRepository
@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class DetailViewModel : BaseThemeViewModel() {
+class DetailViewModel : BaseViewModel() {
 
   private val repository = DetailRepository(RetrofitHelper.create())
   private var repoDetail = RepoDetailModel()
