@@ -10,7 +10,6 @@ import android.widget.TextView
 import androidx.annotation.AnyThread
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
-import androidx.annotation.Dimension
 import androidx.annotation.DrawableRes
 import androidx.annotation.MainThread
 import androidx.annotation.PluralsRes
@@ -120,8 +119,12 @@ fun @receiver:StringRes Int.getString(): String? = try {
   null
 }
 
-fun @receiver:StringRes Int.getString(vararg formatArgs: Any): String? =
-  getString()?.format(formatArgs)
+fun @receiver:StringRes Int.getString(vararg formatArgs: Any): String? = try {
+  StringUtils.getString(this, formatArgs)
+} catch (e: Exception) {
+  e.printStackTrace()
+  null
+}
 
 fun @receiver:PluralsRes Int.getQuantityString(num: Int): String? = try {
   CommonApplication.app.resources.getQuantityString(this, num, num)
@@ -144,15 +147,15 @@ fun @receiver:Pt Float.pt2px(): Int = AdaptScreenUtils.pt2Px(this)
 
 context(BaseViewModel)
 @Sp
-fun @receiver:Dimension Int.px2sp(): Int = SizeUtils.px2sp(this.toFloat())
+fun @receiver:Px Int.px2sp(): Int = SizeUtils.px2sp(this.toFloat())
 
 context(BaseViewModel)
 @Dp
-fun @receiver:Dimension Int.px2dp(): Int = SizeUtils.px2dp(this.toFloat())
+fun @receiver:Px Int.px2dp(): Int = SizeUtils.px2dp(this.toFloat())
 
 context(BaseViewModel)
 @Pt
-fun @receiver:Dimension Int.px2pt(): Int = AdaptScreenUtils.px2Pt(this.toFloat())
+fun @receiver:Px Int.px2pt(): Int = AdaptScreenUtils.px2Pt(this.toFloat())
 
 context(BaseViewModel)
 fun Bitmap.toDrawable(): Drawable = ImageUtils.bitmap2Drawable(this)
