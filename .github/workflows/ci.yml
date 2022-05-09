@@ -103,7 +103,7 @@ jobs:
     name: Build
     strategy:
       matrix:
-        os: [ ubuntu-latest, windows-latest, macos-latest ]
+        os: [ ubuntu-latest, macos-latest ]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
@@ -118,3 +118,18 @@ jobs:
         if: matrix.os == 'ubuntu-latest'
         with:
           path: app/build/*.apk
+
+  build-on-windows:
+    name: Build on Windows
+    runs-on: windows-latest
+    timeout-minutes: 20
+    if: github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'windows')
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: 17
+      - uses: gradle/gradle-build-action@v2
+      - name: Build
+        run: ./gradlew app:assemble
