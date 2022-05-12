@@ -127,7 +127,7 @@ fun Project.setupBase(): BaseExtension {
 }
 
 fun Project.setupCommon(): BaseExtension = setupBase().apply {
-  flavorDimensions("channel")
+  flavorDimensions("env")
   productFlavors {
     create("dev")
     create("prod")
