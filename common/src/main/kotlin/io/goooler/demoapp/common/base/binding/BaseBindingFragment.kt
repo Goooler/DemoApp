@@ -5,11 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
-import io.goooler.demoapp.common.base.theme.BaseThemeFragment
+import io.goooler.demoapp.base.core.BaseFragment
 import io.goooler.demoapp.common.util.inflateBinding
 
 abstract class BaseBindingFragment<VB : ViewDataBinding> :
-  BaseThemeFragment(),
+  BaseFragment(),
   IBindingFragment<VB> {
   private var _binding: VB? = null
 

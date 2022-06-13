@@ -5,11 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
-import io.goooler.demoapp.common.base.theme.BaseThemeDialogFragment
+import io.goooler.demoapp.base.core.BaseDialogFragment
 import io.goooler.demoapp.common.util.inflateBinding
 
 abstract class BaseBindingDialogFragment<VB : ViewDataBinding> :
-  BaseThemeDialogFragment(),
+  BaseDialogFragment(),
   IBindingFragment<VB> {
 
   override lateinit var binding: VB
