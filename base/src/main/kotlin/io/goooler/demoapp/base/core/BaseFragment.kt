@@ -1,8 +1,6 @@
 package io.goooler.demoapp.base.core
 
 import android.os.Bundle
-import android.view.KeyEvent
-import android.view.View
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 
