@@ -1,38 +1,35 @@
 package io.goooler.demoapp.base.core
 
+import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 
 abstract class BaseFragment : Fragment(), IFragment {
 
-  override fun onBackPressed(): Boolean {
-    activity?.onBackPressed()
-    return true
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    dispatchBackPress()
   }
 
   override fun finish() {
     activity?.finish()
   }
-
-  override fun onResume() {
-    super.onResume()
-    view?.dispatchBackPress()
-  }
 }
 
 sealed interface IFragment {
 
-  fun onBackPressed(): Boolean
+  fun onBackPressed(): Boolean = false
 
   fun finish()
 
-  fun View.dispatchBackPress() {
-    isFocusableInTouchMode = true
-    requestFocus()
-    setOnKeyListener { _, keyCode, event ->
-      val flag = keyCode == KeyEvent.KEYCODE_BACK && event.action == KeyEvent.ACTION_UP
-      if (flag) onBackPressed() else false
+  fun Fragment.dispatchBackPress() {
+    activity?.onBackPressedDispatcher?.addCallback(this) {
+      isEnabled = onBackPressed()
+      // 不拦截时先把监听关闭再开启，防止递归
+      if (!isEnabled) activity?.onBackPressed()
+      isEnabled = true
     }
   }
 }
