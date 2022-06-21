@@ -34,12 +34,6 @@ class WebActivity : BaseBindingActivity<WebActivityBinding>() {
     }
   }
 
-  override fun onBackPressed() {
-    if (webFragment?.goBack() == false) {
-      super.onBackPressed()
-    }
-  }
-
   private val listener = object : View.OnClickListener, WebFragment.OnEventListener {
     override fun onClick(v: View) {
       when (v) {

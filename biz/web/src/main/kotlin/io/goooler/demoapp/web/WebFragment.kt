@@ -25,10 +25,6 @@ class WebFragment : BaseBindingFragment<WebFragmentBinding>() {
 
   val url: String? get() = binding.webView.url
 
-  fun goBack(): Boolean = binding.webView.canGoBack().also {
-    if (it) binding.webView.goBack()
-  }
-
   override fun initOnce() {
     headers = mapOf(
       "buildType" to BuildConfig.BUILD_TYPE,
@@ -50,6 +46,10 @@ class WebFragment : BaseBindingFragment<WebFragmentBinding>() {
         )
         fileChooserCallback = null
       }
+  }
+
+  override fun onBackPressed(): Boolean = binding.webView.canGoBack().also {
+    if (it) binding.webView.goBack()
   }
 
   private val listener = object : CompatWebView.OnEventListener, JsInterface {
