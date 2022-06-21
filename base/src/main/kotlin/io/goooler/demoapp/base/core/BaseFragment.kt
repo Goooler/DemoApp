@@ -27,7 +27,6 @@ sealed interface IFragment {
   fun Fragment.dispatchBackPress() {
     activity?.onBackPressedDispatcher?.addCallback(this) {
       isEnabled = onBackPressed()
-      // 不拦截时先把监听关闭再开启，防止递归
       if (!isEnabled) activity?.onBackPressed()
       isEnabled = true
     }
