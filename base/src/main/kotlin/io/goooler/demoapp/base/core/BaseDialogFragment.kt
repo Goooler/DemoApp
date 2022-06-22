@@ -3,6 +3,7 @@
 package io.goooler.demoapp.base.core
 
 import android.content.DialogInterface
+import android.os.Bundle
 import androidx.fragment.app.DialogFragment
 
 abstract class BaseDialogFragment : DialogFragment(), IFragment {
@@ -10,13 +11,9 @@ abstract class BaseDialogFragment : DialogFragment(), IFragment {
   var onDismissListener: DialogInterface.OnDismissListener? = null
   var onCancelListener: DialogInterface.OnCancelListener? = null
 
-  override fun onBackPressed(): Boolean {
-    dismiss()
-    return true
-  }
-
-  override fun finish() {
-    activity?.finish()
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    dispatchBackPress()
   }
 
   override fun onResume() {
@@ -25,7 +22,6 @@ abstract class BaseDialogFragment : DialogFragment(), IFragment {
       setCanceledOnTouchOutside(isCancelable)
       setCancelable(isCancelable)
     }
-    view?.dispatchBackPress()
   }
 
   override fun onDismiss(dialog: DialogInterface) {
@@ -36,5 +32,9 @@ abstract class BaseDialogFragment : DialogFragment(), IFragment {
   override fun onCancel(dialog: DialogInterface) {
     onCancelListener?.onCancel(dialog)
     super.onCancel(dialog)
+  }
+
+  override fun finish() {
+    activity?.finish()
   }
 }
