@@ -2,8 +2,10 @@
 
 package io.goooler.demoapp.base.core
 
+import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
+import android.view.KeyEvent
 import androidx.fragment.app.DialogFragment
 
 abstract class BaseDialogFragment : DialogFragment(), IFragment {
@@ -11,9 +13,15 @@ abstract class BaseDialogFragment : DialogFragment(), IFragment {
   var onDismissListener: DialogInterface.OnDismissListener? = null
   var onCancelListener: DialogInterface.OnCancelListener? = null
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    dispatchBackPress()
+  override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+    return super.onCreateDialog(savedInstanceState).apply {
+      setOnKeyListener { _, keyCode, keyEvent ->
+        if (keyCode == KeyEvent.KEYCODE_BACK && keyEvent.action == KeyEvent.ACTION_UP) {
+          this@BaseDialogFragment.onBackPressed()
+        } else
+          false
+      }
+    }
   }
 
   override fun onResume() {
