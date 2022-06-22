@@ -1,7 +1,6 @@
 package io.goooler.demoapp.main.ui
 
 import android.Manifest
-import android.content.Intent
 import android.os.Bundle
 import dagger.hilt.android.AndroidEntryPoint
 import io.goooler.demoapp.adapter.vp.CommonFragmentStatePagerAdapter
@@ -52,17 +51,7 @@ class MainActivity : BaseBindingActivity<MainActivityBinding>() {
       .request()
   }
 
-  /**
-   * 不杀掉进程，直接返回桌面
-   */
   override fun onBackPressed() {
-    if (supportFragmentManager.backStackEntryCount == 0) {
-      val intent = Intent(Intent.ACTION_MAIN)
-        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        .addCategory(Intent.CATEGORY_HOME)
-      startActivity(intent)
-    } else {
-      super.onBackPressed()
-    }
+    moveTaskToBack(false)
   }
 }
