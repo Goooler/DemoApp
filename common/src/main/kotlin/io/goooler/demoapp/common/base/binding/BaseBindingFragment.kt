@@ -12,21 +12,20 @@ abstract class BaseBindingFragment<VB : ViewDataBinding> :
   BaseFragment(),
   IBindingFragment<VB> {
   private var _binding: VB? = null
-
-  override lateinit var binding: VB
-
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    _binding = inflateBinding(layoutInflater)
-    binding = _binding ?: throw IllegalArgumentException("Binding is null in $this")
-    initOnce()
-  }
+  /**
+   * You can't call [binding] after [onDestroyView]
+   */
+  override val binding: VB get() = _binding ?: throw IllegalArgumentException("Binding has been destroyed")
 
   override fun onCreateView(
     inflater: LayoutInflater,
     container: ViewGroup?,
     savedInstanceState: Bundle?
-  ): View = binding.root
+  ): View {
+    _binding = inflateBinding(layoutInflater)
+    initOnce()
+    return binding.root
+  }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
