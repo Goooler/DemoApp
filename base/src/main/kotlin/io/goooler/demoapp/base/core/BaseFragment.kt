@@ -8,7 +8,11 @@ abstract class BaseFragment : Fragment(), IFragment {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    dispatchBackPress()
+    activity?.onBackPressedDispatcher?.addCallback(this) {
+      isEnabled = onBackPressed()
+      if (!isEnabled) activity?.onBackPressed()
+      isEnabled = true
+    }
   }
 
   override fun finish() {
@@ -21,12 +25,4 @@ sealed interface IFragment {
   fun onBackPressed(): Boolean = false
 
   fun finish()
-
-  fun Fragment.dispatchBackPress() {
-    activity?.onBackPressedDispatcher?.addCallback(this) {
-      isEnabled = onBackPressed()
-      if (!isEnabled) activity?.onBackPressed()
-      isEnabled = true
-    }
-  }
 }
