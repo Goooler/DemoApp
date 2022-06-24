@@ -1,4 +1,3 @@
-import com.android.build.api.dsl.CommonExtension
 import com.android.build.gradle.BaseExtension
 import dagger.hilt.android.plugin.HiltExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
@@ -120,9 +119,6 @@ fun Project.setupBase(): BaseExtension {
       "META-INF/AL2.0",
       "META-INF/LGPL2.1",
     )
-    (this as? CommonExtension<*, *, *, *>)?.lint {
-      abortOnError = true
-    }
   }
 }
 

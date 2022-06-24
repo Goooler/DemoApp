@@ -18,7 +18,12 @@ android {
     versionName = libs.versions.versionName.get()
     resourceConfigurations += setOf("en", "zh-rCN", "xxhdpi")
   }
-  signingConfigs.create("release") {
+  buildFeatures {
+    dataBinding = true
+    resValues = true
+  }
+  lint.abortOnError = true
+  val releaseSigning = signingConfigs.create("release") {
     keyAlias = getSignProperty("keyAlias")
     keyPassword = getSignProperty("keyPassword")
     storeFile = File(rootDir, getSignProperty("storeFile"))
@@ -26,21 +31,17 @@ android {
     enableV3Signing = true
     enableV4Signing = true
   }
-  buildFeatures {
-    dataBinding = true
-    resValues = true
-  }
   buildTypes {
     release {
       resValue("string", "app_name", appName)
-      signingConfig = signingConfigs["release"]
+      signingConfig = releaseSigning
       isMinifyEnabled = true
       isShrinkResources = true
       proguardFiles("$rootDir/gradle/proguard-rules.pro")
     }
     debug {
       resValue("string", "app_name", "$appName.debug")
-      signingConfig = signingConfigs["release"]
+      signingConfig = releaseSigning
       isJniDebuggable = true
       isRenderscriptDebuggable = true
       isCrunchPngs = false
