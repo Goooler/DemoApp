@@ -110,7 +110,8 @@ internal class RvAdapterHelper<M : IVhModelType>(private val adapter: IRvAdapter
   @Suppress("UNCHECKED_CAST")
   private fun findLeaf(model: M, list: MutableList<M>) {
     if (model is IVhModelWrapper<*>) {
-      model.asList().forEach { findLeaf(it as M, list) }
+      if (model.viewType != -1) list += model
+      model.subList.forEach { findLeaf(it as M, list) }
     } else {
       list += model
     }
