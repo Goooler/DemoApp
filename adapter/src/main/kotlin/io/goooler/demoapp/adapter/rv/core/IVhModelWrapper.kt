@@ -11,6 +11,9 @@ package io.goooler.demoapp.adapter.rv.core
  */
 interface IVhModelWrapper<M : IVhModelType> : IVhModelType {
 
+  /**
+   * If [viewType] return value is not -1, this [IVhModelWrapper] self will be as a node.
+   */
   override val viewType: Int get() = -1
 
   /**
