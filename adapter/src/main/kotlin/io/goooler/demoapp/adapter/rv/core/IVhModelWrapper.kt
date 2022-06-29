@@ -19,5 +19,5 @@ interface IVhModelWrapper<M : IVhModelType> : IVhModelType {
   /**
    * As sub model list.
    */
-  val subList: List<M>
+  val subList: Iterable<M>
 }
