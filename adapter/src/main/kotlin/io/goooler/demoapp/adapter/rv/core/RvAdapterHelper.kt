@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import io.goooler.demoapp.adapter.rv.core.ISpanSize.Companion.SPAN_SIZE_FULL
-import io.goooler.demoapp.adapter.rv.core.ISpanSize.Companion.SPAN_SIZE_SINGLE
 
 /**
  * Created on 2020/10/22.
@@ -127,7 +126,7 @@ internal class RvAdapterHelper<M : IVhModelType>(private val adapter: IRvAdapter
           (adapter[position] as? ISpanSize)?.spanSize?.let { size ->
             return if (size == SPAN_SIZE_FULL) it.spanCount else size
           }
-          return SPAN_SIZE_SINGLE
+          return it.spanCount
         }
       }
     }
