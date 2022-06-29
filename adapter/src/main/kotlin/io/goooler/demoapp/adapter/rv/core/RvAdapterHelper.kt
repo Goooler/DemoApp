@@ -123,9 +123,10 @@ internal class RvAdapterHelper<M : IVhModelType>(private val adapter: IRvAdapter
     (recyclerView.layoutManager as? GridLayoutManager)?.let {
       it.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
         override fun getSpanSize(position: Int): Int {
-          return (adapter[position] as? ISpanSize)?.spanSize?.let { size ->
-            if (size == SPAN_SIZE_FULL) it.spanCount else size
-          } ?: it.spanCount
+          (adapter[position] as? ISpanSize)?.spanSize?.let { size ->
+            return if (size == SPAN_SIZE_FULL) it.spanCount else size
+          }
+          return it.spanCount
         }
       }
     }
