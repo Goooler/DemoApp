@@ -24,7 +24,6 @@ import android.text.style.ForegroundColorSpan
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
-import android.view.inputmethod.InputMethodManager
 import android.webkit.MimeTypeMap
 import android.webkit.URLUtil
 import android.widget.TextView
@@ -488,14 +487,6 @@ inline val View.attachedActivity: Activity?
 inline val View.lifecycle: Lifecycle? get() = findViewTreeLifecycleOwner()?.lifecycle
 
 inline val View.lifecycleScope: LifecycleCoroutineScope? get() = lifecycle?.coroutineScope
-
-fun View.hideSoftInput() {
-  context.getSystemService<InputMethodManager>()?.hideSoftInputFromWindow(windowToken, 0)
-}
-
-fun View.showSoftInput() {
-  context.getSystemService<InputMethodManager>()?.showSoftInput(this, 0)
-}
 
 fun TextView.setOnEditorConfirmActionListener(listener: (TextView) -> Unit) {
   setOnEditorActionListener { view, actionId, event ->

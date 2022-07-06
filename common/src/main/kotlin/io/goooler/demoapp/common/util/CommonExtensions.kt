@@ -6,6 +6,7 @@ package io.goooler.demoapp.common.util
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.TextView
 import androidx.annotation.AnyThread
 import androidx.annotation.ColorInt
@@ -23,6 +24,7 @@ import androidx.viewbinding.ViewBinding
 import com.blankj.utilcode.util.AdaptScreenUtils
 import com.blankj.utilcode.util.ColorUtils
 import com.blankj.utilcode.util.ImageUtils
+import com.blankj.utilcode.util.KeyboardUtils
 import com.blankj.utilcode.util.ResourceUtils
 import com.blankj.utilcode.util.SPUtils
 import com.blankj.utilcode.util.SizeUtils
@@ -143,6 +145,14 @@ fun Bitmap.toDrawable(): Drawable = ImageUtils.bitmap2Drawable(this)
 fun Drawable.toBitmap(): Bitmap = ImageUtils.drawable2Bitmap(this)
 
 // ---------------------View-------------------------------//
+
+fun View.hideSoftInput() {
+  KeyboardUtils.hideSoftInput(this)
+}
+
+fun View.showSoftInput() {
+  KeyboardUtils.showSoftInput(this)
+}
 
 fun TextView.hideTextInputLayoutErrorOnTextChange(textInputLayout: TextInputLayout) {
   doAfterTextChanged { textInputLayout.error = null }
