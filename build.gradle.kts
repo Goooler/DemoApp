@@ -81,9 +81,6 @@ tasks {
     )
     delete(rootProject.buildDir, customFileTypes)
   }
-  wrapper {
-    distributionType = Wrapper.DistributionType.ALL
-  }
 }
 
 fun Project.setupBase(): BaseExtension {
