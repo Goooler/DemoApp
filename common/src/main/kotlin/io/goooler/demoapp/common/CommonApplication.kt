@@ -1,6 +1,5 @@
 package io.goooler.demoapp.common
 
-import android.webkit.WebView
 import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
@@ -11,22 +10,13 @@ import java.util.Locale
 
 abstract class CommonApplication : BaseApplication() {
 
-  override fun initImmediately() {
-    super.initImmediately()
+  override fun onCreate() {
+    super.onCreate()
     app = this
     resources.configuration.setLocale(Locale.ENGLISH)
     CrashHandler.init()
-    initImageLoader()
-    initWebView()
-    initSmartRefresh()
-  }
-
-  private fun initImageLoader() {
     ImageLoader.init(this)
-  }
-
-  private fun initWebView() {
-    WebView.setWebContentsDebuggingEnabled(BuildConfig.DEBUG)
+    initSmartRefresh()
   }
 
   private fun initSmartRefresh() {

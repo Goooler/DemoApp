@@ -7,8 +7,8 @@ import io.goooler.demoapp.common.router.RouterManager
 @HiltAndroidApp
 class DemoApplication : CommonApplication() {
 
-  override fun initImmediately() {
-    super.initImmediately()
+  override fun onCreate() {
+    super.onCreate()
     RouterManager.impl = RouterManagerImpl
   }
 }
