@@ -6,7 +6,7 @@ plugins {
 
 android {
   buildFeatures.compose = true
-  composeOptions.kotlinCompilerExtensionVersion = libs.versions.androidX.compose.get()
+  composeOptions.kotlinCompilerExtensionVersion = libs.versions.androidX.composeCompiler.get()
 }
 
 dependencies {

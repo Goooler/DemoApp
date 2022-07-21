@@ -22,13 +22,6 @@ allprojects {
   tasks.withType<KotlinCompile> {
     kotlinOptions {
       jvmTarget = JavaVersion.VERSION_11.toString()
-      // https://youtrack.jetbrains.com/issue/KT-41985
-      @Suppress("SuspiciousCollectionReassignment")
-      freeCompilerArgs += listOf(
-        "-progressive",
-        "-opt-in=kotlin.RequiresOptIn",
-        "-Xjvm-default=all"
-      )
     }
   }
   tasks.withType<Test> {
