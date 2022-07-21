@@ -10,7 +10,6 @@ dependencies {
   implementation(libs.square.okHttp)
   implementation(libs.square.retrofit.gson)
   implementation(libs.square.okHttp.logInterceptor)
-  implementation(libs.fastjson)
   implementation(libs.google.gson)
   implementation(libs.bundles.glide)
   implementation(libs.rxJava3.java)

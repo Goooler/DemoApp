@@ -2,8 +2,6 @@
 
 package io.goooler.demoapp.obsolete.util
 
-import com.alibaba.fastjson.JSONObject
-import com.alibaba.fastjson.TypeReference
 import com.google.gson.Gson
 import java.lang.reflect.Type
 
@@ -37,39 +35,6 @@ interface GsonUtil : JsonConverter {
 
     override fun toJson(src: Any): String? = try {
       gson.toJson(src)
-    } catch (e: Exception) {
-      e.printStackTrace()
-      null
-    }
-  }
-}
-
-interface FastJsonUtil : JsonConverter {
-
-  fun <T> FastJsonUtil.Companion.fromJson(json: String, typeRef: TypeReference<T>): T? = try {
-    JSONObject.parseObject(json, typeRef)
-  } catch (e: Exception) {
-    e.printStackTrace()
-    null
-  }
-
-  companion object : FastJsonUtil {
-    override fun <T> fromJson(json: String, classOfT: Class<T>): T? = try {
-      JSONObject.parseObject(json, classOfT)
-    } catch (e: Exception) {
-      e.printStackTrace()
-      null
-    }
-
-    override fun <T> fromJson(json: String, typeOfT: Type): T? = try {
-      JSONObject.parseObject(json, typeOfT)
-    } catch (e: Exception) {
-      e.printStackTrace()
-      null
-    }
-
-    override fun toJson(src: Any): String? = try {
-      JSONObject.toJSONString(src)
     } catch (e: Exception) {
       e.printStackTrace()
       null
