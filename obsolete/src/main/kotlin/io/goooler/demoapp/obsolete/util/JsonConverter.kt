@@ -5,39 +5,15 @@ package io.goooler.demoapp.obsolete.util
 import com.google.gson.Gson
 import java.lang.reflect.Type
 
-sealed interface JsonConverter {
+object GsonUtil {
+  @PublishedApi
+  internal val gson = Gson()
 
-  fun <T> fromJson(json: String, classOfT: Class<T>): T?
+  inline fun <reified T> fromJson(json: String, classOfT: Class<T>): T? =
+    runCatching { gson.fromJson(json, classOfT) }.getOrNull()
 
-  fun <T> fromJson(json: String, typeOfT: Type): T?
+  inline fun <reified T> fromJson(json: String, typeOfT: Type): T? =
+    runCatching { gson.fromJson<T>(json, typeOfT) }.getOrNull()
 
-  fun toJson(src: Any): String?
-}
-
-interface GsonUtil : JsonConverter {
-
-  companion object : GsonUtil {
-    private val gson = Gson()
-
-    override fun <T> fromJson(json: String, classOfT: Class<T>): T? = try {
-      gson.fromJson(json, classOfT)
-    } catch (e: Exception) {
-      e.printStackTrace()
-      null
-    }
-
-    override fun <T> fromJson(json: String, typeOfT: Type): T? = try {
-      gson.fromJson(json, typeOfT)
-    } catch (e: Exception) {
-      e.printStackTrace()
-      null
-    }
-
-    override fun toJson(src: Any): String? = try {
-      gson.toJson(src)
-    } catch (e: Exception) {
-      e.printStackTrace()
-      null
-    }
-  }
+  fun toJson(src: Any): String? = runCatching { gson.toJson(src) }.getOrNull()
 }
