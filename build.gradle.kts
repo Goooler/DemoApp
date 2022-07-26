@@ -1,5 +1,6 @@
 import com.android.build.gradle.BaseExtension
 import dagger.hilt.android.plugin.HiltExtension
+import io.gitlab.arturbosch.detekt.extensions.DetektExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jlleitschuh.gradle.ktlint.KtlintExtension
 
@@ -10,6 +11,7 @@ plugins {
   alias(libs.plugins.kotlin.kapt) apply false
   alias(libs.plugins.hilt) apply false
   alias(libs.plugins.ktlint) apply false
+  alias(libs.plugins.detekt) apply false
   alias(libs.plugins.moshiX) apply false
 }
 
@@ -17,6 +19,11 @@ allprojects {
   apply(plugin = rootProject.libs.plugins.ktlint.get().pluginId)
   configure<KtlintExtension> {
     version.set(rootProject.libs.versions.ktlint.get())
+  }
+
+  apply(plugin = rootProject.libs.plugins.detekt.get().pluginId)
+  configure<DetektExtension> {
+    config = rootProject.files("config/detekt/detekt.yml")
   }
 
   tasks.withType<KotlinCompile> {
