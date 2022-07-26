@@ -16,35 +16,11 @@ interface RouterManager {
 
   fun goWeb(context: Context, url: String, useChrome: Boolean = false)
 
-  companion object : RouterManager {
+  companion object : RouterManager by routerManagerDelegate {
     const val PARAMS = "params"
     const val RE_LOGIN = "reLogin"
     const val USE_CHROME = "useChrome"
-
-    lateinit var impl: RouterManager
-
-    override fun go(context: Context, url: String) {
-      impl.go(context, url)
-    }
-
-    override fun goLogin(context: Context, isReLogin: Boolean) {
-      impl.goLogin(context, isReLogin)
-    }
-
-    override fun goMain(context: Context) {
-      impl.goMain(context)
-    }
-
-    override fun goRepoDetail(context: Context, fullName: String) {
-      impl.goRepoDetail(context, fullName)
-    }
-
-    override fun goAudioPlay(context: Context) {
-      impl.goAudioPlay(context)
-    }
-
-    override fun goWeb(context: Context, url: String, useChrome: Boolean) {
-      impl.goWeb(context, url, useChrome)
-    }
   }
 }
+
+lateinit var routerManagerDelegate: RouterManager
