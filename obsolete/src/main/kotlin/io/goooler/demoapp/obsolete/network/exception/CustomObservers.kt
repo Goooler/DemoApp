@@ -26,7 +26,7 @@ abstract class CustomObservableObserver<T : BaseResponse> :
     onCustomError(e.toResponseException())
   }
 
-  override fun onComplete() {}
+  override fun onComplete() = Unit
 }
 
 abstract class CustomSingleObserver<T : BaseResponse> :
