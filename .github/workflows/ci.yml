@@ -28,7 +28,6 @@ jobs:
   check:
     name: Check
     runs-on: ubuntu-latest
-    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v3
       - uses: gradle/wrapper-validation-action@v1
@@ -55,7 +54,7 @@ jobs:
   unit-tests:
     name: Unit tests
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 50
     if: github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'unit-tests')
     steps:
       - uses: actions/checkout@v3
@@ -70,7 +69,7 @@ jobs:
   instrumentation-tests:
     name: Instrumentation tests
     runs-on: macos-latest
-    timeout-minutes: 20
+    timeout-minutes: 50
     if: github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'instrumentation-tests')
     strategy:
       fail-fast: true
