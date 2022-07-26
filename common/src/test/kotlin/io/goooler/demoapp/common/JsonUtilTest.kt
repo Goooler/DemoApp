@@ -19,7 +19,7 @@ class JsonUtilTest {
   @Test
   fun `JsonUtil fromJson(String, Class, Class)`() {
     val list: List<Repo> = JsonUtil.fromJson(strArray, List::class.java, Repo::class.java)
-      ?: throw Exception("Parse json error")
+      ?: throw AssertionError("Parse json error")
     assertEquals(list.firstOrNull(), firstBean)
     assertEquals(list.secondOrNull(), secondBean)
   }
@@ -39,7 +39,7 @@ class JsonUtilTest {
   @Test
   fun `String fromJson(Class, Class)`() {
     val list: List<Repo> = strArray.fromJson(List::class.java, Repo::class.java)
-      ?: throw Exception("Parse json error")
+      ?: throw AssertionError("Parse json error")
     assertEquals(list.first(), firstBean)
     assertEquals(list[1], secondBean)
   }

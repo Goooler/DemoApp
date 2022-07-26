@@ -105,7 +105,9 @@ fun DetailPage(model: RepoDetailModel, onForkClick: () -> Unit) {
 fun DetailPagePreview() {
   val model = RepoDetailModel(
     "Compose/Demo",
-    "Jetpack Compose is Android’s modern toolkit for building native UI. It simplifies and accelerates UI development on Android. Quickly bring your app to life with less code, powerful tools, and intuitive Kotlin APIs.",
+    "Jetpack Compose is Android’s modern toolkit for building native UI. " +
+      "It simplifies and accelerates UI development on Android. " +
+      "Quickly bring your app to life with less code, powerful tools, and intuitive Kotlin APIs.",
     "Apache",
     99,
     1,
