@@ -23,7 +23,6 @@ class BottomTipDialogFragment : BaseBindingDialogFragment<CommonBottomTipDialogF
   ): View {
     dialog?.let {
       it.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-      it.requestWindowFeature(Window.FEATURE_NO_TITLE)
     }
     return super.onCreateView(inflater, container, savedInstanceState)
   }
