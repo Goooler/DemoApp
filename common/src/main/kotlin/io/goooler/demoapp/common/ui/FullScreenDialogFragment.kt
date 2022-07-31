@@ -1,6 +1,7 @@
 package io.goooler.demoapp.common.ui
 
-import android.os.Bundle
+import android.view.Gravity
+import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
 import io.goooler.demoapp.common.R
 import io.goooler.demoapp.common.base.binding.BaseBindingDialogFragment
@@ -9,9 +10,16 @@ import io.goooler.demoapp.common.databinding.CommonFullScreenDialogFragmentBindi
 class FullScreenDialogFragment :
   BaseBindingDialogFragment<CommonFullScreenDialogFragmentBinding>() {
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    setStyle(STYLE_NO_TITLE, R.style.CommonDialogFullScreenTheme)
+  override fun onResume() {
+    super.onResume()
+    dialog?.window?.run {
+      setWindowAnimations(R.style.CommonDialogBottomAnim)
+      attributes = attributes?.apply {
+        width = ViewGroup.LayoutParams.MATCH_PARENT
+        height = ViewGroup.LayoutParams.MATCH_PARENT
+        gravity = Gravity.BOTTOM
+      }
+    }
   }
 
   override fun initOnce() {

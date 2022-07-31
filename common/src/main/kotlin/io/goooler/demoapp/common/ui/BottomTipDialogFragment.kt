@@ -1,6 +1,5 @@
 package io.goooler.demoapp.common.ui
 
-import android.os.Bundle
 import android.view.Gravity
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
@@ -11,9 +10,16 @@ import io.goooler.demoapp.common.databinding.CommonBottomTipDialogFragmentBindin
 
 class BottomTipDialogFragment : BaseBindingDialogFragment<CommonBottomTipDialogFragmentBinding>() {
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    setStyle(STYLE_NORMAL, R.style.CommonDialogTransparentTheme)
+  override fun onResume() {
+    super.onResume()
+    dialog?.window?.run {
+      setWindowAnimations(R.style.CommonDialogBottomAnim)
+      attributes = attributes?.apply {
+        width = ViewGroup.LayoutParams.MATCH_PARENT
+        height = ViewGroup.LayoutParams.WRAP_CONTENT
+        gravity = Gravity.BOTTOM
+      }
+    }
   }
 
   override fun initOnce() {
@@ -24,22 +30,6 @@ class BottomTipDialogFragment : BaseBindingDialogFragment<CommonBottomTipDialogF
       }
       it.ivClose.setOnClickListener {
         dismiss()
-      }
-    }
-  }
-
-  override fun onResume() {
-    super.onResume()
-    setStyle()
-  }
-
-  private fun setStyle() {
-    dialog?.window?.run {
-      setWindowAnimations(R.style.CommonDialogBottomAnim)
-      attributes = attributes?.apply {
-        width = ViewGroup.LayoutParams.MATCH_PARENT
-        height = ViewGroup.LayoutParams.WRAP_CONTENT
-        gravity = Gravity.BOTTOM
       }
     }
   }
