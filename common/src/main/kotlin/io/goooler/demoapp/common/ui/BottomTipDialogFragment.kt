@@ -34,7 +34,7 @@ class BottomTipDialogFragment : BaseBindingDialogFragment<CommonBottomTipDialogF
       setWindowAnimations(R.style.CommonDialogBottomAnim)
       attributes = attributes?.apply {
         width = ViewGroup.LayoutParams.MATCH_PARENT
-        height = ViewGroup.LayoutParams.MATCH_PARENT
+        height = ViewGroup.LayoutParams.WRAP_CONTENT
         gravity = Gravity.BOTTOM
       }
     }
