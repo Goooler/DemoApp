@@ -3,9 +3,12 @@
 
 package io.goooler.demoapp.common.util
 
+import android.content.ContentResolver
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
-import android.view.LayoutInflater
+import android.text.format.DateFormat
+import android.text.format.Formatter
 import android.view.View
 import android.widget.TextView
 import androidx.annotation.AnyThread
@@ -63,22 +66,22 @@ fun @receiver:StringRes Int.showToast() {
   ToastUtil.show(CommonApplication.app, this)
 }
 
-@MainThread
-fun SmartRefreshLayout.finishRefreshAndLoadMore() {
-  finishRefresh()
-  finishLoadMore()
+inline fun <reified T : Any> DiffUtil.ItemCallback<T>.asConfig(): AsyncDifferConfig<T> {
+  return AsyncDifferConfig.Builder(this)
+    .setBackgroundThreadExecutor(Dispatchers.Default.asExecutor())
+    .build()
 }
 
-@MainThread
-fun SmartRefreshLayout.enableRefreshAndLoadMore(enable: Boolean = true) {
-  setEnableRefresh(enable)
-  setEnableLoadMore(enable)
-}
+val contentResolver: ContentResolver get() = CommonApplication.app.contentResolver
 
-@MainThread
-fun SmartRefreshLayout.disableRefreshAndLoadMore() {
-  enableRefreshAndLoadMore(false)
-}
+val packageManager: PackageManager get() = CommonApplication.app.packageManager
+
+// ---------------------Unit-------------------------------//
+
+fun Long.formatFileSize(): String = Formatter.formatFileSize(CommonApplication.app, this)
+
+fun Long.millis2String(pattern: String = "yyyyMMddHHmmss"): String =
+  TimeUtils.millis2String(this, DateFormat.getBestDateTimePattern(Locale.getDefault(), pattern))
 
 // ---------------------String-------------------------------//
 
@@ -158,19 +161,19 @@ fun TextView.hideTextInputLayoutErrorOnTextChange(textInputLayout: TextInputLayo
   doAfterTextChanged { textInputLayout.error = null }
 }
 
-inline fun <reified T : Any> DiffUtil.ItemCallback<T>.asConfig(): AsyncDifferConfig<T> {
-  return AsyncDifferConfig.Builder(this)
-    .setBackgroundThreadExecutor(Dispatchers.Default.asExecutor())
-    .build()
+@MainThread
+fun SmartRefreshLayout.finishRefreshAndLoadMore() {
+  finishRefresh()
+  finishLoadMore()
 }
 
-// ---------------------VM & Binding-------------------------------//
+@MainThread
+fun SmartRefreshLayout.enableRefreshAndLoadMore(enable: Boolean = true) {
+  setEnableRefresh(enable)
+  setEnableLoadMore(enable)
+}
 
-@Suppress("UNCHECKED_CAST")
-fun <T : ViewBinding> LifecycleOwner.inflateBinding(inflater: LayoutInflater): T {
-  return (javaClass.genericSuperclass as ParameterizedType).actualTypeArguments
-    .filterIsInstance<Class<T>>()
-    .first()
-    .getDeclaredMethod("inflate", LayoutInflater::class.java)
-    .invoke(null, inflater) as T
+@MainThread
+fun SmartRefreshLayout.disableRefreshAndLoadMore() {
+  enableRefreshAndLoadMore(false)
 }

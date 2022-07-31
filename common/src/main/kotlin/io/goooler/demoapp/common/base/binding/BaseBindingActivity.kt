@@ -4,13 +4,15 @@ import android.annotation.SuppressLint
 import android.content.pm.ActivityInfo
 import android.content.res.Resources
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.WindowManager
 import androidx.databinding.ViewDataBinding
+import androidx.viewbinding.ViewBinding
 import com.blankj.utilcode.util.AdaptScreenUtils
 import com.blankj.utilcode.util.BarUtils
 import com.blankj.utilcode.util.ScreenUtils
 import io.goooler.demoapp.base.core.BaseActivity
-import io.goooler.demoapp.common.util.inflateBinding
+import java.lang.reflect.ParameterizedType
 
 abstract class BaseBindingActivity<VB : ViewDataBinding> : BaseActivity(), IBinding<VB> {
 
@@ -38,5 +40,17 @@ abstract class BaseBindingActivity<VB : ViewDataBinding> : BaseActivity(), IBind
       AdaptScreenUtils.adaptWidth(super.getResources(), 360)
     else
       AdaptScreenUtils.adaptHeight(super.getResources(), 640)
+  }
+
+  companion object {
+    @Suppress("UNCHECKED_CAST")
+    internal fun <T : ViewBinding> Any.inflateBinding(inflater: LayoutInflater): T {
+      return (javaClass.genericSuperclass as ParameterizedType).actualTypeArguments
+        .filterIsInstance<Class<T>>()
+        .first()
+        .getDeclaredMethod("inflate", LayoutInflater::class.java)
+        .also { it.isAccessible = true }
+        .invoke(null, inflater) as T
+    }
   }
 }
