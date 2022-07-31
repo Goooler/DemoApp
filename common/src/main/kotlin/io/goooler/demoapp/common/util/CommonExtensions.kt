@@ -75,14 +75,12 @@ val contentResolver: ContentResolver get() = CommonApplication.app.contentResolv
 
 val packageManager: PackageManager get() = CommonApplication.app.packageManager
 
-// ---------------------Unit-------------------------------//
+// ---------------------String-------------------------------//
 
 fun Long.formatFileSize(): String = Formatter.formatFileSize(CommonApplication.app, this)
 
 fun Long.millis2String(pattern: String = "yyyyMMddHHmmss"): String =
   TimeUtils.millis2String(this, DateFormat.getBestDateTimePattern(Locale.getDefault(), pattern))
-
-// ---------------------String-------------------------------//
 
 @AnyThread
 fun String.showToast() {
