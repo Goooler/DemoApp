@@ -7,7 +7,6 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
 import androidx.fragment.app.FragmentManager
 import io.goooler.demoapp.common.R
 import io.goooler.demoapp.common.base.binding.BaseBindingDialogFragment
@@ -21,9 +20,7 @@ class FullScreenDialogFragment :
     container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View {
-    dialog?.let {
-      it.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-    }
+    dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
     return super.onCreateView(inflater, container, savedInstanceState)
   }
 

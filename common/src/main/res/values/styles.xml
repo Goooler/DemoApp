@@ -15,7 +15,7 @@
   </style>
 
   <style name="CommonDialogBottomAnim" parent="@android:style/Animation">
-    <item name="windowNoTitle">true</item>
+    <item name="android:windowNoTitle">true</item>
     <item name="android:windowEnterAnimation">@anim/common_popup_enter</item>
     <item name="android:windowExitAnimation">@anim/common_popup_exit</item>
   </style>

@@ -7,7 +7,6 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
 import androidx.fragment.app.FragmentManager
 import io.goooler.demoapp.base.util.putArguments
 import io.goooler.demoapp.common.R
@@ -21,9 +20,7 @@ class BottomTipDialogFragment : BaseBindingDialogFragment<CommonBottomTipDialogF
     container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View {
-    dialog?.let {
-      it.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-    }
+    dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
     return super.onCreateView(inflater, container, savedInstanceState)
   }
 
