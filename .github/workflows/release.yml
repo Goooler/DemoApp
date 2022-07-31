@@ -15,12 +15,9 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: 17
-      - name: Build APK
-        uses: gradle/gradle-build-action@v2
-        with:
-          arguments: app:assembleProdRelease
-      - name: Create Release
-        uses: ncipollo/release-action@v1
+      - uses: gradle/gradle-build-action@v2
+      - run: ./gradlew app:assembleProdRelease
+      - uses: ncipollo/release-action@v1
         with:
           artifacts: "app/build/*.apk"
           token: ${{ secrets.GITHUB_TOKEN }}
