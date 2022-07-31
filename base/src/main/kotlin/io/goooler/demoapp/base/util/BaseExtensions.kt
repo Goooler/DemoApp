@@ -49,6 +49,7 @@ import androidx.lifecycle.coroutineScope
 import androidx.lifecycle.findViewTreeLifecycleOwner
 import java.io.File
 import java.io.Serializable
+import java.lang.reflect.Method
 import java.math.BigDecimal
 import java.util.Collections
 import java.util.UUID
@@ -131,21 +132,6 @@ fun getReflectedMethod(
 
 // ---------------------CharSequence-------------------------------//
 
-/**
- * Validate given text is a valid filename.
- *
- * @return true if given text is a valid filename
- */
-fun String.isValidFilename(): Boolean {
-  val filenameRegex =
-    Pattern.compile("[\\\\/:*?\"<>|\\x01-\\x1F\\x7F]", Pattern.CASE_INSENSITIVE)
-
-  // It's not easy to use regex to detect single/double dot while leaving valid values
-  // (filename.zip) behind...
-  // So we simply use equality to check them
-  return !filenameRegex.matcher(this).find() && "." != this && ".." != this
-}
-
 operator fun String.times(@IntRange(from = 0) num: Int): String {
   require(num >= 0) {
     "Param num should >= 0"
@@ -168,6 +154,11 @@ fun String.onlyDigits(): String = replace(Regex("\\D*"), "")
 
 fun String.removeAllSpecialCharacters(): String = replace(Regex("[^a-zA-Z]+"), "")
 
+/**
+ * Validate given text is a valid filename.
+ *
+ * @return true if given text is a valid filename
+ */
 fun String.isValidFilename(): Boolean {
   val filenameRegex =
     Pattern.compile("[\\\\\\/:\\*\\?\"<>\\|\\x01-\\x1F\\x7F]", Pattern.CASE_INSENSITIVE)
@@ -279,8 +270,6 @@ fun String?.safeToColor(@ColorInt default: Int = 0): Int {
 fun String?.isNetworkUrl(): Boolean = URLUtil.isNetworkUrl(this)
 
 fun String?.isValidUrl(): Boolean = URLUtil.isValidUrl(this)
-
-fun Uri.withAppendedId(id: Long): Uri = ContentUris.withAppendedId(this, id)
 
 // ---------------------Calculate-------------------------------//
 

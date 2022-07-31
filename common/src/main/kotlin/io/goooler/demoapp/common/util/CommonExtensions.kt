@@ -20,10 +20,8 @@ import androidx.annotation.PluralsRes
 import androidx.annotation.Px
 import androidx.annotation.StringRes
 import androidx.core.widget.doAfterTextChanged
-import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.AsyncDifferConfig
 import androidx.recyclerview.widget.DiffUtil
-import androidx.viewbinding.ViewBinding
 import com.blankj.utilcode.util.AdaptScreenUtils
 import com.blankj.utilcode.util.ColorUtils
 import com.blankj.utilcode.util.ImageUtils
@@ -32,6 +30,7 @@ import com.blankj.utilcode.util.ResourceUtils
 import com.blankj.utilcode.util.SPUtils
 import com.blankj.utilcode.util.SizeUtils
 import com.blankj.utilcode.util.StringUtils
+import com.blankj.utilcode.util.TimeUtils
 import com.google.android.material.textfield.TextInputLayout
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import io.goooler.demoapp.base.util.Dp
@@ -41,7 +40,7 @@ import io.goooler.demoapp.base.util.ToastUtil
 import io.goooler.demoapp.common.BuildConfig
 import io.goooler.demoapp.common.CommonApplication
 import io.goooler.demoapp.common.type.SpKeys
-import java.lang.reflect.ParameterizedType
+import java.util.Locale
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.asExecutor
 
