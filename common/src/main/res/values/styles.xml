@@ -14,17 +14,6 @@
     <item name="android:windowBackground">@android:color/transparent</item>
   </style>
 
-  <!--全屏对话框-->
-  <style name="CommonDialogFullScreenTheme" parent="CommonDialogTheme">
-    <item name="android:windowIsFloating">false</item>
-  </style>
-
-  <!--对话框背景透明-->
-  <style name="CommonDialogTransparentTheme" parent="CommonDialogTheme">
-    <item name="android:windowIsFloating">true</item>
-  </style>
-
-  <!--底部弹起效果-->
   <style name="CommonDialogBottomAnim" parent="@android:style/Animation">
     <item name="android:windowEnterAnimation">@anim/common_popup_enter</item>
     <item name="android:windowExitAnimation">@anim/common_popup_exit</item>
