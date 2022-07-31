@@ -49,6 +49,7 @@ import androidx.lifecycle.coroutineScope
 import androidx.lifecycle.findViewTreeLifecycleOwner
 import java.io.File
 import java.io.Serializable
+import java.lang.reflect.Method
 import java.math.BigDecimal
 import java.util.Collections
 import java.util.UUID
@@ -102,6 +103,33 @@ fun <T : Parcelable> T.deepCopy(): T? {
   }
 }
 
+@Throws(ReflectiveOperationException::class)
+fun lazyReflectedMethod(
+  declaringClass: Class<*>,
+  methodName: String,
+  vararg parameterTypes: Any
+): Lazy<Method> = lazy {
+  getReflectedMethod(declaringClass, methodName, *getParameterTypes(parameterTypes))
+}
+
+@Throws(ReflectiveOperationException::class)
+fun getParameterTypes(parameterTypes: Array<out Any>): Array<Class<*>> =
+  Array(parameterTypes.size) {
+    when (val parameterType = parameterTypes[it]) {
+      is Class<*> -> parameterType
+      is String -> Class.forName(parameterType)
+      else -> throw IllegalArgumentException(parameterType.toString())
+    }
+  }
+
+@Throws(ReflectiveOperationException::class)
+fun getReflectedMethod(
+  declaringClass: Class<*>,
+  methodName: String,
+  vararg parameterTypes: Class<*>
+): Method =
+  declaringClass.getDeclaredMethod(methodName, *parameterTypes).also { it.isAccessible = true }
+
 // ---------------------CharSequence-------------------------------//
 
 operator fun String.times(@IntRange(from = 0) num: Int): String {
@@ -126,6 +154,11 @@ fun String.onlyDigits(): String = replace(Regex("\\D*"), "")
 
 fun String.removeAllSpecialCharacters(): String = replace(Regex("[^a-zA-Z]+"), "")
 
+/**
+ * Validate given text is a valid filename.
+ *
+ * @return true if given text is a valid filename
+ */
 fun String.isValidFilename(): Boolean {
   val filenameRegex =
     Pattern.compile("[\\\\\\/:\\*\\?\"<>\\|\\x01-\\x1F\\x7F]", Pattern.CASE_INSENSITIVE)
@@ -391,17 +424,17 @@ fun Intent.getStringExtra(name: String, defaultValue: String): String =
 fun Intent.getCharSequenceExtra(name: String, defaultValue: CharSequence): CharSequence =
   getCharSequenceExtra(name) ?: defaultValue
 
-fun <T : Parcelable> Intent.getParcelableExtra(name: String, defaultValue: T): T =
+inline fun <reified T : Parcelable> Intent.getParcelableExtra(name: String, defaultValue: T): T =
   getParcelableExtra(name) ?: defaultValue
 
-fun <T : Serializable> Intent.getSerializableExtra(
+inline fun <reified T : Serializable> Intent.getSerializableExtra(
   name: String,
-  defaultValue: Serializable
-): Serializable = getSerializableExtra(name) ?: defaultValue
+  defaultValue: T
+): T = (getSerializableExtra(name) ?: defaultValue) as T
 
 // ---------------------Fragment-------------------------------//
 
-fun <T : Fragment> T.putArguments(bundle: Bundle): T {
+fun <T : Fragment> T.putArguments(bundle: Bundle?): T {
   arguments = bundle
   return this
 }

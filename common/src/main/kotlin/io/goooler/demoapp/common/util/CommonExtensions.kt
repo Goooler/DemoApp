@@ -3,9 +3,12 @@
 
 package io.goooler.demoapp.common.util
 
+import android.content.ContentResolver
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
-import android.view.LayoutInflater
+import android.text.format.DateFormat
+import android.text.format.Formatter
 import android.view.View
 import android.widget.TextView
 import androidx.annotation.AnyThread
@@ -17,10 +20,8 @@ import androidx.annotation.PluralsRes
 import androidx.annotation.Px
 import androidx.annotation.StringRes
 import androidx.core.widget.doAfterTextChanged
-import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.AsyncDifferConfig
 import androidx.recyclerview.widget.DiffUtil
-import androidx.viewbinding.ViewBinding
 import com.blankj.utilcode.util.AdaptScreenUtils
 import com.blankj.utilcode.util.ColorUtils
 import com.blankj.utilcode.util.ImageUtils
@@ -29,6 +30,7 @@ import com.blankj.utilcode.util.ResourceUtils
 import com.blankj.utilcode.util.SPUtils
 import com.blankj.utilcode.util.SizeUtils
 import com.blankj.utilcode.util.StringUtils
+import com.blankj.utilcode.util.TimeUtils
 import com.google.android.material.textfield.TextInputLayout
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import io.goooler.demoapp.base.util.Dp
@@ -38,7 +40,7 @@ import io.goooler.demoapp.base.util.ToastUtil
 import io.goooler.demoapp.common.BuildConfig
 import io.goooler.demoapp.common.CommonApplication
 import io.goooler.demoapp.common.type.SpKeys
-import java.lang.reflect.ParameterizedType
+import java.util.Locale
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.asExecutor
 
@@ -63,24 +65,22 @@ fun @receiver:StringRes Int.showToast() {
   ToastUtil.show(CommonApplication.app, this)
 }
 
-@MainThread
-fun SmartRefreshLayout.finishRefreshAndLoadMore() {
-  finishRefresh()
-  finishLoadMore()
+inline fun <reified T : Any> DiffUtil.ItemCallback<T>.asConfig(): AsyncDifferConfig<T> {
+  return AsyncDifferConfig.Builder(this)
+    .setBackgroundThreadExecutor(Dispatchers.Default.asExecutor())
+    .build()
 }
 
-@MainThread
-fun SmartRefreshLayout.enableRefreshAndLoadMore(enable: Boolean = true) {
-  setEnableRefresh(enable)
-  setEnableLoadMore(enable)
-}
+val contentResolver: ContentResolver get() = CommonApplication.app.contentResolver
 
-@MainThread
-fun SmartRefreshLayout.disableRefreshAndLoadMore() {
-  enableRefreshAndLoadMore(false)
-}
+val packageManager: PackageManager get() = CommonApplication.app.packageManager
 
 // ---------------------String-------------------------------//
+
+fun Long.formatFileSize(): String = Formatter.formatFileSize(CommonApplication.app, this)
+
+fun Long.millis2String(pattern: String = "yyyyMMddHHmmss"): String =
+  TimeUtils.millis2String(this, DateFormat.getBestDateTimePattern(Locale.getDefault(), pattern))
 
 @AnyThread
 fun String.showToast() {
@@ -158,19 +158,19 @@ fun TextView.hideTextInputLayoutErrorOnTextChange(textInputLayout: TextInputLayo
   doAfterTextChanged { textInputLayout.error = null }
 }
 
-inline fun <reified T : Any> DiffUtil.ItemCallback<T>.asConfig(): AsyncDifferConfig<T> {
-  return AsyncDifferConfig.Builder(this)
-    .setBackgroundThreadExecutor(Dispatchers.Default.asExecutor())
-    .build()
+@MainThread
+fun SmartRefreshLayout.finishRefreshAndLoadMore() {
+  finishRefresh()
+  finishLoadMore()
 }
 
-// ---------------------VM & Binding-------------------------------//
+@MainThread
+fun SmartRefreshLayout.enableRefreshAndLoadMore(enable: Boolean = true) {
+  setEnableRefresh(enable)
+  setEnableLoadMore(enable)
+}
 
-@Suppress("UNCHECKED_CAST")
-fun <T : ViewBinding> LifecycleOwner.inflateBinding(inflater: LayoutInflater): T {
-  return (javaClass.genericSuperclass as ParameterizedType).actualTypeArguments
-    .filterIsInstance<Class<T>>()
-    .first()
-    .getDeclaredMethod("inflate", LayoutInflater::class.java)
-    .invoke(null, inflater) as T
+@MainThread
+fun SmartRefreshLayout.disableRefreshAndLoadMore() {
+  enableRefreshAndLoadMore(false)
 }

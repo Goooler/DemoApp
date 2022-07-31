@@ -5,17 +5,23 @@ package io.goooler.demoapp.base.util
 import android.graphics.Color
 import android.graphics.Outline
 import android.graphics.Paint
+import android.graphics.PorterDuff
 import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewOutlineProvider
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.annotation.Px
 import androidx.databinding.BindingAdapter
 
 // ------------------------View --------------------------//
+@BindingAdapter("binding_isEnabled")
+internal fun View.bindingIsEnabled(enabled: Boolean) {
+  this.isEnabled = enabled
+}
 
 @BindingAdapter("binding_isGone")
 internal fun View.bindingIsGone(gone: Boolean) {
@@ -79,6 +85,19 @@ internal fun View.bindingMarginStart(@Px margin: Float) {
 @BindingAdapter("binding_marginEnd")
 internal fun View.bindingMarginEnd(@Px margin: Float) {
   marginDirection(2, margin)
+}
+
+@BindingAdapter("binding_onLongClick")
+internal fun View.bindingOnLongClick(body: () -> Unit) {
+  setOnLongClickListener {
+    body()
+    true
+  }
+}
+
+@BindingAdapter("binding_tint")
+fun ImageView.bindingTint(@ColorInt color: Int) {
+  setColorFilter(color, PorterDuff.Mode.SRC_IN)
 }
 
 // ------------------------View Bg Shape---------------------//
