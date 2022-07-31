@@ -1,11 +1,6 @@
 package io.goooler.demoapp.common.ui
 
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
-import android.os.Bundle
 import android.view.Gravity
-import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
 import io.goooler.demoapp.base.util.putArguments
@@ -14,15 +9,6 @@ import io.goooler.demoapp.common.base.binding.BaseBindingDialogFragment
 import io.goooler.demoapp.common.databinding.CommonBottomTipDialogFragmentBinding
 
 class BottomTipDialogFragment : BaseBindingDialogFragment<CommonBottomTipDialogFragmentBinding>() {
-
-  override fun onCreateView(
-    inflater: LayoutInflater,
-    container: ViewGroup?,
-    savedInstanceState: Bundle?
-  ): View {
-    dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-    return super.onCreateView(inflater, container, savedInstanceState)
-  }
 
   override fun onResume() {
     super.onResume()
