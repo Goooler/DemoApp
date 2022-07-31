@@ -38,7 +38,7 @@ class MainHomeViewModel @Inject constructor(private val repository: MainCommonRe
   }
 
   fun countDown() {
-    _title.value = R.string.main_star_count_tip.getString()
+    _title.value = R.string.main_star_count_tip.getString().format(1)
   }
 
   private fun startCountDown(

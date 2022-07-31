@@ -112,9 +112,6 @@ fun @receiver:ColorRes Int.getColor(): Int = try {
 
 fun @receiver:StringRes Int.getString(): String = StringUtils.getString(this)
 
-fun @receiver:StringRes Int.getString(vararg formatArgs: Any): String =
-  StringUtils.getString(this, formatArgs)
-
 fun @receiver:PluralsRes Int.getQuantityString(num: Int): String? = try {
   CommonApplication.app.resources.getQuantityString(this, num, num)
 } catch (e: Exception) {
