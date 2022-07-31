@@ -3,4 +3,6 @@
 
   <string name="main_coil_bg">https://raw.githubusercontent.com/coil-kt/coil/main/logo.svg</string>
 
+  <string name="main_star_count_tip">All %d stars.</string>
+
 </resources>

@@ -4,7 +4,9 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.goooler.demoapp.base.core.BaseViewModel
 import io.goooler.demoapp.base.util.defaultAsync
+import io.goooler.demoapp.common.util.getString
 import io.goooler.demoapp.common.util.showToast
+import io.goooler.demoapp.main.R
 import io.goooler.demoapp.main.bean.MainRepoListBean
 import io.goooler.demoapp.main.repository.MainCommonRepository
 import java.util.concurrent.CancellationException
@@ -36,11 +38,7 @@ class MainHomeViewModel @Inject constructor(private val repository: MainCommonRe
   }
 
   fun countDown() {
-    if (countdownJob?.isActive != true) {
-      startCountDown()
-    } else {
-      countdownJob?.cancel(ManualCancellationException)
-    }
+    _title.value = R.string.main_star_count_tip.getString()
   }
 
   private fun startCountDown(
