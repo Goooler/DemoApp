@@ -1,5 +1,4 @@
 import com.android.build.gradle.BaseExtension
-import dagger.hilt.android.plugin.HiltExtension
 import io.gitlab.arturbosch.detekt.extensions.DetektExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jlleitschuh.gradle.ktlint.KtlintExtension
@@ -9,7 +8,6 @@ plugins {
   alias(libs.plugins.android.library) apply false
   alias(libs.plugins.kotlin.android) apply false
   alias(libs.plugins.kotlin.kapt) apply false
-  alias(libs.plugins.hilt) apply false
   alias(libs.plugins.ktlint) apply false
   alias(libs.plugins.detekt) apply false
   alias(libs.plugins.moshiX) apply false
@@ -63,11 +61,6 @@ subprojects {
   }
   plugins.withId(rootProject.libs.plugins.android.application.get().pluginId) {
     setupCommon()
-  }
-  plugins.withId(rootProject.libs.plugins.hilt.get().pluginId) {
-    configure<HiltExtension> {
-      enableAggregatingTask = true
-    }
   }
 }
 
