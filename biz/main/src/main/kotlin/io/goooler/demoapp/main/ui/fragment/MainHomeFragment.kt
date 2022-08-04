@@ -59,7 +59,7 @@ class MainHomeFragment : BaseBindingFragment<MainHomeFragmentBinding>() {
       .setIcon(
         IconCompat.createWithResource(
           context,
-          io.goooler.demoapp.common.R.drawable.common_ic_kt_red
+          io.goooler.demoapp.common.R.drawable.common_ic_github
         )
       )
       .setIntent(intent)
