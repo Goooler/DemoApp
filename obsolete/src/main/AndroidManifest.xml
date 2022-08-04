@@ -6,7 +6,7 @@
     android:name=".ObsoleteApplication"
     android:allowBackup="true"
     android:hardwareAccelerated="true"
-    android:icon="@drawable/common_ic_kt_red"
+    android:icon="@drawable/common_ic_github"
     android:label="Obsolete"
     android:supportsRtl="true"
     android:theme="@style/CommonAppTheme"
