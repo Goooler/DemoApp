@@ -115,6 +115,5 @@ jobs:
       - uses: gradle/gradle-build-action@v2
       - run: ./gradlew app:assemble
       - uses: actions/upload-artifact@v3
-        if: matrix.os == 'ubuntu-latest'
         with:
           path: app/build/*.apk
