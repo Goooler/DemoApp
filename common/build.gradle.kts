@@ -49,4 +49,6 @@ dependencies {
   releaseImplementation(libs.chucker.release)
 
   testImplementation(libs.kotlin.junit5)
+  testImplementation(libs.square.okHttp.mock)
+  testImplementation(libs.square.okHttp.mockJunit5)
 }
