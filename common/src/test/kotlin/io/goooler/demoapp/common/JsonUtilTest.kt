@@ -54,14 +54,6 @@ class JsonUtilTest {
   internal data class Repo(val id: Long, val name: String, val owner: Owner) {
     @JsonClass(generateAdapter = true)
     data class Owner(val login: String)
-
-    override fun equals(other: Any?): Boolean = if (other is Repo) {
-      this.id == other.id && this.name == other.name && this.owner.login == other.owner.login
-    } else {
-      false
-    }
-
-    override fun hashCode(): Int = id.hashCode()
   }
 
   companion object {
