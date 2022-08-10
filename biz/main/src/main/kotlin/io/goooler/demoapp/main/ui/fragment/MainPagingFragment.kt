@@ -5,7 +5,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshListener
-import dagger.hilt.android.AndroidEntryPoint
 import io.goooler.demoapp.adapter.rv.paging.BaseRvPagingAdapter
 import io.goooler.demoapp.base.util.unsafeLazy
 import io.goooler.demoapp.common.base.binding.BaseBindingFragment
@@ -18,7 +17,6 @@ import io.goooler.demoapp.main.vm.MainPagingViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-@AndroidEntryPoint
 class MainPagingFragment : BaseBindingFragment<MainPagingFragmentBinding>() {
 
   private val vm: MainPagingViewModel by viewModels()
