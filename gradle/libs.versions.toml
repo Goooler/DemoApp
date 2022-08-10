@@ -28,7 +28,6 @@ android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
-anvil = "com.squareup.anvil:2.4.1"
 moshiX = "dev.zacsweers.moshix:0.18.3"
 ktlint = "org.jlleitschuh.gradle.ktlint:10.3.0"
 detekt = "io.gitlab.arturbosch.detekt:1.21.0"
