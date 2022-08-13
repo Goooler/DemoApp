@@ -5,7 +5,6 @@ plugins {
   alias(libs.plugins.android.application)
   alias(libs.plugins.kotlin.android)
   alias(libs.plugins.kotlin.kapt)
-  alias(libs.plugins.hilt)
 }
 
 android {
@@ -63,9 +62,6 @@ dependencies {
   implementation(projects.biz.main)
   implementation(projects.biz.detail)
   implementation(projects.biz.web)
-
-  implementation(libs.androidX.hilt)
-  kapt(libs.androidX.hilt.compiler)
 
   debugImplementation(libs.square.leakCanary)
 }

@@ -2,16 +2,17 @@ package io.goooler.demoapp.main.repository
 
 import androidx.annotation.IntRange
 import io.goooler.demoapp.base.util.paramMapOf
+import io.goooler.demoapp.common.network.RetrofitHelper
 import io.goooler.demoapp.common.type.CommonConstants
+import io.goooler.demoapp.common.util.RoomHelper
 import io.goooler.demoapp.main.api.MainCommonApi
 import io.goooler.demoapp.main.bean.MainRepoListBean
 import io.goooler.demoapp.main.db.MainCommonDao
-import javax.inject.Inject
+import io.goooler.demoapp.main.db.MainDatabase
 
-class MainCommonRepository @Inject constructor(
-  private val api: MainCommonApi,
-  private val dao: MainCommonDao
-) {
+class MainCommonRepository {
+  private val api: MainCommonApi = RetrofitHelper.create()
+  private val dao: MainCommonDao = RoomHelper.create<MainDatabase>().mainCommonDao
 
   suspend fun getRepoListFromApi(
     user: String,

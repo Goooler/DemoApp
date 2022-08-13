@@ -2,7 +2,6 @@ plugins {
   alias(libs.plugins.android.library)
   alias(libs.plugins.kotlin.android)
   alias(libs.plugins.kotlin.kapt)
-  alias(libs.plugins.hilt)
   alias(libs.plugins.moshiX)
 }
 
@@ -27,9 +26,6 @@ dependencies {
 
   implementation(libs.androidX.coordinatorLayout)
   implementation(libs.flycoTabLayout)
-
-  implementation(libs.androidX.hilt)
-  kapt(libs.androidX.hilt.compiler)
 
   implementation(libs.bundles.androidX.room)
   kapt(libs.androidX.room.compiler)

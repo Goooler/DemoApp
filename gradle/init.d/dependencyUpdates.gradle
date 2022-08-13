@@ -12,11 +12,14 @@ initscript {
   dependencies {
     //noinspection GradleDynamicVersion
     classpath "com.github.ben-manes:gradle-versions-plugin:+"
+    //noinspection GradleDynamicVersion
+    classpath "nl.littlerobots.version-catalog-update:nl.littlerobots.version-catalog-update.gradle.plugin:+"
   }
 }
 
-allprojects {
+rootProject {
   apply plugin: com.github.benmanes.gradle.versions.VersionsPlugin
+  apply plugin: nl.littlerobots.vcu.plugin.VersionCatalogUpdatePlugin
 
   tasks.named("dependencyUpdates").configure {
     rejectVersionIf {

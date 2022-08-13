@@ -6,20 +6,18 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import androidx.paging.filter
-import dagger.hilt.android.lifecycle.HiltViewModel
 import io.goooler.demoapp.adapter.rv.paging.BasePagingSource
 import io.goooler.demoapp.base.core.BaseViewModel
 import io.goooler.demoapp.common.type.CommonConstants
 import io.goooler.demoapp.main.model.MainCommonVhModel
 import io.goooler.demoapp.main.repository.MainCommonRepository
-import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
 
-@HiltViewModel
-class MainPagingViewModel @Inject constructor(private val repository: MainCommonRepository) :
-  BaseViewModel() {
+class MainPagingViewModel : BaseViewModel() {
+  private val repository = MainCommonRepository()
+
   private val removedItemsFlow = MutableStateFlow(emptyList<MainCommonVhModel>())
   private val removedItemsSet = mutableSetOf<MainCommonVhModel>()
 

@@ -1,14 +1,12 @@
 package io.goooler.demoapp.main.vm
 
 import androidx.lifecycle.viewModelScope
-import dagger.hilt.android.lifecycle.HiltViewModel
 import io.goooler.demoapp.base.core.BaseViewModel
 import io.goooler.demoapp.base.util.defaultAsync
 import io.goooler.demoapp.common.util.showToast
 import io.goooler.demoapp.main.bean.MainRepoListBean
 import io.goooler.demoapp.main.repository.MainCommonRepository
 import java.util.concurrent.CancellationException
-import javax.inject.Inject
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.seconds
 import kotlinx.coroutines.Dispatchers
@@ -22,9 +20,8 @@ import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-@HiltViewModel
-class MainHomeViewModel @Inject constructor(private val repository: MainCommonRepository) :
-  BaseViewModel() {
+class MainHomeViewModel : BaseViewModel() {
+  private val repository = MainCommonRepository()
 
   private val _title = MutableStateFlow("")
   val title: StateFlow<String> = _title
