@@ -41,7 +41,7 @@ include(
   ":biz:main",
   ":biz:detail",
   ":biz:web",
-  ":obsolete"
+  ":biz:obsolete"
 )
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
