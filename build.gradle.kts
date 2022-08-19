@@ -1,22 +1,22 @@
 import com.android.build.gradle.BaseExtension
 import io.gitlab.arturbosch.detekt.extensions.DetektExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import org.jlleitschuh.gradle.ktlint.KtlintExtension
+import org.jmailen.gradle.kotlinter.KotlinterExtension
 
 plugins {
   alias(libs.plugins.android.application) apply false
   alias(libs.plugins.android.library) apply false
   alias(libs.plugins.kotlin.android) apply false
   alias(libs.plugins.kotlin.kapt) apply false
-  alias(libs.plugins.ktlint) apply false
+  alias(libs.plugins.kotlinter) apply false
   alias(libs.plugins.detekt) apply false
   alias(libs.plugins.moshiX) apply false
 }
 
 allprojects {
-  apply(plugin = rootProject.libs.plugins.ktlint.get().pluginId)
-  configure<KtlintExtension> {
-    version.set(rootProject.libs.versions.ktlint.get())
+  apply(plugin = rootProject.libs.plugins.kotlinter.get().pluginId)
+  configure<KotlinterExtension> {
+    version = rootProject.libs.versions.ktlint.get()
   }
 
   apply(plugin = rootProject.libs.plugins.detekt.get().pluginId)
