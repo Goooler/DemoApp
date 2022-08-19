@@ -21,7 +21,7 @@ class MainActivity : BaseBindingActivity<MainActivityBinding>() {
   private val fragments = listOf(
     MainHomeFragment(),
     MainSrlFragment(),
-    MainPagingFragment()
+    MainPagingFragment(),
   )
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,7 +38,7 @@ class MainActivity : BaseBindingActivity<MainActivityBinding>() {
       .permissions(
         Manifest.permission.READ_EXTERNAL_STORAGE,
         Manifest.permission.CAMERA,
-        Manifest.permission.ACCESS_COARSE_LOCATION
+        Manifest.permission.ACCESS_COARSE_LOCATION,
       )
       .onGranted { permissions ->
         permissions.forEach { it.log() }

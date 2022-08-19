@@ -41,7 +41,7 @@ class MainHomeViewModel : BaseViewModel() {
   }
 
   private fun startCountDown(
-    timeout: Duration = 5.seconds
+    timeout: Duration = 5.seconds,
   ) {
     countdownJob = viewModelScope.launch {
       flow {

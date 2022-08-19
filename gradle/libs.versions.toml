@@ -17,7 +17,7 @@ coil = "2.2.0"
 coroutines = "1.6.4"
 glide = "4.13.2"
 kotlin = "1.7.10"
-ktlint = "0.45.2"
+ktlint = "0.46.1"
 square-okHttp = "4.10.0"
 square-retrofit = "2.9.0"
 srl = "2.0.3"
@@ -29,7 +29,7 @@ android-library = { id = "com.android.library", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 moshiX = "dev.zacsweers.moshix:0.18.3"
-ktlint = "org.jlleitschuh.gradle.ktlint:10.3.0"
+kotlinter = "org.jmailen.kotlinter:3.11.1"
 detekt = "io.gitlab.arturbosch.detekt:1.21.0"
 
 [libraries]

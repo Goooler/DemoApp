@@ -15,7 +15,7 @@ import androidx.viewpager.widget.ViewPager
  */
 open class CommonFragmentStatePagerAdapter(
   fragmentManager: FragmentManager,
-  behavior: Int = BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
+  behavior: Int = BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT,
 ) : FragmentStatePagerAdapter(fragmentManager, behavior) {
 
   private val fragmentList = mutableListOf<Fragment>()

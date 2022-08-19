@@ -37,7 +37,8 @@ abstract class BaseService : LifecycleService() {
 
   protected open val channel: NotificationChannelCompat
     get() = NotificationChannelCompat.Builder(
-      channelId.toString(), @Suppress("InlinedApi") NotificationManager.IMPORTANCE_MIN
+      channelId.toString(),
+      @Suppress("InlinedApi") NotificationManager.IMPORTANCE_MIN,
     ).setName(channelName).build()
 
   override fun onCreate() {

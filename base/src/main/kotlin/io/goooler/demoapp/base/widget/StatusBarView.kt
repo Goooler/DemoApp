@@ -17,8 +17,10 @@ class StatusBarView(context: Context, attrs: AttributeSet? = null) : View(contex
   @Px
   private fun getStatusBarHeight(): Int {
     val resources = Resources.getSystem()
+
     @SuppressLint("InternalInsetResource")
-    @DimenRes val resId = resources.getIdentifier("status_bar_height", "dimen", "android")
+    @DimenRes
+    val resId = resources.getIdentifier("status_bar_height", "dimen", "android")
     return resources.getDimensionPixelSize(resId)
   }
 }

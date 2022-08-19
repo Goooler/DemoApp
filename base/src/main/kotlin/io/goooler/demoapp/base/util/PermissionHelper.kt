@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 
 class PermissionHelper private constructor(
   private val activity: ComponentActivity?,
-  private val fragment: Fragment?
+  private val fragment: Fragment?,
 ) {
   private val permissions = mutableListOf<String>()
 
@@ -46,7 +46,7 @@ class PermissionHelper private constructor(
     val launcher = activity ?: fragment
       ?: throw IllegalArgumentException("activity or fragment must not be null")
     launcher.registerForActivityResult(
-      ActivityResultContracts.RequestMultiplePermissions()
+      ActivityResultContracts.RequestMultiplePermissions(),
     ) {
       onRawResultsCallback?.invoke(it) ?: run {
         for (entry in it.entries) {

@@ -10,7 +10,7 @@ sealed class MainCommonVhModel : IDiffVhModelType, ISpanSize {
     val logoUrl: String?,
     val content: String?,
     val fullName: String,
-    val shareCount: Int = 0
+    val shareCount: Int = 0,
   ) : MainCommonVhModel() {
 
     override val viewType: Int = R.layout.main_common_rv_item
