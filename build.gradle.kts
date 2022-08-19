@@ -80,7 +80,7 @@ fun Project.setupBase(): BaseExtension {
   return extensions.getByName<BaseExtension>("android").apply {
     resourcePrefix = "${name}_"
     namespace = "io.goooler.demoapp.$name"
-    compileSdkVersion(32)
+    compileSdkVersion(33)
     defaultConfig {
       minSdk = 21
       vectorDrawables.useSupportLibrary = true
