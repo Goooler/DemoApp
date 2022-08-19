@@ -32,7 +32,6 @@ gradleEnterprise {
 include(
   // App
   ":app",
-  ":obsolete",
   // Common
   ":base",
   ":common",
@@ -41,7 +40,8 @@ include(
   ":biz:login",
   ":biz:main",
   ":biz:detail",
-  ":biz:web"
+  ":biz:web",
+  ":obsolete"
 )
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
