@@ -11,6 +11,6 @@ interface MainCommonApi {
   @GET("users/{user}/repos")
   suspend fun getRepoList(
     @Path("user") user: String,
-    @QueryMap params: ParamMap
+    @QueryMap params: ParamMap,
   ): List<MainRepoListBean>
 }

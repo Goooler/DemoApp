@@ -28,7 +28,7 @@ class WebFragment : BaseBindingFragment<WebFragmentBinding>() {
   override fun initOnce() {
     headers = mapOf(
       "buildType" to BuildConfig.BUILD_TYPE,
-      "flavor" to BuildConfig.FLAVOR
+      "flavor" to BuildConfig.FLAVOR,
     )
 
     binding.let {
@@ -42,7 +42,7 @@ class WebFragment : BaseBindingFragment<WebFragmentBinding>() {
     fileChooserLauncher =
       registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
         fileChooserCallback?.onReceiveValue(
-          WebChromeClient.FileChooserParams.parseResult(it.resultCode, it.data)
+          WebChromeClient.FileChooserParams.parseResult(it.resultCode, it.data),
         )
         fileChooserCallback = null
       }
@@ -66,7 +66,7 @@ class WebFragment : BaseBindingFragment<WebFragmentBinding>() {
 
     override fun onShowFileChooser(
       filePathCallback: ValueCallback<Array<Uri>>,
-      fileChooserParams: WebChromeClient.FileChooserParams
+      fileChooserParams: WebChromeClient.FileChooserParams,
     ): Boolean {
       fileChooserCallback = filePathCallback
       val canMultiSelect =
@@ -105,7 +105,7 @@ class WebFragment : BaseBindingFragment<WebFragmentBinding>() {
     private const val URL = "url"
 
     operator fun invoke(url: String): WebFragment = WebFragment().putArguments(
-      URL to url
+      URL to url,
     )
   }
 }

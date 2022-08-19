@@ -21,7 +21,7 @@ abstract class BaseBindingFragment<VB : ViewDataBinding> :
   override fun onCreateView(
     inflater: LayoutInflater,
     container: ViewGroup?,
-    savedInstanceState: Bundle?
+    savedInstanceState: Bundle?,
   ): View {
     _binding = inflateBinding(layoutInflater)
     initOnce()

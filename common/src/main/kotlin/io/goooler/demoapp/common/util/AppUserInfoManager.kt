@@ -53,6 +53,6 @@ object AppUserInfoManager {
     val userId: String,
     val token: String,
     val userName: String,
-    val nickName: String
+    val nickName: String,
   )
 }

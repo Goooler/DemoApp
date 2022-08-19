@@ -20,7 +20,7 @@ abstract class BasePagingSource<T : IDiffVhModelType> : PagingSource<Int, T>() {
       LoadResult.Page(
         fetchedList,
         if (currentPage == 1) null else currentPage - 1,
-        currentPage + 1
+        currentPage + 1,
       )
     }
   } catch (e: Exception) {
