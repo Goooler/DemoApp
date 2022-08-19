@@ -12,7 +12,7 @@ android {
 
   defaultConfig {
     applicationId = namespace
-    targetSdk = 32
+    targetSdk = 33
     versionCode = libs.versions.versionCode.get().toInt()
     versionName = libs.versions.versionName.get()
     resourceConfigurations += setOf("en", "zh-rCN", "xxhdpi")
