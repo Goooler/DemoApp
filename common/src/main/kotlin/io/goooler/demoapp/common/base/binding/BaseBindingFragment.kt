@@ -12,6 +12,7 @@ abstract class BaseBindingFragment<VB : ViewDataBinding> :
   BaseFragment(),
   IBindingFragment<VB> {
   private var _binding: VB? = null
+
   /**
    * You can't call [binding] after [onDestroyView]
    */

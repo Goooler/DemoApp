@@ -55,8 +55,9 @@ class MainSrlViewModel : BaseViewModel() {
       _listData.forEach { model ->
         list += if (model is MainCommonVhModel.Repo && model.fullName == fullName) {
           model.copy(shareCount = model.shareCount + 1)
-        } else
+        } else {
           model
+        }
       }
       _listData.clear()
       _listData += list

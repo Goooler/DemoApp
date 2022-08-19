@@ -36,10 +36,11 @@ abstract class BaseBindingActivity<VB : ViewDataBinding> : BaseActivity(), IBind
   }
 
   override fun getResources(): Resources {
-    return if (ScreenUtils.isPortrait())
+    return if (ScreenUtils.isPortrait()) {
       AdaptScreenUtils.adaptWidth(super.getResources(), 360)
-    else
+    } else {
       AdaptScreenUtils.adaptHeight(super.getResources(), 640)
+    }
   }
 
   companion object {
