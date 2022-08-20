@@ -13,6 +13,16 @@ plugins {
   alias(libs.plugins.moshiX) apply false
 }
 
+buildscript {
+  configurations.classpath {
+    resolutionStrategy.eachDependency {
+      when(requested.group) {
+        "com.pinterest.ktlint" -> useVersion("0.47.0")
+      }
+    }
+  }
+}
+
 allprojects {
   apply(plugin = rootProject.libs.plugins.kotlinter.get().pluginId)
   configure<KotlinterExtension> {
