@@ -17,7 +17,7 @@ buildscript {
   configurations.classpath {
     resolutionStrategy.eachDependency {
       when(requested.group) {
-        "com.pinterest.ktlint" -> useVersion("0.47.0")
+        libs.ktlint.get().module.group -> useVersion(libs.versions.ktlint.get())
       }
     }
   }
