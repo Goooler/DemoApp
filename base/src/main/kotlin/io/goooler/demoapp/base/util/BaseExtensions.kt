@@ -45,6 +45,7 @@ import androidx.fragment.app.commit
 import androidx.fragment.app.findFragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleCoroutineScope
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.coroutineScope
 import androidx.lifecycle.findViewTreeLifecycleOwner
 import java.io.File
@@ -517,7 +518,20 @@ inline val View.attachedActivity: Activity?
     return baseContext as? Activity
   }
 
-inline val View.lifecycle: Lifecycle? get() = findViewTreeLifecycleOwner()?.lifecycle
+inline val Context?.lifecycle: Lifecycle?
+  get() {
+    var context: Context? = this
+    while (true) {
+      when (context) {
+        is LifecycleOwner -> return context.lifecycle
+        is ContextWrapper -> context = context.baseContext
+        else -> return null
+      }
+    }
+  }
+
+inline val View.lifecycle: Lifecycle?
+  get() = findViewTreeLifecycleOwner()?.lifecycle ?: context.lifecycle
 
 inline val View.lifecycleScope: LifecycleCoroutineScope? get() = lifecycle?.coroutineScope
 
