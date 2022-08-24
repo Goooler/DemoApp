@@ -524,8 +524,8 @@ inline val Context?.lifecycle: Lifecycle?
     while (true) {
       when (context) {
         is LifecycleOwner -> return context.lifecycle
-        !is ContextWrapper -> return null
-        else -> context = context.baseContext
+        is ContextWrapper -> context = context.baseContext
+        else -> return null
       }
     }
   }
