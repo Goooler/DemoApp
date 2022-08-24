@@ -28,6 +28,15 @@ gradleEnterprise {
   }
 }
 
+val isCiBuild = System.getenv("GITHUB_ACTIONS") == "true"
+
+buildCache {
+  remote(HttpBuildCache::class.java) {
+    setUrl("https://gradle.com/terms-of-service/cache/")
+    isPush = isCiBuild
+  }
+}
+
 include(
   // App
   ":app",
