@@ -1,5 +1,6 @@
 package io.goooler.demoapp.common
 
+import android.os.StrictMode
 import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
@@ -17,6 +18,7 @@ abstract class CommonApplication : BaseApplication() {
     CrashHandler.init()
     ImageLoader.init(this)
     initSmartRefresh()
+    enableStrictMode()
   }
 
   private fun initSmartRefresh() {
@@ -28,6 +30,21 @@ abstract class CommonApplication : BaseApplication() {
     SmartRefreshLayout.setDefaultRefreshFooterCreator { context, refreshLayout ->
       refreshLayout.setPrimaryColorsId(*colors)
       ClassicsFooter(context)
+    }
+  }
+
+  private fun enableStrictMode() {
+    if (BuildConfig.DEBUG) {
+      val threadPolicy = StrictMode.ThreadPolicy.Builder()
+        .detectAll()
+        .penaltyDeath()
+        .build()
+      val vmPolicy = StrictMode.VmPolicy.Builder()
+        .detectAll()
+        .penaltyDeath()
+        .build()
+      StrictMode.setThreadPolicy(threadPolicy)
+      StrictMode.setVmPolicy(vmPolicy)
     }
   }
 
