@@ -33,8 +33,6 @@ kotlinter = "org.jmailen.kotlinter:3.11.1"
 detekt = "io.gitlab.arturbosch.detekt:1.21.0"
 
 [libraries]
-gradlePlugin-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
-
 kotlin-junit5 = { module = "org.jetbrains.kotlin:kotlin-test-junit5", version.ref = "kotlin" }
 kotlinX-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
 
