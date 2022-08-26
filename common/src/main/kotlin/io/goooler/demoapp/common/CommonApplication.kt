@@ -37,14 +37,9 @@ abstract class CommonApplication : BaseApplication() {
     if (BuildConfig.DEBUG) {
       val threadPolicy = StrictMode.ThreadPolicy.Builder()
         .detectAll()
-        .penaltyDeath()
-        .build()
-      val vmPolicy = StrictMode.VmPolicy.Builder()
-        .detectAll()
-        .penaltyDeath()
+        .penaltyLog()
         .build()
       StrictMode.setThreadPolicy(threadPolicy)
-      StrictMode.setVmPolicy(vmPolicy)
     }
   }
 
