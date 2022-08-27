@@ -14,17 +14,16 @@ class MainRepoListBean(
   @PrimaryKey val id: Long,
   val private: Boolean,
   val name: String,
-  @ColumnInfo(name = "full_name") @Json(name = "full_name")
+  @Json(name = "full_name") @ColumnInfo(name = "full_name")
   val fullName: String,
   @Embedded val owner: OwnerBean,
 ) : BaseResponse() {
 
   @JsonClass(generateAdapter = true)
   class OwnerBean(
-    @ColumnInfo(name = "owner_name")
-    @Json(name = "login")
+    @Json(name = "login") @ColumnInfo(name = "owner_name")
     val ownerName: String,
-    @ColumnInfo(name = "avatar_url") @Json(name = "avatar_url")
+    @Json(name = "avatar_url") @ColumnInfo(name = "avatar_url")
     val avatarUrl: String?,
   )
 }
