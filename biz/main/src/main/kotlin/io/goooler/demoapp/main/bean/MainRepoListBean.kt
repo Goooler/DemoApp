@@ -12,9 +12,9 @@ import io.goooler.demoapp.common.network.BaseResponse
 @Entity(tableName = "main_repo_list")
 data class MainRepoListBean(
   @PrimaryKey val id: Long,
-  @ColumnInfo val private: Boolean,
-  @ColumnInfo val name: String,
-  @Json(name = "full_name") val fullName: String,
+  val private: Boolean,
+  val name: String,
+  @ColumnInfo(name = "full_name") @Json(name = "full_name") val fullName: String,
   @Embedded val owner: OwnerBean,
 ) : BaseResponse() {
   constructor() : this(0, false, "", "", OwnerBean(null))
