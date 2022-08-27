@@ -18,8 +18,9 @@ abstract class BaseDialogFragment : DialogFragment(), IFragment {
       setOnKeyListener { _, keyCode, keyEvent ->
         if (keyCode == KeyEvent.KEYCODE_BACK && keyEvent.action == KeyEvent.ACTION_UP) {
           this@BaseDialogFragment.onBackPressed()
-        } else
+        } else {
           false
+        }
       }
     }
   }

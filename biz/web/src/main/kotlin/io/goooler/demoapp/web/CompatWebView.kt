@@ -88,7 +88,7 @@ open class CompatWebView(context: Context, attrs: AttributeSet? = null) : WebVie
       override fun onShowFileChooser(
         view: WebView,
         filePathCallback: ValueCallback<Array<Uri>>,
-        fileChooserParams: FileChooserParams
+        fileChooserParams: FileChooserParams,
       ): Boolean {
         return onEventListener?.onShowFileChooser(filePathCallback, fileChooserParams)
           ?: super.onShowFileChooser(view, filePathCallback, fileChooserParams)
@@ -117,7 +117,7 @@ open class CompatWebView(context: Context, attrs: AttributeSet? = null) : WebVie
 
     fun onShowFileChooser(
       filePathCallback: ValueCallback<Array<Uri>>,
-      fileChooserParams: WebChromeClient.FileChooserParams
+      fileChooserParams: WebChromeClient.FileChooserParams,
     ): Boolean
 
     fun onProgressChanged(@IntRange(from = 0) i: Int)

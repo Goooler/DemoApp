@@ -35,7 +35,7 @@ class DetailViewModel : BaseViewModel() {
           it.license?.name.orEmpty(),
           it.starsCount,
           it.forksCount,
-          it.openIssuesCount
+          it.openIssuesCount,
         )
       }
       _repoDetailModel.value = repoDetail

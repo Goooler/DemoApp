@@ -45,6 +45,7 @@ import androidx.fragment.app.commit
 import androidx.fragment.app.findFragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleCoroutineScope
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.coroutineScope
 import androidx.lifecycle.findViewTreeLifecycleOwner
 import java.io.File
@@ -107,7 +108,7 @@ fun <T : Parcelable> T.deepCopy(): T? {
 fun lazyReflectedMethod(
   declaringClass: Class<*>,
   methodName: String,
-  vararg parameterTypes: Any
+  vararg parameterTypes: Any,
 ): Lazy<Method> = lazy {
   getReflectedMethod(declaringClass, methodName, *getParameterTypes(parameterTypes))
 }
@@ -126,7 +127,7 @@ fun getParameterTypes(parameterTypes: Array<out Any>): Array<Class<*>> =
 fun getReflectedMethod(
   declaringClass: Class<*>,
   methodName: String,
-  vararg parameterTypes: Class<*>
+  vararg parameterTypes: Class<*>,
 ): Method =
   declaringClass.getDeclaredMethod(methodName, *parameterTypes).also { it.isAccessible = true }
 
@@ -187,7 +188,7 @@ fun Spannable.withClickableSpan(clickablePart: String, onClickListener: () -> Un
     clickableSpan,
     indexOf(clickablePart),
     indexOf(clickablePart) + clickablePart.length,
-    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE,
   )
   return this
 }
@@ -198,7 +199,7 @@ fun CharSequence.withColorSpan(coloredPart: String, @ColorInt color: Int): Spann
       ForegroundColorSpan(color),
       it.length - coloredPart.length,
       it.length,
-      Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+      Spanned.SPAN_EXCLUSIVE_EXCLUSIVE,
     )
   }
 }
@@ -397,6 +398,19 @@ fun <T> MutableCollection<T>.removeFirstOrNull(predicate: (T) -> Boolean): T? {
   return null
 }
 
+// ---------------------Coroutine-------------------------------//
+
+fun <T> CoroutineScope.defaultAsync(
+  start: CoroutineStart = CoroutineStart.DEFAULT,
+  block: suspend CoroutineScope.() -> T,
+): Deferred<T> = async(SupervisorJob(), start, block)
+
+suspend fun <T> withIoContext(block: suspend CoroutineScope.() -> T): T =
+  withContext(Dispatchers.IO, block)
+
+suspend fun <T> withDefaultContext(block: suspend CoroutineScope.() -> T): T =
+  withContext(Dispatchers.Default, block)
+
 // ---------------------File-------------------------------//
 
 fun File.notExists(): Boolean = exists().not()
@@ -416,7 +430,7 @@ inline fun <reified T : Parcelable> Intent.getParcelableExtra(name: String, defa
 
 inline fun <reified T : Serializable> Intent.getSerializableExtra(
   name: String,
-  defaultValue: T
+  defaultValue: T,
 ): T = (getSerializableExtra(name) ?: defaultValue) as T
 
 // ---------------------Fragment-------------------------------//
@@ -440,7 +454,7 @@ fun FragmentManager.addFragment(
   fragment: Fragment,
   @IdRes containerViewId: Int = android.R.id.content,
   isAddToBackStack: Boolean = false,
-  tag: String? = null
+  tag: String? = null,
 ) {
   if (fragment.isAdded) return
   commit {
@@ -460,7 +474,7 @@ fun FragmentManager.replaceFragment(
   fragment: Fragment,
   @IdRes containerViewId: Int = android.R.id.content,
   isAddToBackStack: Boolean = true,
-  tag: String? = null
+  tag: String? = null,
 ) {
   if (fragment.isAdded) return
   commit {
@@ -474,7 +488,7 @@ fun Fragment.addFragment(
   fragment: Fragment,
   @IdRes containerViewId: Int = android.R.id.content,
   isAddToBackStack: Boolean = false,
-  tag: String? = null
+  tag: String? = null,
 ) {
   childFragmentManager.addFragment(fragment, containerViewId, isAddToBackStack, tag)
 }
@@ -484,7 +498,7 @@ fun Fragment.replaceFragment(
   fragment: Fragment,
   @IdRes containerViewId: Int = android.R.id.content,
   isAddToBackStack: Boolean = false,
-  tag: String? = null
+  tag: String? = null,
 ) {
   childFragmentManager.addFragment(fragment, containerViewId, isAddToBackStack, tag)
 }
@@ -504,7 +518,20 @@ inline val View.attachedActivity: Activity?
     return baseContext as? Activity
   }
 
-inline val View.lifecycle: Lifecycle? get() = findViewTreeLifecycleOwner()?.lifecycle
+inline val Context?.lifecycle: Lifecycle?
+  get() {
+    var context: Context? = this
+    while (true) {
+      when (context) {
+        is LifecycleOwner -> return context.lifecycle
+        is ContextWrapper -> context = context.baseContext
+        else -> return null
+      }
+    }
+  }
+
+inline val View.lifecycle: Lifecycle?
+  get() = findViewTreeLifecycleOwner()?.lifecycle ?: context.lifecycle
 
 inline val View.lifecycleScope: LifecycleCoroutineScope? get() = lifecycle?.coroutineScope
 
@@ -513,7 +540,7 @@ fun TextView.setOnEditorConfirmActionListener(listener: (TextView) -> Unit) {
     val isConfirmAction = if (event != null) {
       when (event.keyCode) {
         KeyEvent.KEYCODE_DPAD_CENTER, KeyEvent.KEYCODE_ENTER,
-        KeyEvent.KEYCODE_NUMPAD_ENTER -> true
+        KeyEvent.KEYCODE_NUMPAD_ENTER, -> true
         else -> false
       } && event.action == KeyEvent.ACTION_DOWN
     } else {
@@ -575,7 +602,7 @@ fun FragmentActivity.addFragment(
   fragment: Fragment,
   @IdRes containerViewId: Int = android.R.id.content,
   isAddToBackStack: Boolean = false,
-  tag: String? = null
+  tag: String? = null,
 ) {
   supportFragmentManager.addFragment(fragment, containerViewId, isAddToBackStack, tag)
 }
@@ -585,7 +612,7 @@ fun FragmentActivity.replaceFragment(
   fragment: Fragment,
   @IdRes containerViewId: Int = android.R.id.content,
   isAddToBackStack: Boolean = false,
-  tag: String? = null
+  tag: String? = null,
 ) {
   supportFragmentManager.replaceFragment(fragment, containerViewId, isAddToBackStack, tag)
 }

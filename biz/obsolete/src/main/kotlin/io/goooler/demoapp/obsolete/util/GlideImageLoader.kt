@@ -21,7 +21,7 @@ object GlideImageLoader {
     placeholderDrawable: Drawable? = null,
     errorDrawable: Drawable? = null,
     @IntRange(from = 0) cornerRadius: Int = 0,
-    useCache: Boolean = true
+    useCache: Boolean = true,
   ) = imageView.loadBase(url, placeholderDrawable, errorDrawable, useCache) {
     if (cornerRadius > 0) transform(RoundedCorners(cornerRadius))
   }
@@ -31,7 +31,7 @@ object GlideImageLoader {
     url: String?,
     placeholderDrawable: Drawable? = null,
     errorDrawable: Drawable? = null,
-    useCache: Boolean = true
+    useCache: Boolean = true,
   ) = imageView.loadBase(url, placeholderDrawable, errorDrawable, useCache) {
     circleCrop()
   }
@@ -42,7 +42,7 @@ object GlideImageLoader {
     placeholderDrawable: Drawable? = null,
     errorDrawable: Drawable? = null,
     @IntRange(from = 0) cornerRadius: Int = 0,
-    useCache: Boolean = true
+    useCache: Boolean = true,
   ) = imageView.loadBase(url, placeholderDrawable, errorDrawable, useCache) {
     if (cornerRadius > 0) transform(CenterCrop(), RoundedCorners(cornerRadius)) else centerCrop()
   }
@@ -52,7 +52,7 @@ object GlideImageLoader {
     placeholderDrawable: Drawable?,
     errorDrawable: Drawable?,
     useCache: Boolean,
-    builder: RequestBuilder<Drawable>.() -> Unit = {}
+    builder: RequestBuilder<Drawable>.() -> Unit = {},
   ) {
     Glide.with(this)
       .load(url)

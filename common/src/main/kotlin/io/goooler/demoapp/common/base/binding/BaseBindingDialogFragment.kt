@@ -25,7 +25,7 @@ abstract class BaseBindingDialogFragment<VB : ViewDataBinding> :
   override fun onCreateView(
     inflater: LayoutInflater,
     container: ViewGroup?,
-    savedInstanceState: Bundle?
+    savedInstanceState: Bundle?,
   ): View {
     dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
     return binding.root

@@ -39,12 +39,12 @@ abstract class BaseRvPagingAdapter<M : IDiffVhModelType>(callback: DiffCallBack<
 
   override fun onCreateViewHolder(
     parent: ViewGroup,
-    @LayoutRes viewType: Int
+    @LayoutRes viewType: Int,
   ): BindingViewHolder = helper.onCreateViewHolder(parent, viewType)
 
   override fun onBindViewHolder(
     holder: BindingViewHolder,
-    @IntRange(from = 0) position: Int
+    @IntRange(from = 0) position: Int,
   ) {
     helper.onBindViewHolder(holder, position)
   }

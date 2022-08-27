@@ -17,11 +17,11 @@ class MainCommonRepository {
   suspend fun getRepoListFromApi(
     user: String,
     @IntRange(from = 1) page: Int = 1,
-    @IntRange(from = 1) pageSize: Int = CommonConstants.DEFAULT_PAGE_SIZE
+    @IntRange(from = 1) pageSize: Int = CommonConstants.DEFAULT_PAGE_SIZE,
   ): List<MainRepoListBean> {
     val params = paramMapOf(
       "page" to page,
-      "per_page" to pageSize
+      "per_page" to pageSize,
     )
     return api.getRepoList(user, params)
   }

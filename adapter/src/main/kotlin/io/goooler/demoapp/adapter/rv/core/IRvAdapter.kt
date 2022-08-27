@@ -35,7 +35,10 @@ internal interface IRvAdapter<M : IVhModelType> {
    */
   fun createVH(parent: ViewGroup, @LayoutRes viewType: Int): BindingViewHolder {
     val binding = DataBindingUtil.inflate<ViewDataBinding>(
-      LayoutInflater.from(parent.context), viewType, parent, false
+      LayoutInflater.from(parent.context),
+      viewType,
+      parent,
+      false,
     )
     return BindingViewHolder(binding)
   }
