@@ -18,7 +18,7 @@ class MainRepoListBean(
   val fullName: String,
   @Embedded val owner: OwnerBean,
 ) : BaseResponse() {
-  constructor() : this(0, false, "", "", OwnerBean(null))
+  constructor() : this(0, false, "", "", OwnerBean("", null))
 
   @JsonClass(generateAdapter = true)
   class OwnerBean(
