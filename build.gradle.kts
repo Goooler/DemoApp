@@ -27,6 +27,23 @@ allprojects {
     config = rootProject.files("config/detekt/detekt.yml")
   }
 
+  plugins.withId(rootProject.libs.plugins.android.library.get().pluginId) {
+    if (displayName.contains(":biz:") || name.startsWith("common")) setupCommon() else setupBase()
+  }
+  plugins.withId(rootProject.libs.plugins.android.application.get().pluginId) {
+    setupCommon()
+  }
+  plugins.withId(rootProject.libs.plugins.kotlin.kapt.get().pluginId) {
+    configure<KaptExtension> {
+      correctErrorTypes = true
+    }
+  }
+  plugins.withId(rootProject.libs.plugins.ksp.get().pluginId) {
+    configure<KspExtension> {
+      arg("room.incremental", "true")
+    }
+  }
+
   tasks.withType<KotlinCompile> {
     kotlinOptions {
       jvmTarget = JavaVersion.VERSION_11.toString()
@@ -53,25 +70,6 @@ allprojects {
             useVersion(libs.versions.coroutines.get())
         }
       }
-    }
-  }
-}
-
-subprojects {
-  plugins.withId(rootProject.libs.plugins.android.library.get().pluginId) {
-    if (displayName.contains(":biz:") || name.startsWith("common")) setupCommon() else setupBase()
-  }
-  plugins.withId(rootProject.libs.plugins.android.application.get().pluginId) {
-    setupCommon()
-  }
-  plugins.withId(rootProject.libs.plugins.kotlin.kapt.get().pluginId) {
-    configure<KaptExtension> {
-      correctErrorTypes = true
-    }
-  }
-  plugins.withId(rootProject.libs.plugins.ksp.get().pluginId) {
-    configure<KspExtension> {
-      arg("room.incremental", "true")
     }
   }
 }
