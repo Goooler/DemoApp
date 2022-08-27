@@ -57,13 +57,6 @@ import java.util.UUID
 import java.util.regex.Pattern
 import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.contract
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.CoroutineStart
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.async
-import kotlinx.coroutines.withContext
 
 // ---------------------Types-------------------------------//
 
@@ -398,24 +391,9 @@ fun <T> MutableCollection<T>.removeFirstOrNull(predicate: (T) -> Boolean): T? {
   return null
 }
 
-// ---------------------Coroutine-------------------------------//
-
-fun <T> CoroutineScope.defaultAsync(
-  start: CoroutineStart = CoroutineStart.DEFAULT,
-  block: suspend CoroutineScope.() -> T,
-): Deferred<T> = async(SupervisorJob(), start, block)
-
-suspend fun <T> withIoContext(block: suspend CoroutineScope.() -> T): T =
-  withContext(Dispatchers.IO, block)
-
-suspend fun <T> withDefaultContext(block: suspend CoroutineScope.() -> T): T =
-  withContext(Dispatchers.Default, block)
-
 // ---------------------File-------------------------------//
 
 fun File.notExists(): Boolean = exists().not()
-
-// ---------------------View-------------------------------//
 
 // ---------------------Intent-------------------------------//
 
