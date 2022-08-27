@@ -21,9 +21,10 @@ android {
 
 kapt {
   correctErrorTypes = true
-  arguments {
-    arg("room.incremental", "true")
-  }
+}
+
+ksp {
+  arg("room.incremental", "true")
 }
 
 dependencies {
