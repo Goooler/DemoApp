@@ -106,18 +106,18 @@ fun ImageView.bindingTint(@ColorInt color: Int) {
   "binding_bg_startColor",
   "binding_bg_endColor",
   "binding_bg_angle",
-  "binding_bg_radius"
+  "binding_bg_radius",
 )
 internal fun View.bindingBgShapeGradual(
   @ColorInt startColor: Int,
   @ColorInt endColor: Int,
   angle: Int,
-  @Px radius: Float
+  @Px radius: Float,
 ) {
   setBgShapeGradual(
     gradualColors = intArrayOf(startColor, endColor),
     angle = angle,
-    radius = radius
+    radius = radius,
   )
 }
 
@@ -127,7 +127,7 @@ internal fun View.bindingBgShapeGradual(
   "binding_bg_angle",
   "binding_bg_stroke",
   "binding_bg_strokeColor",
-  "binding_bg_radius"
+  "binding_bg_radius",
 )
 internal fun View.bindingBgShapeGradual(
   @ColorInt startColor: Int,
@@ -135,14 +135,14 @@ internal fun View.bindingBgShapeGradual(
   angle: Int,
   @Px stroke: Float,
   @ColorInt strokeColor: Int,
-  @Px radius: Float
+  @Px radius: Float,
 ) {
   setBgShapeGradual(
     gradualColors = intArrayOf(startColor, endColor),
     angle = angle,
     radius = radius,
     strokeColor = strokeColor,
-    stroke = stroke
+    stroke = stroke,
   )
 }
 
@@ -151,19 +151,19 @@ internal fun View.bindingBgShapeGradual(
   "binding_bg_centerColor",
   "binding_bg_endColor",
   "binding_bg_angle",
-  "binding_bg_radius"
+  "binding_bg_radius",
 )
 internal fun View.bindingBgShapeGradual(
   @ColorInt startColor: Int,
   @ColorInt centerColor: Int,
   @ColorInt endColor: Int,
   angle: Int,
-  @Px radius: Float
+  @Px radius: Float,
 ) {
   setBgShapeGradual(
     gradualColors = intArrayOf(startColor, centerColor, endColor),
     angle = angle,
-    radius = radius
+    radius = radius,
   )
 }
 
@@ -176,16 +176,16 @@ internal fun View.bindingBgShapeGradual(
     "binding_bg_topLeftRadius",
     "binding_bg_topRightRadius",
     "binding_bg_bottomLeftRadius",
-    "binding_bg_bottomRightRadius"
+    "binding_bg_bottomRightRadius",
   ],
-  requireAll = false
+  requireAll = false,
 )
 internal fun View.bindingBgShapeCorners(
   @ColorInt solidColor: Int,
   @Px topLeft: Float,
   @Px topRight: Float,
   @Px bottomLeft: Float,
-  @Px bottomRight: Float
+  @Px bottomRight: Float,
 ) {
   setBgShapeCorners(solidColor, topLeft, topRight, bottomLeft, bottomRight)
 }
@@ -193,12 +193,12 @@ internal fun View.bindingBgShapeCorners(
 @BindingAdapter(
   "binding_bg_startColor",
   "binding_bg_endColor",
-  "binding_bg_angle"
+  "binding_bg_angle",
 )
 internal fun View.bindingBgShapeGradual(
   @ColorInt startColor: Int,
   @ColorInt endColor: Int,
-  angle: Int
+  angle: Int,
 ) {
   setBgShapeGradual(gradualColors = intArrayOf(startColor, endColor), angle = angle)
 }
@@ -207,13 +207,13 @@ internal fun View.bindingBgShapeGradual(
   "binding_bg_startColor",
   "binding_bg_centerColor",
   "binding_bg_endColor",
-  "binding_bg_angle"
+  "binding_bg_angle",
 )
 internal fun View.bindingBgShapeGradual(
   @ColorInt startColor: Int,
   @ColorInt centerColor: Int,
   @ColorInt endColor: Int,
-  angle: Int
+  angle: Int,
 ) {
   setBgShapeGradual(gradualColors = intArrayOf(startColor, centerColor, endColor), angle = angle)
 }
@@ -222,29 +222,29 @@ internal fun View.bindingBgShapeGradual(
   "binding_bg_stroke",
   "binding_bg_strokeColor",
   "binding_bg_solidColor",
-  "binding_bg_radius"
+  "binding_bg_radius",
 )
 internal fun View.bindingBgShapeStroke(
   @Px stroke: Float,
   @ColorInt strokeColor: Int,
   @ColorInt solidColor: Int,
-  @Px radius: Float
+  @Px radius: Float,
 ) {
   setBgShapeGradual(
     stroke = stroke,
     strokeColor = strokeColor,
     solidColor = solidColor,
-    radius = radius
+    radius = radius,
   )
 }
 
 @BindingAdapter(
   "binding_bg_solidColor",
-  "binding_bg_radius"
+  "binding_bg_radius",
 )
 internal fun View.bindingBgShape(
   @ColorInt solidColor: Int,
-  @Px radius: Float
+  @Px radius: Float,
 ) {
   setBgShapeGradual(solidColor = solidColor, radius = radius)
 }
@@ -252,18 +252,18 @@ internal fun View.bindingBgShape(
 @BindingAdapter(
   "binding_bg_stroke",
   "binding_bg_strokeColor",
-  "binding_bg_solidOvalColor"
+  "binding_bg_solidOvalColor",
 )
 internal fun View.bindingBgShapeOvalStroke(
   @Px stroke: Float,
   @ColorInt strokeColor: Int,
-  @ColorInt solidOvalColor: Int
+  @ColorInt solidOvalColor: Int,
 ) {
   setBgShapeGradual(
     shapeType = GradientDrawable.OVAL,
     strokeColor = strokeColor,
     stroke = stroke,
-    solidColor = solidOvalColor
+    solidColor = solidOvalColor,
   )
 }
 
@@ -315,7 +315,7 @@ private fun View.setBgShapeGradual(
   @ColorInt solidColor: Int? = null,
   @ColorInt strokeColor: Int = Color.TRANSPARENT,
   @Px stroke: Float = 0f,
-  @Px radius: Float = 0f
+  @Px radius: Float = 0f,
 ) {
   background = GradientDrawable().apply {
     shape = shapeType
@@ -361,7 +361,7 @@ private fun View.setBgShapeCorners(
   @Px topLeft: Float = 0f,
   @Px topRight: Float = 0f,
   @Px bottomLeft: Float = 0f,
-  @Px bottomRight: Float = 0f
+  @Px bottomRight: Float = 0f,
 ) {
   background = GradientDrawable().apply {
     shape = GradientDrawable.RECTANGLE
@@ -374,7 +374,7 @@ private fun View.setBgShapeCorners(
       bottomRight,
       bottomRight,
       bottomLeft,
-      bottomLeft
+      bottomLeft,
     )
   }
 }

@@ -17,15 +17,14 @@ dependencyResolutionManagement {
 }
 
 plugins {
-  `gradle-enterprise`
+  id("com.gradle.enterprise") version "3.11.1"
 }
 
 gradleEnterprise {
   buildScan {
     termsOfServiceUrl = "https://gradle.com/terms-of-service"
     termsOfServiceAgree = "yes"
-    publishAlwaysIf(System.getenv("GITHUB_ACTIONS") == "true")
-    publishOnFailure()
+    publishAlways()
   }
 }
 
@@ -41,7 +40,7 @@ include(
   ":biz:main",
   ":biz:detail",
   ":biz:web",
-  ":biz:obsolete"
+  ":biz:obsolete",
 )
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")

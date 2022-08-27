@@ -1,22 +1,22 @@
 import com.android.build.gradle.BaseExtension
 import io.gitlab.arturbosch.detekt.extensions.DetektExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import org.jlleitschuh.gradle.ktlint.KtlintExtension
+import org.jmailen.gradle.kotlinter.KotlinterExtension
 
 plugins {
   alias(libs.plugins.android.application) apply false
   alias(libs.plugins.android.library) apply false
   alias(libs.plugins.kotlin.android) apply false
   alias(libs.plugins.kotlin.kapt) apply false
-  alias(libs.plugins.ktlint) apply false
+  alias(libs.plugins.kotlinter) apply false
   alias(libs.plugins.detekt) apply false
   alias(libs.plugins.moshiX) apply false
 }
 
 allprojects {
-  apply(plugin = rootProject.libs.plugins.ktlint.get().pluginId)
-  configure<KtlintExtension> {
-    version.set(rootProject.libs.versions.ktlint.get())
+  apply(plugin = rootProject.libs.plugins.kotlinter.get().pluginId)
+  configure<KotlinterExtension> {
+    version = rootProject.libs.versions.ktlint.get()
   }
 
   apply(plugin = rootProject.libs.plugins.detekt.get().pluginId)
@@ -44,7 +44,6 @@ allprojects {
         libs.androidX.collection.get().module.group -> useVersion(libs.versions.androidX.collection.get())
         libs.androidX.core.get().module.group -> useVersion(libs.versions.androidX.core.get())
         libs.androidX.fragment.get().module.group -> useVersion(libs.versions.androidX.fragment.get())
-        libs.gradlePlugin.kotlin.get().module.group -> useVersion(libs.versions.kotlin.get())
         libs.square.okHttp.logInterceptor.get().module.group -> useVersion(libs.versions.square.okHttp.get())
         else -> when {
           requested.name.startsWith("kotlinx-coroutines") ->

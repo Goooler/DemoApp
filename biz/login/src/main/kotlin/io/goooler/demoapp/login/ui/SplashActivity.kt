@@ -15,9 +15,10 @@ class SplashActivity : BaseActivity() {
   }
 
   override fun onBackPressed() {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S)
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
       finish()
-    else
+    } else {
       super.onBackPressed()
+    }
   }
 }

@@ -27,10 +27,11 @@ object ImageLoader {
     val imageLoader = coil.ImageLoader.Builder(application)
       .crossfade(true)
       .components {
-        val gifDecoderFactory = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P)
+        val gifDecoderFactory = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
           ImageDecoderDecoder.Factory()
-        else
+        } else {
           GifDecoder.Factory()
+        }
         add(gifDecoderFactory)
         add(SvgDecoder.Factory(false))
       }
@@ -43,8 +44,9 @@ object ImageLoader {
     data: Any?,
     placeholderDrawable: Drawable? = null,
     errorDrawable: Drawable? = null,
-    @Px @FloatRange(from = 0.0) cornerRadius: Float = 0F,
-    useCache: Boolean = true
+    @Px @FloatRange(from = 0.0)
+    cornerRadius: Float = 0F,
+    useCache: Boolean = true,
   ) {
     imageView.loadBase(data, placeholderDrawable, errorDrawable, useCache) {
       if (cornerRadius > 0) transformations(RoundedCornersTransformation(cornerRadius))
@@ -56,7 +58,7 @@ object ImageLoader {
     data: Any?,
     placeholderDrawable: Drawable? = null,
     errorDrawable: Drawable? = null,
-    useCache: Boolean = true
+    useCache: Boolean = true,
   ) {
     imageView.loadBase(data, placeholderDrawable, errorDrawable, useCache) {
       transformations(CircleCropTransformation())
@@ -68,7 +70,7 @@ object ImageLoader {
     placeholderDrawable: Drawable?,
     errorDrawable: Drawable?,
     useCache: Boolean,
-    builder: ImageRequest.Builder.() -> Unit = {}
+    builder: ImageRequest.Builder.() -> Unit = {},
   ) {
     load(data) {
       placeholder(placeholderDrawable)
@@ -82,7 +84,7 @@ object ImageLoader {
     data: Any?,
     context: Context,
     useCache: Boolean = true,
-    builder: ImageRequest.Builder.() -> Unit = {}
+    builder: ImageRequest.Builder.() -> Unit = {},
   ): Drawable? {
     val request = ImageRequest.Builder(context)
       .data(data)
@@ -110,22 +112,23 @@ internal fun ImageView.bindingLoad(data: Any?) {
 
 @BindingAdapter(
   "binding_iv_data",
-  "binding_iv_cornerRadius"
+  "binding_iv_cornerRadius",
 )
 internal fun ImageView.bindingLoad(
   data: Any?,
-  @Px @FloatRange(from = 0.0) cornerRadius: Float
+  @Px @FloatRange(from = 0.0)
+  cornerRadius: Float,
 ) {
   ImageLoader.load(this, data, cornerRadius = cornerRadius)
 }
 
 @BindingAdapter(
   "binding_iv_data",
-  "binding_iv_placeholder"
+  "binding_iv_placeholder",
 )
 internal fun ImageView.bindingLoad(
   data: Any?,
-  placeholderDrawable: Drawable?
+  placeholderDrawable: Drawable?,
 ) {
   ImageLoader.load(this, data, placeholderDrawable)
 }
@@ -133,12 +136,12 @@ internal fun ImageView.bindingLoad(
 @BindingAdapter(
   "binding_iv_data",
   "binding_iv_placeholder",
-  "binding_iv_error"
+  "binding_iv_error",
 )
 internal fun ImageView.bindingLoad(
   data: Any?,
   placeholderDrawable: Drawable?,
-  errorDrawable: Drawable?
+  errorDrawable: Drawable?,
 ) {
   ImageLoader.load(this, data, placeholderDrawable, errorDrawable)
 }
@@ -147,13 +150,14 @@ internal fun ImageView.bindingLoad(
   "binding_iv_data",
   "binding_iv_placeholder",
   "binding_iv_error",
-  "binding_iv_cornerRadius"
+  "binding_iv_cornerRadius",
 )
 internal fun ImageView.bindingLoad(
   data: Any?,
   placeholderDrawable: Drawable?,
   errorDrawable: Drawable?,
-  @Px @FloatRange(from = 0.0) cornerRadius: Float
+  @Px @FloatRange(from = 0.0)
+  cornerRadius: Float,
 ) {
   ImageLoader.load(this, data, placeholderDrawable, errorDrawable, cornerRadius)
 }
@@ -163,14 +167,15 @@ internal fun ImageView.bindingLoad(
   "binding_iv_placeholder",
   "binding_iv_error",
   "binding_iv_cornerRadius",
-  "binding_iv_useCache"
+  "binding_iv_useCache",
 )
 internal fun ImageView.bindingLoad(
   data: Any?,
   placeholderDrawable: Drawable?,
   errorDrawable: Drawable?,
-  @Px @FloatRange(from = 0.0) cornerRadius: Float,
-  useCache: Boolean
+  @Px @FloatRange(from = 0.0)
+  cornerRadius: Float,
+  useCache: Boolean,
 ) {
   ImageLoader.load(this, data, placeholderDrawable, errorDrawable, cornerRadius, useCache)
 }
@@ -182,11 +187,11 @@ internal fun ImageView.bindingLoadCircleCrop(data: Any?) {
 
 @BindingAdapter(
   "binding_iv_data_circle",
-  "binding_iv_placeholder"
+  "binding_iv_placeholder",
 )
 internal fun ImageView.bindingLoadCircleCrop(
   data: Any?,
-  placeholderDrawable: Drawable?
+  placeholderDrawable: Drawable?,
 ) {
   ImageLoader.loadCircleCrop(this, data, placeholderDrawable)
 }
@@ -194,12 +199,12 @@ internal fun ImageView.bindingLoadCircleCrop(
 @BindingAdapter(
   "binding_iv_data_circle",
   "binding_iv_placeholder",
-  "binding_iv_error"
+  "binding_iv_error",
 )
 internal fun ImageView.bindingLoadCircleCrop(
   data: Any?,
   placeholderDrawable: Drawable?,
-  errorDrawable: Drawable?
+  errorDrawable: Drawable?,
 ) {
   ImageLoader.loadCircleCrop(this, data, placeholderDrawable, errorDrawable)
 }
@@ -208,13 +213,13 @@ internal fun ImageView.bindingLoadCircleCrop(
   "binding_iv_data_circle",
   "binding_iv_placeholder",
   "binding_iv_error",
-  "binding_iv_useCache"
+  "binding_iv_useCache",
 )
 internal fun ImageView.bindingLoadCircleCrop(
   data: Any?,
   placeholderDrawable: Drawable?,
   errorDrawable: Drawable?,
-  useCache: Boolean
+  useCache: Boolean,
 ) {
   ImageLoader.loadCircleCrop(this, data, placeholderDrawable, errorDrawable, useCache)
 }

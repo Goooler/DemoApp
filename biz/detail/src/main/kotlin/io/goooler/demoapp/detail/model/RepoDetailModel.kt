@@ -6,5 +6,5 @@ data class RepoDetailModel(
   val license: String = "",
   val starsCount: Int = 0,
   val forksCount: Int = 0,
-  val openIssuesCount: Int = 0
+  val openIssuesCount: Int = 0,
 )

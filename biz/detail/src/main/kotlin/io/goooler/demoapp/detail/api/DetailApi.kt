@@ -8,6 +8,6 @@ interface DetailApi {
 
   @GET("https://api.github.com/repos/{fullName}")
   suspend fun getRepoDetail(
-    @Path(value = "fullName", encoded = true) fullName: String
+    @Path(value = "fullName", encoded = true) fullName: String,
   ): RepoDetailBean
 }
