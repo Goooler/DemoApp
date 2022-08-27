@@ -2,6 +2,7 @@ plugins {
   alias(libs.plugins.android.library)
   alias(libs.plugins.kotlin.android)
   alias(libs.plugins.kotlin.kapt)
+  alias(libs.plugins.ksp)
   alias(libs.plugins.moshiX)
 }
 
@@ -39,7 +40,7 @@ dependencies {
   api(libs.utils)
 
   implementation(libs.bundles.androidX.room)
-  kapt(libs.androidX.room.compiler)
+  ksp(libs.androidX.room.compiler)
 
   implementation(libs.bundles.coil)
   implementation(libs.square.moshi)
