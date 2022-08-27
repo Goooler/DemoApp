@@ -2,6 +2,7 @@ plugins {
   alias(libs.plugins.android.library)
   alias(libs.plugins.kotlin.android)
   alias(libs.plugins.kotlin.kapt)
+  alias(libs.plugins.ksp)
   alias(libs.plugins.moshiX)
 }
 
@@ -14,13 +15,6 @@ android {
   )
 }
 
-kapt {
-  correctErrorTypes = true
-  arguments {
-    arg("room.incremental", "true")
-  }
-}
-
 dependencies {
   implementation(projects.common)
 
@@ -28,7 +22,7 @@ dependencies {
   implementation(libs.flycoTabLayout)
 
   implementation(libs.bundles.androidX.room)
-  kapt(libs.androidX.room.compiler)
+  ksp(libs.androidX.room.compiler)
 
   implementation(libs.square.moshi)
 }

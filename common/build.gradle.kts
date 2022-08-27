@@ -2,6 +2,7 @@ plugins {
   alias(libs.plugins.android.library)
   alias(libs.plugins.kotlin.android)
   alias(libs.plugins.kotlin.kapt)
+  alias(libs.plugins.ksp)
   alias(libs.plugins.moshiX)
 }
 
@@ -15,13 +16,6 @@ android {
     buildConfigField("String", "VERSION_NAME", "\"${libs.versions.versionName.get()}\"")
     buildConfigField("String", "CDN_PREFIX", "\"https://raw.githubusercontent.com/\"")
     buildConfigField("String", "API_HOST", "\"https://api.github.com/\"")
-  }
-}
-
-kapt {
-  correctErrorTypes = true
-  arguments {
-    arg("room.incremental", "true")
   }
 }
 
@@ -39,7 +33,7 @@ dependencies {
   api(libs.utils)
 
   implementation(libs.bundles.androidX.room)
-  kapt(libs.androidX.room.compiler)
+  ksp(libs.androidX.room.compiler)
 
   implementation(libs.bundles.coil)
   implementation(libs.square.moshi)
