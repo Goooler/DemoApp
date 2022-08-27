@@ -1,5 +1,6 @@
 import com.android.build.gradle.BaseExtension
 import io.gitlab.arturbosch.detekt.extensions.DetektExtension
+import org.jetbrains.kotlin.gradle.plugin.KaptExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jmailen.gradle.kotlinter.KotlinterExtension
 
@@ -62,6 +63,11 @@ subprojects {
   plugins.withId(rootProject.libs.plugins.android.application.get().pluginId) {
     setupCommon()
   }
+  plugins.withId(rootProject.libs.plugins.kotlin.kapt.get().pluginId) {
+    configure<KaptExtension> {
+      correctErrorTypes = true
+    }
+  }
 }
 
 tasks {
@@ -69,8 +75,8 @@ tasks {
     val customFileTypes = fileTree(
       mapOf(
         "dir" to "$rootDir/gradle",
-        "include" to arrayOf("*.log", "*.txt")
-      )
+        "include" to arrayOf("*.log", "*.txt"),
+      ),
     )
     delete(rootProject.buildDir, customFileTypes)
   }

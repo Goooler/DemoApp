@@ -15,10 +15,6 @@ android {
   )
 }
 
-kapt {
-  correctErrorTypes = true
-}
-
 ksp {
   arg("room.incremental", "true")
 }
