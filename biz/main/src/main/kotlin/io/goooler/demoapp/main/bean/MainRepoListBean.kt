@@ -9,7 +9,7 @@ import com.squareup.moshi.JsonClass
 import io.goooler.demoapp.common.network.BaseResponse
 
 @JsonClass(generateAdapter = true)
-@Entity(tableName = "main_repo_list")
+@Entity(tableName = "main_repo_list", ignoredColumns = ["message", "code"])
 data class MainRepoListBean(
   @PrimaryKey val id: Long,
   val private: Boolean,
@@ -22,6 +22,9 @@ data class MainRepoListBean(
 
   @JsonClass(generateAdapter = true)
   data class OwnerBean(
+    @ColumnInfo(name = "owner_name")
+    @Json(name = "login")
+    val ownerName: String,
     @ColumnInfo(name = "avatar_url") @Json(name = "avatar_url")
     val avatarUrl: String?,
   )
