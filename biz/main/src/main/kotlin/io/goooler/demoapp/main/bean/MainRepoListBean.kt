@@ -10,7 +10,7 @@ import io.goooler.demoapp.common.network.BaseResponse
 
 @JsonClass(generateAdapter = true)
 @Entity(tableName = "main_repo_list", ignoredColumns = ["message", "code"])
-data class MainRepoListBean(
+class MainRepoListBean(
   @PrimaryKey val id: Long,
   val private: Boolean,
   val name: String,
@@ -21,7 +21,7 @@ data class MainRepoListBean(
   constructor() : this(0, false, "", "", OwnerBean(null))
 
   @JsonClass(generateAdapter = true)
-  data class OwnerBean(
+  class OwnerBean(
     @ColumnInfo(name = "owner_name")
     @Json(name = "login")
     val ownerName: String,
