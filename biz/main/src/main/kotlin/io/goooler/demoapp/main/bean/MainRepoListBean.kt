@@ -19,13 +19,7 @@ class MainRepoListBean : BaseResponse() {
   var private: Boolean = false
 
   @ColumnInfo
-  var fork: Boolean = false
-
-  @ColumnInfo
   var name: String? = null
-
-  @ColumnInfo
-  var description: String? = null
 
   @Json(name = "full_name")
   var fullName: String = ""
@@ -35,9 +29,6 @@ class MainRepoListBean : BaseResponse() {
 
   @JsonClass(generateAdapter = true)
   class OwnerBean {
-    @ColumnInfo(name = "owner_name")
-    @Json(name = "login")
-    var ownerName: String? = null
 
     @ColumnInfo(name = "avatar_url")
     @Json(name = "avatar_url")
