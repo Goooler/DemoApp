@@ -1,5 +1,7 @@
 import com.android.build.gradle.BaseExtension
+import com.google.devtools.ksp.gradle.KspExtension
 import io.gitlab.arturbosch.detekt.extensions.DetektExtension
+import org.jetbrains.kotlin.gradle.plugin.KaptExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jmailen.gradle.kotlinter.KotlinterExtension
 
@@ -23,6 +25,23 @@ allprojects {
   apply(plugin = rootProject.libs.plugins.detekt.get().pluginId)
   configure<DetektExtension> {
     config = rootProject.files("config/detekt/detekt.yml")
+  }
+
+  plugins.withId(rootProject.libs.plugins.android.library.get().pluginId) {
+    if (displayName.contains(":biz:") || name.startsWith("common")) setupCommon() else setupBase()
+  }
+  plugins.withId(rootProject.libs.plugins.android.application.get().pluginId) {
+    setupCommon()
+  }
+  plugins.withId(rootProject.libs.plugins.kotlin.kapt.get().pluginId) {
+    configure<KaptExtension> {
+      correctErrorTypes = true
+    }
+  }
+  plugins.withId(rootProject.libs.plugins.ksp.get().pluginId) {
+    configure<KspExtension> {
+      arg("room.incremental", "true")
+    }
   }
 
   tasks.withType<KotlinCompile> {
@@ -55,22 +74,13 @@ allprojects {
   }
 }
 
-subprojects {
-  plugins.withId(rootProject.libs.plugins.android.library.get().pluginId) {
-    if (displayName.contains(":biz:") || name.startsWith("common")) setupCommon() else setupBase()
-  }
-  plugins.withId(rootProject.libs.plugins.android.application.get().pluginId) {
-    setupCommon()
-  }
-}
-
 tasks {
   create<Delete>("clean") {
     val customFileTypes = fileTree(
       mapOf(
         "dir" to "$rootDir/gradle",
-        "include" to arrayOf("*.log", "*.txt")
-      )
+        "include" to arrayOf("*.log", "*.txt"),
+      ),
     )
     delete(rootProject.buildDir, customFileTypes)
   }

@@ -15,13 +15,6 @@ android {
   )
 }
 
-kapt {
-  correctErrorTypes = true
-  arguments {
-    arg("room.incremental", "true")
-  }
-}
-
 dependencies {
   implementation(projects.common)
 
