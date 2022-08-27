@@ -15,10 +15,6 @@ android {
   )
 }
 
-ksp {
-  arg("room.incremental", "true")
-}
-
 dependencies {
   implementation(projects.common)
 

@@ -19,10 +19,6 @@ android {
   }
 }
 
-ksp {
-  arg("room.incremental", "true")
-}
-
 dependencies {
   api(projects.base)
   api(projects.adapter)
