@@ -9,16 +9,16 @@ import com.squareup.moshi.JsonClass
 import io.goooler.demoapp.common.network.BaseResponse
 
 @JsonClass(generateAdapter = true)
-@Entity(tableName = "main_repo_list", ignoredColumns = ["message", "code"])
+@Entity(tableName = "main_repo_list")
 data class MainRepoListBean(
-  @PrimaryKey val id: Long = 0,
-  @ColumnInfo val private: Boolean = false,
-  @ColumnInfo val name: String? = null,
-  @Json(name = "full_name") val fullName: String = "",
-  @Embedded val owner: OwnerBean? = null,
+  @PrimaryKey val id: Long,
+  @ColumnInfo val private: Boolean,
+  @ColumnInfo val name: String,
+  @Json(name = "full_name") val fullName: String,
+  @Embedded val owner: OwnerBean,
 ) : BaseResponse() {
   @JsonClass(generateAdapter = true)
   data class OwnerBean(
-    @ColumnInfo(name = "avatar_url") @Json(name = "avatar_url") val avatarUrl: String? = null,
+    @ColumnInfo(name = "avatar_url") @Json(name = "avatar_url") val avatarUrl: String?,
   )
 }
