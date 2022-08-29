@@ -24,6 +24,9 @@ on:
       - 'LICENSE'
       - 'NOTICE'
 
+env:
+  ENABLE_CHECK: true
+
 jobs:
   ktlint:
     runs-on: ubuntu-latest
