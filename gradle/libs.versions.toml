@@ -86,7 +86,7 @@ chucker-release = { module = "com.github.chuckerteam.chucker:library-no-op", ver
 coil = { module = "io.coil-kt:coil", version.ref = "coil" }
 coil-gif = { module = "io.coil-kt:coil-gif", version.ref = "coil" }
 coil-svg = { module = "io.coil-kt:coil-svg", version.ref = "coil" }
-flycoTabLayout = "com.flyco.tablayout:FlycoTabLayout_Lib:2.2.0"
+flycoTabLayout = "io.github.h07000223:flycoTabLayout:3.0.0"
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
 glide-okhttp3 = { module = "com.github.bumptech.glide:okhttp3-integration", version.ref = "glide" }
 glide-transformations = "jp.wasabeef:glide-transformations:4.3.0"
