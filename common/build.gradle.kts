@@ -26,7 +26,6 @@ dependencies {
   api(libs.androidX.constraintLayout)
   api(libs.androidX.cardView)
   api(libs.google.material)
-  api(libs.photoView)
   api(libs.bundles.srl)
 
   api(libs.androidX.collection)
