@@ -99,7 +99,10 @@ fun Project.setupBase(): BaseExtension {
     sourceSets.configureEach {
       java.srcDirs("src/$name/kotlin")
     }
-    compileOptions.setDefaultJavaVersion(JavaVersion.VERSION_11)
+    compileOptions {
+      targetCompatibility(JavaVersion.VERSION_11)
+      sourceCompatibility(JavaVersion.VERSION_11)
+    }
     packagingOptions.resources.excludes += setOf(
       "**/*.proto",
       "**/*.bin",
