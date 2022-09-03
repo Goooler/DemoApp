@@ -1,13 +1,9 @@
 package io.goooler.demoapp.base.util
 
-import androidx.activity.ComponentActivity
+import androidx.activity.result.ActivityResultCaller
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.fragment.app.Fragment
 
-class PermissionHelper private constructor(
-  private val activity: ComponentActivity?,
-  private val fragment: Fragment?,
-) {
+class PermissionHelper private constructor(private val activityResultCaller: ActivityResultCaller) {
   private val permissions = mutableListOf<String>()
 
   private var onRawResultsCallback: ((Map<String, Boolean>) -> Unit)? = null
@@ -43,8 +39,7 @@ class PermissionHelper private constructor(
     val grantedPermissions = mutableListOf<String>()
     val deniedPermissions = mutableListOf<String>()
 
-    val launcher = checkNotNull(activity ?: fragment) { "activity or fragment must not be null" }
-    launcher.registerForActivityResult(
+    activityResultCaller.registerForActivityResult(
       ActivityResultContracts.RequestMultiplePermissions(),
     ) {
       onRawResultsCallback?.invoke(it) ?: run {
@@ -62,10 +57,7 @@ class PermissionHelper private constructor(
   }
 
   companion object {
-    fun with(activity: ComponentActivity): PermissionHelper =
-      PermissionHelper(activity, null)
-
-    fun with(fragment: Fragment): PermissionHelper =
-      PermissionHelper(null, fragment)
+    fun with(activityResultCaller: ActivityResultCaller): PermissionHelper =
+      PermissionHelper(activityResultCaller)
   }
 }
