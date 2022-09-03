@@ -43,8 +43,7 @@ class PermissionHelper private constructor(
     val grantedPermissions = mutableListOf<String>()
     val deniedPermissions = mutableListOf<String>()
 
-    val launcher = activity ?: fragment
-      ?: throw IllegalArgumentException("activity or fragment must not be null")
+    val launcher = checkNotNull(activity ?: fragment) { "activity or fragment must not be null" }
     launcher.registerForActivityResult(
       ActivityResultContracts.RequestMultiplePermissions(),
     ) {
