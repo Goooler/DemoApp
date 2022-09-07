@@ -67,7 +67,7 @@ androidX-viewPager2 = "androidx.viewpager2:viewpager2:1.0.0"
 androidX-webKit = "androidx.webkit:webkit:1.5.0"
 
 square-leakCanary = "com.squareup.leakcanary:leakcanary-android:2.9.1"
-square-moshi = "com.squareup.moshi:moshi:1.13.0"
+square-moshi = "com.squareup.moshi:moshi:1.14.0"
 square-okHttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "square-okHttp" }
 square-okHttp-LogInterceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "square-okHttp" }
 square-okHttp-mock = { module = "com.squareup.okhttp3:mockwebserver", version.ref = "square-okHttp" }
