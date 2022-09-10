@@ -181,7 +181,7 @@ fun Spannable.withClickableSpan(clickablePart: String, onClickListener: () -> Un
     clickableSpan,
     indexOf(clickablePart),
     indexOf(clickablePart) + clickablePart.length,
-    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE,
+    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
   )
   return this
 }
@@ -192,7 +192,7 @@ fun CharSequence.withColorSpan(coloredPart: String, @ColorInt color: Int): Spann
       ForegroundColorSpan(color),
       it.length - coloredPart.length,
       it.length,
-      Spanned.SPAN_EXCLUSIVE_EXCLUSIVE,
+      Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
     )
   }
 }

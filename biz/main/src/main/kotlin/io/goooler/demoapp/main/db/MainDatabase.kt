@@ -8,7 +8,7 @@ import io.goooler.demoapp.main.bean.MainRepoListBean
 @Database(
   entities = [MainRepoListBean::class],
   version = RoomHelper.DB_VERSION,
-  exportSchema = false,
+  exportSchema = false
 )
 abstract class MainDatabase : RoomDatabase() {
 

@@ -38,7 +38,7 @@ internal interface IRvAdapter<M : IVhModelType> {
       LayoutInflater.from(parent.context),
       viewType,
       parent,
-      false,
+      false
     )
     return BindingViewHolder(binding)
   }

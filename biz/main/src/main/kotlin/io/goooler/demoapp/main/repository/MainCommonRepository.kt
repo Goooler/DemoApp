@@ -21,7 +21,7 @@ class MainCommonRepository {
   ): List<MainRepoListBean> {
     val params = paramMapOf(
       "page" to page,
-      "per_page" to pageSize,
+      "per_page" to pageSize
     )
     return api.getRepoList(user, params)
   }

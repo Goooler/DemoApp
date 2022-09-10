@@ -40,7 +40,7 @@ class PermissionHelper private constructor(private val activityResultCaller: Act
     val deniedPermissions = mutableListOf<String>()
 
     activityResultCaller.registerForActivityResult(
-      ActivityResultContracts.RequestMultiplePermissions(),
+      ActivityResultContracts.RequestMultiplePermissions()
     ) {
       onRawResultsCallback?.invoke(it) ?: run {
         for (entry in it.entries) {

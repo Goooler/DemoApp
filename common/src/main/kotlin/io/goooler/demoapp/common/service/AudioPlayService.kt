@@ -77,7 +77,7 @@ class AudioPlayService : BaseService() {
     audioManager?.requestAudioFocus(
       audioFocusChangeListener,
       AudioManager.STREAM_MUSIC,
-      AudioManager.AUDIOFOCUS_GAIN,
+      AudioManager.AUDIOFOCUS_GAIN
     )
   }
 

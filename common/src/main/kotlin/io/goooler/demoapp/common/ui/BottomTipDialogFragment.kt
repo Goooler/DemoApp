@@ -41,7 +41,7 @@ class BottomTipDialogFragment : BaseBindingDialogFragment<CommonBottomTipDialogF
     fun show(manager: FragmentManager, title: String, content: String, tag: String? = null) {
       BottomTipDialogFragment().putArguments(
         TITLE to title,
-        CONTENT to content,
+        CONTENT to content
       ).show(manager, tag)
     }
   }
