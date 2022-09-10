@@ -2,6 +2,7 @@ plugins {
   alias(libs.plugins.android.library)
   alias(libs.plugins.kotlin.android)
   alias(libs.plugins.kotlin.kapt)
+  alias(libs.plugins.ksp)
   alias(libs.plugins.moshiX)
 }
 
@@ -18,13 +19,6 @@ android {
   }
 }
 
-kapt {
-  correctErrorTypes = true
-  arguments {
-    arg("room.incremental", "true")
-  }
-}
-
 dependencies {
   api(projects.base)
   api(projects.adapter)
@@ -32,14 +26,13 @@ dependencies {
   api(libs.androidX.constraintLayout)
   api(libs.androidX.cardView)
   api(libs.google.material)
-  api(libs.photoView)
   api(libs.bundles.srl)
 
   api(libs.androidX.collection)
   api(libs.utils)
 
   implementation(libs.bundles.androidX.room)
-  kapt(libs.androidX.room.compiler)
+  ksp(libs.androidX.room.compiler)
 
   implementation(libs.bundles.coil)
   implementation(libs.square.moshi)

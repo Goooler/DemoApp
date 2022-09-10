@@ -113,7 +113,7 @@ jobs:
           distribution: 'zulu'
           java-version: 17
       - uses: gradle/gradle-build-action@v2
-      - run: ./gradlew app:assemble
+      - run: ./gradlew app:assembleProdRelease
       - uses: actions/upload-artifact@v3
         with:
           path: app/build/*.apk
