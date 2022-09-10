@@ -44,7 +44,8 @@ object ImageLoader {
     data: Any?,
     placeholderDrawable: Drawable? = null,
     errorDrawable: Drawable? = null,
-    @Px @FloatRange(from = 0.0)
+    @Px
+    @FloatRange(from = 0.0)
     cornerRadius: Float = 0F,
     useCache: Boolean = true,
   ) {
@@ -116,7 +117,8 @@ internal fun ImageView.bindingLoad(data: Any?) {
 )
 internal fun ImageView.bindingLoad(
   data: Any?,
-  @Px @FloatRange(from = 0.0)
+  @Px
+  @FloatRange(from = 0.0)
   cornerRadius: Float,
 ) {
   ImageLoader.load(this, data, cornerRadius = cornerRadius)
@@ -156,7 +158,8 @@ internal fun ImageView.bindingLoad(
   data: Any?,
   placeholderDrawable: Drawable?,
   errorDrawable: Drawable?,
-  @Px @FloatRange(from = 0.0)
+  @Px
+  @FloatRange(from = 0.0)
   cornerRadius: Float,
 ) {
   ImageLoader.load(this, data, placeholderDrawable, errorDrawable, cornerRadius)
@@ -173,7 +176,8 @@ internal fun ImageView.bindingLoad(
   data: Any?,
   placeholderDrawable: Drawable?,
   errorDrawable: Drawable?,
-  @Px @FloatRange(from = 0.0)
+  @Px
+  @FloatRange(from = 0.0)
   cornerRadius: Float,
   useCache: Boolean,
 ) {
