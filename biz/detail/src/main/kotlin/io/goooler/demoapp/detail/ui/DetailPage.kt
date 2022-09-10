@@ -56,12 +56,12 @@ fun DetailPage(model: RepoDetailModel, onForkClick: () -> Unit) {
     modifier = Modifier
       .padding(8.dp)
       .fillMaxSize()
-      .verticalScroll(rememberScrollState())
+      .verticalScroll(rememberScrollState()),
   ) {
     Text(
       text = model.fullName,
       style = MaterialTheme.typography.h5,
-      maxLines = 1
+      maxLines = 1,
     )
     Spacer(modifier = Modifier.height(5.dp))
     Text(
@@ -70,17 +70,17 @@ fun DetailPage(model: RepoDetailModel, onForkClick: () -> Unit) {
       maxLines = if (isDescExpanded) Int.MAX_VALUE else 2,
       modifier = Modifier.clickable {
         isDescExpanded = !isDescExpanded
-      }
+      },
     )
     Spacer(modifier = Modifier.height(5.dp))
     Row {
       Button(onClick = {
         R.plurals.detail_star_count_tip.getQuantityString(model.starsCount)?.showToast()
-      }) {
+      },) {
         Icon(
           Icons.Filled.Star,
           contentDescription = "Star",
-          modifier = Modifier.size(ButtonDefaults.IconSize)
+          modifier = Modifier.size(ButtonDefaults.IconSize),
         )
         Spacer(Modifier.size(ButtonDefaults.IconSpacing))
         Text(model.starsCount.toString())
@@ -90,7 +90,7 @@ fun DetailPage(model: RepoDetailModel, onForkClick: () -> Unit) {
         Icon(
           Icons.Filled.Share,
           contentDescription = "Fork",
-          modifier = Modifier.size(ButtonDefaults.IconSize)
+          modifier = Modifier.size(ButtonDefaults.IconSize),
         )
         Spacer(Modifier.size(ButtonDefaults.IconSpacing))
         Text(model.forksCount.toString())
@@ -111,7 +111,7 @@ fun DetailPagePreview() {
     "Apache",
     99,
     1,
-    2
+    2,
   )
   DetailPage(model) {}
 }
