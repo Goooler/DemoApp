@@ -30,7 +30,7 @@ kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 ksp = "com.google.devtools.ksp:1.7.10-1.0.6"
 moshiX = "dev.zacsweers.moshix:0.18.3"
-kotlinter = "org.jmailen.kotlinter:3.11.1"
+kotlinter = "org.jmailen.kotlinter:3.12.0"
 detekt = "io.gitlab.arturbosch.detekt:1.21.0"
 
 [libraries]
