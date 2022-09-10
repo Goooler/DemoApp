@@ -16,6 +16,16 @@ plugins {
   alias(libs.plugins.moshiX) apply false
 }
 
+buildscript {
+  configurations.classpath {
+    resolutionStrategy.eachDependency {
+      when(requested.group) {
+        libs.ktlint.get().module.group -> useVersion(libs.versions.ktlint.get())
+      }
+    }
+  }
+}
+
 allprojects {
   apply(plugin = rootProject.libs.plugins.kotlinter.get().pluginId)
   configure<KotlinterExtension> {
