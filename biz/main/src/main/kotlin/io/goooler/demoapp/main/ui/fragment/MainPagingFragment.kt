@@ -56,9 +56,7 @@ class MainPagingFragment : BaseBindingFragment<MainPagingFragmentBinding>() {
 
     override fun onClick(v: View) {
       when (v) {
-        binding.layoutError.ivError,
-        binding.layoutError.tvTip,
-        -> {
+        binding.layoutError.ivError, binding.layoutError.tvTip -> {
           rvAdapter.refresh()
           binding.layoutError.root.visibility = View.GONE
         }
