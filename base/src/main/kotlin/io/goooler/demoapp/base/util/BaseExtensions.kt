@@ -207,47 +207,67 @@ fun String.safeSubstring(startIndex: Int, endIndex: Int): String {
 }
 
 fun String?.safeToBoolean(default: Boolean = false): Boolean {
-  return if (this == null) default else try {
-    toBoolean()
-  } catch (e: Throwable) {
-    e.printStackTrace()
+  return if (this == null) {
     default
+  } else {
+    try {
+      toBoolean()
+    } catch (e: Throwable) {
+      e.printStackTrace()
+      default
+    }
   }
 }
 
 fun String?.safeToInt(default: Int = 0): Int {
-  return if (this == null) default else try {
-    toInt()
-  } catch (e: Throwable) {
-    e.printStackTrace()
+  return if (this == null) {
     default
+  } else {
+    try {
+      toInt()
+    } catch (e: Throwable) {
+      e.printStackTrace()
+      default
+    }
   }
 }
 
 fun String?.safeToLong(default: Long = 0L): Long {
-  return if (this == null) default else try {
-    toLong()
-  } catch (e: Throwable) {
-    e.printStackTrace()
+  return if (this == null) {
     default
+  } else {
+    try {
+      toLong()
+    } catch (e: Throwable) {
+      e.printStackTrace()
+      default
+    }
   }
 }
 
 fun String?.safeToFloat(default: Float = 0f): Float {
-  return if (this == null) default else try {
-    toFloat()
-  } catch (e: Throwable) {
-    e.printStackTrace()
+  return if (this == null) {
     default
+  } else {
+    try {
+      toFloat()
+    } catch (e: Throwable) {
+      e.printStackTrace()
+      default
+    }
   }
 }
 
 fun String?.safeToDouble(default: Double = 0.0): Double {
-  return if (this == null) default else try {
-    toDouble()
-  } catch (e: Throwable) {
-    e.printStackTrace()
+  return if (this == null) {
     default
+  } else {
+    try {
+      toDouble()
+    } catch (e: Throwable) {
+      e.printStackTrace()
+      default
+    }
   }
 }
 
@@ -518,7 +538,8 @@ fun TextView.setOnEditorConfirmActionListener(listener: (TextView) -> Unit) {
     val isConfirmAction = if (event != null) {
       when (event.keyCode) {
         KeyEvent.KEYCODE_DPAD_CENTER, KeyEvent.KEYCODE_ENTER,
-        KeyEvent.KEYCODE_NUMPAD_ENTER, -> true
+        KeyEvent.KEYCODE_NUMPAD_ENTER,
+        -> true
         else -> false
       } && event.action == KeyEvent.ACTION_DOWN
     } else {
