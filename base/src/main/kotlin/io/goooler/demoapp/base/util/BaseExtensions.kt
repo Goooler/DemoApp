@@ -206,80 +206,24 @@ fun String.safeSubstring(startIndex: Int, endIndex: Int): String {
   return substring(begin, end)
 }
 
-fun String?.safeToBoolean(default: Boolean = false): Boolean {
-  return if (this == null) {
-    default
-  } else {
-    try {
-      toBoolean()
-    } catch (e: Throwable) {
-      e.printStackTrace()
-      default
-    }
-  }
-}
+fun String?.safeToBoolean(default: Boolean = false): Boolean =
+  runCatching { toBoolean() }.getOrElse { default }
 
-fun String?.safeToInt(default: Int = 0): Int {
-  return if (this == null) {
-    default
-  } else {
-    try {
-      toInt()
-    } catch (e: Throwable) {
-      e.printStackTrace()
-      default
-    }
-  }
-}
+fun String?.safeToInt(default: Int = 0): Int =
+  runCatching { orEmpty().toInt() }.getOrElse { default }
 
-fun String?.safeToLong(default: Long = 0L): Long {
-  return if (this == null) {
-    default
-  } else {
-    try {
-      toLong()
-    } catch (e: Throwable) {
-      e.printStackTrace()
-      default
-    }
-  }
-}
+fun String?.safeToLong(default: Long = 0L): Long =
+  runCatching { orEmpty().toLong() }.getOrElse { default }
 
-fun String?.safeToFloat(default: Float = 0f): Float {
-  return if (this == null) {
-    default
-  } else {
-    try {
-      toFloat()
-    } catch (e: Throwable) {
-      e.printStackTrace()
-      default
-    }
-  }
-}
+fun String?.safeToFloat(default: Float = 0f): Float =
+  runCatching { orEmpty().toFloat() }.getOrElse { default }
 
-fun String?.safeToDouble(default: Double = 0.0): Double {
-  return if (this == null) {
-    default
-  } else {
-    try {
-      toDouble()
-    } catch (e: Throwable) {
-      e.printStackTrace()
-      default
-    }
-  }
-}
+fun String?.safeToDouble(default: Double = 0.0): Double =
+  runCatching { orEmpty().toDouble() }.getOrElse { default }
 
 @ColorInt
-fun String?.safeToColor(@ColorInt default: Int = 0): Int {
-  return try {
-    Color.parseColor(this)
-  } catch (e: Throwable) {
-    e.printStackTrace()
-    default
-  }
-}
+fun String?.safeToColor(@ColorInt default: Int = 0): Int =
+  runCatching { Color.parseColor(this) }.getOrDefault(default)
 
 fun String?.isNetworkUrl(): Boolean = URLUtil.isNetworkUrl(this)
 
