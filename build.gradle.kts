@@ -3,7 +3,6 @@ import com.google.devtools.ksp.gradle.KspExtension
 import io.gitlab.arturbosch.detekt.extensions.DetektExtension
 import org.jetbrains.kotlin.gradle.plugin.KaptExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import org.jmailen.gradle.kotlinter.KotlinterExtension
 
 plugins {
   alias(libs.plugins.android.application) apply false
@@ -18,9 +17,6 @@ plugins {
 
 allprojects {
   apply(plugin = rootProject.libs.plugins.kotlinter.get().pluginId)
-  configure<KotlinterExtension> {
-    version = rootProject.libs.versions.ktlint.get()
-  }
 
   apply(plugin = rootProject.libs.plugins.detekt.get().pluginId)
   configure<DetektExtension> {

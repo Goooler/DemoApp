@@ -17,7 +17,6 @@ coil = "2.2.1"
 coroutines = "1.6.4"
 glide = "4.13.2"
 kotlin = "1.7.10"
-ktlint = "0.46.1"
 square-okHttp = "4.10.0"
 square-retrofit = "2.9.0"
 srl = "2.0.5"
@@ -30,7 +29,7 @@ kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 ksp = "com.google.devtools.ksp:1.7.10-1.0.6"
 moshiX = "dev.zacsweers.moshix:0.18.3"
-kotlinter = "org.jmailen.kotlinter:3.11.1"
+kotlinter = "org.jmailen.kotlinter:3.12.0"
 detekt = "io.gitlab.arturbosch.detekt:1.21.0"
 
 [libraries]
@@ -90,6 +89,7 @@ flycoTabLayout = "io.github.h07000223:flycoTabLayout:3.0.0"
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
 glide-okhttp3 = { module = "com.github.bumptech.glide:okhttp3-integration", version.ref = "glide" }
 glide-transformations = "jp.wasabeef:glide-transformations:4.3.0"
+photoView = "com.github.chrisbanes:PhotoView:2.3.0"
 rxJava3-android = "io.reactivex.rxjava3:rxandroid:3.0.0"
 rxJava3-java = "io.reactivex.rxjava3:rxjava:3.1.5"
 srl-footer = { module = "io.github.scwang90:refresh-footer-classics", version.ref = "srl" }
