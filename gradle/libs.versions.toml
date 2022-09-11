@@ -35,6 +35,7 @@ detekt = "io.gitlab.arturbosch.detekt:1.21.0"
 [libraries]
 kotlin-junit5 = { module = "org.jetbrains.kotlin:kotlin-test-junit5", version.ref = "kotlin" }
 kotlinX-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
+kotlinX-immutable = "org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.5"
 
 androidX-compose-ui = { module = "androidx.compose.ui:ui", version.ref = "androidX-compose" }
 androidX-compose-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "androidX-compose" }

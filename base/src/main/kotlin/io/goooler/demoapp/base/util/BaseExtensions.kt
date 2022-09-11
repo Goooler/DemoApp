@@ -52,7 +52,6 @@ import java.io.File
 import java.io.Serializable
 import java.lang.reflect.Method
 import java.math.BigDecimal
-import java.util.Collections
 import java.util.UUID
 import java.util.regex.Pattern
 import kotlin.contracts.ExperimentalContracts
@@ -323,12 +322,6 @@ fun <T> List<T>.secondOrNull(): T? {
 fun <T> List<T>.thirdOrNull(): T? {
   return if (size < 3) null else this[2]
 }
-
-fun <E> List<E>.toUnmodifiableList(): List<E> = Collections.unmodifiableList(this)
-
-fun <T> Set<T>.toUnmodifiableSet(): Set<T> = Collections.unmodifiableSet(this)
-
-fun <K, V> Map<K, V>.toUnmodifiableMap(): Map<K, V> = Collections.unmodifiableMap(this)
 
 fun paramMapOf(vararg pairs: Pair<String, Any>): HashMap<String, Any> =
   HashMap<String, Any>(pairs.size).apply { putAll(pairs) }
