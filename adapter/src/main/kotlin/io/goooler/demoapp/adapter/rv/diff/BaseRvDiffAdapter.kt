@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import io.goooler.demoapp.adapter.rv.core.BindingViewHolder
 import io.goooler.demoapp.adapter.rv.core.IMutableRvAdapter
 import io.goooler.demoapp.adapter.rv.core.RvAdapterHelper
-import java.util.Collections
+import kotlinx.collections.immutable.toImmutableList
 
 /**
  * Created on 2020/10/22.
@@ -60,7 +60,7 @@ abstract class BaseRvDiffAdapter<M : IDiffVhModelType> :
   override operator fun get(@IntRange(from = 0) position: Int): M = getItem(position)
 
   override var list: List<M>
-    get() = Collections.unmodifiableList(helper.list)
+    get() = helper.list.toImmutableList()
     set(value) {
       helper.list = value
       submitList(helper.transform(value))
