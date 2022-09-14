@@ -40,6 +40,7 @@ import io.goooler.demoapp.base.util.ToastUtil
 import io.goooler.demoapp.common.BuildConfig
 import io.goooler.demoapp.common.CommonApplication
 import io.goooler.demoapp.common.type.SpKeys
+import java.text.NumberFormat
 import java.util.Locale
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.asExecutor
@@ -171,3 +172,11 @@ fun SmartRefreshLayout.enableRefreshAndLoadMore(enable: Boolean = true) {
 fun SmartRefreshLayout.disableRefreshAndLoadMore() {
   enableRefreshAndLoadMore(false)
 }
+
+// ---------------------Number-------------------------------//
+
+fun Number.formatCurrency(locale: Locale = Locale.getDefault()): String = runCatching {
+  NumberFormat.getCurrencyInstance(locale).format(this)
+}.getOrDefault("0.00")
+
+fun Number.formatCurrency(locale: String): String = formatCurrency(Locale.forLanguageTag(locale))
