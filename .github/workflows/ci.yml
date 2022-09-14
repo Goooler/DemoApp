@@ -64,7 +64,7 @@ jobs:
           distribution: 'zulu'
           java-version: 17
       - uses: gradle/gradle-build-action@v2
-      - run: ./gradlew test
+      - run: ./gradlew testDebugUnitTest
 
   instrumentation-tests:
     runs-on: macos-latest
