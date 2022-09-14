@@ -1,4 +1,4 @@
-@file:Suppress("unused")
+@file:Suppress("unused", "SupportAnnotationUsage")
 @file:JvmName("CommonExtensionUtil")
 
 package io.goooler.demoapp.common.util
@@ -120,22 +120,22 @@ fun @receiver:PluralsRes Int.getQuantityString(num: Int): String? = try {
 }
 
 @Px
-fun @receiver:Sp Float.sp2px(): Int = SizeUtils.sp2px(this)
+fun @receiver:Sp Number.sp2px(): Int = SizeUtils.sp2px(this.toFloat())
 
 @Px
-fun @receiver:Dp Float.dp2px(): Int = SizeUtils.dp2px(this)
+fun @receiver:Dp Number.dp2px(): Int = SizeUtils.dp2px(this.toFloat())
 
 @Px
-fun @receiver:Pt Float.pt2px(): Int = AdaptScreenUtils.pt2Px(this)
+fun @receiver:Pt Number.pt2px(): Int = AdaptScreenUtils.pt2Px(this.toFloat())
 
 @Sp
-fun @receiver:Px Int.px2sp(): Int = SizeUtils.px2sp(this.toFloat())
+fun @receiver:Px Number.px2sp(): Int = SizeUtils.px2sp(this.toFloat())
 
 @Dp
-fun @receiver:Px Int.px2dp(): Int = SizeUtils.px2dp(this.toFloat())
+fun @receiver:Px Number.px2dp(): Int = SizeUtils.px2dp(this.toFloat())
 
 @Pt
-fun @receiver:Px Int.px2pt(): Int = AdaptScreenUtils.px2Pt(this.toFloat())
+fun @receiver:Px Number.px2pt(): Int = AdaptScreenUtils.px2Pt(this.toFloat())
 
 fun Bitmap.toDrawable(): Drawable = ImageUtils.bitmap2Drawable(this)
 
