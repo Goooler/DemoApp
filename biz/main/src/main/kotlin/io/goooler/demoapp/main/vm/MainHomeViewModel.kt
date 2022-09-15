@@ -2,7 +2,6 @@ package io.goooler.demoapp.main.vm
 
 import androidx.lifecycle.viewModelScope
 import io.goooler.demoapp.base.core.BaseViewModel
-import io.goooler.demoapp.common.util.showToast
 import io.goooler.demoapp.main.bean.MainRepoListBean
 import io.goooler.demoapp.main.repository.MainCommonRepository
 import java.util.concurrent.CancellationException
