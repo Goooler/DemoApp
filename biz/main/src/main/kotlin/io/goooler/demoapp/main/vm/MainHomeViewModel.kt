@@ -70,9 +70,7 @@ class MainHomeViewModel : BaseViewModel() {
         val microsoft = async(SupervisorJob()) { repository.getRepoListFromDb("microsoft") }
 
         _title.value = processList(google.await(), microsoft.await())
-      } catch (e: Exception) {
-        _title.value = e.message.orEmpty()
-        e.printStackTrace()
+      } catch (_: Exception) {
       }
 
       try {
@@ -83,6 +81,7 @@ class MainHomeViewModel : BaseViewModel() {
 
         putRepoListIntoDb(google.await(), microsoft.await())
       } catch (e: Exception) {
+        io.goooler.demoapp.common.R.string.common_request_failed.showToast()
         _title.value = e.message.orEmpty()
         e.printStackTrace()
       }
