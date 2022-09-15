@@ -2,7 +2,6 @@ package io.goooler.demoapp.main.vm
 
 import androidx.lifecycle.viewModelScope
 import io.goooler.demoapp.base.core.BaseViewModel
-import io.goooler.demoapp.common.util.showToast
 import io.goooler.demoapp.main.bean.MainRepoListBean
 import io.goooler.demoapp.main.repository.MainCommonRepository
 import java.util.concurrent.CancellationException
@@ -71,7 +70,9 @@ class MainHomeViewModel : BaseViewModel() {
         val microsoft = async(SupervisorJob()) { repository.getRepoListFromDb("microsoft") }
 
         _title.value = processList(google.await(), microsoft.await())
-      } catch (_: Exception) {
+      } catch (e: Exception) {
+        _title.value = e.message.orEmpty()
+        e.printStackTrace()
       }
 
       try {
@@ -82,10 +83,8 @@ class MainHomeViewModel : BaseViewModel() {
 
         putRepoListIntoDb(google.await(), microsoft.await())
       } catch (e: Exception) {
-        e.message?.let {
-          _title.value = it
-        }
-        io.goooler.demoapp.common.R.string.common_request_failed.showToast()
+        _title.value = e.message.orEmpty()
+        e.printStackTrace()
       }
     }
   }
