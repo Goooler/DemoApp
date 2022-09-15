@@ -82,10 +82,9 @@ class MainHomeViewModel : BaseViewModel() {
 
         putRepoListIntoDb(google.await(), microsoft.await())
       } catch (e: Exception) {
-        e.message?.let {
-          _title.value = it
-        }
         io.goooler.demoapp.common.R.string.common_request_failed.showToast()
+        _title.value = e.message.orEmpty()
+        e.printStackTrace()
       }
     }
   }
