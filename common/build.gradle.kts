@@ -3,7 +3,6 @@ plugins {
   alias(libs.plugins.kotlin.android)
   alias(libs.plugins.kotlin.kapt)
   alias(libs.plugins.ksp)
-  alias(libs.plugins.moshiX)
 }
 
 android {
@@ -35,7 +34,10 @@ dependencies {
   ksp(libs.androidX.room.compiler)
 
   implementation(libs.bundles.coil)
+
   implementation(libs.square.moshi)
+  ksp(libs.square.moshi.compiler)
+
   implementation(libs.square.retrofit.moshi)
 
   debugImplementation(libs.chucker.debug)

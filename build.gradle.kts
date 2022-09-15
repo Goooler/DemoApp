@@ -12,7 +12,6 @@ plugins {
   alias(libs.plugins.ksp) apply false
   alias(libs.plugins.kotlinter) apply false
   alias(libs.plugins.detekt) apply false
-  alias(libs.plugins.moshiX) apply false
 }
 
 allprojects {
