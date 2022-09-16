@@ -62,7 +62,7 @@ jobs:
           distribution: 'zulu'
           java-version: 17
       - uses: gradle/gradle-build-action@v2
-      - run: ./gradlew lint
+      - run: ./gradlew lintDebug
 
   unit-tests:
     runs-on: ubuntu-latest
