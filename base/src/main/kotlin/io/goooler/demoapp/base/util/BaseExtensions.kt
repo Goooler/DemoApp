@@ -52,18 +52,10 @@ import java.io.File
 import java.io.Serializable
 import java.lang.reflect.Method
 import java.math.BigDecimal
-import java.util.Collections
 import java.util.UUID
 import java.util.regex.Pattern
 import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.contract
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.CoroutineStart
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.async
-import kotlinx.coroutines.withContext
 
 // ---------------------Types-------------------------------//
 
@@ -213,60 +205,24 @@ fun String.safeSubstring(startIndex: Int, endIndex: Int): String {
   return substring(begin, end)
 }
 
-fun String?.safeToBoolean(default: Boolean = false): Boolean {
-  return if (this == null) default else try {
-    toBoolean()
-  } catch (e: Throwable) {
-    e.printStackTrace()
-    default
-  }
-}
+fun String?.safeToBoolean(default: Boolean = false): Boolean =
+  runCatching { toBoolean() }.getOrElse { default }
 
-fun String?.safeToInt(default: Int = 0): Int {
-  return if (this == null) default else try {
-    toInt()
-  } catch (e: Throwable) {
-    e.printStackTrace()
-    default
-  }
-}
+fun String?.safeToInt(default: Int = 0): Int =
+  runCatching { orEmpty().toInt() }.getOrElse { default }
 
-fun String?.safeToLong(default: Long = 0L): Long {
-  return if (this == null) default else try {
-    toLong()
-  } catch (e: Throwable) {
-    e.printStackTrace()
-    default
-  }
-}
+fun String?.safeToLong(default: Long = 0L): Long =
+  runCatching { orEmpty().toLong() }.getOrElse { default }
 
-fun String?.safeToFloat(default: Float = 0f): Float {
-  return if (this == null) default else try {
-    toFloat()
-  } catch (e: Throwable) {
-    e.printStackTrace()
-    default
-  }
-}
+fun String?.safeToFloat(default: Float = 0f): Float =
+  runCatching { orEmpty().toFloat() }.getOrElse { default }
 
-fun String?.safeToDouble(default: Double = 0.0): Double {
-  return if (this == null) default else try {
-    toDouble()
-  } catch (e: Throwable) {
-    e.printStackTrace()
-    default
-  }
-}
+fun String?.safeToDouble(default: Double = 0.0): Double =
+  runCatching { orEmpty().toDouble() }.getOrElse { default }
 
 @ColorInt
-fun String?.safeToColor(@ColorInt default: Int = 0): Int {
-  return try {
-    Color.parseColor(this)
-  } catch (e: Throwable) {
-    e.printStackTrace()
-    default
-  }
-}
+fun String?.safeToColor(@ColorInt default: Int = 0): Int =
+  runCatching { Color.parseColor(this) }.getOrDefault(default)
 
 fun String?.isNetworkUrl(): Boolean = URLUtil.isNetworkUrl(this)
 
@@ -367,12 +323,6 @@ fun <T> List<T>.thirdOrNull(): T? {
   return if (size < 3) null else this[2]
 }
 
-fun <E> List<E>.toUnmodifiableList(): List<E> = Collections.unmodifiableList(this)
-
-fun <T> Set<T>.toUnmodifiableSet(): Set<T> = Collections.unmodifiableSet(this)
-
-fun <K, V> Map<K, V>.toUnmodifiableMap(): Map<K, V> = Collections.unmodifiableMap(this)
-
 fun paramMapOf(vararg pairs: Pair<String, Any>): HashMap<String, Any> =
   HashMap<String, Any>(pairs.size).apply { putAll(pairs) }
 
@@ -398,24 +348,9 @@ fun <T> MutableCollection<T>.removeFirstOrNull(predicate: (T) -> Boolean): T? {
   return null
 }
 
-// ---------------------Coroutine-------------------------------//
-
-fun <T> CoroutineScope.defaultAsync(
-  start: CoroutineStart = CoroutineStart.DEFAULT,
-  block: suspend CoroutineScope.() -> T,
-): Deferred<T> = async(SupervisorJob(), start, block)
-
-suspend fun <T> withIoContext(block: suspend CoroutineScope.() -> T): T =
-  withContext(Dispatchers.IO, block)
-
-suspend fun <T> withDefaultContext(block: suspend CoroutineScope.() -> T): T =
-  withContext(Dispatchers.Default, block)
-
 // ---------------------File-------------------------------//
 
 fun File.notExists(): Boolean = exists().not()
-
-// ---------------------View-------------------------------//
 
 // ---------------------Intent-------------------------------//
 
@@ -539,8 +474,7 @@ fun TextView.setOnEditorConfirmActionListener(listener: (TextView) -> Unit) {
   setOnEditorActionListener { view, actionId, event ->
     val isConfirmAction = if (event != null) {
       when (event.keyCode) {
-        KeyEvent.KEYCODE_DPAD_CENTER, KeyEvent.KEYCODE_ENTER,
-        KeyEvent.KEYCODE_NUMPAD_ENTER, -> true
+        KeyEvent.KEYCODE_DPAD_CENTER, KeyEvent.KEYCODE_ENTER, KeyEvent.KEYCODE_NUMPAD_ENTER -> true
         else -> false
       } && event.action == KeyEvent.ACTION_DOWN
     } else {

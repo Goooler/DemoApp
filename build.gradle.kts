@@ -1,27 +1,42 @@
 import com.android.build.gradle.BaseExtension
+import com.google.devtools.ksp.gradle.KspExtension
 import io.gitlab.arturbosch.detekt.extensions.DetektExtension
+import org.jetbrains.kotlin.gradle.plugin.KaptExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import org.jmailen.gradle.kotlinter.KotlinterExtension
 
 plugins {
   alias(libs.plugins.android.application) apply false
   alias(libs.plugins.android.library) apply false
   alias(libs.plugins.kotlin.android) apply false
   alias(libs.plugins.kotlin.kapt) apply false
+  alias(libs.plugins.ksp) apply false
   alias(libs.plugins.kotlinter) apply false
   alias(libs.plugins.detekt) apply false
-  alias(libs.plugins.moshiX) apply false
 }
 
 allprojects {
   apply(plugin = rootProject.libs.plugins.kotlinter.get().pluginId)
-  configure<KotlinterExtension> {
-    version = rootProject.libs.versions.ktlint.get()
-  }
 
   apply(plugin = rootProject.libs.plugins.detekt.get().pluginId)
   configure<DetektExtension> {
     config = rootProject.files("config/detekt/detekt.yml")
+  }
+
+  plugins.withId(rootProject.libs.plugins.android.library.get().pluginId) {
+    if (displayName.contains(":biz:") || name.startsWith("common")) setupCommon() else setupBase()
+  }
+  plugins.withId(rootProject.libs.plugins.android.application.get().pluginId) {
+    setupCommon()
+  }
+  plugins.withId(rootProject.libs.plugins.kotlin.kapt.get().pluginId) {
+    configure<KaptExtension> {
+      correctErrorTypes = true
+    }
+  }
+  plugins.withId(rootProject.libs.plugins.ksp.get().pluginId) {
+    configure<KspExtension> {
+      arg("room.incremental", "true")
+    }
   }
 
   tasks.withType<KotlinCompile> {
@@ -54,22 +69,13 @@ allprojects {
   }
 }
 
-subprojects {
-  plugins.withId(rootProject.libs.plugins.android.library.get().pluginId) {
-    if (displayName.contains(":biz:") || name.startsWith("common")) setupCommon() else setupBase()
-  }
-  plugins.withId(rootProject.libs.plugins.android.application.get().pluginId) {
-    setupCommon()
-  }
-}
-
 tasks {
   create<Delete>("clean") {
     val customFileTypes = fileTree(
       mapOf(
         "dir" to "$rootDir/gradle",
-        "include" to arrayOf("*.log", "*.txt")
-      )
+        "include" to arrayOf("*.log", "*.txt"),
+      ),
     )
     delete(rootProject.buildDir, customFileTypes)
   }
@@ -88,7 +94,10 @@ fun Project.setupBase(): BaseExtension {
     sourceSets.configureEach {
       java.srcDirs("src/$name/kotlin")
     }
-    compileOptions.setDefaultJavaVersion(JavaVersion.VERSION_11)
+    compileOptions {
+      targetCompatibility(JavaVersion.VERSION_11)
+      sourceCompatibility(JavaVersion.VERSION_11)
+    }
     packagingOptions.resources.excludes += setOf(
       "**/*.proto",
       "**/*.bin",

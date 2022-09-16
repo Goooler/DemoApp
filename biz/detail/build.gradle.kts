@@ -1,7 +1,7 @@
 plugins {
   alias(libs.plugins.android.library)
   alias(libs.plugins.kotlin.android)
-  alias(libs.plugins.moshiX)
+  alias(libs.plugins.ksp)
 }
 
 android {
@@ -17,4 +17,5 @@ dependencies {
   implementation(libs.bundles.accompanist)
 
   implementation(libs.square.moshi)
+  ksp(libs.square.moshi.compiler)
 }

@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.annotation.IntRange
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
-import java.util.Collections
+import kotlinx.collections.immutable.toImmutableList
 
 /**
  * Created on 2020/10/22.
@@ -49,7 +49,7 @@ abstract class BaseRvAdapter<M : IVhModelType> :
   override operator fun get(@IntRange(from = 0) position: Int): M = helper.list[position]
 
   override var list: List<M>
-    get() = Collections.unmodifiableList(helper.list)
+    get() = helper.list.toImmutableList()
     set(value) {
       helper.list = value
       notifyDataSetChanged()

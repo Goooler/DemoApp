@@ -10,37 +10,23 @@ import io.goooler.demoapp.common.network.BaseResponse
 
 @JsonClass(generateAdapter = true)
 @Entity(tableName = "main_repo_list", ignoredColumns = ["message", "code"])
-class MainRepoListBean : BaseResponse() {
-
-  @PrimaryKey
-  var id: Long = 0
-
-  @ColumnInfo
-  var private: Boolean = false
-
-  @ColumnInfo
-  var fork: Boolean = false
-
-  @ColumnInfo
-  var name: String? = null
-
-  @ColumnInfo
-  var description: String? = null
-
+class MainRepoListBean(
+  @PrimaryKey val id: Long,
+  val private: Boolean,
+  val name: String,
   @Json(name = "full_name")
-  var fullName: String = ""
-
-  @Embedded
-  var owner: OwnerBean? = null
+  @ColumnInfo(name = "full_name")
+  val fullName: String,
+  @Embedded val owner: OwnerBean,
+) : BaseResponse() {
 
   @JsonClass(generateAdapter = true)
-  class OwnerBean {
-    @ColumnInfo(name = "owner_name")
+  class OwnerBean(
     @Json(name = "login")
-    var ownerName: String? = null
-
-    @ColumnInfo(name = "avatar_url")
+    @ColumnInfo(name = "owner_name")
+    val ownerName: String,
     @Json(name = "avatar_url")
-    var avatarUrl: String? = null
-  }
+    @ColumnInfo(name = "avatar_url")
+    val avatarUrl: String?,
+  )
 }

@@ -75,7 +75,7 @@ jobs:
           distribution: 'zulu'
           java-version: 17
       - uses: gradle/gradle-build-action@v2
-      - run: ./gradlew test
+      - run: ./gradlew testDebugUnitTest
 
   instrumentation-tests:
     runs-on: macos-latest
@@ -124,6 +124,8 @@ jobs:
           distribution: 'zulu'
           java-version: 17
       - uses: gradle/gradle-build-action@v2
+        with:
+          gradle-home-cache-cleanup: true
       - run: ./gradlew app:assembleProdRelease
       - uses: actions/upload-artifact@v3
         with:

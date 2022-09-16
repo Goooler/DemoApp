@@ -74,7 +74,7 @@
 -dontwarn java.time.zone.ZoneRulesProvider
 
 # DataBinding
--keep,allowoptimization public class * extends androidx.databinding.ViewDataBinding {
+-keep,allowoptimization public class * extends androidx.viewbinding.ViewBinding {
   public static * inflate(android.view.LayoutInflater);
 }
 
