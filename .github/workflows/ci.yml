@@ -78,7 +78,7 @@ jobs:
       - run: ./gradlew testDebugUnitTest
 
   instrumentation-tests:
-    runs-on: macos-latest
+    runs-on: buildjet-4vcpu-ubuntu-2204
     timeout-minutes: 50
     if: github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'instrumentation-tests')
     strategy:
