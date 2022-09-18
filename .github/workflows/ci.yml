@@ -32,7 +32,7 @@ jobs:
       - uses: gradle/wrapper-validation-action@v1
 
   ktlint:
-    runs-on: buildjet-4vcpu-ubuntu-2204
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-java@v3
@@ -43,7 +43,7 @@ jobs:
       - run: ./gradlew lintKotlin
 
   detekt:
-    runs-on: buildjet-4vcpu-ubuntu-2204
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-java@v3
@@ -54,7 +54,7 @@ jobs:
       - run: ./gradlew detekt
 
   android-lint:
-    runs-on: buildjet-4vcpu-ubuntu-2204
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-java@v3
@@ -65,7 +65,7 @@ jobs:
       - run: ./gradlew lintDebug
 
   unit-tests:
-    runs-on: buildjet-4vcpu-ubuntu-2204
+    runs-on: ubuntu-latest
     timeout-minutes: 50
     if: github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'unit-tests')
     steps:
@@ -78,7 +78,7 @@ jobs:
       - run: ./gradlew testDebugUnitTest
 
   instrumentation-tests:
-    runs-on: buildjet-4vcpu-ubuntu-2204
+    runs-on: macos-latest
     timeout-minutes: 50
     if: github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'instrumentation-tests')
     strategy:
