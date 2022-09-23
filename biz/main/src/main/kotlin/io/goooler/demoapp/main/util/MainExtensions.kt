@@ -1,7 +1,7 @@
 package io.goooler.demoapp.main.util
 
 import androidx.databinding.ViewDataBinding
-import io.goooler.demoapp.main.BRBridge as BR
+import io.goooler.demoapp.main.util.BRBridge as BR
 
 internal fun ViewDataBinding.bindListener(listener: Any) {
   setVariable(BR.listener, listener)
