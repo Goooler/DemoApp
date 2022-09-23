@@ -1,5 +1,6 @@
 import com.android.build.gradle.BaseExtension
 import com.google.devtools.ksp.gradle.KspExtension
+import com.slapin.napt.NaptGradleExtension
 import io.gitlab.arturbosch.detekt.extensions.DetektExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
@@ -26,6 +27,11 @@ allprojects {
   }
   plugins.withId(rootProject.libs.plugins.android.application.get().pluginId) {
     setupCommon()
+  }
+  plugins.withId(rootProject.libs.plugins.napt.get().pluginId) {
+    configure<NaptGradleExtension> {
+      naptTriggerPackagePrefix.set("${project.namespace}.util")
+    }
   }
   plugins.withId(rootProject.libs.plugins.ksp.get().pluginId) {
     configure<KspExtension> {
@@ -78,7 +84,7 @@ tasks {
 fun Project.setupBase(): BaseExtension {
   return extensions.getByName<BaseExtension>("android").apply {
     resourcePrefix = "${name}_"
-    namespace = "io.goooler.demoapp.$name"
+    namespace = project.namespace
     compileSdkVersion(33)
     defaultConfig {
       minSdk = 21
@@ -121,3 +127,6 @@ fun Project.setupCommon(): BaseExtension = setupBase().apply {
     create("prod")
   }
 }
+
+val Project.namespace: String
+  get() = "io.goooler.demoapp.$name"
