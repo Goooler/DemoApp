@@ -31,7 +31,6 @@ allprojects {
   plugins.withId(rootProject.libs.plugins.napt.get().pluginId) {
     configure<NaptGradleExtension> {
       generateNaptTrigger.set(false)
-      naptTriggerPackagePrefix.set("io.goooler.demoapp")
     }
   }
   plugins.withId(rootProject.libs.plugins.ksp.get().pluginId) {
