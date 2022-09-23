@@ -30,7 +30,8 @@ allprojects {
   }
   plugins.withId(rootProject.libs.plugins.napt.get().pluginId) {
     configure<NaptGradleExtension> {
-      naptTriggerPackagePrefix.set("${project.namespace}.util")
+      generateNaptTrigger.set(false)
+      naptTriggerPackagePrefix.set("io.goooler.demoapp")
     }
   }
   plugins.withId(rootProject.libs.plugins.ksp.get().pluginId) {
@@ -84,7 +85,7 @@ tasks {
 fun Project.setupBase(): BaseExtension {
   return extensions.getByName<BaseExtension>("android").apply {
     resourcePrefix = "${name}_"
-    namespace = project.namespace
+    namespace = "io.goooler.demoapp.$name"
     compileSdkVersion(33)
     defaultConfig {
       minSdk = 21
@@ -127,6 +128,3 @@ fun Project.setupCommon(): BaseExtension = setupBase().apply {
     create("prod")
   }
 }
-
-val Project.namespace: String
-  get() = "io.goooler.demoapp.$name"
