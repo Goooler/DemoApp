@@ -85,6 +85,9 @@ fun Project.setupBase(): BaseExtension {
       vectorDrawables.useSupportLibrary = true
       testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
+    sourceSets.configureEach {
+      java.srcDirs("src/$name/kotlin")
+    }
     compileOptions {
       targetCompatibility(JavaVersion.VERSION_11)
       sourceCompatibility(JavaVersion.VERSION_11)
