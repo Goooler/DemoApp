@@ -82,7 +82,7 @@ tasks {
 }
 
 fun Project.setupBase(): BaseExtension {
-  return extensions.getByName<BaseExtension>("android").apply {
+  return extensions.getByType<BaseExtension>().apply {
     resourcePrefix = "${name}_"
     namespace = "io.goooler.demoapp.$name"
     compileSdkVersion(33)
