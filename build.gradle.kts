@@ -1,6 +1,5 @@
 import com.android.build.gradle.BaseExtension
 import com.google.devtools.ksp.gradle.KspExtension
-import com.slapin.napt.NaptGradleExtension
 import io.gitlab.arturbosch.detekt.extensions.DetektExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
@@ -27,11 +26,6 @@ allprojects {
   }
   plugins.withId(rootProject.libs.plugins.android.application.get().pluginId) {
     setupCommon()
-  }
-  plugins.withId(rootProject.libs.plugins.napt.get().pluginId) {
-    configure<NaptGradleExtension> {
-      generateNaptTrigger.set(false)
-    }
   }
   plugins.withId(rootProject.libs.plugins.ksp.get().pluginId) {
     configure<KspExtension> {
