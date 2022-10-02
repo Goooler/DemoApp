@@ -41,6 +41,10 @@ allprojects {
   tasks.withType<Test> {
     useJUnitPlatform()
   }
+  tasks.withType<ValidatePlugins>().configureEach {
+    failOnWarning.set(true)
+    enableStricterValidation.set(true)
+  }
 
   configurations.configureEach {
     resolutionStrategy.eachDependency {
