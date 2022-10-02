@@ -69,7 +69,7 @@ allprojects {
 }
 
 tasks {
-  create<Delete>("clean") {
+  register<Delete>("clean") {
     val customFileTypes = fileTree(
       mapOf(
         "dir" to "$rootDir/gradle",
