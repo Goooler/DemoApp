@@ -42,7 +42,7 @@ allprojects {
     useJUnitPlatform()
   }
 
-  configurations.all {
+  configurations.configureEach {
     resolutionStrategy.eachDependency {
       when (requested.group) {
         "com.android.support" -> {
