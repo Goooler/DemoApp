@@ -41,13 +41,18 @@ allprojects {
   tasks.withType<Test> {
     useJUnitPlatform()
   }
+  tasks.withType<ValidatePlugins>().configureEach {
+    failOnWarning.set(true)
+    enableStricterValidation.set(true)
+  }
 
-  configurations.all {
+  configurations.configureEach {
     resolutionStrategy.eachDependency {
       when (requested.group) {
         "com.android.support" -> {
           if ("multidex" !in requested.name) useVersion(libs.versions.support.get())
         }
+
         libs.androidX.appCompat.get().module.group -> useVersion(libs.versions.androidX.appCompat.get())
         libs.androidX.activity.compose.get().module.group -> useVersion(libs.versions.androidX.activity.get())
         libs.androidX.collection.get().module.group -> useVersion(libs.versions.androidX.collection.get())
@@ -64,7 +69,7 @@ allprojects {
 }
 
 tasks {
-  create<Delete>("clean") {
+  register<Delete>("clean") {
     val customFileTypes = fileTree(
       mapOf(
         "dir" to "$rootDir/gradle",
@@ -75,8 +80,8 @@ tasks {
   }
 }
 
-fun Project.setupBase(): BaseExtension {
-  return extensions.getByType<BaseExtension>().apply {
+fun <T : BaseExtension> Project.setupBase(block: T.() -> Unit) {
+  extensions.configure<BaseExtension> {
     resourcePrefix = "${name}_"
     namespace = "io.goooler.demoapp.$name"
     compileSdkVersion(33)
@@ -111,13 +116,21 @@ fun Project.setupBase(): BaseExtension {
       "META-INF/AL2.0",
       "META-INF/LGPL2.1",
     )
+    @Suppress("UNCHECKED_CAST")
+    (this as T).block()
   }
 }
 
-fun Project.setupCommon(): BaseExtension = setupBase().apply {
-  flavorDimensions("env")
-  productFlavors {
-    create("dev")
-    create("prod")
+fun Project.setupBase() {
+  setupBase<BaseExtension> {}
+}
+
+fun Project.setupCommon() {
+  setupBase<BaseExtension> {
+    flavorDimensions("env")
+    productFlavors {
+      create("dev")
+      create("prod")
+    }
   }
 }
