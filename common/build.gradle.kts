@@ -10,7 +10,7 @@ android {
     buildConfig = true
     dataBinding = true
   }
-  productFlavors.all {
+  productFlavors.configureEach {
     buildConfigField("Integer", "VERSION_CODE", libs.versions.versionCode.get())
     buildConfigField("String", "VERSION_NAME", "\"${libs.versions.versionName.get()}\"")
     buildConfigField("String", "CDN_PREFIX", "\"https://raw.githubusercontent.com/\"")

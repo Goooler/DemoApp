@@ -47,8 +47,8 @@ android {
     }
   }
   dependenciesInfo.includeInApk = false
-  applicationVariants.all {
-    outputs.all {
+  applicationVariants.configureEach {
+    outputs.configureEach {
       (this as? ApkVariantOutputImpl)?.outputFileName = "../../../../" +
         "${appName}_${versionName}_${versionCode}_${flavorName}_${buildType.name}.apk"
     }
