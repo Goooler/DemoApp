@@ -19,5 +19,5 @@ jobs:
       - run: ./gradlew app:assembleProdRelease
       - uses: ncipollo/release-action@v1
         with:
-          artifacts: "app/build/outputs/apk/prod/release/*.apk"
+          artifacts: app/build/outputs
           token: ${{ secrets.GITHUB_TOKEN }}

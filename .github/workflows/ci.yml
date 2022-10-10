@@ -130,4 +130,4 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: build-outputs
-          path: app/build/outputs
+          path: app/build/outputs/apk/prod/release/*.apk
