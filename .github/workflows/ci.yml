@@ -129,4 +129,5 @@ jobs:
       - run: ./gradlew app:assembleProdRelease
       - uses: actions/upload-artifact@v3
         with:
-          path: app/build/*.apk
+          name: build-outputs
+          path: app/build/outputs
