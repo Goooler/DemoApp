@@ -6,9 +6,15 @@ import android.media.AudioAttributes
 import android.media.AudioManager
 import android.media.MediaPlayer
 import android.os.Build
+import android.view.LayoutInflater
+import android.view.WindowManager
 import androidx.core.content.getSystemService
+import androidx.lifecycle.lifecycleScope
 import io.goooler.demoapp.base.core.BaseService
 import io.goooler.demoapp.base.util.unsafeLazy
+import io.goooler.demoapp.common.databinding.CommonFloatingTipViewBinding
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class AudioPlayService : BaseService() {
 
@@ -54,6 +60,15 @@ class AudioPlayService : BaseService() {
       setOnPreparedListener {
         start()
       }
+    }
+    lifecycleScope.launch {
+      delay(3000)
+      val floatingView = CommonFloatingTipViewBinding.inflate(LayoutInflater.from(this@AudioPlayService)).root
+      val layoutParam = WindowManager.LayoutParams().apply {
+        width = WindowManager.LayoutParams.WRAP_CONTENT
+        height = WindowManager.LayoutParams.WRAP_CONTENT
+      }
+      getSystemService<WindowManager>()?.addView(floatingView, layoutParam)
     }
   }
 
