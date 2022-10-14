@@ -12,6 +12,7 @@ import androidx.core.content.getSystemService
 import androidx.lifecycle.lifecycleScope
 import io.goooler.demoapp.base.core.BaseService
 import io.goooler.demoapp.base.util.unsafeLazy
+import io.goooler.demoapp.common.R
 import io.goooler.demoapp.common.databinding.CommonFloatingTipViewBinding
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -63,7 +64,7 @@ class AudioPlayService : BaseService() {
     }
     lifecycleScope.launch {
       delay(3000)
-      val floatingView = CommonFloatingTipViewBinding.inflate(LayoutInflater.from(this@AudioPlayService)).root
+      val floatingView = LayoutInflater.from(this@AudioPlayService).inflate(R.layout.common_floating_tip_view, null)
       val layoutParam = WindowManager.LayoutParams().apply {
         width = WindowManager.LayoutParams.WRAP_CONTENT
         height = WindowManager.LayoutParams.WRAP_CONTENT
