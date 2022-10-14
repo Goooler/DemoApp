@@ -97,7 +97,7 @@ rxJava3-java = "io.reactivex.rxjava3:rxjava:3.1.5"
 srl-footer = { module = "io.github.scwang90:refresh-footer-classics", version.ref = "srl" }
 srl-header = { module = "io.github.scwang90:refresh-header-classics", version.ref = "srl" }
 srl-kernel = { module = "io.github.scwang90:refresh-layout-kernel", version.ref = "srl" }
-utils = "com.blankj:utilcodex:1.31.0"
+utils = "com.blankj:utilcodex:1.31.1"
 
 [bundles]
 androidX-compose = [
