@@ -2,10 +2,13 @@ package io.goooler.demoapp.common.service
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.PixelFormat
 import android.media.AudioAttributes
 import android.media.AudioManager
 import android.media.MediaPlayer
 import android.os.Build
+import android.util.DisplayMetrics
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.WindowManager
 import androidx.core.content.getSystemService
@@ -13,7 +16,6 @@ import androidx.lifecycle.lifecycleScope
 import io.goooler.demoapp.base.core.BaseService
 import io.goooler.demoapp.base.util.unsafeLazy
 import io.goooler.demoapp.common.R
-import io.goooler.demoapp.common.databinding.CommonFloatingTipViewBinding
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -64,12 +66,20 @@ class AudioPlayService : BaseService() {
     }
     lifecycleScope.launch {
       delay(3000)
-      val floatingView = LayoutInflater.from(this@AudioPlayService).inflate(R.layout.common_floating_tip_view, null)
+      val windowManager = getSystemService<WindowManager>() ?: return@launch
+      val outMetrics = DisplayMetrics()
+      windowManager.defaultDisplay.getMetrics(outMetrics)
       val layoutParam = WindowManager.LayoutParams().apply {
+        type = WindowManager.LayoutParams.TYPE_TOAST
+        format = PixelFormat.RGBA_8888
         width = WindowManager.LayoutParams.WRAP_CONTENT
         height = WindowManager.LayoutParams.WRAP_CONTENT
+        gravity = Gravity.START or Gravity.TOP
+        x = outMetrics.widthPixels / 2 - width / 2
+        y = outMetrics.heightPixels / 2 - height / 2
       }
-      getSystemService<WindowManager>()?.addView(floatingView, layoutParam)
+      val floatingView = LayoutInflater.from(this@AudioPlayService).inflate(R.layout.common_floating_tip_view, null)
+      windowManager.addView(floatingView, layoutParam)
     }
   }
 
