@@ -13,6 +13,7 @@
   <uses-permission android:name="android.permission.CAMERA" />
   <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
   <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+  <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW" />
   <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
   <application android:networkSecurityConfig="@xml/common_network_security_config">
