@@ -1,8 +1,10 @@
 package io.goooler.demoapp.common.network
 
-abstract class BaseResponse(
-  val message: String? = null,
-  val code: Int = -1,
-)
+interface BaseResponse {
+  val message: String?
+    get() = null
+  val code: Int
+    get() = -1
+}
 
-class HttpResponse<T>(val entry: T?) : BaseResponse()
+class HttpResponse<T>(val entry: T?) : BaseResponse
