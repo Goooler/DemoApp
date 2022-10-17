@@ -23,7 +23,7 @@ abstract class BasePagingSource<T : IDiffVhModelType> : PagingSource<Int, T>() {
         currentPage + 1,
       )
     }
-  } catch (e: Exception) {
+  } catch (@Suppress("TooGenericExceptionCaught") e: Exception) {
     LoadResult.Error(e)
   }
 
