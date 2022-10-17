@@ -7,4 +7,4 @@ interface BaseResponse {
     get() = -1
 }
 
-class HttpResponse<T>(val entry: T?) : BaseResponse
+class HttpResponse<T : Any>(val entry: T?) : BaseResponse
