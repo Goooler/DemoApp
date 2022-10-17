@@ -13,5 +13,5 @@ interface MainCommonDao {
   suspend fun getRepoList(ownerName: String): List<MainRepoListBean>
 
   @Insert(onConflict = OnConflictStrategy.REPLACE)
-  suspend fun insertRepoList(vararg entities: MainRepoListBean)
+  suspend fun insertRepoList(list: List<MainRepoListBean>)
 }
