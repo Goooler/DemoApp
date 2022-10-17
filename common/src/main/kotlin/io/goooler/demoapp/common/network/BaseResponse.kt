@@ -1,6 +1,6 @@
 package io.goooler.demoapp.common.network
 
-abstract class BaseResponse(
+sealed class BaseResponse(
   val message: String? = null,
   val code: Int = -1,
 )

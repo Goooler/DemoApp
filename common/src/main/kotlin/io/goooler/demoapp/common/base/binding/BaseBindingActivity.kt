@@ -35,6 +35,7 @@ abstract class BaseBindingActivity<VB : ViewDataBinding> : BaseActivity(), IBind
     }
   }
 
+  @Suppress("MagicNumber")
   override fun getResources(): Resources {
     return if (ScreenUtils.isPortrait()) {
       AdaptScreenUtils.adaptWidth(super.getResources(), 360)
