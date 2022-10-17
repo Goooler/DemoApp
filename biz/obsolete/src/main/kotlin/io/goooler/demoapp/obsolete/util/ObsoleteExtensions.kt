@@ -16,7 +16,7 @@ import java.util.Date
 import kotlin.math.absoluteValue
 
 @Throws(ResponseException::class)
-fun <T> HttpResponse<T>.checkCodeWithException(): T? {
+fun <T : Any> HttpResponse<T>.checkCodeWithException(): T? {
   if (code != 200) throw (message ?: code.toString()).toResponseException()
   return entry
 }
