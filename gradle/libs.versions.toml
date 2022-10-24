@@ -27,7 +27,7 @@ support = "28.0.0"
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-ksp = "com.google.devtools.ksp:1.7.20-1.0.6"
+ksp = "com.google.devtools.ksp:1.7.20-1.0.7"
 napt = "com.sergei-lapin.napt:1.17"
 kotlinter = "org.jmailen.kotlinter:3.12.0"
 detekt = "io.gitlab.arturbosch.detekt:1.21.0"
@@ -80,7 +80,7 @@ square-retrofit-moshi = { module = "com.squareup.retrofit2:converter-moshi", ver
 google-accompanist-swipeRefresh = { module = "com.google.accompanist:accompanist-swiperefresh", version.ref = "accompanist" }
 google-accompanist-systemUiController = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanist" }
 google-gson = "com.google.code.gson:gson:2.9.1"
-google-material = "com.google.android.material:material:1.6.1"
+google-material = "com.google.android.material:material:1.7.0"
 
 chucker-debug = { module = "com.github.chuckerteam.chucker:library", version.ref = "chucker" }
 chucker-release = { module = "com.github.chuckerteam.chucker:library-no-op", version.ref = "chucker" }
@@ -97,7 +97,7 @@ rxJava3-java = "io.reactivex.rxjava3:rxjava:3.1.5"
 srl-footer = { module = "io.github.scwang90:refresh-footer-classics", version.ref = "srl" }
 srl-header = { module = "io.github.scwang90:refresh-header-classics", version.ref = "srl" }
 srl-kernel = { module = "io.github.scwang90:refresh-layout-kernel", version.ref = "srl" }
-utils = "com.blankj:utilcodex:1.31.0"
+utils = "com.blankj:utilcodex:1.31.1"
 
 [bundles]
 androidX-compose = [

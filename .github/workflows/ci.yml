@@ -38,7 +38,7 @@ jobs:
       - uses: actions/setup-java@v3
         with:
           distribution: 'zulu'
-          java-version: 19
+          java-version: 18
       - uses: gradle/gradle-build-action@v2
       - run: ./gradlew lintKotlin
 
@@ -49,7 +49,7 @@ jobs:
       - uses: actions/setup-java@v3
         with:
           distribution: 'zulu'
-          java-version: 19
+          java-version: 18
       - uses: gradle/gradle-build-action@v2
       - run: ./gradlew detekt
 
@@ -60,7 +60,7 @@ jobs:
       - uses: actions/setup-java@v3
         with:
           distribution: 'zulu'
-          java-version: 19
+          java-version: 18
       - uses: gradle/gradle-build-action@v2
       - run: ./gradlew lintDebug
 
@@ -73,7 +73,7 @@ jobs:
       - uses: actions/setup-java@v3
         with:
           distribution: 'zulu'
-          java-version: 19
+          java-version: 18
       - uses: gradle/gradle-build-action@v2
       - run: ./gradlew testDebugUnitTest
 
@@ -90,7 +90,7 @@ jobs:
       - uses: actions/setup-java@v3
         with:
           distribution: 'zulu'
-          java-version: 19
+          java-version: 18
       - uses: gradle/gradle-build-action@v2
       - uses: actions/cache@v3
         id: avd-cache
@@ -122,11 +122,12 @@ jobs:
       - uses: actions/setup-java@v3
         with:
           distribution: 'zulu'
-          java-version: 19
+          java-version: 18
       - uses: gradle/gradle-build-action@v2
         with:
           gradle-home-cache-cleanup: true
       - run: ./gradlew app:assembleProdRelease
       - uses: actions/upload-artifact@v3
         with:
-          path: app/build/*.apk
+          name: build-outputs
+          path: app/build/outputs/apk/prod/release/*.apk

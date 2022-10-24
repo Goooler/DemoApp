@@ -14,10 +14,10 @@ jobs:
       - uses: actions/setup-java@v3
         with:
           distribution: 'zulu'
-          java-version: 19
+          java-version: 18
       - uses: gradle/gradle-build-action@v2
       - run: ./gradlew app:assembleProdRelease
       - uses: ncipollo/release-action@v1
         with:
-          artifacts: "app/build/*.apk"
+          artifacts: app/build/outputs
           token: ${{ secrets.GITHUB_TOKEN }}
