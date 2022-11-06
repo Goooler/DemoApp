@@ -30,7 +30,7 @@ kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 ksp = "com.google.devtools.ksp:1.7.20-1.0.7"
 napt = "com.sergei-lapin.napt:1.17"
 kotlinter = "org.jmailen.kotlinter:3.12.0"
-detekt = "io.gitlab.arturbosch.detekt:1.22.0-RC2"
+detekt = "io.gitlab.arturbosch.detekt:1.22.0-RC3"
 
 [libraries]
 kotlin-junit5 = { module = "org.jetbrains.kotlin:kotlin-test-junit5", version.ref = "kotlin" }
