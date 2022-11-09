@@ -6,6 +6,6 @@
     "config:base"
   ],
   "ignoreDeps": [
-    "com.alibaba:fastjson"
+    "org.jetbrains.kotlin"
   ]
 }
