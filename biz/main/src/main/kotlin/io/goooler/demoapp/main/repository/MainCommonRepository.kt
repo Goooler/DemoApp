@@ -23,7 +23,7 @@ class MainCommonRepository {
       "page" to page,
       "per_page" to pageSize,
     )
-    return api.getRepoList(user, params)
+    return api.getRepos(user, params)
   }
 
   suspend fun getRepoListFromDb(ownerName: String): List<MainRepoListBean> =
