@@ -35,6 +35,10 @@
 
 -keepattributes Signature,InnerClasses,EnclosingMethod,*Annotation*
 
+# Retrofit
+-if interface * { @retrofit2.http.* <methods>; }
+-keep,allowobfuscation interface * extends <1>
+
 # Okio
 -dontwarn okio.**
 
