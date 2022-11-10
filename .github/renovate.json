@@ -6,6 +6,7 @@
     "config:base"
   ],
   "ignoreDeps": [
-    "org.jetbrains.kotlin"
+    "org.jetbrains.kotlin",
+    "com.google.devtools.ksp"
   ]
 }
