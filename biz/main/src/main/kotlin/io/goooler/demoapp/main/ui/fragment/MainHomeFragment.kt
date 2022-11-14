@@ -12,6 +12,7 @@ import androidx.core.graphics.drawable.IconCompat
 import androidx.fragment.app.viewModels
 import io.goooler.demoapp.base.util.addDynamicShortcutCompat
 import io.goooler.demoapp.base.util.unsafeLazy
+import io.goooler.demoapp.common.CommonApplication
 import io.goooler.demoapp.common.base.binding.BaseBindingFragment
 import io.goooler.demoapp.common.databinding.CommonBottomTipDialogFragmentBinding
 import io.goooler.demoapp.common.router.RouterManager
@@ -28,7 +29,7 @@ class MainHomeFragment : BaseBindingFragment<MainHomeFragmentBinding>() {
   private val initData by unsafeLazy { vm.initData() }
 
   private val windowManager by lazy {
-    context?.getSystemService<WindowManager>()
+     CommonApplication.app.getSystemService<WindowManager>()
   }
 
   override fun initOnce() {
