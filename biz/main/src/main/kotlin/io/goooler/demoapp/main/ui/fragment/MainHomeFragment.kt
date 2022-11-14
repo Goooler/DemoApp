@@ -5,12 +5,15 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.view.View
+import android.view.WindowManager
+import androidx.core.content.getSystemService
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.graphics.drawable.IconCompat
 import androidx.fragment.app.viewModels
 import io.goooler.demoapp.base.util.addDynamicShortcutCompat
 import io.goooler.demoapp.base.util.unsafeLazy
 import io.goooler.demoapp.common.base.binding.BaseBindingFragment
+import io.goooler.demoapp.common.databinding.CommonBottomTipDialogFragmentBinding
 import io.goooler.demoapp.common.router.RouterManager
 import io.goooler.demoapp.common.ui.FullScreenDialogFragment
 import io.goooler.demoapp.common.util.showToast
@@ -23,6 +26,10 @@ class MainHomeFragment : BaseBindingFragment<MainHomeFragmentBinding>() {
   private val vm: MainHomeViewModel by viewModels()
 
   private val initData by unsafeLazy { vm.initData() }
+
+  private val windowManager by lazy {
+    context?.getSystemService<WindowManager>()
+  }
 
   override fun initOnce() {
     binding.let {
@@ -41,7 +48,7 @@ class MainHomeFragment : BaseBindingFragment<MainHomeFragmentBinding>() {
       binding.bt1 -> {
         binding.bt1.postDelayed(
           {
-            "this is a tip in background".showToast()
+            showViewInBackground()
           },
           2000,
         )
@@ -72,6 +79,11 @@ class MainHomeFragment : BaseBindingFragment<MainHomeFragmentBinding>() {
       .setIntent(intent)
       .build()
     context.addDynamicShortcutCompat(SHORTCUT_ID, shortcut)
+  }
+
+  private fun showViewInBackground() {
+    val view = CommonBottomTipDialogFragmentBinding.inflate(layoutInflater).root
+    windowManager?.updateViewLayout(view, acu.a())
   }
 
   companion object {
