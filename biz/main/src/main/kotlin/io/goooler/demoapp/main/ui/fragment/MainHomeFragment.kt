@@ -13,6 +13,7 @@ import io.goooler.demoapp.base.util.unsafeLazy
 import io.goooler.demoapp.common.base.binding.BaseBindingFragment
 import io.goooler.demoapp.common.router.RouterManager
 import io.goooler.demoapp.common.ui.FullScreenDialogFragment
+import io.goooler.demoapp.common.util.showToast
 import io.goooler.demoapp.main.databinding.MainHomeFragmentBinding
 import io.goooler.demoapp.main.ui.AudioPlayActivity
 import io.goooler.demoapp.main.vm.MainHomeViewModel
@@ -37,7 +38,15 @@ class MainHomeFragment : BaseBindingFragment<MainHomeFragmentBinding>() {
 
   private val listener = View.OnClickListener {
     when (it) {
-      binding.bt1 -> RouterManager.goWeb(requireContext(), "bilibili.com")
+      binding.bt1 -> {
+        binding.bt1.postDelayed(
+          {
+            "this is a tip in background".showToast()
+          },
+          2000,
+        )
+      }
+
       binding.bt4 -> vm.countDown()
       binding.bt6 -> FullScreenDialogFragment.show(childFragmentManager)
       binding.bt7 -> RouterManager.goAudioPlay(requireContext())
