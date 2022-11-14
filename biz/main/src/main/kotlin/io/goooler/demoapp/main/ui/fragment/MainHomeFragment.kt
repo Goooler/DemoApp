@@ -17,7 +17,6 @@ import io.goooler.demoapp.common.base.binding.BaseBindingFragment
 import io.goooler.demoapp.common.databinding.CommonBottomTipDialogFragmentBinding
 import io.goooler.demoapp.common.router.RouterManager
 import io.goooler.demoapp.common.ui.FullScreenDialogFragment
-import io.goooler.demoapp.common.util.showToast
 import io.goooler.demoapp.main.databinding.MainHomeFragmentBinding
 import io.goooler.demoapp.main.ui.AudioPlayActivity
 import io.goooler.demoapp.main.vm.MainHomeViewModel
@@ -29,7 +28,7 @@ class MainHomeFragment : BaseBindingFragment<MainHomeFragmentBinding>() {
   private val initData by unsafeLazy { vm.initData() }
 
   private val windowManager by lazy {
-     CommonApplication.app.getSystemService<WindowManager>()
+    CommonApplication.app.getSystemService<WindowManager>()
   }
 
   override fun initOnce() {
@@ -84,7 +83,7 @@ class MainHomeFragment : BaseBindingFragment<MainHomeFragmentBinding>() {
 
   private fun showViewInBackground() {
     val view = CommonBottomTipDialogFragmentBinding.inflate(layoutInflater).root
-    windowManager?.updateViewLayout(view, acu.a())
+    windowManager?.addView(view, acu.a())
   }
 
   companion object {
