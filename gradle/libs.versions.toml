@@ -28,7 +28,7 @@ android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 ksp = "com.google.devtools.ksp:1.7.20-1.0.8"
-napt = "com.sergei-lapin.napt:1.18"
+napt = "com.sergei-lapin.napt:1.19"
 kotlinter = "org.jmailen.kotlinter:3.12.0"
 detekt = "io.gitlab.arturbosch.detekt:1.21.0"
 
