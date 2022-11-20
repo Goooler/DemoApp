@@ -1,3 +1,5 @@
+@file:Suppress("TooGenericExceptionCaught", "MagicNumber")
+
 package io.goooler.demoapp.main.vm
 
 import androidx.lifecycle.viewModelScope

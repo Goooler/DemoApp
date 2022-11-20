@@ -1,4 +1,4 @@
-@file:Suppress("unused")
+@file:Suppress("unused", "TooManyFunctions")
 @file:JvmName("BaseExtensionUtil")
 @file:OptIn(ExperimentalContracts::class)
 
@@ -102,6 +102,7 @@ fun lazyReflectedMethod(
   methodName: String,
   vararg parameterTypes: Any,
 ): Lazy<Method> = lazy {
+  @Suppress("SpreadOperator")
   getReflectedMethod(declaringClass, methodName, *getParameterTypes(parameterTypes))
 }
 
@@ -320,6 +321,7 @@ fun <T> List<T>.secondOrNull(): T? {
  * 取集合内第三个元素
  */
 fun <T> List<T>.thirdOrNull(): T? {
+  @Suppress("MagicNumber")
   return if (size < 3) null else this[2]
 }
 

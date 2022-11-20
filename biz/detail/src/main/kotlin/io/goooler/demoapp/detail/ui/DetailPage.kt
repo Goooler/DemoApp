@@ -1,3 +1,5 @@
+@file:Suppress("FunctionNaming")
+
 package io.goooler.demoapp.detail.ui
 
 import androidx.compose.foundation.clickable
@@ -103,6 +105,7 @@ fun DetailPage(model: RepoDetailModel, onForkClick: () -> Unit) {
 @Preview
 @Composable
 fun DetailPagePreview() {
+  @Suppress("MagicNumber")
   val model = RepoDetailModel(
     "Compose/Demo",
     "Jetpack Compose is Android’s modern toolkit for building native UI. " +

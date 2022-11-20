@@ -1,3 +1,5 @@
+@file:Suppress("MagicNumber")
+
 package io.goooler.demoapp.base.network
 
 import android.content.Context

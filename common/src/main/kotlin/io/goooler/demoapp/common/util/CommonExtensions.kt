@@ -1,4 +1,4 @@
-@file:Suppress("unused", "SupportAnnotationUsage")
+@file:Suppress("unused", "SupportAnnotationUsage", "TooManyFunctions", "TooGenericExceptionCaught", "PrintStackTrace")
 @file:JvmName("CommonExtensionUtil")
 
 package io.goooler.demoapp.common.util
@@ -87,8 +87,6 @@ fun Long.millis2String(pattern: String = "yyyyMMddHHmmss"): String =
 fun String.showToast() {
   ToastUtil.show(CommonApplication.app, this)
 }
-
-fun String.isValidPhoneFormat(): Boolean = startsWith("1") && length == 11
 
 fun String.hidePhoneNumber(): String {
   return replace(Regex("(\\d{3})\\d{4}(\\d{4})"), "$1****$2")
