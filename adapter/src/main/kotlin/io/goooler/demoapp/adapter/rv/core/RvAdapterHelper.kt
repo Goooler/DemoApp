@@ -17,6 +17,7 @@ import io.goooler.demoapp.adapter.rv.core.ISpanSize.Companion.SPAN_SIZE_FULL
  * @version 1.0.0
  * @since 1.0.0
  */
+@Suppress("TooManyFunctions")
 internal class RvAdapterHelper<M : IVhModelType>(private val adapter: IRvAdapter<M>) {
 
   private val ivdManager = ViewTypeDelegateManager<M>()

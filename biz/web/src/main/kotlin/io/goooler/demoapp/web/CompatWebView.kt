@@ -59,6 +59,7 @@ open class CompatWebView(context: Context, attrs: AttributeSet? = null) : WebVie
       // h5 存储数据
       domStorageEnabled = true
       // 设置默认字体大小
+      @Suppress("MagicNumber")
       defaultFontSize = 18
       // 关闭安全浏览
       WebSettingsCompat.setSafeBrowsingEnabled(this, false)

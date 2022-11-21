@@ -30,6 +30,6 @@ class MainCommonRepository {
     dao.getRepoList(ownerName)
 
   suspend fun putRepoListIntoDb(list: List<MainRepoListBean>) {
-    dao.insertRepoList(*list.toTypedArray())
+    dao.insertRepoList(list)
   }
 }

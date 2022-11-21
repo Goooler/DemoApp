@@ -1,4 +1,4 @@
-@file:Suppress("unused")
+@file:Suppress("unused", "LongParameterList", "ComplexMethod", "TooManyFunctions", "MagicNumber")
 
 package io.goooler.demoapp.base.util
 

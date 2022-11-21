@@ -21,6 +21,7 @@ abstract class CommonApplication : BaseApplication() {
     enableStrictMode()
   }
 
+  @Suppress("SpreadOperator")
   private fun initSmartRefresh() {
     val colors = intArrayOf(android.R.color.transparent, android.R.color.darker_gray)
     SmartRefreshLayout.setDefaultRefreshHeaderCreator { context, refreshLayout ->

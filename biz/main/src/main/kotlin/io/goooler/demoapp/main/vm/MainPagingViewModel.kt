@@ -37,8 +37,12 @@ class MainPagingViewModel : BaseViewModel() {
 
   private inner class DataSource : BasePagingSource<MainCommonVhModel>() {
     override suspend fun fetchListData(page: Int): List<MainCommonVhModel> {
-      return repository.getRepoListFromApi("google", page, 30)
+      return repository.getRepoListFromApi("google", page, DEFAULT_PAGE_SIZE)
         .map { MainCommonVhModel.Repo(it.owner.avatarUrl, it.name, it.fullName) }
     }
+  }
+
+  companion object {
+    private const val DEFAULT_PAGE_SIZE = 30
   }
 }
