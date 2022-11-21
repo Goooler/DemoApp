@@ -1,5 +1,3 @@
-@file:Suppress("FunctionNaming")
-
 package io.goooler.demoapp.detail.ui
 
 import androidx.compose.foundation.clickable
