@@ -1,6 +1,7 @@
 package io.goooler.demoapp.detail.ui
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -13,27 +14,31 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.pullrefresh.PullRefreshIndicator
+import androidx.compose.material.pullrefresh.pullRefresh
+import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.google.accompanist.swiperefresh.SwipeRefresh
-import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import io.goooler.demoapp.common.util.getQuantityString
 import io.goooler.demoapp.common.util.showToast
 import io.goooler.demoapp.detail.R
 import io.goooler.demoapp.detail.model.RepoDetailModel
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun DetailPageWithSwipeRefresh(
   isRefreshing: Boolean,
@@ -41,9 +46,12 @@ fun DetailPageWithSwipeRefresh(
   model: RepoDetailModel,
   onForkClick: () -> Unit,
 ) {
+  val refreshState = rememberPullRefreshState(refreshing = isRefreshing, onRefresh = onRefresh)
+
   MaterialTheme {
-    SwipeRefresh(state = rememberSwipeRefreshState(isRefreshing), onRefresh = onRefresh) {
+    Box(modifier = Modifier.pullRefresh(state = refreshState)) {
       DetailPage(model, onForkClick)
+      PullRefreshIndicator(isRefreshing, refreshState, Modifier.align(Alignment.TopCenter))
     }
   }
 }
@@ -74,9 +82,11 @@ fun DetailPage(model: RepoDetailModel, onForkClick: () -> Unit) {
     )
     Spacer(modifier = Modifier.height(5.dp))
     Row {
-      Button(onClick = {
-        R.plurals.detail_star_count_tip.getQuantityString(model.starsCount)?.showToast()
-      },) {
+      Button(
+        onClick = {
+          R.plurals.detail_star_count_tip.getQuantityString(model.starsCount)?.showToast()
+        },
+      ) {
         Icon(
           Icons.Filled.Star,
           contentDescription = "Star",
