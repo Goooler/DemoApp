@@ -21,7 +21,10 @@ android {
     dataBinding = true
     resValues = true
   }
-  lint.abortOnError = true
+  lint {
+    abortOnError = true
+    warningsAsErrors = true
+  }
   val releaseSigning = signingConfigs.create("release") {
     keyAlias = getSignProperty("keyAlias")
     keyPassword = getSignProperty("keyPassword")
