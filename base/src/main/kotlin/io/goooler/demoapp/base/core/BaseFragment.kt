@@ -10,6 +10,7 @@ abstract class BaseFragment : Fragment(), IFragment {
     super.onCreate(savedInstanceState)
     activity?.onBackPressedDispatcher?.addCallback(this) {
       isEnabled = onBackPressed()
+      @Suppress("DEPRECATION")
       if (!isEnabled) activity?.onBackPressed()
       isEnabled = true
     }
