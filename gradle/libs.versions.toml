@@ -77,7 +77,6 @@ square-retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "s
 square-retrofit-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "square-retrofit" }
 square-retrofit-moshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "square-retrofit" }
 
-google-accompanist-swipeRefresh = { module = "com.google.accompanist:accompanist-swiperefresh", version.ref = "accompanist" }
 google-accompanist-systemUiController = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanist" }
 google-gson = "com.google.code.gson:gson:2.10"
 google-material = "com.google.android.material:material:1.7.0"
@@ -118,7 +117,6 @@ androidX-room = [
   "androidX-room-ktx"
 ]
 accompanist = [
-  "google-accompanist-swipeRefresh",
   "google-accompanist-systemUiController"
 ]
 coil = [
