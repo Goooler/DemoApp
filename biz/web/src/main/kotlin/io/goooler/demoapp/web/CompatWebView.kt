@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.webkit.SslErrorHandler
 import android.webkit.ValueCallback
 import android.webkit.WebChromeClient
+import android.webkit.WebResourceRequest
 import android.webkit.WebSettings
 import android.webkit.WebView
 import androidx.annotation.IntRange
@@ -69,8 +70,8 @@ open class CompatWebView(context: Context, attrs: AttributeSet? = null) : WebVie
         handler.proceed()
       }
 
-      override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
-        return onEventListener?.onInterceptUrl(url) ?: false
+      override fun shouldOverrideUrlLoading(view: WebView, request: WebResourceRequest): Boolean {
+        return onEventListener?.onInterceptUrl(request.url) ?: false
       }
 
       override fun onPageFinished(view: WebView, url: String) {
@@ -112,7 +113,7 @@ open class CompatWebView(context: Context, attrs: AttributeSet? = null) : WebVie
   }
 
   interface OnEventListener {
-    fun onInterceptUrl(url: String): Boolean
+    fun onInterceptUrl(uri: Uri): Boolean
 
     fun onReceivedTitle(title: String)
 
