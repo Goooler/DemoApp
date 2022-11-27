@@ -50,7 +50,7 @@ android {
   applicationVariants.configureEach {
     outputs.configureEach {
       (this as? ApkVariantOutputImpl)?.outputFileName =
-        "${appName}_${versionName}_${versionCode}_${flavorName}_${buildType.name}.apk"
+        "${appName}_${versionName}_${versionCode}_${flavorName}_${buildType.name}_$commitHash.apk"
     }
   }
 }
@@ -69,3 +69,7 @@ dependencies {
 fun Project.getSignProperty(key: String, path: String = "gradle/keystore.properties"): String {
   return Properties().apply { rootProject.file(path).inputStream().use(::load) }.getProperty(key)
 }
+
+val commitHash = providers.exec {
+  commandLine("git", "rev-parse", "--short=7", "HEAD")
+}.standardOutput.asText.get().trim()
