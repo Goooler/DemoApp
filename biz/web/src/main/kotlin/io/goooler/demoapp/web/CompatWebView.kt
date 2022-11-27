@@ -113,7 +113,7 @@ open class CompatWebView(context: Context, attrs: AttributeSet? = null) : WebVie
   }
 
   interface OnEventListener {
-    fun onInterceptUrl(url: Uri): Boolean
+    fun onInterceptUrl(uri: Uri): Boolean
 
     fun onReceivedTitle(title: String)
 

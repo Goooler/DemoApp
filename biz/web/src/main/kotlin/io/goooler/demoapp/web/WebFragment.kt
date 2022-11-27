@@ -8,7 +8,6 @@ import android.webkit.WebChromeClient
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.IntRange
-import androidx.core.net.toUri
 import io.goooler.demoapp.base.util.extension2MimeType
 import io.goooler.demoapp.base.util.isNetworkUrl
 import io.goooler.demoapp.base.util.putArguments
@@ -53,10 +52,10 @@ class WebFragment : BaseBindingFragment<WebFragmentBinding>() {
   }
 
   private val listener = object : CompatWebView.OnEventListener, JsInterface {
-    override fun onInterceptUrl(url: Uri): Boolean = if (url.toString().isNetworkUrl()) {
+    override fun onInterceptUrl(uri: Uri): Boolean = if (uri.toString().isNetworkUrl()) {
       false
     } else {
-      startActivity(Intent(Intent.ACTION_VIEW, url))
+      startActivity(Intent(Intent.ACTION_VIEW, uri))
       true
     }
 
