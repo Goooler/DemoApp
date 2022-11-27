@@ -53,10 +53,10 @@ class WebFragment : BaseBindingFragment<WebFragmentBinding>() {
   }
 
   private val listener = object : CompatWebView.OnEventListener, JsInterface {
-    override fun onInterceptUrl(url: String): Boolean = if (url.isNetworkUrl()) {
+    override fun onInterceptUrl(url: Uri): Boolean = if (url.toString().isNetworkUrl()) {
       false
     } else {
-      startActivity(Intent(Intent.ACTION_VIEW, url.toUri()))
+      startActivity(Intent(Intent.ACTION_VIEW, url))
       true
     }
 
