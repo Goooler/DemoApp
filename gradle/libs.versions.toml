@@ -1,7 +1,7 @@
 [versions]
 versionName = "1.7.2"
 versionCode = "107020"
-accompanist = "0.27.1"
+accompanist = "0.28.0"
 agp = "7.3.1"
 androidX-activity = "1.6.1"
 androidX-appCompat = "1.5.1"
