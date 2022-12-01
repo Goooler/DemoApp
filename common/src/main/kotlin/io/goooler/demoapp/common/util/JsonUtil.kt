@@ -1,4 +1,4 @@
-@file:Suppress("unused")
+@file:Suppress("unused", "TooGenericExceptionCaught", "PrintStackTrace")
 
 package io.goooler.demoapp.common.util
 

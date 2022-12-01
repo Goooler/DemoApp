@@ -14,7 +14,7 @@ dependencyResolutionManagement {
 }
 
 plugins {
-  id("com.gradle.enterprise") version "3.11.3"
+  id("com.gradle.enterprise") version "3.11.4"
 }
 
 gradleEnterprise {
@@ -41,3 +41,4 @@ include(
 )
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+enableFeaturePreview("STABLE_CONFIGURATION_CACHE")

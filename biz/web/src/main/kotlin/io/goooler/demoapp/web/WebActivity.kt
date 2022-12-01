@@ -54,6 +54,7 @@ class WebActivity : BaseBindingActivity<WebActivityBinding>() {
     }
 
     override fun onProgressChanged(i: Int) {
+      @Suppress("MagicNumber")
       binding.progressBar.visibility = if (i >= 100) {
         View.GONE
       } else {

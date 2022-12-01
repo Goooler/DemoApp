@@ -1,3 +1,5 @@
+@file:Suppress("TooGenericExceptionCaught", "MagicNumber", "PrintStackTrace")
+
 package io.goooler.demoapp.obsolete.util
 
 import com.blankj.utilcode.util.TimeUtils
@@ -80,6 +82,7 @@ fun Long.easyTime(): String {
  *
  * 分是 Long 类型、元是 Double 类型
  */
+@Suppress("NestedBlockDepth")
 fun Number.formatMoney(isYuan: Boolean = false, trans2W: Boolean = false, scale: Int = 2): String {
   val moneyF = if (isYuan) {
     toDouble()

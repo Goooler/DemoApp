@@ -1,3 +1,5 @@
+@file:Suppress("MagicNumber")
+
 package io.goooler.demoapp.obsolete.network.exception
 
 import io.goooler.demoapp.common.network.BaseResponse
