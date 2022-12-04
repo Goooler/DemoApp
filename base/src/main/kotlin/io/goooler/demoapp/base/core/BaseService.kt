@@ -2,6 +2,8 @@ package io.goooler.demoapp.base.core
 
 import android.app.Notification
 import android.app.NotificationManager
+import android.app.Service
+import android.os.Build
 import androidx.annotation.DrawableRes
 import androidx.annotation.IntRange
 import androidx.core.app.NotificationChannelCompat
@@ -48,7 +50,12 @@ abstract class BaseService : LifecycleService() {
   }
 
   override fun onDestroy() {
-    stopForeground(true)
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+      stopForeground(Service.STOP_FOREGROUND_REMOVE)
+    } else {
+      @Suppress("DEPRECATION")
+      stopForeground(true)
+    }
     super.onDestroy()
   }
 }

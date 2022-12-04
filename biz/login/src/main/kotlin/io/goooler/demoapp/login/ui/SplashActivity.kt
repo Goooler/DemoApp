@@ -18,6 +18,7 @@ class SplashActivity : BaseActivity() {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
       finish()
     } else {
+      @Suppress("DEPRECATION")
       super.onBackPressed()
     }
   }
