@@ -531,6 +531,8 @@ fun Context.setMusicMute(mute: Boolean = true) {
   }
 }
 
+inline fun <reified T : Any> Context.requireSystemService(): T = checkNotNull(getSystemService())
+
 // ---------------------Activity-------------------------------//
 
 @MainThread
