@@ -6,22 +6,17 @@ import android.media.AudioAttributes
 import android.media.AudioManager
 import android.media.MediaPlayer
 import android.os.Build
-import androidx.core.content.getSystemService
 import io.goooler.demoapp.base.core.BaseService
+import io.goooler.demoapp.base.util.requireSystemService
 import io.goooler.demoapp.base.util.unsafeLazy
 
 class AudioPlayService : BaseService() {
 
   private val mediaPlayer = MediaPlayer()
   private var lastStreamUrl = ""
-  private var audioManager: AudioManager? = null
+  private val audioManager: AudioManager by unsafeLazy { requireSystemService() }
 
   override val contentTitle: String get() = "正在播放音频"
-
-  override fun onCreate() {
-    super.onCreate()
-    audioManager = getSystemService()
-  }
 
   override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
     when (intent?.action) {
@@ -69,13 +64,12 @@ class AudioPlayService : BaseService() {
 
   private fun stopPlay() {
     abandonAudioFocus()
-    audioManager = null
     mediaPlayer.stop()
   }
 
   private fun requestAudioFocus() {
     @Suppress("DEPRECATION")
-    audioManager?.requestAudioFocus(
+    audioManager.requestAudioFocus(
       audioFocusChangeListener,
       AudioManager.STREAM_MUSIC,
       AudioManager.AUDIOFOCUS_GAIN,
@@ -84,7 +78,7 @@ class AudioPlayService : BaseService() {
 
   private fun abandonAudioFocus() {
     @Suppress("DEPRECATION")
-    audioManager?.abandonAudioFocus(audioFocusChangeListener)
+    audioManager.abandonAudioFocus(audioFocusChangeListener)
   }
 
   private val audioFocusChangeListener by unsafeLazy {
