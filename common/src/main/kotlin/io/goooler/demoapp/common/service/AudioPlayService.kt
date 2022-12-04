@@ -68,6 +68,7 @@ class AudioPlayService : BaseService() {
   }
 
   private fun requestAudioFocus() {
+    @Suppress("DEPRECATION")
     audioManager.requestAudioFocus(
       audioFocusChangeListener,
       AudioManager.STREAM_MUSIC,
@@ -76,6 +77,7 @@ class AudioPlayService : BaseService() {
   }
 
   private fun abandonAudioFocus() {
+    @Suppress("DEPRECATION")
     audioManager.abandonAudioFocus(audioFocusChangeListener)
   }
 
