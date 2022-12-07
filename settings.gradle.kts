@@ -40,7 +40,15 @@ include(
   ":biz:obsolete",
 )
 
-includeBuild("demo")
+includeBuild("demo") {
+  dependencySubstitution {
+    substitute(module("demo:common")).using(project(":common"))
+    substitute(module("demo:biz.login")).using(project(":biz:login"))
+    substitute(module("demo:biz.main")).using(project(":biz:main"))
+    substitute(module("demo:biz.detail")).using(project(":biz:detail"))
+    substitute(module("demo:biz.web")).using(project(":biz:web"))
+  }
+}
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 enableFeaturePreview("STABLE_CONFIGURATION_CACHE")
