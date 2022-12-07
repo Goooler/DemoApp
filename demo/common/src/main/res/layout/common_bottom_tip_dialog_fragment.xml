@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools">
+
+  <LinearLayout
+    binding_bg_solidColor="@{@android:color/holo_red_dark}"
+    binding_bg_topLeftRadius="@{30}"
+    binding_bg_topRightRadius="@{30}"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="300dp"
+    android:orientation="vertical"
+    tools:background="@android:color/holo_red_dark">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+
+      <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/common_white"
+        android:textSize="19sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="这是一个示例标题" />
+
+      <ImageView
+        android:id="@+id/iv_close"
+        android:layout_width="37dp"
+        android:layout_height="37dp"
+        android:padding="10dp"
+        android:src="@drawable/common_ic_close"
+        app:layout_constraintBottom_toBottomOf="@id/tv_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_title"
+        app:tint="@color/common_white" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+      android:id="@+id/tv_content"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="12dp"
+      android:layout_marginTop="25dp"
+      android:layout_marginEnd="12dp"
+      android:textColor="@color/common_white"
+      tools:text="这是一段示例内容" />
+  </LinearLayout>
+</layout>

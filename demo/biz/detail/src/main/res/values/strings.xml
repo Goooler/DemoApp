@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <plurals name="detail_star_count_tip">
+    <item quantity="one">All %d star.</item>
+    <item quantity="other">All %d stars.</item>
+  </plurals>
+
+</resources>
