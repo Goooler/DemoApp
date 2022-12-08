@@ -37,13 +37,14 @@ kotlin-junit5 = { module = "org.jetbrains.kotlin:kotlin-test-junit5", version.re
 kotlinX-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
 kotlinX-immutable = "org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.5"
 
-androidX-compose-ui = { module = "androidx.compose.ui:ui", version.ref = "androidX-compose" }
-androidX-compose-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "androidX-compose" }
-androidX-compose-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "androidX-compose" }
-androidX-compose-material = { module = "androidx.compose.material:material", version.ref = "androidX-compose" }
-androidX-compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "androidX-compose" }
-androidX-compose-icons-core = { module = "androidx.compose.material:material-icons-core", version.ref = "androidX-compose" }
-androidX-compose-icons-extended = { module = "androidx.compose.material:material-icons-extended", version.ref = "androidX-compose" }
+androidX-compose-bom = { module = "androidx.compose:compose-bom", version = "2022.12.00" }
+androidX-compose-ui = { module = "androidx.compose.ui:ui"}
+androidX-compose-tooling = { module = "androidx.compose.ui:ui-tooling"}
+androidX-compose-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview"}
+androidX-compose-material = { module = "androidx.compose.material:material"}
+androidX-compose-foundation = { module = "androidx.compose.foundation:foundation"}
+androidX-compose-icons-core = { module = "androidx.compose.material:material-icons-core"}
+androidX-compose-icons-extended = { module = "androidx.compose.material:material-icons-extended"}
 
 androidX-activity = { module = "androidx.activity:activity-ktx", version.ref = "androidX-activity" }
 androidX-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidX-activity" }
@@ -100,6 +101,7 @@ utils = "com.blankj:utilcodex:1.31.1"
 
 [bundles]
 androidX-compose = [
+  "androidX-compose-bom",
   "androidX-compose-ui",
   "androidX-compose-tooling",
   "androidX-compose-tooling-preview",
