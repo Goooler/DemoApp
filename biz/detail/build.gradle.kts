@@ -13,6 +13,7 @@ dependencies {
   implementation(projects.common)
 
   implementation(libs.androidX.activity.compose)
+  implementation(libs.androidX.compose.bom)
   implementation(libs.bundles.androidX.compose)
   implementation(libs.bundles.accompanist)
 
