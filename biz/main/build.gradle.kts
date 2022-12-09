@@ -16,6 +16,7 @@ android {
 
 dependencies {
   implementation(projects.common)
+  implementation(projects.cascade)
 
   implementation(libs.androidX.coordinatorLayout)
   implementation(libs.flycoTabLayout)
