@@ -38,7 +38,10 @@ include(
   ":biz:detail",
   ":biz:web",
   ":biz:obsolete",
+  ":cascade"
 )
+
+project(":cascade").projectDir = File("cascade/cascade")
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 enableFeaturePreview("STABLE_CONFIGURATION_CACHE")
