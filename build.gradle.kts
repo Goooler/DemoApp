@@ -1,14 +1,15 @@
 import com.android.build.gradle.BaseExtension
 import com.google.devtools.ksp.gradle.KspExtension
 import io.gitlab.arturbosch.detekt.extensions.DetektExtension
+import org.jetbrains.kotlin.gradle.plugin.KaptExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
   alias(libs.plugins.android.application) apply false
   alias(libs.plugins.android.library) apply false
   alias(libs.plugins.kotlin.android) apply false
+  alias(libs.plugins.kotlin.kapt) apply false
   alias(libs.plugins.ksp) apply false
-  alias(libs.plugins.napt) apply false
   alias(libs.plugins.kotlinter) apply false
   alias(libs.plugins.detekt) apply false
 }
@@ -26,6 +27,11 @@ allprojects {
   }
   plugins.withId(rootProject.libs.plugins.android.application.get().pluginId) {
     setupCommon()
+  }
+  plugins.withId(rootProject.libs.plugins.kotlin.kapt.get().pluginId) {
+    configure<KaptExtension> {
+      correctErrorTypes = true
+    }
   }
   plugins.withId(rootProject.libs.plugins.ksp.get().pluginId) {
     configure<KspExtension> {
@@ -90,9 +96,6 @@ fun <T : BaseExtension> Project.setupBase(block: T.() -> Unit) {
       minSdk = 21
       vectorDrawables.useSupportLibrary = true
       testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
-    sourceSets.configureEach {
-      java.srcDirs("src/$name/kotlin")
     }
     compileOptions {
       targetCompatibility(JavaVersion.VERSION_11)
