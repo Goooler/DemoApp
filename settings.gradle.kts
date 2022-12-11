@@ -29,7 +29,7 @@ include(
   // App
   ":app",
   // Common
-  ":base",
+  ":input-base",
   ":common",
   ":adapter",
   // Biz
@@ -39,6 +39,8 @@ include(
   ":biz:web",
   ":biz:obsolete",
 )
+
+project(":input-base").projectDir = File(rootDir, "base")
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 enableFeaturePreview("STABLE_CONFIGURATION_CACHE")

@@ -19,7 +19,7 @@ android {
 }
 
 dependencies {
-  api(projects.base)
+  api(projects.inputBase)
   api(projects.adapter)
 
   api(libs.androidX.constraintLayout)
