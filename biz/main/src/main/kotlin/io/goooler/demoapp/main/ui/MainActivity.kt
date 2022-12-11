@@ -16,7 +16,7 @@ class MainActivity : BaseBindingActivity<MainActivityBinding>() {
 
   private val pagerAdapter by unsafeLazy { CommonFragmentStatePagerAdapter(supportFragmentManager) }
 
-  private val titles = listOf("home", "smartRefresh", "paging")
+  private val titles = listOf("demoHome", "demoSrl", "demoPaging")
 
   private val fragments = listOf(
     MainHomeFragment(),
