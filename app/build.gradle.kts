@@ -59,12 +59,12 @@ android {
 }
 
 dependencies {
-  implementation(projects.common)
+  implementation("demo:common")
 
-  implementation(projects.biz.login)
-  implementation(projects.biz.main)
-  implementation(projects.biz.detail)
-  implementation(projects.biz.web)
+  implementation("demo:biz.login")
+  implementation("demo:biz.main")
+  implementation("demo:biz.detail")
+  implementation("demo:biz.web")
 
   debugImplementation(libs.square.leakCanary)
 }
