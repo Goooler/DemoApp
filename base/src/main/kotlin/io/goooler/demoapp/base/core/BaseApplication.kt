@@ -4,6 +4,7 @@ import android.annotation.TargetApi
 import android.app.Application
 import android.os.Build
 import android.webkit.WebView
+import io.goooler.demoapp.base.util.ToastUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
 
@@ -12,6 +13,8 @@ abstract class BaseApplication : Application(), CoroutineScope by MainScope() {
   override fun onCreate() {
     super.onCreate()
     initWebView()
+
+    ToastUtil.show(this, "BaseApplication.onCreate")
   }
 
   /**
