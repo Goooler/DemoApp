@@ -40,7 +40,7 @@ include(
   ":biz:obsolete",
 )
 
-project(":base").projectDir = File(rootDir, "gradle/base")
+project(":base").projectDir = File(rootDir, "base")
 
 includeBuild("demo") {
   dependencySubstitution {
