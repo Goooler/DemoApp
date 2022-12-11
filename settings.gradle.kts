@@ -40,7 +40,7 @@ include(
   ":biz:obsolete",
 )
 
-project(":base").projectDir = File(rootDir.parentFile, "base")
+project(":base").projectDir = File(rootDir.parentFile, "gradle/base")
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 enableFeaturePreview("STABLE_CONFIGURATION_CACHE")
