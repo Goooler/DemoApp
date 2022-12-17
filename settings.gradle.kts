@@ -2,13 +2,6 @@ pluginManagement {
   repositories {
     google()
     gradlePluginPortal()
-    maven("https://storage.googleapis.com/r8-releases/raw")
-  }
-  buildscript {
-    dependencies {
-      // https://issuetracker.google.com/issues/262661471
-      classpath("com.android.tools:r8:4.0.47")
-    }
   }
 }
 
