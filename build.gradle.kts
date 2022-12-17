@@ -67,9 +67,6 @@ allprojects {
       }
     }
   }
-
-  // https://stackoverflow.com/questions/65194964/how-to-get-version-of-r8-that-is-being-used-by-the-android-gradle-plugin
-  throw GradleException("R8 version: ${com.android.tools.r8.Version.getVersionString()}")
 }
 
 tasks {
