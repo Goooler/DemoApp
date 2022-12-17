@@ -84,7 +84,7 @@ fun DetailPage(model: RepoDetailModel, onForkClick: () -> Unit) {
     Row {
       Button(onClick = {
         R.plurals.detail_star_count_tip.getQuantityString(model.starsCount)?.showToast()
-      }) {
+      },) {
         Icon(
           Icons.Filled.Star,
           contentDescription = "Star",
