@@ -10,7 +10,7 @@ android {
 
   sourceSets["main"].res.srcDirs(
     "src/main/res/core",
-    "src/main/res/other"
+    "src/main/res/other",
   )
 }
 
