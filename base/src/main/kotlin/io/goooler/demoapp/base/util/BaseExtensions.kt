@@ -83,14 +83,19 @@ inline val isMainThread: Boolean get() = Looper.getMainLooper() == Looper.myLoop
 fun <T : Any> unsafeLazy(initializer: () -> T): Lazy<T> =
   lazy(LazyThreadSafetyMode.NONE, initializer)
 
-fun <T : Parcelable> T.deepCopy(): T? {
+inline fun <reified T : Parcelable> T.deepCopy(): T? {
   var parcel: Parcel? = null
   return try {
     parcel = Parcel.obtain().also {
       it.writeParcelable(this, 0)
       it.setDataPosition(0)
     }
-    parcel.readParcelable(this::class.java.classLoader)
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+      parcel.readParcelable(this::class.java.classLoader, T::class.java)
+    } else {
+      @Suppress("DEPRECATION")
+      parcel.readParcelable(this::class.java.classLoader)
+    }
   } finally {
     parcel?.recycle()
   }
@@ -362,13 +367,26 @@ fun Intent.getStringExtra(name: String, defaultValue: String): String =
 fun Intent.getCharSequenceExtra(name: String, defaultValue: CharSequence): CharSequence =
   getCharSequenceExtra(name) ?: defaultValue
 
-inline fun <reified T : Parcelable> Intent.getParcelableExtra(name: String, defaultValue: T): T =
-  getParcelableExtra(name) ?: defaultValue
+inline fun <reified T : Parcelable> Intent.getParcelableExtra(name: String, defaultValue: T): T {
+  return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+    getParcelableExtra(name, T::class.java)
+  } else {
+    @Suppress("DEPRECATION")
+    getParcelableExtra(name)
+  } ?: defaultValue
+}
 
 inline fun <reified T : Serializable> Intent.getSerializableExtra(
   name: String,
   defaultValue: T,
-): T = (getSerializableExtra(name) ?: defaultValue) as T
+): T {
+  return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+    getSerializableExtra(name, T::class.java)
+  } else {
+    @Suppress("DEPRECATION")
+    getSerializableExtra(name) as T
+  } ?: defaultValue
+}
 
 // ---------------------Fragment-------------------------------//
 
@@ -526,10 +544,13 @@ fun Context.setMusicMute(mute: Boolean = true) {
       val direction = if (mute) AudioManager.ADJUST_UNMUTE else AudioManager.ADJUST_MUTE
       it.adjustStreamVolume(AudioManager.STREAM_MUSIC, direction, 0)
     } else {
+      @Suppress("DEPRECATION")
       it.setStreamMute(AudioManager.STREAM_MUSIC, mute)
     }
   }
 }
+
+inline fun <reified T : Any> Context.requireSystemService(): T = checkNotNull(getSystemService())
 
 // ---------------------Activity-------------------------------//
 

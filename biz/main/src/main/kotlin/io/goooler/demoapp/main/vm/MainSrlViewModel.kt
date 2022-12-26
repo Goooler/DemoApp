@@ -71,7 +71,7 @@ class MainSrlViewModel : BaseViewModel() {
         finishRefreshAndLoadMore(false)
         repository.getRepoListFromApi("goooler", page)
           .map { bean ->
-            MainCommonVhModel.Repo(bean.owner?.avatarUrl, bean.name, bean.fullName)
+            MainCommonVhModel.Repo(bean.owner.avatarUrl, bean.name, bean.fullName)
           }.let {
             _listData += it
             if (page == 1 && it.isEmpty()) {

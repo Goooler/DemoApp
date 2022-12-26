@@ -11,6 +11,7 @@ import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import java.math.BigDecimal
+import java.math.RoundingMode
 import java.util.Calendar
 import java.util.Date
 import kotlin.math.absoluteValue
@@ -94,13 +95,13 @@ fun Number.formatMoney(isYuan: Boolean = false, trans2W: Boolean = false, scale:
     when {
       trans2W && moneyF / 10000 > 0 -> {
         BigDecimal.valueOf(moneyF / 10000)
-          .setScale(1, BigDecimal.ROUND_DOWN)
+          .setScale(scale, RoundingMode.DOWN)
           .stripTrailingZeros().toPlainString() + "W"
       }
 
       else ->
         BigDecimal.valueOf(moneyF)
-          .setScale(scale, BigDecimal.ROUND_DOWN)
+          .setScale(scale, RoundingMode.DOWN)
           .stripTrailingZeros().toPlainString()
           .let {
             if (it.toDouble().absoluteValue < 0.000001) {
