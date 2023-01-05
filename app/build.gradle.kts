@@ -36,14 +36,12 @@ android {
   buildTypes {
     release {
       resValue("string", "app_name", appName)
-      signingConfig = releaseSigning
       isMinifyEnabled = true
       isShrinkResources = true
       proguardFiles("$rootDir/gradle/proguard-rules.pro")
     }
     debug {
       resValue("string", "app_name", "$appName.debug")
-      signingConfig = releaseSigning
       isJniDebuggable = true
       isRenderscriptDebuggable = true
       isCrunchPngs = false
@@ -54,6 +52,11 @@ android {
     outputs.configureEach {
       (this as? ApkVariantOutputImpl)?.outputFileName =
         "${appName}_${versionName}_${versionCode}_${flavorName}_${buildType.name}_$commitHash.apk"
+    }
+  }
+  androidComponents {
+    onVariants { variant ->
+      variant.signingConfig.setConfig(releaseSigning)
     }
   }
 }
