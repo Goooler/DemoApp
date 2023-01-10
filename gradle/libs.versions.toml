@@ -2,7 +2,7 @@
 versionName = "1.7.2"
 versionCode = "107020"
 accompanist = "0.28.0"
-agp = "8.0.0-alpha10"
+agp = "7.4.0-rc03"
 androidX-activity = "1.6.1"
 androidX-appCompat = "1.5.1"
 androidX-collection = "1.2.0"
@@ -79,7 +79,7 @@ square-retrofit-gson = { module = "com.squareup.retrofit2:converter-gson", versi
 square-retrofit-moshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "square-retrofit" }
 
 google-accompanist-systemUiController = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanist" }
-google-gson = "com.google.code.gson:gson:2.10"
+google-gson = "com.google.code.gson:gson:2.10.1"
 google-material = "com.google.android.material:material:1.7.0"
 
 chucker-debug = { module = "com.github.chuckerteam.chucker:library", version.ref = "chucker" }
