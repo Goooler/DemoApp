@@ -11,6 +11,7 @@ plugins {
   alias(libs.plugins.napt) apply false
   alias(libs.plugins.kotlinter) apply false
   alias(libs.plugins.detekt) apply false
+  alias(libs.plugins.cacheFix) apply false
 }
 
 allprojects {

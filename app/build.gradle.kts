@@ -5,6 +5,7 @@ plugins {
   alias(libs.plugins.android.application)
   alias(libs.plugins.kotlin.android)
   alias(libs.plugins.napt)
+  alias(libs.plugins.cacheFix)
 }
 
 android {
