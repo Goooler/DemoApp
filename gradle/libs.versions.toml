@@ -103,7 +103,6 @@ utils = "com.blankj:utilcodex:1.31.1"
 [bundles]
 androidX-compose = [
   "androidX-compose-ui",
-  "androidX-compose-tooling",
   "androidX-compose-tooling-preview",
   "androidX-compose-material",
   "androidX-compose-foundation",
