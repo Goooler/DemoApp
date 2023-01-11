@@ -1,5 +1,6 @@
 import com.android.build.gradle.BaseExtension
 import com.google.devtools.ksp.gradle.KspExtension
+import com.android.build.gradle.BasePlugin
 import io.gitlab.arturbosch.detekt.extensions.DetektExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
@@ -22,6 +23,9 @@ allprojects {
     config = rootProject.files("config/detekt/detekt.yml")
   }
 
+  plugins.withType<BasePlugin> {
+    plugins.apply(libs.plugins.kotlin.android.get().pluginId)
+  }
   plugins.withId(rootProject.libs.plugins.android.library.get().pluginId) {
     if (displayName.contains(":biz:") || name.startsWith("common")) setupCommon() else setupBase()
   }
