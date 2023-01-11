@@ -18,9 +18,9 @@ plugins {
 }
 
 allprojects {
-  apply(plugin = rootProject.libs.plugins.kotlinter.get().pluginId)
+  plugins.apply(rootProject.libs.plugins.kotlinter.get().pluginId)
 
-  apply(plugin = rootProject.libs.plugins.detekt.get().pluginId)
+  plugins.apply(rootProject.libs.plugins.detekt.get().pluginId)
   configure<DetektExtension> {
     config = rootProject.files("config/detekt/detekt.yml")
   }
