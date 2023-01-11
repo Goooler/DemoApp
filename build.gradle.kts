@@ -1,4 +1,5 @@
 import com.android.build.gradle.BaseExtension
+import com.android.build.gradle.api.AndroidBasePlugin
 import com.google.devtools.ksp.gradle.KspExtension
 import io.gitlab.arturbosch.detekt.extensions.DetektExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
@@ -32,6 +33,9 @@ allprojects {
     configure<KspExtension> {
       arg("room.incremental", "true")
     }
+  }
+  plugins.withType<AndroidBasePlugin>().configureEach {
+    project.apply(plugin = libs.plugins.cacheFix.get().pluginId)
   }
 
   tasks.withType<KotlinCompile> {
