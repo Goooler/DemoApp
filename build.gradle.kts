@@ -25,6 +25,7 @@ allprojects {
 
   plugins.withType<BasePlugin> {
     plugins.apply(libs.plugins.kotlin.android.get().pluginId)
+    plugins.apply(libs.plugins.cacheFix.get().pluginId)
   }
   plugins.withId(rootProject.libs.plugins.android.library.get().pluginId) {
     if (displayName.contains(":biz:") || name.startsWith("common")) setupCommon() else setupBase()
