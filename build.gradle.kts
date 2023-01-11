@@ -1,6 +1,8 @@
+import com.android.build.gradle.AppPlugin
 import com.android.build.gradle.BaseExtension
-import com.google.devtools.ksp.gradle.KspExtension
 import com.android.build.gradle.BasePlugin
+import com.android.build.gradle.LibraryPlugin
+import com.google.devtools.ksp.gradle.KspExtension
 import io.gitlab.arturbosch.detekt.extensions.DetektExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
@@ -26,12 +28,12 @@ allprojects {
   plugins.withType<BasePlugin> {
     plugins.apply(libs.plugins.kotlin.android.get().pluginId)
     plugins.apply(libs.plugins.cacheFix.get().pluginId)
-  }
-  plugins.withId(rootProject.libs.plugins.android.library.get().pluginId) {
-    if (displayName.contains(":biz:") || name.startsWith("common")) setupCommon() else setupBase()
-  }
-  plugins.withId(rootProject.libs.plugins.android.application.get().pluginId) {
-    setupCommon()
+
+    if (this is AppPlugin) {
+      setupCommon()
+    } else if (this is LibraryPlugin) {
+      if (displayName.contains(":biz:") || name.startsWith("common")) setupCommon() else setupBase()
+    }
   }
   plugins.withId(rootProject.libs.plugins.ksp.get().pluginId) {
     configure<KspExtension> {
