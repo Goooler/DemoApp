@@ -1,4 +1,7 @@
+import com.android.build.gradle.AppPlugin
 import com.android.build.gradle.BaseExtension
+import com.android.build.gradle.BasePlugin
+import com.android.build.gradle.LibraryPlugin
 import com.google.devtools.ksp.gradle.KspExtension
 import io.gitlab.arturbosch.detekt.extensions.DetektExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
@@ -11,21 +14,26 @@ plugins {
   alias(libs.plugins.napt) apply false
   alias(libs.plugins.kotlinter) apply false
   alias(libs.plugins.detekt) apply false
+  alias(libs.plugins.cacheFix) apply false
 }
 
 allprojects {
-  apply(plugin = rootProject.libs.plugins.kotlinter.get().pluginId)
+  plugins.apply(rootProject.libs.plugins.kotlinter.get().pluginId)
 
-  apply(plugin = rootProject.libs.plugins.detekt.get().pluginId)
+  plugins.apply(rootProject.libs.plugins.detekt.get().pluginId)
   configure<DetektExtension> {
     config = rootProject.files("config/detekt/detekt.yml")
   }
 
-  plugins.withId(rootProject.libs.plugins.android.library.get().pluginId) {
-    if (displayName.contains(":biz:") || name.startsWith("common")) setupCommon() else setupBase()
-  }
-  plugins.withId(rootProject.libs.plugins.android.application.get().pluginId) {
-    setupCommon()
+  plugins.withType<BasePlugin> {
+    plugins.apply(libs.plugins.kotlin.android.get().pluginId)
+    plugins.apply(libs.plugins.cacheFix.get().pluginId)
+
+    if (this is AppPlugin) {
+      setupCommon()
+    } else if (this is LibraryPlugin) {
+      if (displayName.contains(":biz:") || name.startsWith("common")) setupCommon() else setupBase()
+    }
   }
   plugins.withId(rootProject.libs.plugins.ksp.get().pluginId) {
     configure<KspExtension> {
