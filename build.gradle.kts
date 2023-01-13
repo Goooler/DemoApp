@@ -44,7 +44,7 @@ allprojects {
   tasks.withType<KotlinCompile> {
     kotlinOptions {
       allWarningsAsErrors = true
-      jvmTarget = JavaVersion.VERSION_11.toString()
+      jvmTarget = JavaVersion.VERSION_17.toString()
     }
   }
   tasks.withType<Test> {
@@ -103,8 +103,8 @@ fun <T : BaseExtension> Project.setupBase(block: T.() -> Unit) {
       java.srcDirs("src/$name/kotlin")
     }
     compileOptions {
-      targetCompatibility(JavaVersion.VERSION_11)
-      sourceCompatibility(JavaVersion.VERSION_11)
+      targetCompatibility(JavaVersion.VERSION_17)
+      sourceCompatibility(JavaVersion.VERSION_17)
     }
     packagingOptions.resources.excludes += setOf(
       "**/*.proto",
