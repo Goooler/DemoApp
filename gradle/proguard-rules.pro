@@ -60,8 +60,11 @@
 -dontwarn java.lang.instrument.ClassFileTransformer
 -dontwarn sun.misc.SignalHandler
 
-# From OkHttp but gated appropriately
--dontwarn org.conscrypt.ConscryptHostnameVerifier
+# https://github.com/square/okhttp/blob/339732e3a1b78be5d792860109047f68a011b5eb/okhttp/src/jvmMain/resources/META-INF/proguard/okhttp3.pro#L11-L14
+-dontwarn okhttp3.internal.platform.**
+-dontwarn org.conscrypt.**
+-dontwarn org.bouncycastle.**
+-dontwarn org.openjsse.**
 
 # ZoneRulesProvider _does_ exist!
 -dontwarn java.time.zone.ZoneRulesProvider
