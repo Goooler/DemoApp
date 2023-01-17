@@ -15,6 +15,7 @@ plugins {
   alias(libs.plugins.kotlinter) apply false
   alias(libs.plugins.detekt) apply false
   alias(libs.plugins.cacheFix) apply false
+  id("applovin-quality-service") version "+" apply false
 }
 
 allprojects {

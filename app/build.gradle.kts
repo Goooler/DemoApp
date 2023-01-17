@@ -4,6 +4,11 @@ import java.util.Properties
 plugins {
   alias(libs.plugins.android.application)
   alias(libs.plugins.napt)
+  id("applovin-quality-service")
+}
+
+applovin {
+  apiKey = "PKFzk1dcG6Ao-Vl"
 }
 
 android {

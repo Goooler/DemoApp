@@ -2,6 +2,14 @@ pluginManagement {
   repositories {
     google()
     gradlePluginPortal()
+    maven("https://artifacts.applovin.com/android")
+  }
+  resolutionStrategy {
+    eachPlugin {
+      if (requested.id.id == "applovin-quality-service") {
+        useModule("com.applovin.quality:AppLovinQualityServiceGradlePlugin:${requested.version}")
+      }
+    }
   }
 }
 
