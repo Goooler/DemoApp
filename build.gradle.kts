@@ -14,7 +14,6 @@ plugins {
   alias(libs.plugins.napt) apply false
   alias(libs.plugins.kotlinter) apply false
   alias(libs.plugins.detekt) apply false
-  alias(libs.plugins.cacheFix) apply false
 }
 
 allprojects {
@@ -27,7 +26,6 @@ allprojects {
 
   plugins.withType<BasePlugin> {
     plugins.apply(libs.plugins.kotlin.android.get().pluginId)
-    plugins.apply(libs.plugins.cacheFix.get().pluginId)
 
     if (this is AppPlugin) {
       setupCommon()
