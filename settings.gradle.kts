@@ -10,9 +10,6 @@ dependencyResolutionManagement {
   repositories {
     google()
     mavenCentral()
-
-    // Need to use the 'dev' Compose Compiler for Kotlin 1.8.0 support
-    maven("https://androidx.dev/storage/compose-compiler/repository/")
   }
 }
 
