@@ -4,7 +4,7 @@ import com.android.build.gradle.BasePlugin
 import com.android.build.gradle.LibraryPlugin
 import com.google.devtools.ksp.gradle.KspExtension
 import io.gitlab.arturbosch.detekt.extensions.DetektExtension
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 
 plugins {
   alias(libs.plugins.android.application) apply false
@@ -40,11 +40,18 @@ allprojects {
       arg("room.incremental", "true")
     }
   }
+  // Configure Java to use our chosen language level. Kotlin will automatically pick this up
+  plugins.withType<JavaBasePlugin>().configureEach {
+    extensions.configure<JavaPluginExtension> {
+      toolchain {
+        languageVersion.set(JavaLanguageVersion.of(17))
+      }
+    }
+  }
 
-  tasks.withType<KotlinCompile> {
-    kotlinOptions {
-      allWarningsAsErrors = true
-      jvmTarget = JavaVersion.VERSION_17.toString()
+  tasks.withType<KotlinCompilationTask<*>>().configureEach {
+    compilerOptions {
+      allWarningsAsErrors.set(true)
     }
   }
   tasks.withType<Test> {
@@ -101,10 +108,6 @@ fun <T : BaseExtension> Project.setupBase(block: T.() -> Unit) {
     }
     sourceSets.configureEach {
       java.srcDirs("src/$name/kotlin")
-    }
-    compileOptions {
-      targetCompatibility(JavaVersion.VERSION_17)
-      sourceCompatibility(JavaVersion.VERSION_17)
     }
     packagingOptions.resources.excludes += setOf(
       "**/*.proto",
