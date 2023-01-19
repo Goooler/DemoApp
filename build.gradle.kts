@@ -40,7 +40,8 @@ allprojects {
       arg("room.incremental", "true")
     }
   }
-  // Configure Java to use our chosen language level. Kotlin will automatically pick this up
+  // Configure Java to use our chosen language level. Kotlin will automatically pick this up.
+  // See https://kotlinlang.org/docs/gradle-configure-project.html#gradle-java-toolchains-support
   plugins.withType<JavaBasePlugin>().configureEach {
     extensions.configure<JavaPluginExtension> {
       toolchain {
@@ -110,7 +111,6 @@ fun <T : BaseExtension> Project.setupBase(block: T.() -> Unit) {
       java.srcDirs("src/$name/kotlin")
     }
     // Can remove this once https://issuetracker.google.com/issues/260059413 is fixed.
-    // See https://kotlinlang.org/docs/gradle-configure-project.html#gradle-java-toolchains-support
     compileOptions {
       sourceCompatibility = JavaVersion.VERSION_17
       targetCompatibility = JavaVersion.VERSION_17
