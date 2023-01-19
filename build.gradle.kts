@@ -26,7 +26,7 @@ allprojects {
     config = rootProject.files("config/detekt/detekt.yml")
   }
 
-  plugins.withType<BasePlugin>().configureEach {
+  plugins.withType<BasePlugin> {
     plugins.apply(libs.plugins.kotlin.android.get().pluginId)
     plugins.apply(libs.plugins.cacheFix.get().pluginId)
 
