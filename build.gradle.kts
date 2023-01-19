@@ -3,6 +3,7 @@ import com.android.build.gradle.BaseExtension
 import com.android.build.gradle.BasePlugin
 import com.android.build.gradle.LibraryPlugin
 import com.google.devtools.ksp.gradle.KspExtension
+import com.google.devtools.ksp.gradle.KspGradleSubplugin
 import io.gitlab.arturbosch.detekt.extensions.DetektExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 
@@ -25,7 +26,7 @@ allprojects {
     config = rootProject.files("config/detekt/detekt.yml")
   }
 
-  plugins.withType<BasePlugin> {
+  plugins.withType<BasePlugin>().configureEach {
     plugins.apply(libs.plugins.kotlin.android.get().pluginId)
     plugins.apply(libs.plugins.cacheFix.get().pluginId)
 
@@ -35,7 +36,7 @@ allprojects {
       if (displayName.contains(":biz:") || name.startsWith("common")) setupCommon() else setupBase()
     }
   }
-  plugins.withId(rootProject.libs.plugins.ksp.get().pluginId) {
+  plugins.withType<KspGradleSubplugin>().configureEach {
     configure<KspExtension> {
       arg("room.incremental", "true")
     }
@@ -55,7 +56,7 @@ allprojects {
       allWarningsAsErrors.set(true)
     }
   }
-  tasks.withType<Test> {
+  tasks.withType<Test>().configureEach {
     useJUnitPlatform()
   }
   tasks.withType<ValidatePlugins>().configureEach {
