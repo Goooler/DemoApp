@@ -31,7 +31,7 @@ ksp = "com.google.devtools.ksp:1.8.0-1.0.9"
 napt = "com.sergei-lapin.napt:1.19"
 kotlinter = "org.jmailen.kotlinter:3.13.0"
 detekt = "io.gitlab.arturbosch.detekt:1.22.0"
-cacheFix = "org.gradle.android.cache-fix:2.6.2"
+cacheFix = "org.gradle.android.cache-fix:2.6.3"
 
 [libraries]
 kotlin-junit5 = { module = "org.jetbrains.kotlin:kotlin-test-junit5", version.ref = "kotlin" }
