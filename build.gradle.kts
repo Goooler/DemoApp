@@ -3,8 +3,9 @@ import com.android.build.gradle.BaseExtension
 import com.android.build.gradle.BasePlugin
 import com.android.build.gradle.LibraryPlugin
 import com.google.devtools.ksp.gradle.KspExtension
+import com.google.devtools.ksp.gradle.KspGradleSubplugin
 import io.gitlab.arturbosch.detekt.extensions.DetektExtension
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 
 plugins {
   alias(libs.plugins.android.application) apply false
@@ -35,19 +36,27 @@ allprojects {
       if (displayName.contains(":biz:") || name.startsWith("common")) setupCommon() else setupBase()
     }
   }
-  plugins.withId(rootProject.libs.plugins.ksp.get().pluginId) {
+  plugins.withType<KspGradleSubplugin>().configureEach {
     configure<KspExtension> {
       arg("room.incremental", "true")
     }
   }
-
-  tasks.withType<KotlinCompile> {
-    kotlinOptions {
-      allWarningsAsErrors = true
-      jvmTarget = JavaVersion.VERSION_17.toString()
+  // Configure Java to use our chosen language level. Kotlin will automatically pick this up.
+  // See https://kotlinlang.org/docs/gradle-configure-project.html#gradle-java-toolchains-support
+  plugins.withType<JavaBasePlugin>().configureEach {
+    extensions.configure<JavaPluginExtension> {
+      toolchain {
+        languageVersion.set(JavaLanguageVersion.of(17))
+      }
     }
   }
-  tasks.withType<Test> {
+
+  tasks.withType<KotlinCompilationTask<*>>().configureEach {
+    compilerOptions {
+      allWarningsAsErrors.set(true)
+    }
+  }
+  tasks.withType<Test>().configureEach {
     useJUnitPlatform()
   }
   tasks.withType<ValidatePlugins>().configureEach {
@@ -102,9 +111,10 @@ fun <T : BaseExtension> Project.setupBase(block: T.() -> Unit) {
     sourceSets.configureEach {
       java.srcDirs("src/$name/kotlin")
     }
+    // Can remove this once https://issuetracker.google.com/issues/260059413 is fixed.
     compileOptions {
-      targetCompatibility(JavaVersion.VERSION_17)
-      sourceCompatibility(JavaVersion.VERSION_17)
+      sourceCompatibility = JavaVersion.VERSION_17
+      targetCompatibility = JavaVersion.VERSION_17
     }
     packagingOptions.resources.excludes += setOf(
       "**/*.proto",
