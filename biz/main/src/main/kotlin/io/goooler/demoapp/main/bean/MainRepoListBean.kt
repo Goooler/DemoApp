@@ -3,6 +3,7 @@ package io.goooler.demoapp.main.bean
 import androidx.room.ColumnInfo
 import androidx.room.Embedded
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
@@ -11,6 +12,7 @@ import com.squareup.moshi.JsonClass
 @Entity(tableName = "main_repo_list")
 class MainRepoListBean(
   @PrimaryKey val id: Long,
+  @Ignore
   val private: Boolean,
   val name: String,
   @Json(name = "full_name")
