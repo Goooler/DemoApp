@@ -31,3 +31,13 @@ class MainRepoListBean(
     val avatarUrl: String?,
   )
 }
+
+@Entity(tableName = "main_repos")
+class MainRepoBean(
+  @PrimaryKey val id: Long,
+  @Ignore val private: Boolean,
+  val name: String,
+  @Json(name = "full_name")
+  @ColumnInfo(name = "full_name")
+  val fullName: String,
+)
