@@ -12,14 +12,14 @@ import com.squareup.moshi.JsonClass
 @Entity(tableName = "main_repo_list")
 class MainRepoListBean(
   @PrimaryKey val id: Long,
-  @Ignore
-  val private: Boolean,
   val name: String,
   @Json(name = "full_name")
   @ColumnInfo(name = "full_name")
   val fullName: String,
   @Embedded val owner: OwnerBean,
 ) {
+  @Ignore
+  var private: Boolean = false
 
   @JsonClass(generateAdapter = true)
   class OwnerBean(
