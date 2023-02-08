@@ -2,7 +2,7 @@
 versionName = "1.8.0"
 versionCode = "108000"
 accompanist = "0.28.0"
-agp = "8.1.0-alpha02"
+agp = "8.1.0-alpha03"
 androidX-activity = "1.6.1"
 androidX-appCompat = "1.6.0"
 androidX-collection = "1.2.0"

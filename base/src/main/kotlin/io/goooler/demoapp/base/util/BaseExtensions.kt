@@ -80,7 +80,8 @@ inline val currentThreadName: String get() = Thread.currentThread().name
 
 inline val isMainThread: Boolean get() = Looper.getMainLooper() == Looper.myLooper()
 
-fun <T : Any> unsafeLazy(initializer: () -> T): Lazy<T> =
+@Suppress("NOTHING_TO_INLINE")
+inline fun <T : Any> unsafeLazy(noinline initializer: () -> T): Lazy<T> =
   lazy(LazyThreadSafetyMode.NONE, initializer)
 
 inline fun <reified T : Parcelable> T.deepCopy(): T? {
