@@ -209,26 +209,6 @@ inline fun <T> Collection<T>?.isNotNullOrEmpty(): Boolean {
   return this.isNullOrEmpty().not()
 }
 
-fun <T> List<T>.safeSubList(fromIndex: Int, toIndex: Int): List<T> {
-  val endIndex = if (toIndex > size) size else toIndex
-  return subList(fromIndex, endIndex)
-}
-
-/**
- * 取集合内第二个元素
- */
-fun <T> List<T>.secondOrNull(): T? {
-  return if (size < 2) null else this[1]
-}
-
-/**
- * 取集合内第三个元素
- */
-fun <T> List<T>.thirdOrNull(): T? {
-  @Suppress("MagicNumber")
-  return if (size < 3) null else this[2]
-}
-
 fun paramMapOf(vararg pairs: Pair<String, Any>): HashMap<String, Any> =
   HashMap<String, Any>(pairs.size).apply { putAll(pairs) }
 
