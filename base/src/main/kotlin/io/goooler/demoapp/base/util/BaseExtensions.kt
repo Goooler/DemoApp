@@ -132,16 +132,6 @@ fun getReflectedMethod(
 
 // ---------------------CharSequence-------------------------------//
 
-operator fun String.times(@IntRange(from = 0) num: Int): String {
-  require(num >= 0) {
-    "Param num should >= 0"
-  }
-  val origin = this
-  return buildString {
-    for (i in 1..num) append(origin)
-  }
-}
-
 fun String.fromHtml(): Spanned = parseAsHtml()
 
 fun String.extension2MimeType(): String? =
