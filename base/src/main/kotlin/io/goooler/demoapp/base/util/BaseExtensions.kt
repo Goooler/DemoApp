@@ -207,30 +207,6 @@ fun <T> Collection<T>?.isNotNullOrEmpty(): Boolean {
   return this.isNullOrEmpty().not()
 }
 
-/**
- * 判断集合内是否仅有一个元素
- */
-@OptIn(ExperimentalContracts::class)
-fun <T> Collection<T>?.isSingle(): Boolean {
-  contract {
-    returns(true) implies (this@isSingle != null)
-  }
-  return this != null && size == 1
-}
-
-/**
- * 判断集合内是否有多个元素
- * @param minSize 最小为 2
- */
-@OptIn(ExperimentalContracts::class)
-fun <T> Collection<T>?.isMultiple(@IntRange(from = 2) minSize: Int = 2): Boolean {
-  contract {
-    returns(true) implies (this@isMultiple != null)
-  }
-  val min = if (minSize < 2) 2 else minSize
-  return this != null && size >= min
-}
-
 fun <T> List<T>.safeSubList(fromIndex: Int, toIndex: Int): List<T> {
   val endIndex = if (toIndex > size) size else toIndex
   return subList(fromIndex, endIndex)
