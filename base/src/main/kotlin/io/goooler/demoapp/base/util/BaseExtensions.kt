@@ -114,7 +114,7 @@ fun String.mimeType2Extension(): String? =
  */
 fun String.isValidFilename(): Boolean {
   val filenameRegex =
-    Pattern.compile("[\\\\\\/:\\*\\?\"<>\\|\\x01-\\x1F\\x7F]", Pattern.CASE_INSENSITIVE)
+    Pattern.compile("[\\\\/:*?\"<>|\\x01-\\x1F\\x7F]", Pattern.CASE_INSENSITIVE)
 
   // It's not easy to use regex to detect single/double dot while leaving valid values
   // (filename.zip) behind...
