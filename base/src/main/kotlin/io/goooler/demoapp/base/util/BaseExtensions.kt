@@ -48,7 +48,6 @@ import androidx.lifecycle.coroutineScope
 import androidx.lifecycle.findViewTreeLifecycleOwner
 import java.io.File
 import java.io.Serializable
-import java.lang.reflect.Method
 import java.math.BigDecimal
 import java.util.UUID
 import java.util.regex.Pattern
@@ -99,34 +98,6 @@ inline fun <reified T : Parcelable> T.deepCopy(): T? {
     parcel?.recycle()
   }
 }
-
-@Throws(ReflectiveOperationException::class)
-fun lazyReflectedMethod(
-  declaringClass: Class<*>,
-  methodName: String,
-  vararg parameterTypes: Any,
-): Lazy<Method> = lazy {
-  @Suppress("SpreadOperator")
-  getReflectedMethod(declaringClass, methodName, *getParameterTypes(parameterTypes))
-}
-
-@Throws(ReflectiveOperationException::class)
-fun getParameterTypes(parameterTypes: Array<out Any>): Array<Class<*>> =
-  Array(parameterTypes.size) {
-    when (val parameterType = parameterTypes[it]) {
-      is Class<*> -> parameterType
-      is String -> Class.forName(parameterType)
-      else -> throw IllegalArgumentException(parameterType.toString())
-    }
-  }
-
-@Throws(ReflectiveOperationException::class)
-fun getReflectedMethod(
-  declaringClass: Class<*>,
-  methodName: String,
-  vararg parameterTypes: Class<*>,
-): Method =
-  declaringClass.getDeclaredMethod(methodName, *parameterTypes).also { it.isAccessible = true }
 
 // ---------------------CharSequence-------------------------------//
 
