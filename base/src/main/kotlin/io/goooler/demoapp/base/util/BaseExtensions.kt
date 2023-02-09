@@ -68,8 +68,6 @@ annotation class Sp
 @Dimension(unit = 3)
 annotation class Pt
 
-typealias ParamMap = HashMap<String, Any>
-
 // ---------------------Any-------------------------------//
 
 inline val randomUUID: String get() = UUID.randomUUID().toString()
@@ -330,9 +328,6 @@ fun <T> List<T>.thirdOrNull(): T? {
   @Suppress("MagicNumber")
   return if (size < 3) null else this[2]
 }
-
-fun paramMapOf(vararg pairs: Pair<String, Any>): HashMap<String, Any> =
-  HashMap<String, Any>(pairs.size).apply { putAll(pairs) }
 
 fun <K, V> MutableMap<K, V>.removeFirst(): Map.Entry<K, V> {
   val iterator = iterator()

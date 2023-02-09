@@ -1,7 +1,6 @@
 package io.goooler.demoapp.main.repository
 
 import androidx.annotation.IntRange
-import io.goooler.demoapp.base.util.paramMapOf
 import io.goooler.demoapp.common.network.RetrofitHelper
 import io.goooler.demoapp.common.type.CommonConstants
 import io.goooler.demoapp.common.util.RoomHelper
@@ -19,7 +18,7 @@ class MainCommonRepository {
     @IntRange(from = 1) page: Int = 1,
     @IntRange(from = 1) pageSize: Int = CommonConstants.DEFAULT_PAGE_SIZE,
   ): List<MainRepoListBean> {
-    val params = paramMapOf(
+    val params = mapOf(
       "page" to page,
       "per_page" to pageSize,
     )
