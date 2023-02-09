@@ -36,7 +36,6 @@ import androidx.core.content.getSystemService
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.os.bundleOf
-import androidx.core.text.parseAsHtml
 import androidx.core.text.toSpannable
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -131,8 +130,6 @@ fun getReflectedMethod(
   declaringClass.getDeclaredMethod(methodName, *parameterTypes).also { it.isAccessible = true }
 
 // ---------------------CharSequence-------------------------------//
-
-fun String.fromHtml(): Spanned = parseAsHtml()
 
 fun String.extension2MimeType(): String? =
   MimeTypeMap.getSingleton().getMimeTypeFromExtension(lowercase())
