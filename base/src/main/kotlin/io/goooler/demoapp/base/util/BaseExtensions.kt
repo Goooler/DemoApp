@@ -107,10 +107,6 @@ fun String.extension2MimeType(): String? =
 fun String.mimeType2Extension(): String? =
   MimeTypeMap.getSingleton().getExtensionFromMimeType(lowercase())
 
-fun String.onlyDigits(): String = replace(Regex("\\D*"), "")
-
-fun String.removeAllSpecialCharacters(): String = replace(Regex("[^a-zA-Z]+"), "")
-
 /**
  * Validate given text is a valid filename.
  *
