@@ -124,8 +124,9 @@ fun String.isValidFilename(): Boolean {
 
 fun Uri.withAppendedId(id: Long): Uri = ContentUris.withAppendedId(this, id)
 
+@Suppress("NOTHING_TO_INLINE")
 @OptIn(ExperimentalContracts::class)
-fun CharSequence?.isNotNullOrEmpty(): Boolean {
+inline fun CharSequence?.isNotNullOrEmpty(): Boolean {
   contract {
     returns(true) implies (this@isNotNullOrEmpty != null)
   }
@@ -199,8 +200,9 @@ infix fun Double.div(that: Double): Double {
 
 // ---------------------Collections-------------------------------//
 
+@Suppress("NOTHING_TO_INLINE")
 @OptIn(ExperimentalContracts::class)
-fun <T> Collection<T>?.isNotNullOrEmpty(): Boolean {
+inline fun <T> Collection<T>?.isNotNullOrEmpty(): Boolean {
   contract {
     returns(true) implies (this@isNotNullOrEmpty != null)
   }
