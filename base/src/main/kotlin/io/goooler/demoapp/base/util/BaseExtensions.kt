@@ -197,30 +197,6 @@ infix fun Double.div(that: Double): Double {
   return (BigDecimal(this.toString()) / BigDecimal(that.toString())).toDouble()
 }
 
-fun Number.isZero(): Boolean {
-  return when (this) {
-    is Byte, is Short, is Int, is Long -> this == 0
-    is Float, is Double -> BigDecimal(this.toString()) == BigDecimal("0.0")
-    else -> false
-  }
-}
-
-fun Number.isNotZero(): Boolean = isZero().not()
-
-fun Int?.orZero(): Int = this ?: 0
-
-fun Int.isInvalid(invalidValue: Int = -1) = this == invalidValue
-
-fun Int.isValid(invalidValue: Int = -1) = isInvalid(invalidValue).not()
-
-fun Long.isInvalid(invalidValue: Long = -1) = this == invalidValue
-
-fun Long.isValid(invalidValue: Long = -1) = isInvalid(invalidValue).not()
-
-fun Boolean?.orTrue(): Boolean = this ?: true
-
-fun Boolean?.orFalse(): Boolean = this ?: false
-
 // ---------------------Collections-------------------------------//
 
 @OptIn(ExperimentalContracts::class)
