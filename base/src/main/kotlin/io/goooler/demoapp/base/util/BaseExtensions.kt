@@ -29,7 +29,6 @@ import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.annotation.Dimension
 import androidx.annotation.IdRes
-import androidx.annotation.IntRange
 import androidx.annotation.MainThread
 import androidx.core.content.getSystemService
 import androidx.core.content.pm.ShortcutInfoCompat
@@ -64,8 +63,6 @@ annotation class Sp
 
 @Dimension(unit = 3)
 annotation class Pt
-
-typealias ParamMap = HashMap<String, Any>
 
 // ---------------------Any-------------------------------//
 
@@ -208,9 +205,6 @@ inline fun <T> Collection<T>?.isNotNullOrEmpty(): Boolean {
   }
   return this.isNullOrEmpty().not()
 }
-
-fun paramMapOf(vararg pairs: Pair<String, Any>): HashMap<String, Any> =
-  HashMap<String, Any>(pairs.size).apply { putAll(pairs) }
 
 fun <K, V> MutableMap<K, V>.removeFirst(): Map.Entry<K, V> {
   val iterator = iterator()
