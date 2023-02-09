@@ -317,6 +317,8 @@ fun <T> MutableCollection<T>.removeFirstOrNull(predicate: (T) -> Boolean): T? {
 
 fun File.notExists(): Boolean = exists().not()
 
+val File.mimeType: String? get() = extension.extension2MimeType()
+
 // ---------------------Intent-------------------------------//
 
 fun Intent.getStringExtra(name: String, defaultValue: String): String =
