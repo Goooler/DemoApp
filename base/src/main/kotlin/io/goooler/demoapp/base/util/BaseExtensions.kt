@@ -156,15 +156,6 @@ fun CharSequence.withColorSpan(coloredPart: String, @ColorInt color: Int): Spann
   }
 }
 
-/**
- * subString 防越界处理
- */
-fun String.safeSubstring(startIndex: Int, endIndex: Int): String {
-  val begin = if (startIndex < 0) 0 else startIndex
-  val end = if (endIndex > length) length else endIndex
-  return substring(begin, end)
-}
-
 fun String?.safeToBoolean(default: Boolean = false): Boolean =
   runCatching { toBoolean() }.getOrElse { default }
 
