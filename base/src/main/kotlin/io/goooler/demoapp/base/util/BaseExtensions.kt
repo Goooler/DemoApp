@@ -1,6 +1,5 @@
 @file:Suppress("unused", "TooManyFunctions")
 @file:JvmName("BaseExtensionUtil")
-@file:OptIn(ExperimentalContracts::class)
 
 package io.goooler.demoapp.base.util
 
