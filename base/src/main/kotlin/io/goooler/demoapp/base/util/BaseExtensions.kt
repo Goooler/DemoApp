@@ -154,24 +154,30 @@ fun CharSequence.withColorSpan(coloredPart: String, @ColorInt color: Int): Spann
   }
 }
 
-fun String?.safeToBoolean(default: Boolean = false): Boolean =
-  runCatching { toBoolean() }.getOrElse { default }
+@Suppress("NOTHING_TO_INLINE")
+inline fun String?.safeToBoolean(default: Boolean = false): Boolean =
+  runCatching(::toBoolean).getOrDefault(default)
 
-fun String?.safeToInt(default: Int = 0): Int =
-  runCatching { orEmpty().toInt() }.getOrElse { default }
+@Suppress("NOTHING_TO_INLINE")
+inline fun String?.safeToInt(default: Int = 0): Int =
+  orEmpty().runCatching(String::toInt).getOrDefault(default)
 
-fun String?.safeToLong(default: Long = 0L): Long =
-  runCatching { orEmpty().toLong() }.getOrElse { default }
+@Suppress("NOTHING_TO_INLINE")
+inline fun String?.safeToLong(default: Long = 0L): Long =
+  orEmpty().runCatching(String::toLong).getOrDefault(default)
 
-fun String?.safeToFloat(default: Float = 0f): Float =
-  runCatching { orEmpty().toFloat() }.getOrElse { default }
+@Suppress("NOTHING_TO_INLINE")
+inline fun String?.safeToFloat(default: Float = 0f): Float =
+  orEmpty().runCatching(String::toFloat).getOrDefault(default)
 
-fun String?.safeToDouble(default: Double = 0.0): Double =
-  runCatching { orEmpty().toDouble() }.getOrElse { default }
+@Suppress("NOTHING_TO_INLINE")
+inline fun String?.safeToDouble(default: Double = 0.0): Double =
+  orEmpty().runCatching(String::toDouble).getOrDefault(default)
 
+@Suppress("NOTHING_TO_INLINE")
 @ColorInt
-fun String?.safeToColor(@ColorInt default: Int = 0): Int =
-  runCatching { Color.parseColor(this) }.getOrDefault(default)
+inline fun String?.safeToColor(@ColorInt default: Int = 0): Int =
+  runCatching(Color::parseColor).getOrDefault(default)
 
 fun String?.isNetworkUrl(): Boolean = URLUtil.isNetworkUrl(this)
 
