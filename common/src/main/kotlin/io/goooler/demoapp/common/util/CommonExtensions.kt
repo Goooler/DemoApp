@@ -94,29 +94,17 @@ fun String.hidePhoneNumber(): String {
 
 // ---------------------Res-------------------------------//
 
-fun @receiver:DrawableRes Int.getDrawable(): Drawable? = try {
-  ResourceUtils.getDrawable(this)
-} catch (e: Exception) {
-  e.printStackTrace()
-  null
-}
+fun @receiver:DrawableRes Int.getDrawable(): Drawable? =
+  runCatching(ResourceUtils::getDrawable).getOrNull()
 
 @ColorInt
-fun @receiver:ColorRes Int.getColor(): Int = try {
-  ColorUtils.getColor(this)
-} catch (e: Exception) {
-  e.printStackTrace()
-  -1
-}
+fun @receiver:ColorRes Int.getColor(): Int =
+  runCatching(ColorUtils::getColor).getOrDefault(-1)
 
 fun @receiver:StringRes Int.getString(): String = StringUtils.getString(this)
 
-fun @receiver:PluralsRes Int.getQuantityString(num: Int): String? = try {
-  CommonApplication.app.resources.getQuantityString(this, num, num)
-} catch (e: Exception) {
-  e.printStackTrace()
-  null
-}
+fun @receiver:PluralsRes Int.getQuantityString(num: Int): String? =
+  runCatching { CommonApplication.app.resources.getQuantityString(this, num, num) }.getOrNull()
 
 @Px
 fun @receiver:Sp Number.sp2px(): Int = SizeUtils.sp2px(this.toFloat())
@@ -150,7 +138,8 @@ fun View.showSoftInput() {
   KeyboardUtils.showSoftInput(this)
 }
 
-fun TextView.hideTextInputLayoutErrorOnTextChange(textInputLayout: TextInputLayout) {
+@Suppress("NOTHING_TO_INLINE")
+inline fun TextView.hideTextInputLayoutErrorOnTextChange(textInputLayout: TextInputLayout) {
   doAfterTextChanged { textInputLayout.error = null }
 }
 
