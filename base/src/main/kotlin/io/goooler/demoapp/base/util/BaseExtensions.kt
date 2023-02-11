@@ -1,6 +1,5 @@
 @file:Suppress("unused", "TooManyFunctions")
 @file:JvmName("BaseExtensionUtil")
-@file:OptIn(ExperimentalContracts::class)
 
 package io.goooler.demoapp.base.util
 
@@ -30,13 +29,11 @@ import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.annotation.Dimension
 import androidx.annotation.IdRes
-import androidx.annotation.IntRange
 import androidx.annotation.MainThread
 import androidx.core.content.getSystemService
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.os.bundleOf
-import androidx.core.text.parseAsHtml
 import androidx.core.text.toSpannable
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -50,7 +47,6 @@ import androidx.lifecycle.coroutineScope
 import androidx.lifecycle.findViewTreeLifecycleOwner
 import java.io.File
 import java.io.Serializable
-import java.lang.reflect.Method
 import java.math.BigDecimal
 import java.util.UUID
 import java.util.regex.Pattern
@@ -100,47 +96,7 @@ inline fun <reified T : Parcelable> T.deepCopy(): T? {
   }
 }
 
-@Throws(ReflectiveOperationException::class)
-fun lazyReflectedMethod(
-  declaringClass: Class<*>,
-  methodName: String,
-  vararg parameterTypes: Any,
-): Lazy<Method> = lazy {
-  @Suppress("SpreadOperator")
-  getReflectedMethod(declaringClass, methodName, *getParameterTypes(parameterTypes))
-}
-
-@Throws(ReflectiveOperationException::class)
-fun getParameterTypes(parameterTypes: Array<out Any>): Array<Class<*>> =
-  Array(parameterTypes.size) {
-    when (val parameterType = parameterTypes[it]) {
-      is Class<*> -> parameterType
-      is String -> Class.forName(parameterType)
-      else -> throw IllegalArgumentException(parameterType.toString())
-    }
-  }
-
-@Throws(ReflectiveOperationException::class)
-fun getReflectedMethod(
-  declaringClass: Class<*>,
-  methodName: String,
-  vararg parameterTypes: Class<*>,
-): Method =
-  declaringClass.getDeclaredMethod(methodName, *parameterTypes).also { it.isAccessible = true }
-
 // ---------------------CharSequence-------------------------------//
-
-operator fun String.times(@IntRange(from = 0) num: Int): String {
-  require(num >= 0) {
-    "Param num should >= 0"
-  }
-  val origin = this
-  return buildString {
-    for (i in 1..num) append(origin)
-  }
-}
-
-fun String.fromHtml(): Spanned = parseAsHtml()
 
 fun String.extension2MimeType(): String? =
   MimeTypeMap.getSingleton().getMimeTypeFromExtension(lowercase())
@@ -148,18 +104,14 @@ fun String.extension2MimeType(): String? =
 fun String.mimeType2Extension(): String? =
   MimeTypeMap.getSingleton().getExtensionFromMimeType(lowercase())
 
-fun String.onlyDigits(): String = replace(Regex("\\D*"), "")
-
-fun String.removeAllSpecialCharacters(): String = replace(Regex("[^a-zA-Z]+"), "")
-
 /**
  * Validate given text is a valid filename.
  *
  * @return true if given text is a valid filename
  */
-fun String.isValidFilename(): Boolean {
+fun CharSequence.isValidFilename(): Boolean {
   val filenameRegex =
-    Pattern.compile("[\\\\\\/:\\*\\?\"<>\\|\\x01-\\x1F\\x7F]", Pattern.CASE_INSENSITIVE)
+    Pattern.compile("[\\\\/:*?\"<>|\\x01-\\x1F\\x7F]", Pattern.CASE_INSENSITIVE)
 
   // It's not easy to use regex to detect single/double dot while leaving valid values
   // (filename.zip) behind...
@@ -169,8 +121,9 @@ fun String.isValidFilename(): Boolean {
 
 fun Uri.withAppendedId(id: Long): Uri = ContentUris.withAppendedId(this, id)
 
+@Suppress("NOTHING_TO_INLINE")
 @OptIn(ExperimentalContracts::class)
-fun CharSequence?.isNotNullOrEmpty(): Boolean {
+inline fun CharSequence?.isNotNullOrEmpty(): Boolean {
   contract {
     returns(true) implies (this@isNotNullOrEmpty != null)
   }
@@ -201,33 +154,30 @@ fun CharSequence.withColorSpan(coloredPart: String, @ColorInt color: Int): Spann
   }
 }
 
-/**
- * subString 防越界处理
- */
-fun String.safeSubstring(startIndex: Int, endIndex: Int): String {
-  val begin = if (startIndex < 0) 0 else startIndex
-  val end = if (endIndex > length) length else endIndex
-  return substring(begin, end)
-}
+@Suppress("NOTHING_TO_INLINE")
+inline fun String?.safeToBoolean(default: Boolean = false): Boolean =
+  runCatching(::toBoolean).getOrDefault(default)
 
-fun String?.safeToBoolean(default: Boolean = false): Boolean =
-  runCatching { toBoolean() }.getOrElse { default }
+@Suppress("NOTHING_TO_INLINE")
+inline fun String?.safeToInt(default: Int = 0): Int =
+  orEmpty().runCatching(String::toInt).getOrDefault(default)
 
-fun String?.safeToInt(default: Int = 0): Int =
-  runCatching { orEmpty().toInt() }.getOrElse { default }
+@Suppress("NOTHING_TO_INLINE")
+inline fun String?.safeToLong(default: Long = 0L): Long =
+  orEmpty().runCatching(String::toLong).getOrDefault(default)
 
-fun String?.safeToLong(default: Long = 0L): Long =
-  runCatching { orEmpty().toLong() }.getOrElse { default }
+@Suppress("NOTHING_TO_INLINE")
+inline fun String?.safeToFloat(default: Float = 0f): Float =
+  orEmpty().runCatching(String::toFloat).getOrDefault(default)
 
-fun String?.safeToFloat(default: Float = 0f): Float =
-  runCatching { orEmpty().toFloat() }.getOrElse { default }
+@Suppress("NOTHING_TO_INLINE")
+inline fun String?.safeToDouble(default: Double = 0.0): Double =
+  orEmpty().runCatching(String::toDouble).getOrDefault(default)
 
-fun String?.safeToDouble(default: Double = 0.0): Double =
-  runCatching { orEmpty().toDouble() }.getOrElse { default }
-
+@Suppress("NOTHING_TO_INLINE")
 @ColorInt
-fun String?.safeToColor(@ColorInt default: Int = 0): Int =
-  runCatching { Color.parseColor(this) }.getOrDefault(default)
+inline fun String?.safeToColor(@ColorInt default: Int = 0): Int =
+  runCatching(Color::parseColor).getOrDefault(default)
 
 fun String?.isNetworkUrl(): Boolean = URLUtil.isNetworkUrl(this)
 
@@ -251,82 +201,15 @@ infix fun Double.div(that: Double): Double {
   return (BigDecimal(this.toString()) / BigDecimal(that.toString())).toDouble()
 }
 
-fun Number.isZero(): Boolean {
-  return when (this) {
-    is Byte, is Short, is Int, is Long -> this == 0
-    is Float, is Double -> BigDecimal(this.toString()) == BigDecimal("0.0")
-    else -> false
-  }
-}
-
-fun Number.isNotZero(): Boolean = isZero().not()
-
-fun Int?.orZero(): Int = this ?: 0
-
-fun Int.isInvalid(invalidValue: Int = -1) = this == invalidValue
-
-fun Int.isValid(invalidValue: Int = -1) = isInvalid(invalidValue).not()
-
-fun Long.isInvalid(invalidValue: Long = -1) = this == invalidValue
-
-fun Long.isValid(invalidValue: Long = -1) = isInvalid(invalidValue).not()
-
-fun Boolean?.orTrue(): Boolean = this ?: true
-
-fun Boolean?.orFalse(): Boolean = this ?: false
-
 // ---------------------Collections-------------------------------//
 
+@Suppress("NOTHING_TO_INLINE")
 @OptIn(ExperimentalContracts::class)
-fun <T> Collection<T>?.isNotNullOrEmpty(): Boolean {
+inline fun <T> Collection<T>?.isNotNullOrEmpty(): Boolean {
   contract {
     returns(true) implies (this@isNotNullOrEmpty != null)
   }
   return this.isNullOrEmpty().not()
-}
-
-/**
- * 判断集合内是否仅有一个元素
- */
-@OptIn(ExperimentalContracts::class)
-fun <T> Collection<T>?.isSingle(): Boolean {
-  contract {
-    returns(true) implies (this@isSingle != null)
-  }
-  return this != null && size == 1
-}
-
-/**
- * 判断集合内是否有多个元素
- * @param minSize 最小为 2
- */
-@OptIn(ExperimentalContracts::class)
-fun <T> Collection<T>?.isMultiple(@IntRange(from = 2) minSize: Int = 2): Boolean {
-  contract {
-    returns(true) implies (this@isMultiple != null)
-  }
-  val min = if (minSize < 2) 2 else minSize
-  return this != null && size >= min
-}
-
-fun <T> List<T>.safeSubList(fromIndex: Int, toIndex: Int): List<T> {
-  val endIndex = if (toIndex > size) size else toIndex
-  return subList(fromIndex, endIndex)
-}
-
-/**
- * 取集合内第二个元素
- */
-fun <T> List<T>.secondOrNull(): T? {
-  return if (size < 2) null else this[1]
-}
-
-/**
- * 取集合内第三个元素
- */
-fun <T> List<T>.thirdOrNull(): T? {
-  @Suppress("MagicNumber")
-  return if (size < 3) null else this[2]
 }
 
 fun <K, V> MutableMap<K, V>.removeFirst(): Map.Entry<K, V> {
@@ -354,6 +237,8 @@ fun <T> MutableCollection<T>.removeFirstOrNull(predicate: (T) -> Boolean): T? {
 // ---------------------File-------------------------------//
 
 fun File.notExists(): Boolean = exists().not()
+
+val File.mimeType: String? get() = extension.extension2MimeType()
 
 // ---------------------Intent-------------------------------//
 
