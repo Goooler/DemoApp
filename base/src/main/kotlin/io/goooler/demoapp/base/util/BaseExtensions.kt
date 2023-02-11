@@ -109,7 +109,7 @@ fun String.mimeType2Extension(): String? =
  *
  * @return true if given text is a valid filename
  */
-fun String.isValidFilename(): Boolean {
+fun CharSequence.isValidFilename(): Boolean {
   val filenameRegex =
     Pattern.compile("[\\\\/:*?\"<>|\\x01-\\x1F\\x7F]", Pattern.CASE_INSENSITIVE)
 
