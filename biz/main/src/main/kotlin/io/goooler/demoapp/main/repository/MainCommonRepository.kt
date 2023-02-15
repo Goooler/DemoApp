@@ -29,6 +29,6 @@ class MainCommonRepository {
     dao.getRepoList(ownerName)
 
   suspend fun putRepoListIntoDb(list: List<MainRepoListBean>) {
-    dao.insertRepoList(list)
+    dao.upsertRepoList(list)
   }
 }
