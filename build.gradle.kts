@@ -23,7 +23,7 @@ allprojects {
   }
 
   pluginManager.withPlugin(rootProject.libs.plugins.android.library.get().pluginId) {
-    if (displayName.contains(":biz:") || name.startsWith("common")) setupCommon() else setupBase()
+    if (displayName.contains(":biz:") || displayName.contains(":common")) setupCommon() else setupBase()
   }
 
   pluginManager.withPlugin(rootProject.libs.plugins.android.application.get().pluginId) {
@@ -93,6 +93,9 @@ tasks {
 }
 
 fun <T : BaseExtension> Project.setupBase(block: T.() -> Unit = {}) {
+  pluginManager.apply(libs.plugins.kotlin.android.get().pluginId)
+  pluginManager.apply(libs.plugins.cacheFix.get().pluginId)
+
   extensions.configure<BaseExtension> {
     resourcePrefix = "${name}_"
     namespace = "io.goooler.demoapp.$name"
@@ -135,9 +138,6 @@ fun <T : BaseExtension> Project.setupBase(block: T.() -> Unit = {}) {
 }
 
 fun Project.setupBase() {
-  pluginManager.apply(libs.plugins.kotlin.android.get().pluginId)
-  pluginManager.apply(libs.plugins.cacheFix.get().pluginId)
-
   setupBase<BaseExtension>()
 }
 
