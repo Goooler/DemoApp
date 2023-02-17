@@ -92,7 +92,7 @@ tasks {
   }
 }
 
-fun <T : BaseExtension> Project.setupBase(block: T.() -> Unit) {
+fun <T : BaseExtension> Project.setupBase(block: T.() -> Unit = {}) {
   extensions.configure<BaseExtension> {
     resourcePrefix = "${name}_"
     namespace = "io.goooler.demoapp.$name"
@@ -138,7 +138,7 @@ fun Project.setupBase() {
   pluginManager.apply(libs.plugins.kotlin.android.get().pluginId)
   pluginManager.apply(libs.plugins.cacheFix.get().pluginId)
 
-  setupBase<BaseExtension> {}
+  setupBase<BaseExtension>()
 }
 
 fun Project.setupCommon() {
