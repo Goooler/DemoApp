@@ -92,7 +92,7 @@ tasks {
   }
 }
 
-fun <T : BaseExtension> Project.setupBase(block: T.() -> Unit = {}) {
+fun Project.setupBase(block: BaseExtension.() -> Unit = {}) {
   pluginManager.apply(libs.plugins.kotlin.android.get().pluginId)
   pluginManager.apply(libs.plugins.cacheFix.get().pluginId)
 
@@ -132,17 +132,12 @@ fun <T : BaseExtension> Project.setupBase(block: T.() -> Unit = {}) {
       "META-INF/AL2.0",
       "META-INF/LGPL2.1",
     )
-    @Suppress("UNCHECKED_CAST")
-    (this as T).block()
+    block()
   }
 }
 
-fun Project.setupBase() {
-  setupBase<BaseExtension>()
-}
-
 fun Project.setupCommon() {
-  setupBase<BaseExtension> {
+  setupBase {
     flavorDimensions("env")
     productFlavors {
       create("dev")
