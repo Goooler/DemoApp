@@ -94,7 +94,7 @@ tasks {
 
 fun Project.setupBase(block: BaseExtension.() -> Unit = {}) {
   pluginManager.apply(libs.plugins.kotlin.android.get().pluginId)
-  pluginManager.apply(libs.plugins.cacheFix.get().pluginId)
+  //pluginManager.apply(libs.plugins.cacheFix.get().pluginId)
 
   extensions.configure<BaseExtension> {
     resourcePrefix = "${name}_"
