@@ -23,15 +23,10 @@ allprojects {
   }
 
   pluginManager.withPlugin(rootProject.libs.plugins.android.library.get().pluginId) {
-    pluginManager.apply(libs.plugins.kotlin.android.get().pluginId)
-    pluginManager.apply(libs.plugins.cacheFix.get().pluginId)
-
     if (displayName.contains(":biz:") || name.startsWith("common")) setupCommon() else setupBase()
   }
 
   pluginManager.withPlugin(rootProject.libs.plugins.android.application.get().pluginId) {
-    pluginManager.apply(libs.plugins.kotlin.android.get().pluginId)
-    pluginManager.apply(libs.plugins.cacheFix.get().pluginId)
     setupCommon()
   }
 
@@ -140,6 +135,9 @@ fun <T : BaseExtension> Project.setupBase(block: T.() -> Unit) {
 }
 
 fun Project.setupBase() {
+  pluginManager.apply(libs.plugins.kotlin.android.get().pluginId)
+  pluginManager.apply(libs.plugins.cacheFix.get().pluginId)
+
   setupBase<BaseExtension> {}
 }
 
