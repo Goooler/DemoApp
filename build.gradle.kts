@@ -1,9 +1,5 @@
-import com.android.build.gradle.AppPlugin
 import com.android.build.gradle.BaseExtension
-import com.android.build.gradle.BasePlugin
-import com.android.build.gradle.LibraryPlugin
 import com.google.devtools.ksp.gradle.KspExtension
-import com.google.devtools.ksp.gradle.KspGradleSubplugin
 import io.gitlab.arturbosch.detekt.extensions.DetektExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 
@@ -19,24 +15,27 @@ plugins {
 }
 
 allprojects {
-  plugins.apply(rootProject.libs.plugins.kotlinter.get().pluginId)
+  pluginManager.apply(rootProject.libs.plugins.kotlinter.get().pluginId)
 
-  plugins.apply(rootProject.libs.plugins.detekt.get().pluginId)
+  pluginManager.apply(rootProject.libs.plugins.detekt.get().pluginId)
   configure<DetektExtension> {
     config = rootProject.files("config/detekt/detekt.yml")
   }
 
-  plugins.withType<BasePlugin> {
-    plugins.apply(libs.plugins.kotlin.android.get().pluginId)
-    plugins.apply(libs.plugins.cacheFix.get().pluginId)
+  pluginManager.withPlugin(rootProject.libs.plugins.android.library.get().pluginId) {
+    pluginManager.apply(libs.plugins.kotlin.android.get().pluginId)
+    pluginManager.apply(libs.plugins.cacheFix.get().pluginId)
 
-    if (this is AppPlugin) {
-      setupCommon()
-    } else if (this is LibraryPlugin) {
-      if (displayName.contains(":biz:") || name.startsWith("common")) setupCommon() else setupBase()
-    }
+    if (displayName.contains(":biz:") || name.startsWith("common")) setupCommon() else setupBase()
   }
-  plugins.withType<KspGradleSubplugin>().configureEach {
+
+  pluginManager.withPlugin(rootProject.libs.plugins.android.application.get().pluginId) {
+    pluginManager.apply(libs.plugins.kotlin.android.get().pluginId)
+    pluginManager.apply(libs.plugins.cacheFix.get().pluginId)
+    setupCommon()
+  }
+
+  pluginManager.withPlugin(rootProject.libs.plugins.ksp.get().pluginId) {
     configure<KspExtension> {
       arg("room.incremental", "true")
     }
