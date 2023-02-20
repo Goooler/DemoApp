@@ -1,5 +1,9 @@
+import com.android.build.gradle.AppPlugin
 import com.android.build.gradle.BaseExtension
+import com.android.build.gradle.BasePlugin
+import com.android.build.gradle.LibraryPlugin
 import com.google.devtools.ksp.gradle.KspExtension
+import com.google.devtools.ksp.gradle.KspGradleSubplugin
 import io.gitlab.arturbosch.detekt.extensions.DetektExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 
@@ -15,22 +19,24 @@ plugins {
 }
 
 allprojects {
-  pluginManager.apply(rootProject.libs.plugins.kotlinter.get().pluginId)
+  plugins.apply(rootProject.libs.plugins.kotlinter.get().pluginId)
 
-  pluginManager.apply(rootProject.libs.plugins.detekt.get().pluginId)
+  plugins.apply(rootProject.libs.plugins.detekt.get().pluginId)
   configure<DetektExtension> {
     config = rootProject.files("config/detekt/detekt.yml")
   }
 
-  pluginManager.withPlugin(rootProject.libs.plugins.android.library.get().pluginId) {
-    if (displayName.contains(":biz:") || displayName.contains(":common")) setupCommon() else setupBase()
-  }
+  plugins.withType<BasePlugin> {
+    plugins.apply(libs.plugins.kotlin.android.get().pluginId)
+    plugins.apply(libs.plugins.cacheFix.get().pluginId)
 
-  pluginManager.withPlugin(rootProject.libs.plugins.android.application.get().pluginId) {
-    setupCommon()
+    if (this is AppPlugin) {
+      setupCommon()
+    } else if (this is LibraryPlugin) {
+      if (displayName.contains(":biz:") || name.startsWith("common")) setupCommon() else setupBase()
+    }
   }
-
-  pluginManager.withPlugin(rootProject.libs.plugins.ksp.get().pluginId) {
+  plugins.withType<KspGradleSubplugin>().configureEach {
     configure<KspExtension> {
       arg("room.incremental", "true")
     }
@@ -92,10 +98,7 @@ tasks {
   }
 }
 
-fun Project.setupBase(block: BaseExtension.() -> Unit = {}) {
-  pluginManager.apply(libs.plugins.kotlin.android.get().pluginId)
-  pluginManager.apply(libs.plugins.cacheFix.get().pluginId)
-
+fun <T : BaseExtension> Project.setupBase(block: T.() -> Unit) {
   extensions.configure<BaseExtension> {
     resourcePrefix = "${name}_"
     namespace = "io.goooler.demoapp.$name"
@@ -132,12 +135,17 @@ fun Project.setupBase(block: BaseExtension.() -> Unit = {}) {
       "META-INF/AL2.0",
       "META-INF/LGPL2.1",
     )
-    block()
+    @Suppress("UNCHECKED_CAST")
+    (this as T).block()
   }
 }
 
+fun Project.setupBase() {
+  setupBase<BaseExtension> {}
+}
+
 fun Project.setupCommon() {
-  setupBase {
+  setupBase<BaseExtension> {
     flavorDimensions("env")
     productFlavors {
       create("dev")
