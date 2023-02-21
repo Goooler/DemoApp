@@ -23,6 +23,7 @@ on:
       - '**.md'
       - 'LICENSE'
       - 'NOTICE'
+  workflow_dispatch:
 
 jobs:
   wrapper-validation:
