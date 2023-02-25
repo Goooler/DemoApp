@@ -24,6 +24,15 @@
   public static final android.os.Parcelable$Creator CREATOR;
 }
 
+# remove all logging from production apk
+-assumenosideeffects class android.util.Log {
+    public static *** getStackTraceString(...);
+    public static *** d(...);
+    public static *** w(...);
+    public static *** v(...);
+    public static *** i(...);
+}
+
 # Assume isInEditMode() always return false in release builds so they can be pruned
 -assumevalues public class * extends android.view.View {
   boolean isInEditMode() return false;
