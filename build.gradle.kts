@@ -5,7 +5,7 @@ import com.android.build.gradle.LibraryPlugin
 import com.google.devtools.ksp.gradle.KspExtension
 import com.google.devtools.ksp.gradle.KspGradleSubplugin
 import io.gitlab.arturbosch.detekt.extensions.DetektExtension
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
   alias(libs.plugins.android.application) apply false
@@ -51,7 +51,7 @@ allprojects {
     }
   }
 
-  tasks.withType<KotlinCompilationTask<*>>().configureEach {
+  tasks.withType<KotlinCompile>().configureEach {
     compilerOptions {
       allWarningsAsErrors.set(true)
     }

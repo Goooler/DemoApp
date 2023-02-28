@@ -24,6 +24,15 @@
   public static final android.os.Parcelable$Creator CREATOR;
 }
 
+# remove all logging from production apk
+-assumenosideeffects class android.util.Log {
+    public static *** getStackTraceString(...);
+    public static *** d(...);
+    public static *** w(...);
+    public static *** v(...);
+    public static *** i(...);
+}
+
 # Assume isInEditMode() always return false in release builds so they can be pruned
 -assumevalues public class * extends android.view.View {
   boolean isInEditMode() return false;
@@ -52,6 +61,20 @@
   boolean ANDROID_DETECTED return true;
 }
 -checkdiscard class kotlinx.coroutines.internal.FastServiceLoader
+
+# remove some kotlin overhead
+-assumenosideeffects class kotlin.jvm.internal.Intrinsics {
+    static void checkNotNull(java.lang.Object);
+    static void checkNotNull(java.lang.Object, java.lang.String);
+    static void checkParameterIsNotNull(java.lang.Object, java.lang.String);
+    static void checkParameterIsNotNull(java.lang.Object, java.lang.String);
+    static void checkNotNullParameter(java.lang.Object, java.lang.String);
+    static void checkExpressionValueIsNotNull(java.lang.Object, java.lang.String);
+    static void checkNotNullExpressionValue(java.lang.Object, java.lang.String);
+    static void checkReturnedValueIsNotNull(java.lang.Object, java.lang.String);
+    static void checkReturnedValueIsNotNull(java.lang.Object, java.lang.String, java.lang.String);
+    static void throwUninitializedPropertyAccessException(java.lang.String);
+}
 
 # Check that qualifier annotations have been discarded.
 -checkdiscard @javax.inject.Qualifier class *
