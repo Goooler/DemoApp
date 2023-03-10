@@ -396,7 +396,7 @@ fun TextView.setOnEditorConfirmActionListener(listener: (TextView) -> Unit) {
   }
 }
 
-// ---------------------View-------------------------------//
+// ---------------------Anim-------------------------------//
 
 val Animator.lifecycleObserver: LifecycleObserver get() = object : DefaultLifecycleObserver {
   override fun onStart(owner: LifecycleOwner) {
