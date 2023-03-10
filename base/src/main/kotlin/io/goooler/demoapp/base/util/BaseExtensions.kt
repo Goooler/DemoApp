@@ -3,6 +3,7 @@
 
 package io.goooler.demoapp.base.util
 
+import android.animation.Animator
 import android.app.Activity
 import android.content.ContentUris
 import android.content.Context
@@ -40,8 +41,10 @@ import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.commit
 import androidx.fragment.app.findFragment
+import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleCoroutineScope
+import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.coroutineScope
 import androidx.lifecycle.findViewTreeLifecycleOwner
@@ -390,6 +393,28 @@ fun TextView.setOnEditorConfirmActionListener(listener: (TextView) -> Unit) {
     } else {
       false
     }
+  }
+}
+
+// ---------------------Anim-------------------------------//
+
+val Animator.lifecycleObserver: LifecycleObserver get() = object : DefaultLifecycleObserver {
+  override fun onStart(owner: LifecycleOwner) {
+    start()
+  }
+
+  override fun onResume(owner: LifecycleOwner) {
+    resume()
+  }
+
+  override fun onPause(owner: LifecycleOwner) {
+    pause()
+  }
+
+  override fun onDestroy(owner: LifecycleOwner) {
+    removeAllListeners()
+    end()
+    cancel()
   }
 }
 
