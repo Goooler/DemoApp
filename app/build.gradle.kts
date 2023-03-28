@@ -11,6 +11,10 @@ kapt {
   correctErrorTypes = true
 }
 
+hilt {
+  enableAggregatingTask = false
+}
+
 android {
   val appName = "DemoApp"
 

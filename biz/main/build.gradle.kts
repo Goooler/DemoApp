@@ -9,6 +9,10 @@ kapt {
   correctErrorTypes = true
 }
 
+hilt {
+  enableAggregatingTask = false
+}
+
 android {
   buildFeatures.dataBinding = true
 
