@@ -2,6 +2,11 @@ plugins {
   alias(libs.plugins.android.library)
   alias(libs.plugins.ksp)
   alias(libs.plugins.kotlin.kapt)
+  alias(libs.plugins.hilt)
+}
+
+kapt {
+  correctErrorTypes = true
 }
 
 android {
@@ -24,4 +29,7 @@ dependencies {
 
   implementation(libs.square.moshi)
   ksp(libs.square.moshi.compiler)
+
+  implementation(libs.hilt.android)
+  kapt(libs.hilt.compiler)
 }

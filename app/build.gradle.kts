@@ -4,6 +4,11 @@ import java.util.Properties
 plugins {
   alias(libs.plugins.android.application)
   alias(libs.plugins.kotlin.kapt)
+  alias(libs.plugins.hilt)
+}
+
+kapt {
+  correctErrorTypes = true
 }
 
 android {
@@ -64,6 +69,9 @@ dependencies {
   implementation(projects.biz.main)
   implementation(projects.biz.detail)
   implementation(projects.biz.web)
+
+  implementation(libs.hilt.android)
+  kapt(libs.hilt.compiler)
 
   debugImplementation(libs.square.leakCanary)
 }
