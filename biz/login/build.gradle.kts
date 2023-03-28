@@ -1,6 +1,6 @@
 plugins {
   alias(libs.plugins.android.library)
-  alias(libs.plugins.napt)
+  alias(libs.plugins.kotlin.kapt)
 }
 
 android {
