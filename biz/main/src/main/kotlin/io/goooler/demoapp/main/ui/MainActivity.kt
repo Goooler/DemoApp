@@ -2,6 +2,7 @@ package io.goooler.demoapp.main.ui
 
 import android.Manifest
 import android.os.Bundle
+import dagger.hilt.android.AndroidEntryPoint
 import io.goooler.demoapp.adapter.vp.CommonFragmentStatePagerAdapter
 import io.goooler.demoapp.base.util.PermissionHelper
 import io.goooler.demoapp.base.util.unsafeLazy
@@ -12,6 +13,7 @@ import io.goooler.demoapp.main.ui.fragment.MainHomeFragment
 import io.goooler.demoapp.main.ui.fragment.MainPagingFragment
 import io.goooler.demoapp.main.ui.fragment.MainSrlFragment
 
+@AndroidEntryPoint
 class MainActivity : BaseBindingActivity<MainActivityBinding>() {
 
   private val pagerAdapter by unsafeLazy { CommonFragmentStatePagerAdapter(supportFragmentManager) }
