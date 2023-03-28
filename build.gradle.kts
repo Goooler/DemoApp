@@ -18,6 +18,16 @@ plugins {
   alias(libs.plugins.cacheFix) apply false
 }
 
+buildscript {
+  configurations.all {
+    resolutionStrategy.eachDependency {
+      when (requested.name) {
+        "javapoet" -> useVersion("1.13.0")
+      }
+    }
+  }
+}
+
 allprojects {
   plugins.apply(rootProject.libs.plugins.kotlinter.get().pluginId)
 

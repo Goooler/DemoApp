@@ -10,7 +10,7 @@ kapt {
 }
 
 hilt {
-  enableAggregatingTask = false
+  enableAggregatingTask = true
 }
 
 android {
