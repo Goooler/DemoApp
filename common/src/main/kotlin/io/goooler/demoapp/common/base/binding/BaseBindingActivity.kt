@@ -48,8 +48,9 @@ abstract class BaseBindingActivity<VB : ViewDataBinding> : BaseActivity(), IBind
     @Suppress("UNCHECKED_CAST")
     internal fun <T : ViewBinding> Any.inflateBinding(inflater: LayoutInflater): T {
       return (javaClass.genericSuperclass as ParameterizedType).actualTypeArguments
+        .asSequence()
         .filterIsInstance<Class<T>>()
-        .first()
+        .first {  it.simpleName.endsWith("Binding") }
         .getDeclaredMethod("inflate", LayoutInflater::class.java)
         .also { it.isAccessible = true }
         .invoke(null, inflater) as T
