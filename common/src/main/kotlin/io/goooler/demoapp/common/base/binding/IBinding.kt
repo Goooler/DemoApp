@@ -23,7 +23,7 @@ internal sealed interface IBinding<VB : ViewDataBinding> {
           return method.invoke(null, inflater) as T
         }
       }
-      throw IllegalStateException("No binding found.")
+      error("No binding found.")
     }
 
     private fun Class<*>.filterBindingMethod(): Method? {
