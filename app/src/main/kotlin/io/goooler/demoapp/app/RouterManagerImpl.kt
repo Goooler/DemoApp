@@ -5,8 +5,8 @@ import android.content.Intent
 import io.goooler.demoapp.common.router.RouterManager
 import io.goooler.demoapp.detail.ui.RepoDetailActivity
 import io.goooler.demoapp.login.ui.LoginActivity
-import io.goooler.demoapp.main.ui.AudioPlayActivity
 import io.goooler.demoapp.main.ui.ActualMainActivity
+import io.goooler.demoapp.main.ui.AudioPlayActivity
 import io.goooler.demoapp.web.WebActivity
 
 object RouterManagerImpl : RouterManager {
