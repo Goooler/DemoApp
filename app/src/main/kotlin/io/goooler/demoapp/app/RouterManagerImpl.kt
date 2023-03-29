@@ -6,7 +6,7 @@ import io.goooler.demoapp.common.router.RouterManager
 import io.goooler.demoapp.detail.ui.RepoDetailActivity
 import io.goooler.demoapp.login.ui.LoginActivity
 import io.goooler.demoapp.main.ui.AudioPlayActivity
-import io.goooler.demoapp.main.ui.MainActivity
+import io.goooler.demoapp.main.ui.ActualMainActivity
 import io.goooler.demoapp.web.WebActivity
 
 object RouterManagerImpl : RouterManager {
@@ -23,7 +23,7 @@ object RouterManagerImpl : RouterManager {
   }
 
   override fun goMain(context: Context) {
-    Intent(context, MainActivity::class.java)
+    Intent(context, ActualMainActivity::class.java)
       .let(context::startActivity)
   }
 

@@ -4,7 +4,7 @@
   <application>
 
     <activity
-      android:name=".ui.MainActivity"
+      android:name=".ui.ActualMainActivity"
       android:launchMode="singleTask" />
 
     <activity android:name=".ui.AudioPlayActivity" />

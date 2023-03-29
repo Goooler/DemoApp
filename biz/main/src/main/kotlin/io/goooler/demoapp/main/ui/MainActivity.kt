@@ -14,7 +14,7 @@ import io.goooler.demoapp.main.ui.fragment.MainPagingFragment
 import io.goooler.demoapp.main.ui.fragment.MainSrlFragment
 
 @AndroidEntryPoint
-class MainActivity : BaseBindingActivity<MainActivityBinding>() {
+open class MainActivity : BaseBindingActivity<MainActivityBinding>() {
 
   private val pagerAdapter by unsafeLazy { CommonFragmentStatePagerAdapter(supportFragmentManager) }
 
