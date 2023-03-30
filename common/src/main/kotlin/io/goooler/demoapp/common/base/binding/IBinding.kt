@@ -28,6 +28,7 @@ internal sealed interface IBinding<VB : ViewDataBinding> {
 
     private fun Class<*>.filterBindingMethod(): Method? {
       return (genericSuperclass as? ParameterizedType)?.actualTypeArguments
+        ?.asSequence()
         ?.filterIsInstance<Class<*>>()
         ?.firstOrNull { it.simpleName.endsWith("Binding") }
         ?.getDeclaredMethod("inflate", LayoutInflater::class.java)
