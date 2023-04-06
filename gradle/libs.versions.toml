@@ -16,7 +16,7 @@ chucker = "3.5.2"
 coil = "2.3.0"
 coroutines = "1.6.4"
 glide = "4.15.1"
-kotlin = "1.8.10"
+kotlin = "1.8.20"
 square-okHttp = "4.10.0"
 square-retrofit = "2.9.0"
 square-moshi = "1.14.0"
@@ -27,7 +27,7 @@ support = "28.0.0"
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-ksp = "com.google.devtools.ksp:1.8.10-1.0.9"
+ksp = "com.google.devtools.ksp:1.8.20-1.0.10"
 napt = "com.sergei-lapin.napt:1.19"
 kotlinter = "org.jmailen.kotlinter:3.14.0"
 detekt = "io.gitlab.arturbosch.detekt:1.22.0"
