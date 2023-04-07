@@ -98,6 +98,25 @@ tasks {
   }
 }
 
+val ktlint: Configuration by configurations.creating
+
+dependencies {
+  ktlint("com.pinterest:ktlint:0.49.0-SNAPSHOT")
+}
+
+val ktlintCheck by tasks.registering(JavaExec::class) {
+  group = LifecycleBasePlugin.VERIFICATION_GROUP
+  description = "Check Kotlin code style"
+  classpath = ktlint
+  mainClass.set("com.pinterest.ktlint.Main")
+  // see https://pinterest.github.io/ktlint/install/cli/#command-line-usage for more information
+  args(
+    "**/src/**/*.kt",
+    "**.kts",
+    "!**/build/**",
+  )
+}
+
 fun <T : BaseExtension> Project.setupBase(block: T.() -> Unit) {
   extensions.configure<BaseExtension> {
     resourcePrefix = "${name}_"

@@ -41,7 +41,7 @@ jobs:
           distribution: 'zulu'
           java-version: 18
       - uses: gradle/gradle-build-action@v2
-      - run: ./gradlew lintKotlin
+      - run: ./gradlew ktlintCheck
 
   detekt:
     runs-on: ubuntu-latest
