@@ -101,7 +101,7 @@ tasks {
 val ktlint: Configuration by configurations.creating
 
 dependencies {
-  ktlint("com.pinterest:ktlint:0.49.0-SNAPSHOT")
+  ktlint("com.pinterest.ktlint:ktlint:0.49.0-SNAPSHOT")
 }
 
 val ktlintCheck by tasks.registering(JavaExec::class) {
