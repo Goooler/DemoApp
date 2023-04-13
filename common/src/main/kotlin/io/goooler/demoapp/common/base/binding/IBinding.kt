@@ -18,6 +18,7 @@ internal sealed interface IBinding<VB : ViewDataBinding> {
       if (method == null) {
         clazz = clazz.superclass
       } else {
+        @Suppress("UNCHECKED_CAST")
         return method.invoke(null, inflater) as T
       }
     }
