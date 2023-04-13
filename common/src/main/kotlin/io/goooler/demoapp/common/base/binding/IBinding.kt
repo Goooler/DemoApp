@@ -10,7 +10,7 @@ import java.lang.reflect.ParameterizedType
 internal sealed interface IBinding<VB : ViewDataBinding> {
   val binding: VB
 
-  fun <T : ViewBinding> IBinding<*>.inflateBinding(inflater: LayoutInflater): T {
+  fun <T : ViewBinding> inflateBinding(inflater: LayoutInflater): T {
     var method: Method?
     var clazz: Class<*> = javaClass
     while (clazz.superclass != null) {
