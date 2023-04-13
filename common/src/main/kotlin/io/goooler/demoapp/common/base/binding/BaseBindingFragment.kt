@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import io.goooler.demoapp.base.core.BaseFragment
-import io.goooler.demoapp.common.base.binding.IBinding.Companion.inflateBinding
 
 abstract class BaseBindingFragment<VB : ViewDataBinding> :
   BaseFragment(),
