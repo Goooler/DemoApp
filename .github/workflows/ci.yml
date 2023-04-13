@@ -118,6 +118,8 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-java@v3
@@ -132,22 +134,8 @@ jobs:
         with:
           name: build-outputs
           path: app/build/outputs/apk/prod/release/*.apk
-
-  gradle-dependency-submission:
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/trunk'
-    permissions:
-      contents: write
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-java@v3
-        with:
-          distribution: 'zulu'
-          java-version: 18
-      - uses: gradle/gradle-build-action@v2
-        with:
-          gradle-home-cache-cleanup: true
       - uses: mikepenz/gradle-dependency-submission@v1
+        if: github.ref == 'refs/heads/trunk'
         with:
           gradle-build-module: ':app'
           gradle-build-configuration: 'prodReleaseRuntimeClasspath'
