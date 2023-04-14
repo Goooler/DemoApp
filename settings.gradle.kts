@@ -7,7 +7,7 @@ pluginManagement {
 
   buildscript {
     dependencies {
-      classpath("com.android.tools:r8:4.0.52")
+      classpath("com.android.tools:r8:8.0.40")
     }
   }
 }
