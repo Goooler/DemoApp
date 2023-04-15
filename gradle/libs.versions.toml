@@ -1,6 +1,6 @@
 [versions]
-versionName = "1.8.0"
-versionCode = "108000"
+versionName = "1.8.2"
+versionCode = "108020"
 accompanist = "0.30.1"
 agp = "8.0.0"
 androidX-activity = "1.7.0"
