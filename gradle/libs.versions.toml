@@ -38,7 +38,7 @@ kotlin-junit5 = { module = "org.jetbrains.kotlin:kotlin-test-junit5", version.re
 kotlinX-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
 kotlinX-immutable = "org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.5"
 
-androidX-compose-bom = { module = "androidx.compose:compose-bom", version = "2023.04.00" }
+androidX-compose-bom = { module = "androidx.compose:compose-bom", version = "2023.04.01" }
 androidX-compose-ui = { module = "androidx.compose.ui:ui" }
 androidX-compose-tooling = { module = "androidx.compose.ui:ui-tooling" }
 androidX-compose-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
