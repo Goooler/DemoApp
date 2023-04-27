@@ -10,7 +10,6 @@ import com.blankj.utilcode.util.AdaptScreenUtils
 import com.blankj.utilcode.util.BarUtils
 import com.blankj.utilcode.util.ScreenUtils
 import io.goooler.demoapp.base.core.BaseActivity
-import io.goooler.demoapp.common.base.binding.IBinding.Companion.inflateBinding
 
 abstract class BaseBindingActivity<VB : ViewDataBinding> : BaseActivity(), IBinding<VB> {
 
