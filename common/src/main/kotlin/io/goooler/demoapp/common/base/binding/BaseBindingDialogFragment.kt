@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import io.goooler.demoapp.base.core.BaseDialogFragment
-import io.goooler.demoapp.common.base.binding.BaseBindingActivity.Companion.inflateBinding
 
 abstract class BaseBindingDialogFragment<VB : ViewDataBinding> :
   BaseDialogFragment(),
