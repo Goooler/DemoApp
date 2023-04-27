@@ -101,7 +101,7 @@ tasks {
 val ktlint: Configuration by configurations.creating
 
 dependencies {
-  ktlint("com.pinterest:ktlint:0.49.0-SNAPSHOT") {
+  ktlint("com.pinterest:ktlint:0.49.0") {
     attributes {
       attribute(Bundling.BUNDLING_ATTRIBUTE, objects.named(Bundling.EXTERNAL))
     }
