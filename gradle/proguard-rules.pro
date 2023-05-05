@@ -95,6 +95,7 @@
 -keep,allowobfuscation,allowshrinking class io.goooler.demoapp.common.base.binding.BaseBindingActivity
 -keep,allowobfuscation,allowshrinking class * extends io.goooler.demoapp.common.base.binding.BaseBindingActivity
 # TODO: Waiting for new retrofit release to remove these rules
--keep,allowobfuscation,allowshrinking interface retrofit2.Call
--keep,allowobfuscation,allowshrinking class retrofit2.Response
+-if interface * { @retrofit2.http.* public *** *(...); }
+-keep,allowoptimization,allowshrinking,allowobfuscation class <3>
+
 -keep,allowobfuscation,allowshrinking class kotlin.coroutines.Continuation
