@@ -97,3 +97,5 @@
 # TODO: Waiting for new retrofit release to remove these rules
 -if interface * { @retrofit2.http.* public *** *(...); }
 -keep,allowoptimization,allowshrinking,allowobfuscation class <3>
+
+-keep,allowobfuscation,allowshrinking class kotlin.coroutines.Continuation
