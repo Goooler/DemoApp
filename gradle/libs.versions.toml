@@ -19,7 +19,7 @@ glide = "4.15.1"
 kotlin = "1.8.21"
 square-okHttp = "4.11.0"
 square-retrofit = "2.9.0"
-square-moshi = "1.14.0"
+square-moshi = "1.15.0"
 srl = "2.0.6"
 support = "28.0.0"
 
