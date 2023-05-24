@@ -15,7 +15,7 @@
   <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
   <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
-  <application android:networkSecurityConfig="@xml/common_network_security_config">
+  <application>
     <!--7.0 以上行为变更，不可直接 Uri.fromFile()-->
     <provider
       android:name=".provider.CommonProvider"
