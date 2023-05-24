@@ -28,7 +28,6 @@ allprojects {
 
   plugins.withType<BasePlugin> {
     plugins.apply(libs.plugins.kotlin.android.get().pluginId)
-    plugins.apply(libs.plugins.cacheFix.get().pluginId)
 
     if (this is AppPlugin) {
       setupCommon()
