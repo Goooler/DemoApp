@@ -30,7 +30,7 @@ kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 ksp = "com.google.devtools.ksp:1.8.21-1.0.11"
 napt = "com.sergei-lapin.napt:1.19"
 kotlinter = "org.jmailen.kotlinter:3.14.0"
-detekt = "io.gitlab.arturbosch.detekt:1.22.0"
+detekt = "io.gitlab.arturbosch.detekt:1.23.0"
 cacheFix = "org.gradle.android.cache-fix:2.7.1"
 
 [libraries]
