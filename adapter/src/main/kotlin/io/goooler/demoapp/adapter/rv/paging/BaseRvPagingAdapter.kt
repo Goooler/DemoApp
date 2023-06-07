@@ -26,6 +26,8 @@ abstract class BaseRvPagingAdapter<M : IDiffVhModelType>(callback: DiffCallBack<
 
   var onLoadStatusListener: OnLoadStatusListener? = null
 
+  override val list: List<M> get() = snapshot().items
+
   override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
     super.onAttachedToRecyclerView(recyclerView)
     helper.onAttachedToRecyclerView(recyclerView)
