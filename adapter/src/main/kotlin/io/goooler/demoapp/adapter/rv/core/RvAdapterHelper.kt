@@ -96,10 +96,8 @@ internal class RvAdapterHelper<M : IVhModelType>(private val adapter: IRvAdapter
   }
 
   fun removeItem(item: M, notify: (Int) -> Unit) {
-    _list.indexOf(item).let {
-      if (it != -1) {
-        removeItem(it, notify)
-      }
+    _list.indexOf(item).takeIf { it != -1 }?.let {
+      removeItem(it, notify)
     }
   }
 
