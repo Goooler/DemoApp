@@ -26,10 +26,8 @@ internal class RvAdapterHelper<M : IVhModelType>(private val adapter: IRvAdapter
   var list: List<M>
     get() = _list
     set(value) {
-      _list.run {
-        clear()
-        addAll(transform(value))
-      }
+      _list.clear()
+      _list.addAll(transform(value))
     }
 
   /**
