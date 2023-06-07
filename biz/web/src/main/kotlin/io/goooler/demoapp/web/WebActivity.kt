@@ -33,6 +33,7 @@ class WebActivity : BaseBindingActivity<WebActivityBinding>() {
         CustomTabsIntent.Builder()
           .setDefaultColorSchemeParams(colorSchemeParams)
           .apply { closeButtonIcon?.let { setCloseButtonIcon(it) } }
+          .setShareState(CustomTabsIntent.SHARE_STATE_OFF)
           .build()
           .launchUrl(this, url.toUri())
         finish()
