@@ -16,7 +16,7 @@ import androidx.databinding.ViewDataBinding
  */
 class ViewTypeDelegateManager<M : IVhModelType> {
 
-  private val mIVDs = SparseArrayCompat<ViewTypeDelegate<ViewDataBinding, M>>()
+  private val ivDs = SparseArrayCompat<ViewTypeDelegate<ViewDataBinding, M>>()
 
   /**
    * When creating viewHolder. if VTD.getViewType() == viewType executes VTD.onCreateVH().
@@ -25,8 +25,8 @@ class ViewTypeDelegateManager<M : IVhModelType> {
    * @param viewType viewType
    */
   internal fun onCreateVH(binding: ViewDataBinding, @LayoutRes viewType: Int) {
-    if (mIVDs.isEmpty) return
-    mIVDs[viewType]?.onCreateVH(binding)
+    if (ivDs.isEmpty) return
+    ivDs[viewType]?.onCreateVH(binding)
   }
 
   /**
@@ -36,8 +36,8 @@ class ViewTypeDelegateManager<M : IVhModelType> {
    * @param model model
    */
   internal fun onBindVH(binding: ViewDataBinding, model: M) {
-    if (mIVDs.isEmpty) return
-    mIVDs[model.viewType]?.onBindVH(binding, model)
+    if (ivDs.isEmpty) return
+    ivDs[model.viewType]?.onBindVH(binding, model)
   }
 
   /**
@@ -47,13 +47,13 @@ class ViewTypeDelegateManager<M : IVhModelType> {
    */
   @Suppress("UNCHECKED_CAST")
   fun <X : ViewDataBinding, Y : M> add(ivd: ViewTypeDelegate<X, Y>) {
-    mIVDs[ivd.viewType] = ivd as ViewTypeDelegate<ViewDataBinding, M>
+    ivDs[ivd.viewType] = ivd as ViewTypeDelegate<ViewDataBinding, M>
   }
 
   /**
    * Eliminate all item's VTD.
    */
   fun clear() {
-    mIVDs.clear()
+    ivDs.clear()
   }
 }

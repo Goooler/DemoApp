@@ -70,21 +70,14 @@ abstract class BaseRvDiffAdapter<M : IDiffVhModelType> :
    * Please do not use it with setList() !
    */
   override fun refreshItems(items: List<M>) {
-    helper.refreshItems(items) {
-      if (it in 0 until itemCount) {
-        notifyItemChanged(it)
-      }
-    }
+    helper.refreshItems(items, ::notifyItemChanged)
   }
 
   override fun removeItem(index: Int) {
-    helper.removeItem(index)
-    notifyItemRemoved(index)
+    helper.removeItem(index, ::notifyItemRemoved)
   }
 
   override fun removeItem(item: M) {
-    helper.removeItem(item) {
-      notifyItemRemoved(it)
-    }
+    helper.removeItem(item, ::notifyItemRemoved)
   }
 }
