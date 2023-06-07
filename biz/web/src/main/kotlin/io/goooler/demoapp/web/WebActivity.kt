@@ -1,14 +1,17 @@
 package io.goooler.demoapp.web
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import androidx.browser.customtabs.CustomTabColorSchemeParams
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.net.toUri
 import com.blankj.utilcode.util.BarUtils
 import io.goooler.demoapp.base.util.addFragment
 import io.goooler.demoapp.common.base.binding.BaseBindingActivity
 import io.goooler.demoapp.common.router.RouterManager
+import io.goooler.demoapp.common.util.getColor
 import io.goooler.demoapp.web.databinding.WebActivityBinding
 
 class WebActivity : BaseBindingActivity<WebActivityBinding>() {
@@ -21,7 +24,11 @@ class WebActivity : BaseBindingActivity<WebActivityBinding>() {
     binding.listener = listener
     intent.extras?.getString(RouterManager.PARAMS)?.let { url ->
       if (intent.action == RouterManager.USE_CHROME) {
+        val colorSchemeParams = CustomTabColorSchemeParams.Builder()
+          .setToolbarColor(io.goooler.demoapp.common.R.color.common_3F9FE0.getColor())
+          .build()
         CustomTabsIntent.Builder()
+          .setDefaultColorSchemeParams(colorSchemeParams)
           .build()
           .launchUrl(this, url.toUri())
         finish()
