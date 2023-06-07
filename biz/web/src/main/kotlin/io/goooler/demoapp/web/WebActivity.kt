@@ -12,6 +12,8 @@ import io.goooler.demoapp.base.util.addFragment
 import io.goooler.demoapp.common.base.binding.BaseBindingActivity
 import io.goooler.demoapp.common.router.RouterManager
 import io.goooler.demoapp.common.util.getColor
+import io.goooler.demoapp.common.util.getDrawable
+import io.goooler.demoapp.common.util.toBitmap
 import io.goooler.demoapp.web.databinding.WebActivityBinding
 
 class WebActivity : BaseBindingActivity<WebActivityBinding>() {
@@ -27,8 +29,10 @@ class WebActivity : BaseBindingActivity<WebActivityBinding>() {
         val colorSchemeParams = CustomTabColorSchemeParams.Builder()
           .setToolbarColor(io.goooler.demoapp.common.R.color.common_3F9FE0.getColor())
           .build()
+        val closeButtonIcon = io.goooler.demoapp.common.R.drawable.common_ic_back.getDrawable()?.toBitmap()
         CustomTabsIntent.Builder()
           .setDefaultColorSchemeParams(colorSchemeParams)
+          .apply { closeButtonIcon?.let { setCloseButtonIcon(it) } }
           .build()
           .launchUrl(this, url.toUri())
         finish()
