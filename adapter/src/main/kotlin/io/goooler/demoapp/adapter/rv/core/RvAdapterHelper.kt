@@ -21,13 +21,12 @@ import io.goooler.demoapp.adapter.rv.core.ISpanSize.Companion.SPAN_SIZE_FULL
 internal class RvAdapterHelper<M : IVhModelType>(private val adapter: IRvAdapter<M>) {
 
   private val ivdManager = ViewTypeDelegateManager<M>()
-
-  private val dataList = mutableListOf<M>()
+  private val _list = mutableListOf<M>()
 
   var list: List<M>
-    get() = dataList
+    get() = _list
     set(value) {
-      dataList.run {
+      _list.run {
         clear()
         addAll(transform(value))
       }
@@ -76,8 +75,8 @@ internal class RvAdapterHelper<M : IVhModelType>(private val adapter: IRvAdapter
    */
   fun refreshItems(items: List<M>, notify: (Int) -> Unit) {
     transform(items).forEach {
-      if (it in dataList) {
-        notify(dataList.indexOf(it))
+      if (it in _list) {
+        notify(_list.indexOf(it))
       }
     }
   }
@@ -92,12 +91,12 @@ internal class RvAdapterHelper<M : IVhModelType>(private val adapter: IRvAdapter
   }
 
   fun removeItem(index: Int, notify: (Int) -> Unit) {
-    dataList.removeAt(index)
+    _list.removeAt(index)
     notify(index)
   }
 
   fun removeItem(item: M, notify: (Int) -> Unit) {
-    dataList.indexOf(item).let {
+    _list.indexOf(item).let {
       if (it != -1) {
         removeItem(it, notify)
       }
