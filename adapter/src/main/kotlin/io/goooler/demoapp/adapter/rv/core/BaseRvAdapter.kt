@@ -60,13 +60,10 @@ abstract class BaseRvAdapter<M : IVhModelType> :
   }
 
   override fun removeItem(index: Int) {
-    helper.removeItem(index)
-    notifyItemRemoved(index)
+    helper.removeItem(index, ::notifyItemRemoved)
   }
 
   override fun removeItem(item: M) {
-    helper.removeItem(item) {
-      notifyItemRemoved(it)
-    }
+    helper.removeItem(item, ::notifyItemRemoved)
   }
 }

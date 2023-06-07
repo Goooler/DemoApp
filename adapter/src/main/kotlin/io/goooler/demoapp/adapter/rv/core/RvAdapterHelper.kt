@@ -91,15 +91,15 @@ internal class RvAdapterHelper<M : IVhModelType>(private val adapter: IRvAdapter
     return result
   }
 
-  fun removeItem(index: Int) {
+  fun removeItem(index: Int, notify: (Int) -> Unit) {
     dataList.removeAt(index)
+    notify(index)
   }
 
   fun removeItem(item: M, notify: (Int) -> Unit) {
     dataList.indexOf(item).let {
       if (it != -1) {
-        removeItem(it)
-        notify(it)
+        removeItem(it, notify)
       }
     }
   }
