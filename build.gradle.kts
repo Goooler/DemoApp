@@ -23,7 +23,7 @@ allprojects {
 
   plugins.apply(rootProject.libs.plugins.detekt.get().pluginId)
   configure<DetektExtension> {
-    config = rootProject.files("config/detekt/detekt.yml")
+    config.from("$rootDir/config/detekt/detekt.yml")
   }
 
   plugins.withType<BasePlugin> {
