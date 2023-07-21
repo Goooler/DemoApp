@@ -37,7 +37,7 @@ class MainHomeFragment : BaseBindingFragment<MainHomeFragmentBinding>() {
 
   private val listener = View.OnClickListener {
     when (it) {
-      binding.bt1 -> RouterManager.goWeb(requireContext(), "bilibili.com")
+      binding.bt1 -> RouterManager.goWeb(requireContext(), "https://bilibili.com", true)
       binding.bt4 -> vm.countDown()
       binding.bt6 -> FullScreenDialogFragment.show(childFragmentManager)
       binding.bt7 -> RouterManager.goAudioPlay(requireContext())
