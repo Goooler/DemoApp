@@ -1,7 +1,6 @@
 package io.goooler.demoapp.web
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.browser.customtabs.CustomTabColorSchemeParams
