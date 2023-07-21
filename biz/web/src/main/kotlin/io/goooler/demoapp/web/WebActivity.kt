@@ -25,23 +25,31 @@ class WebActivity : BaseBindingActivity<WebActivityBinding>() {
     binding.listener = listener
     intent.extras?.getString(RouterManager.PARAMS)?.let { url ->
       if (intent.action == RouterManager.USE_CHROME) {
-        val colorSchemeParams = CustomTabColorSchemeParams.Builder()
-          .setToolbarColor(io.goooler.demoapp.common.R.color.common_3F9FE0.getColor())
-          .build()
-        val closeButtonIcon = io.goooler.demoapp.common.R.drawable.common_ic_back.getDrawable()?.toBitmap()
-        CustomTabsIntent.Builder()
-          .setDefaultColorSchemeParams(colorSchemeParams)
-          .apply { closeButtonIcon?.let { setCloseButtonIcon(it) } }
-          .setShareState(CustomTabsIntent.SHARE_STATE_OFF)
-          .build()
-          .launchUrl(this, url.toUri())
-        finish()
+        useChrome(url)
       } else {
-        webFragment = WebFragment(url).also {
-          it.onEventListener = listener
-          addFragment(it, R.id.fragment_container)
-        }
+        useWebView(url)
       }
+    }
+  }
+
+  private fun useChrome(url: String) {
+    val colorSchemeParams = CustomTabColorSchemeParams.Builder()
+      .setToolbarColor(io.goooler.demoapp.common.R.color.common_3F9FE0.getColor())
+      .build()
+    val closeButtonIcon = io.goooler.demoapp.common.R.drawable.common_ic_back.getDrawable()?.toBitmap()
+    CustomTabsIntent.Builder()
+      .setDefaultColorSchemeParams(colorSchemeParams)
+      .apply { closeButtonIcon?.let { setCloseButtonIcon(it) } }
+      .setShareState(CustomTabsIntent.SHARE_STATE_OFF)
+      .build()
+      .launchUrl(this, url.toUri())
+    finish()
+  }
+
+  private fun useWebView(uri: String) {
+    webFragment = WebFragment(uri).also {
+      it.onEventListener = listener
+      addFragment(it, R.id.fragment_container)
     }
   }
 
