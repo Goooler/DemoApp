@@ -24,6 +24,7 @@ allprojects {
   plugins.apply(rootProject.libs.plugins.detekt.get().pluginId)
   configure<DetektExtension> {
     config.from("$rootDir/config/detekt/detekt.yml")
+    parallel = true
   }
 
   plugins.withType<BasePlugin> {
