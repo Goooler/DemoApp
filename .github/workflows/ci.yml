@@ -39,7 +39,7 @@ jobs:
       - uses: actions/setup-java@v3
         with:
           distribution: 'zulu'
-          java-version: 18
+          java-version: 20
       - uses: gradle/gradle-build-action@v2
       - run: ./gradlew lintKotlin
 
@@ -50,7 +50,7 @@ jobs:
       - uses: actions/setup-java@v3
         with:
           distribution: 'zulu'
-          java-version: 18
+          java-version: 20
       - uses: gradle/gradle-build-action@v2
       - run: ./gradlew detekt
 
@@ -61,7 +61,7 @@ jobs:
       - uses: actions/setup-java@v3
         with:
           distribution: 'zulu'
-          java-version: 18
+          java-version: 20
       - uses: gradle/gradle-build-action@v2
       - run: ./gradlew lintDebug
 
@@ -74,7 +74,7 @@ jobs:
       - uses: actions/setup-java@v3
         with:
           distribution: 'zulu'
-          java-version: 18
+          java-version: 20
       - uses: gradle/gradle-build-action@v2
       - run: ./gradlew testDebugUnitTest
 
@@ -91,7 +91,7 @@ jobs:
       - uses: actions/setup-java@v3
         with:
           distribution: 'zulu'
-          java-version: 18
+          java-version: 20
       - uses: gradle/gradle-build-action@v2
       - uses: actions/cache@v3
         id: avd-cache
@@ -125,7 +125,7 @@ jobs:
       - uses: actions/setup-java@v3
         with:
           distribution: 'zulu'
-          java-version: 18
+          java-version: 20
       - uses: gradle/gradle-build-action@v2
         with:
           gradle-home-cache-cleanup: true

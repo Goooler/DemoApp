@@ -23,7 +23,7 @@ allprojects {
 
   plugins.apply(rootProject.libs.plugins.detekt.get().pluginId)
   configure<DetektExtension> {
-    config = rootProject.files("config/detekt/detekt.yml")
+    config.from("$rootDir/config/detekt/detekt.yml")
   }
 
   plugins.withType<BasePlugin> {
@@ -46,22 +46,22 @@ allprojects {
   plugins.withType<JavaBasePlugin>().configureEach {
     extensions.configure<JavaPluginExtension> {
       toolchain {
-        languageVersion.set(JavaLanguageVersion.of(17))
+        languageVersion = JavaLanguageVersion.of(17)
       }
     }
   }
 
   tasks.withType<KotlinCompile>().configureEach {
     compilerOptions {
-      allWarningsAsErrors.set(true)
+      allWarningsAsErrors = true
     }
   }
   tasks.withType<Test>().configureEach {
     useJUnitPlatform()
   }
   tasks.withType<ValidatePlugins>().configureEach {
-    failOnWarning.set(true)
-    enableStricterValidation.set(true)
+    failOnWarning = true
+    enableStricterValidation = true
   }
 
   configurations.configureEach {
