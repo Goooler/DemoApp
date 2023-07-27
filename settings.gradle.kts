@@ -6,7 +6,7 @@ pluginManagement {
 }
 
 dependencyResolutionManagement {
-  repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+  repositoriesMode = RepositoriesMode.FAIL_ON_PROJECT_REPOS
   repositories {
     google()
     mavenCentral()
@@ -14,7 +14,7 @@ dependencyResolutionManagement {
 }
 
 plugins {
-  id("com.gradle.enterprise") version "3.13.2"
+  id("com.gradle.enterprise") version "3.14.1"
 }
 
 gradleEnterprise {

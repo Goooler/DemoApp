@@ -21,6 +21,11 @@ import androidx.recyclerview.widget.RecyclerView
 internal interface IRvAdapter<M : IVhModelType> {
 
   /**
+   * Get data list.
+   */
+  val list: List<M>
+
+  /**
    * What to do when creating the viewHolder for all.
    */
   fun onCreateVHForAll(binding: ViewDataBinding)
@@ -59,7 +64,7 @@ internal interface IMutableRvAdapter<M : IVhModelType> : IRvAdapter<M> {
   /**
    * Set or Get data list.
    */
-  var list: List<M>
+  override var list: List<M>
 
   /**
    * Refresh some items.

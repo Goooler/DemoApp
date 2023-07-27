@@ -26,6 +26,8 @@ abstract class BaseRvPagingAdapter<M : IDiffVhModelType>(callback: DiffCallBack<
 
   var onLoadStatusListener: OnLoadStatusListener? = null
 
+  override val list: List<M> get() = snapshot().items
+
   override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
     super.onAttachedToRecyclerView(recyclerView)
     helper.onAttachedToRecyclerView(recyclerView)
@@ -84,22 +86,22 @@ abstract class BaseRvPagingAdapter<M : IDiffVhModelType>(callback: DiffCallBack<
     fun onLoadMore() {}
 
     /**
-     * 没有在下拉刷新或上拉加载
+     * Not loading
      */
     fun onNotLoading()
 
     /**
-     * 没有更多数据
+     * No more data
      */
     fun onNoMoreData()
 
     /**
-     * 第一页请求为空
+     * Empty data
      */
     fun onEmpty()
 
     /**
-     * 暂时没有区分第一页加载失败或是中间页加载失败
+     * Error occurred
      */
     fun onError(t: Throwable)
   }
