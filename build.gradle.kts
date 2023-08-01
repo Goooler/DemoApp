@@ -94,7 +94,7 @@ tasks {
         "include" to arrayOf("*.log", "*.txt"),
       ),
     )
-    delete(rootProject.buildDir, customFileTypes)
+    delete(rootProject.layout.buildDirectory, customFileTypes)
   }
 }
 
