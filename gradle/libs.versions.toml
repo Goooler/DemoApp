@@ -76,7 +76,6 @@ square-moshi-compiler = { module = "com.squareup.moshi:moshi-kotlin-codegen", ve
 square-okHttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "square-okHttp" }
 square-okHttp-LogInterceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "square-okHttp" }
 square-okHttp-mock = { module = "com.squareup.okhttp3:mockwebserver", version.ref = "square-okHttp" }
-square-okHttp-mockJunit5 = { module = "com.squareup.okhttp3:mockwebserver3-junit5", version.ref = "square-okHttp" }
 square-retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "square-retrofit" }
 square-retrofit-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "square-retrofit" }
 square-retrofit-moshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "square-retrofit" }
