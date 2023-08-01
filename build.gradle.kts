@@ -53,7 +53,8 @@ allprojects {
 
   tasks.withType<KotlinCompile>().configureEach {
     compilerOptions {
-      allWarningsAsErrors = true
+      // Disable this flag due to https://github.com/Goooler/DemoApp/pull/437
+//      allWarningsAsErrors = true
     }
   }
   tasks.withType<Test>().configureEach {
