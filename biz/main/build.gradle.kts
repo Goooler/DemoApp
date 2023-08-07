@@ -24,4 +24,8 @@ dependencies {
 
   implementation(libs.square.moshi)
   ksp(libs.square.moshi.compiler)
+
+  val ktorVersion = "2.3.3"
+  implementation("io.ktor:ktor-client-core:$ktorVersion")
+  implementation("io.ktor:ktor-client-cio:$ktorVersion")
 }

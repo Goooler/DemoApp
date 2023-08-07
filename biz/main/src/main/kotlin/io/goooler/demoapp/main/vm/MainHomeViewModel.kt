@@ -4,15 +4,18 @@ package io.goooler.demoapp.main.vm
 
 import androidx.lifecycle.viewModelScope
 import io.goooler.demoapp.base.core.BaseViewModel
+import io.goooler.demoapp.common.util.fromJson
 import io.goooler.demoapp.main.bean.MainRepoListBean
 import io.goooler.demoapp.main.repository.MainCommonRepository
+import io.ktor.client.HttpClient
+import io.ktor.client.engine.cio.CIO
+import io.ktor.client.request.get
+import io.ktor.client.statement.bodyAsText
 import java.util.concurrent.CancellationException
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.seconds
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -67,27 +70,10 @@ class MainHomeViewModel : BaseViewModel() {
 
   private fun fetchRepoLists() {
     viewModelScope.launch {
-      try {
-        val google = async(SupervisorJob()) { repository.getRepoListFromDb("google") }
-        val microsoft = async(SupervisorJob()) { repository.getRepoListFromDb("microsoft") }
-
-        _title.value = processList(google.await(), microsoft.await())
-      } catch (e: Exception) {
-        _title.value = e.message.orEmpty()
-        e.printStackTrace()
-      }
-
-      try {
-        val google = async(SupervisorJob()) { repository.getRepoListFromApi("google") }
-        val microsoft = async(SupervisorJob()) { repository.getRepoListFromApi("microsoft") }
-
-        _title.value = processList(google.await(), microsoft.await())
-
-        putRepoListIntoDb(google.await(), microsoft.await())
-      } catch (e: Exception) {
-        _title.value = e.message.orEmpty()
-        e.printStackTrace()
-      }
+      val client = HttpClient(CIO)
+      val response = client.get("http://api.github.com/users/google/repos")
+      val repoList: List<MainRepoListBean>? = response.bodyAsText().fromJson(List::class.java, MainRepoListBean::class.java)
+      _title.value = repoList?.first().toString()
     }
   }
 
