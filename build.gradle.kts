@@ -104,7 +104,7 @@ fun <T : BaseExtension> Project.setupBase(block: T.() -> Unit) {
   extensions.configure<BaseExtension> {
     resourcePrefix = "${name}_"
     namespace = "io.goooler.demoapp.$name"
-    compileSdkVersion(33)
+    compileSdkVersion(34)
     defaultConfig {
       minSdk = 21
       vectorDrawables.useSupportLibrary = true
