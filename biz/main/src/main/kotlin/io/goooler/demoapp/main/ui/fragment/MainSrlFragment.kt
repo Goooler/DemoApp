@@ -1,7 +1,9 @@
 package io.goooler.demoapp.main.ui.fragment
 
+import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
@@ -11,8 +13,10 @@ import io.goooler.demoapp.common.base.binding.BaseBindingFragment
 import io.goooler.demoapp.common.router.RouterManager
 import io.goooler.demoapp.common.util.enableRefreshAndLoadMore
 import io.goooler.demoapp.main.databinding.MainSrlFragmentBinding
+import io.goooler.demoapp.main.ui.EventFloatingWindow
 import io.goooler.demoapp.main.ui.adapter.MainSrlRvAdapter
 import io.goooler.demoapp.main.vm.MainSrlViewModel
+import kotlinx.coroutines.launch
 
 class MainSrlFragment : BaseBindingFragment<MainSrlFragmentBinding>() {
 
@@ -30,6 +34,16 @@ class MainSrlFragment : BaseBindingFragment<MainSrlFragmentBinding>() {
     }
     ItemTouchHelper(ItemTouchHelperCallback(listener, itemViewSwipeEnabled = true))
       .attachToRecyclerView(binding.rvList)
+  }
+
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+    EventFloatingWindow.show(requireActivity())
+    lifecycleScope.launch {
+      vm.listData.collect {
+        EventFloatingWindow.setData(it)
+      }
+    }
   }
 
   override fun onResume() {
