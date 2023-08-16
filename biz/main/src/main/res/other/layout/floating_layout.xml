@@ -12,7 +12,6 @@
             android:id="@+id/rv_list"
             android:layout_width="200dp"
             android:layout_height="300dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/main_common_rv_item" />
 
     </LinearLayout>

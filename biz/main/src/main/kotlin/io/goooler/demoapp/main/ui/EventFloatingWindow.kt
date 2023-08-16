@@ -3,6 +3,7 @@ package io.goooler.demoapp.main.ui
 import android.app.Activity
 import android.app.Application
 import android.os.Bundle
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.limbo.floatwindow.FloatWindow
 import com.limbo.floatwindow.draggable.MovingDraggable
 import io.goooler.demoapp.main.databinding.FloatingLayoutBinding
@@ -38,6 +39,9 @@ object EventFloatingWindow {
     rvAdapter = MainSrlRvAdapter(object : MainSrlRvAdapter.OnEventListener {})
     val binding = FloatingLayoutBinding.inflate(activity.layoutInflater).also {
       it.rvList.adapter = rvAdapter
+      it.rvList.layoutManager = object : LinearLayoutManager(activity) {
+        override fun canScrollVertically(): Boolean = false
+      }
     }
     FloatWindow.init()
       .setContentView(binding.root)
