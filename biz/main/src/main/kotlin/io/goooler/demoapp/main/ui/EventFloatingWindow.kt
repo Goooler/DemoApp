@@ -40,7 +40,6 @@ object EventFloatingWindow {
     val binding = FloatingLayoutBinding.inflate(activity.layoutInflater).also {
       it.rvList.adapter = rvAdapter
       it.rvList.layoutManager = object : LinearLayoutManager(activity) {
-        override fun canScrollVertically(): Boolean = false
       }
     }
     FloatWindow.init()
