@@ -10,6 +10,7 @@
     android:label="@string/app_name"
     android:supportsRtl="true"
     android:theme="@style/CommonAppTheme"
-    tools:ignore="MipmapIcons" />
+    tools:ignore="MipmapIcons"
+    tools:replace="android:icon, android:theme"/>
 
 </manifest>

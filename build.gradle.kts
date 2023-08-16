@@ -106,7 +106,7 @@ fun <T : BaseExtension> Project.setupBase(block: T.() -> Unit) {
     namespace = "io.goooler.demoapp.$name"
     compileSdkVersion(34)
     defaultConfig {
-      minSdk = 21
+      minSdk = 24
       vectorDrawables.useSupportLibrary = true
       testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
