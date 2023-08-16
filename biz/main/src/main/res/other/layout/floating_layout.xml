@@ -10,8 +10,8 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="200dp"
+            android:layout_height="300dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             tools:listitem="@layout/main_common_rv_item" />
