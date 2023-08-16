@@ -38,9 +38,9 @@ class MainSrlFragment : BaseBindingFragment<MainSrlFragmentBinding>() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    EventFloatingWindow.show(requireActivity())
     lifecycleScope.launch {
       vm.listData.collect {
+        EventFloatingWindow.show(requireActivity())
         EventFloatingWindow.setData(it)
       }
     }
