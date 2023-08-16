@@ -6,7 +6,8 @@ import android.os.Bundle
 import com.imuxuan.floatingview.FloatingView
 
 object EventFloatingWindow {
-  fun show(app: Application) {
+  fun show(activity: Activity) {
+    val app = activity.applicationContext as Application
     app.registerActivityLifecycleCallbacks(object : Application.ActivityLifecycleCallbacks {
       override fun onActivityStarted(activity: Activity) {
         FloatingView.get().attach(activity)
@@ -22,11 +23,11 @@ object EventFloatingWindow {
 
       override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) = Unit
 
-
       override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) = Unit
 
       override fun onActivityResumed(activity: Activity) = Unit
     })
     FloatingView.get().add()
+    FloatingView.get().attach(activity)
   }
 }
