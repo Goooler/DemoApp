@@ -24,4 +24,6 @@ dependencies {
 
   implementation(libs.square.moshi)
   ksp(libs.square.moshi.compiler)
+
+  implementation("com.imuxuan:floatingview:1.6")
 }
