@@ -1,7 +1,7 @@
 [versions]
 versionName = "1.9.0"
 versionCode = "109000"
-agp = "8.1.0"
+agp = "8.1.1"
 androidX-activity = "1.7.2"
 androidX-appCompat = "1.6.1"
 androidX-collection = "1.2.0"
