@@ -94,7 +94,7 @@ glide-okhttp3 = { module = "com.github.bumptech.glide:okhttp3-integration", vers
 glide-transformations = "jp.wasabeef:glide-transformations:4.3.0"
 photoView = "com.github.chrisbanes:PhotoView:2.3.0"
 rxJava3-android = "io.reactivex.rxjava3:rxandroid:3.0.2"
-rxJava3-java = "io.reactivex.rxjava3:rxjava:3.1.6"
+rxJava3-java = "io.reactivex.rxjava3:rxjava:3.1.7"
 srl-footer = { module = "io.github.scwang90:refresh-footer-classics", version.ref = "srl" }
 srl-header = { module = "io.github.scwang90:refresh-header-classics", version.ref = "srl" }
 srl-kernel = { module = "io.github.scwang90:refresh-layout-kernel", version.ref = "srl" }
