@@ -25,5 +25,5 @@ dependencies {
   implementation(libs.square.moshi)
   ksp(libs.square.moshi.compiler)
 
-  implementation("com.github.Petterpx:FloatingX:1.3.1")
+  implementation("com.github.Petterpx:FloatingX:1.3.2")
 }
