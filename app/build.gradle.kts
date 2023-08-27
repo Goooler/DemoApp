@@ -44,7 +44,6 @@ android {
       resValue("string", "app_name", "$appName.debug")
       signingConfig = releaseSigning
       isJniDebuggable = true
-      isRenderscriptDebuggable = true
       isCrunchPngs = false
     }
   }
