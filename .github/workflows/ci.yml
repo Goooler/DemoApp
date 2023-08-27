@@ -128,14 +128,10 @@ jobs:
           java-version: 20
       - uses: gradle/gradle-build-action@v2
         with:
+          dependency-graph: ${{ github.ref == 'refs/heads/trunk' && 'generate-and-submit' || 'disabled'}}
           gradle-home-cache-cleanup: true
       - run: ./gradlew app:assembleProdRelease
       - uses: actions/upload-artifact@v3
         with:
           name: build-outputs
           path: app/build/outputs/apk/prod/release/*.apk
-      - uses: mikepenz/gradle-dependency-submission@v1
-        if: github.ref == 'refs/heads/trunk'
-        with:
-          gradle-build-module: ':app'
-          gradle-build-configuration: 'prodReleaseRuntimeClasspath'

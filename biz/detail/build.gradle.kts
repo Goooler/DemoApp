@@ -15,7 +15,6 @@ dependencies {
   implementation(platform(libs.androidX.compose.bom))
   implementation(libs.bundles.androidX.compose)
   debugImplementation(libs.androidX.compose.tooling)
-  implementation(libs.bundles.accompanist)
 
   implementation(libs.square.moshi)
   ksp(libs.square.moshi.compiler)

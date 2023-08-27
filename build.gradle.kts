@@ -103,7 +103,7 @@ fun <T : BaseExtension> Project.setupBase(block: T.() -> Unit) {
   extensions.configure<BaseExtension> {
     resourcePrefix = "${name}_"
     namespace = "io.goooler.demoapp.$name"
-    compileSdkVersion(33)
+    compileSdkVersion(34)
     defaultConfig {
       minSdk = 21
       vectorDrawables.useSupportLibrary = true
@@ -111,11 +111,6 @@ fun <T : BaseExtension> Project.setupBase(block: T.() -> Unit) {
     }
     sourceSets.configureEach {
       java.srcDirs("src/$name/kotlin")
-    }
-    // Can remove this once https://issuetracker.google.com/issues/260059413 is fixed.
-    compileOptions {
-      sourceCompatibility = JavaVersion.VERSION_17
-      targetCompatibility = JavaVersion.VERSION_17
     }
     packagingOptions.resources.excludes += setOf(
       "**/*.proto",

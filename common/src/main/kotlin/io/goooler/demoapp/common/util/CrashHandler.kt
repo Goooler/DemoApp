@@ -21,6 +21,9 @@ object CrashHandler : Thread.UncaughtExceptionHandler {
     @Suppress("MagicNumber")
     SystemClock.sleep(2000)
     // 如果系统提供了默认的异常处理器，则交给系统去结束程序，否则就由自己结束自己
-    defaultHandler?.uncaughtException(t, e) ?: Process.killProcess(Process.myPid()); exitProcess(1)
+    defaultHandler?.uncaughtException(t, e) ?: run {
+      Process.killProcess(Process.myPid())
+      exitProcess(1)
+    }
   }
 }
