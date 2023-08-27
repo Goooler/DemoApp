@@ -34,13 +34,13 @@ class MainSrlFragment : BaseBindingFragment<MainSrlFragmentBinding>() {
     }
     ItemTouchHelper(ItemTouchHelperCallback(listener, itemViewSwipeEnabled = true))
       .attachToRecyclerView(binding.rvList)
+    EventFloatingWindow.show(requireActivity())
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     lifecycleScope.launch {
       vm.listData.collect {
-        EventFloatingWindow.show(requireActivity())
         EventFloatingWindow.setData(it)
       }
     }
