@@ -107,6 +107,15 @@
         android:text="Create shortcut"
         android:textAllCaps="false" />
 
+      <Button
+          android:id="@+id/bt_9"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="5dp"
+          android:onClick="@{listener}"
+          android:text="Show floating window"
+          android:textAllCaps="false" />
+
     </LinearLayout>
 
   </androidx.core.widget.NestedScrollView>

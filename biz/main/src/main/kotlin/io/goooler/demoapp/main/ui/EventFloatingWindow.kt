@@ -22,6 +22,7 @@ object EventFloatingWindow {
   }
 
   fun setData(data: List<MainCommonVhModel>) {
+    if (!::rvAdapter.isInitialized) return
     rvAdapter.list = data
   }
 }

@@ -34,7 +34,6 @@ class MainSrlFragment : BaseBindingFragment<MainSrlFragmentBinding>() {
     }
     ItemTouchHelper(ItemTouchHelperCallback(listener, itemViewSwipeEnabled = true))
       .attachToRecyclerView(binding.rvList)
-    EventFloatingWindow.show(requireActivity())
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

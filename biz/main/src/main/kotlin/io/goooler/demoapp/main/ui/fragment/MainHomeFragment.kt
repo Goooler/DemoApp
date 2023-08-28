@@ -15,6 +15,7 @@ import io.goooler.demoapp.common.router.RouterManager
 import io.goooler.demoapp.common.ui.FullScreenDialogFragment
 import io.goooler.demoapp.main.databinding.MainHomeFragmentBinding
 import io.goooler.demoapp.main.ui.AudioPlayActivity
+import io.goooler.demoapp.main.ui.EventFloatingWindow
 import io.goooler.demoapp.main.vm.MainHomeViewModel
 
 class MainHomeFragment : BaseBindingFragment<MainHomeFragmentBinding>() {
@@ -43,6 +44,9 @@ class MainHomeFragment : BaseBindingFragment<MainHomeFragmentBinding>() {
       binding.bt7 -> RouterManager.goAudioPlay(requireContext())
       binding.bt8 -> if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
         createShortcut(requireContext())
+      }
+      binding.bt9 -> {
+        EventFloatingWindow.show(requireActivity())
       }
     }
   }
