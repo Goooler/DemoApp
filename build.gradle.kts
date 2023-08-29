@@ -2,6 +2,7 @@ import com.android.build.gradle.AppPlugin
 import com.android.build.gradle.BaseExtension
 import com.android.build.gradle.BasePlugin
 import com.android.build.gradle.LibraryPlugin
+import com.diffplug.gradle.spotless.SpotlessExtension
 import com.google.devtools.ksp.gradle.KspExtension
 import com.google.devtools.ksp.gradle.KspGradleSubplugin
 import io.gitlab.arturbosch.detekt.extensions.DetektExtension
@@ -13,18 +14,28 @@ plugins {
   alias(libs.plugins.kotlin.android) apply false
   alias(libs.plugins.ksp) apply false
   alias(libs.plugins.napt) apply false
-  alias(libs.plugins.kotlinter) apply false
+  alias(libs.plugins.spotless) apply false
   alias(libs.plugins.detekt) apply false
   alias(libs.plugins.cacheFix) apply false
 }
 
 allprojects {
-  plugins.apply(rootProject.libs.plugins.kotlinter.get().pluginId)
-
   plugins.apply(rootProject.libs.plugins.detekt.get().pluginId)
   configure<DetektExtension> {
     config.from("$rootDir/detekt.yml")
     parallel = true
+  }
+
+  plugins.apply(rootProject.libs.plugins.spotless.get().pluginId)
+  extensions.configure<SpotlessExtension> {
+    kotlin {
+      ktlint()
+      target("src/**/*.kt")
+    }
+    kotlinGradle {
+      ktlint()
+      target("*.kts")
+    }
   }
 
   plugins.withType<BasePlugin> {
@@ -85,18 +96,6 @@ allprojects {
         }
       }
     }
-  }
-}
-
-tasks {
-  register("clean") {
-    val customFileTypes = fileTree(
-      mapOf(
-        "dir" to "$rootDir/gradle",
-        "include" to arrayOf("*.log", "*.txt"),
-      ),
-    )
-    delete(rootProject.layout.buildDirectory, customFileTypes)
   }
 }
 
