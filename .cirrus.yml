@@ -1,0 +1,8 @@
+container:
+  image: ghcr.io/cirruslabs/android-sdk:34
+  cpu: 8
+  memory: 16G
+  kvm: true
+
+build_android_task:
+  build_script: ./gradlew app:assembleProdRelease
