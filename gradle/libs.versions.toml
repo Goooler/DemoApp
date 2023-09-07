@@ -50,7 +50,7 @@ compose-compiler = { module = "androidx.compose.compiler:compiler", version.ref 
 
 androidX-activity = { module = "androidx.activity:activity-ktx", version.ref = "androidX-activity" }
 androidX-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidX-activity" }
-androidX-annotation = "androidx.annotation:annotation:1.6.0"
+androidX-annotation = "androidx.annotation:annotation:1.7.0"
 androidX-appCompat = { module = "androidx.appcompat:appcompat", version.ref = "androidX-appCompat" }
 androidX-browser = "androidx.browser:browser:1.6.0"
 androidX-cardView = "androidx.cardview:cardview:1.0.0"
