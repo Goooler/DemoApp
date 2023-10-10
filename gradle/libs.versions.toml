@@ -19,7 +19,7 @@ kotlin = "1.9.10"
 square-okHttp = "4.11.0"
 square-retrofit = "2.9.0"
 square-moshi = "1.15.0"
-srl = "2.0.6"
+srl = "2.1.0"
 support = "28.0.0"
 
 [plugins]
