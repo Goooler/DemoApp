@@ -29,11 +29,11 @@ allprojects {
   plugins.apply(rootProject.libs.plugins.spotless.get().pluginId)
   extensions.configure<SpotlessExtension> {
     kotlin {
-      ktlint()
+      ktlint("1.0.1")
       target("src/**/*.kt")
     }
     kotlinGradle {
-      ktlint()
+      ktlint("1.0.1")
       target("*.kts")
     }
   }
