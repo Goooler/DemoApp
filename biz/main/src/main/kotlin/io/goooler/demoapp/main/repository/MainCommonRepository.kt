@@ -11,7 +11,7 @@ import io.goooler.demoapp.main.db.MainDatabase
 
 class MainCommonRepository {
   private val api: MainCommonApi = RetrofitHelper.create()
-  private val dao: MainCommonDao = RoomHelper.create<MainDatabase>().mainCommonDao
+  private val dao: MainCommonDao = RoomHelper.create<MainDatabase>().getMainCommonDao()
 
   suspend fun getRepoListFromApi(
     user: String,

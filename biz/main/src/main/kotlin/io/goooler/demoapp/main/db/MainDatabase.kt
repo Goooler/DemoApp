@@ -12,5 +12,5 @@ import io.goooler.demoapp.main.bean.MainRepoListBean
 )
 abstract class MainDatabase : RoomDatabase() {
 
-  abstract val mainCommonDao: MainCommonDao
+  abstract fun getMainCommonDao(): MainCommonDao
 }
