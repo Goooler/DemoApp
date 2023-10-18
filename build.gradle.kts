@@ -50,6 +50,7 @@ allprojects {
   }
   plugins.withType<KspGradleSubplugin>().configureEach {
     configure<KspExtension> {
+      arg("room.generateKotlin", "true")
       arg("room.incremental", "true")
     }
   }
