@@ -1,6 +1,7 @@
 plugins {
   alias(libs.plugins.android.library)
   alias(libs.plugins.ksp)
+  alias(libs.plugins.androidX.room)
   alias(libs.plugins.napt)
 }
 
@@ -30,7 +31,6 @@ dependencies {
   api(libs.utils)
 
   implementation(libs.bundles.androidX.room)
-  ksp(libs.androidX.room.compiler)
 
   implementation(libs.bundles.coil)
 

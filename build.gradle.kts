@@ -1,10 +1,10 @@
+import androidx.room.gradle.RoomExtension
+import androidx.room.gradle.RoomGradlePlugin
 import com.android.build.gradle.AppPlugin
 import com.android.build.gradle.BaseExtension
 import com.android.build.gradle.BasePlugin
 import com.android.build.gradle.LibraryPlugin
 import com.diffplug.gradle.spotless.SpotlessExtension
-import com.google.devtools.ksp.gradle.KspExtension
-import com.google.devtools.ksp.gradle.KspGradleSubplugin
 import io.gitlab.arturbosch.detekt.extensions.DetektExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
@@ -13,6 +13,7 @@ plugins {
   alias(libs.plugins.android.library) apply false
   alias(libs.plugins.kotlin.android) apply false
   alias(libs.plugins.ksp) apply false
+  alias(libs.plugins.androidX.room) apply false
   alias(libs.plugins.napt) apply false
   alias(libs.plugins.spotless) apply false
   alias(libs.plugins.detekt) apply false
@@ -48,12 +49,13 @@ allprojects {
       if (displayName.contains(":biz:") || name.startsWith("common")) setupCommon() else setupBase()
     }
   }
-  plugins.withType<KspGradleSubplugin>().configureEach {
-    configure<KspExtension> {
-      arg("room.generateKotlin", "true")
-      arg("room.incremental", "true")
+
+  plugins.withType<RoomGradlePlugin>().configureEach {
+    extensions.configure<RoomExtension> {
+      schemaDirectory("$projectDir/schemas/")
     }
   }
+
   // Configure Java to use our chosen language level. Kotlin will automatically pick this up.
   // See https://kotlinlang.org/docs/gradle-configure-project.html#gradle-java-toolchains-support
   plugins.withType<JavaBasePlugin>().configureEach {
