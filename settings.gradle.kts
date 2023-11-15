@@ -1,6 +1,11 @@
 pluginManagement {
   repositories {
-    google()
+    google {
+      content {
+        includeGroupByRegex(".*google.*")
+        includeGroupByRegex(".*android.*")
+      }
+    }
     gradlePluginPortal()
   }
 }
@@ -8,7 +13,12 @@ pluginManagement {
 dependencyResolutionManagement {
   repositoriesMode = RepositoriesMode.FAIL_ON_PROJECT_REPOS
   repositories {
-    google()
+    google {
+      content {
+        includeGroupByRegex(".*google.*")
+        includeGroupByRegex(".*android.*")
+      }
+    }
     mavenCentral()
   }
 }
