@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.ViewDataBinding
+import androidx.viewbinding.ViewBinding
 import io.goooler.demoapp.base.core.BaseFragment
 
-abstract class BaseBindingFragment<VB : ViewDataBinding> :
+abstract class BaseBindingFragment<VB : ViewBinding> :
   BaseFragment(),
   IBindingFragment<VB> {
   private var _binding: VB? = null
@@ -29,7 +29,7 @@ abstract class BaseBindingFragment<VB : ViewDataBinding> :
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    binding.lifecycleOwner = viewLifecycleOwner
+    (binding as? androidx.databinding.ViewDataBinding)?.lifecycleOwner = viewLifecycleOwner
   }
 
   override fun onDestroyView() {

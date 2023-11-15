@@ -2,15 +2,14 @@ package io.goooler.demoapp.common.base.binding
 
 import android.view.LayoutInflater
 import androidx.annotation.MainThread
-import androidx.databinding.ViewDataBinding
 import androidx.viewbinding.ViewBinding
 import java.lang.reflect.Method
 import java.lang.reflect.ParameterizedType
 
-internal sealed interface IBinding<VB : ViewDataBinding> {
+internal sealed interface IBinding<VB : ViewBinding> {
   val binding: VB
 
-  fun <T : ViewBinding> inflateBinding(inflater: LayoutInflater): T {
+  fun inflateBinding(inflater: LayoutInflater): VB {
     var method: Method?
     var clazz: Class<*> = javaClass
     while (clazz.superclass != null) {
@@ -19,7 +18,7 @@ internal sealed interface IBinding<VB : ViewDataBinding> {
         clazz = clazz.superclass
       } else {
         @Suppress("UNCHECKED_CAST")
-        return method.invoke(null, inflater) as T
+        return method.invoke(null, inflater) as VB
       }
     }
     error("No Binding type argument found.")
@@ -35,7 +34,7 @@ internal sealed interface IBinding<VB : ViewDataBinding> {
   }
 }
 
-internal sealed interface IBindingFragment<VB : ViewDataBinding> : IBinding<VB> {
+internal sealed interface IBindingFragment<VB : ViewBinding> : IBinding<VB> {
 
   @MainThread
   fun initOnce() {
