@@ -5,13 +5,13 @@ import android.content.pm.ActivityInfo
 import android.content.res.Resources
 import android.os.Bundle
 import android.view.WindowManager
-import androidx.databinding.ViewDataBinding
+import androidx.viewbinding.ViewBinding
 import com.blankj.utilcode.util.AdaptScreenUtils
 import com.blankj.utilcode.util.BarUtils
 import com.blankj.utilcode.util.ScreenUtils
 import io.goooler.demoapp.base.core.BaseActivity
 
-abstract class BaseBindingActivity<VB : ViewDataBinding> : BaseActivity(), IBinding<VB> {
+abstract class BaseBindingActivity<VB : ViewBinding> : BaseActivity(), IBinding<VB> {
 
   override lateinit var binding: VB
 
@@ -26,8 +26,8 @@ abstract class BaseBindingActivity<VB : ViewDataBinding> : BaseActivity(), IBind
 
     BarUtils.transparentStatusBar(this)
 
-    binding = (inflateBinding(layoutInflater) as VB).also {
-      it.lifecycleOwner = this
+    binding = inflateBinding(layoutInflater).also {
+      (it as? androidx.databinding.ViewDataBinding)?.lifecycleOwner = this
       setContentView(it.root)
     }
   }
