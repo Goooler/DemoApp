@@ -734,7 +734,7 @@ style:
     active: false
   UnusedParameter:
     active: true
-    allowedNames: 'ignored|expected'
+    allowedNames: 'ignored|expected|modifier'
   UnusedPrivateClass:
     active: true
   UnusedPrivateMember:
