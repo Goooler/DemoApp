@@ -34,7 +34,7 @@ allprojects {
         .customRuleSets(
           listOf(
             "io.nlopez.compose.rules:ktlint:0.3.5",
-          )
+          ),
         )
     }
     kotlinGradle {
