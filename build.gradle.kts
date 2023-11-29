@@ -29,8 +29,13 @@ allprojects {
   plugins.apply(rootProject.libs.plugins.spotless.get().pluginId)
   extensions.configure<SpotlessExtension> {
     kotlin {
-      ktlint(rootProject.libs.ktlint.get().version)
       target("src/**/*.kt")
+      ktlint(rootProject.libs.ktlint.get().version)
+        .customRuleSets(
+          listOf(
+            "io.nlopez.compose.rules:ktlint:0.3.5",
+          )
+        )
     }
     kotlinGradle {
       ktlint(rootProject.libs.ktlint.get().version)
