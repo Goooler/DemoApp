@@ -23,7 +23,7 @@ class RepoDetailActivity : BaseActivity() {
     setContent {
       val model by vm.repoDetailModel.collectAsState()
       val isRefreshing by vm.isRefreshing.collectAsState()
-      DetailPageWithSwipeRefresh(isRefreshing, vm::refresh, model, vm::fork)
+      DetailPageWithSwipeRefresh(isRefreshing, vm::refresh, model, onForkClick = vm::fork)
     }
   }
 

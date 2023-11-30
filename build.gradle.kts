@@ -25,12 +25,15 @@ allprojects {
     config.from("$rootDir/detekt.yml")
     parallel = true
   }
+  dependencies {
+    "detektPlugins"(rootProject.libs.composeRules)
+  }
 
   plugins.apply(rootProject.libs.plugins.spotless.get().pluginId)
   extensions.configure<SpotlessExtension> {
     kotlin {
-      ktlint(rootProject.libs.ktlint.get().version)
       target("src/**/*.kt")
+      ktlint(rootProject.libs.ktlint.get().version)
     }
     kotlinGradle {
       ktlint(rootProject.libs.ktlint.get().version)

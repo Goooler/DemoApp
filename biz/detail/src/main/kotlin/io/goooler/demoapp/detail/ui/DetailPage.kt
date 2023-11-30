@@ -44,20 +44,25 @@ fun DetailPageWithSwipeRefresh(
   isRefreshing: Boolean,
   onRefresh: () -> Unit,
   model: RepoDetailModel,
+  modifier: Modifier = Modifier,
   onForkClick: () -> Unit,
 ) {
   val refreshState = rememberPullRefreshState(refreshing = isRefreshing, onRefresh = onRefresh)
 
   MaterialTheme {
     Box(modifier = Modifier.pullRefresh(state = refreshState)) {
-      DetailPage(model, onForkClick)
+      DetailPage(model = model, onForkClick = onForkClick)
       PullRefreshIndicator(isRefreshing, refreshState, Modifier.align(Alignment.TopCenter))
     }
   }
 }
 
 @Composable
-fun DetailPage(model: RepoDetailModel, onForkClick: () -> Unit) {
+fun DetailPage(
+  model: RepoDetailModel,
+  modifier: Modifier = Modifier,
+  onForkClick: () -> Unit,
+) {
   var isDescExpanded by remember { mutableStateOf(false) }
 
   Column(
@@ -110,7 +115,7 @@ fun DetailPage(model: RepoDetailModel, onForkClick: () -> Unit) {
 
 @Preview
 @Composable
-fun DetailPagePreview() {
+private fun DetailPagePreview() {
   @Suppress("MagicNumber")
   val model = RepoDetailModel(
     "Compose/Demo",
