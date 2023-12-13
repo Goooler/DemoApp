@@ -1,13 +1,11 @@
 # This is a configuration file for ProGuard.
-# http://proguard.sourceforge.net/index.html#manual/usage.html
+# https://www.guardsquare.com/manual/configuration/usage
 -allowaccessmodification
 -dontpreverify
 -dontusemixedcaseclassnames
 -dontskipnonpubliclibraryclasses
+-keepattributes Signature,InnerClasses,EnclosingMethod,*Annotation*
 -verbose
--printseeds seeds.txt
--printusage unused.txt
--printmapping mapping.txt
 
 # For native methods, see http://proguard.sourceforge.net/manual/examples.html#native
 -keepclasseswithmembernames class * {
@@ -42,14 +40,6 @@
   public static <fields>;
 }
 
--keepattributes Signature,InnerClasses,EnclosingMethod,*Annotation*
-
-# Okio
--dontwarn okio.**
-
-# Kotlin
--dontwarn kotlin.**
-
 # Some unsafe classfactory stuff
 -keep class sun.misc.Unsafe { *; }
 
@@ -79,22 +69,15 @@
 # Check that qualifier annotations have been discarded.
 -checkdiscard @javax.inject.Qualifier class *
 
-# Coroutines debug agent bits
--dontwarn java.lang.instrument.ClassFileTransformer
--dontwarn sun.misc.SignalHandler
-
-# ZoneRulesProvider _does_ exist!
--dontwarn java.time.zone.ZoneRulesProvider
-
-# DataBinding
+# ViewBinding
 -keep,allowoptimization public class * extends androidx.viewbinding.ViewBinding {
   public static * inflate(android.view.LayoutInflater);
 }
-
 # Extra rules for R8 fullMode
 -keep,allowobfuscation,allowshrinking class io.goooler.demoapp.common.base.binding.BaseBindingActivity
 -keep,allowobfuscation,allowshrinking class * extends io.goooler.demoapp.common.base.binding.BaseBindingActivity
-# TODO: Waiting for new retrofit release to remove these rules
+
+# TODO: Remove these rules when new Retrofit version is released.
 -if interface * { @retrofit2.http.* public *** *(...); }
 -keep,allowoptimization,allowshrinking,allowobfuscation class <3>
 -keep,allowoptimization,allowshrinking,allowobfuscation class kotlin.coroutines.Continuation
