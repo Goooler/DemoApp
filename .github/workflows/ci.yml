@@ -131,7 +131,7 @@ jobs:
           dependency-graph: ${{ github.ref == 'refs/heads/trunk' && 'generate-and-submit' || 'disabled'}}
           gradle-home-cache-cleanup: true
       - run: ./gradlew app:assembleProdRelease
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: build-outputs
           path: app/build/outputs/apk/prod/release/*.apk
