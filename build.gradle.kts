@@ -83,20 +83,17 @@ allprojects {
   configurations.configureEach {
     resolutionStrategy.eachDependency {
       when (requested.group) {
-        "com.android.support" -> {
-          if ("multidex" !in requested.name) useVersion(libs.versions.support.get())
+        libs.androidX.appCompat.get().module.group -> useVersion(libs.androidX.appCompat.get().version.toString())
+        libs.androidX.activity.compose.get().module.group -> useVersion(libs.androidX.activity.compose.get().version.toString())
+        libs.androidX.collection.get().module.group -> useVersion(libs.androidX.collection.get().version.toString())
+        libs.androidX.core.get().module.group -> useVersion(libs.androidX.core.get().version.toString())
+        libs.androidX.fragment.get().module.group -> useVersion(libs.androidX.fragment.get().version.toString())
+        libs.kotlin.junit5.get().module.group -> useVersion(libs.kotlin.junit5.get().version.toString())
+        libs.kotlinX.coroutines.get().group -> when (requested.name) {
+          libs.kotlinX.coroutines.get().name -> useVersion(libs.kotlinX.coroutines.get().version.toString())
+          libs.kotlinX.immutable.get().name -> useVersion(libs.kotlinX.immutable.get().version.toString())
         }
-
-        libs.androidX.appCompat.get().module.group -> useVersion(libs.versions.androidX.appCompat.get())
-        libs.androidX.activity.compose.get().module.group -> useVersion(libs.versions.androidX.activity.get())
-        libs.androidX.collection.get().module.group -> useVersion(libs.versions.androidX.collection.get())
-        libs.androidX.core.get().module.group -> useVersion(libs.versions.androidX.core.get())
-        libs.androidX.fragment.get().module.group -> useVersion(libs.versions.androidX.fragment.get())
-        libs.square.okHttp.logInterceptor.get().module.group -> useVersion(libs.versions.square.okHttp.get())
-        else -> when {
-          requested.name.startsWith("kotlinx-coroutines") ->
-            useVersion(libs.versions.coroutines.get())
-        }
+        libs.square.okHttp.logInterceptor.get().module.group -> useVersion(libs.square.okHttp.logInterceptor.get().version.toString())
       }
     }
   }
