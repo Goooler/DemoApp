@@ -81,6 +81,8 @@ allprojects {
   }
 
   configurations.configureEach {
+    // https://detekt.dev/docs/gettingstarted/gradle/#gradle-runtime-dependencies
+    if (name == "detekt") return@configureEach
     resolutionStrategy.eachDependency {
       when (requested.group) {
         libs.androidX.appCompat.get().module.group -> useVersion(libs.androidX.appCompat.get().version.toString())
