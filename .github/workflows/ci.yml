@@ -39,7 +39,7 @@ jobs:
       - uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
-          java-version: 20
+          java-version: 21
       - uses: gradle/gradle-build-action@v2
       - run: ./gradlew spotlessCheck
 
@@ -50,7 +50,7 @@ jobs:
       - uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
-          java-version: 20
+          java-version: 21
       - uses: gradle/gradle-build-action@v2
       - run: ./gradlew detekt
 
@@ -61,7 +61,7 @@ jobs:
       - uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
-          java-version: 20
+          java-version: 21
       - uses: gradle/gradle-build-action@v2
       - run: ./gradlew lintDebug
 
@@ -74,7 +74,7 @@ jobs:
       - uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
-          java-version: 20
+          java-version: 21
       - uses: gradle/gradle-build-action@v2
       - run: ./gradlew testDebugUnitTest
 
@@ -91,7 +91,7 @@ jobs:
       - uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
-          java-version: 20
+          java-version: 21
       - uses: gradle/gradle-build-action@v2
       - uses: actions/cache@v4
         id: avd-cache
@@ -125,7 +125,7 @@ jobs:
       - uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
-          java-version: 20
+          java-version: 21
       - uses: gradle/gradle-build-action@v2
         with:
           dependency-graph: ${{ github.ref == 'refs/heads/trunk' && 'generate-and-submit' || 'disabled'}}
