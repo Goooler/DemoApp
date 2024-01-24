@@ -6,7 +6,6 @@ import android.view.View
 import androidx.browser.customtabs.CustomTabColorSchemeParams
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.net.toUri
-import com.blankj.utilcode.util.BarUtils
 import io.goooler.demoapp.base.util.addFragment
 import io.goooler.demoapp.common.base.binding.BaseBindingActivity
 import io.goooler.demoapp.common.router.RouterManager
@@ -21,7 +20,6 @@ class WebActivity : BaseBindingActivity<WebActivityBinding>() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    BarUtils.setStatusBarLightMode(this, true)
     binding.listener = listener
     intent.extras?.getString(RouterManager.PARAMS)?.let { url ->
       if (intent.action == RouterManager.USE_CHROME) {
