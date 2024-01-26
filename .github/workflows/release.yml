@@ -15,7 +15,7 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: 21
-      - uses: gradle/gradle-build-action@v2
+      - uses: gradle/gradle-build-action@v3
       - run: ./gradlew app:assembleProdRelease
       - uses: ncipollo/release-action@v1
         with:

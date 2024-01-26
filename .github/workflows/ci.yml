@@ -40,7 +40,7 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: 21
-      - uses: gradle/gradle-build-action@v2
+      - uses: gradle/gradle-build-action@v3
       - run: ./gradlew spotlessCheck
 
   detekt:
@@ -51,7 +51,7 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: 21
-      - uses: gradle/gradle-build-action@v2
+      - uses: gradle/gradle-build-action@v3
       - run: ./gradlew detekt
 
   android-lint:
@@ -62,7 +62,7 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: 21
-      - uses: gradle/gradle-build-action@v2
+      - uses: gradle/gradle-build-action@v3
       - run: ./gradlew lintDebug
 
   unit-tests:
@@ -75,7 +75,7 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: 21
-      - uses: gradle/gradle-build-action@v2
+      - uses: gradle/gradle-build-action@v3
       - run: ./gradlew testDebugUnitTest
 
   instrumentation-tests:
@@ -92,7 +92,7 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: 21
-      - uses: gradle/gradle-build-action@v2
+      - uses: gradle/gradle-build-action@v3
       - uses: actions/cache@v4
         id: avd-cache
         with:
@@ -126,7 +126,7 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: 21
-      - uses: gradle/gradle-build-action@v2
+      - uses: gradle/gradle-build-action@v3
         with:
           dependency-graph: ${{ github.ref == 'refs/heads/trunk' && 'generate-and-submit' || 'disabled'}}
           gradle-home-cache-cleanup: true
