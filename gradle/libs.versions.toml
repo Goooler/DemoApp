@@ -91,7 +91,7 @@ srl-header = { module = "io.github.scwang90:refresh-header-classics", version.re
 srl-kernel = { module = "io.github.scwang90:refresh-layout-kernel", version.ref = "srl" }
 utils = "com.blankj:utilcodex:1.31.1"
 ktlint = "com.pinterest.ktlint:ktlint-cli:1.1.1"
-composeRules = "io.nlopez.compose.rules:detekt:0.3.10"
+composeRules = "io.nlopez.compose.rules:detekt:0.3.11"
 
 [bundles]
 androidX-compose = [
