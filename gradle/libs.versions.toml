@@ -21,7 +21,7 @@ kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 ksp = "com.google.devtools.ksp:1.9.22-1.0.17"
 napt = "com.sergei-lapin.napt:1.19"
 spotless = "com.diffplug.spotless:6.25.0"
-detekt = "io.gitlab.arturbosch.detekt:1.23.4"
+detekt = "io.gitlab.arturbosch.detekt:1.23.5"
 cacheFix = "org.gradle.android.cache-fix:3.0"
 
 [libraries]
