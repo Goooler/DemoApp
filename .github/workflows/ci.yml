@@ -52,6 +52,8 @@ jobs:
           distribution: 'zulu'
           java-version: 21
       - uses: gradle/actions/setup-gradle@v3
+        with:
+          cache-encryption-key: Da25KUVSE5jbGds2zXmfXw==
       - run: ./gradlew detekt
 
   android-lint:
@@ -63,6 +65,8 @@ jobs:
           distribution: 'zulu'
           java-version: 21
       - uses: gradle/actions/setup-gradle@v3
+        with:
+          cache-encryption-key: Da25KUVSE5jbGds2zXmfXw==
       - run: ./gradlew lintDebug
 
   unit-tests:
@@ -76,6 +80,8 @@ jobs:
           distribution: 'zulu'
           java-version: 21
       - uses: gradle/actions/setup-gradle@v3
+        with:
+          cache-encryption-key: Da25KUVSE5jbGds2zXmfXw==
       - run: ./gradlew testDebugUnitTest
 
   instrumentation-tests:
@@ -93,6 +99,8 @@ jobs:
           distribution: 'zulu'
           java-version: 21
       - uses: gradle/actions/setup-gradle@v3
+        with:
+          cache-encryption-key: Da25KUVSE5jbGds2zXmfXw==
       - uses: actions/cache@v4
         id: avd-cache
         with:
@@ -128,6 +136,7 @@ jobs:
           java-version: 21
       - uses: gradle/actions/setup-gradle@v3
         with:
+          cache-encryption-key: Da25KUVSE5jbGds2zXmfXw==
           dependency-graph: ${{ github.ref == 'refs/heads/trunk' && 'generate-and-submit' || 'disabled'}}
           gradle-home-cache-cleanup: true
       - run: ./gradlew app:assembleProdRelease
