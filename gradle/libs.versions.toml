@@ -38,7 +38,7 @@ androidX-compose-foundation = { module = "androidx.compose.foundation:foundation
 androidX-compose-icons-core = { module = "androidx.compose.material:material-icons-core" }
 androidX-compose-icons-extended = { module = "androidx.compose.material:material-icons-extended" }
 # This isn't strictly used, but allows Renovate to see us using the Compose Compiler artifact
-androidX-compose-compiler = "androidx.compose.compiler:compiler:1.5.9"
+androidX-compose-compiler = "androidx.compose.compiler:compiler:1.5.10"
 
 androidX-activity = { module = "androidx.activity:activity-ktx", version.ref = "androidX-activity" }
 androidX-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidX-activity" }
