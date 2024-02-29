@@ -98,7 +98,6 @@ fun Number.formatMoney(isYuan: Boolean = false, trans2W: Boolean = false, scale:
           .setScale(scale, RoundingMode.DOWN)
           .stripTrailingZeros().toPlainString() + "W"
       }
-
       else ->
         BigDecimal.valueOf(moneyF)
           .setScale(scale, RoundingMode.DOWN)
