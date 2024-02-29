@@ -60,6 +60,7 @@ class MainPagingFragment : BaseBindingFragment<MainPagingFragmentBinding>() {
           rvAdapter.refresh()
           binding.layoutError.root.visibility = View.GONE
         }
+
         binding.fabRemove -> {
         }
       }

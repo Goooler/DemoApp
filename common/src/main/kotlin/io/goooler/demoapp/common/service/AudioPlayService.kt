@@ -87,9 +87,11 @@ class AudioPlayService : BaseService() {
         AudioManager.AUDIOFOCUS_GAIN -> {
           resumePlay()
         }
+
         AudioManager.AUDIOFOCUS_LOSS -> {
           pausePlay()
         }
+
         AudioManager.AUDIOFOCUS_LOSS_TRANSIENT -> {
           pausePlay()
         }

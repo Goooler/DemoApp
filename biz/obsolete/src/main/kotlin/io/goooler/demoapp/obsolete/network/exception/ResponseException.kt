@@ -7,12 +7,15 @@ class ResponseException(message: String?, throwable: Throwable?) : Exception(mes
 
 fun Throwable?.toResponseException(): ResponseException = when (this) {
   is ResponseException -> this
+
   is HttpException -> {
     @Suppress("MagicNumber")
     val message = if (code() == 401) "auth failed" else "connect failed"
     ResponseException(message, this)
   }
+
   is IOException -> ResponseException("timeout", this)
+
   else -> ResponseException("unknown error", this)
 }
 

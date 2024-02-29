@@ -84,15 +84,22 @@ allprojects {
     resolutionStrategy.eachDependency {
       when (requested.group) {
         libs.androidX.appCompat.get().module.group -> useVersion(libs.androidX.appCompat.get().version.toString())
+
         libs.androidX.activity.compose.get().module.group -> useVersion(libs.androidX.activity.compose.get().version.toString())
+
         libs.androidX.collection.get().module.group -> useVersion(libs.androidX.collection.get().version.toString())
+
         libs.androidX.core.get().module.group -> useVersion(libs.androidX.core.get().version.toString())
+
         libs.androidX.fragment.get().module.group -> useVersion(libs.androidX.fragment.get().version.toString())
+
         libs.kotlin.junit5.get().module.group -> useVersion(libs.kotlin.junit5.get().version.toString())
+
         libs.kotlinX.coroutines.get().group -> when (requested.name) {
           libs.kotlinX.coroutines.get().name -> useVersion(libs.kotlinX.coroutines.get().version.toString())
           libs.kotlinX.immutable.get().name -> useVersion(libs.kotlinX.immutable.get().version.toString())
         }
+
         libs.square.okHttp.logInterceptor.get().module.group -> useVersion(libs.square.okHttp.logInterceptor.get().version.toString())
       }
     }

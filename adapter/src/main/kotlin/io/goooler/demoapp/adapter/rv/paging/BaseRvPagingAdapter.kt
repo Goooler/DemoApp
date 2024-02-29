@@ -61,7 +61,9 @@ abstract class BaseRvPagingAdapter<M : IDiffVhModelType>(callback: DiffCallBack<
     addLoadStateListener {
       when {
         it.refresh is LoadState.Loading -> onLoadStatusListener?.onRefresh()
+
         it.append is LoadState.Loading -> onLoadStatusListener?.onLoadMore()
+
         else -> {
           onLoadStatusListener?.onNotLoading()
           if (it.refresh is LoadState.Error) {
