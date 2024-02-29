@@ -57,7 +57,6 @@ class WebActivity : BaseBindingActivity<WebActivityBinding>() {
         binding.layoutTitle.ivLeft -> {
           finish()
         }
-
         binding.layoutTitle.ivRight -> {
           val intent = Intent().setAction(Intent.ACTION_SEND)
             .putExtra(Intent.EXTRA_TEXT, webFragment?.url)

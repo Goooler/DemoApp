@@ -21,19 +21,15 @@ class AudioPlayActivity : BaseBindingActivity<MainAudioPlayActivityBinding>() {
       binding.btStart -> {
         AudioPlayService.startPlay(this, R.string.main_music_01_url.getString())
       }
-
       binding.btPause -> {
         AudioPlayService.pausePlay(this)
       }
-
       binding.btResume -> {
         AudioPlayService.resumePlay(this)
       }
-
       binding.btStop -> {
         AudioPlayService.stopPlay(this)
       }
-
       binding.btGoMain -> {
         RouterManager.goMain(this)
       }

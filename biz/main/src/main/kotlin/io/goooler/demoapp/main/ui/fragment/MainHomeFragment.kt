@@ -38,13 +38,9 @@ class MainHomeFragment : BaseBindingFragment<MainHomeFragmentBinding>() {
   private val listener = View.OnClickListener {
     when (it) {
       binding.bt1 -> RouterManager.goWeb(requireContext(), "https://bilibili.com", true)
-
       binding.bt4 -> vm.countDown()
-
       binding.bt6 -> FullScreenDialogFragment.show(childFragmentManager)
-
       binding.bt7 -> RouterManager.goAudioPlay(requireContext())
-
       binding.bt8 -> if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
         createShortcut(requireContext())
       }
