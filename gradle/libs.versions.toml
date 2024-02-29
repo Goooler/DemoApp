@@ -18,7 +18,7 @@ srl = "2.1.0"
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-ksp = "com.google.devtools.ksp:1.9.22-1.0.17"
+ksp = "com.google.devtools.ksp:1.9.22-1.0.18"
 napt = "com.sergei-lapin.napt:1.19"
 spotless = "com.diffplug.spotless:6.25.0"
 detekt = "io.gitlab.arturbosch.detekt:1.23.5"
