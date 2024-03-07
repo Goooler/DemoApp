@@ -44,7 +44,7 @@ androidX-activity = { module = "androidx.activity:activity-ktx", version.ref = "
 androidX-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidX-activity" }
 androidX-annotation = "androidx.annotation:annotation:1.7.1"
 androidX-appCompat = "androidx.appcompat:appcompat:1.6.1"
-androidX-browser = "androidx.browser:browser:1.7.0"
+androidX-browser = "androidx.browser:browser:1.8.0"
 androidX-cardView = "androidx.cardview:cardview:1.0.0"
 androidX-collection = "androidx.collection:collection-ktx:1.4.0"
 androidX-constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.4"
