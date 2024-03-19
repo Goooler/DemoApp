@@ -76,3 +76,8 @@
 # Extra rules for R8 fullMode
 -keep,allowobfuscation,allowshrinking class io.goooler.demoapp.common.base.binding.BaseBindingActivity
 -keep,allowobfuscation,allowshrinking class * extends io.goooler.demoapp.common.base.binding.BaseBindingActivity
+
+# TODO: Remove these rules when new Retrofit version is released.
+-if interface * { @retrofit2.http.* public *** *(...); }
+-keep,allowoptimization,allowshrinking,allowobfuscation class <3>
+-keep,allowoptimization,allowshrinking,allowobfuscation class kotlin.coroutines.Continuation
