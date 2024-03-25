@@ -8,7 +8,7 @@ androidX-room = "2.6.1"
 chucker = "4.0.0"
 coil = "2.6.0"
 glide = "4.16.0"
-kotlin = "1.9.22"
+kotlin = "1.9.23"
 square-okHttp = "4.12.0"
 square-retrofit = "2.10.0"
 square-moshi = "1.15.1"
@@ -18,7 +18,7 @@ srl = "2.1.0"
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-ksp = "com.google.devtools.ksp:1.9.22-1.0.18"
+ksp = "com.google.devtools.ksp:1.9.23-1.0.19"
 napt = "com.sergei-lapin.napt:1.19"
 spotless = "com.diffplug.spotless:6.25.0"
 detekt = "io.gitlab.arturbosch.detekt:1.23.5"
@@ -38,7 +38,7 @@ androidX-compose-foundation = { module = "androidx.compose.foundation:foundation
 androidX-compose-icons-core = { module = "androidx.compose.material:material-icons-core" }
 androidX-compose-icons-extended = { module = "androidx.compose.material:material-icons-extended" }
 # This isn't strictly used, but allows Renovate to see us using the Compose Compiler artifact
-androidX-compose-compiler = "androidx.compose.compiler:compiler:1.5.10"
+androidX-compose-compiler = "androidx.compose.compiler:compiler:1.5.11"
 
 androidX-activity = { module = "androidx.activity:activity-ktx", version.ref = "androidX-activity" }
 androidX-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidX-activity" }
