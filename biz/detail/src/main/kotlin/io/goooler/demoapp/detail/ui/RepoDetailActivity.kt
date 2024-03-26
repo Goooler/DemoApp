@@ -3,8 +3,8 @@ package io.goooler.demoapp.detail.ui
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.foundation.layout.padding
+import androidx.compose.ui.Modifier
 import io.goooler.demoapp.base.core.BaseActivity
 import io.goooler.demoapp.detail.vm.DetailViewModel
 
@@ -15,15 +15,15 @@ class RepoDetailActivity : BaseActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 
-    intent.getStringExtra(FULL_NAME)?.let {
-      vm.fullName = it
-      vm.refresh()
-    }
+    vm.fullName = intent.getStringExtra(FULL_NAME) ?: return
+    vm.refresh()
 
     setContent {
-      val model by vm.repoDetailModel.collectAsState()
-      val isRefreshing by vm.isRefreshing.collectAsState()
-      DetailPageWithSwipeRefresh(isRefreshing, vm::refresh, model, onForkClick = vm::fork)
+      DemoScaffold { innerPadding ->
+        DetailPageWithSwipeRefresh(
+          modifier = Modifier.padding(innerPadding),
+        )
+      }
     }
   }
 
