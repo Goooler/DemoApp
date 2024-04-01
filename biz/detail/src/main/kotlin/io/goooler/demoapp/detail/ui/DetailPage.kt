@@ -45,8 +45,8 @@ import io.goooler.demoapp.detail.vm.DetailViewModel
 @Composable
 fun DetailPageWithSwipeRefresh(
   modifier: Modifier = Modifier,
+  vm: DetailViewModel = viewModel(),
 ) {
-  val vm: DetailViewModel = viewModel()
   val model by vm.repoDetailModel.collectAsState()
   val isRefreshing by vm.isRefreshing.collectAsState()
 
