@@ -20,10 +20,8 @@ class DetailViewModel : BaseViewModel() {
 
   lateinit var fullName: String
 
-  val repoDetailModel: StateFlow<RepoDetailModel>
-    get() = _repoDetailModel.asStateFlow()
-  val isRefreshing: StateFlow<Boolean>
-    get() = _isRefreshing.asStateFlow()
+  val repoDetailModel: StateFlow<RepoDetailModel> = _repoDetailModel.asStateFlow()
+  val isRefreshing: StateFlow<Boolean> = _isRefreshing.asStateFlow()
 
   fun refresh() {
     viewModelScope.launch {

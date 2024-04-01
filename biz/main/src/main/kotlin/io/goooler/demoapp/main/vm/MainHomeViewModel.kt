@@ -16,6 +16,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.onCompletion
@@ -26,7 +27,7 @@ class MainHomeViewModel : BaseViewModel() {
   private val repository = MainCommonRepository()
 
   private val _title = MutableStateFlow("")
-  val title: StateFlow<String> = _title
+  val title: StateFlow<String> = _title.asStateFlow()
 
   private var countdownJob: Job? = null
 
