@@ -27,7 +27,7 @@ class DetailViewModel : BaseViewModel() {
 
   fun refresh() {
     viewModelScope.launch {
-      _isRefreshing.emit(true)
+      _isRefreshing.value = true
       repository.getRepoDetail(fullName).let {
         repoDetail = RepoDetailModel(
           it.fullName,
@@ -39,7 +39,7 @@ class DetailViewModel : BaseViewModel() {
         )
       }
       _repoDetailModel.value = repoDetail
-      _isRefreshing.emit(false)
+      _isRefreshing.value = false
     }
   }
 
