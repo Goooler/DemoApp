@@ -67,7 +67,7 @@ fun DetailPage(
   var isDescExpanded by remember { mutableStateOf(false) }
 
   Column(
-    modifier = Modifier
+    modifier = modifier
       .padding(8.dp)
       .fillMaxSize()
       .verticalScroll(rememberScrollState()),
