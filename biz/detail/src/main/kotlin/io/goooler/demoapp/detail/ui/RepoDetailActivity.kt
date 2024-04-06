@@ -15,7 +15,7 @@ class RepoDetailActivity : BaseActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 
-    vm.fullName = intent.getStringExtra(FULL_NAME) ?: return
+    vm.fullName = intent.getStringExtra(FULL_NAME) ?: "Goooler/DemoApp"
     vm.refresh()
 
     setContent {
