@@ -1,5 +1,6 @@
 package io.goooler.demoapp.detail.ui
 
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.PaddingValues
@@ -16,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
 
@@ -56,6 +58,19 @@ fun DemoTheme(
     content = content,
   )
 }
+
+@Preview(
+  name = "Light",
+  showSystemUi = true,
+  showBackground = true,
+)
+@Preview(
+  name = "Dark",
+  showSystemUi = true,
+  showBackground = true,
+  uiMode = UI_MODE_NIGHT_YES,
+)
+annotation class DemoPreview
 
 @Composable
 fun DemoScaffold(

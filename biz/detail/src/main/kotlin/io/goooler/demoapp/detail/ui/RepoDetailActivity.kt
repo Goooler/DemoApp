@@ -20,7 +20,7 @@ class RepoDetailActivity : BaseActivity() {
 
     setContent {
       DemoScaffold { innerPadding ->
-        DetailPageWithSwipeRefresh(
+        DetailScreenWithSwipeRefresh(
           modifier = Modifier.padding(innerPadding),
         )
       }

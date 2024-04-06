@@ -36,7 +36,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.coerceAtLeast
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -48,7 +48,7 @@ import io.goooler.demoapp.detail.vm.DetailViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DetailPageWithSwipeRefresh(
+fun DetailScreenWithSwipeRefresh(
   modifier: Modifier = Modifier,
   vm: DetailViewModel = viewModel(),
 ) {
@@ -71,13 +71,7 @@ fun DetailPageWithSwipeRefresh(
     modifier = modifier.padding(horizontal = 10.dp),
   ) {
     Box(Modifier.nestedScroll(refreshState.nestedScrollConnection)) {
-      LazyColumn {
-        @Suppress("MagicNumber")
-        val models = List(10) { model }
-        items(models) { model ->
-          DetailCard(model = model, onForkClick = vm::fork)
-        }
-      }
+      DetailList(model, vm::fork)
 
       PullToRefreshContainer(
         modifier = Modifier.align(Alignment.TopCenter),
@@ -88,10 +82,24 @@ fun DetailPageWithSwipeRefresh(
 }
 
 @Composable
-fun DetailCard(
+private fun DetailList(
+  model: RepoDetailModel,
+  onForkClick: () -> Unit = {},
+) {
+  LazyColumn {
+    @Suppress("MagicNumber")
+    val models = List(10) { model }
+    items(models) { model ->
+      DetailCard(model = model, onForkClick = onForkClick)
+    }
+  }
+}
+
+@Composable
+private fun DetailCard(
   model: RepoDetailModel,
   modifier: Modifier = Modifier,
-  onForkClick: () -> Unit,
+  onForkClick: () -> Unit = {},
 ) {
   var isDescExpanded by rememberSaveable { mutableStateOf(false) }
   val extraPadding by animateDpAsState(
@@ -108,7 +116,9 @@ fun DetailCard(
   ) {
     Text(
       text = model.fullName,
-      style = MaterialTheme.typography.titleLarge,
+      style = MaterialTheme.typography.titleLarge.copy(
+        fontWeight = FontWeight.SemiBold,
+      ),
       maxLines = 1,
     )
     Spacer(modifier = Modifier.height(5.dp))
@@ -154,9 +164,9 @@ fun DetailCard(
   }
 }
 
-@Preview
+@DemoPreview
 @Composable
-private fun DetailPagePreview() {
+private fun DetailListPreview() {
   @Suppress("MagicNumber")
   val model = RepoDetailModel(
     "Compose/Demo",
@@ -168,5 +178,5 @@ private fun DetailPagePreview() {
     1,
     2,
   )
-  DetailCard(model) {}
+  DetailList(model)
 }
