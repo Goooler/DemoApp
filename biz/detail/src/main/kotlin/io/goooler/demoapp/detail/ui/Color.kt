@@ -1,3 +1,5 @@
+@file:Suppress("MagicNumber")
+
 package io.goooler.demoapp.detail.ui
 
 import androidx.compose.ui.graphics.Color

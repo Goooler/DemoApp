@@ -85,7 +85,7 @@ fun DemoTheme(
   showBackground = true,
   uiMode = UI_MODE_NIGHT_YES,
 )
-annotation class DemoPreview
+annotation class PreviewDemo
 
 @Composable
 fun DemoScaffold(

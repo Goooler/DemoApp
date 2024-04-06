@@ -164,7 +164,7 @@ private fun DetailCard(
   }
 }
 
-@DemoPreview
+@PreviewDemo
 @Composable
 private fun DetailListPreview() {
   @Suppress("MagicNumber")
