@@ -1,7 +1,7 @@
 package io.goooler.demoapp.detail.ui
 
+import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring
-import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.spring
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -19,6 +19,7 @@ import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -37,7 +38,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.coerceAtLeast
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import io.goooler.demoapp.common.util.getQuantityString
@@ -102,65 +102,68 @@ private fun DetailCard(
   onForkClick: () -> Unit = {},
 ) {
   var isDescExpanded by rememberSaveable { mutableStateOf(false) }
-  val extraPadding by animateDpAsState(
-    targetValue = if (isDescExpanded) 20.dp else 0.dp,
-    label = "extraPadding",
-    animationSpec = spring(
-      dampingRatio = Spring.DampingRatioMediumBouncy,
-      stiffness = Spring.StiffnessLow,
-    ),
-  )
 
-  Column(
-    modifier = modifier.padding(extraPadding.coerceAtLeast(0.dp)),
+  Card(
+    modifier = modifier.padding(8.dp),
   ) {
-    Text(
-      text = model.fullName,
-      style = MaterialTheme.typography.titleLarge.copy(
-        fontWeight = FontWeight.SemiBold,
-      ),
-      maxLines = 1,
-    )
-    Spacer(modifier = Modifier.height(5.dp))
-    Text(
-      text = model.description,
-      style = MaterialTheme.typography.bodyLarge,
-      maxLines = if (isDescExpanded) Int.MAX_VALUE else 1,
-      modifier = Modifier.clickable {
-        isDescExpanded = !isDescExpanded
-      },
-    )
-    Spacer(modifier = Modifier.height(5.dp))
-    Row {
-      Button(
-        modifier = Modifier.weight(1f),
-        onClick = {
-          R.plurals.detail_star_count_tip.getQuantityString(model.starsCount)?.showToast()
+    Column(
+      modifier = Modifier
+        .padding(12.dp)
+        .animateContentSize(
+          animationSpec = spring(
+            dampingRatio = Spring.DampingRatioMediumBouncy,
+            stiffness = Spring.StiffnessLow,
+          ),
+        ),
+    ) {
+      Text(
+        text = model.fullName,
+        style = MaterialTheme.typography.titleLarge.copy(
+          fontWeight = FontWeight.SemiBold,
+        ),
+        maxLines = 1,
+      )
+      Spacer(modifier = Modifier.height(5.dp))
+      Text(
+        text = model.description,
+        style = MaterialTheme.typography.bodyLarge,
+        maxLines = if (isDescExpanded) Int.MAX_VALUE else 1,
+        modifier = Modifier.clickable {
+          isDescExpanded = !isDescExpanded
         },
-      ) {
-        Icon(
-          Icons.Filled.Star,
-          contentDescription = "Star",
-          modifier = Modifier.size(ButtonDefaults.IconSize),
-        )
-        Spacer(Modifier.size(ButtonDefaults.IconSpacing))
-        Text(model.starsCount.toString())
+      )
+      Spacer(modifier = Modifier.height(5.dp))
+      Row {
+        Button(
+          modifier = Modifier.weight(1f),
+          onClick = {
+            R.plurals.detail_star_count_tip.getQuantityString(model.starsCount)?.showToast()
+          },
+        ) {
+          Icon(
+            Icons.Filled.Star,
+            contentDescription = "Star",
+            modifier = Modifier.size(ButtonDefaults.IconSize),
+          )
+          Spacer(Modifier.size(ButtonDefaults.IconSpacing))
+          Text(model.starsCount.toString())
+        }
+        Spacer(modifier = Modifier.width(20.dp))
+        Button(
+          modifier = Modifier.weight(1f),
+          onClick = onForkClick,
+        ) {
+          Icon(
+            Icons.Filled.Share,
+            contentDescription = "Fork",
+            modifier = Modifier.size(ButtonDefaults.IconSize),
+          )
+          Spacer(Modifier.size(ButtonDefaults.IconSpacing))
+          Text(model.forksCount.toString())
+        }
       }
-      Spacer(modifier = Modifier.width(20.dp))
-      Button(
-        modifier = Modifier.weight(1f),
-        onClick = onForkClick,
-      ) {
-        Icon(
-          Icons.Filled.Share,
-          contentDescription = "Fork",
-          modifier = Modifier.size(ButtonDefaults.IconSize),
-        )
-        Spacer(Modifier.size(ButtonDefaults.IconSpacing))
-        Text(model.forksCount.toString())
-      }
+      Spacer(modifier = Modifier.height(5.dp))
     }
-    Spacer(modifier = Modifier.height(5.dp))
   }
 }
 
