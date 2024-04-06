@@ -18,7 +18,7 @@ srl = "2.1.0"
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-ksp = "com.google.devtools.ksp:1.9.23-1.0.19"
+ksp = "com.google.devtools.ksp:1.9.23-1.0.20"
 napt = "com.sergei-lapin.napt:1.19"
 spotless = "com.diffplug.spotless:6.25.0"
 detekt = "io.gitlab.arturbosch.detekt:1.23.6"
@@ -29,7 +29,7 @@ kotlin-junit5 = { module = "org.jetbrains.kotlin:kotlin-test-junit5", version.re
 kotlinX-coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.0"
 kotlinX-immutable = "org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.7"
 
-androidX-compose-bom = "androidx.compose:compose-bom:2024.03.00"
+androidX-compose-bom = "androidx.compose:compose-bom:2024.04.00"
 androidX-compose-ui = { module = "androidx.compose.ui:ui" }
 androidX-compose-tooling = { module = "androidx.compose.ui:ui-tooling" }
 androidX-compose-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
