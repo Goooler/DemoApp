@@ -1,11 +1,15 @@
 plugins {
   alias(libs.plugins.android.library)
+  alias(libs.plugins.kotlin.compose)
   alias(libs.plugins.ksp)
 }
 
 android {
   buildFeatures.compose = true
-  composeOptions.kotlinCompilerExtensionVersion = libs.androidX.compose.compiler.get().version
+}
+
+composeCompiler {
+  suppressKotlinVersionCompatibilityCheck = libs.versions.kotlin.get()
 }
 
 dependencies {
