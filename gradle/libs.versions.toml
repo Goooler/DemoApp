@@ -2,7 +2,7 @@
 versionName = "1.9.0"
 versionCode = "109000"
 agp = "8.3.2"
-androidX-activity = "1.8.2"
+androidX-activity = "1.9.0"
 androidX-lifecycle = "2.7.0"
 androidX-room = "2.6.1"
 chucker = "4.0.0"
@@ -30,7 +30,7 @@ kotlin-junit5 = { module = "org.jetbrains.kotlin:kotlin-test-junit5", version.re
 kotlinX-coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.0"
 kotlinX-immutable = "org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.7"
 
-androidX-compose-bom = "androidx.compose:compose-bom:2024.04.00"
+androidX-compose-bom = "androidx.compose:compose-bom:2024.04.01"
 androidX-compose-ui = { module = "androidx.compose.ui:ui" }
 androidX-compose-tooling = { module = "androidx.compose.ui:ui-tooling" }
 androidX-compose-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
@@ -39,7 +39,7 @@ androidX-compose-foundation = { module = "androidx.compose.foundation:foundation
 androidX-compose-icons-core = { module = "androidx.compose.material:material-icons-core" }
 androidX-compose-icons-extended = { module = "androidx.compose.material:material-icons-extended" }
 
-androidX-activity = { module = "androidx.activity:activity-ktx", version.ref = "androidX-activity" }
+androidX-activity = { module = "androidx.activity:activity", version.ref = "androidX-activity" }
 androidX-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidX-activity" }
 androidX-annotation = "androidx.annotation:annotation:1.7.1"
 androidX-appCompat = "androidx.appcompat:appcompat:1.6.1"
