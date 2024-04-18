@@ -2,7 +2,7 @@
 versionName = "1.9.0"
 versionCode = "109000"
 agp = "8.3.2"
-androidX-activity = "1.8.2"
+androidX-activity = "1.9.0"
 androidX-lifecycle = "2.7.0"
 androidX-room = "2.6.1"
 chucker = "4.0.0"
@@ -39,7 +39,7 @@ androidX-compose-foundation = { module = "androidx.compose.foundation:foundation
 androidX-compose-icons-core = { module = "androidx.compose.material:material-icons-core" }
 androidX-compose-icons-extended = { module = "androidx.compose.material:material-icons-extended" }
 
-androidX-activity = { module = "androidx.activity:activity-ktx", version.ref = "androidX-activity" }
+androidX-activity = { module = "androidx.activity:activity", version.ref = "androidX-activity" }
 androidX-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidX-activity" }
 androidX-annotation = "androidx.annotation:annotation:1.7.1"
 androidX-appCompat = "androidx.appcompat:appcompat:1.6.1"
@@ -48,7 +48,7 @@ androidX-cardView = "androidx.cardview:cardview:1.0.0"
 androidX-collection = "androidx.collection:collection-ktx:1.4.0"
 androidX-constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.4"
 androidX-coordinatorLayout = "androidx.coordinatorlayout:coordinatorlayout:1.2.0"
-androidX-core = "androidx.core:core-ktx:1.12.0"
+androidX-core = "androidx.core:core-ktx:1.13.0"
 androidX-fragment = "androidx.fragment:fragment-ktx:1.6.2"
 androidX-lifecycle-service = { module = "androidx.lifecycle:lifecycle-service", version.ref = "androidX-lifecycle" }
 androidX-lifecycle-viewModel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "androidX-lifecycle" }
