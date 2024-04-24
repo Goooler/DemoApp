@@ -2,7 +2,7 @@
 versionName = "1.9.0"
 versionCode = "109000"
 agp = "8.3.2"
-androidX-activity = "1.8.2"
+androidX-activity = "1.9.0"
 androidX-lifecycle = "2.7.0"
 androidX-room = "2.6.1"
 chucker = "4.0.0"
@@ -30,7 +30,7 @@ kotlin-junit5 = { module = "org.jetbrains.kotlin:kotlin-test-junit5", version.re
 kotlinX-coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.0"
 kotlinX-immutable = "org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.7"
 
-androidX-compose-bom = "androidx.compose:compose-bom:2024.04.00"
+androidX-compose-bom = "androidx.compose:compose-bom:2024.04.01"
 androidX-compose-ui = { module = "androidx.compose.ui:ui" }
 androidX-compose-tooling = { module = "androidx.compose.ui:ui-tooling" }
 androidX-compose-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
@@ -39,7 +39,7 @@ androidX-compose-foundation = { module = "androidx.compose.foundation:foundation
 androidX-compose-icons-core = { module = "androidx.compose.material:material-icons-core" }
 androidX-compose-icons-extended = { module = "androidx.compose.material:material-icons-extended" }
 
-androidX-activity = { module = "androidx.activity:activity-ktx", version.ref = "androidX-activity" }
+androidX-activity = { module = "androidx.activity:activity", version.ref = "androidX-activity" }
 androidX-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidX-activity" }
 androidX-annotation = "androidx.annotation:annotation:1.7.1"
 androidX-appCompat = "androidx.appcompat:appcompat:1.6.1"
@@ -48,7 +48,7 @@ androidX-cardView = "androidx.cardview:cardview:1.0.0"
 androidX-collection = "androidx.collection:collection-ktx:1.4.0"
 androidX-constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.4"
 androidX-coordinatorLayout = "androidx.coordinatorlayout:coordinatorlayout:1.2.0"
-androidX-core = "androidx.core:core-ktx:1.12.0"
+androidX-core = "androidx.core:core-ktx:1.13.0"
 androidX-fragment = "androidx.fragment:fragment-ktx:1.6.2"
 androidX-lifecycle-service = { module = "androidx.lifecycle:lifecycle-service", version.ref = "androidX-lifecycle" }
 androidX-lifecycle-viewModel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "androidX-lifecycle" }
@@ -61,7 +61,7 @@ androidX-room-runtime = { module = "androidx.room:room-runtime", version.ref = "
 androidX-viewPager2 = "androidx.viewpager2:viewpager2:1.0.0"
 androidX-webKit = "androidx.webkit:webkit:1.10.0"
 
-square-leakCanary = "com.squareup.leakcanary:leakcanary-android:2.13"
+square-leakCanary = "com.squareup.leakcanary:leakcanary-android:2.14"
 square-moshi = { module = "com.squareup.moshi:moshi", version.ref = "square-moshi" }
 square-moshi-compiler = { module = "com.squareup.moshi:moshi-kotlin-codegen", version.ref = "square-moshi" }
 square-okHttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "square-okHttp" }
@@ -91,7 +91,7 @@ srl-header = { module = "io.github.scwang90:refresh-header-classics", version.re
 srl-kernel = { module = "io.github.scwang90:refresh-layout-kernel", version.ref = "srl" }
 utils = "com.blankj:utilcodex:1.31.1"
 ktlint = "com.pinterest.ktlint:ktlint-cli:1.2.1"
-composeRules = "io.nlopez.compose.rules:detekt:0.3.13"
+composeRules = "io.nlopez.compose.rules:detekt:0.3.17"
 
 [bundles]
 androidX-compose = [
