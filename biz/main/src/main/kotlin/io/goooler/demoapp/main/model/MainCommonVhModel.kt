@@ -4,14 +4,14 @@ import io.goooler.demoapp.adapter.rv.core.ISpanSize
 import io.goooler.demoapp.adapter.rv.diff.IDiffVhModelType
 import io.goooler.demoapp.main.R
 
-sealed class MainCommonVhModel : IDiffVhModelType, ISpanSize {
+sealed interface MainCommonVhModel : IDiffVhModelType, ISpanSize {
 
   data class Repo(
     val logoUrl: String?,
     val content: String?,
     val fullName: String,
     val shareCount: Int = 0,
-  ) : MainCommonVhModel() {
+  ) : MainCommonVhModel {
 
     override val viewType: Int = R.layout.main_common_rv_item
 
@@ -29,11 +29,11 @@ sealed class MainCommonVhModel : IDiffVhModelType, ISpanSize {
     }
   }
 
-  object Empty : MainCommonVhModel() {
+  data object Empty : MainCommonVhModel {
     override val viewType: Int = io.goooler.demoapp.common.R.layout.common_empty_layout
   }
 
-  object Error : MainCommonVhModel() {
+  data object Error : MainCommonVhModel {
     override val viewType: Int = io.goooler.demoapp.common.R.layout.common_error_layout
   }
 }
