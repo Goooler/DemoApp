@@ -11,6 +11,18 @@ import io.goooler.demoapp.main.util.bindModel
 class MainSrlRvAdapter(private val listener: OnEventListener) :
   BaseRvDiffAdapter<MainCommonVhModel>(DiffCallBack<MainCommonVhModel>().asConfig()) {
 
+  init {
+    setHasStableIds(true)
+  }
+
+  override fun getItemId(position: Int): Long {
+    return when (val item = getItem(position)) {
+      is MainCommonVhModel.Repo -> item.fullName.hashCode().toLong()
+      is MainCommonVhModel.Empty -> MainCommonVhModel.Empty.viewType.toLong()
+      is MainCommonVhModel.Error -> MainCommonVhModel.Error.viewType.toLong()
+    }
+  }
+
   override fun onCreateVHForAll(binding: ViewDataBinding) {
     binding.bindListener(listener)
   }
