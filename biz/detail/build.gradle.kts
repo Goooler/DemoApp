@@ -8,10 +8,6 @@ android {
   buildFeatures.compose = true
 }
 
-composeCompiler {
-  suppressKotlinVersionCompatibilityCheck = libs.versions.kotlin.get()
-}
-
 dependencies {
   implementation(projects.common)
 
