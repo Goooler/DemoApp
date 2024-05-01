@@ -1,14 +1,14 @@
 [versions]
 versionName = "1.9.0"
 versionCode = "109000"
-agp = "8.3.2"
+agp = "8.4.0"
 androidX-activity = "1.9.0"
 androidX-lifecycle = "2.7.0"
 androidX-room = "2.6.1"
 chucker = "4.0.0"
 coil = "2.6.0"
 glide = "4.16.0"
-kotlin = "2.0.0-RC1"
+kotlin = "2.0.0-RC2"
 square-okHttp = "4.12.0"
 square-retrofit = "2.11.0"
 square-moshi = "1.15.1"
@@ -19,7 +19,7 @@ android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
-ksp = "com.google.devtools.ksp:2.0.0-RC1-1.0.20"
+ksp = "com.google.devtools.ksp:2.0.0-RC2-1.0.20"
 napt = "com.sergei-lapin.napt:1.19"
 spotless = "com.diffplug.spotless:6.25.0"
 detekt = "io.gitlab.arturbosch.detekt:1.23.6"
@@ -91,7 +91,7 @@ srl-header = { module = "io.github.scwang90:refresh-header-classics", version.re
 srl-kernel = { module = "io.github.scwang90:refresh-layout-kernel", version.ref = "srl" }
 utils = "com.blankj:utilcodex:1.31.1"
 ktlint = "com.pinterest.ktlint:ktlint-cli:1.2.1"
-composeRules = "io.nlopez.compose.rules:detekt:0.3.17"
+composeRules = "io.nlopez.compose.rules:detekt:0.3.19"
 
 [bundles]
 androidX-compose = [
