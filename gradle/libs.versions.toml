@@ -41,7 +41,7 @@ androidX-compose-icons-extended = { module = "androidx.compose.material:material
 
 androidX-activity = { module = "androidx.activity:activity", version.ref = "androidX-activity" }
 androidX-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidX-activity" }
-androidX-annotation = "androidx.annotation:annotation:1.7.1"
+androidX-annotation = "androidx.annotation:annotation:1.8.0"
 androidX-appCompat = "androidx.appcompat:appcompat:1.6.1"
 androidX-browser = "androidx.browser:browser:1.8.0"
 androidX-cardView = "androidx.cardview:cardview:1.0.0"
