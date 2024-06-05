@@ -4,7 +4,9 @@ import android.os.Bundle
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 
-abstract class BaseFragment : Fragment(), IFragment {
+abstract class BaseFragment :
+  Fragment(),
+  IFragment {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)

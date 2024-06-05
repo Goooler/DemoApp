@@ -7,8 +7,7 @@ import io.goooler.demoapp.common.R
 import io.goooler.demoapp.common.base.binding.BaseBindingDialogFragment
 import io.goooler.demoapp.common.databinding.CommonFullScreenDialogFragmentBinding
 
-class FullScreenDialogFragment :
-  BaseBindingDialogFragment<CommonFullScreenDialogFragmentBinding>() {
+class FullScreenDialogFragment : BaseBindingDialogFragment<CommonFullScreenDialogFragmentBinding>() {
 
   override fun onResume() {
     super.onResume()

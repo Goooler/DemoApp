@@ -17,6 +17,7 @@ ij_kotlin_name_count_to_use_star_import_for_members = 999
 ij_kotlin_packages_to_use_import_on_demand = unset
 ktlint_code_style = intellij_idea
 ktlint_function_naming_ignore_when_annotated_with = Composable
+ktlint_standard_function-expression-body = disabled
 
 [*.md]
 trim_trailing_whitespace = false

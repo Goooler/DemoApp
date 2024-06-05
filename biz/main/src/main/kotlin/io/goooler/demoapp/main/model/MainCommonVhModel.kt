@@ -4,7 +4,9 @@ import io.goooler.demoapp.adapter.rv.core.ISpanSize
 import io.goooler.demoapp.adapter.rv.diff.IDiffVhModelType
 import io.goooler.demoapp.main.R
 
-sealed interface MainCommonVhModel : IDiffVhModelType, ISpanSize {
+sealed interface MainCommonVhModel :
+  IDiffVhModelType,
+  ISpanSize {
 
   data class Repo(
     val logoUrl: String?,

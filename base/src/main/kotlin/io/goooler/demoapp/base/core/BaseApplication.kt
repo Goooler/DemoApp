@@ -7,7 +7,9 @@ import android.webkit.WebView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
 
-abstract class BaseApplication : Application(), CoroutineScope by MainScope() {
+abstract class BaseApplication :
+  Application(),
+  CoroutineScope by MainScope() {
 
   override fun onCreate() {
     super.onCreate()
