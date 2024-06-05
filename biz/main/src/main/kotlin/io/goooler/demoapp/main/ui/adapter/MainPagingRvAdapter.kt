@@ -6,7 +6,9 @@ import io.goooler.demoapp.main.model.MainCommonVhModel
 import io.goooler.demoapp.main.util.bindListener
 import io.goooler.demoapp.main.util.bindModel
 
-class MainPagingRvAdapter(private val listener: OnEventListener) : BaseRvPagingAdapter<MainCommonVhModel>() {
+class MainPagingRvAdapter(
+  private val listener: OnEventListener,
+) : BaseRvPagingAdapter<MainCommonVhModel>() {
 
   override fun onCreateVHForAll(binding: ViewDataBinding) {
     binding.bindListener(listener)

@@ -8,7 +8,9 @@ import io.goooler.demoapp.main.model.MainCommonVhModel
 import io.goooler.demoapp.main.util.bindListener
 import io.goooler.demoapp.main.util.bindModel
 
-class MainSrlRvAdapter(private val listener: OnEventListener) : BaseRvDiffAdapter<MainCommonVhModel>(DiffCallBack<MainCommonVhModel>().asConfig()) {
+class MainSrlRvAdapter(
+  private val listener: OnEventListener,
+) : BaseRvDiffAdapter<MainCommonVhModel>(DiffCallBack<MainCommonVhModel>().asConfig()) {
 
   override fun onCreateVHForAll(binding: ViewDataBinding) {
     binding.bindListener(listener)
