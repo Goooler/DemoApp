@@ -8,7 +8,9 @@ import android.os.Bundle
 import android.view.KeyEvent
 import androidx.fragment.app.DialogFragment
 
-abstract class BaseDialogFragment : DialogFragment(), IFragment {
+abstract class BaseDialogFragment :
+  DialogFragment(),
+  IFragment {
 
   var onDismissListener: DialogInterface.OnDismissListener? = null
   var onCancelListener: DialogInterface.OnCancelListener? = null
