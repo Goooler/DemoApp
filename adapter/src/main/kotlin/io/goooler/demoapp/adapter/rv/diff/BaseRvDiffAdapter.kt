@@ -53,6 +53,14 @@ abstract class BaseRvDiffAdapter<M : IDiffVhModelType> :
     helper.onBindViewHolder(holder, position)
   }
 
+  override fun onBindViewHolder(
+    holder: BindingViewHolder,
+    @IntRange(from = 0) position: Int,
+    payloads: List<Any>,
+  ) {
+    helper.onBindViewHolder(holder, position, payloads)
+  }
+
   @LayoutRes
   override fun getItemViewType(@IntRange(from = 0) position: Int): Int =
     getItem(position).viewType

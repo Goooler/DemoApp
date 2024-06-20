@@ -22,12 +22,26 @@ sealed interface MainCommonVhModel :
     override fun isItemTheSame(that: IDiffVhModelType): Boolean =
       (that as? Repo)?.fullName == this.fullName
 
+    override fun getPayloads(that: IDiffVhModelType): String? = when {
+      that !is Repo -> null
+      that.logoUrl != this@Repo.logoUrl -> KEY_LOGO_URL
+      that.content != this@Repo.content -> KEY_CONTENT
+      that.shareCount != this@Repo.shareCount -> KEY_SHARE_COUNT
+      else -> null
+    }
+
     val shareCountStr: String get() = shareCount.toString()
 
     interface OnEventListener {
       fun onContentClick(fullName: String) {}
       fun onShareClick(fullName: String) {}
       fun onItemClick(item: MainCommonVhModel) {}
+    }
+
+    companion object {
+      internal const val KEY_LOGO_URL = "logoUrl"
+      internal const val KEY_CONTENT = "content"
+      internal const val KEY_SHARE_COUNT = "shareCount"
     }
   }
 

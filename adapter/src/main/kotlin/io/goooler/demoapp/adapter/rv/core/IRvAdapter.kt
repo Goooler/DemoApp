@@ -33,7 +33,7 @@ internal interface IRvAdapter<M : IVhModelType> {
   /**
    * What to do when binding the viewHolder for all.
    */
-  fun onBindVHForAll(binding: ViewDataBinding, model: M)
+  fun onBindVHForAll(binding: ViewDataBinding, model: M, payloads: List<Any>)
 
   /**
    * Create BaseViewHolder.

@@ -1,6 +1,5 @@
 package io.goooler.demoapp.adapter.rv.core
 
-import android.annotation.SuppressLint
 import android.view.ViewGroup
 import androidx.annotation.IntRange
 import androidx.annotation.LayoutRes
@@ -16,7 +15,7 @@ import kotlinx.collections.immutable.toImmutableList
  * @version 1.0.0
  * @since 1.0.0
  */
-@SuppressLint("NotifyDataSetChanged")
+@Suppress("NotifyDataSetChanged", "TooManyFunctions")
 abstract class BaseRvAdapter<M : IVhModelType> :
   RecyclerView.Adapter<BindingViewHolder>(),
   IMutableRvAdapter<M> {
@@ -38,6 +37,14 @@ abstract class BaseRvAdapter<M : IVhModelType> :
 
   override fun onBindViewHolder(holder: BindingViewHolder, @IntRange(from = 0) position: Int) {
     helper.onBindViewHolder(holder, position)
+  }
+
+  override fun onBindViewHolder(
+    holder: BindingViewHolder,
+    @IntRange(from = 0)position: Int,
+    payloads: List<Any>,
+  ) {
+    helper.onBindViewHolder(holder, position, payloads)
   }
 
   @LayoutRes

@@ -35,9 +35,9 @@ class ViewTypeDelegateManager<M : IVhModelType> {
    * @param binding ViewDataBinding
    * @param model model
    */
-  internal fun onBindVH(binding: ViewDataBinding, model: M) {
+  internal fun onBindVH(binding: ViewDataBinding, model: M, payloads: List<Any>) {
     if (ivDs.isEmpty) return
-    ivDs[model.viewType]?.onBindVH(binding, model)
+    ivDs[model.viewType]?.onBindVH(binding, model, payloads)
   }
 
   /**

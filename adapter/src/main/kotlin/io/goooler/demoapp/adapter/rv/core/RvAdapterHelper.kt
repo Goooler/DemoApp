@@ -59,11 +59,15 @@ internal class RvAdapterHelper<M : IVhModelType>(private val adapter: IRvAdapter
   /**
    * Called by RecyclerView to display the data at the specified position.
    */
-  fun onBindViewHolder(holder: BindingViewHolder, @IntRange(from = 0) position: Int) {
+  fun onBindViewHolder(
+    holder: BindingViewHolder,
+    @IntRange(from = 0) position: Int,
+    payloads: List<Any> = emptyList(),
+  ) {
     adapter[position]?.let {
       setFullSpan(holder, it)
-      adapter.onBindVHForAll(holder.binding, it)
-      ivdManager.onBindVH(holder.binding, it)
+      adapter.onBindVHForAll(holder.binding, it, payloads)
+      ivdManager.onBindVH(holder.binding, it, payloads)
       holder.binding.executePendingBindings()
     }
   }
