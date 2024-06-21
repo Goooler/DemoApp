@@ -19,7 +19,7 @@ interface IDiffVhModelType : IVhModelType {
    * @param that other model
    * @return by default, the same object is the same item.
    */
-  fun isItemTheSame(that: IDiffVhModelType): Boolean = this == that
+  fun isItemTheSame(that: IDiffVhModelType): Boolean = this === that
 
   /**
    * Whether the content is the same.
@@ -29,4 +29,6 @@ interface IDiffVhModelType : IVhModelType {
    * @return by default, checking if they are equals.
    */
   fun isContentTheSame(that: IDiffVhModelType): Boolean = this == that
+
+  fun getPayloads(that: IDiffVhModelType): Any? = null
 }

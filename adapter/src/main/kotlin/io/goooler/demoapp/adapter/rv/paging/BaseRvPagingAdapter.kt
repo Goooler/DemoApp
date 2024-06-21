@@ -52,6 +52,14 @@ abstract class BaseRvPagingAdapter<M : IDiffVhModelType>(callback: DiffCallBack<
     helper.onBindViewHolder(holder, position)
   }
 
+  override fun onBindViewHolder(
+    holder: BindingViewHolder,
+    @IntRange(from = 0) position: Int,
+    payloads: List<Any>,
+  ) {
+    helper.onBindViewHolder(holder, position, payloads)
+  }
+
   @LayoutRes
   override fun getItemViewType(@IntRange(from = 0) position: Int): Int =
     getItem(position)?.viewType ?: 0

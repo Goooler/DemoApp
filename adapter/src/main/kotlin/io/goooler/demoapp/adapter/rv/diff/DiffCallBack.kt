@@ -15,5 +15,5 @@ open class DiffCallBack<M : IDiffVhModelType> : DiffUtil.ItemCallback<M>() {
   override fun areContentsTheSame(oldItem: M, newItem: M): Boolean =
     oldItem.isContentTheSame(newItem)
 
-  override fun getChangePayload(oldItem: M, newItem: M): Any? = null
+  override fun getChangePayload(oldItem: M, newItem: M): Any? = oldItem.getPayloads(newItem)
 }

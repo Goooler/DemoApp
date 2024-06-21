@@ -33,5 +33,5 @@ interface ViewTypeDelegate<DB : ViewDataBinding, M : IVhModelType> {
    * @param binding ViewDataBinding
    * @param model model
    */
-  fun onBindVH(binding: DB, model: M)
+  fun onBindVH(binding: DB, model: M, payloads: List<Any>)
 }

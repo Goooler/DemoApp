@@ -14,7 +14,11 @@ class MainPagingRvAdapter(
     binding.bindListener(listener)
   }
 
-  override fun onBindVHForAll(binding: ViewDataBinding, model: MainCommonVhModel) {
+  override fun onBindVHForAll(
+    binding: ViewDataBinding,
+    model: MainCommonVhModel,
+    payloads: List<Any>,
+  ) {
     binding.bindModel(model)
   }
 
