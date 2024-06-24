@@ -27,14 +27,6 @@ internal interface IMutableRvAdapterDelegate<M : IVhModelType, VH : BindingViewH
   )
 
   fun getItemViewType(@IntRange(from = 0) position: Int): Int
-
-  fun transform(original: List<M>): List<M>
-
-  fun refreshItems(items: List<M>, notify: (Int) -> Unit)
-
-  fun removeItem(index: Int, notify: (Int) -> Unit)
-
-  fun removeItem(item: M, notify: (Int) -> Unit)
 }
 
 /**
@@ -125,7 +117,7 @@ internal class RvAdapterDelegate<M : IVhModelType> : IMutableRvAdapterDelegate<M
   /**
    * Compare the list to find the same items and refresh them.
    */
-  override fun refreshItems(items: List<M>, notify: (Int) -> Unit) {
+  fun refreshItems(items: List<M>, notify: (Int) -> Unit) {
     transform(items).forEach {
       if (it in _list) {
         notify(_list.indexOf(it))
@@ -133,12 +125,12 @@ internal class RvAdapterDelegate<M : IVhModelType> : IMutableRvAdapterDelegate<M
     }
   }
 
-  override fun removeItem(index: Int, notify: (Int) -> Unit) {
+  fun removeItem(index: Int, notify: (Int) -> Unit) {
     _list.removeAt(index)
     notify(index)
   }
 
-  override fun removeItem(item: M, notify: (Int) -> Unit) {
+  fun removeItem(item: M, notify: (Int) -> Unit) {
     _list.indexOf(item).takeIf { it != -1 }?.let {
       removeItem(it, notify)
     }
@@ -147,7 +139,7 @@ internal class RvAdapterDelegate<M : IVhModelType> : IMutableRvAdapterDelegate<M
   /**
    * Transform data list. Always return a new list.
    */
-  override fun transform(original: List<M>): List<M> {
+  fun transform(original: List<M>): List<M> {
     val result = mutableListOf<M>()
     original.forEach { findLeaf(it, result) }
     return result
