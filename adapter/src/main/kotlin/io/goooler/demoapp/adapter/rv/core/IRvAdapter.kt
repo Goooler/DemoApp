@@ -2,7 +2,6 @@ package io.goooler.demoapp.adapter.rv.core
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.annotation.IntRange
 import androidx.annotation.LayoutRes
 import androidx.databinding.BindingAdapter
 import androidx.databinding.DataBindingUtil
@@ -56,7 +55,7 @@ internal interface IRvAdapter<M : IVhModelType> {
   /**
    * Get item by position.
    */
-  operator fun get(@IntRange(from = 0) position: Int): M?
+  operator fun get(position: Int): M?
 }
 
 internal interface IMutableRvAdapter<M : IVhModelType> : IRvAdapter<M> {
@@ -71,7 +70,7 @@ internal interface IMutableRvAdapter<M : IVhModelType> : IRvAdapter<M> {
    */
   fun refreshItems(items: List<M>)
 
-  fun removeItem(@IntRange(from = 0) index: Int)
+  fun removeItem(index: Int)
 
   fun removeItem(item: M)
 }

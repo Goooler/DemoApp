@@ -5,7 +5,6 @@ package io.goooler.demoapp.obsolete.util
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.widget.ImageView
-import androidx.annotation.IntRange
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -20,7 +19,7 @@ object GlideImageLoader {
     url: String?,
     placeholderDrawable: Drawable? = null,
     errorDrawable: Drawable? = null,
-    @IntRange(from = 0) cornerRadius: Int = 0,
+    cornerRadius: Int = 0,
     useCache: Boolean = true,
   ) = imageView.loadBase(url, placeholderDrawable, errorDrawable, useCache) {
     if (cornerRadius > 0) transform(RoundedCorners(cornerRadius))
@@ -41,7 +40,7 @@ object GlideImageLoader {
     url: String?,
     placeholderDrawable: Drawable? = null,
     errorDrawable: Drawable? = null,
-    @IntRange(from = 0) cornerRadius: Int = 0,
+    cornerRadius: Int = 0,
     useCache: Boolean = true,
   ) = imageView.loadBase(url, placeholderDrawable, errorDrawable, useCache) {
     if (cornerRadius > 0) transform(CenterCrop(), RoundedCorners(cornerRadius)) else centerCrop()
