@@ -1,4 +1,4 @@
-package io.goooler.demoapp.adapter.rv.diff
+package io.goooler.demoapp.adapter.rv.core
 
 import android.view.ViewGroup
 import androidx.annotation.IntRange
@@ -7,13 +7,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import io.goooler.demoapp.adapter.rv.core.BindingViewHolder
-import io.goooler.demoapp.adapter.rv.core.IRvAdapter
-import io.goooler.demoapp.adapter.rv.core.ISpanSize
 import io.goooler.demoapp.adapter.rv.core.ISpanSize.Companion.SPAN_SIZE_FULL
-import io.goooler.demoapp.adapter.rv.core.IVhModelType
-import io.goooler.demoapp.adapter.rv.core.IVhModelWrapper
-import io.goooler.demoapp.adapter.rv.core.ViewTypeDelegateManager
 import kotlinx.collections.immutable.toImmutableList
 
 internal interface IMutableRvAdapterDelegate<M : IVhModelType, VH : BindingViewHolder> : IRvAdapter<M> {

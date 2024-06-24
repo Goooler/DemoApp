@@ -5,6 +5,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import io.goooler.demoapp.adapter.rv.core.BindingViewHolder
 import io.goooler.demoapp.adapter.rv.core.IMutableRvAdapter
+import io.goooler.demoapp.adapter.rv.core.IMutableRvAdapterDelegate
+import io.goooler.demoapp.adapter.rv.core.RvAdapterDelegate
 
 /**
  * Created on 2020/10/22.
