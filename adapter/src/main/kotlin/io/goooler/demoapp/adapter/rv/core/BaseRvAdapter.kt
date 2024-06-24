@@ -16,7 +16,7 @@ abstract class BaseRvAdapter<M : IVhModelType> private constructor(
   private val delegate: RvAdapterDelegate<M>,
 ) : RecyclerView.Adapter<BindingViewHolder>(),
   IMutableRvAdapter<M>,
-  IMutableRvAdapterDelegate<M, BindingViewHolder> by delegate {
+  IRvAdapterDelegate<M, BindingViewHolder> by delegate {
 
   constructor() : this(RvAdapterDelegate()) {
     @Suppress("LeakingThis")

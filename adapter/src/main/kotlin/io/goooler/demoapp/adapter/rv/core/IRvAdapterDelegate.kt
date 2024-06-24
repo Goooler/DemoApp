@@ -9,16 +9,31 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import io.goooler.demoapp.adapter.rv.core.ISpanSize.Companion.SPAN_SIZE_FULL
 import kotlinx.collections.immutable.toImmutableList
 
-internal interface IMutableRvAdapterDelegate<M : IVhModelType, VH : BindingViewHolder> : IRvAdapter<M> {
+internal interface IRvAdapterDelegate<M : IVhModelType, VH : BindingViewHolder> : IRvAdapter<M> {
 
+  /**
+   * Keep the same signature as [RecyclerView.Adapter.onAttachedToRecyclerView].
+   */
   fun onAttachedToRecyclerView(recyclerView: RecyclerView)
 
+  /**
+   * Keep the same signature as [RecyclerView.Adapter.onDetachedFromRecyclerView].
+   */
   fun onDetachedFromRecyclerView(recyclerView: RecyclerView)
 
+  /**
+   * Keep the same signature as [RecyclerView.Adapter.onCreateViewHolder].
+   */
   fun onCreateViewHolder(parent: ViewGroup, @LayoutRes viewType: Int): VH
 
+  /**
+   * Keep the same signature as [RecyclerView.Adapter.onBindViewHolder].
+   */
   fun onBindViewHolder(holder: BindingViewHolder, position: Int)
 
+  /**
+   * Keep the same signature as [RecyclerView.Adapter.onBindViewHolder].
+   */
   fun onBindViewHolder(
     holder: BindingViewHolder,
     position: Int,
@@ -38,12 +53,12 @@ internal interface IMutableRvAdapterDelegate<M : IVhModelType, VH : BindingViewH
  * @since 1.0.0
  */
 @Suppress("TooManyFunctions")
-internal class RvAdapterDelegate<M : IVhModelType> : IMutableRvAdapterDelegate<M, BindingViewHolder> {
+internal class RvAdapterDelegate<M : IVhModelType> : IRvAdapterDelegate<M, BindingViewHolder> {
 
   private val ivdManager = ViewTypeDelegateManager<M>()
   private val _list = mutableListOf<M>()
 
-  internal lateinit var adapter: IRvAdapter<M>
+  lateinit var adapter: IRvAdapter<M>
 
   override var list: List<M>
     get() = _list.toImmutableList()
