@@ -77,7 +77,9 @@ internal class RvAdapterDelegate<M : IVhModelType> : IMutableRvAdapterDelegate<M
     recyclerView.adapter = null
   }
 
-  override fun get(position: Int): M = _list[position]
+  override fun get(position: Int): M = _list.getOrElse(position) {
+    adapter[position] ?: error("No such a element in $position in $adapter")
+  }
 
   @LayoutRes
   override fun getItemViewType(position: Int): Int = get(position).viewType
