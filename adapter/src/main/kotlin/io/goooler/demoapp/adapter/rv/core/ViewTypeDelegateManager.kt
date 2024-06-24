@@ -16,7 +16,7 @@ import androidx.databinding.ViewDataBinding
  */
 class ViewTypeDelegateManager<M : IVhModelType> {
 
-  private val ivDs = SparseArrayCompat<ViewTypeDelegate<ViewDataBinding, M>>()
+  private val ivDs = SparseArrayCompat<ViewTypeDelegate<M>>()
 
   /**
    * When creating viewHolder. if VTD.getViewType() == viewType executes VTD.onCreateVH().
@@ -46,8 +46,8 @@ class ViewTypeDelegateManager<M : IVhModelType> {
    * @param ivd VTD
    */
   @Suppress("UNCHECKED_CAST")
-  fun <X : ViewDataBinding, Y : M> add(ivd: ViewTypeDelegate<X, Y>) {
-    ivDs[ivd.viewType] = ivd as ViewTypeDelegate<ViewDataBinding, M>
+  fun <T : M> add(ivd: ViewTypeDelegate<T>) {
+    ivDs[ivd.viewType] = ivd as ViewTypeDelegate<M>
   }
 
   /**

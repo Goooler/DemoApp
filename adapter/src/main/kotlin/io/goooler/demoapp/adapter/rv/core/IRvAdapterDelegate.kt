@@ -121,11 +121,11 @@ internal class RvAdapterDelegate<M : IVhModelType> : IRvAdapterDelegate<M, Bindi
   }
 
   override fun onCreateVHForAll(binding: ViewDataBinding) {
-    error("Should override this in your adapter.")
+    error("Shouldn't call this in delegate.")
   }
 
   override fun onBindVHForAll(binding: ViewDataBinding, model: M, payloads: List<Any>) {
-    error("Should override this in your adapter.")
+    error("Shouldn't call this in delegate.")
   }
 
   /**

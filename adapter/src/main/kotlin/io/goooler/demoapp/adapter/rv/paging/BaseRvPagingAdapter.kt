@@ -1,6 +1,7 @@
 package io.goooler.demoapp.adapter.rv.paging
 
 import androidx.annotation.LayoutRes
+import androidx.databinding.ViewDataBinding
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.paging.PagingDataAdapter
@@ -8,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import io.goooler.demoapp.adapter.rv.core.BindingViewHolder
 import io.goooler.demoapp.adapter.rv.core.IRvAdapter
 import io.goooler.demoapp.adapter.rv.core.IRvAdapterDelegate
+import io.goooler.demoapp.adapter.rv.core.IRvBindingAdapter
 import io.goooler.demoapp.adapter.rv.core.RvAdapterDelegate
 import io.goooler.demoapp.adapter.rv.diff.DiffCallBack
 import io.goooler.demoapp.adapter.rv.diff.IDiffVhModelType
@@ -23,6 +25,7 @@ abstract class BaseRvPagingAdapter<M : IDiffVhModelType> private constructor(
   callback: DiffCallBack<M>,
   private val delegate: RvAdapterDelegate<M>,
 ) : PagingDataAdapter<M, BindingViewHolder>(callback),
+  IRvBindingAdapter<M>,
   IRvAdapter<M>,
   IRvAdapterDelegate<M, BindingViewHolder> by delegate {
 
@@ -52,6 +55,14 @@ abstract class BaseRvPagingAdapter<M : IDiffVhModelType> private constructor(
     getItem(position)?.viewType ?: 0
 
   override operator fun get(position: Int): M? = getItem(position)
+
+  override fun onCreateVHForAll(binding: ViewDataBinding) {
+    onCreateVH(binding)
+  }
+
+  override fun onBindVHForAll(binding: ViewDataBinding, model: M, payloads: List<Any>) {
+    onBindVH(binding, model, payloads)
+  }
 
   private val loadStateListener: (CombinedLoadStates) -> Unit = {
     when {

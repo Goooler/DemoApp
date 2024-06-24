@@ -1,7 +1,6 @@
 package io.goooler.demoapp.adapter.rv.core
 
 import androidx.annotation.LayoutRes
-import androidx.databinding.ViewDataBinding
 
 /**
  * Created on 2020/10/21.
@@ -12,26 +11,11 @@ import androidx.databinding.ViewDataBinding
  * @version 1.0.0
  * @since 1.0.0
  */
-interface ViewTypeDelegate<DB : ViewDataBinding, M : IVhModelType> {
+interface ViewTypeDelegate<M : IVhModelType> : IRvBindingAdapter<M> {
 
   /**
    * The delegate takes effect when this.getViewType() == model.getViewType().
    */
   @get:LayoutRes
   val viewType: Int
-
-  /**
-   * What to do when creating the viewHolder.
-   *
-   * @param binding ViewDataBinding
-   */
-  fun onCreateVH(binding: DB)
-
-  /**
-   * What to do when binding the viewHolder.
-   *
-   * @param binding ViewDataBinding
-   * @param model model
-   */
-  fun onBindVH(binding: DB, model: M, payloads: List<Any>)
 }

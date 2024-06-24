@@ -14,11 +14,11 @@ class MainSrlRvAdapter(
   private val listener: OnEventListener,
 ) : BaseRvDiffAdapter<MainCommonVhModel>(DiffCallBack<MainCommonVhModel>().asConfig()) {
 
-  override fun onCreateVHForAll(binding: ViewDataBinding) {
+  override fun onCreateVH(binding: ViewDataBinding) {
     binding.bindListener(listener)
   }
 
-  override fun onBindVHForAll(
+  override fun onBindVH(
     binding: ViewDataBinding,
     model: MainCommonVhModel,
     payloads: List<Any>,

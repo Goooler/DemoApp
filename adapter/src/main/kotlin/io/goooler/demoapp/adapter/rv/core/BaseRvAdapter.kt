@@ -1,5 +1,6 @@
 package io.goooler.demoapp.adapter.rv.core
 
+import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 
 /**
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 abstract class BaseRvAdapter<M : IVhModelType> private constructor(
   private val delegate: RvAdapterDelegate<M>,
 ) : RecyclerView.Adapter<BindingViewHolder>(),
+  IRvBindingAdapter<M>,
   IMutableRvAdapter<M>,
   IRvAdapterDelegate<M, BindingViewHolder> by delegate {
 
@@ -30,6 +32,14 @@ abstract class BaseRvAdapter<M : IVhModelType> private constructor(
       @Suppress("NotifyDataSetChanged")
       notifyDataSetChanged()
     }
+
+  override fun onCreateVHForAll(binding: ViewDataBinding) {
+    onCreateVH(binding)
+  }
+
+  override fun onBindVHForAll(binding: ViewDataBinding, model: M, payloads: List<Any>) {
+    onBindVH(binding, model, payloads)
+  }
 
   override fun refreshItems(items: List<M>) {
     delegate.refreshItems(items, ::notifyItemChanged)
