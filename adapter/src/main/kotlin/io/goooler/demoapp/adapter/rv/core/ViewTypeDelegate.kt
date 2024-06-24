@@ -1,7 +1,5 @@
 package io.goooler.demoapp.adapter.rv.core
 
-import androidx.annotation.LayoutRes
-
 /**
  * Created on 2020/10/21.
  *
@@ -11,11 +9,6 @@ import androidx.annotation.LayoutRes
  * @version 1.0.0
  * @since 1.0.0
  */
-interface ViewTypeDelegate<M : IVhModelType> : IRvBinding<M> {
-
-  /**
-   * The delegate takes effect when this.getViewType() == model.getViewType().
-   */
-  @get:LayoutRes
-  val viewType: Int
-}
+interface ViewTypeDelegate<M : IVhModelType> :
+  IVhModelType,
+  IRvBinding<M>
