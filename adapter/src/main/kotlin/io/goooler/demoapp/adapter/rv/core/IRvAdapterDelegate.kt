@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import io.goooler.demoapp.adapter.rv.core.ISpanSize.Companion.SPAN_SIZE_FULL
-import kotlinx.collections.immutable.toImmutableList
 
 /**
  * Keep the same signature as [RecyclerView.Adapter].
@@ -38,7 +37,7 @@ internal interface IRvAdapterDelegate<M : IVhModelType, VH : BindingViewHolder> 
     lateinit var adapter: AP
 
     override var list: List<M>
-      get() = _list.toImmutableList()
+      get() = _list
       set(value) {
         _list.clear()
         _list.addAll(transform(value))
