@@ -19,14 +19,14 @@ import kotlinx.collections.immutable.toPersistentList
  * @since 1.0.0
  */
 abstract class BaseRvDiffAdapter<M : IDiffVhModelType> private constructor(
-  callback: AsyncDifferConfig<M>,
+  asyncDifferConfig: AsyncDifferConfig<M>,
   private val delegate: IRvAdapterDelegate.Impl<M, BaseRvDiffAdapter<M>>,
-) : ListAdapter<M, BindingViewHolder>(callback),
+) : ListAdapter<M, BindingViewHolder>(asyncDifferConfig),
   IRvBinding<M>,
   IMutableRvAdapter<M>,
   IRvAdapterDelegate<M, BindingViewHolder> by delegate {
 
-  constructor(callback: DiffCallBack<M> = DiffCallBack()) : this(
+  constructor(callback: DiffCallback<M> = DiffCallback()) : this(
     AsyncDifferConfig.Builder(callback).build(),
     IRvAdapterDelegate.Impl(),
   ) {
