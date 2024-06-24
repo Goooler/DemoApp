@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 abstract class BaseRvAdapter<M : IVhModelType> private constructor(
   private val delegate: RvAdapterDelegate<M>,
 ) : RecyclerView.Adapter<BindingViewHolder>(),
-  IRvBindingAdapter<M>,
+  IRvBinding<M>,
   IMutableRvAdapter<M>,
   IRvAdapterDelegate<M, BindingViewHolder> by delegate {
 

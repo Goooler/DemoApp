@@ -11,7 +11,7 @@ import androidx.annotation.LayoutRes
  * @version 1.0.0
  * @since 1.0.0
  */
-interface ViewTypeDelegate<M : IVhModelType> : IRvBindingAdapter<M> {
+interface ViewTypeDelegate<M : IVhModelType> : IRvBinding<M> {
 
   /**
    * The delegate takes effect when this.getViewType() == model.getViewType().

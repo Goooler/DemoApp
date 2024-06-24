@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import io.goooler.demoapp.adapter.rv.core.BindingViewHolder
 import io.goooler.demoapp.adapter.rv.core.IMutableRvAdapter
 import io.goooler.demoapp.adapter.rv.core.IRvAdapterDelegate
-import io.goooler.demoapp.adapter.rv.core.IRvBindingAdapter
+import io.goooler.demoapp.adapter.rv.core.IRvBinding
 import io.goooler.demoapp.adapter.rv.core.RvAdapterDelegate
 
 /**
@@ -23,7 +23,7 @@ abstract class BaseRvDiffAdapter<M : IDiffVhModelType> private constructor(
   callback: AsyncDifferConfig<M>,
   private val delegate: RvAdapterDelegate<M>,
 ) : ListAdapter<M, BindingViewHolder>(callback),
-  IRvBindingAdapter<M>,
+  IRvBinding<M>,
   IMutableRvAdapter<M>,
   IRvAdapterDelegate<M, BindingViewHolder> by delegate {
 

@@ -2,7 +2,7 @@ package io.goooler.demoapp.adapter.rv.core
 
 import androidx.databinding.ViewDataBinding
 
-interface IRvBindingAdapter<M : IVhModelType> {
+interface IRvBinding<M : IVhModelType> {
 
   /**
    * What to do when creating the viewHolder.

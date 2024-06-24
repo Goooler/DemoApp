@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import io.goooler.demoapp.adapter.rv.core.BindingViewHolder
 import io.goooler.demoapp.adapter.rv.core.IRvAdapter
 import io.goooler.demoapp.adapter.rv.core.IRvAdapterDelegate
-import io.goooler.demoapp.adapter.rv.core.IRvBindingAdapter
+import io.goooler.demoapp.adapter.rv.core.IRvBinding
 import io.goooler.demoapp.adapter.rv.core.RvAdapterDelegate
 import io.goooler.demoapp.adapter.rv.diff.DiffCallBack
 import io.goooler.demoapp.adapter.rv.diff.IDiffVhModelType
@@ -25,7 +25,7 @@ abstract class BaseRvPagingAdapter<M : IDiffVhModelType> private constructor(
   callback: DiffCallBack<M>,
   private val delegate: RvAdapterDelegate<M>,
 ) : PagingDataAdapter<M, BindingViewHolder>(callback),
-  IRvBindingAdapter<M>,
+  IRvBinding<M>,
   IRvAdapter<M>,
   IRvAdapterDelegate<M, BindingViewHolder> by delegate {
 
