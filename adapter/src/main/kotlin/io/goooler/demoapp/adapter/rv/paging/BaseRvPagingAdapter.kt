@@ -9,7 +9,6 @@ import io.goooler.demoapp.adapter.rv.core.BindingViewHolder
 import io.goooler.demoapp.adapter.rv.core.IRvAdapter
 import io.goooler.demoapp.adapter.rv.core.IRvAdapterDelegate
 import io.goooler.demoapp.adapter.rv.core.IRvBinding
-import io.goooler.demoapp.adapter.rv.core.RvAdapterDelegate
 import io.goooler.demoapp.adapter.rv.diff.DiffCallBack
 import io.goooler.demoapp.adapter.rv.diff.IDiffVhModelType
 
@@ -22,7 +21,7 @@ import io.goooler.demoapp.adapter.rv.diff.IDiffVhModelType
  */
 abstract class BaseRvPagingAdapter<M : IDiffVhModelType> private constructor(
   callback: DiffCallBack<M>,
-  private val delegate: RvAdapterDelegate<M, BaseRvPagingAdapter<M>>,
+  private val delegate: IRvAdapterDelegate.Impl<M, BaseRvPagingAdapter<M>>,
 ) : PagingDataAdapter<M, BindingViewHolder>(callback),
   IRvBinding<M>,
   IRvAdapter<M>,
@@ -32,7 +31,7 @@ abstract class BaseRvPagingAdapter<M : IDiffVhModelType> private constructor(
 
   override val list: List<M> get() = snapshot().items
 
-  constructor(callback: DiffCallBack<M> = DiffCallBack()) : this(callback, RvAdapterDelegate()) {
+  constructor(callback: DiffCallBack<M> = DiffCallBack()) : this(callback, IRvAdapterDelegate.Impl()) {
     @Suppress("LeakingThis")
     delegate.adapter = this
   }

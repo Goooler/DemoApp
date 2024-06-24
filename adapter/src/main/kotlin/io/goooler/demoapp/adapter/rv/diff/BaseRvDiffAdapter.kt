@@ -7,7 +7,6 @@ import io.goooler.demoapp.adapter.rv.core.BindingViewHolder
 import io.goooler.demoapp.adapter.rv.core.IMutableRvAdapter
 import io.goooler.demoapp.adapter.rv.core.IRvAdapterDelegate
 import io.goooler.demoapp.adapter.rv.core.IRvBinding
-import io.goooler.demoapp.adapter.rv.core.RvAdapterDelegate
 
 /**
  * Created on 2020/10/22.
@@ -20,7 +19,7 @@ import io.goooler.demoapp.adapter.rv.core.RvAdapterDelegate
  */
 abstract class BaseRvDiffAdapter<M : IDiffVhModelType> private constructor(
   callback: AsyncDifferConfig<M>,
-  private val delegate: RvAdapterDelegate<M, BaseRvDiffAdapter<M>>,
+  private val delegate: IRvAdapterDelegate.Impl<M, BaseRvDiffAdapter<M>>,
 ) : ListAdapter<M, BindingViewHolder>(callback),
   IRvBinding<M>,
   IMutableRvAdapter<M>,
@@ -28,13 +27,13 @@ abstract class BaseRvDiffAdapter<M : IDiffVhModelType> private constructor(
 
   constructor(callback: DiffCallBack<M> = DiffCallBack()) : this(
     AsyncDifferConfig.Builder(callback).build(),
-    RvAdapterDelegate(),
+    IRvAdapterDelegate.Impl(),
   ) {
     @Suppress("LeakingThis")
     delegate.adapter = this
   }
 
-  constructor(config: AsyncDifferConfig<M>) : this(config, RvAdapterDelegate()) {
+  constructor(config: AsyncDifferConfig<M>) : this(config, IRvAdapterDelegate.Impl()) {
     @Suppress("LeakingThis")
     delegate.adapter = this
   }

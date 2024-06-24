@@ -12,13 +12,13 @@ import androidx.recyclerview.widget.RecyclerView
  * @since 1.0.0
  */
 abstract class BaseRvAdapter<M : IVhModelType> private constructor(
-  private val delegate: RvAdapterDelegate<M, BaseRvAdapter<M>>,
+  private val delegate: IRvAdapterDelegate.Impl<M, BaseRvAdapter<M>>,
 ) : RecyclerView.Adapter<BindingViewHolder>(),
   IRvBinding<M>,
   IMutableRvAdapter<M>,
   IRvAdapterDelegate<M, BindingViewHolder> by delegate {
 
-  constructor() : this(RvAdapterDelegate()) {
+  constructor() : this(IRvAdapterDelegate.Impl()) {
     @Suppress("LeakingThis")
     delegate.adapter = this
   }
