@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
  * @version 1.0.0
  * @since 1.0.0
  */
-@Suppress("TooManyFunctions")
 abstract class BaseRvAdapter<M : IVhModelType> private constructor(
   private val delegate: RvAdapterDelegate<M, BaseRvAdapter<M>>,
 ) : RecyclerView.Adapter<BindingViewHolder>(),
