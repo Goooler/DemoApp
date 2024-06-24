@@ -29,12 +29,12 @@ abstract class BaseRvDiffAdapter<M : IDiffVhModelType> private constructor(
     RvAdapterDelegate(),
   ) {
     @Suppress("LeakingThis")
-    (delegate as RvAdapterDelegate).adapter = this
+    delegate.adapter = this
   }
 
   constructor(config: AsyncDifferConfig<M>) : this(config, RvAdapterDelegate()) {
     @Suppress("LeakingThis")
-    (delegate as RvAdapterDelegate).adapter = this
+    delegate.adapter = this
   }
 
   override var list: List<M>
