@@ -1,7 +1,6 @@
 package io.goooler.demoapp.adapter.rv.core
 
 import android.view.ViewGroup
-import androidx.annotation.IntRange
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.collections.immutable.toImmutableList
@@ -35,25 +34,25 @@ abstract class BaseRvAdapter<M : IVhModelType> :
   override fun onCreateViewHolder(parent: ViewGroup, @LayoutRes viewType: Int): BindingViewHolder =
     helper.onCreateViewHolder(parent, viewType)
 
-  override fun onBindViewHolder(holder: BindingViewHolder, @IntRange(from = 0) position: Int) {
+  override fun onBindViewHolder(holder: BindingViewHolder, position: Int) {
     helper.onBindViewHolder(holder, position)
   }
 
   override fun onBindViewHolder(
     holder: BindingViewHolder,
-    @IntRange(from = 0)position: Int,
+    position: Int,
     payloads: List<Any>,
   ) {
     helper.onBindViewHolder(holder, position, payloads)
   }
 
   @LayoutRes
-  override fun getItemViewType(@IntRange(from = 0) position: Int): Int =
+  override fun getItemViewType(position: Int): Int =
     helper.list[position].viewType
 
   override fun getItemCount(): Int = helper.list.size
 
-  override operator fun get(@IntRange(from = 0) position: Int): M = helper.list[position]
+  override operator fun get(position: Int): M = helper.list[position]
 
   override var list: List<M>
     get() = helper.list.toImmutableList()

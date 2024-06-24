@@ -1,6 +1,5 @@
 package io.goooler.demoapp.adapter.rv.core
 
-import androidx.annotation.IntRange
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 
@@ -39,8 +38,8 @@ class ItemTouchHelperCallback(
 
   interface ItemChangeListener {
 
-    fun onItemMove(@IntRange(from = 0) fromPosition: Int, @IntRange(from = 0) toPosition: Int)
+    fun onItemMove(fromPosition: Int, toPosition: Int)
 
-    fun onItemDismiss(@IntRange(from = 0) position: Int)
+    fun onItemDismiss(position: Int)
   }
 }

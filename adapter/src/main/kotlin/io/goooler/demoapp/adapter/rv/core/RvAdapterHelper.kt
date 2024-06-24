@@ -1,7 +1,6 @@
 package io.goooler.demoapp.adapter.rv.core
 
 import android.view.ViewGroup
-import androidx.annotation.IntRange
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -61,7 +60,7 @@ internal class RvAdapterHelper<M : IVhModelType>(private val adapter: IRvAdapter
    */
   fun onBindViewHolder(
     holder: BindingViewHolder,
-    @IntRange(from = 0) position: Int,
+    position: Int,
     payloads: List<Any> = emptyList(),
   ) {
     adapter[position]?.let {

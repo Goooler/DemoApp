@@ -7,7 +7,6 @@ import android.webkit.ValueCallback
 import android.webkit.WebChromeClient
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.annotation.IntRange
 import io.goooler.demoapp.base.util.extension2MimeType
 import io.goooler.demoapp.base.util.isNetworkUrl
 import io.goooler.demoapp.base.util.putArguments
@@ -97,7 +96,7 @@ class WebFragment : BaseBindingFragment<WebFragmentBinding>() {
 
   interface OnEventListener {
     fun onReceivedTitle(title: String)
-    fun onProgressChanged(@IntRange(from = 0) i: Int)
+    fun onProgressChanged(i: Int)
   }
 
   companion object {

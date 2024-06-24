@@ -1,7 +1,6 @@
 package io.goooler.demoapp.adapter.rv.diff
 
 import android.view.ViewGroup
-import androidx.annotation.IntRange
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.AsyncDifferConfig
 import androidx.recyclerview.widget.DiffUtil
@@ -48,24 +47,24 @@ abstract class BaseRvDiffAdapter<M : IDiffVhModelType> :
 
   override fun onBindViewHolder(
     holder: BindingViewHolder,
-    @IntRange(from = 0) position: Int,
+    position: Int,
   ) {
     helper.onBindViewHolder(holder, position)
   }
 
   override fun onBindViewHolder(
     holder: BindingViewHolder,
-    @IntRange(from = 0) position: Int,
+    position: Int,
     payloads: List<Any>,
   ) {
     helper.onBindViewHolder(holder, position, payloads)
   }
 
   @LayoutRes
-  override fun getItemViewType(@IntRange(from = 0) position: Int): Int =
+  override fun getItemViewType(position: Int): Int =
     getItem(position).viewType
 
-  override operator fun get(@IntRange(from = 0) position: Int): M = getItem(position)
+  override operator fun get(position: Int): M = getItem(position)
 
   override var list: List<M>
     get() = helper.list.toImmutableList()
