@@ -1,6 +1,5 @@
 package io.goooler.demoapp.adapter.rv.paging
 
-import androidx.annotation.IntRange
 import androidx.annotation.LayoutRes
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
@@ -49,10 +48,10 @@ abstract class BaseRvPagingAdapter<M : IDiffVhModelType> private constructor(
   }
 
   @LayoutRes
-  override fun getItemViewType(@IntRange(from = 0) position: Int): Int =
+  override fun getItemViewType(position: Int): Int =
     getItem(position)?.viewType ?: 0
 
-  override operator fun get(@IntRange(from = 0) position: Int): M? = getItem(position)
+  override operator fun get(position: Int): M? = getItem(position)
 
   private val loadStateListener: (CombinedLoadStates) -> Unit = {
     when {

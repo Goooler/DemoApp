@@ -1,7 +1,6 @@
 package io.goooler.demoapp.adapter.rv.core
 
 import android.view.ViewGroup
-import androidx.annotation.IntRange
 import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.GridLayoutManager
@@ -18,15 +17,15 @@ internal interface IMutableRvAdapterDelegate<M : IVhModelType, VH : BindingViewH
 
   fun onCreateViewHolder(parent: ViewGroup, @LayoutRes viewType: Int): VH
 
-  fun onBindViewHolder(holder: BindingViewHolder, @IntRange(from = 0) position: Int)
+  fun onBindViewHolder(holder: BindingViewHolder, position: Int)
 
   fun onBindViewHolder(
     holder: BindingViewHolder,
-    @IntRange(from = 0) position: Int,
+    position: Int,
     payloads: List<Any>,
   )
 
-  fun getItemViewType(@IntRange(from = 0) position: Int): Int
+  fun getItemViewType(position: Int): Int
 }
 
 /**
@@ -95,7 +94,7 @@ internal class RvAdapterDelegate<M : IVhModelType> : IMutableRvAdapterDelegate<M
    */
   override fun onBindViewHolder(
     holder: BindingViewHolder,
-    @IntRange(from = 0) position: Int,
+    position: Int,
     payloads: List<Any>,
   ) {
     get(position).let {
