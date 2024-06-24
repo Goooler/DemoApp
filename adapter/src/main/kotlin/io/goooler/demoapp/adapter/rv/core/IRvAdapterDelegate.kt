@@ -94,7 +94,7 @@ internal interface IRvAdapterDelegate<M : IVhModelType, VH : BindingViewHolder> 
     /**
      * Compare the list to find the same items and refresh them.
      */
-    fun refreshItems(items: List<M>, notify: (Int) -> Unit) {
+    inline fun refreshItems(items: List<M>, notify: (Int) -> Unit) {
       transform(items).forEach {
         if (it in _list) {
           notify(_list.indexOf(it))
@@ -102,12 +102,12 @@ internal interface IRvAdapterDelegate<M : IVhModelType, VH : BindingViewHolder> 
       }
     }
 
-    fun removeItem(index: Int, notify: (Int) -> Unit) {
+    inline fun removeItem(index: Int, notify: (Int) -> Unit) {
       _list.removeAt(index)
       notify(index)
     }
 
-    fun removeItem(item: M, notify: (Int) -> Unit) {
+    inline fun removeItem(item: M, notify: (Int) -> Unit) {
       _list.indexOf(item).takeIf { it != -1 }?.let {
         removeItem(it, notify)
       }
