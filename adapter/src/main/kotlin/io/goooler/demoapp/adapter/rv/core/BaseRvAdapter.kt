@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
  * @version 1.0.0
  * @since 1.0.0
  */
-@Suppress("NotifyDataSetChanged", "TooManyFunctions")
+@Suppress("TooManyFunctions")
 abstract class BaseRvAdapter<M : IVhModelType> private constructor(
   private val delegate: RvAdapterDelegate<M>,
 ) : RecyclerView.Adapter<BindingViewHolder>(),
@@ -27,6 +27,7 @@ abstract class BaseRvAdapter<M : IVhModelType> private constructor(
     get() = delegate.list
     set(value) {
       delegate.list = value
+      @Suppress("NotifyDataSetChanged")
       notifyDataSetChanged()
     }
 
