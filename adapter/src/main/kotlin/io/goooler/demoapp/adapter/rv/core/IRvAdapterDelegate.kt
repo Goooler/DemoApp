@@ -54,7 +54,7 @@ internal interface IRvAdapterDelegate<M : IVhModelType, VH : BindingViewHolder> 
     }
 
     override fun get(position: Int): M = _list.getOrElse(position) {
-      adapter[position] ?: error("No such a element in $position in $adapter")
+      adapter[position] ?: error("No such a element in position $position in adapter $adapter.")
     }
 
     @LayoutRes
