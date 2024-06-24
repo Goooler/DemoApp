@@ -115,11 +115,11 @@ internal class RvAdapterDelegate<M : IVhModelType> : IMutableRvAdapterDelegate<M
   }
 
   override fun onCreateVHForAll(binding: ViewDataBinding) {
-    TODO("Not yet implemented")
+    error("Shouldn't call this in delegate.")
   }
 
   override fun onBindVHForAll(binding: ViewDataBinding, model: M, payloads: List<Any>) {
-    TODO("Not yet implemented")
+    error("Shouldn't call this in delegate.")
   }
 
   /**
