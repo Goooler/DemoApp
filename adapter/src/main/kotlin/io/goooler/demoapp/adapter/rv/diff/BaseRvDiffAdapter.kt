@@ -1,6 +1,5 @@
 package io.goooler.demoapp.adapter.rv.diff
 
-import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.AsyncDifferConfig
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -21,7 +20,7 @@ import io.goooler.demoapp.adapter.rv.core.RvAdapterDelegate
  */
 abstract class BaseRvDiffAdapter<M : IDiffVhModelType> private constructor(
   callback: AsyncDifferConfig<M>,
-  private val delegate: RvAdapterDelegate<M>,
+  private val delegate: RvAdapterDelegate<M, BaseRvDiffAdapter<M>>,
 ) : ListAdapter<M, BindingViewHolder>(callback),
   IRvBinding<M>,
   IMutableRvAdapter<M>,
@@ -46,14 +45,6 @@ abstract class BaseRvDiffAdapter<M : IDiffVhModelType> private constructor(
       delegate.list = value
       submitList(delegate.transform(value))
     }
-
-  override fun onCreateVHForAll(binding: ViewDataBinding) {
-    onCreateVH(binding)
-  }
-
-  override fun onBindVHForAll(binding: ViewDataBinding, model: M, payloads: List<Any>) {
-    onBindVH(binding, model, payloads)
-  }
 
   /**
    * Please do not use it with setList() !

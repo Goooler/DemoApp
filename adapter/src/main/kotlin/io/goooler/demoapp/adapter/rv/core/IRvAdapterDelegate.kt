@@ -9,39 +9,23 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import io.goooler.demoapp.adapter.rv.core.ISpanSize.Companion.SPAN_SIZE_FULL
 import kotlinx.collections.immutable.toImmutableList
 
-internal interface IRvAdapterDelegate<M : IVhModelType, VH : BindingViewHolder> : IRvAdapter<M> {
-
-  /**
-   * Keep the same signature as [RecyclerView.Adapter.onAttachedToRecyclerView].
-   */
+/**
+ * Keep the same signature as [RecyclerView.Adapter].
+ *
+ * Workaround for [KT-21955](https://youtrack.jetbrains.com/issue/KT-21955).
+ */
+internal interface RecyclerViewAdapter<VH : RecyclerView.ViewHolder> {
   fun onAttachedToRecyclerView(recyclerView: RecyclerView)
-
-  /**
-   * Keep the same signature as [RecyclerView.Adapter.onDetachedFromRecyclerView].
-   */
   fun onDetachedFromRecyclerView(recyclerView: RecyclerView)
-
-  /**
-   * Keep the same signature as [RecyclerView.Adapter.onCreateViewHolder].
-   */
-  fun onCreateViewHolder(parent: ViewGroup, @LayoutRes viewType: Int): VH
-
-  /**
-   * Keep the same signature as [RecyclerView.Adapter.onBindViewHolder].
-   */
+  fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH
   fun onBindViewHolder(holder: BindingViewHolder, position: Int)
-
-  /**
-   * Keep the same signature as [RecyclerView.Adapter.onBindViewHolder].
-   */
-  fun onBindViewHolder(
-    holder: BindingViewHolder,
-    position: Int,
-    payloads: List<Any>,
-  )
-
+  fun onBindViewHolder(holder: BindingViewHolder, position: Int, payloads: List<Any>)
   fun getItemViewType(position: Int): Int
 }
+
+internal interface IRvAdapterDelegate<M : IVhModelType, VH : BindingViewHolder> :
+  IRvAdapter<M>,
+  RecyclerViewAdapter<VH>
 
 /**
  * Created on 2020/10/22.
@@ -53,12 +37,14 @@ internal interface IRvAdapterDelegate<M : IVhModelType, VH : BindingViewHolder> 
  * @since 1.0.0
  */
 @Suppress("TooManyFunctions")
-internal class RvAdapterDelegate<M : IVhModelType> : IRvAdapterDelegate<M, BindingViewHolder> {
+internal class RvAdapterDelegate<M : IVhModelType, AP> : IRvAdapterDelegate<M, BindingViewHolder>
+  where AP : IRvAdapter<M>,
+        AP : IRvBinding<M> {
 
   private val ivdManager = ViewTypeDelegateManager<M>()
   private val _list = mutableListOf<M>()
 
-  lateinit var adapter: IRvAdapter<M>
+  lateinit var adapter: AP
 
   override var list: List<M>
     get() = _list.toImmutableList()
@@ -94,7 +80,7 @@ internal class RvAdapterDelegate<M : IVhModelType> : IRvAdapterDelegate<M, Bindi
    * Called when RecyclerView needs a new ViewHolder of the given type to represent an item.
    */
   override fun onCreateViewHolder(parent: ViewGroup, @LayoutRes viewType: Int): BindingViewHolder {
-    return createVH(parent, viewType).also {
+    return BindingViewHolder.create(parent, viewType).also {
       adapter.onCreateVHForAll(it.binding)
       ivdManager.onCreateVH(it.binding, viewType)
     }
@@ -121,11 +107,11 @@ internal class RvAdapterDelegate<M : IVhModelType> : IRvAdapterDelegate<M, Bindi
   }
 
   override fun onCreateVHForAll(binding: ViewDataBinding) {
-    error("Shouldn't call this in delegate.")
+    adapter.onCreateVH(binding)
   }
 
   override fun onBindVHForAll(binding: ViewDataBinding, model: M, payloads: List<Any>) {
-    error("Shouldn't call this in delegate.")
+    adapter.onBindVH(binding, model, payloads)
   }
 
   /**

@@ -1,10 +1,6 @@
 package io.goooler.demoapp.adapter.rv.core
 
-import android.view.LayoutInflater
-import android.view.ViewGroup
-import androidx.annotation.LayoutRes
 import androidx.databinding.BindingAdapter
-import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 
@@ -33,19 +29,6 @@ internal interface IRvAdapter<M : IVhModelType> {
    * What to do when binding the viewHolder for all.
    */
   fun onBindVHForAll(binding: ViewDataBinding, model: M, payloads: List<Any>)
-
-  /**
-   * Create BaseViewHolder.
-   */
-  fun createVH(parent: ViewGroup, @LayoutRes viewType: Int): BindingViewHolder {
-    val binding = DataBindingUtil.inflate<ViewDataBinding>(
-      LayoutInflater.from(parent.context),
-      viewType,
-      parent,
-      false,
-    )
-    return BindingViewHolder(binding)
-  }
 
   /**
    * Init ViewTypeDelegateManager. You can add VTDs.
