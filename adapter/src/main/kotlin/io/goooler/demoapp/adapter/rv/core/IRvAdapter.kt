@@ -67,12 +67,12 @@ internal interface IRvAdapter<M : IVhModelType> : RecyclerViewAdapter<BindingVie
 
     private val ivdManager = ViewTypeDelegateManager<M>()
 
-    @Suppress("PropertyName", "ktlint:standard:backing-property-naming")
+    @Suppress("PropertyName", "VariableNaming", "ktlint:standard:backing-property-naming")
     protected val _list = mutableListOf<M>()
 
     lateinit var adapter: AP
 
-    override val list: List<M> get() = _list
+    override val list: List<M> = _list
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
       initManager(ivdManager)
