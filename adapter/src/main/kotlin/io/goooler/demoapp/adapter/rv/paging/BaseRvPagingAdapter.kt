@@ -48,8 +48,7 @@ abstract class BaseRvPagingAdapter<M : IDiffVhModelType> private constructor(
   }
 
   @LayoutRes
-  override fun getItemViewType(position: Int): Int =
-    getItem(position)?.viewType ?: 0
+  override fun getItemViewType(position: Int): Int = getItem(position)?.viewType ?: 0
 
   override operator fun get(position: Int): M? = getItem(position)
 
