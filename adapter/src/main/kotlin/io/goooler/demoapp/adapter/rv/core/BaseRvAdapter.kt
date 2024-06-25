@@ -12,6 +12,7 @@ import kotlinx.collections.immutable.toImmutableList
  * @version 1.0.0
  * @since 1.0.0
  */
+@Suppress("DELEGATED_MEMBER_HIDES_SUPERTYPE_OVERRIDE")
 abstract class BaseRvAdapter<M : IVhModelType> private constructor(
   private val delegate: IMutableRvAdapter.Impl<M, BaseRvAdapter<M>>,
 ) : RecyclerView.Adapter<BindingViewHolder>(),

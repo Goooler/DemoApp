@@ -18,6 +18,7 @@ import io.goooler.demoapp.adapter.rv.diff.IDiffVhModelType
  * @version 1.0.0
  * @since 1.0.0
  */
+@Suppress("DELEGATED_MEMBER_HIDES_SUPERTYPE_OVERRIDE")
 abstract class BaseRvPagingAdapter<M : IDiffVhModelType> private constructor(
   callback: DiffCallback<M>,
   private val delegate: IRvAdapter.Impl<M, BaseRvPagingAdapter<M>>,

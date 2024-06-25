@@ -17,6 +17,7 @@ import kotlinx.collections.immutable.toImmutableList
  * @version 1.0.0
  * @since 1.0.0
  */
+@Suppress("DELEGATED_MEMBER_HIDES_SUPERTYPE_OVERRIDE")
 abstract class BaseRvDiffAdapter<M : IDiffVhModelType> private constructor(
   asyncDifferConfig: AsyncDifferConfig<M>,
   private val delegate: IMutableRvAdapter.Impl<M, BaseRvDiffAdapter<M>>,
