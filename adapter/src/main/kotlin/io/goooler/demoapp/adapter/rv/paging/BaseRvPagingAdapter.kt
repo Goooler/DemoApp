@@ -29,7 +29,9 @@ abstract class BaseRvPagingAdapter<M : IDiffVhModelType> private constructor(
 
   var onLoadStatusListener: OnLoadStatusListener? = null
 
-  override val list: List<M> get() = snapshot().items
+  override var list: List<M>
+    get() = snapshot().items
+    set(value) = error("You shouldn't call this setter. Use submitData() instead.")
 
   constructor(callback: DiffCallback<M> = DiffCallback()) : this(callback, IRvAdapterDelegate.Impl()) {
     @Suppress("LeakingThis")

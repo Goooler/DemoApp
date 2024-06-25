@@ -45,19 +45,4 @@ abstract class BaseRvDiffAdapter<M : IDiffVhModelType> private constructor(
       delegate.list = value
       submitList(delegate.transform(value))
     }
-
-  /**
-   * Please do not use it with setList() !
-   */
-  override fun refreshItems(items: List<M>) {
-    delegate.refreshItems(items, ::notifyItemChanged)
-  }
-
-  override fun removeItem(index: Int) {
-    delegate.removeItem(index, ::notifyItemRemoved)
-  }
-
-  override fun removeItem(item: M) {
-    delegate.removeItem(item, ::notifyItemRemoved)
-  }
 }

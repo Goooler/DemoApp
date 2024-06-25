@@ -33,16 +33,4 @@ abstract class BaseRvAdapter<M : IVhModelType> private constructor(
     }
 
   override fun getItemCount(): Int = delegate.list.size
-
-  override fun refreshItems(items: List<M>) {
-    delegate.refreshItems(items, ::notifyItemChanged)
-  }
-
-  override fun removeItem(index: Int) {
-    delegate.removeItem(index, ::notifyItemRemoved)
-  }
-
-  override fun removeItem(item: M) {
-    delegate.removeItem(item, ::notifyItemRemoved)
-  }
 }

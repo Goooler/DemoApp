@@ -23,13 +23,14 @@ internal interface RecyclerViewAdapter<VH : RecyclerView.ViewHolder> {
 }
 
 internal interface IRvAdapterDelegate<M : IVhModelType, VH : BindingViewHolder> :
-  IRvAdapter<M>,
+  IMutableRvAdapter<M>,
   RecyclerViewAdapter<VH> {
 
   @Suppress("TooManyFunctions")
   class Impl<M : IVhModelType, AP> : IRvAdapterDelegate<M, BindingViewHolder>
     where AP : IRvAdapter<M>,
-          AP : IRvBinding<M> {
+          AP : IRvBinding<M>,
+          AP : RecyclerView.Adapter<BindingViewHolder> {
 
     private val ivdManager = ViewTypeDelegateManager<M>()
     private val _list = mutableListOf<M>()
@@ -90,26 +91,16 @@ internal interface IRvAdapterDelegate<M : IVhModelType, VH : BindingViewHolder> 
       adapter.onBindVH(binding, model, payloads)
     }
 
-    /**
-     * Compare the list to find the same items and refresh them.
-     */
-    inline fun refreshItems(items: List<M>, notify: (Int) -> Unit) {
-      transform(items).forEach {
-        if (it in _list) {
-          notify(_list.indexOf(it))
-        }
-      }
+    override fun refreshItems(items: List<M>) {
+      refreshItems(items, adapter::notifyItemChanged)
     }
 
-    inline fun removeItem(index: Int, notify: (Int) -> Unit) {
-      _list.removeAt(index)
-      notify(index)
+    override fun removeItem(index: Int) {
+      removeItem(index = index, adapter::notifyItemRemoved)
     }
 
-    inline fun removeItem(item: M, notify: (Int) -> Unit) {
-      _list.indexOf(item).takeIf { it != -1 }?.let {
-        removeItem(it, notify)
-      }
+    override fun removeItem(item: M) {
+      removeItem(item = item, adapter::notifyItemRemoved)
     }
 
     /**
@@ -119,6 +110,28 @@ internal interface IRvAdapterDelegate<M : IVhModelType, VH : BindingViewHolder> 
       val result = mutableListOf<M>()
       original.forEach { findLeaf(it, result) }
       return result
+    }
+
+    /**
+     * Compare the list to find the same items and refresh them.
+     */
+    private inline fun refreshItems(items: List<M>, notify: (Int) -> Unit) {
+      transform(items).forEach {
+        if (it in _list) {
+          notify(_list.indexOf(it))
+        }
+      }
+    }
+
+    private inline fun removeItem(index: Int, notify: (Int) -> Unit) {
+      _list.removeAt(index)
+      notify(index)
+    }
+
+    private inline fun removeItem(item: M, notify: (Int) -> Unit) {
+      _list.indexOf(item).takeIf { it != -1 }?.let {
+        removeItem(it, notify)
+      }
     }
 
     /**
