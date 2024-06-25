@@ -7,7 +7,6 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.RecyclerView
 import io.goooler.demoapp.adapter.rv.core.BindingViewHolder
 import io.goooler.demoapp.adapter.rv.core.IRvAdapter
-import io.goooler.demoapp.adapter.rv.core.IRvAdapterDelegate
 import io.goooler.demoapp.adapter.rv.core.IRvBinding
 import io.goooler.demoapp.adapter.rv.diff.DiffCallback
 import io.goooler.demoapp.adapter.rv.diff.IDiffVhModelType
@@ -21,11 +20,10 @@ import io.goooler.demoapp.adapter.rv.diff.IDiffVhModelType
  */
 abstract class BaseRvPagingAdapter<M : IDiffVhModelType> private constructor(
   callback: DiffCallback<M>,
-  private val delegate: IRvAdapterDelegate.Impl<M, BaseRvPagingAdapter<M>>,
+  private val delegate: IRvAdapter.Impl<M, BaseRvPagingAdapter<M>>,
 ) : PagingDataAdapter<M, BindingViewHolder>(callback),
   IRvBinding<M>,
-  IRvAdapter<M>,
-  IRvAdapterDelegate<M, BindingViewHolder> by delegate {
+  IRvAdapter<M, BindingViewHolder> by delegate {
 
   var onLoadStatusListener: OnLoadStatusListener? = null
 
@@ -33,7 +31,7 @@ abstract class BaseRvPagingAdapter<M : IDiffVhModelType> private constructor(
     get() = snapshot().items
     set(_) = error("You shouldn't call this setter. Use submitData() instead.")
 
-  constructor(callback: DiffCallback<M> = DiffCallback()) : this(callback, IRvAdapterDelegate.Impl()) {
+  constructor(callback: DiffCallback<M> = DiffCallback()) : this(callback, IRvAdapter.Impl()) {
     @Suppress("LeakingThis")
     delegate.adapter = this
   }

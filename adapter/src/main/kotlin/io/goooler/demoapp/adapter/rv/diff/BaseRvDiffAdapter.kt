@@ -5,7 +5,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import io.goooler.demoapp.adapter.rv.core.BindingViewHolder
 import io.goooler.demoapp.adapter.rv.core.IMutableRvAdapter
-import io.goooler.demoapp.adapter.rv.core.IRvAdapterDelegate
 import io.goooler.demoapp.adapter.rv.core.IRvBinding
 import kotlinx.collections.immutable.toImmutableList
 
@@ -20,21 +19,20 @@ import kotlinx.collections.immutable.toImmutableList
  */
 abstract class BaseRvDiffAdapter<M : IDiffVhModelType> private constructor(
   asyncDifferConfig: AsyncDifferConfig<M>,
-  private val delegate: IRvAdapterDelegate.Impl<M, BaseRvDiffAdapter<M>>,
+  private val delegate: IMutableRvAdapter.Impl<M, BaseRvDiffAdapter<M>>,
 ) : ListAdapter<M, BindingViewHolder>(asyncDifferConfig),
   IRvBinding<M>,
-  IMutableRvAdapter<M>,
-  IRvAdapterDelegate<M, BindingViewHolder> by delegate {
+  IMutableRvAdapter<M, BindingViewHolder> by delegate {
 
   constructor(callback: DiffCallback<M> = DiffCallback()) : this(
     AsyncDifferConfig.Builder(callback).build(),
-    IRvAdapterDelegate.Impl(),
+    IMutableRvAdapter.Impl(),
   ) {
     @Suppress("LeakingThis")
     delegate.adapter = this
   }
 
-  constructor(config: AsyncDifferConfig<M>) : this(config, IRvAdapterDelegate.Impl()) {
+  constructor(config: AsyncDifferConfig<M>) : this(config, IMutableRvAdapter.Impl()) {
     @Suppress("LeakingThis")
     delegate.adapter = this
   }

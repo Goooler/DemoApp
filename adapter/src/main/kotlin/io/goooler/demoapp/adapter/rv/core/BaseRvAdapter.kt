@@ -13,13 +13,12 @@ import kotlinx.collections.immutable.toImmutableList
  * @since 1.0.0
  */
 abstract class BaseRvAdapter<M : IVhModelType> private constructor(
-  private val delegate: IRvAdapterDelegate.Impl<M, BaseRvAdapter<M>>,
+  private val delegate: IMutableRvAdapter.Impl<M, BaseRvAdapter<M>>,
 ) : RecyclerView.Adapter<BindingViewHolder>(),
   IRvBinding<M>,
-  IMutableRvAdapter<M>,
-  IRvAdapterDelegate<M, BindingViewHolder> by delegate {
+  IMutableRvAdapter<M, BindingViewHolder> by delegate {
 
-  constructor() : this(IRvAdapterDelegate.Impl()) {
+  constructor() : this(IMutableRvAdapter.Impl()) {
     @Suppress("LeakingThis")
     delegate.adapter = this
   }
