@@ -40,6 +40,11 @@ internal interface IRvAdapter<M : IVhModelType> : RecyclerViewAdapter<BindingVie
   val list: List<M>
 
   /**
+   * Get item by position.
+   */
+  operator fun get(position: Int): M?
+
+  /**
    * What to do when creating the viewHolder for all.
    */
   fun onCreateVHForAll(binding: ViewDataBinding)
@@ -53,11 +58,6 @@ internal interface IRvAdapter<M : IVhModelType> : RecyclerViewAdapter<BindingVie
    * Init ViewTypeDelegateManager. You can add VTDs.
    */
   fun initManager(manager: ViewTypeDelegateManager<M>) {}
-
-  /**
-   * Get item by position.
-   */
-  operator fun get(position: Int): M?
 
   @Suppress("TooManyFunctions")
   open class Impl<M : IVhModelType, AP> : IRvAdapter<M>
