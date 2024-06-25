@@ -23,7 +23,7 @@ abstract class BaseRvPagingAdapter<M : IDiffVhModelType> private constructor(
   private val delegate: IRvAdapter.Impl<M, BaseRvPagingAdapter<M>>,
 ) : PagingDataAdapter<M, BindingViewHolder>(callback),
   IRvBinding<M>,
-  IRvAdapter<M, BindingViewHolder> by delegate {
+  IRvAdapter<M> by delegate {
 
   var onLoadStatusListener: OnLoadStatusListener? = null
 

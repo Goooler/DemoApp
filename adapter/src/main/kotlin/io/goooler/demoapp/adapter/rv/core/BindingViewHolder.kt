@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
  * @version 1.0.0
  * @since 1.0.0
  */
-open class BindingViewHolder(val binding: ViewDataBinding) : RecyclerView.ViewHolder(binding.root) {
+class BindingViewHolder(val binding: ViewDataBinding) : RecyclerView.ViewHolder(binding.root) {
 
   companion object {
     fun create(parent: ViewGroup, @LayoutRes viewType: Int): BindingViewHolder {

@@ -32,7 +32,7 @@ internal interface RecyclerViewAdapter<VH : RecyclerView.ViewHolder> {
  * @version 1.0.0
  * @since 1.0.0
  */
-internal interface IRvAdapter<M : IVhModelType, VH : RecyclerView.ViewHolder> : RecyclerViewAdapter<VH> {
+internal interface IRvAdapter<M : IVhModelType> : RecyclerViewAdapter<BindingViewHolder> {
 
   /**
    * Get data list.
@@ -60,8 +60,8 @@ internal interface IRvAdapter<M : IVhModelType, VH : RecyclerView.ViewHolder> : 
   operator fun get(position: Int): M?
 
   @Suppress("TooManyFunctions")
-  open class Impl<M : IVhModelType, AP> : IRvAdapter<M, BindingViewHolder>
-    where AP : IRvAdapter<M, BindingViewHolder>,
+  open class Impl<M : IVhModelType, AP> : IRvAdapter<M>
+    where AP : IRvAdapter<M>,
           AP : IRvBinding<M>,
           AP : RecyclerView.Adapter<BindingViewHolder> {
 
@@ -170,7 +170,7 @@ internal interface IRvAdapter<M : IVhModelType, VH : RecyclerView.ViewHolder> : 
   }
 }
 
-internal interface IMutableRvAdapter<M : IVhModelType, VH : BindingViewHolder> : IRvAdapter<M, VH> {
+internal interface IMutableRvAdapter<M : IVhModelType> : IRvAdapter<M> {
 
   /**
    * Set or Get data list.
@@ -188,8 +188,8 @@ internal interface IMutableRvAdapter<M : IVhModelType, VH : BindingViewHolder> :
 
   class Impl<M : IVhModelType, AP> :
     IRvAdapter.Impl<M, AP>(),
-    IMutableRvAdapter<M, BindingViewHolder>
-    where AP : IRvAdapter<M, BindingViewHolder>,
+    IMutableRvAdapter<M>
+    where AP : IRvAdapter<M>,
           AP : IRvBinding<M>,
           AP : RecyclerView.Adapter<BindingViewHolder> {
 
@@ -239,11 +239,11 @@ internal interface IMutableRvAdapter<M : IVhModelType, VH : BindingViewHolder> :
 @BindingAdapter("binding_rv_dataList")
 internal fun <M : IVhModelType> RecyclerView.bindingSetList(list: List<M>?) {
   @Suppress("UNCHECKED_CAST")
-  (adapter as? IMutableRvAdapter<M, *>)?.list = list.orEmpty()
+  (adapter as? IMutableRvAdapter<M>)?.list = list.orEmpty()
 }
 
 @BindingAdapter("binding_rv_refreshItems")
 internal fun <M : IVhModelType> RecyclerView.bindingRefreshItems(items: List<M>?) {
   @Suppress("UNCHECKED_CAST")
-  (adapter as? IMutableRvAdapter<M, *>)?.refreshItems(items.orEmpty())
+  (adapter as? IMutableRvAdapter<M>)?.refreshItems(items.orEmpty())
 }

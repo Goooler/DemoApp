@@ -22,7 +22,7 @@ abstract class BaseRvDiffAdapter<M : IDiffVhModelType> private constructor(
   private val delegate: IMutableRvAdapter.Impl<M, BaseRvDiffAdapter<M>>,
 ) : ListAdapter<M, BindingViewHolder>(asyncDifferConfig),
   IRvBinding<M>,
-  IMutableRvAdapter<M, BindingViewHolder> by delegate {
+  IMutableRvAdapter<M> by delegate {
 
   constructor(callback: DiffCallback<M> = DiffCallback()) : this(
     AsyncDifferConfig.Builder(callback).build(),
