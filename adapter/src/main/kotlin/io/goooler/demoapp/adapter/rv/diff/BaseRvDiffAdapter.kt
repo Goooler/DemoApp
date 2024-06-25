@@ -7,7 +7,7 @@ import io.goooler.demoapp.adapter.rv.core.BindingViewHolder
 import io.goooler.demoapp.adapter.rv.core.IMutableRvAdapter
 import io.goooler.demoapp.adapter.rv.core.IRvAdapterDelegate
 import io.goooler.demoapp.adapter.rv.core.IRvBinding
-import kotlinx.collections.immutable.toPersistentList
+import kotlinx.collections.immutable.toImmutableList
 
 /**
  * Created on 2020/10/22.
@@ -40,7 +40,7 @@ abstract class BaseRvDiffAdapter<M : IDiffVhModelType> private constructor(
   }
 
   override var list: List<M>
-    get() = delegate.list.toPersistentList()
+    get() = delegate.list.toImmutableList()
     set(value) {
       delegate.list = value
       submitList(delegate.transform(value))
