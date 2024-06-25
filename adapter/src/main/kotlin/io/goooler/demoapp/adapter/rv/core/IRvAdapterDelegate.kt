@@ -64,11 +64,9 @@ internal interface IRvAdapterDelegate<M : IVhModelType, VH : BindingViewHolder> 
     override fun onCreateViewHolder(
       parent: ViewGroup,
       @LayoutRes viewType: Int,
-    ): BindingViewHolder {
-      return BindingViewHolder.create(parent, viewType).also {
-        adapter.onCreateVHForAll(it.binding)
-        ivdManager.onCreateVH(it.binding, viewType)
-      }
+    ): BindingViewHolder = BindingViewHolder.create(parent, viewType).also {
+      adapter.onCreateVHForAll(it.binding)
+      ivdManager.onCreateVH(it.binding, viewType)
     }
 
     override fun onBindViewHolder(holder: BindingViewHolder, position: Int) {
