@@ -193,8 +193,7 @@ internal interface IMutableRvAdapter<M : IVhModelType> : IRvAdapter<M> {
           AP : IRvBinding<M>,
           AP : RecyclerView.Adapter<BindingViewHolder> {
 
-    override var list: List<M>
-      get() = _list
+    override var list: List<M> = super.list
       set(value) {
         _list.clear()
         _list.addAll(transform(value))
