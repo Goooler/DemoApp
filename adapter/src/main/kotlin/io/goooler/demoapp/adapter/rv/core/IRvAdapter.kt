@@ -201,36 +201,22 @@ internal interface IMutableRvAdapter<M : IVhModelType> : IRvAdapter<M> {
       }
 
     override fun refreshItems(items: List<M>) {
-      refreshItems(items, adapter::notifyItemChanged)
-    }
-
-    override fun removeItem(index: Int) {
-      removeItem(index = index, adapter::notifyItemRemoved)
-    }
-
-    override fun removeItem(item: M) {
-      removeItem(item = item, adapter::notifyItemRemoved)
-    }
-
-    /**
-     * Compare the list to find the same items and refresh them.
-     */
-    private inline fun refreshItems(items: List<M>, notify: (Int) -> Unit) {
       transform(items).forEach {
         if (it in _list) {
-          notify(_list.indexOf(it))
+          adapter.notifyItemChanged(_list.indexOf(it))
         }
       }
     }
 
-    private inline fun removeItem(index: Int, notify: (Int) -> Unit) {
+    override fun removeItem(index: Int) {
       _list.removeAt(index)
-      notify(index)
+      adapter::notifyItemRemoved
     }
 
-    private inline fun removeItem(item: M, notify: (Int) -> Unit) {
+    override fun removeItem(item: M) {
       _list.indexOf(item).takeIf { it != -1 }?.let {
-        removeItem(it, notify)
+        removeItem(it)
+        adapter::notifyItemRemoved
       }
     }
   }
