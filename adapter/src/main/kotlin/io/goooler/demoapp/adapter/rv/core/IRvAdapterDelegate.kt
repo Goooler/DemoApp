@@ -53,7 +53,8 @@ internal interface IRvAdapterDelegate<M : IVhModelType, VH : BindingViewHolder> 
       recyclerView.adapter = null
     }
 
-    override fun get(position: Int): M = _list.getOrElse(position) {
+    override operator fun get(position: Int): M = _list.getOrElse(position) {
+      // Override get in adapters as a fallback.
       adapter[position] ?: error("No such a element in position $position in adapter $adapter.")
     }
 
