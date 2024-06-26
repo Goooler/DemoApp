@@ -18,6 +18,7 @@ plugins {
   alias(libs.plugins.spotless) apply false
   alias(libs.plugins.detekt) apply false
   alias(libs.plugins.cacheFix) apply false
+  alias(libs.plugins.mavenPublish) apply false
 }
 
 allprojects {

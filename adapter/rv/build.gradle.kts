@@ -2,6 +2,7 @@ plugins {
   alias(libs.plugins.android.library)
   alias(libs.plugins.bcv)
   alias(libs.plugins.napt)
+  alias(libs.plugins.mavenPublish)
 }
 
 android {
