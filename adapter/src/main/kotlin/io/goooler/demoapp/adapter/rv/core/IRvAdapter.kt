@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import io.goooler.demoapp.adapter.rv.core.ISpanSize.Companion.SPAN_SIZE_FULL
+import java.util.Collections
 import kotlinx.collections.immutable.toImmutableList
 
 /**
@@ -174,6 +175,8 @@ internal interface IMutableRvAdapter<M : IVhModelType> : IRvAdapter<M> {
 
   fun removeItem(item: M)
 
+  fun moveItem(from: Int, to: Int)
+
   class Impl<M : IVhModelType, AP> :
     IRvAdapter.Impl<M, AP>(),
     IMutableRvAdapter<M>
@@ -214,6 +217,14 @@ internal interface IMutableRvAdapter<M : IVhModelType> : IRvAdapter<M> {
         removeItem(it)
         adapter::notifyItemRemoved
       }
+    }
+
+    override fun moveItem(from: Int, to: Int) {
+      val message = "%s index %s out of bounds for length ${_list.size}"
+      require(from in _list.indices) { message.format("From", from) }
+      require(to in _list.indices) { message.format("To", to) }
+      Collections.swap(_list, from, to)
+      adapter.notifyItemMoved(from, to)
     }
 
     private fun flat(original: List<M>): List<M> {
