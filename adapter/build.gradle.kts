@@ -8,7 +8,6 @@ android {
 }
 
 dependencies {
-  api(libs.kotlinX.immutable)
   api(libs.androidX.collection)
   api(libs.androidX.paging)
   api(libs.androidX.recyclerView)
