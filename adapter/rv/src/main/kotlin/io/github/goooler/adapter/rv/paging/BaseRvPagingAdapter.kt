@@ -1,15 +1,15 @@
-package io.goooler.demoapp.adapter.rv.paging
+package io.github.goooler.adapter.rv.paging
 
 import androidx.annotation.LayoutRes
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.RecyclerView
-import io.goooler.demoapp.adapter.rv.core.BindingViewHolder
-import io.goooler.demoapp.adapter.rv.core.IRvAdapter
-import io.goooler.demoapp.adapter.rv.core.IRvBinding
-import io.goooler.demoapp.adapter.rv.diff.DiffCallback
-import io.goooler.demoapp.adapter.rv.diff.IDiffVhModelType
+import io.github.goooler.adapter.rv.core.BindingViewHolder
+import io.github.goooler.adapter.rv.core.IRvAdapter
+import io.github.goooler.adapter.rv.core.IRvBinding
+import io.github.goooler.adapter.rv.diff.DiffCallback
+import io.github.goooler.adapter.rv.diff.IDiffVhModelType
 
 /**
  * Created on 2020/10/09.

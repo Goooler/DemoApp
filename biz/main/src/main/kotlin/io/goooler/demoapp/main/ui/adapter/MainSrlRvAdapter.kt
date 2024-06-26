@@ -1,8 +1,8 @@
 package io.goooler.demoapp.main.ui.adapter
 
 import androidx.databinding.ViewDataBinding
-import io.goooler.demoapp.adapter.rv.diff.BaseRvDiffAdapter
-import io.goooler.demoapp.adapter.rv.diff.DiffCallback
+import io.github.goooler.adapter.rv.diff.BaseRvDiffAdapter
+import io.github.goooler.adapter.rv.diff.DiffCallback
 import io.goooler.demoapp.common.util.ImageLoader
 import io.goooler.demoapp.common.util.asConfig
 import io.goooler.demoapp.main.databinding.MainCommonRvItemBinding

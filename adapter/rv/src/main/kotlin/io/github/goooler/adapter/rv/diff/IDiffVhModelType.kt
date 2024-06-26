@@ -1,7 +1,7 @@
-package io.goooler.demoapp.adapter.rv.diff
+package io.github.goooler.adapter.rv.diff
 
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import io.goooler.demoapp.adapter.rv.core.IVhModelType
+import io.github.goooler.adapter.rv.core.IVhModelType
 
 /**
  * Created on 2020/10/22.

@@ -1,4 +1,4 @@
-package io.goooler.demoapp.adapter.rv.core
+package io.github.goooler.adapter.rv.core
 
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView

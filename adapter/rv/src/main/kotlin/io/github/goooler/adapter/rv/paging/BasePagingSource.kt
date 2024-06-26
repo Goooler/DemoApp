@@ -1,9 +1,9 @@
-package io.goooler.demoapp.adapter.rv.paging
+package io.github.goooler.adapter.rv.paging
 
 import androidx.annotation.IntRange
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import io.goooler.demoapp.adapter.rv.diff.IDiffVhModelType
+import io.github.goooler.adapter.rv.diff.IDiffVhModelType
 
 abstract class BasePagingSource<T : IDiffVhModelType> : PagingSource<Int, T>() {
 

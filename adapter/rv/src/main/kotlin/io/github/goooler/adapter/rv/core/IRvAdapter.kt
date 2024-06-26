@@ -1,4 +1,4 @@
-package io.goooler.demoapp.adapter.rv.core
+package io.github.goooler.adapter.rv.core
 
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
@@ -7,7 +7,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import io.goooler.demoapp.adapter.rv.core.ISpanSize.Companion.SPAN_SIZE_FULL
+import io.github.goooler.adapter.rv.core.ISpanSize.Companion.SPAN_SIZE_FULL
 import java.util.Collections
 import kotlinx.collections.immutable.toImmutableList
 

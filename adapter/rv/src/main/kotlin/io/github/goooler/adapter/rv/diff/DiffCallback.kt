@@ -1,4 +1,4 @@
-package io.goooler.demoapp.adapter.rv.diff
+package io.github.goooler.adapter.rv.diff
 
 import androidx.recyclerview.widget.DiffUtil
 

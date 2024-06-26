@@ -1,4 +1,4 @@
-package io.goooler.demoapp.adapter.rv.core
+package io.github.goooler.adapter.rv.core
 
 /**
  * Created on 2020/10/23.

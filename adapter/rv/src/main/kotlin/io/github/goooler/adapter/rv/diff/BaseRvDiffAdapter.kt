@@ -1,11 +1,11 @@
-package io.goooler.demoapp.adapter.rv.diff
+package io.github.goooler.adapter.rv.diff
 
 import androidx.recyclerview.widget.AsyncDifferConfig
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import io.goooler.demoapp.adapter.rv.core.BindingViewHolder
-import io.goooler.demoapp.adapter.rv.core.IMutableRvAdapter
-import io.goooler.demoapp.adapter.rv.core.IRvBinding
+import io.github.goooler.adapter.rv.core.BindingViewHolder
+import io.github.goooler.adapter.rv.core.IMutableRvAdapter
+import io.github.goooler.adapter.rv.core.IRvBinding
 
 /**
  * Created on 2020/10/22.
