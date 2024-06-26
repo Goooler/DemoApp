@@ -14,7 +14,6 @@ import io.github.goooler.adapter.rv.core.ISpanSize.Companion.SPAN_SIZE_FULL
 import io.github.goooler.adapter.rv.core.IVhModelType
 import io.github.goooler.adapter.rv.core.IVhModelWrapper
 import java.util.Collections
-import kotlinx.collections.immutable.toImmutableList
 
 /**
  * Keep the same signature as [RecyclerView.Adapter].
@@ -79,7 +78,7 @@ internal interface IRvAdapter<M : IVhModelType> : RecyclerViewAdapter<BindingVie
 
     lateinit var adapter: AP
 
-    override val list: List<M> get() = _list.toImmutableList()
+    override val list: List<M> get() = Collections.unmodifiableList(_list)
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
       initManager(ivdManager)
