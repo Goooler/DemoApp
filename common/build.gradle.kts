@@ -19,7 +19,7 @@ android {
 
 dependencies {
   api(projects.base)
-  api(projects.adapter.rv)
+  api("io.github.goooler.android:adapter-rv:1.0.0-SNAPSHOT")
   api(projects.adapter.vp)
 
   api(libs.androidX.constraintLayout)
