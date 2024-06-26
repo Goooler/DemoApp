@@ -158,8 +158,10 @@ internal interface IMutableRvAdapter<M : IVhModelType> : IRvAdapter<M> {
 
   /**
    * Refresh some items.
+   *
+   * @param items the items to be refreshed, [Int] is for the index of [M].
    */
-  fun refreshItems(items: List<M>)
+  fun refreshItems(vararg items: Triple<Int, M, Any?>)
 
   fun removeItem(index: Int)
 
@@ -179,11 +181,11 @@ internal interface IMutableRvAdapter<M : IVhModelType> : IRvAdapter<M> {
         _list.addAll(flat(value))
       }
 
-    override fun refreshItems(items: List<M>) {
-      flat(items).forEach {
-        if (it in _list) {
-          adapter.notifyItemChanged(_list.indexOf(it))
-        }
+    override fun refreshItems(vararg items: Triple<Int, M, Any?>) {
+      items.forEach { (index, item, payload) ->
+        check(index in _list.indices) { "Index $index out of bounds for length ${_list.size}" }
+        _list[index] = item
+        adapter.notifyItemChanged(index, payload)
       }
     }
 
@@ -224,7 +226,7 @@ internal fun <M : IVhModelType> RecyclerView.bindingSetList(list: List<M>?) {
 }
 
 @BindingAdapter("binding_rv_refreshItems")
-internal fun <M : IVhModelType> RecyclerView.bindingRefreshItems(items: List<M>?) {
+internal fun <M : IVhModelType> RecyclerView.bindingRefreshItems(vararg items: Triple<Int, M, Any?>) {
   @Suppress("UNCHECKED_CAST")
-  (adapter as? IMutableRvAdapter<M>)?.refreshItems(items.orEmpty())
+  (adapter as? IMutableRvAdapter<M>)?.refreshItems(*items)
 }
