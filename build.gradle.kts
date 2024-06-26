@@ -5,6 +5,8 @@ import com.android.build.gradle.LibraryPlugin
 import com.diffplug.gradle.spotless.SpotlessExtension
 import com.google.devtools.ksp.gradle.KspExtension
 import com.google.devtools.ksp.gradle.KspGradleSubplugin
+import com.slapin.napt.NaptGradleExtension
+import com.slapin.napt.NaptGradlePlugin
 import io.gitlab.arturbosch.detekt.extensions.DetektExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
@@ -63,6 +65,11 @@ allprojects {
   plugins.withType<JavaBasePlugin>().configureEach {
     extensions.configure<JavaPluginExtension> {
       toolchain.languageVersion = JavaLanguageVersion.of(21)
+    }
+  }
+  plugins.withType<NaptGradlePlugin>().configureEach {
+    extensions.configure<NaptGradleExtension> {
+      generateNaptTrigger = false
     }
   }
 
