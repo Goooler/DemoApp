@@ -10,11 +10,11 @@ class MainPagingRvAdapter(
   private val listener: OnEventListener,
 ) : BaseRvPagingAdapter<MainCommonVhModel>() {
 
-  override fun onCreateVHForAll(binding: ViewDataBinding) {
+  override fun onCreateVH(binding: ViewDataBinding) {
     binding.bindListener(listener)
   }
 
-  override fun onBindVHForAll(
+  override fun onBindVH(
     binding: ViewDataBinding,
     model: MainCommonVhModel,
     payloads: List<Any>,

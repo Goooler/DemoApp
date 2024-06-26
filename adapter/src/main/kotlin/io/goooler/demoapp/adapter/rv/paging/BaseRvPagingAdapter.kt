@@ -1,14 +1,14 @@
 package io.goooler.demoapp.adapter.rv.paging
 
-import android.view.ViewGroup
 import androidx.annotation.LayoutRes
+import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.RecyclerView
 import io.goooler.demoapp.adapter.rv.core.BindingViewHolder
 import io.goooler.demoapp.adapter.rv.core.IRvAdapter
-import io.goooler.demoapp.adapter.rv.core.RvAdapterHelper
-import io.goooler.demoapp.adapter.rv.diff.DiffCallBack
+import io.goooler.demoapp.adapter.rv.core.IRvBinding
+import io.goooler.demoapp.adapter.rv.diff.DiffCallback
 import io.goooler.demoapp.adapter.rv.diff.IDiffVhModelType
 
 /**
@@ -18,71 +18,56 @@ import io.goooler.demoapp.adapter.rv.diff.IDiffVhModelType
  * @version 1.0.0
  * @since 1.0.0
  */
-abstract class BaseRvPagingAdapter<M : IDiffVhModelType>(callback: DiffCallBack<M> = DiffCallBack()) :
-  PagingDataAdapter<M, BindingViewHolder>(callback),
-  IRvAdapter<M> {
-
-  private val helper by lazy(LazyThreadSafetyMode.NONE) { RvAdapterHelper(this) }
+@Suppress("DELEGATED_MEMBER_HIDES_SUPERTYPE_OVERRIDE")
+abstract class BaseRvPagingAdapter<M : IDiffVhModelType> private constructor(
+  callback: DiffCallback<M>,
+  private val delegate: IRvAdapter.Impl<M, BaseRvPagingAdapter<M>>,
+) : PagingDataAdapter<M, BindingViewHolder>(callback),
+  IRvBinding<M>,
+  IRvAdapter<M> by delegate {
 
   var onLoadStatusListener: OnLoadStatusListener? = null
 
   override val list: List<M> get() = snapshot().items
 
+  constructor(callback: DiffCallback<M> = DiffCallback()) : this(callback, IRvAdapter.Impl()) {
+    @Suppress("LeakingThis")
+    delegate.adapter = this
+  }
+
   override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
     super.onAttachedToRecyclerView(recyclerView)
-    helper.onAttachedToRecyclerView(recyclerView)
-    observeLoadState()
+    delegate.onAttachedToRecyclerView(recyclerView)
+    addLoadStateListener(loadStateListener)
   }
 
   override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
     super.onDetachedFromRecyclerView(recyclerView)
-    helper.onDetachedFromRecyclerView(recyclerView)
-  }
-
-  override fun onCreateViewHolder(
-    parent: ViewGroup,
-    @LayoutRes viewType: Int,
-  ): BindingViewHolder = helper.onCreateViewHolder(parent, viewType)
-
-  override fun onBindViewHolder(
-    holder: BindingViewHolder,
-    position: Int,
-  ) {
-    helper.onBindViewHolder(holder, position)
-  }
-
-  override fun onBindViewHolder(
-    holder: BindingViewHolder,
-    position: Int,
-    payloads: List<Any>,
-  ) {
-    helper.onBindViewHolder(holder, position, payloads)
+    delegate.onDetachedFromRecyclerView(recyclerView)
+    removeLoadStateListener(loadStateListener)
   }
 
   @LayoutRes
-  override fun getItemViewType(position: Int): Int =
-    getItem(position)?.viewType ?: 0
+  override fun getItemViewType(position: Int): Int = getItem(position)?.viewType ?: 0
 
   override operator fun get(position: Int): M? = getItem(position)
 
-  private fun observeLoadState() {
-    addLoadStateListener {
-      when {
-        it.refresh is LoadState.Loading -> onLoadStatusListener?.onRefresh()
-        it.append is LoadState.Loading -> onLoadStatusListener?.onLoadMore()
-        else -> {
-          onLoadStatusListener?.onNotLoading()
-          if (it.refresh is LoadState.Error) {
-            when (val throwable = (it.refresh as LoadState.Error).error) {
-              is PagingSourceException.EmptyDataException -> onLoadStatusListener?.onEmpty()
-              else -> onLoadStatusListener?.onError(throwable)
-            }
+  private val loadStateListener: (CombinedLoadStates) -> Unit = {
+    when {
+      it.refresh is LoadState.Loading -> onLoadStatusListener?.onRefresh()
+      it.append is LoadState.Loading -> onLoadStatusListener?.onLoadMore()
+      else -> {
+        onLoadStatusListener?.onNotLoading()
+        if (it.refresh is LoadState.Error) {
+          when (val throwable = (it.refresh as LoadState.Error).error) {
+            is PagingSourceException.EmptyDataException -> onLoadStatusListener?.onEmpty()
+            else -> onLoadStatusListener?.onError(throwable)
           }
-          if (it.append is LoadState.Error) {
-            when (val throwable = (it.append as LoadState.Error).error) {
-              is PagingSourceException.NoMoreDataException -> onLoadStatusListener?.onNoMoreData()
-              else -> onLoadStatusListener?.onError(throwable)
-            }
+        }
+        if (it.append is LoadState.Error) {
+          when (val throwable = (it.append as LoadState.Error).error) {
+            is PagingSourceException.NoMoreDataException -> onLoadStatusListener?.onNoMoreData()
+            else -> onLoadStatusListener?.onError(throwable)
           }
         }
       }

@@ -2,7 +2,7 @@ package io.goooler.demoapp.adapter.rv.diff
 
 import androidx.recyclerview.widget.DiffUtil
 
-open class DiffCallBack<M : IDiffVhModelType> : DiffUtil.ItemCallback<M>() {
+open class DiffCallback<M : IDiffVhModelType> : DiffUtil.ItemCallback<M>() {
 
   /**
    * Call this first.
