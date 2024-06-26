@@ -3,13 +3,6 @@ package io.github.goooler.adapter.rv.diff
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import io.github.goooler.adapter.rv.core.IVhModelType
 
-/**
- * Created on 2020/10/22.
- *
- * @author feling
- * @version 1.0.0
- * @since 1.0.0
- */
 public interface IDiffVhModelType : IVhModelType {
 
   /**

@@ -30,13 +30,7 @@ internal interface RecyclerViewAdapter<VH : RecyclerView.ViewHolder> {
 }
 
 /**
- * Created on 2020/10/21.
- *
  * Please let your [RecyclerView.Adapter] implements IExtAdapter.
- *
- * @author feling
- * @version 1.0.0
- * @since 1.0.0
  */
 internal interface IRvAdapter<M : IVhModelType> : RecyclerViewAdapter<BindingViewHolder> {
 

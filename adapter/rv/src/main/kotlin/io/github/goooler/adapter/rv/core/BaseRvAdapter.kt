@@ -4,13 +4,7 @@ import androidx.recyclerview.widget.RecyclerView
 import io.github.goooler.adapter.rv.internal.IMutableRvAdapter
 
 /**
- * Created on 2020/10/22.
- *
  * Simple FeAdapter. You can write your own [RecyclerView.Adapter] according to this.
- *
- * @author feling
- * @version 1.0.0
- * @since 1.0.0
  */
 @Suppress("DELEGATED_MEMBER_HIDES_SUPERTYPE_OVERRIDE")
 public abstract class BaseRvAdapter<M : IVhModelType> private constructor(

@@ -8,13 +8,7 @@ import io.github.goooler.adapter.rv.core.IRvBinding
 import io.github.goooler.adapter.rv.internal.IMutableRvAdapter
 
 /**
- * Created on 2020/10/22.
- *
  * DiffListAdapter. This adapter used [DiffUtil].
- *
- * @author feling
- * @version 1.0.0
- * @since 1.0.0
  */
 @Suppress("DELEGATED_MEMBER_HIDES_SUPERTYPE_OVERRIDE")
 public abstract class BaseRvDiffAdapter<M : IDiffVhModelType> private constructor(

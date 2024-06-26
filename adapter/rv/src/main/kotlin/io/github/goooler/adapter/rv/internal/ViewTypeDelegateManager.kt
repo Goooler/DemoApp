@@ -7,13 +7,7 @@ import androidx.databinding.ViewDataBinding
 import io.github.goooler.adapter.rv.core.IVhModelType
 
 /**
- * Created on 2020/10/21.
- *
  * The unified management class of ViewTypeDelegate.
- *
- * @author feling
- * @version 1.0.0
- * @since 1.0.0
  */
 internal class ViewTypeDelegateManager<M : IVhModelType> {
 

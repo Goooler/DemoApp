@@ -11,13 +11,6 @@ import io.github.goooler.adapter.rv.diff.DiffCallback
 import io.github.goooler.adapter.rv.diff.IDiffVhModelType
 import io.github.goooler.adapter.rv.internal.IRvAdapter
 
-/**
- * Created on 2020/10/09.
- *
- * @author Goooler
- * @version 1.0.0
- * @since 1.0.0
- */
 @Suppress("DELEGATED_MEMBER_HIDES_SUPERTYPE_OVERRIDE")
 public abstract class BaseRvPagingAdapter<M : IDiffVhModelType> private constructor(
   callback: DiffCallback<M>,
