@@ -248,15 +248,3 @@ internal interface IMutableRvAdapter<M : IVhModelType> : IRvAdapter<M> {
     }
   }
 }
-
-@BindingAdapter("binding_rv_dataList")
-internal fun <M : IVhModelType> RecyclerView.bindingSetList(list: List<M>?) {
-  @Suppress("UNCHECKED_CAST")
-  (adapter as? IMutableRvAdapter<M>)?.list = list.orEmpty()
-}
-
-@BindingAdapter("binding_rv_refreshItems")
-internal fun <M : IVhModelType> RecyclerView.bindingRefreshItems(vararg items: Triple<Int, M, Any?>) {
-  @Suppress("UNCHECKED_CAST")
-  (adapter as? IMutableRvAdapter<M>)?.refreshItems(*items)
-}
