@@ -163,6 +163,13 @@ internal interface IMutableRvAdapter<M : IVhModelType> : IRvAdapter<M> {
    */
   fun refreshItems(vararg items: Triple<Int, M, Any?>)
 
+  /**
+   * Add some items.
+   *
+   * @param items the items to be added, [Int] is for the index of [M].
+   */
+  fun addItems(vararg items: Pair<Int, M>)
+
   fun removeItem(index: Int)
 
   fun removeItem(item: M)
@@ -186,6 +193,14 @@ internal interface IMutableRvAdapter<M : IVhModelType> : IRvAdapter<M> {
         check(index in _list.indices) { "Index $index out of bounds for length ${_list.size}" }
         _list[index] = item
         adapter.notifyItemChanged(index, payload)
+      }
+    }
+
+    override fun addItems(vararg items: Pair<Int, M>) {
+      items.forEach { (index, item) ->
+        check(index in _list.indices) { "Index $index out of bounds for length ${_list.size}" }
+        _list.add(index, item)
+        adapter.notifyItemInserted(index)
       }
     }
 
