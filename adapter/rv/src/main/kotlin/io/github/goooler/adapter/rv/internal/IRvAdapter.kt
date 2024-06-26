@@ -67,12 +67,12 @@ internal interface IRvAdapter<M : IVhModelType> : RecyclerViewAdapter<BindingVie
 
     private val ivdManager = ViewTypeDelegateManager<M>()
 
-    @Suppress("PropertyName", "VariableNaming", "ktlint:standard:backing-property-naming")
-    protected val _list = mutableListOf<M>()
-
     lateinit var adapter: AP
 
-    override val list: List<M> get() = Collections.unmodifiableList(_list)
+    /**
+     * Have to override this property in [adapter], we don't store any list data in this delegate.
+     */
+    override val list: List<M> get() = adapter.list
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
       initManager(ivdManager)
@@ -84,10 +84,7 @@ internal interface IRvAdapter<M : IVhModelType> : RecyclerViewAdapter<BindingVie
       recyclerView.adapter = null
     }
 
-    override operator fun get(position: Int): M = _list.getOrElse(position) {
-      // Override get in adapters as a fallback.
-      adapter[position] ?: error("No such a element in position $position in adapter $adapter.")
-    }
+    override operator fun get(position: Int): M = list[position]
 
     @LayoutRes
     override fun getItemViewType(position: Int): Int = get(position).viewType
@@ -182,12 +179,17 @@ internal interface IMutableRvAdapter<M : IVhModelType> : IRvAdapter<M> {
           AP : IRvBinding<M>,
           AP : RecyclerView.Adapter<BindingViewHolder> {
 
+    private val _list = mutableListOf<M>()
+
     override var list: List<M>
-      get() = super.list
+      // Copy a new list to avoid the original list being modified.
+      get() = _list.toMutableList()
       set(value) {
         _list.clear()
         _list.addAll(flat(value))
       }
+
+    override operator fun get(position: Int): M = _list[position]
 
     override fun addItems(vararg items: Pair<Int, M>) {
       items.forEach { (index, item) ->

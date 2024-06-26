@@ -19,16 +19,21 @@ public abstract class BaseRvPagingAdapter<M : IDiffVhModelType> private construc
   IRvBinding<M>,
   IRvAdapter<M> by delegate {
 
-  public var onLoadStatusListener: OnLoadStatusListener? = null
-
-  public override val list: List<M> get() = snapshot().items
-
   public constructor(callback: DiffCallback<M> = DiffCallback()) : this(callback, IRvAdapter.Impl()) {
     @Suppress("LeakingThis")
     delegate.adapter = this
   }
 
-  public override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
+  public var onLoadStatusListener: OnLoadStatusListener? = null
+
+  public override val list: List<M> get() = snapshot().items
+
+  public override operator fun get(position: Int): M? = getItem(position)
+
+  @LayoutRes
+  public override fun getItemViewType(position: Int): Int = getItem(position)?.viewType ?: 0
+
+  override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
     super.onAttachedToRecyclerView(recyclerView)
     delegate.onAttachedToRecyclerView(recyclerView)
     addLoadStateListener(loadStateListener)
@@ -39,11 +44,6 @@ public abstract class BaseRvPagingAdapter<M : IDiffVhModelType> private construc
     delegate.onDetachedFromRecyclerView(recyclerView)
     removeLoadStateListener(loadStateListener)
   }
-
-  @LayoutRes
-  public override fun getItemViewType(position: Int): Int = getItem(position)?.viewType ?: 0
-
-  public override operator fun get(position: Int): M? = getItem(position)
 
   private val loadStateListener: (CombinedLoadStates) -> Unit = {
     when {
