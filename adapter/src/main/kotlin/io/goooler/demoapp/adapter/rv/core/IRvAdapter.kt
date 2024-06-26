@@ -201,13 +201,13 @@ internal interface IMutableRvAdapter<M : IVhModelType> : IRvAdapter<M> {
 
     override fun removeItem(index: Int) {
       _list.removeAt(index)
-      adapter::notifyItemRemoved
+      adapter.notifyItemRemoved(index)
     }
 
     override fun removeItem(item: M) {
       _list.indexOf(item).takeIf { it != -1 }?.let {
         removeItem(it)
-        adapter::notifyItemRemoved
+        adapter.notifyItemRemoved(it)
       }
     }
 
