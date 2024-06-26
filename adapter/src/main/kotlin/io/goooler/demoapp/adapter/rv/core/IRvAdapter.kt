@@ -176,11 +176,11 @@ internal interface IMutableRvAdapter<M : IVhModelType> : IRvAdapter<M> {
       get() = super.list
       set(value) {
         _list.clear()
-        _list.addAll(transform(value))
+        _list.addAll(flat(value))
       }
 
     override fun refreshItems(items: List<M>) {
-      transform(items).forEach {
+      flat(items).forEach {
         if (it in _list) {
           adapter.notifyItemChanged(_list.indexOf(it))
         }
@@ -199,22 +199,16 @@ internal interface IMutableRvAdapter<M : IVhModelType> : IRvAdapter<M> {
       }
     }
 
-    /**
-     * Transform data list. Always return a new list.
-     */
-    private fun transform(original: List<M>): List<M> {
+    private fun flat(original: List<M>): List<M> {
       val result = mutableListOf<M>()
       original.forEach { findLeaf(it, result) }
       return result
     }
 
-    /**
-     * Recursively traversing all leaf nodes.
-     */
-    @Suppress("UNCHECKED_CAST")
     private fun findLeaf(model: M, list: MutableList<M>) {
       if (model is IVhModelWrapper<*>) {
         if (model.viewType != -1) list += model
+        @Suppress("UNCHECKED_CAST")
         model.subList.forEach { findLeaf(it as M, list) }
       } else {
         list += model
