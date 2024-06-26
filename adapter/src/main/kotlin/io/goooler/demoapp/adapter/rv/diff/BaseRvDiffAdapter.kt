@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.ListAdapter
 import io.goooler.demoapp.adapter.rv.core.BindingViewHolder
 import io.goooler.demoapp.adapter.rv.core.IMutableRvAdapter
 import io.goooler.demoapp.adapter.rv.core.IRvBinding
-import kotlinx.collections.immutable.toImmutableList
 
 /**
  * Created on 2020/10/22.
@@ -39,9 +38,9 @@ abstract class BaseRvDiffAdapter<M : IDiffVhModelType> private constructor(
   }
 
   override var list: List<M>
-    get() = delegate.list.toImmutableList()
+    get() = delegate.list
     set(value) {
       delegate.list = value
-      submitList(delegate.transform(value))
+      submitList(delegate.list)
     }
 }

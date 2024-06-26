@@ -1,7 +1,6 @@
 package io.goooler.demoapp.adapter.rv.core
 
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.collections.immutable.toImmutableList
 
 /**
  * Created on 2020/10/22.
@@ -25,7 +24,7 @@ abstract class BaseRvAdapter<M : IVhModelType> private constructor(
   }
 
   override var list: List<M>
-    get() = delegate.list.toImmutableList()
+    get() = delegate.list
     set(value) {
       delegate.list = value
       @Suppress("NotifyDataSetChanged")

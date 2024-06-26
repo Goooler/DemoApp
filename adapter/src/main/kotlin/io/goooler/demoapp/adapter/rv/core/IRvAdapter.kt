@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import io.goooler.demoapp.adapter.rv.core.ISpanSize.Companion.SPAN_SIZE_FULL
+import kotlinx.collections.immutable.toImmutableList
 
 /**
  * Keep the same signature as [RecyclerView.Adapter].
@@ -72,7 +73,7 @@ internal interface IRvAdapter<M : IVhModelType> : RecyclerViewAdapter<BindingVie
 
     lateinit var adapter: AP
 
-    override val list: List<M> = _list
+    override val list: List<M> get() = _list.toImmutableList()
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
       initManager(ivdManager)
@@ -119,28 +120,6 @@ internal interface IRvAdapter<M : IVhModelType> : RecyclerViewAdapter<BindingVie
 
     override fun onBindVHForAll(binding: ViewDataBinding, model: M, payloads: List<Any>) {
       adapter.onBindVH(binding, model, payloads)
-    }
-
-    /**
-     * Transform data list. Always return a new list.
-     */
-    fun transform(original: List<M>): List<M> {
-      val result = mutableListOf<M>()
-      original.forEach { findLeaf(it, result) }
-      return result
-    }
-
-    /**
-     * Recursively traversing all leaf nodes.
-     */
-    @Suppress("UNCHECKED_CAST")
-    private fun findLeaf(model: M, list: MutableList<M>) {
-      if (model is IVhModelWrapper<*>) {
-        if (model.viewType != -1) list += model
-        model.subList.forEach { findLeaf(it as M, list) }
-      } else {
-        list += model
-      }
     }
 
     /**
@@ -193,7 +172,8 @@ internal interface IMutableRvAdapter<M : IVhModelType> : IRvAdapter<M> {
           AP : IRvBinding<M>,
           AP : RecyclerView.Adapter<BindingViewHolder> {
 
-    override var list: List<M> = super.list
+    override var list: List<M>
+      get() = super.list
       set(value) {
         _list.clear()
         _list.addAll(transform(value))
@@ -216,6 +196,28 @@ internal interface IMutableRvAdapter<M : IVhModelType> : IRvAdapter<M> {
       _list.indexOf(item).takeIf { it != -1 }?.let {
         removeItem(it)
         adapter::notifyItemRemoved
+      }
+    }
+
+    /**
+     * Transform data list. Always return a new list.
+     */
+    private fun transform(original: List<M>): List<M> {
+      val result = mutableListOf<M>()
+      original.forEach { findLeaf(it, result) }
+      return result
+    }
+
+    /**
+     * Recursively traversing all leaf nodes.
+     */
+    @Suppress("UNCHECKED_CAST")
+    private fun findLeaf(model: M, list: MutableList<M>) {
+      if (model is IVhModelWrapper<*>) {
+        if (model.viewType != -1) list += model
+        model.subList.forEach { findLeaf(it as M, list) }
+      } else {
+        list += model
       }
     }
   }
