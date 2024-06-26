@@ -8,10 +8,14 @@ plugins {
 android {
   namespace = "io.github.goooler.adapter.rv"
   buildFeatures.dataBinding = true
-}
 
-kotlin {
-  explicitApi()
+  compileOptions {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+  }
+  kotlinOptions {
+    jvmTarget = "1.8"
+  }
 }
 
 dependencies {
