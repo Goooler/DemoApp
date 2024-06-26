@@ -1,6 +1,7 @@
 package io.github.goooler.adapter.rv.core
 
 import androidx.recyclerview.widget.RecyclerView
+import io.github.goooler.adapter.rv.internal.IMutableRvAdapter
 
 /**
  * Created on 2020/10/22.

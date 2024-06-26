@@ -1,9 +1,10 @@
-package io.github.goooler.adapter.rv.core
+package io.github.goooler.adapter.rv.internal
 
 import androidx.annotation.LayoutRes
 import androidx.collection.SparseArrayCompat
 import androidx.collection.set
 import androidx.databinding.ViewDataBinding
+import io.github.goooler.adapter.rv.core.IVhModelType
 
 /**
  * Created on 2020/10/21.
@@ -14,7 +15,7 @@ import androidx.databinding.ViewDataBinding
  * @version 1.0.0
  * @since 1.0.0
  */
-class ViewTypeDelegateManager<M : IVhModelType> {
+internal class ViewTypeDelegateManager<M : IVhModelType> {
 
   private val ivDs = SparseArrayCompat<ViewTypeDelegate<M>>()
 
@@ -24,7 +25,7 @@ class ViewTypeDelegateManager<M : IVhModelType> {
    * @param binding ViewDataBinding
    * @param viewType viewType
    */
-  internal fun onCreateVH(binding: ViewDataBinding, @LayoutRes viewType: Int) {
+  fun onCreateVH(binding: ViewDataBinding, @LayoutRes viewType: Int) {
     if (ivDs.isEmpty) return
     ivDs[viewType]?.onCreateVH(binding)
   }
@@ -35,7 +36,7 @@ class ViewTypeDelegateManager<M : IVhModelType> {
    * @param binding ViewDataBinding
    * @param model model
    */
-  internal fun onBindVH(binding: ViewDataBinding, model: M, payloads: List<Any>) {
+  fun onBindVH(binding: ViewDataBinding, model: M, payloads: List<Any>) {
     if (ivDs.isEmpty) return
     ivDs[model.viewType]?.onBindVH(binding, model, payloads)
   }

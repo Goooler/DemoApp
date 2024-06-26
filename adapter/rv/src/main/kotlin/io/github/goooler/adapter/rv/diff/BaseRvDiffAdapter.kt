@@ -4,8 +4,8 @@ import androidx.recyclerview.widget.AsyncDifferConfig
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import io.github.goooler.adapter.rv.core.BindingViewHolder
-import io.github.goooler.adapter.rv.core.IMutableRvAdapter
 import io.github.goooler.adapter.rv.core.IRvBinding
+import io.github.goooler.adapter.rv.internal.IMutableRvAdapter
 
 /**
  * Created on 2020/10/22.

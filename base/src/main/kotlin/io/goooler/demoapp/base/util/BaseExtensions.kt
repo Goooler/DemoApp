@@ -380,7 +380,8 @@ fun TextView.setOnEditorConfirmActionListener(listener: (TextView) -> Unit) {
       when (event.keyCode) {
         KeyEvent.KEYCODE_DPAD_CENTER, KeyEvent.KEYCODE_ENTER, KeyEvent.KEYCODE_NUMPAD_ENTER -> true
         else -> false
-      } && event.action == KeyEvent.ACTION_DOWN
+      } &&
+        event.action == KeyEvent.ACTION_DOWN
     } else {
       when (actionId) {
         EditorInfo.IME_NULL, EditorInfo.IME_ACTION_DONE, EditorInfo.IME_ACTION_NEXT -> true
