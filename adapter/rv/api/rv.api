@@ -6,6 +6,24 @@ public class androidx/databinding/library/baseAdapters/BR {
 	public fun <init> ()V
 }
 
+public class io/github/goooler/adapter/rv/BR {
+	public static field _all I
+	public fun <init> ()V
+}
+
+public class io/github/goooler/adapter/rv/DataBinderMapperImpl : androidx/databinding/DataBinderMapper {
+	public fun <init> ()V
+	public fun collectDependencies ()Ljava/util/List;
+	public fun convertBrIdToString (I)Ljava/lang/String;
+	public fun getDataBinder (Landroidx/databinding/DataBindingComponent;Landroid/view/View;I)Landroidx/databinding/ViewDataBinding;
+	public fun getDataBinder (Landroidx/databinding/DataBindingComponent;[Landroid/view/View;I)Landroidx/databinding/ViewDataBinding;
+	public fun getLayoutId (Ljava/lang/String;)I
+}
+
+public class io/github/goooler/adapter/rv/DataBindingTriggerClass {
+	public fun <init> ()V
+}
+
 public abstract class io/github/goooler/adapter/rv/core/BaseRvAdapter : androidx/recyclerview/widget/RecyclerView$Adapter, io/github/goooler/adapter/rv/core/IRvBinding, io/github/goooler/adapter/rv/internal/IMutableRvAdapter {
 	public fun <init> ()V
 	public fun addItems ([Lkotlin/Pair;)V
@@ -209,23 +227,5 @@ public final class io/github/goooler/adapter/rv/paging/PagingSourceException$NoM
 	public fun equals (Ljava/lang/Object;)Z
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
-}
-
-public class io/goooler/demoapp/rv/BR {
-	public static field _all I
-	public fun <init> ()V
-}
-
-public class io/goooler/demoapp/rv/DataBinderMapperImpl : androidx/databinding/DataBinderMapper {
-	public fun <init> ()V
-	public fun collectDependencies ()Ljava/util/List;
-	public fun convertBrIdToString (I)Ljava/lang/String;
-	public fun getDataBinder (Landroidx/databinding/DataBindingComponent;Landroid/view/View;I)Landroidx/databinding/ViewDataBinding;
-	public fun getDataBinder (Landroidx/databinding/DataBindingComponent;[Landroid/view/View;I)Landroidx/databinding/ViewDataBinding;
-	public fun getLayoutId (Ljava/lang/String;)I
-}
-
-public class io/goooler/demoapp/rv/DataBindingTriggerClass {
-	public fun <init> ()V
 }
 
