@@ -19,7 +19,8 @@ android {
 
 dependencies {
   api(projects.base)
-  api(projects.adapter)
+  api(projects.adapter.rv)
+  api(projects.adapter.vp)
 
   api(libs.androidX.constraintLayout)
   api(libs.androidX.cardView)

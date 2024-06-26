@@ -45,7 +45,8 @@ include(
   // Common
   ":base",
   ":common",
-  ":adapter",
+  ":adapter:rv",
+  ":adapter:vp",
   // Biz
   ":biz:login",
   ":biz:main",
