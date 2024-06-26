@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import io.goooler.demoapp.adapter.rv.core.ISpanSize.Companion.SPAN_SIZE_FULL
+import java.util.Collections
 import kotlinx.collections.immutable.toImmutableList
 
 /**
@@ -157,13 +158,24 @@ internal interface IMutableRvAdapter<M : IVhModelType> : IRvAdapter<M> {
   override var list: List<M>
 
   /**
-   * Refresh some items.
+   * Add some items.
+   *
+   * @param items the items to be added, [Int] is for the index of [M].
    */
-  fun refreshItems(items: List<M>)
+  fun addItems(vararg items: Pair<Int, M>)
 
   fun removeItem(index: Int)
 
   fun removeItem(item: M)
+
+  /**
+   * Refresh some items.
+   *
+   * @param items the items to be refreshed, [Int] is for the index of [M].
+   */
+  fun refreshItems(vararg items: Triple<Int, M, Any?>)
+
+  fun moveItem(from: Int, to: Int)
 
   class Impl<M : IVhModelType, AP> :
     IRvAdapter.Impl<M, AP>(),
@@ -179,24 +191,40 @@ internal interface IMutableRvAdapter<M : IVhModelType> : IRvAdapter<M> {
         _list.addAll(flat(value))
       }
 
-    override fun refreshItems(items: List<M>) {
-      flat(items).forEach {
-        if (it in _list) {
-          adapter.notifyItemChanged(_list.indexOf(it))
-        }
+    override fun addItems(vararg items: Pair<Int, M>) {
+      items.forEach { (index, item) ->
+        check(index in _list.indices) { "Index $index out of bounds for length ${_list.size}" }
+        _list.add(index, item)
+        adapter.notifyItemInserted(index)
       }
     }
 
     override fun removeItem(index: Int) {
       _list.removeAt(index)
-      adapter::notifyItemRemoved
+      adapter.notifyItemRemoved(index)
     }
 
     override fun removeItem(item: M) {
       _list.indexOf(item).takeIf { it != -1 }?.let {
         removeItem(it)
-        adapter::notifyItemRemoved
+        adapter.notifyItemRemoved(it)
       }
+    }
+
+    override fun refreshItems(vararg items: Triple<Int, M, Any?>) {
+      items.forEach { (index, item, payload) ->
+        check(index in _list.indices) { "Index $index out of bounds for length ${_list.size}" }
+        _list[index] = item
+        adapter.notifyItemChanged(index, payload)
+      }
+    }
+
+    override fun moveItem(from: Int, to: Int) {
+      val message = "%s index %s out of bounds for length ${_list.size}"
+      require(from in _list.indices) { message.format("From", from) }
+      require(to in _list.indices) { message.format("To", to) }
+      Collections.swap(_list, from, to)
+      adapter.notifyItemMoved(from, to)
     }
 
     private fun flat(original: List<M>): List<M> {
@@ -224,7 +252,7 @@ internal fun <M : IVhModelType> RecyclerView.bindingSetList(list: List<M>?) {
 }
 
 @BindingAdapter("binding_rv_refreshItems")
-internal fun <M : IVhModelType> RecyclerView.bindingRefreshItems(items: List<M>?) {
+internal fun <M : IVhModelType> RecyclerView.bindingRefreshItems(vararg items: Triple<Int, M, Any?>) {
   @Suppress("UNCHECKED_CAST")
-  (adapter as? IMutableRvAdapter<M>)?.refreshItems(items.orEmpty())
+  (adapter as? IMutableRvAdapter<M>)?.refreshItems(*items)
 }
