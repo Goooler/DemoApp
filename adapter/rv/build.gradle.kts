@@ -6,6 +6,7 @@ plugins {
 }
 
 android {
+  namespace = "io.github.goooler.adapter.rv"
   buildFeatures.dataBinding = true
 }
 

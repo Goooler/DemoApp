@@ -104,7 +104,9 @@ allprojects {
 fun <T : BaseExtension> Project.setupBase(block: T.() -> Unit) {
   extensions.configure<BaseExtension> {
     resourcePrefix = "${name}_"
-    namespace = "io.goooler.demoapp.$name"
+    if (namespace.isNullOrEmpty()) {
+      namespace = "io.goooler.demoapp.$name"
+    }
     compileSdkVersion(34)
     defaultConfig {
       minSdk = 21
