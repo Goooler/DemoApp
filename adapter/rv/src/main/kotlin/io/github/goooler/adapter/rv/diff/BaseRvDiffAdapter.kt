@@ -17,14 +17,14 @@ import io.github.goooler.adapter.rv.internal.IMutableRvAdapter
  * @since 1.0.0
  */
 @Suppress("DELEGATED_MEMBER_HIDES_SUPERTYPE_OVERRIDE")
-abstract class BaseRvDiffAdapter<M : IDiffVhModelType> private constructor(
+public abstract class BaseRvDiffAdapter<M : IDiffVhModelType> private constructor(
   asyncDifferConfig: AsyncDifferConfig<M>,
   private val delegate: IMutableRvAdapter.Impl<M, BaseRvDiffAdapter<M>>,
 ) : ListAdapter<M, BindingViewHolder>(asyncDifferConfig),
   IRvBinding<M>,
   IMutableRvAdapter<M> by delegate {
 
-  constructor(callback: DiffCallback<M> = DiffCallback()) : this(
+  public constructor(callback: DiffCallback<M> = DiffCallback()) : this(
     AsyncDifferConfig.Builder(callback).build(),
     IMutableRvAdapter.Impl(),
   ) {
@@ -32,12 +32,12 @@ abstract class BaseRvDiffAdapter<M : IDiffVhModelType> private constructor(
     delegate.adapter = this
   }
 
-  constructor(config: AsyncDifferConfig<M>) : this(config, IMutableRvAdapter.Impl()) {
+  public constructor(config: AsyncDifferConfig<M>) : this(config, IMutableRvAdapter.Impl()) {
     @Suppress("LeakingThis")
     delegate.adapter = this
   }
 
-  override var list: List<M>
+  public override var list: List<M>
     get() = delegate.list
     set(value) {
       delegate.list = value

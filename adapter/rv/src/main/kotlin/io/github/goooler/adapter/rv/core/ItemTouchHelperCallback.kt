@@ -3,17 +3,17 @@ package io.github.goooler.adapter.rv.core
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 
-class ItemTouchHelperCallback(
+public class ItemTouchHelperCallback(
   private val listener: ItemChangeListener,
   private val longPressDragEnabled: Boolean = true,
   private val itemViewSwipeEnabled: Boolean = false,
 ) : ItemTouchHelper.Callback() {
 
-  override fun isLongPressDragEnabled(): Boolean = longPressDragEnabled
+  public override fun isLongPressDragEnabled(): Boolean = longPressDragEnabled
 
-  override fun isItemViewSwipeEnabled(): Boolean = itemViewSwipeEnabled
+  public override fun isItemViewSwipeEnabled(): Boolean = itemViewSwipeEnabled
 
-  override fun getMovementFlags(
+  public override fun getMovementFlags(
     recyclerView: RecyclerView,
     viewHolder: RecyclerView.ViewHolder,
   ): Int {
@@ -23,7 +23,7 @@ class ItemTouchHelperCallback(
     return makeMovementFlags(dragFlags, swipeFlags)
   }
 
-  override fun onMove(
+  public override fun onMove(
     recyclerView: RecyclerView,
     from: RecyclerView.ViewHolder,
     to: RecyclerView.ViewHolder,
@@ -32,14 +32,14 @@ class ItemTouchHelperCallback(
     return true
   }
 
-  override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+  public override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
     listener.onItemDismiss(viewHolder.bindingAdapterPosition)
   }
 
-  interface ItemChangeListener {
+  public interface ItemChangeListener {
 
-    fun onItemMove(fromPosition: Int, toPosition: Int)
+    public fun onItemMove(fromPosition: Int, toPosition: Int)
 
-    fun onItemDismiss(position: Int)
+    public fun onItemDismiss(position: Int)
   }
 }

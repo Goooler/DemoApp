@@ -13,18 +13,18 @@ import io.github.goooler.adapter.rv.internal.IMutableRvAdapter
  * @since 1.0.0
  */
 @Suppress("DELEGATED_MEMBER_HIDES_SUPERTYPE_OVERRIDE")
-abstract class BaseRvAdapter<M : IVhModelType> private constructor(
+public abstract class BaseRvAdapter<M : IVhModelType> private constructor(
   private val delegate: IMutableRvAdapter.Impl<M, BaseRvAdapter<M>>,
 ) : RecyclerView.Adapter<BindingViewHolder>(),
   IRvBinding<M>,
   IMutableRvAdapter<M> by delegate {
 
-  constructor() : this(IMutableRvAdapter.Impl()) {
+  public constructor() : this(IMutableRvAdapter.Impl()) {
     @Suppress("LeakingThis")
     delegate.adapter = this
   }
 
-  override var list: List<M>
+  public override var list: List<M>
     get() = delegate.list
     set(value) {
       delegate.list = value
@@ -32,5 +32,5 @@ abstract class BaseRvAdapter<M : IVhModelType> private constructor(
       notifyDataSetChanged()
     }
 
-  override fun getItemCount(): Int = delegate.list.size
+  public override fun getItemCount(): Int = delegate.list.size
 }

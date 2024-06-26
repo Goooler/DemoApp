@@ -19,38 +19,38 @@ import io.github.goooler.adapter.rv.internal.IRvAdapter
  * @since 1.0.0
  */
 @Suppress("DELEGATED_MEMBER_HIDES_SUPERTYPE_OVERRIDE")
-abstract class BaseRvPagingAdapter<M : IDiffVhModelType> private constructor(
+public abstract class BaseRvPagingAdapter<M : IDiffVhModelType> private constructor(
   callback: DiffCallback<M>,
   private val delegate: IRvAdapter.Impl<M, BaseRvPagingAdapter<M>>,
 ) : PagingDataAdapter<M, BindingViewHolder>(callback),
   IRvBinding<M>,
   IRvAdapter<M> by delegate {
 
-  var onLoadStatusListener: OnLoadStatusListener? = null
+  public var onLoadStatusListener: OnLoadStatusListener? = null
 
-  override val list: List<M> get() = snapshot().items
+  public override val list: List<M> get() = snapshot().items
 
-  constructor(callback: DiffCallback<M> = DiffCallback()) : this(callback, IRvAdapter.Impl()) {
+  public constructor(callback: DiffCallback<M> = DiffCallback()) : this(callback, IRvAdapter.Impl()) {
     @Suppress("LeakingThis")
     delegate.adapter = this
   }
 
-  override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
+  public override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
     super.onAttachedToRecyclerView(recyclerView)
     delegate.onAttachedToRecyclerView(recyclerView)
     addLoadStateListener(loadStateListener)
   }
 
-  override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
+  public override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
     super.onDetachedFromRecyclerView(recyclerView)
     delegate.onDetachedFromRecyclerView(recyclerView)
     removeLoadStateListener(loadStateListener)
   }
 
   @LayoutRes
-  override fun getItemViewType(position: Int): Int = getItem(position)?.viewType ?: 0
+  public override fun getItemViewType(position: Int): Int = getItem(position)?.viewType ?: 0
 
-  override operator fun get(position: Int): M? = getItem(position)
+  public override operator fun get(position: Int): M? = getItem(position)
 
   private val loadStateListener: (CombinedLoadStates) -> Unit = {
     when {
@@ -74,28 +74,28 @@ abstract class BaseRvPagingAdapter<M : IDiffVhModelType> private constructor(
     }
   }
 
-  interface OnLoadStatusListener {
-    fun onRefresh() {}
-    fun onLoadMore() {}
+  public interface OnLoadStatusListener {
+    public fun onRefresh() {}
+    public fun onLoadMore() {}
 
     /**
      * Not loading
      */
-    fun onNotLoading()
+    public fun onNotLoading()
 
     /**
      * No more data
      */
-    fun onNoMoreData()
+    public fun onNoMoreData()
 
     /**
      * Empty data
      */
-    fun onEmpty()
+    public fun onEmpty()
 
     /**
      * Error occurred
      */
-    fun onError(t: Throwable)
+    public fun onError(t: Throwable)
   }
 }

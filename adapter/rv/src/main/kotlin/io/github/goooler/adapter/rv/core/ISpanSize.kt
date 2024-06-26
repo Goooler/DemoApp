@@ -15,21 +15,21 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
  * @version 1.0.0
  * @since 1.0.0
  */
-interface ISpanSize {
+public interface ISpanSize {
   /**
    * Get span size. How many lattices does a model occupy.
    */
-  val spanSize: Int get() = SPAN_SIZE_SINGLE
+  public val spanSize: Int get() = SPAN_SIZE_SINGLE
 
-  companion object {
+  public companion object {
     /**
      * fill one line.
      */
-    const val SPAN_SIZE_FULL = -1
-    const val SPAN_SIZE_SINGLE = 1
-    const val SPAN_SIZE_DOUBLE = 2
-    const val SPAN_SIZE_TRIPLE = 3
-    const val SPAN_SIZE_QUADRUPLE = 4
-    const val SPAN_SIZE_QUINTUPLE = 5
+    public const val SPAN_SIZE_FULL: Int = -1
+    public const val SPAN_SIZE_SINGLE: Int = 1
+    public const val SPAN_SIZE_DOUBLE: Int = 2
+    public const val SPAN_SIZE_TRIPLE: Int = 3
+    public const val SPAN_SIZE_QUADRUPLE: Int = 4
+    public const val SPAN_SIZE_QUINTUPLE: Int = 5
   }
 }

@@ -5,9 +5,9 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import io.github.goooler.adapter.rv.diff.IDiffVhModelType
 
-abstract class BasePagingSource<T : IDiffVhModelType> : PagingSource<Int, T>() {
+public abstract class BasePagingSource<T : IDiffVhModelType> : PagingSource<Int, T>() {
 
-  override suspend fun load(params: LoadParams<Int>): LoadResult<Int, T> = try {
+  public override suspend fun load(params: LoadParams<Int>): LoadResult<Int, T> = try {
     val currentPage = params.key ?: 1
     val fetchedList = fetchListData(currentPage)
     if (fetchedList.isEmpty()) {
@@ -27,7 +27,7 @@ abstract class BasePagingSource<T : IDiffVhModelType> : PagingSource<Int, T>() {
     LoadResult.Error(e)
   }
 
-  abstract suspend fun fetchListData(@IntRange(from = 1) page: Int): List<T>
+  public abstract suspend fun fetchListData(@IntRange(from = 1) page: Int): List<T>
 
-  override fun getRefreshKey(state: PagingState<Int, T>): Int? = null
+  public override fun getRefreshKey(state: PagingState<Int, T>): Int? = null
 }

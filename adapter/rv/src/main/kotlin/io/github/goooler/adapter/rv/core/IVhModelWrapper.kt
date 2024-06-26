@@ -9,7 +9,7 @@ package io.github.goooler.adapter.rv.core
  * @version 1.0.0
  * @since 1.0.0
  */
-interface IVhModelWrapper<M : IVhModelType> : IVhModelType {
+public interface IVhModelWrapper<M : IVhModelType> : IVhModelType {
 
   /**
    * If [viewType] return value is not -1, this [IVhModelWrapper] self will be as a node.
@@ -19,5 +19,5 @@ interface IVhModelWrapper<M : IVhModelType> : IVhModelType {
   /**
    * As sub model list.
    */
-  val subList: Iterable<M>
+  public val subList: Iterable<M>
 }

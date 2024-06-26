@@ -8,6 +8,10 @@ android {
   buildFeatures.dataBinding = true
 }
 
+kotlin {
+  explicitApi()
+}
+
 dependencies {
   api(libs.kotlinX.immutable)
   api(libs.androidX.collection)
