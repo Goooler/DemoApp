@@ -12,7 +12,7 @@ import androidx.viewpager.widget.ViewPager
  * Adapter for [ViewPager]
  * Lazy load in [Fragment.onResume]
  */
-open class CommonFragmentStatePagerAdapter(
+public open class CommonFragmentStatePagerAdapter(
   fragmentManager: FragmentManager,
   behavior: Int = BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT,
 ) : FragmentStatePagerAdapter(fragmentManager, behavior) {
@@ -20,7 +20,7 @@ open class CommonFragmentStatePagerAdapter(
   private val fragmentList = mutableListOf<Fragment>()
   private val titleList = mutableListOf<String>()
 
-  fun setData(fragments: List<Fragment>? = null, titles: List<String>? = null) {
+  public fun setData(fragments: List<Fragment>? = null, titles: List<String>? = null) {
     fragments?.let {
       fragmentList.clear()
       fragmentList += it
@@ -32,12 +32,12 @@ open class CommonFragmentStatePagerAdapter(
     notifyDataSetChanged()
   }
 
-  override fun getItem(position: Int): Fragment = fragmentList[position]
+  public override fun getItem(position: Int): Fragment = fragmentList[position]
 
-  override fun getPageTitle(position: Int): CharSequence? =
+  public override fun getPageTitle(position: Int): CharSequence? =
     titleList[position]
 
-  override fun getCount(): Int = fragmentList.size
+  public override fun getCount(): Int = fragmentList.size
 
-  override fun getItemPosition(any: Any): Int = PagerAdapter.POSITION_NONE
+  public override fun getItemPosition(any: Any): Int = PagerAdapter.POSITION_NONE
 }
