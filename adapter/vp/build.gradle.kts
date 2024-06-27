@@ -6,7 +6,6 @@ plugins {
 
 android {
   namespace = "io.github.goooler.adapter.vp"
-  buildFeatures.dataBinding = true
 
   compileOptions {
     sourceCompatibility = JavaVersion.VERSION_1_8
