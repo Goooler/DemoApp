@@ -2,7 +2,7 @@ package io.goooler.demoapp.main.ui
 
 import android.Manifest
 import android.os.Bundle
-import io.goooler.demoapp.adapter.vp.CommonFragmentStatePagerAdapter
+import io.github.goooler.adapter.vp.CommonFragmentStatePagerAdapter
 import io.goooler.demoapp.base.util.PermissionHelper
 import io.goooler.demoapp.base.util.unsafeLazy
 import io.goooler.demoapp.common.base.binding.BaseBindingActivity

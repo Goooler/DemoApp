@@ -5,7 +5,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
-import io.goooler.demoapp.adapter.rv.core.ItemTouchHelperCallback
+import io.github.goooler.adapter.rv.core.ItemTouchHelperCallback
 import io.goooler.demoapp.base.util.unsafeLazy
 import io.goooler.demoapp.common.base.binding.BaseBindingFragment
 import io.goooler.demoapp.common.router.RouterManager

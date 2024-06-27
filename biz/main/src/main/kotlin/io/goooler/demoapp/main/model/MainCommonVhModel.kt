@@ -1,7 +1,7 @@
 package io.goooler.demoapp.main.model
 
-import io.goooler.demoapp.adapter.rv.core.ISpanSize
-import io.goooler.demoapp.adapter.rv.diff.IDiffVhModelType
+import io.github.goooler.adapter.rv.core.ISpanSize
+import io.github.goooler.adapter.rv.diff.IDiffVhModelType
 import io.goooler.demoapp.main.R
 
 sealed interface MainCommonVhModel :

@@ -1,7 +1,7 @@
 package io.goooler.demoapp.main.ui.adapter
 
 import androidx.databinding.ViewDataBinding
-import io.goooler.demoapp.adapter.rv.paging.BaseRvPagingAdapter
+import io.github.goooler.adapter.rv.paging.BaseRvPagingAdapter
 import io.goooler.demoapp.main.model.MainCommonVhModel
 import io.goooler.demoapp.main.util.bindListener
 import io.goooler.demoapp.main.util.bindModel

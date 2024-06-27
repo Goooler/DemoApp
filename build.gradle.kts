@@ -14,11 +14,13 @@ plugins {
   alias(libs.plugins.android.application) apply false
   alias(libs.plugins.android.library) apply false
   alias(libs.plugins.kotlin.android) apply false
+  alias(libs.plugins.bcv) apply false
   alias(libs.plugins.ksp) apply false
   alias(libs.plugins.napt) apply false
   alias(libs.plugins.spotless) apply false
   alias(libs.plugins.detekt) apply false
   alias(libs.plugins.cacheFix) apply false
+  alias(libs.plugins.mavenPublish) apply false
 }
 
 allprojects {
@@ -109,7 +111,9 @@ allprojects {
 fun <T : BaseExtension> Project.setupBase(block: T.() -> Unit) {
   extensions.configure<BaseExtension> {
     resourcePrefix = "${name}_"
-    namespace = "io.goooler.demoapp.$name"
+    if (namespace.isNullOrEmpty()) {
+      namespace = "io.goooler.demoapp.$name"
+    }
     compileSdkVersion(34)
     defaultConfig {
       minSdk = 21
