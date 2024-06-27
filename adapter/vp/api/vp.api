@@ -1,0 +1,37 @@
+public abstract interface class androidx/databinding/DataBindingComponent {
+}
+
+public class androidx/databinding/library/baseAdapters/BR {
+	public static field _all I
+	public fun <init> ()V
+}
+
+public class io/github/goooler/adapter/vp/BR {
+	public static field _all I
+	public fun <init> ()V
+}
+
+public class io/github/goooler/adapter/vp/CommonFragmentStatePagerAdapter : androidx/fragment/app/FragmentStatePagerAdapter {
+	public fun <init> (Landroidx/fragment/app/FragmentManager;I)V
+	public synthetic fun <init> (Landroidx/fragment/app/FragmentManager;IILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun getCount ()I
+	public fun getItem (I)Landroidx/fragment/app/Fragment;
+	public fun getItemPosition (Ljava/lang/Object;)I
+	public fun getPageTitle (I)Ljava/lang/CharSequence;
+	public final fun setData (Ljava/util/List;Ljava/util/List;)V
+	public static synthetic fun setData$default (Lio/github/goooler/adapter/vp/CommonFragmentStatePagerAdapter;Ljava/util/List;Ljava/util/List;ILjava/lang/Object;)V
+}
+
+public class io/github/goooler/adapter/vp/DataBinderMapperImpl : androidx/databinding/DataBinderMapper {
+	public fun <init> ()V
+	public fun collectDependencies ()Ljava/util/List;
+	public fun convertBrIdToString (I)Ljava/lang/String;
+	public fun getDataBinder (Landroidx/databinding/DataBindingComponent;Landroid/view/View;I)Landroidx/databinding/ViewDataBinding;
+	public fun getDataBinder (Landroidx/databinding/DataBindingComponent;[Landroid/view/View;I)Landroidx/databinding/ViewDataBinding;
+	public fun getLayoutId (Ljava/lang/String;)I
+}
+
+public class io/github/goooler/adapter/vp/DataBindingTriggerClass {
+	public fun <init> ()V
+}
+

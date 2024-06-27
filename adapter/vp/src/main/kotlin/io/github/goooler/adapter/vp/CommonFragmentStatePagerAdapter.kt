@@ -1,6 +1,6 @@
 @file:Suppress("unused", "DEPRECATION")
 
-package io.goooler.demoapp.adapter.vp
+package io.github.goooler.adapter.vp
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

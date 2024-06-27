@@ -20,7 +20,7 @@ android {
 dependencies {
   api(projects.base)
   api("io.github.goooler.android:adapter-rv:1.0.0-20240626.074833-4")
-  api(projects.adapter.vp)
+  api("io.github.goooler.android:adapter-vp:1.0.0-SNAPSHOT")
 
   api(libs.androidX.constraintLayout)
   api(libs.androidX.cardView)
