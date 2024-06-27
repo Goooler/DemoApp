@@ -5,6 +5,7 @@ plugins {
   alias(libs.plugins.bcv)
   alias(libs.plugins.napt)
   alias(libs.plugins.mavenPublish)
+  signing
 }
 
 android {
@@ -22,6 +23,14 @@ kotlin {
   compilerOptions {
     jvmTarget = JvmTarget.JVM_1_8
   }
+}
+
+mavenPublishing {
+  signAllPublications()
+}
+
+signing {
+  isRequired = !version.toString().endsWith("-SNAPSHOT")
 }
 
 dependencies {

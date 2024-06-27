@@ -24,6 +24,11 @@ plugins {
 }
 
 allprojects {
+  if (localGradleProperty("VERSION_NAME").isPresent) {
+    version = localGradleProperty("VERSION_NAME").get()
+    group = localGradleProperty("GROUP").get()
+  }
+
   plugins.apply(rootProject.libs.plugins.detekt.get().pluginId)
   configure<DetektExtension> {
     config.from("$rootDir/detekt.yml")
@@ -159,4 +164,9 @@ fun Project.setupCommon() {
       create("prod")
     }
   }
+}
+
+// TODO: remove this once https://github.com/gradle/gradle/issues/23572 is fixed
+fun Project.localGradleProperty(name: String): Provider<String> = provider {
+  if (hasProperty(name)) property(name)?.toString() else null
 }
