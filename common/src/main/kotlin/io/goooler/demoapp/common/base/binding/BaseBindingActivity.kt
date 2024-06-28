@@ -11,7 +11,9 @@ import com.blankj.utilcode.util.AdaptScreenUtils
 import com.blankj.utilcode.util.ScreenUtils
 import io.goooler.demoapp.base.core.BaseActivity
 
-abstract class BaseBindingActivity<VB : ViewBinding> : BaseActivity(), IBinding<VB> {
+abstract class BaseBindingActivity<VB : ViewBinding> :
+  BaseActivity(),
+  IBinding<VB> {
 
   override lateinit var binding: VB
 

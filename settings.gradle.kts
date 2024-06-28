@@ -2,8 +2,9 @@ pluginManagement {
   repositories {
     google {
       content {
-        includeGroupByRegex(".*google.*")
-        includeGroupByRegex(".*android.*")
+        includeGroupByRegex("com\\.android.*")
+        includeGroupByRegex("com\\.google.*")
+        includeGroupByRegex("androidx.*")
       }
     }
     gradlePluginPortal()
@@ -15,8 +16,9 @@ dependencyResolutionManagement {
   repositories {
     google {
       content {
-        includeGroupByRegex(".*google.*")
-        includeGroupByRegex(".*android.*")
+        includeGroupByRegex("com\\.android.*")
+        includeGroupByRegex("com\\.google.*")
+        includeGroupByRegex("androidx.*")
       }
     }
     mavenCentral()
@@ -24,7 +26,7 @@ dependencyResolutionManagement {
 }
 
 plugins {
-  id("com.gradle.develocity") version "3.17.3"
+  id("com.gradle.develocity") version "3.17.5"
 }
 
 develocity {
@@ -43,7 +45,8 @@ include(
   // Common
   ":base",
   ":common",
-  ":adapter",
+  ":adapter:rv",
+  ":adapter:vp",
   // Biz
   ":biz:login",
   ":biz:main",

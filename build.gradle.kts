@@ -5,6 +5,8 @@ import com.android.build.gradle.LibraryPlugin
 import com.diffplug.gradle.spotless.SpotlessExtension
 import com.google.devtools.ksp.gradle.KspExtension
 import com.google.devtools.ksp.gradle.KspGradleSubplugin
+import com.slapin.napt.NaptGradleExtension
+import com.slapin.napt.NaptGradlePlugin
 import io.gitlab.arturbosch.detekt.extensions.DetektExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
@@ -12,14 +14,21 @@ plugins {
   alias(libs.plugins.android.application) apply false
   alias(libs.plugins.android.library) apply false
   alias(libs.plugins.kotlin.android) apply false
+  alias(libs.plugins.bcv) apply false
   alias(libs.plugins.ksp) apply false
   alias(libs.plugins.napt) apply false
   alias(libs.plugins.spotless) apply false
   alias(libs.plugins.detekt) apply false
   alias(libs.plugins.cacheFix) apply false
+  alias(libs.plugins.mavenPublish) apply false
 }
 
 allprojects {
+  if (localGradleProperty("VERSION_NAME").isPresent) {
+    version = localGradleProperty("VERSION_NAME").get()
+    group = localGradleProperty("GROUP").get()
+  }
+
   plugins.apply(rootProject.libs.plugins.detekt.get().pluginId)
   configure<DetektExtension> {
     config.from("$rootDir/detekt.yml")
@@ -63,6 +72,11 @@ allprojects {
       toolchain.languageVersion = JavaLanguageVersion.of(21)
     }
   }
+  plugins.withType<NaptGradlePlugin>().configureEach {
+    extensions.configure<NaptGradleExtension> {
+      generateNaptTrigger = false
+    }
+  }
 
   tasks.withType<KotlinCompile>().configureEach {
     compilerOptions {
@@ -102,7 +116,9 @@ allprojects {
 fun <T : BaseExtension> Project.setupBase(block: T.() -> Unit) {
   extensions.configure<BaseExtension> {
     resourcePrefix = "${name}_"
-    namespace = "io.goooler.demoapp.$name"
+    if (namespace.isNullOrEmpty()) {
+      namespace = "io.goooler.demoapp.$name"
+    }
     compileSdkVersion(34)
     defaultConfig {
       minSdk = 21
@@ -148,4 +164,9 @@ fun Project.setupCommon() {
       create("prod")
     }
   }
+}
+
+// TODO: remove this once https://github.com/gradle/gradle/issues/23572 is fixed
+fun Project.localGradleProperty(name: String): Provider<String> = provider {
+  if (hasProperty(name)) property(name)?.toString() else null
 }

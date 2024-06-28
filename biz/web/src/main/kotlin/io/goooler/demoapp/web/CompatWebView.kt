@@ -11,7 +11,6 @@ import android.webkit.WebChromeClient
 import android.webkit.WebResourceRequest
 import android.webkit.WebSettings
 import android.webkit.WebView
-import androidx.annotation.IntRange
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.findViewTreeLifecycleOwner
@@ -122,7 +121,7 @@ open class CompatWebView(context: Context, attrs: AttributeSet? = null) : WebVie
       fileChooserParams: WebChromeClient.FileChooserParams,
     ): Boolean
 
-    fun onProgressChanged(@IntRange(from = 0) i: Int)
+    fun onProgressChanged(i: Int)
 
     fun loadFinish()
   }
