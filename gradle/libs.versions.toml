@@ -19,7 +19,7 @@ android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
-bcv = "org.jetbrains.kotlinx.binary-compatibility-validator:0.15.0"
+bcv = "org.jetbrains.kotlinx.binary-compatibility-validator:0.15.1"
 ksp = "com.google.devtools.ksp:2.0.0-1.0.22"
 napt = "com.sergei-lapin.napt:1.19"
 spotless = "com.diffplug.spotless:7.0.0.BETA1"
