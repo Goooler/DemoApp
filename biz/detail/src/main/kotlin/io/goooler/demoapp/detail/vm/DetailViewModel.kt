@@ -20,14 +20,12 @@ class DetailViewModel : BaseViewModel() {
 
   lateinit var fullName: String
 
-  val repoDetailModel: StateFlow<RepoDetailModel>
-    get() = _repoDetailModel.asStateFlow()
-  val isRefreshing: StateFlow<Boolean>
-    get() = _isRefreshing.asStateFlow()
+  val repoDetailModel: StateFlow<RepoDetailModel> = _repoDetailModel.asStateFlow()
+  val isRefreshing: StateFlow<Boolean> = _isRefreshing.asStateFlow()
 
   fun refresh() {
     viewModelScope.launch {
-      _isRefreshing.emit(true)
+      _isRefreshing.value = true
       repository.getRepoDetail(fullName).let {
         repoDetail = RepoDetailModel(
           it.fullName,
@@ -39,7 +37,7 @@ class DetailViewModel : BaseViewModel() {
         )
       }
       _repoDetailModel.value = repoDetail
-      _isRefreshing.emit(false)
+      _isRefreshing.value = false
     }
   }
 
